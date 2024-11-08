@@ -1,0 +1,8510 @@
+[
+  {
+    "command": "\\textasciicircum",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textasciicircum",
+    "filename": "0FC0A"
+  },
+  {
+    "command": "\\textless",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textless",
+    "filename": "8D5AE"
+  },
+  {
+    "command": "\\textasciitilde",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textasciitilde",
+    "filename": "46C29"
+  },
+  {
+    "command": "\\textordfeminine",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textordfeminine",
+    "filename": "9622C"
+  },
+  {
+    "command": "\\textasteriskcentered",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textasteriskcentered",
+    "filename": "64973"
+  },
+  {
+    "command": "\\textordmasculine",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textordmasculine",
+    "filename": "97017"
+  },
+  {
+    "command": "\\textbackslash",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textbackslash",
+    "filename": "482AF"
+  },
+  {
+    "command": "\\textparagraph",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textparagraph",
+    "filename": "C214D"
+  },
+  {
+    "command": "\\textbar",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textbar",
+    "filename": "A2A8E"
+  },
+  {
+    "command": "\\textperiodcentered",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textperiodcentered",
+    "filename": "E4E88"
+  },
+  {
+    "command": "\\textbraceleft",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textbraceleft",
+    "filename": "798E1"
+  },
+  {
+    "command": "\\textquestiondown",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textquestiondown",
+    "filename": "0F41F"
+  },
+  {
+    "command": "\\textbraceright",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textbraceright",
+    "filename": "30FD8"
+  },
+  {
+    "command": "\\textquotedblleft",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textquotedblleft",
+    "filename": "670C6"
+  },
+  {
+    "command": "\\textbullet",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textbullet",
+    "filename": "B04CB"
+  },
+  {
+    "command": "\\textquotedblright",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textquotedblright",
+    "filename": "CE3B3"
+  },
+  {
+    "command": "\\textcopyright",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textcopyright",
+    "filename": "AB75A"
+  },
+  {
+    "command": "\\textquoteleft",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textquoteleft",
+    "filename": "ED0DE"
+  },
+  {
+    "command": "\\textdagger",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textdagger",
+    "filename": "6A82B"
+  },
+  {
+    "command": "\\textquoteright",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textquoteright",
+    "filename": "2FA72"
+  },
+  {
+    "command": "\\textdaggerdbl",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textdaggerdbl",
+    "filename": "E4D89"
+  },
+  {
+    "command": "\\textregistered",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textregistered",
+    "filename": "E38EE"
+  },
+  {
+    "command": "\\textdollar",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textdollar",
+    "filename": "4BF71"
+  },
+  {
+    "command": "\\textsection",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textsection",
+    "filename": "FC4A5"
+  },
+  {
+    "command": "\\textellipsis",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textellipsis",
+    "filename": "00B6E"
+  },
+  {
+    "command": "\\textsterling",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textsterling",
+    "filename": "19165"
+  },
+  {
+    "command": "\\textemdash",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textemdash",
+    "filename": "252FC"
+  },
+  {
+    "command": "\\texttrademark",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_texttrademark",
+    "filename": "0DDEA"
+  },
+  {
+    "command": "\\textendash",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textendash",
+    "filename": "C30AD"
+  },
+  {
+    "command": "\\textunderscore",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textunderscore",
+    "filename": "72CD4"
+  },
+  {
+    "command": "\\textexclamdown",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textexclamdown",
+    "filename": "04B27"
+  },
+  {
+    "command": "\\textvisiblespace",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textvisiblespace",
+    "filename": "07040"
+  },
+  {
+    "command": "\\textgreater",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_textgreater",
+    "filename": "08E8A"
+  },
+  {
+    "command": "!`",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-!`",
+    "filename": "C3EEE"
+  },
+  {
+    "command": "\\$",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_$",
+    "filename": "ACFC3"
+  },
+  {
+    "command": "\\_",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-__",
+    "filename": "D4BE6"
+  },
+  {
+    "command": "\\ddag",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_ddag",
+    "filename": "D3954"
+  },
+  {
+    "command": "\\{",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_{",
+    "filename": "EBC25"
+  },
+  {
+    "command": "\\P",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_P",
+    "filename": "B62A8"
+  },
+  {
+    "command": "\\copyright",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_copyright",
+    "filename": "77083"
+  },
+  {
+    "command": "\\dots",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_dots",
+    "filename": "0E6C6"
+  },
+  {
+    "command": "\\}",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_}",
+    "filename": "B52EF"
+  },
+  {
+    "command": "\\S",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_S",
+    "filename": "5BB7C"
+  },
+  {
+    "command": "\\dag",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_dag",
+    "filename": "EE60D"
+  },
+  {
+    "command": "\\pounds",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_pounds",
+    "filename": "21E51"
+  },
+  {
+    "command": "\\&",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_&",
+    "filename": "5F785"
+  },
+  {
+    "command": "\\#",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_#",
+    "filename": "F0C18"
+  },
+  {
+    "command": "\\%",
+    "mathmode": true,
+    "textmode": true,
+    "key": "latex2e-OT1-_%",
+    "filename": "95637"
+  },
+  {
+    "command": "\\--",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_--",
+    "filename": "211E0"
+  },
+  {
+    "command": "\\---",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_---",
+    "filename": "F1832"
+  },
+  {
+    "command": "\\----",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_----",
+    "filename": "39CEF"
+  },
+  {
+    "command": "\\checkmark",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": true,
+    "key": "amssymb-OT1-_checkmark",
+    "filename": "1C93A"
+  },
+  {
+    "command": "\\circledR",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": true,
+    "key": "amssymb-OT1-_circledR",
+    "filename": "B10B3"
+  },
+  {
+    "command": "\\maltese",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": true,
+    "key": "amssymb-OT1-_maltese",
+    "filename": "CB937"
+  },
+  {
+    "command": "\\aa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_aa",
+    "filename": "F924A"
+  },
+  {
+    "command": "\\L",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_L",
+    "filename": "ED3A1"
+  },
+  {
+    "command": "\\o",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_o",
+    "filename": "A70EB"
+  },
+  {
+    "command": "\\ss",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_ss",
+    "filename": "43D61"
+  },
+  {
+    "command": "\\AA",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_AA",
+    "filename": "BC692"
+  },
+  {
+    "command": "\\l",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_l",
+    "filename": "F2F59"
+  },
+  {
+    "command": "\\O",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_O",
+    "filename": "56279"
+  },
+  {
+    "command": "\\SS",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_SS",
+    "filename": "ADB99"
+  },
+  {
+    "command": "\\AE",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_AE",
+    "filename": "45958"
+  },
+  {
+    "command": "\\OE",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_OE",
+    "filename": "E9468"
+  },
+  {
+    "command": "\\ae",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_ae",
+    "filename": "162B2"
+  },
+  {
+    "command": "\\oe",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-OT1-_oe",
+    "filename": "7E132"
+  },
+  {
+    "command": "\\DH",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_DH",
+    "filename": "D176F"
+  },
+  {
+    "command": "\\dh",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_dh",
+    "filename": "96230"
+  },
+  {
+    "command": "\\DJ",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_DJ",
+    "filename": "82904"
+  },
+  {
+    "command": "\\dj",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_dj",
+    "filename": "D4AA4"
+  },
+  {
+    "command": "\\NG",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_NG",
+    "filename": "AA453"
+  },
+  {
+    "command": "\\ng",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_ng",
+    "filename": "DF6F1"
+  },
+  {
+    "command": "\\TH",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_TH",
+    "filename": "D380F"
+  },
+  {
+    "command": "\\th",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_th",
+    "filename": "04A18"
+  },
+  {
+    "command": "\\guillemotleft",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_guillemotleft",
+    "filename": "14BB9"
+  },
+  {
+    "command": "\\guilsinglleft",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_guilsinglleft",
+    "filename": "476F1"
+  },
+  {
+    "command": "\\quotedblbase",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_quotedblbase",
+    "filename": "75B16"
+  },
+  {
+    "command": "\\textquotedbl",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_textquotedbl",
+    "filename": "B28D2"
+  },
+  {
+    "command": "\\guillemotright",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_guillemotright",
+    "filename": "64479"
+  },
+  {
+    "command": "\\guilsinglright",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_guilsinglright",
+    "filename": "92A9C"
+  },
+  {
+    "command": "\\quotesinglbase",
+    "fontenc": "T1",
+    "mathmode": false,
+    "textmode": true,
+    "key": "latex2e-T1-_quotesinglbase",
+    "filename": "8A083"
+  },
+  {
+    "command": "\\textbabygamma",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbabygamma",
+    "filename": "9BE11"
+  },
+  {
+    "command": "\\textglotstop",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textglotstop",
+    "filename": "F8E6F"
+  },
+  {
+    "command": "\\textrtailn",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrtailn",
+    "filename": "26F6F"
+  },
+  {
+    "command": "\\textbarb",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbarb",
+    "filename": "A462F"
+  },
+  {
+    "command": "\\texthalflength",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthalflength",
+    "filename": "1DC70"
+  },
+  {
+    "command": "\\textrtailr",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrtailr",
+    "filename": "A7ACC"
+  },
+  {
+    "command": "\\textbarc",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbarc",
+    "filename": "EC062"
+  },
+  {
+    "command": "\\texthardsign",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthardsign",
+    "filename": "B4B27"
+  },
+  {
+    "command": "\\textrtails",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrtails",
+    "filename": "BBFD0"
+  },
+  {
+    "command": "\\textbard",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbard",
+    "filename": "31BD8"
+  },
+  {
+    "command": "\\texthooktop",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthooktop",
+    "filename": "ABE28"
+  },
+  {
+    "command": "\\textrtailt",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrtailt",
+    "filename": "D74E5"
+  },
+  {
+    "command": "\\textbardotlessj",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbardotlessj",
+    "filename": "37959"
+  },
+  {
+    "command": "\\texthtb",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthtb",
+    "filename": "A8496"
+  },
+  {
+    "command": "\\textrtailz",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrtailz",
+    "filename": "14106"
+  },
+  {
+    "command": "\\textbarg",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbarg",
+    "filename": "172D2"
+  },
+  {
+    "command": "\\texthtbardotlessj",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthtbardotlessj",
+    "filename": "0CFC6"
+  },
+  {
+    "command": "\\textrthook",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrthook",
+    "filename": "2DAE5"
+  },
+  {
+    "command": "\\textbarglotstop",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbarglotstop",
+    "filename": "5646D"
+  },
+  {
+    "command": "\\texthtc",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthtc",
+    "filename": "DFB2F"
+  },
+  {
+    "command": "\\textsca",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textsca",
+    "filename": "D96C2"
+  },
+  {
+    "command": "\\textbari",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbari",
+    "filename": "2452B"
+  },
+  {
+    "command": "\\texthtd",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthtd",
+    "filename": "5B3AB"
+  },
+  {
+    "command": "\\textscb",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscb",
+    "filename": "14C10"
+  },
+  {
+    "command": "\\textbarl",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbarl",
+    "filename": "A7908"
+  },
+  {
+    "command": "\\texthtg",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthtg",
+    "filename": "556E2"
+  },
+  {
+    "command": "\\textsce",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textsce",
+    "filename": "8863C"
+  },
+  {
+    "command": "\\textbaro",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbaro",
+    "filename": "A1A1A"
+  },
+  {
+    "command": "\\texthth",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthth",
+    "filename": "B47B8"
+  },
+  {
+    "command": "\\textscg",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscg",
+    "filename": "AE90B"
+  },
+  {
+    "command": "\\textbarrevglotstop",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbarrevglotstop",
+    "filename": "37A54"
+  },
+  {
+    "command": "\\texththeng",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texththeng",
+    "filename": "C3C47"
+  },
+  {
+    "command": "\\textsch",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textsch",
+    "filename": "20AF3"
+  },
+  {
+    "command": "\\textbaru",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbaru",
+    "filename": "23D70"
+  },
+  {
+    "command": "\\texthtk",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthtk",
+    "filename": "8A391"
+  },
+  {
+    "command": "\\textschwa",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textschwa",
+    "filename": "71BDE"
+  },
+  {
+    "command": "\\textbeltl",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbeltl",
+    "filename": "886AC"
+  },
+  {
+    "command": "\\texthtp",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthtp",
+    "filename": "FFF3C"
+  },
+  {
+    "command": "\\textsci",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textsci",
+    "filename": "4012F"
+  },
+  {
+    "command": "\\textbeta",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbeta",
+    "filename": "56E33"
+  },
+  {
+    "command": "\\texthtq",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthtq",
+    "filename": "A24D5"
+  },
+  {
+    "command": "\\textscj",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscj",
+    "filename": "B36FB"
+  },
+  {
+    "command": "\\textbullseye",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textbullseye",
+    "filename": "B5C33"
+  },
+  {
+    "command": "\\texthtrtaild",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthtrtaild",
+    "filename": "5645C"
+  },
+  {
+    "command": "\\textscl",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscl",
+    "filename": "D7A04"
+  },
+  {
+    "command": "\\textceltpal",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textceltpal",
+    "filename": "E8AD3"
+  },
+  {
+    "command": "\\texthtscg",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthtscg",
+    "filename": "9A9F7"
+  },
+  {
+    "command": "\\textscn",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscn",
+    "filename": "078F1"
+  },
+  {
+    "command": "\\textchi",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textchi",
+    "filename": "0F46A"
+  },
+  {
+    "command": "\\texthtt",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthtt",
+    "filename": "3E3A1"
+  },
+  {
+    "command": "\\textscoelig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscoelig",
+    "filename": "2D41B"
+  },
+  {
+    "command": "\\textcloseepsilon",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcloseepsilon",
+    "filename": "752D4"
+  },
+  {
+    "command": "\\texthvlig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texthvlig",
+    "filename": "2AF77"
+  },
+  {
+    "command": "\\textscomega",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscomega",
+    "filename": "E10B0"
+  },
+  {
+    "command": "\\textcloseomega",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcloseomega",
+    "filename": "D8435"
+  },
+  {
+    "command": "\\textinvglotstop",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textinvglotstop",
+    "filename": "B41ED"
+  },
+  {
+    "command": "\\textscr",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscr",
+    "filename": "BAA76"
+  },
+  {
+    "command": "\\textcloserevepsilon",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcloserevepsilon",
+    "filename": "A1791"
+  },
+  {
+    "command": "\\textinvscr",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textinvscr",
+    "filename": "40A48"
+  },
+  {
+    "command": "\\textscripta",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscripta",
+    "filename": "65659"
+  },
+  {
+    "command": "\\textcommatailz",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcommatailz",
+    "filename": "35B6E"
+  },
+  {
+    "command": "\\textiota",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textiota",
+    "filename": "69CC3"
+  },
+  {
+    "command": "\\textscriptg",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscriptg",
+    "filename": "F0F23"
+  },
+  {
+    "command": "\\textcorner",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcorner",
+    "filename": "5AC3D"
+  },
+  {
+    "command": "\\textlambda",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textlambda",
+    "filename": "95ED8"
+  },
+  {
+    "command": "\\textscriptv",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscriptv",
+    "filename": "6386B"
+  },
+  {
+    "command": "\\textcrb",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcrb",
+    "filename": "4B518"
+  },
+  {
+    "command": "\\textlengthmark",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textlengthmark",
+    "filename": "D9619"
+  },
+  {
+    "command": "\\textscu",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscu",
+    "filename": "4A109"
+  },
+  {
+    "command": "\\textcrd",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcrd",
+    "filename": "7806E"
+  },
+  {
+    "command": "\\textlhookt",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textlhookt",
+    "filename": "27DDD"
+  },
+  {
+    "command": "\\textscy",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textscy",
+    "filename": "5DCD0"
+  },
+  {
+    "command": "\\textcrg",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcrg",
+    "filename": "D8587"
+  },
+  {
+    "command": "\\textlhtlongi",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textlhtlongi",
+    "filename": "75C9C"
+  },
+  {
+    "command": "\\textsecstress",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textsecstress",
+    "filename": "F41D4"
+  },
+  {
+    "command": "\\textcrh",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcrh",
+    "filename": "50BD4"
+  },
+  {
+    "command": "\\textlhtlongy",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textlhtlongy",
+    "filename": "AB237"
+  },
+  {
+    "command": "\\textsoftsign",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textsoftsign",
+    "filename": "16084"
+  },
+  {
+    "command": "\\textcrinvglotstop",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcrinvglotstop",
+    "filename": "05D51"
+  },
+  {
+    "command": "\\textlonglegr",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textlonglegr",
+    "filename": "3F887"
+  },
+  {
+    "command": "\\textstretchc",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textstretchc",
+    "filename": "926B0"
+  },
+  {
+    "command": "\\textcrlambda",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcrlambda",
+    "filename": "54CBC"
+  },
+  {
+    "command": "\\textlptr",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textlptr",
+    "filename": "F49E1"
+  },
+  {
+    "command": "\\texttctclig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texttctclig",
+    "filename": "7EBFD"
+  },
+  {
+    "command": "\\textcrtwo",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcrtwo",
+    "filename": "E0AD4"
+  },
+  {
+    "command": "\\textltailm",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textltailm",
+    "filename": "957EA"
+  },
+  {
+    "command": "\\textteshlig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textteshlig",
+    "filename": "CB968"
+  },
+  {
+    "command": "\\textctc",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textctc",
+    "filename": "00EBC"
+  },
+  {
+    "command": "\\textltailn",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textltailn",
+    "filename": "D5757"
+  },
+  {
+    "command": "\\texttheta",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texttheta",
+    "filename": "CD78E"
+  },
+  {
+    "command": "\\textctd",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textctd",
+    "filename": "A51CC"
+  },
+  {
+    "command": "\\textltilde",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textltilde",
+    "filename": "1FDA4"
+  },
+  {
+    "command": "\\textthorn",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textthorn",
+    "filename": "42D5D"
+  },
+  {
+    "command": "\\textctdctzlig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textctdctzlig",
+    "filename": "C6DDC"
+  },
+  {
+    "command": "\\textlyoghlig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textlyoghlig",
+    "filename": "EABE1"
+  },
+  {
+    "command": "\\texttoneletterstem",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texttoneletterstem",
+    "filename": "DD3BF"
+  },
+  {
+    "command": "\\textctesh",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textctesh",
+    "filename": "2C214"
+  },
+  {
+    "command": "\\textObardotlessj",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textObardotlessj",
+    "filename": "F7159"
+  },
+  {
+    "command": "\\texttslig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_texttslig",
+    "filename": "7810B"
+  },
+  {
+    "command": "\\textctj",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textctj",
+    "filename": "58A90"
+  },
+  {
+    "command": "\\textOlyoghlig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textOlyoghlig",
+    "filename": "53640"
+  },
+  {
+    "command": "\\textturna",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturna",
+    "filename": "58210"
+  },
+  {
+    "command": "\\textctn",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textctn",
+    "filename": "CC5F0"
+  },
+  {
+    "command": "\\textomega",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textomega",
+    "filename": "5EE63"
+  },
+  {
+    "command": "\\textturncelig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturncelig",
+    "filename": "0403B"
+  },
+  {
+    "command": "\\textctt",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textctt",
+    "filename": "53DDB"
+  },
+  {
+    "command": "\\textopencorner",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textopencorner",
+    "filename": "1F66F"
+  },
+  {
+    "command": "\\textturnh",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturnh",
+    "filename": "BD664"
+  },
+  {
+    "command": "\\textcttctclig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textcttctclig",
+    "filename": "6763D"
+  },
+  {
+    "command": "\\textopeno",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textopeno",
+    "filename": "E97A4"
+  },
+  {
+    "command": "\\textturnk",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturnk",
+    "filename": "7DBAE"
+  },
+  {
+    "command": "\\textctyogh",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textctyogh",
+    "filename": "CF823"
+  },
+  {
+    "command": "\\textpalhook",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textpalhook",
+    "filename": "BF4EB"
+  },
+  {
+    "command": "\\textturnlonglegr",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturnlonglegr",
+    "filename": "9BE17"
+  },
+  {
+    "command": "\\textctz",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textctz",
+    "filename": "F6D68"
+  },
+  {
+    "command": "\\textphi",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textphi",
+    "filename": "602D4"
+  },
+  {
+    "command": "\\textturnm",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturnm",
+    "filename": "C4E02"
+  },
+  {
+    "command": "\\textdctzlig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textdctzlig",
+    "filename": "48CB0"
+  },
+  {
+    "command": "\\textpipe",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textpipe",
+    "filename": "76E83"
+  },
+  {
+    "command": "\\textturnmrleg",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturnmrleg",
+    "filename": "24DFC"
+  },
+  {
+    "command": "\\textdoublebaresh",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textdoublebaresh",
+    "filename": "895E3"
+  },
+  {
+    "command": "\\textprimstress",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textprimstress",
+    "filename": "39788"
+  },
+  {
+    "command": "\\textturnr",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturnr",
+    "filename": "561A1"
+  },
+  {
+    "command": "\\textdoublebarpipe",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textdoublebarpipe",
+    "filename": "2D0E5"
+  },
+  {
+    "command": "\\textraiseglotstop",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textraiseglotstop",
+    "filename": "E256F"
+  },
+  {
+    "command": "\\textturnrrtail",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturnrrtail",
+    "filename": "9C2A4"
+  },
+  {
+    "command": "\\textdoublebarslash",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textdoublebarslash",
+    "filename": "3A527"
+  },
+  {
+    "command": "\\textraisevibyi",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textraisevibyi",
+    "filename": "27F55"
+  },
+  {
+    "command": "\\textturnscripta",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturnscripta",
+    "filename": "0E68A"
+  },
+  {
+    "command": "\\textdoublepipe",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textdoublepipe",
+    "filename": "3A7A5"
+  },
+  {
+    "command": "\\textramshorns",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textramshorns",
+    "filename": "CB733"
+  },
+  {
+    "command": "\\textturnt",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturnt",
+    "filename": "86B25"
+  },
+  {
+    "command": "\\textdoublevertline",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textdoublevertline",
+    "filename": "F08EB"
+  },
+  {
+    "command": "\\textrevapostrophe",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrevapostrophe",
+    "filename": "5905E"
+  },
+  {
+    "command": "\\textturnv",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturnv",
+    "filename": "DD9CE"
+  },
+  {
+    "command": "\\textdownstep",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textdownstep",
+    "filename": "71F8B"
+  },
+  {
+    "command": "\\textreve",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textreve",
+    "filename": "42082"
+  },
+  {
+    "command": "\\textturnw",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturnw",
+    "filename": "B84E1"
+  },
+  {
+    "command": "\\textdyoghlig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textdyoghlig",
+    "filename": "9AD8A"
+  },
+  {
+    "command": "\\textrevepsilon",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrevepsilon",
+    "filename": "0570E"
+  },
+  {
+    "command": "\\textturny",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textturny",
+    "filename": "0E24A"
+  },
+  {
+    "command": "\\textdzlig",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textdzlig",
+    "filename": "2FE6D"
+  },
+  {
+    "command": "\\textrevglotstop",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrevglotstop",
+    "filename": "7F253"
+  },
+  {
+    "command": "\\textupsilon",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textupsilon",
+    "filename": "8A284"
+  },
+  {
+    "command": "\\textepsilon",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textepsilon",
+    "filename": "B7C53"
+  },
+  {
+    "command": "\\textrevyogh",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrevyogh",
+    "filename": "46406"
+  },
+  {
+    "command": "\\textupstep",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textupstep",
+    "filename": "4B690"
+  },
+  {
+    "command": "\\textesh",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textesh",
+    "filename": "2CEC1"
+  },
+  {
+    "command": "\\textrhookrevepsilon",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrhookrevepsilon",
+    "filename": "49454"
+  },
+  {
+    "command": "\\textvertline",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textvertline",
+    "filename": "55E88"
+  },
+  {
+    "command": "\\textfishhookr",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textfishhookr",
+    "filename": "2C440"
+  },
+  {
+    "command": "\\textrhookschwa",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrhookschwa",
+    "filename": "70DA3"
+  },
+  {
+    "command": "\\textvibyi",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textvibyi",
+    "filename": "5BAC9"
+  },
+  {
+    "command": "\\textg",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textg",
+    "filename": "789BC"
+  },
+  {
+    "command": "\\textrhoticity",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrhoticity",
+    "filename": "138E8"
+  },
+  {
+    "command": "\\textvibyy",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textvibyy",
+    "filename": "9EC98"
+  },
+  {
+    "command": "\\textgamma",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textgamma",
+    "filename": "52F8F"
+  },
+  {
+    "command": "\\textrptr",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrptr",
+    "filename": "DA79F"
+  },
+  {
+    "command": "\\textwynn",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textwynn",
+    "filename": "09780"
+  },
+  {
+    "command": "\\textglobfall",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textglobfall",
+    "filename": "714BB"
+  },
+  {
+    "command": "\\textrtaild",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrtaild",
+    "filename": "A0482"
+  },
+  {
+    "command": "\\textyogh",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textyogh",
+    "filename": "66B4E"
+  },
+  {
+    "command": "\\textglobrise",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textglobrise",
+    "filename": "81115"
+  },
+  {
+    "command": "\\textrtaill",
+    "package": "tipa",
+    "mathmode": false,
+    "textmode": true,
+    "key": "tipa-OT1-_textrtaill",
+    "filename": "0561E"
+  },
+  {
+    "command": "\\textbaht",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textbaht",
+    "filename": "761C6"
+  },
+  {
+    "command": "\\textdollar",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textdollar",
+    "filename": "29E47"
+  },
+  {
+    "command": "\\textguarani",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textguarani",
+    "filename": "31D63"
+  },
+  {
+    "command": "\\textwon",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textwon",
+    "filename": "ACF68"
+  },
+  {
+    "command": "\\textcent",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textcent",
+    "filename": "95D53"
+  },
+  {
+    "command": "\\textdollaroldstyle",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textdollaroldstyle",
+    "filename": "6D3E6"
+  },
+  {
+    "command": "\\textlira",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textlira",
+    "filename": "11C41"
+  },
+  {
+    "command": "\\textyen",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textyen",
+    "filename": "6833D"
+  },
+  {
+    "command": "\\textcentoldstyle",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textcentoldstyle",
+    "filename": "6BEF8"
+  },
+  {
+    "command": "\\textdong",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textdong",
+    "filename": "AE697"
+  },
+  {
+    "command": "\\textnaira",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textnaira",
+    "filename": "3315B"
+  },
+  {
+    "command": "\\textcolonmonetary",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textcolonmonetary",
+    "filename": "F7BA1"
+  },
+  {
+    "command": "\\texteuro",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_texteuro",
+    "filename": "335A1"
+  },
+  {
+    "command": "\\textpeso",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textpeso",
+    "filename": "51F3D"
+  },
+  {
+    "command": "\\textcurrency",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textcurrency",
+    "filename": "5B34B"
+  },
+  {
+    "command": "\\textflorin",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textflorin",
+    "filename": "7FE51"
+  },
+  {
+    "command": "\\textsterling",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textsterling",
+    "filename": "A300D"
+  },
+  {
+    "command": "\\Denarius",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Denarius",
+    "filename": "9B9DC"
+  },
+  {
+    "command": "\\EUR",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_EUR",
+    "filename": "B7BD0"
+  },
+  {
+    "command": "\\EURdig",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_EURdig",
+    "filename": "8BD29"
+  },
+  {
+    "command": "\\EURtm",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_EURtm",
+    "filename": "9578B"
+  },
+  {
+    "command": "\\Pfund",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Pfund",
+    "filename": "0F516"
+  },
+  {
+    "command": "\\Ecommerce",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Ecommerce",
+    "filename": "524BB"
+  },
+  {
+    "command": "\\EURcr",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_EURcr",
+    "filename": "8EA7D"
+  },
+  {
+    "command": "\\EURhv",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_EURhv",
+    "filename": "22795"
+  },
+  {
+    "command": "\\EyesDollar",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_EyesDollar",
+    "filename": "5BAA7"
+  },
+  {
+    "command": "\\Shilling",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Shilling",
+    "filename": "1B054"
+  },
+  {
+    "command": "\\cent",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_cent",
+    "filename": "0DC71"
+  },
+  {
+    "command": "\\currency",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_currency",
+    "filename": "AD3E7"
+  },
+  {
+    "command": "\\textcircledP",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textcircledP",
+    "filename": "5473D"
+  },
+  {
+    "command": "\\textcopyright",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textcopyright",
+    "filename": "33AFD"
+  },
+  {
+    "command": "\\textservicemark",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textservicemark",
+    "filename": "09462"
+  },
+  {
+    "command": "\\textcopyleft",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textcopyleft",
+    "filename": "F7C4A"
+  },
+  {
+    "command": "\\textregistered",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textregistered",
+    "filename": "4A26D"
+  },
+  {
+    "command": "\\texttrademark",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_texttrademark",
+    "filename": "D68C3"
+  },
+  {
+    "command": "\\textasteriskcentered",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textasteriskcentered",
+    "filename": "BEF70"
+  },
+  {
+    "command": "\\textordfeminine",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textordfeminine",
+    "filename": "1C9DE"
+  },
+  {
+    "command": "\\textbardbl",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textbardbl",
+    "filename": "587E4"
+  },
+  {
+    "command": "\\textordmasculine",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textordmasculine",
+    "filename": "064AA"
+  },
+  {
+    "command": "\\textbigcircle",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textbigcircle",
+    "filename": "28C50"
+  },
+  {
+    "command": "\\textparagraph",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textparagraph",
+    "filename": "B6D4D"
+  },
+  {
+    "command": "\\textblank",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textblank",
+    "filename": "7928A"
+  },
+  {
+    "command": "\\textperiodcentered",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textperiodcentered",
+    "filename": "ACF67"
+  },
+  {
+    "command": "\\textbrokenbar",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textbrokenbar",
+    "filename": "A6F8B"
+  },
+  {
+    "command": "\\textpertenthousand",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textpertenthousand",
+    "filename": "7224F"
+  },
+  {
+    "command": "\\textbullet",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textbullet",
+    "filename": "72E4D"
+  },
+  {
+    "command": "\\textperthousand",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textperthousand",
+    "filename": "0F8DE"
+  },
+  {
+    "command": "\\textdagger",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textdagger",
+    "filename": "BA275"
+  },
+  {
+    "command": "\\textpilcrow",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textpilcrow",
+    "filename": "FF096"
+  },
+  {
+    "command": "\\textdaggerdbl",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textdaggerdbl",
+    "filename": "8E8E1"
+  },
+  {
+    "command": "\\textquotesingle",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textquotesingle",
+    "filename": "2923F"
+  },
+  {
+    "command": "\\textdblhyphen",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textdblhyphen",
+    "filename": "D9E15"
+  },
+  {
+    "command": "\\textquotestraightbase",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textquotestraightbase",
+    "filename": "12827"
+  },
+  {
+    "command": "\\textdblhyphenchar",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textdblhyphenchar",
+    "filename": "C7B65"
+  },
+  {
+    "command": "\\textquotestraightdblbase",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textquotestraightdblbase",
+    "filename": "9F920"
+  },
+  {
+    "command": "\\textdiscount",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textdiscount",
+    "filename": "B0594"
+  },
+  {
+    "command": "\\textrecipe",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textrecipe",
+    "filename": "8CB8D"
+  },
+  {
+    "command": "\\textestimated",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textestimated",
+    "filename": "01495"
+  },
+  {
+    "command": "\\textreferencemark",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textreferencemark",
+    "filename": "D9ABC"
+  },
+  {
+    "command": "\\textinterrobang",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textinterrobang",
+    "filename": "89787"
+  },
+  {
+    "command": "\\textsection",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textsection",
+    "filename": "B226D"
+  },
+  {
+    "command": "\\textinterrobangdown",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textinterrobangdown",
+    "filename": "12A08"
+  },
+  {
+    "command": "\\textthreequartersemdash",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textthreequartersemdash",
+    "filename": "AE355"
+  },
+  {
+    "command": "\\textmusicalnote",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textmusicalnote",
+    "filename": "AB0C1"
+  },
+  {
+    "command": "\\texttildelow",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_texttildelow",
+    "filename": "BE209"
+  },
+  {
+    "command": "\\textnumero",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textnumero",
+    "filename": "97116"
+  },
+  {
+    "command": "\\texttwelveudash",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_texttwelveudash",
+    "filename": "7BD9D"
+  },
+  {
+    "command": "\\textopenbullet",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textopenbullet",
+    "filename": "EE0CC"
+  },
+  {
+    "command": "\\permil",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_permil",
+    "filename": "0EA47"
+  },
+  {
+    "command": "\\mathdollar",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_mathdollar",
+    "filename": "E458D"
+  },
+  {
+    "command": "\\mathparagraph",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_mathparagraph",
+    "filename": "66B26"
+  },
+  {
+    "command": "\\mathsterling",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_mathsterling",
+    "filename": "4D919"
+  },
+  {
+    "command": "\\mathellipsis",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_mathellipsis",
+    "filename": "4A946"
+  },
+  {
+    "command": "\\mathsection",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_mathsection",
+    "filename": "FFC95"
+  },
+  {
+    "command": "\\mathunderscore",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_mathunderscore",
+    "filename": "84DDE"
+  },
+  {
+    "command": "\\amalg",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_amalg",
+    "filename": "2DA90"
+  },
+  {
+    "command": "\\cup",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_cup",
+    "filename": "2EF29"
+  },
+  {
+    "command": "\\oplus",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_oplus",
+    "filename": "5DD7D"
+  },
+  {
+    "command": "\\times",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_times",
+    "filename": "A1251"
+  },
+  {
+    "command": "\\ast",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_ast",
+    "filename": "0DCF6"
+  },
+  {
+    "command": "\\dagger",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_dagger",
+    "filename": "703AB"
+  },
+  {
+    "command": "\\oslash",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_oslash",
+    "filename": "3B42A"
+  },
+  {
+    "command": "\\triangleleft",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_triangleleft",
+    "filename": "3269C"
+  },
+  {
+    "command": "\\bigcirc",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bigcirc",
+    "filename": "C38AF"
+  },
+  {
+    "command": "\\ddagger",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_ddagger",
+    "filename": "71035"
+  },
+  {
+    "command": "\\otimes",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_otimes",
+    "filename": "662B7"
+  },
+  {
+    "command": "\\triangleright",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_triangleright",
+    "filename": "FB60A"
+  },
+  {
+    "command": "\\bigtriangledown",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bigtriangledown",
+    "filename": "3350B"
+  },
+  {
+    "command": "\\diamond",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_diamond",
+    "filename": "FB2FF"
+  },
+  {
+    "command": "\\pm",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_pm",
+    "filename": "01476"
+  },
+  {
+    "command": "\\bigtriangleup",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bigtriangleup",
+    "filename": "93861"
+  },
+  {
+    "command": "\\div",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_div",
+    "filename": "31A71"
+  },
+  {
+    "command": "\\bullet",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bullet",
+    "filename": "77284"
+  },
+  {
+    "command": "\\setminus",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_setminus",
+    "filename": "DA15E"
+  },
+  {
+    "command": "\\uplus",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_uplus",
+    "filename": "1D1B0"
+  },
+  {
+    "command": "\\cap",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_cap",
+    "filename": "93935"
+  },
+  {
+    "command": "\\mp",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_mp",
+    "filename": "B4D63"
+  },
+  {
+    "command": "\\sqcap",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_sqcap",
+    "filename": "5D8AB"
+  },
+  {
+    "command": "\\vee",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_vee",
+    "filename": "176CB"
+  },
+  {
+    "command": "\\cdot",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_cdot",
+    "filename": "EB4BA"
+  },
+  {
+    "command": "\\odot",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_odot",
+    "filename": "0C5EF"
+  },
+  {
+    "command": "\\sqcup",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_sqcup",
+    "filename": "349B5"
+  },
+  {
+    "command": "\\wedge",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_wedge",
+    "filename": "0712E"
+  },
+  {
+    "command": "\\circ",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_circ",
+    "filename": "2EABE"
+  },
+  {
+    "command": "\\ominus",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_ominus",
+    "filename": "9A179"
+  },
+  {
+    "command": "\\star",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_star",
+    "filename": "E28B1"
+  },
+  {
+    "command": "\\wr",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_wr",
+    "filename": "14E83"
+  },
+  {
+    "command": "\\barwedge",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_barwedge",
+    "filename": "426DC"
+  },
+  {
+    "command": "\\circledcirc",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_circledcirc",
+    "filename": "A6922"
+  },
+  {
+    "command": "\\intercal",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_intercal",
+    "filename": "5B061"
+  },
+  {
+    "command": "\\boxdot",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_boxdot",
+    "filename": "D0B40"
+  },
+  {
+    "command": "\\circleddash",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_circleddash",
+    "filename": "FC07A"
+  },
+  {
+    "command": "\\leftthreetimes",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_leftthreetimes",
+    "filename": "4B8DF"
+  },
+  {
+    "command": "\\boxminus",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_boxminus",
+    "filename": "50B3B"
+  },
+  {
+    "command": "\\Cup",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Cup",
+    "filename": "BC610"
+  },
+  {
+    "command": "\\ltimes",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ltimes",
+    "filename": "BE39F"
+  },
+  {
+    "command": "\\boxplus",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_boxplus",
+    "filename": "20A7A"
+  },
+  {
+    "command": "\\curlyvee",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_curlyvee",
+    "filename": "0CF19"
+  },
+  {
+    "command": "\\rightthreetimes",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_rightthreetimes",
+    "filename": "08B4D"
+  },
+  {
+    "command": "\\boxtimes",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_boxtimes",
+    "filename": "F64B3"
+  },
+  {
+    "command": "\\curlywedge",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_curlywedge",
+    "filename": "F975D"
+  },
+  {
+    "command": "\\rtimes",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_rtimes",
+    "filename": "6B067"
+  },
+  {
+    "command": "\\Cap",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Cap",
+    "filename": "1DF9F"
+  },
+  {
+    "command": "\\divideontimes",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_divideontimes",
+    "filename": "F985C"
+  },
+  {
+    "command": "\\smallsetminus",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_smallsetminus",
+    "filename": "5A304"
+  },
+  {
+    "command": "\\centerdot",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_centerdot",
+    "filename": "3B804"
+  },
+  {
+    "command": "\\dotplus",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_dotplus",
+    "filename": "9D740"
+  },
+  {
+    "command": "\\veebar",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_veebar",
+    "filename": "1C32F"
+  },
+  {
+    "command": "\\circledast",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_circledast",
+    "filename": "41867"
+  },
+  {
+    "command": "\\doublebarwedge",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_doublebarwedge",
+    "filename": "FFC08"
+  },
+  {
+    "command": "\\lhd",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": false,
+    "key": "wasysym-OT1-_lhd",
+    "filename": "B1A1D"
+  },
+  {
+    "command": "\\ocircle",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": false,
+    "key": "wasysym-OT1-_ocircle",
+    "filename": "A365D"
+  },
+  {
+    "command": "\\RHD",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": false,
+    "key": "wasysym-OT1-_RHD",
+    "filename": "86EEA"
+  },
+  {
+    "command": "\\unrhd",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": false,
+    "key": "wasysym-OT1-_unrhd",
+    "filename": "79C20"
+  },
+  {
+    "command": "\\LHD",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": false,
+    "key": "wasysym-OT1-_LHD",
+    "filename": "7FB12"
+  },
+  {
+    "command": "\\rhd",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": false,
+    "key": "wasysym-OT1-_rhd",
+    "filename": "AB705"
+  },
+  {
+    "command": "\\unlhd",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": false,
+    "key": "wasysym-OT1-_unlhd",
+    "filename": "96D47"
+  },
+  {
+    "command": "\\bigcap",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bigcap",
+    "filename": "E7B46"
+  },
+  {
+    "command": "\\bigotimes",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bigotimes",
+    "filename": "50F2A"
+  },
+  {
+    "command": "\\bigwedge",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bigwedge",
+    "filename": "4E49F"
+  },
+  {
+    "command": "\\prod",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_prod",
+    "filename": "1DE92"
+  },
+  {
+    "command": "\\bigcup",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bigcup",
+    "filename": "1CAED"
+  },
+  {
+    "command": "\\bigsqcup",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bigsqcup",
+    "filename": "E0D36"
+  },
+  {
+    "command": "\\coprod",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_coprod",
+    "filename": "1C9D6"
+  },
+  {
+    "command": "\\sum",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_sum",
+    "filename": "67BBB"
+  },
+  {
+    "command": "\\bigodot",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bigodot",
+    "filename": "21391"
+  },
+  {
+    "command": "\\biguplus",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_biguplus",
+    "filename": "60F49"
+  },
+  {
+    "command": "\\int",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_int",
+    "filename": "5B8C5"
+  },
+  {
+    "command": "\\bigoplus",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bigoplus",
+    "filename": "22150"
+  },
+  {
+    "command": "\\bigvee",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bigvee",
+    "filename": "72C17"
+  },
+  {
+    "command": "\\oint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_oint",
+    "filename": "40BF1"
+  },
+  {
+    "command": "\\parr",
+    "package": "cmll",
+    "mathmode": true,
+    "textmode": false,
+    "key": "cmll-OT1-_parr",
+    "filename": "7CFCE"
+  },
+  {
+    "command": "\\with",
+    "package": "cmll",
+    "mathmode": true,
+    "textmode": false,
+    "key": "cmll-OT1-_with",
+    "filename": "73D62"
+  },
+  {
+    "command": "\\iint",
+    "package": "amsmath",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amsmath-OT1-_iint",
+    "filename": "7F896"
+  },
+  {
+    "command": "\\iiint",
+    "package": "amsmath",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amsmath-OT1-_iiint",
+    "filename": "9A570"
+  },
+  {
+    "command": "\\iiiint",
+    "package": "amsmath",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amsmath-OT1-_iiiint",
+    "filename": "4D305"
+  },
+  {
+    "command": "\\idotsint",
+    "package": "amsmath",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amsmath-OT1-_idotsint",
+    "filename": "18C13"
+  },
+  {
+    "command": "\\dotsint",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_dotsint",
+    "filename": "C7654"
+  },
+  {
+    "command": "\\ointclockwise",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_ointclockwise",
+    "filename": "8F18C"
+  },
+  {
+    "command": "\\fint",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_fint",
+    "filename": "B4449"
+  },
+  {
+    "command": "\\ointctrclockwise",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_ointctrclockwise",
+    "filename": "F4BF9"
+  },
+  {
+    "command": "\\iiiint",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_iiiint",
+    "filename": "DF471"
+  },
+  {
+    "command": "\\sqiint",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_sqiint",
+    "filename": "4BEC9"
+  },
+  {
+    "command": "\\iiint",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_iiint",
+    "filename": "C85E1"
+  },
+  {
+    "command": "\\sqint",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_sqint",
+    "filename": "E81BB"
+  },
+  {
+    "command": "\\iint",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_iint",
+    "filename": "2C96F"
+  },
+  {
+    "command": "\\varoiint",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_varoiint",
+    "filename": "0D709"
+  },
+  {
+    "command": "\\landdownint",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_landdownint",
+    "filename": "41F28"
+  },
+  {
+    "command": "\\varointclockwise",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_varointclockwise",
+    "filename": "73ED1"
+  },
+  {
+    "command": "\\landupint",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_landupint",
+    "filename": "9A3C0"
+  },
+  {
+    "command": "\\varointctrclockwise",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_varointctrclockwise",
+    "filename": "D760B"
+  },
+  {
+    "command": "\\oiint",
+    "package": "esint",
+    "mathmode": true,
+    "textmode": false,
+    "key": "esint-OT1-_oiint",
+    "filename": "2B2C7"
+  },
+  {
+    "command": "\\approx",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_approx",
+    "filename": "ECDB0"
+  },
+  {
+    "command": "\\not\\approx",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_not_approx",
+    "filename": "3F1FA"
+  },
+  {
+    "command": "\\equiv",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_equiv",
+    "filename": "B8A34"
+  },
+  {
+    "command": "\\not\\equiv",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_not_equiv",
+    "filename": "247D3"
+  },
+  {
+    "command": "\\perp",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_perp",
+    "filename": "E9F9E"
+  },
+  {
+    "command": "\\smile",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_smile",
+    "filename": "504AB"
+  },
+  {
+    "command": "\\asymp",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_asymp",
+    "filename": "03926"
+  },
+  {
+    "command": "\\frown",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_frown",
+    "filename": "F1B78"
+  },
+  {
+    "command": "\\prec",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_prec",
+    "filename": "BAB94"
+  },
+  {
+    "command": "\\succ",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_succ",
+    "filename": "A2FC8"
+  },
+  {
+    "command": "\\bowtie",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bowtie",
+    "filename": "D97C9"
+  },
+  {
+    "command": "\\preceq",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_preceq",
+    "filename": "90B01"
+  },
+  {
+    "command": "\\succeq",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_succeq",
+    "filename": "28145"
+  },
+  {
+    "command": "\\cong",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_cong",
+    "filename": "83712"
+  },
+  {
+    "command": "\\mid",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_mid",
+    "filename": "692A0"
+  },
+  {
+    "command": "\\propto",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_propto",
+    "filename": "33F5F"
+  },
+  {
+    "command": "\\vdash",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_vdash",
+    "filename": "D500E"
+  },
+  {
+    "command": "\\dashv",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_dashv",
+    "filename": "525D5"
+  },
+  {
+    "command": "\\models",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_models",
+    "filename": "EA00D"
+  },
+  {
+    "command": "\\sim",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_sim",
+    "filename": "40771"
+  },
+  {
+    "command": "\\not\\sim",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_not_sim",
+    "filename": "4016D"
+  },
+  {
+    "command": "\\doteq",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_doteq",
+    "filename": "EDE16"
+  },
+  {
+    "command": "\\parallel",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_parallel",
+    "filename": "47D74"
+  },
+  {
+    "command": "\\simeq",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_simeq",
+    "filename": "EA592"
+  },
+  {
+    "command": "\\not\\simeq",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_not_simeq",
+    "filename": "9B1CA"
+  },
+  {
+    "command": "\\approxeq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_approxeq",
+    "filename": "7F1CD"
+  },
+  {
+    "command": "\\eqcirc",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_eqcirc",
+    "filename": "9397D"
+  },
+  {
+    "command": "\\succapprox",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_succapprox",
+    "filename": "A617B"
+  },
+  {
+    "command": "\\backepsilon",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_backepsilon",
+    "filename": "23A31"
+  },
+  {
+    "command": "\\fallingdotseq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_fallingdotseq",
+    "filename": "7C8CA"
+  },
+  {
+    "command": "\\succcurlyeq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_succcurlyeq",
+    "filename": "3C486"
+  },
+  {
+    "command": "\\backsim",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_backsim",
+    "filename": "FBFBB"
+  },
+  {
+    "command": "\\multimap",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_multimap",
+    "filename": "2DC2D"
+  },
+  {
+    "command": "\\succsim",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_succsim",
+    "filename": "5538D"
+  },
+  {
+    "command": "\\backsimeq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_backsimeq",
+    "filename": "78B15"
+  },
+  {
+    "command": "\\pitchfork",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_pitchfork",
+    "filename": "BE3C4"
+  },
+  {
+    "command": "\\therefore",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_therefore",
+    "filename": "C4AAE"
+  },
+  {
+    "command": "\\because",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_because",
+    "filename": "96D05"
+  },
+  {
+    "command": "\\precapprox",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_precapprox",
+    "filename": "06FB2"
+  },
+  {
+    "command": "\\thickapprox",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_thickapprox",
+    "filename": "EA11E"
+  },
+  {
+    "command": "\\between",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_between",
+    "filename": "6CE4A"
+  },
+  {
+    "command": "\\preccurlyeq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_preccurlyeq",
+    "filename": "B9AEB"
+  },
+  {
+    "command": "\\thicksim",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_thicksim",
+    "filename": "733B9"
+  },
+  {
+    "command": "\\Bumpeq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Bumpeq",
+    "filename": "CF845"
+  },
+  {
+    "command": "\\precsim",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_precsim",
+    "filename": "80BCF"
+  },
+  {
+    "command": "\\varpropto",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_varpropto",
+    "filename": "10A6A"
+  },
+  {
+    "command": "\\bumpeq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_bumpeq",
+    "filename": "0B108"
+  },
+  {
+    "command": "\\risingdotseq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_risingdotseq",
+    "filename": "FAE30"
+  },
+  {
+    "command": "\\Vdash",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Vdash",
+    "filename": "A2DC1"
+  },
+  {
+    "command": "\\circeq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_circeq",
+    "filename": "F58D0"
+  },
+  {
+    "command": "\\shortmid",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_shortmid",
+    "filename": "F3256"
+  },
+  {
+    "command": "\\vDash",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_vDash",
+    "filename": "5B9A9"
+  },
+  {
+    "command": "\\curlyeqprec",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_curlyeqprec",
+    "filename": "00AB3"
+  },
+  {
+    "command": "\\shortparallel",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_shortparallel",
+    "filename": "73E8A"
+  },
+  {
+    "command": "\\Vvdash",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Vvdash",
+    "filename": "8AFF2"
+  },
+  {
+    "command": "\\curlyeqsucc",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_curlyeqsucc",
+    "filename": "7C713"
+  },
+  {
+    "command": "\\smallfrown",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_smallfrown",
+    "filename": "9128A"
+  },
+  {
+    "command": "\\doteqdot",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_doteqdot",
+    "filename": "7F71D"
+  },
+  {
+    "command": "\\smallsmile",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_smallsmile",
+    "filename": "E179D"
+  },
+  {
+    "command": "\\ncong",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ncong",
+    "filename": "33F08"
+  },
+  {
+    "command": "\\nshortparallel",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nshortparallel",
+    "filename": "53235"
+  },
+  {
+    "command": "\\nVDash",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nVDash",
+    "filename": "46568"
+  },
+  {
+    "command": "\\nmid",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nmid",
+    "filename": "84798"
+  },
+  {
+    "command": "\\nsim",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nsim",
+    "filename": "E1508"
+  },
+  {
+    "command": "\\precnapprox",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_precnapprox",
+    "filename": "34681"
+  },
+  {
+    "command": "\\nparallel",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nparallel",
+    "filename": "5D9C7"
+  },
+  {
+    "command": "\\nsucc",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nsucc",
+    "filename": "862E1"
+  },
+  {
+    "command": "\\precnsim",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_precnsim",
+    "filename": "C4CE7"
+  },
+  {
+    "command": "\\nprec",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nprec",
+    "filename": "D33EC"
+  },
+  {
+    "command": "\\nsucceq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nsucceq",
+    "filename": "ED73A"
+  },
+  {
+    "command": "\\succnapprox",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_succnapprox",
+    "filename": "0DCDB"
+  },
+  {
+    "command": "\\npreceq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_npreceq",
+    "filename": "3D479"
+  },
+  {
+    "command": "\\nvDash",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nvDash",
+    "filename": "A15B3"
+  },
+  {
+    "command": "\\succnsim",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_succnsim",
+    "filename": "22F1D"
+  },
+  {
+    "command": "\\nshortmid",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nshortmid",
+    "filename": "8823E"
+  },
+  {
+    "command": "\\nvdash",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nvdash",
+    "filename": "F898C"
+  },
+  {
+    "command": "\\inplus",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_inplus",
+    "filename": "A2583"
+  },
+  {
+    "command": "\\niplus",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_niplus",
+    "filename": "C2141"
+  },
+  {
+    "command": "\\sqsupseteq",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_sqsupseteq",
+    "filename": "04B9D"
+  },
+  {
+    "command": "\\supset",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_supset",
+    "filename": "666A8"
+  },
+  {
+    "command": "\\sqsubseteq",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_sqsubseteq",
+    "filename": "3922E"
+  },
+  {
+    "command": "\\subset",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_subset",
+    "filename": "7B9FB"
+  },
+  {
+    "command": "\\supseteq",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_supseteq",
+    "filename": "AABF4"
+  },
+  {
+    "command": "\\subseteq",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_subseteq",
+    "filename": "BC327"
+  },
+  {
+    "command": "\\nsubseteq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nsubseteq",
+    "filename": "AEB3E"
+  },
+  {
+    "command": "\\subseteqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_subseteqq",
+    "filename": "D0FA2"
+  },
+  {
+    "command": "\\supsetneqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_supsetneqq",
+    "filename": "8647D"
+  },
+  {
+    "command": "\\nsupseteq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nsupseteq",
+    "filename": "CA2D9"
+  },
+  {
+    "command": "\\subsetneq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_subsetneq",
+    "filename": "2ECB3"
+  },
+  {
+    "command": "\\varsubsetneq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_varsubsetneq",
+    "filename": "850C6"
+  },
+  {
+    "command": "\\nsupseteqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nsupseteqq",
+    "filename": "A99A4"
+  },
+  {
+    "command": "\\subsetneqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_subsetneqq",
+    "filename": "2B4A1"
+  },
+  {
+    "command": "\\varsubsetneqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_varsubsetneqq",
+    "filename": "2A4B0"
+  },
+  {
+    "command": "\\sqsubset",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_sqsubset",
+    "filename": "281F3"
+  },
+  {
+    "command": "\\Supset",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Supset",
+    "filename": "6F9C3"
+  },
+  {
+    "command": "\\varsupsetneq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_varsupsetneq",
+    "filename": "79D2F"
+  },
+  {
+    "command": "\\sqsupset",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_sqsupset",
+    "filename": "67A4D"
+  },
+  {
+    "command": "\\supseteqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_supseteqq",
+    "filename": "07447"
+  },
+  {
+    "command": "\\varsupsetneqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_varsupsetneqq",
+    "filename": "82890"
+  },
+  {
+    "command": "\\Subset",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Subset",
+    "filename": "CB881"
+  },
+  {
+    "command": "\\supsetneq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_supsetneq",
+    "filename": "BF9A2"
+  },
+  {
+    "command": "\\geq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_geq",
+    "filename": "13ECF"
+  },
+  {
+    "command": "\\gg",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gg",
+    "filename": "23886"
+  },
+  {
+    "command": "\\leq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_leq",
+    "filename": "CB1C8"
+  },
+  {
+    "command": "\\ll",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ll",
+    "filename": "64039"
+  },
+  {
+    "command": "\\neq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_neq",
+    "filename": "56D1F"
+  },
+  {
+    "command": "\\eqslantgtr",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_eqslantgtr",
+    "filename": "A94CB"
+  },
+  {
+    "command": "\\gtrdot",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gtrdot",
+    "filename": "DE4B8"
+  },
+  {
+    "command": "\\lesseqgtr",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lesseqgtr",
+    "filename": "B331C"
+  },
+  {
+    "command": "\\ngeq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ngeq",
+    "filename": "83C31"
+  },
+  {
+    "command": "\\eqslantless",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_eqslantless",
+    "filename": "42DE9"
+  },
+  {
+    "command": "\\gtreqless",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gtreqless",
+    "filename": "88FB8"
+  },
+  {
+    "command": "\\lesseqqgtr",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lesseqqgtr",
+    "filename": "D200A"
+  },
+  {
+    "command": "\\ngeqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ngeqq",
+    "filename": "9E5A9"
+  },
+  {
+    "command": "\\geqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_geqq",
+    "filename": "F89C0"
+  },
+  {
+    "command": "\\gtreqqless",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gtreqqless",
+    "filename": "6BDED"
+  },
+  {
+    "command": "\\lessgtr",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lessgtr",
+    "filename": "7AB08"
+  },
+  {
+    "command": "\\ngeqslant",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ngeqslant",
+    "filename": "AE4BC"
+  },
+  {
+    "command": "\\geqslant",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_geqslant",
+    "filename": "6EAA1"
+  },
+  {
+    "command": "\\gtrless",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gtrless",
+    "filename": "10252"
+  },
+  {
+    "command": "\\lesssim",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lesssim",
+    "filename": "894E4"
+  },
+  {
+    "command": "\\ngtr",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ngtr",
+    "filename": "EF97A"
+  },
+  {
+    "command": "\\ggg",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ggg",
+    "filename": "2D4EF"
+  },
+  {
+    "command": "\\gtrsim",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gtrsim",
+    "filename": "A217F"
+  },
+  {
+    "command": "\\lll",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lll",
+    "filename": "293F0"
+  },
+  {
+    "command": "\\nleq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nleq",
+    "filename": "064A4"
+  },
+  {
+    "command": "\\gnapprox",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gnapprox",
+    "filename": "23D86"
+  },
+  {
+    "command": "\\gvertneqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gvertneqq",
+    "filename": "61B80"
+  },
+  {
+    "command": "\\lnapprox",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lnapprox",
+    "filename": "3172A"
+  },
+  {
+    "command": "\\nleqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nleqq",
+    "filename": "F8ACF"
+  },
+  {
+    "command": "\\gneq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gneq",
+    "filename": "E1D31"
+  },
+  {
+    "command": "\\leqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_leqq",
+    "filename": "F493B"
+  },
+  {
+    "command": "\\lneq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lneq",
+    "filename": "5A24B"
+  },
+  {
+    "command": "\\nleqslant",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nleqslant",
+    "filename": "F7DFF"
+  },
+  {
+    "command": "\\gneqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gneqq",
+    "filename": "86F30"
+  },
+  {
+    "command": "\\leqslant",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_leqslant",
+    "filename": "6A486"
+  },
+  {
+    "command": "\\lneqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lneqq",
+    "filename": "FB5AC"
+  },
+  {
+    "command": "\\nless",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nless",
+    "filename": "BB139"
+  },
+  {
+    "command": "\\gnsim",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gnsim",
+    "filename": "325A7"
+  },
+  {
+    "command": "\\lessapprox",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lessapprox",
+    "filename": "FE810"
+  },
+  {
+    "command": "\\lnsim",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lnsim",
+    "filename": "76988"
+  },
+  {
+    "command": "\\gtrapprox",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gtrapprox",
+    "filename": "6E912"
+  },
+  {
+    "command": "\\lessdot",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lessdot",
+    "filename": "2343A"
+  },
+  {
+    "command": "\\lvertneqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lvertneqq",
+    "filename": "DD0CA"
+  },
+  {
+    "command": "\\blacktriangleleft",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_blacktriangleleft",
+    "filename": "6964C"
+  },
+  {
+    "command": "\\ntrianglelefteq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ntrianglelefteq",
+    "filename": "6DF8F"
+  },
+  {
+    "command": "\\trianglelefteq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_trianglelefteq",
+    "filename": "676E3"
+  },
+  {
+    "command": "\\vartriangleleft",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_vartriangleleft",
+    "filename": "14295"
+  },
+  {
+    "command": "\\blacktriangleright",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_blacktriangleright",
+    "filename": "510C1"
+  },
+  {
+    "command": "\\ntriangleright",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ntriangleright",
+    "filename": "BBFA3"
+  },
+  {
+    "command": "\\triangleq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_triangleq",
+    "filename": "7759C"
+  },
+  {
+    "command": "\\vartriangleright",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_vartriangleright",
+    "filename": "7DF49"
+  },
+  {
+    "command": "\\ntriangleleft",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ntriangleleft",
+    "filename": "B2155"
+  },
+  {
+    "command": "\\ntrianglerighteq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ntrianglerighteq",
+    "filename": "3C5E4"
+  },
+  {
+    "command": "\\trianglerighteq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_trianglerighteq",
+    "filename": "A37C7"
+  },
+  {
+    "command": "\\Downarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Downarrow",
+    "filename": "51EDE"
+  },
+  {
+    "command": "\\longleftarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_longleftarrow",
+    "filename": "19519"
+  },
+  {
+    "command": "\\nwarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_nwarrow",
+    "filename": "D989C"
+  },
+  {
+    "command": "\\downarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_downarrow",
+    "filename": "1E791"
+  },
+  {
+    "command": "\\Longleftarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Longleftarrow",
+    "filename": "FAA97"
+  },
+  {
+    "command": "\\Rightarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Rightarrow",
+    "filename": "9F3B4"
+  },
+  {
+    "command": "\\hookleftarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_hookleftarrow",
+    "filename": "8194A"
+  },
+  {
+    "command": "\\longleftrightarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_longleftrightarrow",
+    "filename": "931C1"
+  },
+  {
+    "command": "\\rightarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_rightarrow",
+    "filename": "1051B"
+  },
+  {
+    "command": "\\hookrightarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_hookrightarrow",
+    "filename": "10626"
+  },
+  {
+    "command": "\\Longleftrightarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Longleftrightarrow",
+    "filename": "149BA"
+  },
+  {
+    "command": "\\searrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_searrow",
+    "filename": "4C5E8"
+  },
+  {
+    "command": "\\longmapsto",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_longmapsto",
+    "filename": "62BE0"
+  },
+  {
+    "command": "\\swarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_swarrow",
+    "filename": "D5795"
+  },
+  {
+    "command": "\\leftarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_leftarrow",
+    "filename": "8BDF4"
+  },
+  {
+    "command": "\\Longrightarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Longrightarrow",
+    "filename": "1CA30"
+  },
+  {
+    "command": "\\uparrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_uparrow",
+    "filename": "7A6F9"
+  },
+  {
+    "command": "\\Leftarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Leftarrow",
+    "filename": "A1BAB"
+  },
+  {
+    "command": "\\longrightarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_longrightarrow",
+    "filename": "A54BB"
+  },
+  {
+    "command": "\\Uparrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Uparrow",
+    "filename": "D3F68"
+  },
+  {
+    "command": "\\Leftrightarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Leftrightarrow",
+    "filename": "E1684"
+  },
+  {
+    "command": "\\mapsto",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_mapsto",
+    "filename": "8119F"
+  },
+  {
+    "command": "\\updownarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_updownarrow",
+    "filename": "69A4B"
+  },
+  {
+    "command": "\\leftrightarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_leftrightarrow",
+    "filename": "014B3"
+  },
+  {
+    "command": "\\nearrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_nearrow",
+    "filename": "7F7F0"
+  },
+  {
+    "command": "\\Updownarrow",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Updownarrow",
+    "filename": "6CA8D"
+  },
+  {
+    "command": "\\leftharpoondown",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_leftharpoondown",
+    "filename": "B3807"
+  },
+  {
+    "command": "\\rightharpoondown",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_rightharpoondown",
+    "filename": "608DB"
+  },
+  {
+    "command": "\\rightleftharpoons",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_rightleftharpoons",
+    "filename": "79525"
+  },
+  {
+    "command": "\\leftharpoonup",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_leftharpoonup",
+    "filename": "30CBE"
+  },
+  {
+    "command": "\\rightharpoonup",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_rightharpoonup",
+    "filename": "C0D8C"
+  },
+  {
+    "command": "\\leadsto",
+    "package": "latexsym",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latexsym-OT1-_leadsto",
+    "filename": "DD885"
+  },
+  {
+    "command": "\\textdownarrow",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textdownarrow",
+    "filename": "38362"
+  },
+  {
+    "command": "\\textrightarrow",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textrightarrow",
+    "filename": "FC9DC"
+  },
+  {
+    "command": "\\textleftarrow",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textleftarrow",
+    "filename": "10D87"
+  },
+  {
+    "command": "\\textuparrow",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textuparrow",
+    "filename": "E6869"
+  },
+  {
+    "command": "\\circlearrowleft",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_circlearrowleft",
+    "filename": "A0B17"
+  },
+  {
+    "command": "\\leftleftarrows",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_leftleftarrows",
+    "filename": "BD148"
+  },
+  {
+    "command": "\\rightleftarrows",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_rightleftarrows",
+    "filename": "CC936"
+  },
+  {
+    "command": "\\circlearrowright",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_circlearrowright",
+    "filename": "A8B57"
+  },
+  {
+    "command": "\\leftrightarrows",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_leftrightarrows",
+    "filename": "ED6AE"
+  },
+  {
+    "command": "\\rightrightarrows",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_rightrightarrows",
+    "filename": "2916B"
+  },
+  {
+    "command": "\\curvearrowleft",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_curvearrowleft",
+    "filename": "63234"
+  },
+  {
+    "command": "\\leftrightsquigarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_leftrightsquigarrow",
+    "filename": "9756B"
+  },
+  {
+    "command": "\\rightsquigarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_rightsquigarrow",
+    "filename": "A1DD6"
+  },
+  {
+    "command": "\\curvearrowright",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_curvearrowright",
+    "filename": "93DF9"
+  },
+  {
+    "command": "\\Lleftarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Lleftarrow",
+    "filename": "1C1A8"
+  },
+  {
+    "command": "\\Rrightarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Rrightarrow",
+    "filename": "A03C7"
+  },
+  {
+    "command": "\\Rsh",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Rsh",
+    "filename": "FFDB7"
+  },
+  {
+    "command": "\\dashleftarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_dashleftarrow",
+    "filename": "E89D7"
+  },
+  {
+    "command": "\\looparrowleft",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_looparrowleft",
+    "filename": "B451B"
+  },
+  {
+    "command": "\\twoheadleftarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_twoheadleftarrow",
+    "filename": "0F747"
+  },
+  {
+    "command": "\\dashrightarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_dashrightarrow",
+    "filename": "A472C"
+  },
+  {
+    "command": "\\looparrowright",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_looparrowright",
+    "filename": "3579E"
+  },
+  {
+    "command": "\\twoheadrightarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_twoheadrightarrow",
+    "filename": "6D560"
+  },
+  {
+    "command": "\\downdownarrows",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_downdownarrows",
+    "filename": "13F2E"
+  },
+  {
+    "command": "\\Lsh",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Lsh",
+    "filename": "60A61"
+  },
+  {
+    "command": "\\upuparrows",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_upuparrows",
+    "filename": "0875E"
+  },
+  {
+    "command": "\\leftarrowtail",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_leftarrowtail",
+    "filename": "15723"
+  },
+  {
+    "command": "\\rightarrowtail",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_rightarrowtail",
+    "filename": "E116F"
+  },
+  {
+    "command": "\\nLeftarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nLeftarrow",
+    "filename": "72187"
+  },
+  {
+    "command": "\\nLeftrightarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nLeftrightarrow",
+    "filename": "C106B"
+  },
+  {
+    "command": "\\nRightarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nRightarrow",
+    "filename": "07523"
+  },
+  {
+    "command": "\\nleftarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nleftarrow",
+    "filename": "A7512"
+  },
+  {
+    "command": "\\nleftrightarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nleftrightarrow",
+    "filename": "4E869"
+  },
+  {
+    "command": "\\nrightarrow",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nrightarrow",
+    "filename": "01FBE"
+  },
+  {
+    "command": "\\downharpoonleft",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_downharpoonleft",
+    "filename": "508C9"
+  },
+  {
+    "command": "\\leftrightharpoons",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_leftrightharpoons",
+    "filename": "82249"
+  },
+  {
+    "command": "\\upharpoonleft",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_upharpoonleft",
+    "filename": "03019"
+  },
+  {
+    "command": "\\downharpoonright",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_downharpoonright",
+    "filename": "FC19C"
+  },
+  {
+    "command": "\\rightleftharpoons",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_rightleftharpoons",
+    "filename": "AB228"
+  },
+  {
+    "command": "\\upharpoonright",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_upharpoonright",
+    "filename": "EA60F"
+  },
+  {
+    "command": "\\leftarrowtriangle",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_leftarrowtriangle",
+    "filename": "98701"
+  },
+  {
+    "command": "\\Mapsfrom",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_Mapsfrom",
+    "filename": "DD5D7"
+  },
+  {
+    "command": "\\shortleftarrow",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_shortleftarrow",
+    "filename": "604D2"
+  },
+  {
+    "command": "\\leftrightarroweq",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_leftrightarroweq",
+    "filename": "0E698"
+  },
+  {
+    "command": "\\mapsfrom",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_mapsfrom",
+    "filename": "2C550"
+  },
+  {
+    "command": "\\shortrightarrow",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_shortrightarrow",
+    "filename": "18DC8"
+  },
+  {
+    "command": "\\leftrightarrowtriangle",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_leftrightarrowtriangle",
+    "filename": "7123C"
+  },
+  {
+    "command": "\\Mapsto",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_Mapsto",
+    "filename": "3D7E0"
+  },
+  {
+    "command": "\\shortuparrow",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_shortuparrow",
+    "filename": "A8FED"
+  },
+  {
+    "command": "\\lightning",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_lightning",
+    "filename": "BAA08"
+  },
+  {
+    "command": "\\nnearrow",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_nnearrow",
+    "filename": "B9D50"
+  },
+  {
+    "command": "\\ssearrow",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_ssearrow",
+    "filename": "B3CE4"
+  },
+  {
+    "command": "\\Longmapsfrom",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_Longmapsfrom",
+    "filename": "09551"
+  },
+  {
+    "command": "\\nnwarrow",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_nnwarrow",
+    "filename": "8C567"
+  },
+  {
+    "command": "\\sswarrow",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_sswarrow",
+    "filename": "AE918"
+  },
+  {
+    "command": "\\longmapsfrom",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_longmapsfrom",
+    "filename": "E4CFC"
+  },
+  {
+    "command": "\\rightarrowtriangle",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_rightarrowtriangle",
+    "filename": "9D325"
+  },
+  {
+    "command": "\\Longmapsto",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_Longmapsto",
+    "filename": "2BEAC"
+  },
+  {
+    "command": "\\shortdownarrow",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_shortdownarrow",
+    "filename": "D3A6E"
+  },
+  {
+    "command": "\\alpha",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_alpha",
+    "filename": "97C86"
+  },
+  {
+    "command": "\\theta",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_theta",
+    "filename": "5D815"
+  },
+  {
+    "command": "\\tau",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_tau",
+    "filename": "EFA60"
+  },
+  {
+    "command": "\\beta",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_beta",
+    "filename": "E974F"
+  },
+  {
+    "command": "\\vartheta",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_vartheta",
+    "filename": "60D21"
+  },
+  {
+    "command": "\\pi",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_pi",
+    "filename": "FA3CB"
+  },
+  {
+    "command": "\\upsilon",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_upsilon",
+    "filename": "EF362"
+  },
+  {
+    "command": "\\gamma",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_gamma",
+    "filename": "11F62"
+  },
+  {
+    "command": "\\iota",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_iota",
+    "filename": "A443D"
+  },
+  {
+    "command": "\\varpi",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_varpi",
+    "filename": "81D36"
+  },
+  {
+    "command": "\\phi",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_phi",
+    "filename": "3336B"
+  },
+  {
+    "command": "\\delta",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_delta",
+    "filename": "2694D"
+  },
+  {
+    "command": "\\kappa",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_kappa",
+    "filename": "FF571"
+  },
+  {
+    "command": "\\rho",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_rho",
+    "filename": "56A77"
+  },
+  {
+    "command": "\\varphi",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_varphi",
+    "filename": "2BF9A"
+  },
+  {
+    "command": "\\epsilon",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_epsilon",
+    "filename": "9EDD3"
+  },
+  {
+    "command": "\\lambda",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_lambda",
+    "filename": "0A443"
+  },
+  {
+    "command": "\\varrho",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_varrho",
+    "filename": "C9785"
+  },
+  {
+    "command": "\\chi",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_chi",
+    "filename": "11461"
+  },
+  {
+    "command": "\\varepsilon",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_varepsilon",
+    "filename": "DFB33"
+  },
+  {
+    "command": "\\mu",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_mu",
+    "filename": "E54EB"
+  },
+  {
+    "command": "\\sigma",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_sigma",
+    "filename": "02558"
+  },
+  {
+    "command": "\\psi",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_psi",
+    "filename": "5147F"
+  },
+  {
+    "command": "\\zeta",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_zeta",
+    "filename": "86182"
+  },
+  {
+    "command": "\\nu",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_nu",
+    "filename": "9172B"
+  },
+  {
+    "command": "\\varsigma",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_varsigma",
+    "filename": "5F905"
+  },
+  {
+    "command": "\\omega",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_omega",
+    "filename": "8E56B"
+  },
+  {
+    "command": "\\eta",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_eta",
+    "filename": "96D6A"
+  },
+  {
+    "command": "\\xi",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_xi",
+    "filename": "975B3"
+  },
+  {
+    "command": "\\Gamma",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Gamma",
+    "filename": "22A95"
+  },
+  {
+    "command": "\\Lambda",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Lambda",
+    "filename": "4F925"
+  },
+  {
+    "command": "\\Sigma",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Sigma",
+    "filename": "191A1"
+  },
+  {
+    "command": "\\Psi",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Psi",
+    "filename": "6766A"
+  },
+  {
+    "command": "\\Delta",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Delta",
+    "filename": "C1F9E"
+  },
+  {
+    "command": "\\Xi",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Xi",
+    "filename": "E9730"
+  },
+  {
+    "command": "\\Upsilon",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Upsilon",
+    "filename": "E4380"
+  },
+  {
+    "command": "\\Omega",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Omega",
+    "filename": "EB057"
+  },
+  {
+    "command": "\\Theta",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Theta",
+    "filename": "34348"
+  },
+  {
+    "command": "\\Pi",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Pi",
+    "filename": "9AD30"
+  },
+  {
+    "command": "\\Phi",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Phi",
+    "filename": "11653"
+  },
+  {
+    "command": "\\digamma",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_digamma",
+    "filename": "329A8"
+  },
+  {
+    "command": "\\varkappa",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_varkappa",
+    "filename": "FA134"
+  },
+  {
+    "command": "\\upphi",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upphi",
+    "filename": "821EF"
+  },
+  {
+    "command": "\\upvarphi",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upvarphi",
+    "filename": "FB615"
+  },
+  {
+    "command": "\\upchi",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upchi",
+    "filename": "3FF7C"
+  },
+  {
+    "command": "\\uppsi",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_uppsi",
+    "filename": "A5232"
+  },
+  {
+    "command": "\\upomega",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upomega",
+    "filename": "C55EC"
+  },
+  {
+    "command": "\\Uppsi",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_Uppsi",
+    "filename": "069CC"
+  },
+  {
+    "command": "\\Upomega",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_Upomega",
+    "filename": "7E5CD"
+  },
+  {
+    "command": "\\upalpha",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upalpha",
+    "filename": "CD639"
+  },
+  {
+    "command": "\\upbeta",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upbeta",
+    "filename": "BF02B"
+  },
+  {
+    "command": "\\upgamma",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upgamma",
+    "filename": "A12F6"
+  },
+  {
+    "command": "\\updelta",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_updelta",
+    "filename": "40A80"
+  },
+  {
+    "command": "\\upepsilon",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upepsilon",
+    "filename": "D4641"
+  },
+  {
+    "command": "\\upvarepsilon",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upvarepsilon",
+    "filename": "4CC3E"
+  },
+  {
+    "command": "\\upzeta",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upzeta",
+    "filename": "E4748"
+  },
+  {
+    "command": "\\upeta",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upeta",
+    "filename": "E1650"
+  },
+  {
+    "command": "\\Upgamma",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_Upgamma",
+    "filename": "6C9B4"
+  },
+  {
+    "command": "\\Updelta",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_Updelta",
+    "filename": "4EDFA"
+  },
+  {
+    "command": "\\Uptheta",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_Uptheta",
+    "filename": "D046D"
+  },
+  {
+    "command": "\\uptheta",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_uptheta",
+    "filename": "63760"
+  },
+  {
+    "command": "\\upvartheta",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upvartheta",
+    "filename": "12860"
+  },
+  {
+    "command": "\\upiota",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upiota",
+    "filename": "1F25B"
+  },
+  {
+    "command": "\\upkappa",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upkappa",
+    "filename": "47402"
+  },
+  {
+    "command": "\\uplambda",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_uplambda",
+    "filename": "8CE23"
+  },
+  {
+    "command": "\\upmu",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upmu",
+    "filename": "CF329"
+  },
+  {
+    "command": "\\upnu",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upnu",
+    "filename": "2A6FB"
+  },
+  {
+    "command": "\\upxi",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upxi",
+    "filename": "440D4"
+  },
+  {
+    "command": "\\Uplambda",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_Uplambda",
+    "filename": "2AC2D"
+  },
+  {
+    "command": "\\Upxi",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_Upxi",
+    "filename": "45056"
+  },
+  {
+    "command": "\\Uppi",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_Uppi",
+    "filename": "1517B"
+  },
+  {
+    "command": "\\uppi",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_uppi",
+    "filename": "D3245"
+  },
+  {
+    "command": "\\upvarpi",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upvarpi",
+    "filename": "74C3E"
+  },
+  {
+    "command": "\\uprho",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_uprho",
+    "filename": "C7211"
+  },
+  {
+    "command": "\\upvarrho",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upvarrho",
+    "filename": "C67B2"
+  },
+  {
+    "command": "\\upsigma",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upsigma",
+    "filename": "ECCE6"
+  },
+  {
+    "command": "\\upvarsigma",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upvarsigma",
+    "filename": "51260"
+  },
+  {
+    "command": "\\uptau",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_uptau",
+    "filename": "7091B"
+  },
+  {
+    "command": "\\upupsilon",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_upupsilon",
+    "filename": "05561"
+  },
+  {
+    "command": "\\Upsigma",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_Upsigma",
+    "filename": "C740F"
+  },
+  {
+    "command": "\\Upupsilon",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_Upupsilon",
+    "filename": "AD983"
+  },
+  {
+    "command": "\\Upphi",
+    "package": "upgreek",
+    "mathmode": true,
+    "textmode": false,
+    "key": "upgreek-OT1-_Upphi",
+    "filename": "E5C01"
+  },
+  {
+    "command": "\\bot",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_bot",
+    "filename": "63E17"
+  },
+  {
+    "command": "\\forall",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_forall",
+    "filename": "62A9D"
+  },
+  {
+    "command": "\\imath",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_imath",
+    "filename": "D24B9"
+  },
+  {
+    "command": "\\ni",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_ni",
+    "filename": "71A6F"
+  },
+  {
+    "command": "\\top",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_top",
+    "filename": "E18B2"
+  },
+  {
+    "command": "\\ell",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_ell",
+    "filename": "8D3C4"
+  },
+  {
+    "command": "\\hbar",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_hbar",
+    "filename": "B1331"
+  },
+  {
+    "command": "\\in",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_in",
+    "filename": "FBA46"
+  },
+  {
+    "command": "\\notin",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_notin",
+    "filename": "06B7D"
+  },
+  {
+    "command": "\\partial",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_partial",
+    "filename": "DA840"
+  },
+  {
+    "command": "\\wp",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_wp",
+    "filename": "E684C"
+  },
+  {
+    "command": "\\exists",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_exists",
+    "filename": "5CE28"
+  },
+  {
+    "command": "\\Im",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Im",
+    "filename": "18ADE"
+  },
+  {
+    "command": "\\jmath",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_jmath",
+    "filename": "A2AB1"
+  },
+  {
+    "command": "\\Re",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Re",
+    "filename": "38880"
+  },
+  {
+    "command": "\\Bbbk",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Bbbk",
+    "filename": "145FD"
+  },
+  {
+    "command": "\\complement",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_complement",
+    "filename": "23742"
+  },
+  {
+    "command": "\\hbar",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_hbar",
+    "filename": "17B92"
+  },
+  {
+    "command": "\\Finv",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Finv",
+    "filename": "CE4F8"
+  },
+  {
+    "command": "\\hslash",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_hslash",
+    "filename": "57AE8"
+  },
+  {
+    "command": "\\circledS",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_circledS",
+    "filename": "75473"
+  },
+  {
+    "command": "\\Game",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_Game",
+    "filename": "79F27"
+  },
+  {
+    "command": "\\nexists",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nexists",
+    "filename": "FA202"
+  },
+  {
+    "command": "\\Lbag",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_Lbag",
+    "filename": "991FB"
+  },
+  {
+    "command": "\\Rbag",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_Rbag",
+    "filename": "F4033"
+  },
+  {
+    "command": "\\lbag",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_lbag",
+    "filename": "287A1"
+  },
+  {
+    "command": "\\rbag",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_rbag",
+    "filename": "C4985"
+  },
+  {
+    "command": "\\llceil",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_llceil",
+    "filename": "63636"
+  },
+  {
+    "command": "\\rrceil",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_rrceil",
+    "filename": "E8D08"
+  },
+  {
+    "command": "\\llfloor",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_llfloor",
+    "filename": "7A7E9"
+  },
+  {
+    "command": "\\rrfloor",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_rrfloor",
+    "filename": "6E0AF"
+  },
+  {
+    "command": "\\llparenthesis",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_llparenthesis",
+    "filename": "44F06"
+  },
+  {
+    "command": "\\rrparenthesis",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_rrparenthesis",
+    "filename": "B01AB"
+  },
+  {
+    "command": "\\langle",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_langle",
+    "filename": "BB1FC"
+  },
+  {
+    "command": "\\rangle",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_rangle",
+    "filename": "531F7"
+  },
+  {
+    "command": "\\lceil",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_lceil",
+    "filename": "C769A"
+  },
+  {
+    "command": "\\rceil",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_rceil",
+    "filename": "F9358"
+  },
+  {
+    "command": "\\lfloor",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_lfloor",
+    "filename": "30630"
+  },
+  {
+    "command": "\\rfloor",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_rfloor",
+    "filename": "C23C7"
+  },
+  {
+    "command": "[",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-[",
+    "filename": "543E0"
+  },
+  {
+    "command": "]",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-]",
+    "filename": "FDE88"
+  },
+  {
+    "command": "|",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-|",
+    "filename": "6C8C8"
+  },
+  {
+    "command": "\\|",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_|",
+    "filename": "C8D0E"
+  },
+  {
+    "command": "/",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-/",
+    "filename": "776E3"
+  },
+  {
+    "command": "\\llbracket",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_llbracket",
+    "filename": "26B80"
+  },
+  {
+    "command": "\\rrbracket",
+    "package": "stmaryrd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stmaryrd-OT1-_rrbracket",
+    "filename": "080A6"
+  },
+  {
+    "command": "\\textlangle",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textlangle",
+    "filename": "DE9D9"
+  },
+  {
+    "command": "\\textrangle",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textrangle",
+    "filename": "E7165"
+  },
+  {
+    "command": "\\textlbrackdbl",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textlbrackdbl",
+    "filename": "C75AD"
+  },
+  {
+    "command": "\\textrbrackdbl",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textrbrackdbl",
+    "filename": "E7714"
+  },
+  {
+    "command": "\\textlquill",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textlquill",
+    "filename": "15214"
+  },
+  {
+    "command": "\\textrquill",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textrquill",
+    "filename": "1E6CA"
+  },
+  {
+    "command": "\\cdotp",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_cdotp",
+    "filename": "BF5A2"
+  },
+  {
+    "command": "\\colon",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_colon",
+    "filename": "A78EC"
+  },
+  {
+    "command": "\\ldotp",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_ldotp",
+    "filename": "384B6"
+  },
+  {
+    "command": "\\vdots",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_vdots",
+    "filename": "373A2"
+  },
+  {
+    "command": "\\cdots",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_cdots",
+    "filename": "02CEA"
+  },
+  {
+    "command": "\\ddots",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_ddots",
+    "filename": "6443C"
+  },
+  {
+    "command": "\\ldots",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_ldots",
+    "filename": "C3D04"
+  },
+  {
+    "command": "\\dotsi",
+    "package": "amsmath",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amsmath-OT1-_dotsi",
+    "filename": "D450F"
+  },
+  {
+    "command": "\\dotsb",
+    "package": "amsmath",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amsmath-OT1-_dotsb",
+    "filename": "BF6D3"
+  },
+  {
+    "command": "\\dotsm",
+    "package": "amsmath",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amsmath-OT1-_dotsm",
+    "filename": "FA5F4"
+  },
+  {
+    "command": "\\dotsc",
+    "package": "amsmath",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amsmath-OT1-_dotsc",
+    "filename": "37744"
+  },
+  {
+    "command": "\\dotso",
+    "package": "amsmath",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amsmath-OT1-_dotso",
+    "filename": "D8B22"
+  },
+  {
+    "command": "\\aleph",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_aleph",
+    "filename": "097CB"
+  },
+  {
+    "command": "\\infty",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_infty",
+    "filename": "2015B"
+  },
+  {
+    "command": "\\prime",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_prime",
+    "filename": "EEA2C"
+  },
+  {
+    "command": "\\angle",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_angle",
+    "filename": "9BFEC"
+  },
+  {
+    "command": "\\diamondsuit",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_diamondsuit",
+    "filename": "1CF1F"
+  },
+  {
+    "command": "\\sharp",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_sharp",
+    "filename": "BD0F5"
+  },
+  {
+    "command": "\\backslash",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_backslash",
+    "filename": "64D5B"
+  },
+  {
+    "command": "\\emptyset",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_emptyset",
+    "filename": "AD9F3"
+  },
+  {
+    "command": "\\nabla",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_nabla",
+    "filename": "63678"
+  },
+  {
+    "command": "\\spadesuit",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_spadesuit",
+    "filename": "9865B"
+  },
+  {
+    "command": "\\flat",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_flat",
+    "filename": "A7FDD"
+  },
+  {
+    "command": "\\natural",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_natural",
+    "filename": "7EAA7"
+  },
+  {
+    "command": "\\surd",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_surd",
+    "filename": "BBBBB"
+  },
+  {
+    "command": "\\clubsuit",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_clubsuit",
+    "filename": "7806B"
+  },
+  {
+    "command": "\\heartsuit",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_heartsuit",
+    "filename": "3400D"
+  },
+  {
+    "command": "\\neg",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_neg",
+    "filename": "D7496"
+  },
+  {
+    "command": "\\triangle",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_triangle",
+    "filename": "4C016"
+  },
+  {
+    "command": "\\sqrt{}",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_sqrt{}",
+    "filename": "AA6C0"
+  },
+  {
+    "command": "\\angle",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_angle",
+    "filename": "32AA1"
+  },
+  {
+    "command": "\\blacktriangledown",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_blacktriangledown",
+    "filename": "FF591"
+  },
+  {
+    "command": "\\mho",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mho",
+    "filename": "13943"
+  },
+  {
+    "command": "\\backprime",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_backprime",
+    "filename": "93DBA"
+  },
+  {
+    "command": "\\diagdown",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_diagdown",
+    "filename": "15408"
+  },
+  {
+    "command": "\\sphericalangle",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_sphericalangle",
+    "filename": "A23E4"
+  },
+  {
+    "command": "\\bigstar",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_bigstar",
+    "filename": "792D7"
+  },
+  {
+    "command": "\\diagup",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_diagup",
+    "filename": "15A68"
+  },
+  {
+    "command": "\\square",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_square",
+    "filename": "452B3"
+  },
+  {
+    "command": "\\blacklozenge",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_blacklozenge",
+    "filename": "48423"
+  },
+  {
+    "command": "\\eth",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_eth",
+    "filename": "27918"
+  },
+  {
+    "command": "\\triangledown",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_triangledown",
+    "filename": "CE8B7"
+  },
+  {
+    "command": "\\blacksquare",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_blacksquare",
+    "filename": "46807"
+  },
+  {
+    "command": "\\lozenge",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lozenge",
+    "filename": "F2143"
+  },
+  {
+    "command": "\\varnothing",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_varnothing",
+    "filename": "1808C"
+  },
+  {
+    "command": "\\blacktriangle",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_blacktriangle",
+    "filename": "673A8"
+  },
+  {
+    "command": "\\measuredangle",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_measuredangle",
+    "filename": "5D674"
+  },
+  {
+    "command": "\\vartriangle",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_vartriangle",
+    "filename": "6849B"
+  },
+  {
+    "command": "\\textdegree",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textdegree",
+    "filename": "541CB"
+  },
+  {
+    "command": "\\textonehalf",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textonehalf",
+    "filename": "2B389"
+  },
+  {
+    "command": "\\textthreequarters",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textthreequarters",
+    "filename": "667EE"
+  },
+  {
+    "command": "\\textdiv",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textdiv",
+    "filename": "AEE85"
+  },
+  {
+    "command": "\\textonequarter",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textonequarter",
+    "filename": "31CC8"
+  },
+  {
+    "command": "\\textthreesuperior",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textthreesuperior",
+    "filename": "3806B"
+  },
+  {
+    "command": "\\textfractionsolidus",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textfractionsolidus",
+    "filename": "F9745"
+  },
+  {
+    "command": "\\textonesuperior",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textonesuperior",
+    "filename": "83635"
+  },
+  {
+    "command": "\\texttimes",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_texttimes",
+    "filename": "331C9"
+  },
+  {
+    "command": "\\textlnot",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textlnot",
+    "filename": "D1A7B"
+  },
+  {
+    "command": "\\textpm",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textpm",
+    "filename": "E2BA7"
+  },
+  {
+    "command": "\\texttwosuperior",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_texttwosuperior",
+    "filename": "D8CA7"
+  },
+  {
+    "command": "\\textminus",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textminus",
+    "filename": "ED768"
+  },
+  {
+    "command": "\\textsurd",
+    "package": "textcomp",
+    "mathmode": false,
+    "textmode": true,
+    "key": "textcomp-OT1-_textsurd",
+    "filename": "1035C"
+  },
+  {
+    "command": "\\iddots",
+    "package": "mathdots",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathdots-OT1-_iddots",
+    "filename": "B1D62"
+  },
+  {
+    "command": "\\mathcal{A}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{A}",
+    "filename": "3E7E1"
+  },
+  {
+    "command": "\\mathcal{B}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{B}",
+    "filename": "B3C28"
+  },
+  {
+    "command": "\\mathcal{C}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{C}",
+    "filename": "45EA6"
+  },
+  {
+    "command": "\\mathcal{D}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{D}",
+    "filename": "D8884"
+  },
+  {
+    "command": "\\mathcal{E}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{E}",
+    "filename": "4D090"
+  },
+  {
+    "command": "\\mathcal{F}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{F}",
+    "filename": "96972"
+  },
+  {
+    "command": "\\mathcal{G}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{G}",
+    "filename": "B2851"
+  },
+  {
+    "command": "\\mathcal{H}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{H}",
+    "filename": "6B4B1"
+  },
+  {
+    "command": "\\mathcal{I}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{I}",
+    "filename": "30C11"
+  },
+  {
+    "command": "\\mathcal{J}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{J}",
+    "filename": "FA5AE"
+  },
+  {
+    "command": "\\mathcal{K}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{K}",
+    "filename": "2DA32"
+  },
+  {
+    "command": "\\mathcal{L}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{L}",
+    "filename": "C96B0"
+  },
+  {
+    "command": "\\mathcal{M}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{M}",
+    "filename": "0DDC1"
+  },
+  {
+    "command": "\\mathcal{N}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{N}",
+    "filename": "93C10"
+  },
+  {
+    "command": "\\mathcal{O}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{O}",
+    "filename": "37ED0"
+  },
+  {
+    "command": "\\mathcal{P}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{P}",
+    "filename": "0A71B"
+  },
+  {
+    "command": "\\mathcal{Q}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{Q}",
+    "filename": "E95B0"
+  },
+  {
+    "command": "\\mathcal{R}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{R}",
+    "filename": "E7D10"
+  },
+  {
+    "command": "\\mathcal{S}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{S}",
+    "filename": "BD461"
+  },
+  {
+    "command": "\\mathcal{T}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{T}",
+    "filename": "067DE"
+  },
+  {
+    "command": "\\mathcal{U}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{U}",
+    "filename": "0482A"
+  },
+  {
+    "command": "\\mathcal{V}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{V}",
+    "filename": "461E6"
+  },
+  {
+    "command": "\\mathcal{W}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{W}",
+    "filename": "D882C"
+  },
+  {
+    "command": "\\mathcal{X}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{X}",
+    "filename": "A1ACF"
+  },
+  {
+    "command": "\\mathcal{Y}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{Y}",
+    "filename": "71F61"
+  },
+  {
+    "command": "\\mathcal{Z}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathcal{Z}",
+    "filename": "9CE9B"
+  },
+  {
+    "command": "\\mathfrak{A}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{A}",
+    "filename": "D3B36"
+  },
+  {
+    "command": "\\mathfrak{B}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{B}",
+    "filename": "AFCF1"
+  },
+  {
+    "command": "\\mathfrak{C}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{C}",
+    "filename": "DE019"
+  },
+  {
+    "command": "\\mathfrak{D}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{D}",
+    "filename": "75597"
+  },
+  {
+    "command": "\\mathfrak{E}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{E}",
+    "filename": "0F28C"
+  },
+  {
+    "command": "\\mathfrak{F}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{F}",
+    "filename": "A1DCB"
+  },
+  {
+    "command": "\\mathfrak{G}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{G}",
+    "filename": "68A4A"
+  },
+  {
+    "command": "\\mathfrak{H}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{H}",
+    "filename": "A91D5"
+  },
+  {
+    "command": "\\mathfrak{I}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{I}",
+    "filename": "410C5"
+  },
+  {
+    "command": "\\mathfrak{J}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{J}",
+    "filename": "C0D05"
+  },
+  {
+    "command": "\\mathfrak{K}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{K}",
+    "filename": "DD119"
+  },
+  {
+    "command": "\\mathfrak{L}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{L}",
+    "filename": "A99DA"
+  },
+  {
+    "command": "\\mathfrak{M}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{M}",
+    "filename": "E3907"
+  },
+  {
+    "command": "\\mathfrak{N}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{N}",
+    "filename": "080D2"
+  },
+  {
+    "command": "\\mathfrak{O}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{O}",
+    "filename": "829D9"
+  },
+  {
+    "command": "\\mathfrak{P}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{P}",
+    "filename": "45C78"
+  },
+  {
+    "command": "\\mathfrak{Q}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{Q}",
+    "filename": "28313"
+  },
+  {
+    "command": "\\mathfrak{R}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{R}",
+    "filename": "C184C"
+  },
+  {
+    "command": "\\mathfrak{S}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{S}",
+    "filename": "DD0D8"
+  },
+  {
+    "command": "\\mathfrak{T}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{T}",
+    "filename": "AA358"
+  },
+  {
+    "command": "\\mathfrak{U}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{U}",
+    "filename": "7AB03"
+  },
+  {
+    "command": "\\mathfrak{V}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{V}",
+    "filename": "D2BF1"
+  },
+  {
+    "command": "\\mathfrak{W}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{W}",
+    "filename": "5E41A"
+  },
+  {
+    "command": "\\mathfrak{X}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{X}",
+    "filename": "1EA13"
+  },
+  {
+    "command": "\\mathfrak{Y}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{Y}",
+    "filename": "F0E3B"
+  },
+  {
+    "command": "\\mathfrak{Z}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{Z}",
+    "filename": "63437"
+  },
+  {
+    "command": "\\mathfrak{a}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{a}",
+    "filename": "60EE3"
+  },
+  {
+    "command": "\\mathfrak{b}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{b}",
+    "filename": "ECF61"
+  },
+  {
+    "command": "\\mathfrak{c}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{c}",
+    "filename": "96966"
+  },
+  {
+    "command": "\\mathfrak{d}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{d}",
+    "filename": "D0687"
+  },
+  {
+    "command": "\\mathfrak{e}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{e}",
+    "filename": "F7512"
+  },
+  {
+    "command": "\\mathfrak{f}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{f}",
+    "filename": "5F904"
+  },
+  {
+    "command": "\\mathfrak{g}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{g}",
+    "filename": "00803"
+  },
+  {
+    "command": "\\mathfrak{h}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{h}",
+    "filename": "E6E04"
+  },
+  {
+    "command": "\\mathfrak{i}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{i}",
+    "filename": "145D6"
+  },
+  {
+    "command": "\\mathfrak{j}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{j}",
+    "filename": "EE559"
+  },
+  {
+    "command": "\\mathfrak{k}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{k}",
+    "filename": "1A5A9"
+  },
+  {
+    "command": "\\mathfrak{l}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{l}",
+    "filename": "711AD"
+  },
+  {
+    "command": "\\mathfrak{m}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{m}",
+    "filename": "2A86E"
+  },
+  {
+    "command": "\\mathfrak{n}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{n}",
+    "filename": "BBDE4"
+  },
+  {
+    "command": "\\mathfrak{o}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{o}",
+    "filename": "01F65"
+  },
+  {
+    "command": "\\mathfrak{p}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{p}",
+    "filename": "94C24"
+  },
+  {
+    "command": "\\mathfrak{q}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{q}",
+    "filename": "912DF"
+  },
+  {
+    "command": "\\mathfrak{r}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{r}",
+    "filename": "3C875"
+  },
+  {
+    "command": "\\mathfrak{s}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{s}",
+    "filename": "F566A"
+  },
+  {
+    "command": "\\mathfrak{t}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{t}",
+    "filename": "FEBB1"
+  },
+  {
+    "command": "\\mathfrak{u}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{u}",
+    "filename": "D4F80"
+  },
+  {
+    "command": "\\mathfrak{v}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{v}",
+    "filename": "4A78C"
+  },
+  {
+    "command": "\\mathfrak{w}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{w}",
+    "filename": "13725"
+  },
+  {
+    "command": "\\mathfrak{x}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{x}",
+    "filename": "4A9E7"
+  },
+  {
+    "command": "\\mathfrak{y}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{y}",
+    "filename": "166CF"
+  },
+  {
+    "command": "\\mathfrak{z}",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_mathfrak{z}",
+    "filename": "023B5"
+  },
+  {
+    "command": "\\mathbb{1}",
+    "package": "bbold",
+    "mathmode": true,
+    "textmode": false,
+    "key": "bbold-OT1-_mathbb{1}",
+    "filename": "26419"
+  },
+  {
+    "command": "\\mathds{1}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{1}",
+    "filename": "B5E5F"
+  },
+  {
+    "command": "\\mathds{h}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{h}",
+    "filename": "CDDF0"
+  },
+  {
+    "command": "\\mathds{k}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{k}",
+    "filename": "9F375"
+  },
+  {
+    "command": "\\mathds{A}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{A}",
+    "filename": "AE3DB"
+  },
+  {
+    "command": "\\mathds{B}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{B}",
+    "filename": "0CE2B"
+  },
+  {
+    "command": "\\mathds{C}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{C}",
+    "filename": "A2A0F"
+  },
+  {
+    "command": "\\mathds{D}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{D}",
+    "filename": "393FA"
+  },
+  {
+    "command": "\\mathds{E}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{E}",
+    "filename": "0CC3B"
+  },
+  {
+    "command": "\\mathds{F}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{F}",
+    "filename": "6AD34"
+  },
+  {
+    "command": "\\mathds{G}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{G}",
+    "filename": "8605D"
+  },
+  {
+    "command": "\\mathds{H}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{H}",
+    "filename": "A1E25"
+  },
+  {
+    "command": "\\mathds{I}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{I}",
+    "filename": "7CC6F"
+  },
+  {
+    "command": "\\mathds{J}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{J}",
+    "filename": "5D146"
+  },
+  {
+    "command": "\\mathds{K}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{K}",
+    "filename": "A40F2"
+  },
+  {
+    "command": "\\mathds{L}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{L}",
+    "filename": "059DF"
+  },
+  {
+    "command": "\\mathds{M}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{M}",
+    "filename": "AC592"
+  },
+  {
+    "command": "\\mathds{N}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{N}",
+    "filename": "B79B2"
+  },
+  {
+    "command": "\\mathds{O}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{O}",
+    "filename": "78FF6"
+  },
+  {
+    "command": "\\mathds{P}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{P}",
+    "filename": "558DC"
+  },
+  {
+    "command": "\\mathds{Q}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{Q}",
+    "filename": "12313"
+  },
+  {
+    "command": "\\mathds{R}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{R}",
+    "filename": "CD3E3"
+  },
+  {
+    "command": "\\mathds{S}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{S}",
+    "filename": "B0FDF"
+  },
+  {
+    "command": "\\mathds{T}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{T}",
+    "filename": "AB736"
+  },
+  {
+    "command": "\\mathds{U}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{U}",
+    "filename": "35697"
+  },
+  {
+    "command": "\\mathds{V}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{V}",
+    "filename": "B9198"
+  },
+  {
+    "command": "\\mathds{W}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{W}",
+    "filename": "3064E"
+  },
+  {
+    "command": "\\mathds{X}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{X}",
+    "filename": "F4329"
+  },
+  {
+    "command": "\\mathds{Y}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{Y}",
+    "filename": "CAF6E"
+  },
+  {
+    "command": "\\mathds{Z}",
+    "package": "dsfont",
+    "mathmode": true,
+    "textmode": false,
+    "key": "dsfont-OT1-_mathds{Z}",
+    "filename": "12C8A"
+  },
+  {
+    "command": "\\mathscr{A}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{A}",
+    "filename": "3BDF0"
+  },
+  {
+    "command": "\\mathscr{B}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{B}",
+    "filename": "529E7"
+  },
+  {
+    "command": "\\mathscr{C}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{C}",
+    "filename": "A7DC3"
+  },
+  {
+    "command": "\\mathscr{D}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{D}",
+    "filename": "7CA4D"
+  },
+  {
+    "command": "\\mathscr{E}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{E}",
+    "filename": "F775D"
+  },
+  {
+    "command": "\\mathscr{F}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{F}",
+    "filename": "3F04F"
+  },
+  {
+    "command": "\\mathscr{G}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{G}",
+    "filename": "CA4DE"
+  },
+  {
+    "command": "\\mathscr{H}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{H}",
+    "filename": "3F38C"
+  },
+  {
+    "command": "\\mathscr{I}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{I}",
+    "filename": "E58D5"
+  },
+  {
+    "command": "\\mathscr{J}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{J}",
+    "filename": "F51D5"
+  },
+  {
+    "command": "\\mathscr{K}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{K}",
+    "filename": "3C3F7"
+  },
+  {
+    "command": "\\mathscr{L}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{L}",
+    "filename": "0CA2C"
+  },
+  {
+    "command": "\\mathscr{M}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{M}",
+    "filename": "00042"
+  },
+  {
+    "command": "\\mathscr{N}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{N}",
+    "filename": "2EDB3"
+  },
+  {
+    "command": "\\mathscr{O}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{O}",
+    "filename": "49D59"
+  },
+  {
+    "command": "\\mathscr{P}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{P}",
+    "filename": "151EE"
+  },
+  {
+    "command": "\\mathscr{Q}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{Q}",
+    "filename": "773F2"
+  },
+  {
+    "command": "\\mathscr{R}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{R}",
+    "filename": "08293"
+  },
+  {
+    "command": "\\mathscr{S}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{S}",
+    "filename": "AE263"
+  },
+  {
+    "command": "\\mathscr{T}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{T}",
+    "filename": "38810"
+  },
+  {
+    "command": "\\mathscr{U}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{U}",
+    "filename": "2FDBE"
+  },
+  {
+    "command": "\\mathscr{V}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{V}",
+    "filename": "A9D49"
+  },
+  {
+    "command": "\\mathscr{W}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{W}",
+    "filename": "041BC"
+  },
+  {
+    "command": "\\mathscr{X}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{X}",
+    "filename": "77285"
+  },
+  {
+    "command": "\\mathscr{Y}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{Y}",
+    "filename": "89A3F"
+  },
+  {
+    "command": "\\mathscr{Z}",
+    "package": "mathrsfs",
+    "mathmode": true,
+    "textmode": false,
+    "key": "mathrsfs-OT1-_mathscr{Z}",
+    "filename": "A5396"
+  },
+  {
+    "command": "\\celsius",
+    "package": "gensymb",
+    "mathmode": true,
+    "textmode": true,
+    "key": "gensymb-OT1-_celsius",
+    "filename": "BD1E9"
+  },
+  {
+    "command": "\\degree",
+    "package": "gensymb",
+    "mathmode": true,
+    "textmode": true,
+    "key": "gensymb-OT1-_degree",
+    "filename": "5461E"
+  },
+  {
+    "command": "\\ohm",
+    "package": "gensymb",
+    "mathmode": true,
+    "textmode": true,
+    "key": "gensymb-OT1-_ohm",
+    "filename": "7F8B8"
+  },
+  {
+    "command": "\\conjunction",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_conjunction",
+    "filename": "4020E"
+  },
+  {
+    "command": "\\opposition",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_opposition",
+    "filename": "2FE9F"
+  },
+  {
+    "command": "\\mercury",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_mercury",
+    "filename": "81DC5"
+  },
+  {
+    "command": "\\earth",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_earth",
+    "filename": "2EA51"
+  },
+  {
+    "command": "\\jupiter",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_jupiter",
+    "filename": "BAD80"
+  },
+  {
+    "command": "\\uranus",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_uranus",
+    "filename": "62176"
+  },
+  {
+    "command": "\\pluto",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_pluto",
+    "filename": "EAB97"
+  },
+  {
+    "command": "\\venus",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_venus",
+    "filename": "31092"
+  },
+  {
+    "command": "\\mars",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_mars",
+    "filename": "7CA7B"
+  },
+  {
+    "command": "\\saturn",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_saturn",
+    "filename": "CC2ED"
+  },
+  {
+    "command": "\\neptune",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_neptune",
+    "filename": "C43D7"
+  },
+  {
+    "command": "\\astrosun",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_astrosun",
+    "filename": "3836C"
+  },
+  {
+    "command": "\\fullmoon",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_fullmoon",
+    "filename": "B9309"
+  },
+  {
+    "command": "\\leftmoon",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_leftmoon",
+    "filename": "F0A3C"
+  },
+  {
+    "command": "\\newmoon",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_newmoon",
+    "filename": "D3EE7"
+  },
+  {
+    "command": "\\rightmoon",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_rightmoon",
+    "filename": "57753"
+  },
+  {
+    "command": "\\aries",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_aries",
+    "filename": "2CDDF"
+  },
+  {
+    "command": "\\cancer",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_cancer",
+    "filename": "2AB2B"
+  },
+  {
+    "command": "\\libra",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_libra",
+    "filename": "C315F"
+  },
+  {
+    "command": "\\aquarius",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_aquarius",
+    "filename": "582FB"
+  },
+  {
+    "command": "\\taurus",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_taurus",
+    "filename": "7CB25"
+  },
+  {
+    "command": "\\leo",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_leo",
+    "filename": "5DEBD"
+  },
+  {
+    "command": "\\scorpio",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_scorpio",
+    "filename": "09816"
+  },
+  {
+    "command": "\\capricornus",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_capricornus",
+    "filename": "5DBA3"
+  },
+  {
+    "command": "\\gemini",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_gemini",
+    "filename": "45780"
+  },
+  {
+    "command": "\\virgo",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_virgo",
+    "filename": "49921"
+  },
+  {
+    "command": "\\sagittarius",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_sagittarius",
+    "filename": "32E8B"
+  },
+  {
+    "command": "\\pisces",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_pisces",
+    "filename": "31F04"
+  },
+  {
+    "command": "\\ascnode",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_ascnode",
+    "filename": "A8974"
+  },
+  {
+    "command": "\\descnode",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_descnode",
+    "filename": "26AD7"
+  },
+  {
+    "command": "\\vernal",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_vernal",
+    "filename": "7CE8C"
+  },
+  {
+    "command": "\\Mercury",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Mercury",
+    "filename": "22BED"
+  },
+  {
+    "command": "\\Earth",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Earth",
+    "filename": "4F45E"
+  },
+  {
+    "command": "\\Jupiter",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Jupiter",
+    "filename": "F53C6"
+  },
+  {
+    "command": "\\Uranus",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Uranus",
+    "filename": "7934C"
+  },
+  {
+    "command": "\\Pluto",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Pluto",
+    "filename": "DA549"
+  },
+  {
+    "command": "\\Venus",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Venus",
+    "filename": "50A8C"
+  },
+  {
+    "command": "\\Mars",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Mars",
+    "filename": "F380D"
+  },
+  {
+    "command": "\\Saturn",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Saturn",
+    "filename": "2BB63"
+  },
+  {
+    "command": "\\Neptune",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Neptune",
+    "filename": "2C23B"
+  },
+  {
+    "command": "\\Moon",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Moon",
+    "filename": "6274A"
+  },
+  {
+    "command": "\\Sun",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Sun",
+    "filename": "79CDF"
+  },
+  {
+    "command": "\\Aries",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Aries",
+    "filename": "FF03F"
+  },
+  {
+    "command": "\\Cancer",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Cancer",
+    "filename": "596EE"
+  },
+  {
+    "command": "\\Libra",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Libra",
+    "filename": "E8877"
+  },
+  {
+    "command": "\\Aquarius",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Aquarius",
+    "filename": "8791E"
+  },
+  {
+    "command": "\\Taurus",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Taurus",
+    "filename": "DA9C0"
+  },
+  {
+    "command": "\\Leo",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Leo",
+    "filename": "097CF"
+  },
+  {
+    "command": "\\Scorpio",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Scorpio",
+    "filename": "D83EC"
+  },
+  {
+    "command": "\\Capricorn",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Capricorn",
+    "filename": "CB92D"
+  },
+  {
+    "command": "\\Gemini",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Gemini",
+    "filename": "94748"
+  },
+  {
+    "command": "\\Virgo",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Virgo",
+    "filename": "0FAF0"
+  },
+  {
+    "command": "\\Sagittarius",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Sagittarius",
+    "filename": "B723E"
+  },
+  {
+    "command": "\\Pisces",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Pisces",
+    "filename": "7EC5C"
+  },
+  {
+    "command": "\\Email",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Email",
+    "filename": "39961"
+  },
+  {
+    "command": "\\fax",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_fax",
+    "filename": "355FD"
+  },
+  {
+    "command": "\\Faxmachine",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Faxmachine",
+    "filename": "7C7A4"
+  },
+  {
+    "command": "\\Lightning",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Lightning",
+    "filename": "9DF44"
+  },
+  {
+    "command": "\\Pickup",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Pickup",
+    "filename": "192A9"
+  },
+  {
+    "command": "\\Emailct",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Emailct",
+    "filename": "2B498"
+  },
+  {
+    "command": "\\FAX",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_FAX",
+    "filename": "17200"
+  },
+  {
+    "command": "\\Letter",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Letter",
+    "filename": "F8815"
+  },
+  {
+    "command": "\\Mobilefone",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Mobilefone",
+    "filename": "509B9"
+  },
+  {
+    "command": "\\Telefon",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Telefon",
+    "filename": "95D39"
+  },
+  {
+    "command": "\\female",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_female",
+    "filename": "37CE9"
+  },
+  {
+    "command": "\\male",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_male",
+    "filename": "F39DE"
+  },
+  {
+    "command": "\\LEFTarrow",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_LEFTarrow",
+    "filename": "7DF1B"
+  },
+  {
+    "command": "\\RIGHTarrow",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_RIGHTarrow",
+    "filename": "BE68C"
+  },
+  {
+    "command": "\\lightning",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_lightning",
+    "filename": "F7EDC"
+  },
+  {
+    "command": "\\DOWNarrow",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_DOWNarrow",
+    "filename": "7242D"
+  },
+  {
+    "command": "\\phone",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_phone",
+    "filename": "89514"
+  },
+  {
+    "command": "\\UParrow",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_UParrow",
+    "filename": "45CE8"
+  },
+  {
+    "command": "\\pointer",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_pointer",
+    "filename": "809F7"
+  },
+  {
+    "command": "\\recorder",
+    "package": "wasysym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "wasysym-OT1-_recorder",
+    "filename": "C531A"
+  },
+  {
+    "command": "\\checked",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_checked",
+    "filename": "1EC79"
+  },
+  {
+    "command": "\\kreuz",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_kreuz",
+    "filename": "05837"
+  },
+  {
+    "command": "\\ataribox",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_ataribox",
+    "filename": "6D791"
+  },
+  {
+    "command": "\\clock",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_clock",
+    "filename": "0002D"
+  },
+  {
+    "command": "\\smiley",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_smiley",
+    "filename": "4AB11"
+  },
+  {
+    "command": "\\bell",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_bell",
+    "filename": "107AD"
+  },
+  {
+    "command": "\\diameter",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_diameter",
+    "filename": "02031"
+  },
+  {
+    "command": "\\sun",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_sun",
+    "filename": "CBAAE"
+  },
+  {
+    "command": "\\blacksmiley",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_blacksmiley",
+    "filename": "417D8"
+  },
+  {
+    "command": "\\Bowtie",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_Bowtie",
+    "filename": "98EBC"
+  },
+  {
+    "command": "\\frownie",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_frownie",
+    "filename": "AA278"
+  },
+  {
+    "command": "\\wasylozenge",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_wasylozenge",
+    "filename": "B4E25"
+  },
+  {
+    "command": "\\brokenvert",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_brokenvert",
+    "filename": "6CB52"
+  },
+  {
+    "command": "\\invdiameter",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": true,
+    "key": "wasysym-OT1-_invdiameter",
+    "filename": "4F32F"
+  },
+  {
+    "command": "\\Ankh",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Ankh",
+    "filename": "E74F3"
+  },
+  {
+    "command": "\\Cross",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Cross",
+    "filename": "5FDF2"
+  },
+  {
+    "command": "\\Heart",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Heart",
+    "filename": "273DE"
+  },
+  {
+    "command": "\\Smiley",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Smiley",
+    "filename": "7E640"
+  },
+  {
+    "command": "\\Bat",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Bat",
+    "filename": "A17A5"
+  },
+  {
+    "command": "\\Mundus",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Mundus",
+    "filename": "44DBB"
+  },
+  {
+    "command": "\\Yinyang",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Yinyang",
+    "filename": "14857"
+  },
+  {
+    "command": "\\Celtcross",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Celtcross",
+    "filename": "F8B41"
+  },
+  {
+    "command": "\\Frowny",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_Frowny",
+    "filename": "B68D9"
+  },
+  {
+    "command": "\\MVAt",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_MVAt",
+    "filename": "8A5CB"
+  },
+  {
+    "command": "\\CircledA",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_CircledA",
+    "filename": "852BA"
+  },
+  {
+    "command": "\\MVRightarrow",
+    "package": "marvosym",
+    "mathmode": false,
+    "textmode": true,
+    "key": "marvosym-OT1-_MVRightarrow",
+    "filename": "D1DCD"
+  }
+]

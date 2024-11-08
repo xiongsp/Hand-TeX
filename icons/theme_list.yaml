@@ -1,0 +1,19 @@
+Theme directories:
+  - /usr/share/icons/breeze
+  - /usr/share/icons/breeze-dark
+
+Files:
+  actions:
+    16:
+      - application-menu
+      - edit-clear
+      - edit-undo
+      - dialog-ok
+      - media-skip-forward
+      - games-config-theme
+      - tools-report-bug
+  status:
+    16:
+      - dialog-warning
+    22:
+      - dialog-error

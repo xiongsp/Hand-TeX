@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Hand Tex
+Comment= Harness the power of the DeepL API.
+GenericName=Computer Aided Translation
+Icon=handtex
+Exec=handtex
+Terminal=false
+Categories=Utility

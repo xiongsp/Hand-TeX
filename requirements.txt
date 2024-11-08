@@ -1,0 +1,8 @@
+attrs
+loguru
+PySide6
+xdg
+setuptools
+PyYAML
+psutil
+chardet

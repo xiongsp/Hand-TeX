@@ -15,18 +15,21 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGraphicsView, QHBoxLayout, QLabel,
-    QListWidgetItem, QMainWindow, QPushButton, QSizePolicy,
-    QSlider, QSpacerItem, QSplitter, QStackedWidget,
-    QVBoxLayout, QWidget)
+from PySide6.QtSvgWidgets import QSvgWidget
+from PySide6.QtWidgets import (QApplication, QFormLayout, QFrame, QGraphicsView,
+    QHBoxLayout, QLabel, QListWidgetItem, QMainWindow,
+    QPushButton, QSizePolicy, QSlider, QSpacerItem,
+    QSpinBox, QSplitter, QStackedWidget, QVBoxLayout,
+    QWidget)
 
 from handtex.CustomQ.CListWidget import CListWidget
+from handtex.sketchpad import Sketchpad
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(900, 600)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_3 = QVBoxLayout(self.centralwidget)
@@ -34,6 +37,8 @@ class Ui_MainWindow(object):
         self.splitter = QSplitter(self.centralwidget)
         self.splitter.setObjectName(u"splitter")
         self.splitter.setOrientation(Qt.Horizontal)
+        self.splitter.setHandleWidth(3)
+        self.splitter.setChildrenCollapsible(False)
         self.widget = QWidget(self.splitter)
         self.widget.setObjectName(u"widget")
         self.verticalLayout = QVBoxLayout(self.widget)
@@ -43,6 +48,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.pushButton_clear = QPushButton(self.widget)
         self.pushButton_clear.setObjectName(u"pushButton_clear")
+        self.pushButton_clear.setEnabled(False)
         icon = QIcon(QIcon.fromTheme(u"edit-clear"))
         self.pushButton_clear.setIcon(icon)
         self.pushButton_clear.setFlat(True)
@@ -55,6 +61,7 @@ class Ui_MainWindow(object):
 
         self.pushButton_undo = QPushButton(self.widget)
         self.pushButton_undo.setObjectName(u"pushButton_undo")
+        self.pushButton_undo.setEnabled(False)
         icon1 = QIcon(QIcon.fromTheme(u"edit-undo"))
         self.pushButton_undo.setIcon(icon1)
         self.pushButton_undo.setFlat(True)
@@ -63,6 +70,7 @@ class Ui_MainWindow(object):
 
         self.pushButton_redo = QPushButton(self.widget)
         self.pushButton_redo.setObjectName(u"pushButton_redo")
+        self.pushButton_redo.setEnabled(False)
         icon2 = QIcon(QIcon.fromTheme(u"edit-redo"))
         self.pushButton_redo.setIcon(icon2)
         self.pushButton_redo.setFlat(True)
@@ -72,21 +80,20 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.verticalSpacer = QSpacerItem(20, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.sketchpad = Sketchpad(self.widget)
+        self.sketchpad.setObjectName(u"sketchpad")
+        self.sketchpad.setMinimumSize(QSize(200, 200))
+        self.sketchpad.setFrameShape(QFrame.NoFrame)
+        self.sketchpad.setFrameShadow(QFrame.Plain)
+        self.sketchpad.setLineWidth(0)
+        self.sketchpad.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.sketchpad.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.sketchpad.setRenderHints(QPainter.Antialiasing)
+        self.sketchpad.setTransformationAnchor(QGraphicsView.NoAnchor)
 
-        self.verticalLayout.addItem(self.verticalSpacer)
+        self.verticalLayout.addWidget(self.sketchpad)
 
-        self.graphicsView = QGraphicsView(self.widget)
-        self.graphicsView.setObjectName(u"graphicsView")
-        self.graphicsView.setMinimumSize(QSize(200, 200))
-
-        self.verticalLayout.addWidget(self.graphicsView)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.verticalLayout.addItem(self.verticalSpacer_2)
-
-        self.verticalLayout.setStretch(2, 1)
+        self.verticalLayout.setStretch(1, 1)
         self.splitter.addWidget(self.widget)
         self.widget1 = QWidget(self.splitter)
         self.widget1.setObjectName(u"widget1")
@@ -129,6 +136,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(-1, -1, -1, 12)
         self.label_training_name = QLabel(self.page_train)
         self.label_training_name.setObjectName(u"label_training_name")
         self.label_training_name.setText(u"<Symbol name>")
@@ -139,23 +147,76 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer_3)
 
+        self.formLayout = QFormLayout()
+        self.formLayout.setObjectName(u"formLayout")
+        self.label_5 = QLabel(self.page_train)
+        self.label_5.setObjectName(u"label_5")
+
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_5)
+
+        self.label_symbol_samples = QLabel(self.page_train)
+        self.label_symbol_samples.setObjectName(u"label_symbol_samples")
+        self.label_symbol_samples.setText(u"<samples>")
+
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.label_symbol_samples)
+
+        self.label = QLabel(self.page_train)
+        self.label.setObjectName(u"label")
+
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label)
+
         self.label_symbol_rarity = QLabel(self.page_train)
         self.label_symbol_rarity.setObjectName(u"label_symbol_rarity")
 
-        self.horizontalLayout_5.addWidget(self.label_symbol_rarity)
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.label_symbol_rarity)
+
+
+        self.horizontalLayout_5.addLayout(self.formLayout)
 
 
         self.verticalLayout_5.addLayout(self.horizontalLayout_5)
 
-        self.widget_training_symbol = QWidget(self.page_train)
+        self.widget_training_symbol = QSvgWidget(self.page_train)
         self.widget_training_symbol.setObjectName(u"widget_training_symbol")
         self.widget_training_symbol.setMinimumSize(QSize(200, 200))
 
-        self.verticalLayout_5.addWidget(self.widget_training_symbol)
+        self.verticalLayout_5.addWidget(self.widget_training_symbol, 0, Qt.AlignHCenter)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer_3 = QSpacerItem(20, 12, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding)
 
         self.verticalLayout_5.addItem(self.verticalSpacer_3)
+
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.label_6 = QLabel(self.page_train)
+        self.label_6.setObjectName(u"label_6")
+
+        self.horizontalLayout_6.addWidget(self.label_6)
+
+        self.label_submission_number = QLabel(self.page_train)
+        self.label_submission_number.setObjectName(u"label_submission_number")
+        self.label_submission_number.setText(u"<submission>")
+
+        self.horizontalLayout_6.addWidget(self.label_submission_number)
+
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_6.addItem(self.horizontalSpacer_4)
+
+        self.label_8 = QLabel(self.page_train)
+        self.label_8.setObjectName(u"label_8")
+
+        self.horizontalLayout_6.addWidget(self.label_8)
+
+        self.spinBox_max_submissions = QSpinBox(self.page_train)
+        self.spinBox_max_submissions.setObjectName(u"spinBox_max_submissions")
+        self.spinBox_max_submissions.setMinimum(1)
+        self.spinBox_max_submissions.setMaximum(100)
+
+        self.horizontalLayout_6.addWidget(self.spinBox_max_submissions)
+
+
+        self.verticalLayout_5.addLayout(self.horizontalLayout_6)
 
         self.label_2 = QLabel(self.page_train)
         self.label_2.setObjectName(u"label_2")
@@ -173,7 +234,7 @@ class Ui_MainWindow(object):
         self.horizontalSlider_selection_bias = QSlider(self.page_train)
         self.horizontalSlider_selection_bias.setObjectName(u"horizontalSlider_selection_bias")
         self.horizontalSlider_selection_bias.setMaximum(100)
-        self.horizontalSlider_selection_bias.setValue(50)
+        self.horizontalSlider_selection_bias.setValue(25)
         self.horizontalSlider_selection_bias.setOrientation(Qt.Horizontal)
         self.horizontalSlider_selection_bias.setTickPosition(QSlider.TicksBelow)
         self.horizontalSlider_selection_bias.setTickInterval(50)
@@ -226,7 +287,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -238,13 +299,17 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.pushButton_undo.setToolTip(QCoreApplication.translate("MainWindow", u"Undo", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_undo.setText("")
+        self.pushButton_undo.setText(QCoreApplication.translate("MainWindow", u"Undo", None))
 #if QT_CONFIG(tooltip)
         self.pushButton_redo.setToolTip(QCoreApplication.translate("MainWindow", u"Redo", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_redo.setText("")
+        self.pushButton_redo.setText(QCoreApplication.translate("MainWindow", u"Redo", None))
         self.pushButton_menu.setText("")
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Samples:", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Rarity:", None))
         self.label_symbol_rarity.setText(QCoreApplication.translate("MainWindow", u"<rarity>", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"Submission:", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Submissions per symbol:", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Selection Bias", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Random", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Rare Symbols", None))

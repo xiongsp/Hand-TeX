@@ -1,4 +1,5 @@
 import difflib
+import json
 import os
 import platform
 import shutil
@@ -16,8 +17,11 @@ import psutil
 from loguru import logger
 from xdg import XDG_CONFIG_HOME, XDG_CACHE_HOME
 
+import handtex.data
+import handtex.structures as st
 from handtex import __program__, __version__
 from handtex.data import color_themes
+from handtex.data import symbols
 
 
 T = TypeVar("T")
@@ -369,3 +373,38 @@ def load_dict_to_attrs_safely(
                 )
 
     return recoverable_exceptions
+
+
+def load_symbols() -> dict[str, st.Symbol]:
+    """
+    Load the symbols from the symbols.json file.
+
+    :return: A dictionary of key to symbols.
+    """
+
+    with resources.path(handtex.data, "symbols.json") as symbols_file:
+        symbol_list = st.Symbol.from_json(symbols_file)
+    return {symbol.key: symbol for symbol in symbol_list}
+
+
+def load_symbol_svg(symbol: st.Symbol, fill_color: str = "#000000") -> Qc.QByteArray:
+    """
+    Load the SVG for the given symbol key, applying the new fill color.
+    The raw svg data is returned as a QByteArray, ready for a QSvgRenderer.
+
+    :param symbol: The symbol to load.
+    :param fill_color: The new fill color.
+    :return: The raw SVG data.
+    """
+    with resources.path(symbols, f"{symbol.filename}.svg") as svg_file:
+        svg_data = svg_file.read_text()
+
+    # Recolor the SVG data.
+    if fill_color == "#000000":
+        return Qc.QByteArray(svg_data.encode("utf-8"))
+
+    svg_data = svg_data.replace('stroke="#000000"', f'stroke="{fill_color}"')
+    svg_data = svg_data.replace('stroke="#000"', f'stroke="{fill_color}"')
+    svg_data = svg_data.replace('fill="#000000"', f'fill="{fill_color}"')
+
+    return Qc.QByteArray(svg_data.encode("utf-8"))

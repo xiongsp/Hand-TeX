@@ -10,16 +10,22 @@ from loguru import logger
 
 import handtex.config as cfg
 import handtex.gui_utils as gu
+import handtex.structures as st
 import handtex.issue_reporter_driver as ird
 import handtex.utils as ut
 import handtex.state_saver as ss
+import handtex.data_recorder as dr
 from handtex import __program__, __version__
 from handtex.ui_generated_files.ui_Mainwindow import Ui_MainWindow
+
+# TODO maybe put a pencil icon in the background of the drawing area until the user draws something
 
 
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     config: cfg.Config = None
     debug: bool
+
+    symbols: dict[str, st.Symbol]
 
     threadpool: Qc.QThreadPool
 
@@ -30,6 +36,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     default_style: str
     theme_is_dark: ut.Shared[bool]
     theme_is_dark_changed = Signal(bool)  # When true, the new theme is dark.
+
+    state_saver: ss.StateSaver
+
+    # Training:
+    train: bool
+    data_recorder: dr.DataRecorder
+    current_symbol: st.Symbol | None
+    submission_count: int
 
     def __init__(
         self,
@@ -56,6 +70,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.save_default_palette()
         self.load_config_theme()
 
+        self.symbols = ut.load_symbols()
+
+        self.train = train
+        self.submission_count = 1
+        if self.train:
+            logger.info("Training mode active.")
+            self.current_symbol = None
+            self.stackedWidget.setCurrentIndex(1)
+            self.data_recorder = dr.DataRecorder(self.symbols)
+
         self.state_saver = ss.StateSaver("error_dialog")
         self.init_state_saver()
         self.state_saver.restore()
@@ -73,11 +97,31 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Make the submit button bigger.
         self.pushButton_submit.setMinimumHeight(self.pushButton_submit.height() * 1.5)
 
+        # Make training symbol name bigger.
+        font = self.label_training_name.font()
+        font.setPointSize(font.pointSize() * 2)
+        self.label_training_name.setFont(font)
+
+        # Connect slots.
+        self.pushButton_clear.clicked.connect(self.sketchpad.clear)
+        self.pushButton_undo.clicked.connect(self.sketchpad.undo)
+        self.pushButton_redo.clicked.connect(self.sketchpad.redo)
+        self.sketchpad.can_undo.connect(self.pushButton_undo.setEnabled)
+        self.sketchpad.can_undo.connect(self.pushButton_clear.setEnabled)
+        self.sketchpad.can_redo.connect(self.pushButton_redo.setEnabled)
+        self.spinBox_max_submissions.valueChanged.connect(self.update_submission_count)
+
+        self.pushButton_submit.clicked.connect(self.submit_training_drawing)
+        self.pushButton_skip.clicked.connect(self.get_next_symbol)
+        self.pushButton_go_back.clicked.connect(self.previous_symbol)
+
     def init_state_saver(self) -> None:
         """
         Load the state from the state saver.
         """
-        self.state_saver.register(self, self.splitter)
+        self.state_saver.register(
+            self, self.splitter, self.horizontalSlider_selection_bias, self.spinBox_max_submissions
+        )
 
     def post_init(self) -> None:
         """
@@ -93,6 +137,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             )
 
         sys.excepthook = exception_handler
+
+        if self.train:
+            self.get_next_symbol()
 
     def closeEvent(self, event: Qg.QCloseEvent) -> None:
         """
@@ -193,7 +240,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.hamburger_menu.addSeparator()
             action = Qg.QAction(Qg.QIcon.fromTheme("tools-report-bug"), "Simulate crash", self)
             action.triggered.connect(self.simulate_crash)
-            logger.warning("Debug mode active.")
             self.hamburger_menu.addAction(action)
 
     def open_log_viewer(self) -> None:
@@ -290,3 +336,68 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Simulate a crash by raising an exception.
         """
         raise Exception("This is a simulated crash.")
+
+    # =========================================== Training ===========================================
+
+    def get_next_symbol(self) -> None:
+        """
+        Get the next symbol to draw.
+        """
+        bias = (
+            self.horizontalSlider_selection_bias.value()
+            / self.horizontalSlider_selection_bias.maximum()
+        )
+        new_symbol_key = self.data_recorder.select_symbol(bias)
+        while self.current_symbol is not None and new_symbol_key == self.current_symbol.key:
+            new_symbol_key = self.data_recorder.select_symbol(bias)
+
+        self.submission_count = 1
+
+        self.set_training_symbol(new_symbol_key)
+
+        max_submissions = self.spinBox_max_submissions.value()
+        self.label_submission_number.setText(f"{self.submission_count}/{max_submissions}")
+
+    def set_training_symbol(self, new_symbol_key: str) -> None:
+        self.current_symbol = self.symbols[new_symbol_key]
+
+        self.label_training_name.setText(self.current_symbol.command)
+        self.label_symbol_rarity.setText(str(self.data_recorder.get_symbol_rarity(new_symbol_key)))
+        self.label_symbol_samples.setText(
+            str(self.data_recorder.get_symbol_sample_count(new_symbol_key))
+        )
+
+        hex_color = self.palette().color(Qg.QPalette.Text).name()
+        self.widget_training_symbol.load(ut.load_symbol_svg(self.current_symbol, hex_color))
+        self.widget_training_symbol.renderer().setAspectRatioMode(Qc.Qt.KeepAspectRatio)
+        self.widget_training_symbol.setFixedSize(200, 200)
+        self.sketchpad.clear()
+
+    def previous_symbol(self) -> None:
+        """
+        Go back to the previous symbol.
+        """
+        self.set_training_symbol(self.data_recorder.previous_symbol())
+
+    def submit_training_drawing(self) -> None:
+        """
+        Submit the drawing for training.
+        """
+        self.data_recorder.submit_drawing(
+            st.SymbolDrawing(self.current_symbol.key, self.sketchpad.clean_strokes())
+        )
+        self.sketchpad.clear()
+        self.submission_count += 1
+
+        max_submissions = self.spinBox_max_submissions.value()
+        if self.submission_count > max_submissions:
+            self.get_next_symbol()
+        else:
+            self.label_submission_number.setText(f"{self.submission_count}/{max_submissions}")
+
+    def update_submission_count(self, value: int) -> None:
+        """
+        Update the submission count.
+        """
+        max_submissions = value
+        self.label_submission_number.setText(f"{self.submission_count}/{max_submissions}")

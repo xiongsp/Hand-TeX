@@ -437,9 +437,12 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_go_back">
+               <widget class="QPushButton" name="pushButton_undo_submit">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="text">
-                 <string>Go Back</string>
+                 <string>Undo Submission</string>
                 </property>
                 <property name="icon">
                  <iconset theme="edit-undo">

@@ -5,6 +5,7 @@ from pathlib import Path
 import random
 
 from loguru import logger
+from PySide6.QtCore import Signal
 
 import handtex.structures as st
 
@@ -16,9 +17,12 @@ class DataRecorder:
     data_dir: Path
     current_data: list[st.SymbolDrawing]
 
+    has_submissions: Signal
+
     # Manage loading/saving symbols for new training data generation.
-    def __init__(self, symbols: dict[str, st.Symbol]):
+    def __init__(self, symbols: dict[str, st.Symbol], has_submissions: Signal):
         self.current_data = []
+        self.has_submissions = has_submissions
 
         # Load the new data location from environment variables.
         if "NEW_DATA_DIR" in os.environ:
@@ -100,15 +104,39 @@ class DataRecorder:
         """
         return self.frequencies[key]
 
+    def undo_submission(self) -> st.SymbolDrawing | None:
+        """
+        Undo the last submission, returning the drawing.
+
+        :return: The last submitted drawing.
+        """
+        if self.current_data:
+            logger.warning(len(self.current_data))
+            drawing = self.current_data.pop()
+            self.frequencies[drawing.key] -= 1
+            logger.info(f"Undid submission for symbol {drawing.key}.")
+            logger.warning(len(self.current_data))
+            self.has_submissions.emit(bool(self.current_data))
+            return drawing
+
+        self.has_submissions.emit(False)
+
     def submit_drawing(self, drawing: st.SymbolDrawing) -> None:
         """
         Submit a drawing to the data recorder.
 
         :param drawing: The drawing to submit.
         """
+        logger.info(
+            f"Recorded drawing for symbol {drawing.key} "
+            f"(scale: {drawing.scaling}, offset: {drawing.x_offset}, {drawing.y_offset})."
+        )
+        # logger.info(f"Recorded drawing for symbol {drawing.strokes}.")
+
         self.current_data.append(drawing)
-        logger.info(f"Recorded drawing for symbol {drawing.key}.")
-        logger.info(f"Recorded drawing for symbol {drawing.strokes}.")
+        self.frequencies[drawing.key] += 1
+
+        self.has_submissions.emit(bool(self.current_data))
 
         # def plot_strokes(strokes):
         #     from matplotlib import pyplot as plt

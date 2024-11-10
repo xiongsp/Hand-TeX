@@ -319,11 +319,12 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_4.addWidget(self.pushButton_skip)
 
-        self.pushButton_go_back = QPushButton(self.page_train)
-        self.pushButton_go_back.setObjectName(u"pushButton_go_back")
-        self.pushButton_go_back.setIcon(icon1)
+        self.pushButton_undo_submit = QPushButton(self.page_train)
+        self.pushButton_undo_submit.setObjectName(u"pushButton_undo_submit")
+        self.pushButton_undo_submit.setEnabled(False)
+        self.pushButton_undo_submit.setIcon(icon1)
 
-        self.horizontalLayout_4.addWidget(self.pushButton_go_back)
+        self.horizontalLayout_4.addWidget(self.pushButton_undo_submit)
 
 
         self.verticalLayout_5.addLayout(self.horizontalLayout_4)
@@ -369,6 +370,6 @@ class Ui_MainWindow(object):
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Train specific symbol:", None))
         self.pushButton_submit.setText(QCoreApplication.translate("MainWindow", u"Submit", None))
         self.pushButton_skip.setText(QCoreApplication.translate("MainWindow", u"Skip", None))
-        self.pushButton_go_back.setText(QCoreApplication.translate("MainWindow", u"Go Back", None))
+        self.pushButton_undo_submit.setText(QCoreApplication.translate("MainWindow", u"Undo Submission", None))
     # retranslateUi
 

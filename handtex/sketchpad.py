@@ -9,7 +9,9 @@ from rdp import rdp
 
 from handtex.constants import CANVAS_SIZE
 import handtex.gui_utils as gu
+import handtex.structures as st
 import handtex.utils as ut
+from structures import SymbolDrawing
 
 
 class Sketchpad(Qw.QGraphicsView):
@@ -171,17 +173,49 @@ class Sketchpad(Qw.QGraphicsView):
         self.can_undo.emit(bool(self.strokes))
         self.can_redo.emit(bool(self.redo_strokes))
 
-    def clean_strokes(self) -> list[list[tuple[int, int]]]:
+    def clean_strokes(self) -> tuple[list[list[tuple[int, int]]], float, int, int]:
         """
         Normalize the coordinates to a 0-CANVAS_SIZE space.
         Apply the RDP algorithm to limit the number of points in each stroke.
         """
         strokes = self.strokes
         clean_strokes = purge_duplicate_strokes(strokes)
-        clean_strokes = rescale_viewport(clean_strokes, self.sceneRect())
-        clean_strokes = scale_and_center(clean_strokes)
+        clean_strokes, scale1 = rescale_viewport(clean_strokes, self.sceneRect())
+        clean_strokes, scale2, x_offset, y_offset = scale_and_center(clean_strokes)
         clean_strokes = [simplify_stroke(stroke) for stroke in clean_strokes]
-        return clean_strokes
+        return clean_strokes, scale1 * scale2, x_offset, y_offset
+
+    def load_strokes(self, drawing: st.SymbolDrawing) -> None:
+        """
+        Load strokes into the sketchpad, as if they had been drawn.
+        This requires undoing the transformations applied to the strokes.
+
+        :param drawing: The drawing to load.
+        """
+
+        logger.debug(f"Loading {len(drawing.strokes)} strokes into the sketchpad.")
+        self.clear()
+        self.strokes.clear()
+        for stroke in drawing.strokes:
+            path = Qg.QPainterPath()
+            stroke = [
+                (
+                    round((x - drawing.x_offset) / drawing.scaling),
+                    round((y - drawing.y_offset) / drawing.scaling),
+                )
+                for x, y in stroke
+            ]
+            self.strokes.append(stroke)
+            path.moveTo(*stroke[0])
+            for point in stroke[1:]:
+                path.lineTo(*point)
+            # Handle single point strokes.
+            if len(stroke) == 1:
+                x, y = stroke[0]
+                path.lineTo(x + 1, y + 1)
+            item = self.scene().addPath(path, self.pen)
+            self.stroke_items.append(item)
+        self.can_undo.emit(bool(self.strokes))
 
     def set_pen_width(self, width: int) -> None:
         """
@@ -205,10 +239,14 @@ def purge_duplicate_strokes(strokes: list[list[tuple[int, int]]]) -> list[list[t
 
 def rescale_viewport(
     coordinates: list[list[tuple[int, int]]], rect: Qc.QRectF
-) -> list[list[tuple[int, int]]]:
+) -> tuple[list[list[tuple[int, int]]], float]:
     """
     Transform the coordinate space from the viewport to a 0-CANVAS_SIZE space.
     Preserve the aspect ratio of the viewport.
+
+    :param coordinates: The coordinates to transform.
+    :param rect: The viewport rectangle.
+    :return: The transformed coordinates and the scaling factor.
     """
     width, height = rect.width(), rect.height()
 
@@ -218,17 +256,29 @@ def rescale_viewport(
     for sublist in coordinates:
         scaled_sublist = [(int(x * scale), int(y * scale)) for x, y in sublist]
         scaled_coordinates.append(scaled_sublist)
-    return scaled_coordinates
+    return scaled_coordinates, scale
 
 
-def scale_and_center(coordinates: list[list[tuple[int, int]]]) -> list[list[tuple[int, int]]]:
+def scale_and_center(
+    coordinates: list[list[tuple[int, int]]]
+) -> tuple[list[list[tuple[int, int]]], float, int, int]:
     all_points = [point for sublist in coordinates for point in sublist]
+    """
+    Scale and center the coordinates in a CANVAS_SIZExCANVAS_SIZE space.
+    
+    :param coordinates: The coordinates to scale and center.
+    :return: The scaled and centered coordinates, the scaling factor, and the x and
+             y offset.
+    """
 
     # Handle the case where there is only a single point
     if len(all_points) == 1:
-        return [
-            [(CANVAS_SIZE / 2, CANVAS_SIZE / 2)]
-        ]  # Center the single point in the CANVAS_SIZExCANVAS_SIZE space
+        return (
+            [[(CANVAS_SIZE / 2, CANVAS_SIZE / 2)]],
+            1,
+            CANVAS_SIZE / 2 - all_points[0][0],
+            CANVAS_SIZE / 2 - all_points[0][1],
+        )  # Center the single point in the CANVAS_SIZExCANVAS_SIZE space
 
     xs, ys = zip(*all_points)
 
@@ -253,7 +303,7 @@ def scale_and_center(coordinates: list[list[tuple[int, int]]]) -> list[list[tupl
         ]
         scaled_coordinates.append(scaled_sublist)
 
-    return scaled_coordinates
+    return scaled_coordinates, scale_factor, offset_x, offset_y
 
 
 def scale_correction_function(x: float) -> float:

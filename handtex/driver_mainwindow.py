@@ -45,6 +45,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     data_recorder: dr.DataRecorder
     current_symbol: st.Symbol | None
     submission_count: int
+    has_submission = Signal(bool)
 
     def __init__(
         self,
@@ -80,7 +81,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if self.train:
             logger.info("Training mode active.")
             self.stackedWidget.setCurrentIndex(1)
-            self.data_recorder = dr.DataRecorder(self.symbols)
+            self.data_recorder = dr.DataRecorder(self.symbols, self.has_submission)
+            self.data_recorder.has_submissions.connect(self.pushButton_undo_submit.setEnabled)
 
         self.state_saver = ss.StateSaver("error_dialog")
         self.init_state_saver()
@@ -115,7 +117,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.pushButton_submit.clicked.connect(self.submit_training_drawing)
         self.pushButton_skip.clicked.connect(self.get_next_symbol)
-        self.pushButton_go_back.clicked.connect(self.previous_symbol)
+        self.pushButton_undo_submit.clicked.connect(self.previous_symbol)
 
     def init_state_saver(self) -> None:
         """
@@ -398,7 +400,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.submission_count = 1
         max_submissions = self.spinBox_max_submissions.value()
-        self.label_submission_number.setText(f"{self.submission_count}/{max_submissions}")
+        self.update_submission_count()
 
     def set_training_symbol(self, new_symbol_key: str) -> None:
         self.current_symbol = self.symbols[new_symbol_key]
@@ -425,14 +427,19 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Go back to the previous symbol.
         """
-        self.set_training_symbol(self.data_recorder.previous_symbol())
+        old_drawing = self.data_recorder.undo_submission()
+        self.set_training_symbol(old_drawing.key)
+        self.sketchpad.load_strokes(old_drawing)
+        if self.submission_count > 1:
+            self.submission_count -= 1
+        self.update_submission_count()
 
     def submit_training_drawing(self) -> None:
         """
         Submit the drawing for training.
         """
         self.data_recorder.submit_drawing(
-            st.SymbolDrawing(self.current_symbol.key, self.sketchpad.clean_strokes())
+            st.SymbolDrawing(self.current_symbol.key, *self.sketchpad.clean_strokes())
         )
         self.sketchpad.clear()
         self.submission_count += 1
@@ -441,11 +448,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if self.submission_count > max_submissions:
             self.get_next_symbol()
         else:
-            self.label_submission_number.setText(f"{self.submission_count}/{max_submissions}")
+            self.update_submission_count()
+            self.load_training_symbol_data()
 
-    def update_submission_count(self, value: int) -> None:
+    def update_submission_count(self) -> None:
         """
         Update the submission count.
         """
-        max_submissions = value
+        max_submissions = self.spinBox_max_submissions.value()
         self.label_submission_number.setText(f"{self.submission_count}/{max_submissions}")

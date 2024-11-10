@@ -35,3 +35,6 @@ class Symbol:
 class SymbolDrawing:
     key: str
     strokes: list[list[tuple[int, int]]]
+    scaling: float
+    x_offset: int
+    y_offset: int

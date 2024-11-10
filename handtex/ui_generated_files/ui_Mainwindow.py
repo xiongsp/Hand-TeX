@@ -17,10 +17,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtSvgWidgets import QSvgWidget
 from PySide6.QtWidgets import (QApplication, QFormLayout, QFrame, QGraphicsView,
-    QHBoxLayout, QLabel, QListWidgetItem, QMainWindow,
-    QPushButton, QSizePolicy, QSlider, QSpacerItem,
-    QSpinBox, QSplitter, QStackedWidget, QVBoxLayout,
-    QWidget)
+    QHBoxLayout, QLabel, QLineEdit, QListWidgetItem,
+    QMainWindow, QPushButton, QSizePolicy, QSlider,
+    QSpacerItem, QSpinBox, QSplitter, QStackedWidget,
+    QVBoxLayout, QWidget)
 
 from handtex.CustomQ.CListWidget import CListWidget
 from handtex.sketchpad import Sketchpad
@@ -39,17 +39,23 @@ class Ui_MainWindow(object):
         self.splitter.setOrientation(Qt.Horizontal)
         self.splitter.setHandleWidth(3)
         self.splitter.setChildrenCollapsible(False)
-        self.widget = QWidget(self.splitter)
-        self.widget.setObjectName(u"widget")
-        self.verticalLayout = QVBoxLayout(self.widget)
+        self.layoutWidget = QWidget(self.splitter)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 6, 0)
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.pushButton_clear = QPushButton(self.widget)
+        self.pushButton_clear = QPushButton(self.layoutWidget)
         self.pushButton_clear.setObjectName(u"pushButton_clear")
         self.pushButton_clear.setEnabled(False)
-        icon = QIcon(QIcon.fromTheme(u"edit-clear"))
+        icon = QIcon()
+        iconThemeName = u"edit-clear"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon = QIcon.fromTheme(iconThemeName)
+        else:
+            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.pushButton_clear.setIcon(icon)
         self.pushButton_clear.setFlat(True)
 
@@ -59,19 +65,31 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
-        self.pushButton_undo = QPushButton(self.widget)
+        self.pushButton_undo = QPushButton(self.layoutWidget)
         self.pushButton_undo.setObjectName(u"pushButton_undo")
         self.pushButton_undo.setEnabled(False)
-        icon1 = QIcon(QIcon.fromTheme(u"edit-undo"))
+        icon1 = QIcon()
+        iconThemeName = u"edit-undo"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon1 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.pushButton_undo.setIcon(icon1)
         self.pushButton_undo.setFlat(True)
 
         self.horizontalLayout.addWidget(self.pushButton_undo)
 
-        self.pushButton_redo = QPushButton(self.widget)
+        self.pushButton_redo = QPushButton(self.layoutWidget)
         self.pushButton_redo.setObjectName(u"pushButton_redo")
         self.pushButton_redo.setEnabled(False)
-        icon2 = QIcon(QIcon.fromTheme(u"edit-redo"))
+        icon2 = QIcon()
+        iconThemeName = u"edit-redo"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon2 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon2.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.pushButton_redo.setIcon(icon2)
         self.pushButton_redo.setFlat(True)
 
@@ -80,7 +98,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.sketchpad = Sketchpad(self.widget)
+        self.sketchpad = Sketchpad(self.layoutWidget)
         self.sketchpad.setObjectName(u"sketchpad")
         self.sketchpad.setMinimumSize(QSize(200, 200))
         self.sketchpad.setFrameShape(QFrame.NoFrame)
@@ -94,10 +112,10 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.sketchpad)
 
         self.verticalLayout.setStretch(1, 1)
-        self.splitter.addWidget(self.widget)
-        self.widget1 = QWidget(self.splitter)
-        self.widget1.setObjectName(u"widget1")
-        self.verticalLayout_2 = QVBoxLayout(self.widget1)
+        self.splitter.addWidget(self.layoutWidget)
+        self.layoutWidget1 = QWidget(self.splitter)
+        self.layoutWidget1.setObjectName(u"layoutWidget1")
+        self.verticalLayout_2 = QVBoxLayout(self.layoutWidget1)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(6, 0, 0, 0)
         self.horizontalLayout_2 = QHBoxLayout()
@@ -106,9 +124,15 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
 
-        self.pushButton_menu = QPushButton(self.widget1)
+        self.pushButton_menu = QPushButton(self.layoutWidget1)
         self.pushButton_menu.setObjectName(u"pushButton_menu")
-        icon3 = QIcon(QIcon.fromTheme(u"application-menu"))
+        icon3 = QIcon()
+        iconThemeName = u"application-menu"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon3 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon3.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.pushButton_menu.setIcon(icon3)
         self.pushButton_menu.setFlat(True)
 
@@ -117,7 +141,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
 
-        self.stackedWidget = QStackedWidget(self.widget1)
+        self.stackedWidget = QStackedWidget(self.layoutWidget1)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.page_classify = QWidget()
         self.page_classify.setObjectName(u"page_classify")
@@ -225,7 +249,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(-1, -1, -1, 24)
+        self.horizontalLayout_3.setContentsMargins(-1, -1, -1, 0)
         self.label_3 = QLabel(self.page_train)
         self.label_3.setObjectName(u"label_3")
 
@@ -249,9 +273,31 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_5.addLayout(self.horizontalLayout_3)
 
+        self.horizontalLayout_7 = QHBoxLayout()
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(-1, -1, -1, 24)
+        self.label_7 = QLabel(self.page_train)
+        self.label_7.setObjectName(u"label_7")
+
+        self.horizontalLayout_7.addWidget(self.label_7)
+
+        self.lineEdit_train_symbol = QLineEdit(self.page_train)
+        self.lineEdit_train_symbol.setObjectName(u"lineEdit_train_symbol")
+
+        self.horizontalLayout_7.addWidget(self.lineEdit_train_symbol)
+
+
+        self.verticalLayout_5.addLayout(self.horizontalLayout_7)
+
         self.pushButton_submit = QPushButton(self.page_train)
         self.pushButton_submit.setObjectName(u"pushButton_submit")
-        icon4 = QIcon(QIcon.fromTheme(u"dialog-ok"))
+        icon4 = QIcon()
+        iconThemeName = u"dialog-ok"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon4 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon4.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.pushButton_submit.setIcon(icon4)
 
         self.verticalLayout_5.addWidget(self.pushButton_submit)
@@ -261,7 +307,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setContentsMargins(-1, 24, -1, -1)
         self.pushButton_skip = QPushButton(self.page_train)
         self.pushButton_skip.setObjectName(u"pushButton_skip")
-        icon5 = QIcon(QIcon.fromTheme(u"media-skip-forward"))
+        icon5 = QIcon()
+        iconThemeName = u"media-skip-forward"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon5 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon5.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.pushButton_skip.setIcon(icon5)
 
         self.horizontalLayout_4.addWidget(self.pushButton_skip)
@@ -279,7 +331,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.stackedWidget)
 
-        self.splitter.addWidget(self.widget1)
+        self.splitter.addWidget(self.layoutWidget1)
 
         self.verticalLayout_3.addWidget(self.splitter)
 
@@ -313,6 +365,7 @@ class Ui_MainWindow(object):
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Selection Bias", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Random", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Rare Symbols", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Train specific symbol:", None))
         self.pushButton_submit.setText(QCoreApplication.translate("MainWindow", u"Submit", None))
         self.pushButton_skip.setText(QCoreApplication.translate("MainWindow", u"Skip", None))
         self.pushButton_go_back.setText(QCoreApplication.translate("MainWindow", u"Go Back", None))

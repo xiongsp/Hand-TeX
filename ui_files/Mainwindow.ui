@@ -26,7 +26,7 @@
       <property name="childrenCollapsible">
        <bool>false</bool>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
         <property name="rightMargin">
          <number>6</number>
@@ -42,7 +42,8 @@
              <string>Clear</string>
             </property>
             <property name="icon">
-             <iconset theme="edit-clear"/>
+             <iconset theme="edit-clear">
+              <normaloff>.</normaloff>.</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -74,7 +75,8 @@
              <string>Undo</string>
             </property>
             <property name="icon">
-             <iconset theme="edit-undo"/>
+             <iconset theme="edit-undo">
+              <normaloff>.</normaloff>.</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -93,7 +95,8 @@
              <string>Redo</string>
             </property>
             <property name="icon">
-             <iconset theme="edit-redo"/>
+             <iconset theme="edit-redo">
+              <normaloff>.</normaloff>.</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -135,7 +138,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget1">
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <property name="leftMargin">
          <number>6</number>
@@ -161,7 +164,8 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset theme="application-menu"/>
+             <iconset theme="application-menu">
+              <normaloff>.</normaloff>.</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -339,7 +343,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_3">
               <property name="bottomMargin">
-               <number>24</number>
+               <number>0</number>
               </property>
               <item>
                <widget class="QLabel" name="label_3">
@@ -377,12 +381,30 @@
              </layout>
             </item>
             <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <property name="bottomMargin">
+               <number>24</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Train specific symbol:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_train_symbol"/>
+              </item>
+             </layout>
+            </item>
+            <item>
              <widget class="QPushButton" name="pushButton_submit">
               <property name="text">
                <string>Submit</string>
               </property>
               <property name="icon">
-               <iconset theme="dialog-ok"/>
+               <iconset theme="dialog-ok">
+                <normaloff>.</normaloff>.</iconset>
               </property>
              </widget>
             </item>
@@ -397,7 +419,8 @@
                  <string>Skip</string>
                 </property>
                 <property name="icon">
-                 <iconset theme="media-skip-forward"/>
+                 <iconset theme="media-skip-forward">
+                  <normaloff>.</normaloff>.</iconset>
                 </property>
                </widget>
               </item>
@@ -407,7 +430,8 @@
                  <string>Go Back</string>
                 </property>
                 <property name="icon">
-                 <iconset theme="edit-undo"/>
+                 <iconset theme="edit-undo">
+                  <normaloff>.</normaloff>.</iconset>
                 </property>
                </widget>
               </item>

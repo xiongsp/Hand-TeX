@@ -1,10 +1,15 @@
 import PySide6.QtWidgets as Qw
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
+import PySide6.QtSvgWidgets as QtSvg
 from PySide6.QtCore import Signal
 
 from loguru import logger
 from rdp import rdp
+
+from handtex.constants import CANVAS_SIZE
+import handtex.gui_utils as gu
+import handtex.utils as ut
 
 
 class Sketchpad(Qw.QGraphicsView):
@@ -37,7 +42,7 @@ class Sketchpad(Qw.QGraphicsView):
         self.current_path = None
         self.current_path_item = None
 
-        self.pen_width = 20
+        self.pen_width = 10
 
         pen_color = self.palette().color(Qg.QPalette.Text)
         self.pen = Qg.QPen(pen_color, self.pen_width)
@@ -104,7 +109,7 @@ class Sketchpad(Qw.QGraphicsView):
                 # If the stroke has only one point, add a second point right next to it.
                 pos = Qc.QPoint(*self.current_stroke[0])
                 pos += Qc.QPoint(1, 1)
-                self.current_stroke.append((pos.x(), pos.y()))
+                # self.current_stroke.append((pos.x(), pos.y()))
                 self.current_path.lineTo(pos)
                 self.current_path_item.setPath(self.current_path)
 
@@ -159,11 +164,12 @@ class Sketchpad(Qw.QGraphicsView):
 
     def clean_strokes(self) -> list[list[tuple[int, int]]]:
         """
-        Normalize the coordinates to a 0-1000 space.
+        Normalize the coordinates to a 0-CANVAS_SIZE space.
         Apply the RDP algorithm to limit the number of points in each stroke.
         """
         strokes = self.strokes
         clean_strokes = purge_duplicate_strokes(strokes)
+        clean_strokes = rescale_viewport(clean_strokes, self.sceneRect())
         clean_strokes = scale_and_center(clean_strokes)
         clean_strokes = [simplify_stroke(stroke) for stroke in clean_strokes]
         return clean_strokes
@@ -179,12 +185,32 @@ def purge_duplicate_strokes(strokes: list[list[tuple[int, int]]]) -> list[list[t
     return cleaned_strokes
 
 
+def rescale_viewport(
+    coordinates: list[list[tuple[int, int]]], rect: Qc.QRectF
+) -> list[list[tuple[int, int]]]:
+    """
+    Transform the coordinate space from the viewport to a 0-CANVAS_SIZE space.
+    Preserve the aspect ratio of the viewport.
+    """
+    width, height = rect.width(), rect.height()
+
+    scale = CANVAS_SIZE / max(width, height)
+
+    scaled_coordinates = []
+    for sublist in coordinates:
+        scaled_sublist = [(int(x * scale), int(y * scale)) for x, y in sublist]
+        scaled_coordinates.append(scaled_sublist)
+    return scaled_coordinates
+
+
 def scale_and_center(coordinates: list[list[tuple[int, int]]]) -> list[list[tuple[int, int]]]:
     all_points = [point for sublist in coordinates for point in sublist]
 
     # Handle the case where there is only a single point
     if len(all_points) == 1:
-        return [[(500, 500)]]  # Center the single point in the 1000x1000 space
+        return [
+            [(CANVAS_SIZE / 2, CANVAS_SIZE / 2)]
+        ]  # Center the single point in the CANVAS_SIZExCANVAS_SIZE space
 
     xs, ys = zip(*all_points)
 
@@ -193,11 +219,13 @@ def scale_and_center(coordinates: list[list[tuple[int, int]]]) -> list[list[tupl
 
     width, height = max_x - min_x, max_y - min_y
 
-    # Determine the scaling factor to fit in 1000x1000, preserving aspect ratio.
-    scale_factor = 1000 / max(width, height)
+    # Determine the scaling factor to fit in CANVAS_SIZExCANVAS_SIZE, preserving aspect ratio
+    scale_factor = CANVAS_SIZE / max(width, height)
 
-    offset_x = (1000 - width * scale_factor) / 2 - min_x * scale_factor
-    offset_y = (1000 - height * scale_factor) / 2 - min_y * scale_factor
+    scale_factor = scale_correction_function(scale_factor)
+
+    offset_x = (CANVAS_SIZE - width * scale_factor) / 2 - min_x * scale_factor
+    offset_y = (CANVAS_SIZE - height * scale_factor) / 2 - min_y * scale_factor
 
     # Scale and center all coordinates.
     scaled_coordinates = []
@@ -208,6 +236,28 @@ def scale_and_center(coordinates: list[list[tuple[int, int]]]) -> list[list[tupl
         scaled_coordinates.append(scaled_sublist)
 
     return scaled_coordinates
+
+
+def scale_correction_function(x: float) -> float:
+    r"""
+    Fully scale up until a factor of x=4, then cap the max scaling at y=5 for x>8.
+    This decays asymptotically to y=2 with an inflection point at x=20.
+
+         x < 4 : x
+    4 <= x < 8 : -\frac{1}{e^{\left(x-4\right)}}+5
+    8 <= x     : 2.0+0.0614754+3\left(1-\frac{1}{1+e^{-0.3\left(x-20\right)}}\right)\right\}
+
+    https://www.desmos.com/calculator/v3iimkbieg
+
+    :param x: The scaling factor.
+    :return: The corrected scaling factor.
+    """
+    if x < 4:
+        return x
+    elif x < 8:
+        return -1 / (2.71828 ** (x - 4)) + 5
+    else:
+        return 2.0614754 + 3 * (1 - 1 / (1 + 2.71828 ** (-0.3 * (x - 20))))
 
 
 def simplify_stroke(stroke, epsilon=1.25):

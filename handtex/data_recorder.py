@@ -108,3 +108,35 @@ class DataRecorder:
         """
         self.current_data.append(drawing)
         logger.info(f"Recorded drawing for symbol {drawing.key}.")
+        logger.info(f"Recorded drawing for symbol {drawing.strokes}.")
+
+        # def plot_strokes(strokes):
+        #     from matplotlib import pyplot as plt
+        #
+        #     fig, axes = plt.subplots(2, 1, figsize=(5, 10))
+        #     # Plot original strokes with points
+        #     axes[0].set_title("Original Strokes (With Points)")
+        #     for stroke in strokes:
+        #         stroke_x = [point[0] for point in stroke]
+        #         stroke_y = [point[1] for point in stroke]
+        #         axes[0].plot(stroke_x, stroke_y, marker="o")
+        #
+        #     # Plot original strokes without points
+        #     for stroke in strokes:
+        #         stroke_x = [point[0] for point in stroke]
+        #         stroke_y = [point[1] for point in stroke]
+        #         axes[1].plot(stroke_x, stroke_y)
+        #
+        #     for i in range(2):
+        #         axes[i].axis("equal")
+        #         # Don't invert the y-axis
+        #         axes[i].set_xlabel("X Coordinate")
+        #         axes[i].set_ylabel("Y Coordinate")
+        #         axes[i].set_xlim(0, 1000)
+        #         axes[i].set_ylim(1000, 0)
+        #         axes[i].set_aspect("equal", adjustable="box")
+        #
+        #     plt.tight_layout()
+        #     plt.show()
+        #
+        # plot_strokes(drawing.strokes)

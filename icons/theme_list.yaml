@@ -12,6 +12,7 @@ Files:
       - media-skip-forward
       - games-config-theme
       - tools-report-bug
+      - edit-line-width
   status:
     16:
       - dialog-warning

@@ -82,8 +82,8 @@ def collect_system_info(callers_file: str) -> str:
     )
     buffer.write(f"System locale: {Qc.QLocale.system().name()}\n")
     buffer.write(f"CPU Cores: {os.cpu_count()}\n")
-    buffer.write(f"Memory: {psutil.virtual_memory().total / 1024 ** 3:.2f} GiB\n")
-    buffer.write(f"Swap: {psutil.swap_memory().total / 1024 ** 3:.2f} GiB\n")
+    buffer.write(f"Memory: {sys_virtual_memory_total() / 1024 ** 3:.2f} GiB\n")
+    buffer.write(f"Swap: {sys_swap_memory_total() / 1024 ** 3:.2f} GiB\n")
 
     return buffer.getvalue()
 
@@ -398,3 +398,25 @@ def load_symbol_svg(symbol: st.Symbol, fill_color: str = "#000000") -> Qc.QByteA
     svg_data = svg_data.replace('fill="#000000"', f'fill="{fill_color}"')
 
     return Qc.QByteArray(svg_data.encode("utf-8"))
+
+
+def sys_virtual_memory_total() -> int:
+    """
+    Get the total amount of RAM in the system in bytes.
+    """
+    try:
+        return psutil.virtual_memory().total
+    except Exception as e:
+        logger.exception(e)
+        return 0
+
+
+def sys_swap_memory_total() -> int:
+    """
+    Get the total amount of swap memory in the system in bytes.
+    """
+    try:
+        return psutil.swap_memory().total
+    except Exception as e:
+        logger.exception(e)
+        return 0

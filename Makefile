@@ -1,5 +1,7 @@
 # define variables
 PYTHON = venv/bin/python
+PYINSTALLER_VENV := venv
+PYINSTALLER := $(PYINSTALLER_VENV)/bin/pyinstaller
 CurrentDir := $(shell pwd)
 BUILD_DIR = dist
 BUILD_CACHE = handtex.egg-info build
@@ -58,5 +60,42 @@ confirm:
 		echo "Aborted by user."; \
 		exit 1; \
 	fi
+
+build-elf:
+	$(PYINSTALLER) handtex/main.py \
+		--paths "${PYINSTALLER_VENV}/lib/python3.12/site-packages" \
+		--onedir --noconfirm --clean --workpath=build --distpath=dist-elf --windowed \
+		--name="Hand TeX" \
+		--copy-metadata=numpy \
+		--copy-metadata=packaging \
+		--copy-metadata=pyyaml \
+		--copy-metadata=pillow \
+		--collect-data handtex
+
+	# This stupid thing refuses to collect data, so do it manually:
+	@echo "Copying data files..."
+	mkdir -p dist-elf/Hand\ TeX/_internal/handtex
+	cp -r handtex/data dist-elf/Hand\ TeX/_internal/handtex/
+	@echo "Purging __pycache__ directories..."
+	@find dist-elf/Hand\ TeX/_internal/handtex -type d -name "__pycache__"
+	@find dist-elf/Hand\ TeX/_internal/handtex -type d -name "__pycache__" -exec rm -rf {} \; || true
+
+	@echo "Purging CUDA related files from _internal directory..."
+	@find dist-elf/Hand\ TeX/_internal -type f \( \
+		-name 'libtorch_cuda.so' -o \
+		-name 'libc10_cuda.so' -o \
+		-name 'libcusparse.so*' -o \
+		-name 'libcurand.so*' -o \
+		-name 'libcudnn.so*' -o \
+		-name 'libcublasLt.so*' -o \
+		-name 'libcublas.so*' -o \
+		-name 'libcupti.so*' -o \
+		-name 'libcufft.so*' -o \
+		-name 'libcudart.so*' -o \
+		-name 'libnv*' -o \
+		-name 'libnccl.so*' \
+		\) -exec rm -rf {} \;
+
+
 
 .PHONY: confirm clean build install fresh-install release black-format compile-ui build-icon-cache refresh-assets

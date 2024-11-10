@@ -3,18 +3,20 @@ import json
 import csv
 from pathlib import Path
 import random
+import datetime
 
 from loguru import logger
 from PySide6.QtCore import Signal
 
 import handtex.structures as st
+import handtex.utils as ut
 
 
 class DataRecorder:
 
     symbols: dict[str, st.Symbol]
     frequencies: dict[str, int]
-    data_dir: Path
+    save_path: Path
     current_data: list[st.SymbolDrawing]
 
     has_submissions: Signal
@@ -26,11 +28,11 @@ class DataRecorder:
 
         # Load the new data location from environment variables.
         if "NEW_DATA_DIR" in os.environ:
-            self.data_dir = Path(os.environ["NEW_DATA_DIR"])
+            data_dir = Path(os.environ["NEW_DATA_DIR"])
         else:
-            self.data_dir = Path("new_data").absolute()
-        self.data_dir.mkdir(parents=True, exist_ok=True)
-        logger.info(f"New data location: {self.data_dir}")
+            data_dir = Path("new_data").absolute()
+        data_dir.mkdir(parents=True, exist_ok=True)
+        logger.info(f"New data location: {data_dir}")
 
         self.symbols = symbols
 
@@ -53,7 +55,7 @@ class DataRecorder:
         # Load new data, gather frequencies from it.
         # All sessions are stored as independant json files.
         new_frequencies = {key: 0 for key in self.symbols.keys()}
-        for new_file in self.data_dir.glob("*.json"):
+        for new_file in data_dir.glob("*.json"):
             with open(new_file, "r") as file:
                 data = json.load(file)
                 for drawing in data:
@@ -66,6 +68,13 @@ class DataRecorder:
         for key, value in new_frequencies.items():
             self.frequencies[key] += value
         logger.info(f"Total of {sum(self.frequencies.values())} drawings for frequency analysis.")
+
+        # Assign the save path.
+        self.save_path = (
+            data_dir / f"session_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.json"
+        )
+        self.save_path = ut.ensure_unique_file_path(self.save_path)
+        logger.info(f"Session data will be saved to {self.save_path}.")
 
     def select_symbol(self, bias: float = 0.5) -> str:
         """
@@ -121,6 +130,8 @@ class DataRecorder:
 
         self.has_submissions.emit(False)
 
+        self.save_data()
+
     def submit_drawing(self, drawing: st.SymbolDrawing) -> None:
         """
         Submit a drawing to the data recorder.
@@ -137,6 +148,8 @@ class DataRecorder:
         self.frequencies[drawing.key] += 1
 
         self.has_submissions.emit(bool(self.current_data))
+
+        self.save_data()
 
         # def plot_strokes(strokes):
         #     from matplotlib import pyplot as plt
@@ -168,3 +181,16 @@ class DataRecorder:
         #     plt.show()
         #
         # plot_strokes(drawing.strokes)
+
+    def save_data(self) -> None:
+        """
+        Save the collected data to a json file.
+        Overwrite the same file if it already exists.
+        """
+        with open(self.save_path, "w") as file:
+            # Use compact json.
+            json.dump(
+                [drawing.dump() for drawing in self.current_data], file, separators=(",", ":\n")
+            )
+
+        logger.info(f"Saved session data to {self.save_path}.")

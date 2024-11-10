@@ -38,3 +38,9 @@ class SymbolDrawing:
     scaling: float
     x_offset: int
     y_offset: int
+
+    def dump(self):
+        return {
+            "key": self.key,
+            "strokes": self.strokes,
+        }

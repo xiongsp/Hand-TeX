@@ -14,7 +14,7 @@ import handtex.utils as ut
 @define
 class Config:
     gui_theme: str = ""  # Blank means system theme.
-    stroke_width: int = 8
+    stroke_width: int = 6
 
     def save(self, path: Path = None) -> bool:
         """

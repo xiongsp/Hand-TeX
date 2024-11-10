@@ -18,8 +18,6 @@ import handtex.data_recorder as dr
 from handtex import __program__, __version__
 from handtex.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 
-# TODO maybe put a pencil icon in the background of the drawing area until the user draws something
-
 
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     config: cfg.Config = None
@@ -62,6 +60,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.submission_count = 1
         self.current_symbol = None
 
+        self.config = self.load_config()
+        self.config.pretty_log()
+
         self.theme_is_dark = ut.Shared[bool](True)
 
         self.hamburger_menu = Qw.QMenu()
@@ -69,9 +70,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.initialize_ui()
 
         self.threadpool = Qc.QThreadPool.globalInstance()
-
-        self.config = self.load_config()
-        self.config.pretty_log()
 
         self.save_default_palette()
         self.load_config_theme()
@@ -242,7 +240,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             stroke_action_group.addAction(action)
             action.width = width
             action.triggered.connect(partial(self.change_pen_width, width))
+            if width == self.config.stroke_width:
+                action.setChecked(True)
             self.stroke_width_menu.addAction(action)
+
+        # Offer opening the log viewer.
+        action_open_log = Qg.QAction(
+            Qg.QIcon.fromTheme("tools-report-bug"), "Report an issue...", self
+        )
+        action_open_log.triggered.connect(self.open_log_viewer)
+        self.hamburger_menu.addAction(action_open_log)
 
         self.reload_stroke_width_icons()
         self.theme_is_dark_changed.connect(self.reload_stroke_width_icons)
@@ -252,7 +259,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if self.debug:
             # Add an intentional crash button.
             self.hamburger_menu.addSeparator()
-            action = Qg.QAction(Qg.QIcon.fromTheme("tools-report-bug"), "Simulate crash", self)
+            action = Qg.QAction("Simulate crash", self)
             action.triggered.connect(self.simulate_crash)
             self.hamburger_menu.addAction(action)
 

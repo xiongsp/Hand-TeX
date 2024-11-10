@@ -42,7 +42,7 @@ class IssueReporter(Qw.QDialog, Ui_IssueReporter):
 
         self.label_log_path.setText(str(ut.get_log_path()))
         self.label_name_hidden.setText(
-            "Note: Name {name} and api keys were hidden".format(name=lp.get_username())
+            'Note: Name "{name}" was hidden'.format(name=lp.get_username())
         )
 
     def load_logs(self) -> None:

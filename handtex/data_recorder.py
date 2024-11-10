@@ -120,11 +120,9 @@ class DataRecorder:
         :return: The last submitted drawing.
         """
         if self.current_data:
-            logger.warning(len(self.current_data))
             drawing = self.current_data.pop()
             self.frequencies[drawing.key] -= 1
             logger.info(f"Undid submission for symbol {drawing.key}.")
-            logger.warning(len(self.current_data))
             self.has_submissions.emit(bool(self.current_data))
             return drawing
 

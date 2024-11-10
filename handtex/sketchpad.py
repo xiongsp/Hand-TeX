@@ -1,17 +1,12 @@
-import PySide6.QtWidgets as Qw
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
-import PySide6.QtSvgWidgets as QtSvg
+import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Signal
-
 from loguru import logger
 from rdp import rdp
 
-from handtex.constants import CANVAS_SIZE
-import handtex.gui_utils as gu
 import handtex.structures as st
-import handtex.utils as ut
-from structures import SymbolDrawing
+from handtex.constants import CANVAS_SIZE
 
 
 class Sketchpad(Qw.QGraphicsView):

@@ -24,6 +24,7 @@ class Config:
         :param path: [Optional] The path to write the profile to.
         :return: True if the profile was written successfully, False otherwise.
         """
+        logger.debug(f"Saving config")
 
         if path is None:
             path = ut.get_config_path()
@@ -78,7 +79,6 @@ class Config:
 def load_config(conf_path: Path, config_factory: Callable[[], Any] = Config) -> tuple[
     Config,
     list[ut.RecoverableParseException],
-    list[ut.ParseError],
     list[ut.CriticalParseError],
 ]:
     """
@@ -88,13 +88,12 @@ def load_config(conf_path: Path, config_factory: Callable[[], Any] = Config) -> 
 
     :param conf_path: Path to the configuration file.
     :param config_factory: [Optional] Factory function to create a new config object.
-    :return: The configuration and 3 lists of errors.
+    :return: The configuration and 2 lists of errors.
     """
 
     config = config_factory()
 
     recoverable_exceptions: list[ut.RecoverableParseException] = []
-    errors: list[ut.ParseError] = []
     critical_errors: list[ut.CriticalParseError] = []
 
     try:
@@ -102,6 +101,8 @@ def load_config(conf_path: Path, config_factory: Callable[[], Any] = Config) -> 
             # Load the default config, then update it with the values from the config file.
             # This way, missing values will be filled in with the default values.
             json_data = json.load(f)
+
+            recoverable_exceptions = ut.load_dict_to_attrs_safely(config, json_data)
 
     except OSError as e:
         logger.exception(f"Failed to read config file {conf_path}")
@@ -122,4 +123,4 @@ def load_config(conf_path: Path, config_factory: Callable[[], Any] = Config) -> 
     if critical_errors:
         config = config_factory()
 
-    return config, recoverable_exceptions, errors, critical_errors
+    return config, recoverable_exceptions, critical_errors

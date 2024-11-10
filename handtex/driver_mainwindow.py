@@ -31,6 +31,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     hamburger_menu: Qw.QMenu
     theming_menu: Qw.QMenu
+    stroke_width_menu: Qw.QMenu
 
     default_palette: Qg.QPalette
     default_style: str
@@ -56,6 +57,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.setWindowIcon(Qg.QIcon(":/icons/logo.png"))
         self.debug = debug
 
+        self.train = train
+        self.submission_count = 1
+        self.current_symbol = None
+
         self.theme_is_dark = ut.Shared[bool](True)
 
         self.hamburger_menu = Qw.QMenu()
@@ -72,11 +77,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.symbols = ut.load_symbols()
 
-        self.train = train
-        self.submission_count = 1
         if self.train:
             logger.info("Training mode active.")
-            self.current_symbol = None
             self.stackedWidget.setCurrentIndex(1)
             self.data_recorder = dr.DataRecorder(self.symbols)
 
@@ -138,6 +140,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         sys.excepthook = exception_handler
 
+        self.sketchpad.set_pen_width(self.config.stroke_width)
+
         if self.train:
             self.get_next_symbol()
 
@@ -160,6 +164,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         :return: The loaded or default config.
         """
+        logger.debug("Loading config.")
         # Check if there is a config at all.
         config_path = ut.get_config_path()
         if not config_path.exists():
@@ -212,12 +217,35 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         )
         themes = [("", "System")]
         themes.extend(ut.get_available_themes())
+        theme_action_group = Qg.QActionGroup(self)
+        theme_action_group.setExclusive(True)
         for theme, name in themes:
             action = Qg.QAction(name, self)
             action.setCheckable(True)
+            theme_action_group.addAction(action)
             action.theme = theme
             action.triggered.connect(partial(self.set_theme, theme))
             self.theming_menu.addAction(action)
+
+        # Add stroke width selection.
+        self.stroke_width_menu = self.hamburger_menu.addMenu(
+            Qg.QIcon.fromTheme("edit-line-width"), "Line Thickness"
+        )
+        supported_stroke_widths = [2, 4, 6, 8, 12, 16, 20]
+        stroke_action_group = Qg.QActionGroup(self)
+        stroke_action_group.setExclusive(True)
+        for width in supported_stroke_widths:
+            action = Qg.QAction(str(width), self)
+            action.setCheckable(True)
+            stroke_action_group.addAction(action)
+            action.width = width
+            action.triggered.connect(partial(self.change_pen_width, width))
+            self.stroke_width_menu.addAction(action)
+
+        self.reload_stroke_width_icons()
+        self.theme_is_dark_changed.connect(self.reload_stroke_width_icons)
+        self.theme_is_dark_changed.connect(self.sketchpad.recolor_pen)
+        self.theme_is_dark_changed.connect(self.load_training_symbol_data)
 
         if self.debug:
             # Add an intentional crash button.
@@ -225,6 +253,22 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             action = Qg.QAction(Qg.QIcon.fromTheme("tools-report-bug"), "Simulate crash", self)
             action.triggered.connect(self.simulate_crash)
             self.hamburger_menu.addAction(action)
+
+    def change_pen_width(self, width: int) -> None:
+        """
+        Change the pen width.
+        """
+        self.sketchpad.set_pen_width(width)
+        self.config.stroke_width = width
+        self.config.save()
+
+    def reload_stroke_width_icons(self) -> None:
+        """
+        Reload the stroke width icons.
+        """
+        theme = "dark" if self.theme_is_dark.get() else "light"
+        for action in self.stroke_width_menu.actions():
+            action.setIcon(gu.load_custom_icon(f"stroke{action.width}", theme))  # noqa
 
     def open_log_viewer(self) -> None:
         logger.debug("Opening issue reporter.")
@@ -279,7 +323,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         background_color = palette.color(Qg.QPalette.Window)
         self.theme_is_dark.set(background_color.lightness() < 128)
         logger.info(f"Theme is dark: {self.theme_is_dark.get()}")
-        self.theme_is_dark_changed.emit(self.theme_is_dark)
 
         # Also just setting the icon theme here, since with qt6 even breeze dark is having issues.
         # Update the fallback icon theme accordingly.
@@ -297,7 +340,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             action.setChecked(action.theme == theme)
 
         self.update()
-        event = Qc.QEvent(Qc.QEvent.PaletteChange)
+
+        # Delay it with a timer to wait for the palette to propagate.
+        Qc.QTimer.singleShot(0, partial(self.theme_is_dark_changed.emit, self.theme_is_dark))
 
         # Update the config it necessary.
         prev_value = self.config.gui_theme
@@ -344,18 +389,24 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     def set_training_symbol(self, new_symbol_key: str) -> None:
         self.current_symbol = self.symbols[new_symbol_key]
+        self.load_training_symbol_data()
+        self.sketchpad.clear()
 
+    def load_training_symbol_data(self) -> None:
+        if self.current_symbol is None:
+            return
         self.label_training_name.setText(self.current_symbol.command)
-        self.label_symbol_rarity.setText(str(self.data_recorder.get_symbol_rarity(new_symbol_key)))
+        self.label_symbol_rarity.setText(
+            str(self.data_recorder.get_symbol_rarity(self.current_symbol.key))
+        )
         self.label_symbol_samples.setText(
-            str(self.data_recorder.get_symbol_sample_count(new_symbol_key))
+            str(self.data_recorder.get_symbol_sample_count(self.current_symbol.key))
         )
 
         hex_color = self.palette().color(Qg.QPalette.Text).name()
         self.widget_training_symbol.load(ut.load_symbol_svg(self.current_symbol, hex_color))
         self.widget_training_symbol.renderer().setAspectRatioMode(Qc.Qt.KeepAspectRatio)
         self.widget_training_symbol.setFixedSize(200, 200)
-        self.sketchpad.clear()
 
     def previous_symbol(self) -> None:
         """

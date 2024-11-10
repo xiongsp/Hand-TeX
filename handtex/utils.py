@@ -299,16 +299,6 @@ class RecoverableParseException(Exception):
     pass
 
 
-class ParseError(Exception):
-    """
-    This serves to wrap any errors that occur during parsing,
-    so that additional info about the file can be included.
-    Errors imply a failure to parse major parts of the file.
-    """
-
-    pass
-
-
 class CriticalParseError(Exception):
     """
     This serves to wrap any critical errors that occur during parsing,

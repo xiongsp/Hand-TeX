@@ -68,6 +68,15 @@ class Sketchpad(Qw.QGraphicsView):
         """
         event.ignore()
 
+    def recolor_pen(self) -> None:
+        """
+        Recolor the pen to match the text color.
+        """
+        pen_color = self.palette().color(Qg.QPalette.Text)
+        self.pen.setColor(pen_color)
+        for item in self.stroke_items:
+            item.setPen(self.pen)
+
     def mousePressEvent(self, event: Qg.QMouseEvent) -> None:
         if event.button() == Qc.Qt.LeftButton:
             # Start a new stroke.
@@ -173,6 +182,15 @@ class Sketchpad(Qw.QGraphicsView):
         clean_strokes = scale_and_center(clean_strokes)
         clean_strokes = [simplify_stroke(stroke) for stroke in clean_strokes]
         return clean_strokes
+
+    def set_pen_width(self, width: int) -> None:
+        """
+        Set the pen width.
+        """
+        self.pen_width = width
+        self.pen.setWidth(width)
+        for item in self.stroke_items:
+            item.setPen(self.pen)
 
 
 def purge_duplicate_strokes(strokes: list[list[tuple[int, int]]]) -> list[list[tuple[int, int]]]:

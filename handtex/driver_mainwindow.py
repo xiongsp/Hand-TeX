@@ -372,18 +372,31 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Get the next symbol to draw.
         """
-        bias = (
-            self.horizontalSlider_selection_bias.value()
-            / self.horizontalSlider_selection_bias.maximum()
-        )
-        new_symbol_key = self.data_recorder.select_symbol(bias)
-        while self.current_symbol is not None and new_symbol_key == self.current_symbol.key:
+        # Check if the user specified a specific symbol.
+        requested_symbol = self.lineEdit_train_symbol.text().strip()
+        if requested_symbol:
+            if requested_symbol in self.symbols:
+                self.set_training_symbol(requested_symbol)
+            else:
+                gu.show_warning(
+                    self,
+                    "Invalid Symbol",
+                    f"The symbol '{requested_symbol}' is not a valid symbol."
+                    f"\n\nExample of a valid symbol key: {list(self.symbols.keys())[0]}",
+                )
+
+        else:
+            bias = (
+                self.horizontalSlider_selection_bias.value()
+                / self.horizontalSlider_selection_bias.maximum()
+            )
             new_symbol_key = self.data_recorder.select_symbol(bias)
+            while self.current_symbol is not None and new_symbol_key == self.current_symbol.key:
+                new_symbol_key = self.data_recorder.select_symbol(bias)
+
+            self.set_training_symbol(new_symbol_key)
 
         self.submission_count = 1
-
-        self.set_training_symbol(new_symbol_key)
-
         max_submissions = self.spinBox_max_submissions.value()
         self.label_submission_number.setText(f"{self.submission_count}/{max_submissions}")
 

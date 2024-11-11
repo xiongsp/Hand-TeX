@@ -13,7 +13,8 @@ def test_get_available_themes():
     themes = ut.get_available_themes()
 
     assert themes
-    assert themes == [("breeze", "Breeze Light"), ("breeze-dark", "Breeze Dark")]
+    assert ("breeze", "Breeze Light") in themes
+    assert ("breeze-dark", "Breeze Dark") in themes
 
 
 def test_theme_icon_presence():

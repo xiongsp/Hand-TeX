@@ -65,6 +65,7 @@ def main() -> None:
     # later on, even when switching the theme again.
     if platform.system() != "Linux" or ut.running_in_flatpak():
         Qg.QIcon.setThemeName("breeze")
+        Qg.QIcon.setThemeSearchPaths([":/icons", theme_icons])
 
     try:
         window = MainWindow(args.debug, args.train)

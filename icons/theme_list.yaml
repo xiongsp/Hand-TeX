@@ -8,6 +8,7 @@ Files:
       - application-menu
       - edit-clear
       - edit-undo
+      - edit-redo
       - dialog-ok
       - media-skip-forward
       - games-config-theme

@@ -406,7 +406,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.set_training_symbol(new_symbol_key)
 
         self.submission_count = 1
-        max_submissions = self.spinBox_max_submissions.value()
         self.update_submission_count()
 
     def set_training_symbol(self, new_symbol_key: str) -> None:

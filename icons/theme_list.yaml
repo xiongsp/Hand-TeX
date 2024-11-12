@@ -14,6 +14,10 @@ Files:
       - games-config-theme
       - tools-report-bug
       - edit-line-width
+      - edit-copy
+      - internet-services
+      - process-stop
+      - window-close
   status:
     16:
       - dialog-warning

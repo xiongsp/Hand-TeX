@@ -1,10 +1,12 @@
 import platform
 import sys
 from functools import partial
+import time
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
+import PySide6.QtSvgWidgets as Qsw
 from PySide6.QtCore import Signal
 from loguru import logger
 
@@ -17,6 +19,10 @@ import handtex.state_saver as ss
 import handtex.data_recorder as dr
 from handtex import __program__, __version__
 from handtex.ui_generated_files.ui_Mainwindow import Ui_MainWindow
+
+import training.image_gen as ig
+import training.train as trn
+import training.inference as inf
 
 
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
@@ -37,6 +43,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     theme_is_dark_changed = Signal(bool)  # When true, the new theme is dark.
 
     state_saver: ss.StateSaver
+
+    # Detection:
+    model: trn.CNN
+    label_decoder: dict[int, str]
 
     # Training:
     train: bool
@@ -81,6 +91,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.stackedWidget.setCurrentIndex(1)
             self.data_recorder = dr.DataRecorder(self.symbols, self.has_submission)
             self.data_recorder.has_submissions.connect(self.pushButton_undo_submit.setEnabled)
+        else:
+            self.sketchpad.new_drawing.connect(self.detect_symbol)
+            self.model, self.label_decoder = inf.load_model_and_decoder(
+                "../training/cnn_model.pt", 1, trn.num_classes, "../training/encodings.txt"
+            )
 
         self.state_saver = ss.StateSaver("error_dialog")
         self.init_state_saver()
@@ -375,6 +390,95 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         raise Exception("This is a simulated crash.")
 
+    # =========================================== Detection ==========================================
+
+    def detect_symbol(self) -> None:
+        # Get the sketch, tensorize it, and predict the symbol.
+        start = time.time()
+        strokes, _, _, _ = self.sketchpad.get_clean_strokes()
+        logger.debug(f"Gathering strokes took {(time.time() - start) * 1000:.2f}ms")
+        tensorized = ig.tensorize_strokes(strokes, trn.image_size)
+        prediction = inf.predict(tensorized, self.model, self.label_decoder)
+        self.show_predictions(prediction)
+        logger.debug(f"Prediction update took {(time.time() - start) * 1000:.2f}ms")
+
+    def show_predictions(self, predictions: list[tuple[str, float]]) -> None:
+        """
+        Show the predictions in the result box.
+        """
+
+        # Empty out the widget containing the predictions.
+        # self.widget_predictions.layout().deleteLater()
+        # self.widget_predictions.setLayout(Qw.QVBoxLayout())
+        def clear_layout(layout):
+            while layout.count():
+                item = layout.takeAt(0)
+                if widget := item.widget():
+                    widget.deleteLater()  # If it's a widget, delete it
+                elif sublayout := item.layout():
+                    clear_layout(sublayout)  # If it's a layout, clear it recursively
+                # Otherwise, it's a spacer item, no special handling needed
+                del item  # Delete the layout item itself
+
+        clear_layout(self.widget_predictions.layout())
+
+        # print("=========================================")
+        # for symbol, confidence in predictions:
+        #     print(f"{symbol}: {confidence:.2f}")
+        hex_color = self.palette().color(Qg.QPalette.Text).name()
+        for symbol, confidence in predictions:
+            # Craft a list item with the symbol and confidence.
+            # This consists of a horizontal layout with an svg widget on the left,
+            # and a vertical stack of labels on the right:
+            # \usepackage{ thingy }    # if there is a package
+            # \command
+            # mode (confidence)
+            outer_layout = Qw.QHBoxLayout()
+            svg_widget = Qsw.QSvgWidget()
+            svg_widget.load(ut.load_symbol_svg(self.symbols[symbol], hex_color))
+            svg_widget.renderer().setAspectRatioMode(Qc.Qt.KeepAspectRatio)
+            svg_widget.setFixedSize(64, 64)
+            outer_layout.addWidget(svg_widget)
+
+            inner_layout = Qw.QVBoxLayout()
+            symbol_data = self.symbols[symbol]
+            label_policy = Qw.QSizePolicy(Qw.QSizePolicy.Preferred, Qw.QSizePolicy.Minimum)
+            if not symbol_data.package_is_default():
+                package_label = Qw.QLabel(f"\\usepackage{{ {symbol_data.package} }}")
+                package_label.setSizePolicy(label_policy)
+                inner_layout.addWidget(package_label)
+            command_label = Qw.QLabel(symbol_data.command)
+            # Make this one 1.5 times bigger.
+            font = command_label.font()
+            font.setPointSize(int(font.pointSize() * 1.5))
+            font.setBold(True)
+            command_label.setSizePolicy(label_policy)
+            command_label.setFont(font)
+            inner_layout.addWidget(command_label)
+            mode_str: str
+            if symbol_data.mathmode and not symbol_data.textmode:
+                mode_str = "Mathmode"
+            elif symbol_data.textmode and not symbol_data.mathmode:
+                mode_str = "Textmode"
+            else:
+                mode_str = "Mathmode & Textmode"
+            mode_label = Qw.QLabel(f"{mode_str} (Match: {confidence:.1%})")
+            font = mode_label.font()
+            font.setPointSize(int(font.pointSize() * 0.9))
+            mode_label.setFont(font)
+            mode_label.setSizePolicy(label_policy)
+            inner_layout.setSpacing(0)
+            inner_layout.setContentsMargins(0, 0, 0, 0)
+            inner_layout.addWidget(mode_label)
+            # Squish the inner layout together vertically.
+            # Do this by making them not expand vertically, with a center alignment vertically.
+
+            outer_layout.addLayout(inner_layout)
+            # Add the item to the list.
+            self.widget_predictions.layout().addLayout(outer_layout)
+        # Slap a spacer on the end to push the items to the top.
+        self.widget_predictions.layout().addStretch()
+
     # =========================================== Training ===========================================
 
     def get_next_symbol(self) -> None:
@@ -445,7 +549,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Submit the drawing for training.
         """
         self.data_recorder.submit_drawing(
-            st.SymbolDrawing(self.current_symbol.key, *self.sketchpad.clean_strokes())
+            st.SymbolDrawing(self.current_symbol.key, *self.sketchpad.get_clean_strokes())
         )
         self.sketchpad.clear()
         self.submission_count += 1

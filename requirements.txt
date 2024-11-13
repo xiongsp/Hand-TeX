@@ -7,4 +7,3 @@ PyYAML
 psutil
 numpy
 rdp
-chardet

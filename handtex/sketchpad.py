@@ -25,6 +25,7 @@ class Sketchpad(Qw.QGraphicsView):
 
     can_undo = Signal(bool)
     can_redo = Signal(bool)
+    new_drawing = Signal()
 
     pen_width: int
 
@@ -124,6 +125,7 @@ class Sketchpad(Qw.QGraphicsView):
             self.current_stroke = None
             self.current_path_item = None
             event.accept()
+            self.new_drawing.emit()
         else:
             event.ignore()
 
@@ -154,6 +156,8 @@ class Sketchpad(Qw.QGraphicsView):
             self.redo_items.append(item)
         self.can_undo.emit(bool(self.strokes))
         self.can_redo.emit(bool(self.redo_strokes))
+        if self.strokes:
+            self.new_drawing.emit()
 
     def redo(self):
         """
@@ -165,10 +169,11 @@ class Sketchpad(Qw.QGraphicsView):
             self.strokes.append(stroke)
             self.stroke_items.append(item)
             self.scene().addItem(item)
+            self.new_drawing.emit()
         self.can_undo.emit(bool(self.strokes))
         self.can_redo.emit(bool(self.redo_strokes))
 
-    def clean_strokes(self) -> tuple[list[list[tuple[int, int]]], float, int, int]:
+    def get_clean_strokes(self) -> tuple[list[list[tuple[int, int]]], float, int, int]:
         """
         Normalize the coordinates to a 0-CANVAS_SIZE space.
         Apply the RDP algorithm to limit the number of points in each stroke.

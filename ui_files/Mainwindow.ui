@@ -189,7 +189,7 @@
         <item>
          <widget class="QStackedWidget" name="stackedWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="page_classify">
            <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -206,7 +206,26 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="CListWidget" name="listWidget"/>
+             <widget class="QScrollArea" name="scrollArea_predictions">
+              <property name="widgetResizable">
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="widget_predictions">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>521</width>
+                 <height>562</height>
+                </rect>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_7">
+                <property name="spacing">
+                 <number>12</number>
+                </property>
+               </layout>
+              </widget>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -464,11 +483,6 @@
   </widget>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>CListWidget</class>
-   <extends>QListWidget</extends>
-   <header>handtex.CustomQ.CListWidget</header>
-  </customwidget>
   <customwidget>
    <class>QSvgWidget</class>
    <extends>QWidget</extends>

@@ -16,7 +16,7 @@ class Symbol:
         return self.key
 
     @classmethod
-    def from_dict(cls, symbol):
+    def from_dict(cls, symbol) -> "Symbol":
         if "package" not in symbol:
             symbol["package"] = "latex2e"
         if "fontenc" not in symbol:
@@ -24,11 +24,14 @@ class Symbol:
         return cls(**symbol)
 
     @classmethod
-    def from_json(cls, json_file):
+    def from_json(cls, json_file) -> list["Symbol"]:
         with open(json_file, "r") as f:
             symbols = json.load(f)
 
         return [cls.from_dict(symbol) for symbol in symbols]
+
+    def package_is_default(self) -> bool:
+        return self.package == "latex2e"
 
 
 @frozen

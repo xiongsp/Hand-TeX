@@ -17,12 +17,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtSvgWidgets import QSvgWidget
 from PySide6.QtWidgets import (QApplication, QFormLayout, QFrame, QGraphicsView,
-    QHBoxLayout, QLabel, QLineEdit, QListWidgetItem,
-    QMainWindow, QPushButton, QSizePolicy, QSlider,
+    QHBoxLayout, QLabel, QLineEdit, QMainWindow,
+    QPushButton, QScrollArea, QSizePolicy, QSlider,
     QSpacerItem, QSpinBox, QSplitter, QStackedWidget,
     QVBoxLayout, QWidget)
 
-from handtex.CustomQ.CListWidget import CListWidget
 from handtex.sketchpad import Sketchpad
 
 class Ui_MainWindow(object):
@@ -149,10 +148,18 @@ class Ui_MainWindow(object):
         self.verticalLayout_4 = QVBoxLayout(self.page_classify)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.listWidget = CListWidget(self.page_classify)
-        self.listWidget.setObjectName(u"listWidget")
+        self.scrollArea_predictions = QScrollArea(self.page_classify)
+        self.scrollArea_predictions.setObjectName(u"scrollArea_predictions")
+        self.scrollArea_predictions.setWidgetResizable(True)
+        self.widget_predictions = QWidget()
+        self.widget_predictions.setObjectName(u"widget_predictions")
+        self.widget_predictions.setGeometry(QRect(0, 0, 521, 562))
+        self.verticalLayout_7 = QVBoxLayout(self.widget_predictions)
+        self.verticalLayout_7.setSpacing(12)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.scrollArea_predictions.setWidget(self.widget_predictions)
 
-        self.verticalLayout_4.addWidget(self.listWidget)
+        self.verticalLayout_4.addWidget(self.scrollArea_predictions)
 
         self.stackedWidget.addWidget(self.page_classify)
         self.page_train = QWidget()
@@ -341,7 +348,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

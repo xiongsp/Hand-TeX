@@ -1,0 +1,47 @@
+latex2e-OT1-_textcopyright latex2e-OT1-_copyright textcomp-OT1-_textcopyright
+latex2e-OT1-_P latex2e-OT1-_mathparagraph
+gensymb-OT1-_ohm latex2e-OT1-_Omega
+latex2e-OT1-_} latex2e-OT1-_textbraceright
+latex2e-T1-_DJ latex2e-T1-_DH
+latex2e-OT1-_& cmll-OT1-_with
+textcomp-OT1-_textregistered latex2e-OT1-_textregistered
+latex2e-OT1-_dots amsmath-OT1-_dotsc amsmath-OT1-_dotso latex2e-OT1-_textellipsis latex2e-OT1-_ldots latex2e-OT1-_mathellipsis
+wasysym-OT1-_RHD wasysym-OT1-_RIGHTarrow
+latex2e-OT1-_textendash latex2e-OT1-_---
+latex2e-OT1-_setminus latex2e-OT1-_backslash latex2e-OT1-_textbackslash
+latex2e-OT1-_dagger latex2e-OT1-_dag
+latex2e-OT1-_perp latex2e-OT1-_bot
+wasysym-OT1-_fullmoon wasysym-OT1-_ocircle
+latex2e-OT1-_textsection textcomp-OT1-_textsection
+latex2e-OT1-_ddagger latex2e-OT1-_ddag
+latex2e-OT1-_| latex2e-OT1-_parallel
+latex2e-OT1-__ latex2e-OT1-_mathunderscore latex2e-OT1-_textunderscore
+wasysym-OT1-_vernal wasysym-OT1-_aries
+amsmath-OT1-_dotsb latex2e-OT1-_cdots amsmath-OT1-_dotsm
+wasysym-OT1-_astrosun latex2e-OT1-_odot
+latex2e-OT1-_textparagraph textcomp-OT1-_textparagraph
+textcomp-OT1-_textdollar latex2e-OT1-_textdollar
+latex2e-OT1-_textordmasculine textcomp-OT1-_textordmasculine
+latex2e-OT1-_mid latex2e-OT1-| latex2e-OT1-_textbar
+textcomp-OT1-_textdblhyphen textcomp-OT1-_textdblhyphenchar
+wasysym-OT1-_LEFTarrow wasysym-OT1-_LHD
+textcomp-OT1-_textordfeminine latex2e-OT1-_textordfeminine
+latex2e-OT1-_textsterling textcomp-OT1-_textsterling
+latex2e-OT1-_S latex2e-OT1-_mathsection
+latex2e-OT1-_bigtriangleup latex2e-OT1-_triangle
+latex2e-OT1-_textemdash latex2e-OT1-_----
+wasysym-OT1-_leo wasysym-OT1-_ascnode
+textcomp-OT1-_textasteriskcentered latex2e-OT1-_textasteriskcentered
+latex2e-OT1-_mathdollar latex2e-OT1-_$
+upgreek-OT1-_upsigma upgreek-OT1-_upvarsigma
+latex2e-OT1-_textperiodcentered textcomp-OT1-_textperiodcentered
+latex2e-OT1-_texttrademark textcomp-OT1-_texttrademark
+latex2e-OT1-!` latex2e-OT1-_textexclamdown
+latex2e-OT1-_pounds latex2e-OT1-_mathsterling
+latex2e-OT1-_textbraceleft latex2e-OT1-_{
+latex2e-OT1-_textdagger textcomp-OT1-_textdagger
+latex2e-OT1-_textdaggerdbl textcomp-OT1-_textdaggerdbl
+latex2e-OT1-_cdotp latex2e-OT1-_cdot
+wasysym-OT1-_clock latex2e-OT1-_o
+textcomp-OT1-_textbullet latex2e-OT1-_textbullet
+upgreek-OT1-_upvarrho upgreek-OT1-_uprho

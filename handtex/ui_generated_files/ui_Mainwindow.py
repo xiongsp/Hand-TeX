@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(900, 610)
+        MainWindow.resize(900, 606)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_3 = QVBoxLayout(self.centralwidget)
@@ -124,16 +124,24 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
 
+        self.pushButton_symbol_list = QPushButton(self.layoutWidget1)
+        self.pushButton_symbol_list.setObjectName(u"pushButton_symbol_list")
+        icon3 = QIcon(QIcon.fromTheme(u"search"))
+        self.pushButton_symbol_list.setIcon(icon3)
+        self.pushButton_symbol_list.setFlat(True)
+
+        self.horizontalLayout_2.addWidget(self.pushButton_symbol_list)
+
         self.pushButton_menu = QPushButton(self.layoutWidget1)
         self.pushButton_menu.setObjectName(u"pushButton_menu")
-        icon3 = QIcon()
+        icon4 = QIcon()
         iconThemeName = u"application-menu"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon3 = QIcon.fromTheme(iconThemeName)
+            icon4 = QIcon.fromTheme(iconThemeName)
         else:
-            icon3.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon4.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.pushButton_menu.setIcon(icon3)
+        self.pushButton_menu.setIcon(icon4)
         self.pushButton_menu.setFlat(True)
 
         self.horizontalLayout_2.addWidget(self.pushButton_menu)
@@ -153,7 +161,7 @@ class Ui_MainWindow(object):
         self.scrollArea_predictions.setWidgetResizable(True)
         self.widget_predictions = QWidget()
         self.widget_predictions.setObjectName(u"widget_predictions")
-        self.widget_predictions.setGeometry(QRect(0, 0, 521, 562))
+        self.widget_predictions.setGeometry(QRect(0, 0, 521, 556))
         self.verticalLayout_7 = QVBoxLayout(self.widget_predictions)
         self.verticalLayout_7.setSpacing(12)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
@@ -299,14 +307,14 @@ class Ui_MainWindow(object):
 
         self.pushButton_submit = QPushButton(self.page_train)
         self.pushButton_submit.setObjectName(u"pushButton_submit")
-        icon4 = QIcon()
+        icon5 = QIcon()
         iconThemeName = u"dialog-ok"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon4 = QIcon.fromTheme(iconThemeName)
+            icon5 = QIcon.fromTheme(iconThemeName)
         else:
-            icon4.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon5.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.pushButton_submit.setIcon(icon4)
+        self.pushButton_submit.setIcon(icon5)
 
         self.verticalLayout_5.addWidget(self.pushButton_submit)
 
@@ -315,14 +323,14 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setContentsMargins(-1, 24, -1, -1)
         self.pushButton_skip = QPushButton(self.page_train)
         self.pushButton_skip.setObjectName(u"pushButton_skip")
-        icon5 = QIcon()
+        icon6 = QIcon()
         iconThemeName = u"media-skip-forward"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon5 = QIcon.fromTheme(iconThemeName)
+            icon6 = QIcon.fromTheme(iconThemeName)
         else:
-            icon5.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon6.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.pushButton_skip.setIcon(icon5)
+        self.pushButton_skip.setIcon(icon6)
 
         self.horizontalLayout_4.addWidget(self.pushButton_skip)
 
@@ -365,6 +373,7 @@ class Ui_MainWindow(object):
         self.pushButton_redo.setToolTip(QCoreApplication.translate("MainWindow", u"Redo", None))
 #endif // QT_CONFIG(tooltip)
         self.pushButton_redo.setText(QCoreApplication.translate("MainWindow", u"Redo", None))
+        self.pushButton_symbol_list.setText(QCoreApplication.translate("MainWindow", u"Symbol List", None))
         self.pushButton_menu.setText("")
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Samples:", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Rarity:", None))

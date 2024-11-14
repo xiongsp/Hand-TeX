@@ -18,6 +18,7 @@ Files:
       - internet-services
       - process-stop
       - window-close
+      - search
   status:
     16:
       - dialog-warning

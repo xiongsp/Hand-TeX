@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>900</width>
-    <height>610</height>
+    <height>606</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -171,6 +171,19 @@
            </spacer>
           </item>
           <item>
+           <widget class="QPushButton" name="pushButton_symbol_list">
+            <property name="text">
+             <string>Symbol List</string>
+            </property>
+            <property name="icon">
+             <iconset theme="search"/>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="pushButton_menu">
             <property name="text">
              <string/>
@@ -216,7 +229,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>521</width>
-                 <height>562</height>
+                 <height>556</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_7">

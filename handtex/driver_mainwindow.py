@@ -17,6 +17,7 @@ import handtex.issue_reporter_driver as ird
 import handtex.utils as ut
 import handtex.state_saver as ss
 import handtex.data_recorder as dr
+import handtex.symbol_list as sl
 from handtex import __program__, __version__
 from handtex.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 
@@ -55,6 +56,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     submission_count: int
     has_submission = Signal(bool)
 
+    # Symbol list:
+    symbol_list: sl.SymbolList | None
+
+    # Lookalikes:
+    identical_symbols: dict[str, list[str]]
+    similar_symbols: dict[str, list[str]]
+
     def __init__(
         self,
         debug: bool,
@@ -69,6 +77,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.train = train
         self.submission_count = 1
         self.current_symbol = None
+
+        self.symbol_list = None
 
         self.config = self.load_config()
         self.config.pretty_log()
@@ -85,6 +95,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.load_config_theme()
 
         self.symbols = ut.load_symbols()
+        self.identical_symbols = ut.load_identical_symbol_metadata()
+        self.similar_symbols = ut.load_similar_symbol_metadata()
 
         if self.train:
             logger.info("Training mode active.")
@@ -94,10 +106,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         else:
             self.sketchpad.new_drawing.connect(self.detect_symbol)
             self.model, self.label_decoder = inf.load_model_and_decoder(
-                "../training/cnn_model.pt", 1, trn.num_classes, "../training/encodings.txt"
+                "../training/cnn_model.pt", trn.num_classes, "../training/encodings.txt"
             )
 
-        self.state_saver = ss.StateSaver("error_dialog")
+        self.state_saver = ss.StateSaver("mainwindow")
         self.init_state_saver()
         self.state_saver.restore()
 
@@ -131,6 +143,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.pushButton_submit.clicked.connect(self.submit_training_drawing)
         self.pushButton_skip.clicked.connect(self.get_next_symbol)
         self.pushButton_undo_submit.clicked.connect(self.previous_symbol)
+
+        self.pushButton_symbol_list.clicked.connect(self.open_symbol_list)
 
     def init_state_saver(self) -> None:
         """
@@ -299,6 +313,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         issue_reporter = ird.IssueReporter(self)
         issue_reporter.exec()
 
+    def open_symbol_list(self) -> None:
+        """
+        Open the symbol list.
+        """
+        if self.symbol_list is None:
+            self.symbol_list = sl.SymbolList(
+                self.symbols, self.identical_symbols, self.similar_symbols
+            )
+        self.symbol_list.show()
+
     # =========================================== Theming ===========================================
 
     def save_default_palette(self) -> None:
@@ -455,14 +479,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             command_label.setSizePolicy(label_policy)
             command_label.setFont(font)
             inner_layout.addWidget(command_label)
-            mode_str: str
-            if symbol_data.mathmode and not symbol_data.textmode:
-                mode_str = "Mathmode"
-            elif symbol_data.textmode and not symbol_data.mathmode:
-                mode_str = "Textmode"
-            else:
-                mode_str = "Mathmode & Textmode"
-            mode_label = Qw.QLabel(f"{mode_str} (Match: {confidence:.1%})")
+            mode_label = Qw.QLabel(f"{symbol_data.mode_str()} (Match: {confidence:.1%})")
             font = mode_label.font()
             font.setPointSize(int(font.pointSize() * 0.9))
             mode_label.setFont(font)

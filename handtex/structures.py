@@ -33,6 +33,17 @@ class Symbol:
     def package_is_default(self) -> bool:
         return self.package == "latex2e"
 
+    def fontenc_is_default(self) -> bool:
+        return self.fontenc == "OT1"
+
+    def mode_str(self) -> str:
+        if self.mathmode and not self.textmode:
+            return "Mathmode"
+        elif self.textmode and not self.mathmode:
+            return "Textmode"
+        else:
+            return "Mathmode & Textmode"
+
 
 @frozen
 class SymbolDrawing:

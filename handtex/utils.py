@@ -21,6 +21,7 @@ import handtex.structures as st
 from handtex import __program__, __version__
 from handtex.data import color_themes
 from handtex.data import symbols
+from handtex.data import symbol_metadata
 
 
 T = TypeVar("T")
@@ -397,6 +398,51 @@ def load_symbol_svg(symbol: st.Symbol, fill_color: str = "#000000") -> Qc.QByteA
     svg_data = svg_data.replace('fill="#000000"', f'fill="{fill_color}"')
 
     return Qc.QByteArray(svg_data.encode("utf-8"))
+
+
+def load_identical_symbol_metadata() -> dict[str, list[str]]:
+    """
+    Load the metadata for the identical symbols.
+    Identical means that the svg figure data is indistinguishable.
+
+    :return: A dictionary mapping symbol keys to lists of identical symbol keys.
+    """
+    return load_symbol_equivalence_metadata("identical*")
+
+
+def load_similar_symbol_metadata() -> dict[str, list[str]]:
+    """
+    Load the metadata for the similar symbols.
+    Similar means that the figure would be drawn the same way by hand.
+
+    :return: A dictionary mapping symbol keys to lists of similar symbol keys.
+    """
+    return load_symbol_equivalence_metadata("similar*")
+
+
+def load_symbol_equivalence_metadata(glob_pattern: str) -> dict[str, list[str]]:
+    """
+    Load the metadata for symbols.
+    File format: each line contains a space separated list of symbol keys.
+
+    :param glob_pattern: The glob pattern to match the metadata files.
+    :return: A dictionary mapping symbol keys to lists of symbol keys.
+    """
+    with resources.path(symbol_metadata, "") as metadata_dir:
+        metadata_dir = Path(metadata_dir)
+    files = list(metadata_dir.glob(glob_pattern))
+
+    symbol_map = {}
+    for file in files:
+        with file.open("r") as f:
+            for line in f:
+                similar_keys = line.strip().split()
+                for key in similar_keys:
+                    map_without_self = similar_keys.copy()
+                    map_without_self.remove(key)
+                    symbol_map[key] = map_without_self
+
+    return symbol_map
 
 
 def sys_virtual_memory_total() -> int:

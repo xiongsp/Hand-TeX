@@ -1,5 +1,4 @@
 latex2e-OT1-_textemdash latex2e-OT1-_mathunderscore latex2e-OT1-_textendash textcomp-OT1-_texttwelveudash latex2e-OT1-__ latex2e-OT1-_--- latex2e-OT1-_-- latex2e-OT1-_textunderscore latex2e-OT1-_---- textcomp-OT1-_textthreequartersemdash
-latex2e-OT1-_Omega gensymb-OT1-_ohm
 latex2e-OT1-_textregistered textcomp-OT1-_textregistered
 amsmath-OT1-_dotsi amsmath-OT1-_dotsb latex2e-OT1-_cdots amsmath-OT1-_dotsm latex2e-OT1-_ldots latex2e-OT1-_textellipsis amsmath-OT1-_dotso latex2e-OT1-_mathellipsis amsmath-OT1-_dotsc latex2e-OT1-_dots
 wasysym-OT1-_RIGHTarrow wasysym-OT1-_RHD

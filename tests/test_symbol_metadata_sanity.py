@@ -54,6 +54,7 @@ def test_similar_lists_disjunct() -> None:
     files = list(metadata_dir.glob("similar*"))
 
     # There cannot be the same key listed twice in the file.
+    global_keys = set()
     for file in files:
         # Just parse out all the keys with a regex.
         # A key is a string of 1 or more characters, no whitespace.
@@ -62,3 +63,10 @@ def test_similar_lists_disjunct() -> None:
         for key in key_set:
             keys.remove(key)
         assert not keys, f"File {file} contains duplicate keys: {keys}"
+
+        # The keys in this file must not be in the global set.
+        intersection = global_keys & key_set
+        assert (
+            not intersection
+        ), f"File {file} contains keys already in another file: {intersection}"
+        global_keys |= key_set

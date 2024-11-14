@@ -15,7 +15,7 @@ tipa-OT1-_textlambda latex2e-OT1-_lambda upgreek-OT1-_uplambda
 latex2e-OT1-_Lambda upgreek-OT1-_Uplambda
 latex2e-OT1-_mu upgreek-OT1-_upmu
 tipa-OT1-_textomega latex2e-OT1-_omega upgreek-OT1-_upomega
-latex2e-OT1-_Omega upgreek-OT1-_Upomega
+latex2e-OT1-_Omega upgreek-OT1-_Upomega gensymb-OT1-_ohm
 tipa-OT1-_textphi latex2e-OT1-_phi latex2e-OT1-_Phi upgreek-OT1-_Upphi
 latex2e-OT1-_pi upgreek-OT1-_uppi
 latex2e-OT1-_Pi upgreek-OT1-_Uppi

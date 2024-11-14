@@ -16,10 +16,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtSvgWidgets import QSvgWidget
-from PySide6.QtWidgets import (QApplication, QComboBox, QFormLayout, QHBoxLayout,
-    QLabel, QLineEdit, QListView, QListWidget,
-    QListWidgetItem, QSizePolicy, QSpacerItem, QSplitter,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFormLayout,
+    QHBoxLayout, QLabel, QLineEdit, QListView,
+    QListWidget, QListWidgetItem, QSizePolicy, QSpacerItem,
+    QSplitter, QVBoxLayout, QWidget)
 
 class Ui_SymbolList(object):
     def setupUi(self, SymbolList):
@@ -33,8 +33,6 @@ class Ui_SymbolList(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(6, -1, 6, -1)
         self.comboBox_search_mode = QComboBox(SymbolList)
-        self.comboBox_search_mode.addItem("")
-        self.comboBox_search_mode.addItem("")
         self.comboBox_search_mode.addItem("")
         self.comboBox_search_mode.addItem("")
         self.comboBox_search_mode.addItem("")
@@ -72,6 +70,8 @@ class Ui_SymbolList(object):
         self.splitter.setOrientation(Qt.Horizontal)
         self.listWidget = QListWidget(self.splitter)
         self.listWidget.setObjectName(u"listWidget")
+        self.listWidget.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
+        self.listWidget.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.listWidget.setMovement(QListView.Static)
         self.listWidget.setResizeMode(QListView.Adjust)
         self.listWidget.setLayoutMode(QListView.Batched)
@@ -113,44 +113,6 @@ class Ui_SymbolList(object):
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.label_command)
 
-        self.label_3 = QLabel(self.verticalLayoutWidget)
-        self.label_3.setObjectName(u"label_3")
-
-        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_3)
-
-        self.label_mode = QLabel(self.verticalLayoutWidget)
-        self.label_mode.setObjectName(u"label_mode")
-        self.label_mode.setText(u"<mode>")
-        self.label_mode.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
-
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.label_mode)
-
-        self.label_5 = QLabel(self.verticalLayoutWidget)
-        self.label_5.setObjectName(u"label_5")
-
-        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_5)
-
-        self.label_identical = QLabel(self.verticalLayoutWidget)
-        self.label_identical.setObjectName(u"label_identical")
-        self.label_identical.setText(u"<identical>")
-        self.label_identical.setWordWrap(True)
-        self.label_identical.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
-
-        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.label_identical)
-
-        self.label_7 = QLabel(self.verticalLayoutWidget)
-        self.label_7.setObjectName(u"label_7")
-
-        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.label_7)
-
-        self.label_similar = QLabel(self.verticalLayoutWidget)
-        self.label_similar.setObjectName(u"label_similar")
-        self.label_similar.setText(u"<similar>")
-        self.label_similar.setWordWrap(True)
-        self.label_similar.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
-
-        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.label_similar)
-
         self.label_package_label = QLabel(self.verticalLayoutWidget)
         self.label_package_label.setObjectName(u"label_package_label")
 
@@ -163,6 +125,18 @@ class Ui_SymbolList(object):
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.label_package)
 
+        self.label_3 = QLabel(self.verticalLayoutWidget)
+        self.label_3.setObjectName(u"label_3")
+
+        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_3)
+
+        self.label_mode = QLabel(self.verticalLayoutWidget)
+        self.label_mode.setObjectName(u"label_mode")
+        self.label_mode.setText(u"<mode>")
+        self.label_mode.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.label_mode)
+
         self.label_fontenc_label = QLabel(self.verticalLayoutWidget)
         self.label_fontenc_label.setObjectName(u"label_fontenc_label")
 
@@ -174,6 +148,19 @@ class Ui_SymbolList(object):
         self.label_fontenc.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.formLayout.setWidget(3, QFormLayout.FieldRole, self.label_fontenc)
+
+        self.label_7 = QLabel(self.verticalLayoutWidget)
+        self.label_7.setObjectName(u"label_7")
+
+        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_7)
+
+        self.label_similar = QLabel(self.verticalLayoutWidget)
+        self.label_similar.setObjectName(u"label_similar")
+        self.label_similar.setText(u"<similar>")
+        self.label_similar.setWordWrap(True)
+        self.label_similar.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+
+        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.label_similar)
 
 
         self.verticalLayout.addLayout(self.formLayout)
@@ -194,16 +181,14 @@ class Ui_SymbolList(object):
         SymbolList.setWindowTitle(QCoreApplication.translate("SymbolList", u"Symbol List", None))
         self.comboBox_search_mode.setItemText(0, QCoreApplication.translate("SymbolList", u"Command", None))
         self.comboBox_search_mode.setItemText(1, QCoreApplication.translate("SymbolList", u"Symbol ID", None))
-        self.comboBox_search_mode.setItemText(2, QCoreApplication.translate("SymbolList", u"Identical to", None))
-        self.comboBox_search_mode.setItemText(3, QCoreApplication.translate("SymbolList", u"Similar to", None))
-        self.comboBox_search_mode.setItemText(4, QCoreApplication.translate("SymbolList", u"Identical or Similar to", None))
+        self.comboBox_search_mode.setItemText(2, QCoreApplication.translate("SymbolList", u"Similar to", None))
 
+        self.lineEdit_search.setPlaceholderText(QCoreApplication.translate("SymbolList", u"Search...", None))
         self.label_11.setText(QCoreApplication.translate("SymbolList", u"Found:", None))
         self.label.setText(QCoreApplication.translate("SymbolList", u"Command:", None))
-        self.label_3.setText(QCoreApplication.translate("SymbolList", u"Mode:", None))
-        self.label_5.setText(QCoreApplication.translate("SymbolList", u"Identical Symbols:", None))
-        self.label_7.setText(QCoreApplication.translate("SymbolList", u"Similar Symbols:", None))
         self.label_package_label.setText(QCoreApplication.translate("SymbolList", u"Package:", None))
+        self.label_3.setText(QCoreApplication.translate("SymbolList", u"Mode:", None))
         self.label_fontenc_label.setText(QCoreApplication.translate("SymbolList", u"Font Encoding:", None))
+        self.label_7.setText(QCoreApplication.translate("SymbolList", u"Similar to:", None))
     # retranslateUi
 

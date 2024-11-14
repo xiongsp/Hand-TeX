@@ -88,7 +88,13 @@ class StateSaver:
                 elif isinstance(widget, Qw.QLineEdit):
                     widget.setText(self.settings.value(widget.objectName()))
                 elif isinstance(widget, Qw.QComboBox):
-                    widget.setCurrentIndex(int(self.settings.value(widget.objectName())))
+                    # Check that the index isn't out of bounds.
+                    if int(self.settings.value(widget.objectName())) < widget.count():
+                        widget.setCurrentIndex(int(self.settings.value(widget.objectName())))
+                    else:
+                        logger.warning(
+                            f"Index out of bounds for {widget.objectName()} in {self.name}"
+                        )
                 elif isinstance(widget, Qw.QSpinBox):
                     widget.setValue(int(self.settings.value(widget.objectName())))
                 elif isinstance(widget, Qw.QTableWidget):

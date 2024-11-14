@@ -400,33 +400,50 @@ def load_symbol_svg(symbol: st.Symbol, fill_color: str = "#000000") -> Qc.QByteA
     return Qc.QByteArray(svg_data.encode("utf-8"))
 
 
-def load_identical_symbol_metadata() -> dict[str, list[str]]:
+def load_similar_and_identical_symbol_metadata() -> dict[str, set[str]]:
+    """
+    Load all the metadata for similarity and identicality(TM) of symbols.
+    Then merge the two dictionaries into one.
+
+    :return: A dictionary mapping symbol keys to sets of similar and identical symbol keys.
+    """
+    similar_symbols = load_similar_symbol_metadata()
+    identical_symbols = load_identical_symbol_metadata()
+    for ik, iv in identical_symbols.items():
+        if ik in similar_symbols:
+            similar_symbols[ik].update(iv)
+        else:
+            similar_symbols[ik] = iv
+    return similar_symbols
+
+
+def load_identical_symbol_metadata() -> dict[str, set[str]]:
     """
     Load the metadata for the identical symbols.
     Identical means that the svg figure data is indistinguishable.
 
-    :return: A dictionary mapping symbol keys to lists of identical symbol keys.
+    :return: A dictionary mapping symbol keys to sets of identical symbol keys.
     """
     return load_symbol_equivalence_metadata("identical*")
 
 
-def load_similar_symbol_metadata() -> dict[str, list[str]]:
+def load_similar_symbol_metadata() -> dict[str, set[str]]:
     """
     Load the metadata for the similar symbols.
     Similar means that the figure would be drawn the same way by hand.
 
-    :return: A dictionary mapping symbol keys to lists of similar symbol keys.
+    :return: A dictionary mapping symbol keys to sets of similar symbol keys.
     """
     return load_symbol_equivalence_metadata("similar*")
 
 
-def load_symbol_equivalence_metadata(glob_pattern: str) -> dict[str, list[str]]:
+def load_symbol_equivalence_metadata(glob_pattern: str) -> dict[str, set[str]]:
     """
     Load the metadata for symbols.
     File format: each line contains a space separated list of symbol keys.
 
     :param glob_pattern: The glob pattern to match the metadata files.
-    :return: A dictionary mapping symbol keys to lists of symbol keys.
+    :return: A dictionary mapping symbol keys to sets of symbol keys.
     """
     with resources.path(symbol_metadata, "") as metadata_dir:
         metadata_dir = Path(metadata_dir)
@@ -438,9 +455,10 @@ def load_symbol_equivalence_metadata(glob_pattern: str) -> dict[str, list[str]]:
             for line in f:
                 similar_keys = line.strip().split()
                 for key in similar_keys:
-                    map_without_self = similar_keys.copy()
-                    map_without_self.remove(key)
-                    symbol_map[key] = map_without_self
+                    if key not in symbol_map:
+                        symbol_map[key] = set(similar_keys) - {key}
+                    else:
+                        symbol_map[key].update(set(similar_keys) - {key})
 
     return symbol_map
 

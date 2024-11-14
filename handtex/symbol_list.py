@@ -15,33 +15,28 @@ from handtex.ui_generated_files.ui_SymbolList import Ui_SymbolList
 class SearchMode(IntEnum):
     COMMAND = 0
     ID = 1
-    IDENTICAL = 2
-    SIMILAR = 3
-    IDENTICAL_SIMILAR = 4
+    SIMILAR = 2
 
 
 class SymbolList(Qw.QWidget, Ui_SymbolList):
 
     symbols: dict[str, st.Symbol]
-    identical_symbols: dict[str, list[str]]
-    similar_symbols: dict[str, list[str]]
+    similar_symbols: dict[str, set[str]]
     icon_size: int
     pixmap_cache: dict[str, Qg.QPixmap]
-    current_symbol_keys: list[str]
+    current_symbol_keys: list[str | None]
 
     state_saver: ss.StateSaver
 
     def __init__(
         self,
         symbols: dict[str, st.Symbol],
-        identical_symbols: dict[str, list[str]],
-        similar_symbols: dict[str, list[str]],
+        similar_symbols: dict[str, set[str]],
         parent=None,
     ):
         super(SymbolList, self).__init__(parent)
         self.setupUi(self)
         self.symbols = symbols
-        self.identical_symbols = identical_symbols
         self.similar_symbols = similar_symbols
 
         self.icon_size = 100
@@ -65,6 +60,7 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self.label_id.setFont(font)
         # Make the right splitter side 250px wide.
         self.splitter.setSizes([self.width() - 320, 320])
+        self.listWidget.verticalScrollBar().setSingleStep(40)
 
         self.state_saver = ss.StateSaver("symbol_list")
         self.init_state_saver()
@@ -101,14 +97,21 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
             self.current_symbol_keys = [
                 key for key in self.symbols if search_text.lower() in key.lower()
             ]
-        elif search_mode == SearchMode.IDENTICAL:
-            self.current_symbol_keys = self.identical_symbols.get(search_text, [])
         elif search_mode == SearchMode.SIMILAR:
-            self.current_symbol_keys = self.similar_symbols.get(search_text, [])
-        elif search_mode == SearchMode.IDENTICAL_SIMILAR:
-            self.current_symbol_keys = self.identical_symbols.get(
-                search_text, []
-            ) + self.similar_symbols.get(search_text, [])
+            if search_text in self.similar_symbols:
+                # List all symbols that are in the similarity group.
+                self.current_symbol_keys = list(self.similar_symbols[search_text])
+            else:
+                # List all symbols that are in similarity groups, grouped
+                # by being in a similarity group.
+                self.current_symbol_keys = []
+                for key in self.similar_symbols:
+                    if key in self.current_symbol_keys:
+                        continue
+                    if not search_text or search_text.lower() in key.lower():
+                        self.current_symbol_keys.append(key)
+                        self.current_symbol_keys.extend(list(self.similar_symbols[key]))
+                        self.current_symbol_keys.append(None)
 
         self.show_symbols()
 
@@ -118,13 +121,35 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
             return
         if self.listWidget.count() == 0:
             return
+        if current_index >= len(self.current_symbol_keys):
+            return
 
         symbol_key = self.current_symbol_keys[current_index]
         self.show_symbol_details(symbol_key)
 
     def show_symbols(self) -> None:
         self.listWidget.clear()
+        separator_pixmap = Qg.QPixmap(self.icon_size, self.icon_size)
+        separator_pixmap.fill(Qt.transparent)
+        # Draw a vertical line in text color.
+        painter = Qg.QPainter(separator_pixmap)
+        painter.setPen(self.palette().color(Qg.QPalette.Text))
+        painter.drawLine(
+            separator_pixmap.width() // 2,
+            int(separator_pixmap.height() * 0.2),
+            separator_pixmap.width() // 2,
+            int(separator_pixmap.height() * 0.8),
+        )
+        painter.end()
         for key in self.current_symbol_keys:
+            if key is None:
+                # Add a spacer item to force a new line (like a line break).
+                spacer_item = Qw.QListWidgetItem(separator_pixmap, " ")
+                spacer_item.setFlags(spacer_item.flags() & ~Qt.ItemIsSelectable & ~Qt.ItemIsEnabled)
+                # Set a size hint wide enough to take up the rest of the row.
+                # Adjust width value based on how wide your items are.
+                self.listWidget.addItem(spacer_item)
+                continue
             label = self.symbols[key].command
             pixmap = self.get_symbol_pixmap(key)
 
@@ -144,11 +169,6 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self.label_fontenc.setVisible(not symbol.fontenc_is_default())
         self.label_fontenc_label.setVisible(not symbol.fontenc_is_default())
         self.label_fontenc.setText(symbol.fontenc)
-
-        if symbol_key in self.identical_symbols:
-            self.label_identical.setText(", ".join(self.identical_symbols[symbol_key]))
-        else:
-            self.label_identical.setText("")
 
         if symbol_key in self.similar_symbols:
             self.label_similar.setText(", ".join(self.similar_symbols[symbol_key]))

@@ -39,7 +39,6 @@ latex2e-OT1-_vee latex2e-OT1-_bigvee
 latex2e-OT1-_wedge latex2e-OT1-_bigwedge
 latex2e-OT1-/ textcomp-OT1-_textfractionsolidus
 latex2e-T1-_DJ latex2e-T1-_DH
-latex2e-T1-_textquotedbl textcomp-OT1-_textquotestraightdblbase
 marvosym-OT1-_Ecommerce textcomp-OT1-_textestimated
 marvosym-OT1-_EURdig marvosym-OT1-_EUR marvosym-OT1-_EURtm marvosym-OT1-_EURcr marvosym-OT1-_EURhv
 marvosym-OT1-_Mars wasysym-OT1-_male wasysym-OT1-_mars
@@ -74,8 +73,8 @@ latex2e-OT1-_% textcomp-OT1-_textdiscount
 textcomp-OT1-_textbrokenbar wasysym-OT1-_brokenvert
 amssymb-OT1-_mathfrak{R} latex2e-OT1-_Re
 amssymb-OT1-_mathfrak{I} latex2e-OT1-_Im
+latex2e-T1-_textquotedbl textcomp-OT1-_textquotestraightdblbase
 latex2e-OT1-_textquotedblright latex2e-T1-_quotedblbase
-latex2e-OT1-_textquotedblleft latex2e-T1-_quotedblbase
 latex2e-OT1-_textquoteright latex2e-T1-_quotesinglbase
 tipa-OT1-_textbaro latex2e-OT1-_ominus
 latex2e-OT1-_jmath amssymb-OT1-_mathcal{J}

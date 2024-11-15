@@ -466,8 +466,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             if not symbol_data.package_is_default():
                 package_label = Qw.QLabel(f"\\usepackage{{ {symbol_data.package} }}")
                 package_label.setSizePolicy(label_policy)
+                package_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
                 inner_layout.addWidget(package_label)
             command_label = Qw.QLabel(symbol_data.command)
+            command_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
             # Make this one 1.5 times bigger.
             font = command_label.font()
             font.setPointSize(int(font.pointSize() * 1.5))
@@ -476,6 +478,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             command_label.setFont(font)
             inner_layout.addWidget(command_label)
             mode_label = Qw.QLabel(f"{symbol_data.mode_str()} (Match: {confidence:.1%})")
+            mode_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
             font = mode_label.font()
             font.setPointSize(int(font.pointSize() * 0.9))
             mode_label.setFont(font)

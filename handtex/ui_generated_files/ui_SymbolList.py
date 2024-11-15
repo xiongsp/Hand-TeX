@@ -36,12 +36,14 @@ class Ui_SymbolList(object):
         self.comboBox_search_mode.addItem("")
         self.comboBox_search_mode.addItem("")
         self.comboBox_search_mode.addItem("")
+        self.comboBox_search_mode.addItem("")
         self.comboBox_search_mode.setObjectName(u"comboBox_search_mode")
 
         self.horizontalLayout.addWidget(self.comboBox_search_mode)
 
         self.lineEdit_search = QLineEdit(SymbolList)
         self.lineEdit_search.setObjectName(u"lineEdit_search")
+        self.lineEdit_search.setClearButtonEnabled(True)
 
         self.horizontalLayout.addWidget(self.lineEdit_search)
 
@@ -182,6 +184,7 @@ class Ui_SymbolList(object):
         self.comboBox_search_mode.setItemText(0, QCoreApplication.translate("SymbolList", u"Command", None))
         self.comboBox_search_mode.setItemText(1, QCoreApplication.translate("SymbolList", u"Symbol ID", None))
         self.comboBox_search_mode.setItemText(2, QCoreApplication.translate("SymbolList", u"Similar to", None))
+        self.comboBox_search_mode.setItemText(3, QCoreApplication.translate("SymbolList", u"Unique", None))
 
         self.lineEdit_search.setPlaceholderText(QCoreApplication.translate("SymbolList", u"Search...", None))
         self.label_11.setText(QCoreApplication.translate("SymbolList", u"Found:", None))

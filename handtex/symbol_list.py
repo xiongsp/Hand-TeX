@@ -16,6 +16,7 @@ class SearchMode(IntEnum):
     COMMAND = 0
     ID = 1
     SIMILAR = 2
+    UNIQUE = 3
 
 
 class SymbolList(Qw.QWidget, Ui_SymbolList):
@@ -112,6 +113,13 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
                         self.current_symbol_keys.append(key)
                         self.current_symbol_keys.extend(list(self.similar_symbols[key]))
                         self.current_symbol_keys.append(None)
+        elif search_mode == SearchMode.UNIQUE:
+            # Exclude all symbols that are in similarity groups.
+            self.current_symbol_keys = [
+                key
+                for key in self.symbols
+                if search_text.lower() in key.lower() and key not in self.similar_symbols
+            ]
 
         self.show_symbols()
 

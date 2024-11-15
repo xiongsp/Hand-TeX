@@ -7,7 +7,7 @@ amssymb-OT1-_vartriangleleft wasysym-OT1-_lhd latex2e-OT1-_triangleleft
 cmll-OT1-_with latex2e-OT1-_&
 latex2e-OT1-_-- latex2e-OT1-_--- latex2e-OT1-_---- latex2e-OT1-__ latex2e-OT1-_mathunderscore latex2e-OT1-_textemdash latex2e-OT1-_textendash latex2e-OT1-_textunderscore textcomp-OT1-_textthreequartersemdash textcomp-OT1-_texttwelveudash textcomp-OT1-_textminus
 latex2e-OT1-_{ latex2e-OT1-_textbraceleft
-latex2e-OT1-_bigcirc wasysym-OT1-_fullmoon textcomp-OT1-_textbigcircle wasysym-OT1-_ocircle gensymb-OT1-_degree
+latex2e-OT1-_bigcirc latex2e-OT1-_circ wasysym-OT1-_fullmoon textcomp-OT1-_textbigcircle wasysym-OT1-_ocircle gensymb-OT1-_degree
 latex2e-OT1-_bigtriangleup latex2e-OT1-_triangle
 latex2e-OT1-_bullet latex2e-OT1-_cdot latex2e-OT1-_cdotp latex2e-OT1-_ldotp latex2e-OT1-_textbullet latex2e-OT1-_textperiodcentered textcomp-OT1-_textbullet textcomp-OT1-_textperiodcentered wasysym-OT1-_newmoon
 latex2e-OT1-_copyright latex2e-OT1-_textcopyright textcomp-OT1-_textcopyright
@@ -16,7 +16,7 @@ latex2e-OT1-_div textcomp-OT1-_textdiv
 latex2e-OT1-_mathparagraph latex2e-OT1-_P textcomp-OT1-_textparagraph latex2e-OT1-_textparagraph
 latex2e-OT1-_mathsterling latex2e-OT1-_pounds
 latex2e-OT1-_neg textcomp-OT1-_textlnot
-latex2e-OT1-_odot wasysym-OT1-_astrosun tipa-OT1-_textbullseye
+latex2e-OT1-_odot wasysym-OT1-_astrosun tipa-OT1-_textbullseye latex2e-OT1-_bigodot marvosym-OT1-_Sun
 latex2e-OT1-_parallel latex2e-OT1-_| tipa-OT1-_textdoublepipe tipa-OT1-_textdoublevertline textcomp-OT1-_textbardbl
 latex2e-OT1-_perp latex2e-OT1-_bot
 latex2e-OT1-_top amssymb-OT1-_intercal
@@ -32,7 +32,7 @@ latex2e-OT1-_textgreater tipa-OT1-_textrptr
 latex2e-OT1-_textless tipa-OT1-_textlptr
 latex2e-OT1-_textordfeminine textcomp-OT1-_textordfeminine
 latex2e-OT1-_textordmasculine textcomp-OT1-_textordmasculine
-latex2e-OT1-_textregistered textcomp-OT1-_textregistered
+latex2e-OT1-_textregistered textcomp-OT1-_textregistered amssymb-OT1-_circledR
 latex2e-OT1-_textsection textcomp-OT1-_textsection latex2e-OT1-_S latex2e-OT1-_mathsection
 latex2e-OT1-_texttrademark textcomp-OT1-_texttrademark
 latex2e-OT1-_vee latex2e-OT1-_bigvee
@@ -72,3 +72,21 @@ textcomp-OT1-_textquotesingle textcomp-OT1-_textquotestraightbase
 amssymb-OT1-_checkmark wasysym-OT1-_checked
 latex2e-OT1-_% textcomp-OT1-_textdiscount
 textcomp-OT1-_textbrokenbar wasysym-OT1-_brokenvert
+amssymb-OT1-_mathfrak{R} latex2e-OT1-_Re
+amssymb-OT1-_mathfrak{I} latex2e-OT1-_Im
+latex2e-OT1-_textquotedblright latex2e-T1-_quotedblbase
+latex2e-OT1-_textquotedblleft latex2e-T1-_quotedblbase
+latex2e-OT1-_textquoteright latex2e-T1-_quotesinglbase
+tipa-OT1-_textbaro latex2e-OT1-_ominus
+latex2e-OT1-_jmath amssymb-OT1-_mathcal{J}
+dsfont-OT1-_mathds{1} bbold-OT1-_mathbb{1}
+marvosym-OT1-_Heart latex2e-OT1-_heartsuit
+latex2e-OT1-_cap latex2e-OT1-_bigcap
+latex2e-OT1-_cup latex2e-OT1-_bigcup
+latex2e-OT1-_sqcup latex2e-OT1-_bigsqcup
+latex2e-OT1-_otimes latex2e-OT1-_bigotimes
+latex2e-OT1-_oplus latex2e-OT1-_bigoplus
+latex2e-OT1-_biguplus latex2e-OT1-_uplus
+latex2e-OT1-_star latex2e-OT1-_bigstar
+esint-OT1-_dotsint amsmath-OT1-_idotsint
+latex2e-OT1-_bowtie wasysym-OT1-_Bowtie

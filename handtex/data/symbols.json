@@ -3298,6 +3298,13 @@
     "filename": "D97C9"
   },
   {
+    "command": "\\Join",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Join",
+    "filename": "D97C9"
+  },
+  {
     "command": "\\preceq",
     "mathmode": true,
     "textmode": false,

@@ -45,3 +45,4 @@ latex2e-OT1-_cdotp latex2e-OT1-_cdot
 wasysym-OT1-_clock latex2e-OT1-_o
 textcomp-OT1-_textbullet latex2e-OT1-_textbullet
 upgreek-OT1-_upvarrho upgreek-OT1-_uprho
+latex2e-OT1-_bowtie latex2e-OT1-_Join

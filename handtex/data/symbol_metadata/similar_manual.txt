@@ -87,6 +87,6 @@ latex2e-OT1-_sqcup latex2e-OT1-_bigsqcup
 latex2e-OT1-_otimes latex2e-OT1-_bigotimes
 latex2e-OT1-_oplus latex2e-OT1-_bigoplus
 latex2e-OT1-_biguplus latex2e-OT1-_uplus
-latex2e-OT1-_star latex2e-OT1-_bigstar
+latex2e-OT1-_star amssymb-OT1-_bigstar
 esint-OT1-_dotsint amsmath-OT1-_idotsint
 latex2e-OT1-_bowtie wasysym-OT1-_Bowtie

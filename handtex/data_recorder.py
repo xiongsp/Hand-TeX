@@ -89,7 +89,7 @@ class DataRecorder:
         symbol_keys = list(self.symbols.keys())
         symbol_weights = []
         for key in symbol_keys:
-            weight = (1 / self.frequencies[key]) ** bias
+            weight = (1 / (self.frequencies[key] + 1)) ** bias
             symbol_weights.append(weight)
         return random.choices(symbol_keys, weights=symbol_weights)[0]
 

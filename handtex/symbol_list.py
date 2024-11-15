@@ -133,6 +133,8 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
             return
 
         symbol_key = self.current_symbol_keys[current_index]
+        if symbol_key is None:
+            return
         self.show_symbol_details(symbol_key)
 
     def show_symbols(self) -> None:

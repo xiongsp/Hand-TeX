@@ -1,4 +1,6 @@
 import numpy as np
+import csv
+from pathlib import Path
 import cv2
 from math import ceil
 import torch
@@ -8,21 +10,29 @@ import sqlite3
 import json
 from sklearn.preprocessing import LabelEncoder
 
+import handtex.utils as ut
+
+# TODO create list of lookalike chars, group them together.
+# TODO make synthetic data for compound chars.
+
 
 class StrokeDataset(Dataset):
     def __init__(
         self,
         db_path,
         symbol_keys: list[str],
+        lookalikes: dict[str, tuple[str, ...]],
         image_size: int,
         label_encoder: LabelEncoder,
         train: bool = True,
     ):
         """
-        Args:
-            db_path (str): Path to the SQLite database.
-            symbol_keys (list): List of symbol keys to load stroke data for.
-            image_size (tuple): Size of the generated images (width, height).
+        :param db_path: Path to the SQLite database.
+        :param symbol_keys: List of symbol keys to load stroke data for.
+        :param lookalikes: Dictionary of lookalike characters.
+        :param image_size: Size of the generated images (images are square)
+        :param label_encoder: LabelEncoder object to encode labels.
+        :param train: If True, load training data, else load validation data.
         """
         self.db_path = db_path
         self.image_size = image_size
@@ -35,11 +45,21 @@ class StrokeDataset(Dataset):
         cursor = conn.cursor()
 
         for symbol_key in symbol_keys:
-            cursor.execute("SELECT id FROM samples WHERE key = ?", (symbol_key,))
+            # cursor.execute("SELECT id FROM samples WHERE key = ?", (symbol_key,))
+            key_and_lookalikes = [symbol_key] + list(lookalikes.get(symbol_key, []))
+            cursor.execute(
+                f"SELECT id FROM samples WHERE key IN ({','.join(['?']*len(key_and_lookalikes))})",
+                key_and_lookalikes,
+            )
             rows = cursor.fetchall()
             split_idx = ceil(len(rows) * 0.1)
             if train:
                 selected_rows = rows[split_idx:]  # Remaining 90% for training
+                print(
+                    f"Loaded {len(rows)} samples of {symbol_key}, "
+                    f"{len(selected_rows)} for training, "
+                    f"{split_idx} for validation."
+                )
             else:
                 selected_rows = rows[:split_idx]  # First 10% for validation
 
@@ -129,16 +149,8 @@ def tensorize_strokes(stroke_data: list[list[tuple[int, int]]], image_size: int)
     )
     img_tensor = transform(img)  # Output shape will be [1, H, W]
 
-    # Expand the tensor to add a batch dimension, final shape should be [1, 1, 28, 28]
+    # Expand the tensor to add a batch dimension.
     img_tensor = img_tensor.unsqueeze(0)
-
-    # Assert that the tensor has the correct shape for the model input
-    assert img_tensor.shape == (
-        1,
-        1,
-        28,
-        28,
-    ), f"Expected shape (1, 1, 28, 28), got {img_tensor.shape}"
 
     return img_tensor
 
@@ -170,41 +182,63 @@ def main():
     # with open(path, "r") as file:
     #     data = json.load(file)
 
-    # Example usage
-    symbol_keys = [
-        "latex2e-OT1-_xi",
-        "latex2e-OT1-_sim",
-        "latex2e-OT1-_infty",
-        "latex2e-OT1-_approx",
-        "dsfont-OT1-_mathds{R}",
-        "latex2e-OT1-_partial",
-        "latex2e-OT1-_equiv",
-        "latex2e-OT1-_alpha",
-        "latex2e-OT1-_sum",
-        "latex2e-OT1-_int",
-    ]
+    symbols = ut.load_symbols()
+    symbol_keys = list(symbols.keys())
+
+    similar_symbols = ut.load_symbol_metadata_similarity()
+
+    # Limit the number of classes to classify.
+    symbol_keys_old = symbol_keys
+    symbol_keys = ut.select_leader_symbols(symbol_keys, similar_symbols)
+
     label_encoder = LabelEncoder()
     label_encoder.fit(symbol_keys)
 
-    db_path = "dextify/detexify_rescaled.db"
-    image_size = 28
+    dump_encoder(label_encoder, symbol_keys)
+
+    old_frequencies_path = Path("../symbol_frequency.csv").absolute()
+    with open(old_frequencies_path, "r") as file:
+        reader = csv.reader(file)
+        frequencies = {row[0]: int(row[1]) for row in reader}
+    # Calculate new frequencies for the leader symbols
+    leader_frequencies = {key: frequencies[key] for key in symbol_keys}
+    for leader in symbol_keys:
+        for similar in similar_symbols.get(leader, []):
+            leader_frequencies[leader] += frequencies[similar]
+    # Dump the new frequencies to a CSV file, sorted by frequency.
+    sorted_frequencies = sorted(leader_frequencies.items(), key=lambda item: item[1], reverse=True)
+    with open("leader_symbol_frequency.csv", "w") as file:
+        writer = csv.writer(file)
+        writer.writerows(sorted_frequencies)
+
+    symbol_mean_freq = sum(frequencies.values()) / len(frequencies)
+    leader_mean_freq = sum(leader_frequencies.values()) / len(leader_frequencies)
+    print(f"Mean frequency of all symbols: {symbol_mean_freq}")
+    print(f"Mean frequency of leader symbols: {leader_mean_freq}")
+
+    db_path = "detexify_rescaled.db"
+    image_size = 48
 
     # Create training and validation datasets and dataloaders
-    train_dataset = StrokeDataset(db_path, symbol_keys, image_size, label_encoder, train=True)
-    validation_dataset = StrokeDataset(db_path, symbol_keys, image_size, label_encoder, train=False)
+    train_dataset = StrokeDataset(
+        db_path, symbol_keys, similar_symbols, image_size, label_encoder, train=True
+    )
+    validation_dataset = StrokeDataset(
+        db_path, symbol_keys, similar_symbols, image_size, label_encoder, train=False
+    )
 
     train_dataloader = DataLoader(train_dataset, batch_size=64, shuffle=True)
     validation_dataloader = DataLoader(validation_dataset, batch_size=64, shuffle=True)
 
-    # Iterate through the training dataloader
-    for batch, labels in train_dataloader:
-        print(batch.shape, labels[0], "...")  # Output the shape of the batch and labels
-        # You can now use the batch for training a model
-
-    # Iterate through the validation dataloader
-    for batch, labels in validation_dataloader:
-        print(batch.shape, labels[0], "...")  # Output the shape of the batch and labels
-        # You can now use the batch for validation
+    # # Iterate through the training dataloader
+    # for batch, labels in train_dataloader:
+    #     print(batch.shape, labels[0], "...")  # Output the shape of the batch and labels
+    #     # You can now use the batch for training a model
+    #
+    # # Iterate through the validation dataloader
+    # for batch, labels in validation_dataloader:
+    #     print(batch.shape, labels[0], "...")  # Output the shape of the batch and labels
+    #     # You can now use the batch for validation
 
     # Show one of the images (optional)
     stroke_data = train_dataset.load_stroke_data(train_dataset.primary_keys[0])

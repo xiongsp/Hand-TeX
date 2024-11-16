@@ -1,6 +1,8 @@
 import torch
+import csv
 import torch.nn.functional as F
 from torch import optim
+import matplotlib.pyplot as plt
 from torch import nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
@@ -20,15 +22,27 @@ class CNN(nn.Module):
         """
         super(CNN, self).__init__()
 
-        # First convolutional layer: 1 input channel, 8 output channels, 3x3 kernel, stride 1, padding 1
-        # 1 input channel because images are grayscale.
-        self.conv1 = nn.Conv2d(in_channels=1, out_channels=8, kernel_size=3, stride=1, padding=1)
-        # Max pooling layer: 2x2 window, stride 2
-        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
-        # Second convolutional layer: 8 input channels, 16 output channels, 3x3 kernel, stride 1, padding 1
-        self.conv2 = nn.Conv2d(in_channels=8, out_channels=16, kernel_size=3, stride=1, padding=1)
-        # Fully connected layer: 16*7*7 input features (after two 2x2 poolings), 10 output features (num_classes)
-        self.fc1 = nn.Linear(16 * 7 * 7, num_classes)
+        # # First convolutional layer: 1 input channel, 8 output channels, 3x3 kernel, stride 1, padding 1
+        # # 1 input channel because images are grayscale.
+        # self.conv1 = nn.Conv2d(in_channels=1, out_channels=8, kernel_size=3, stride=1, padding=1)
+        # # Max pooling layer: 2x2 window, stride 2
+        # self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
+        # # Second convolutional layer: 8 input channels, 16 output channels, 3x3 kernel, stride 1, padding 1
+        # self.conv2 = nn.Conv2d(in_channels=8, out_channels=16, kernel_size=3, stride=1, padding=1)
+        # # Image size: 48 -> 24 -> 12 after each pooling.
+        # # Fully connected layer: 16*12*12 input features (after two 2x2 poolings), 10 output features (num_classes)
+        # self.fc1 = nn.Linear(16 * 12 * 12, num_classes)
+        self.conv1 = nn.Conv2d(1, 16, kernel_size=3, padding=1)
+        self.bn1 = nn.BatchNorm2d(16)
+        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
+        self.bn2 = nn.BatchNorm2d(32)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv3 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
+        self.bn3 = nn.BatchNorm2d(64)
+        self.pool2 = nn.MaxPool2d(2, 2)
+        self.fc1 = nn.Linear(64 * 12 * 12, 1024)
+        self.dropout = nn.Dropout(0.5)
+        self.fc2 = nn.Linear(1024, num_classes)
 
     def forward(self, x):
         """
@@ -42,12 +56,21 @@ class CNN(nn.Module):
             torch.Tensor
                 The output tensor after passing through the network.
         """
-        x = F.relu(self.conv1(x))  # Apply first convolution and ReLU activation
-        x = self.pool(x)  # Apply max pooling
-        x = F.relu(self.conv2(x))  # Apply second convolution and ReLU activation
-        x = self.pool(x)  # Apply max pooling
-        x = x.reshape(x.shape[0], -1)  # Flatten the tensor
-        x = self.fc1(x)  # Apply fully connected layer
+        # x = F.relu(self.conv1(x))  # Apply first convolution and ReLU activation
+        # x = self.pool(x)  # Apply max pooling
+        # x = F.relu(self.conv2(x))  # Apply second convolution and ReLU activation
+        # x = self.pool(x)  # Apply max pooling
+        # x = x.reshape(x.shape[0], -1)  # Flatten the tensor
+        # x = self.fc1(x)  # Apply fully connected layer
+        # return x
+        x = F.relu(self.bn1(self.conv1(x)))
+        x = self.pool(F.relu(self.bn2(self.conv2(x))))
+        x = F.relu(self.bn3(self.conv3(x)))
+        x = self.pool2(F.relu(x))
+        x = x.view(-1, 64 * 12 * 12)
+        x = F.relu(self.fc1(x))
+        x = self.dropout(x)
+        x = self.fc2(x)
         return x
 
 
@@ -91,18 +114,26 @@ def check_accuracy(loader, model, device):
 symbols = ut.load_symbols()
 symbol_keys = list(symbols.keys())
 
+similar_symbols = ut.load_symbol_metadata_similarity()
+
+# Limit the number of classes to classify.
+symbol_keys = ut.select_leader_symbols(symbol_keys, similar_symbols)
+
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 num_classes = len(symbol_keys)
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 10  # Reduced for demonstration purposes
+num_epochs = 15
 
-db_path = "dextify/detexify_rescaled.db"
-image_size = 28
+db_path = "detexify_rescaled.db"
+image_size = 48
 
 model_path = "cnn_model.pt"
 encodings_path = "encodings.txt"
+
+# symbol_counts_path = "../symbol_frequency.csv"
+symbol_counts_path = "leader_symbol_frequency.csv"
 
 
 def main():
@@ -113,19 +144,70 @@ def main():
     dump_encoder(label_encoder, symbol_keys, encodings_path)
 
     # Create training and validation datasets and dataloaders
-    train_dataset = StrokeDataset(db_path, symbol_keys, image_size, label_encoder, train=True)
-    validation_dataset = StrokeDataset(db_path, symbol_keys, image_size, label_encoder, train=False)
+    train_dataset = StrokeDataset(
+        db_path, symbol_keys, similar_symbols, image_size, label_encoder, train=True
+    )
+    validation_dataset = StrokeDataset(
+        db_path, symbol_keys, similar_symbols, image_size, label_encoder, train=False
+    )
 
-    train_dataloader = DataLoader(train_dataset, batch_size=64, shuffle=True)
-    validation_dataloader = DataLoader(validation_dataset, batch_size=64, shuffle=True)
+    train_dataloader = DataLoader(train_dataset, batch_size, shuffle=True)
+    validation_dataloader = DataLoader(validation_dataset, batch_size, shuffle=True)
 
     model = CNN(num_classes=num_classes).to(device)
 
+    # criterion = nn.CrossEntropyLoss()
+    # # optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+    # optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-5)
+    # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
+    #
+    # for epoch in range(num_epochs):
+    #     print(f"\nEpoch [{epoch + 1}/{num_epochs}]")
+    #     for batch_index, (data, targets) in enumerate(tqdm(train_dataloader)):
+    #         # Move data and targets to the device (GPU/CPU)
+    #         data = data.to(device)
+    #         targets = targets.to(device)
+    #
+    #         # Forward pass: compute the model output
+    #         scores = model(data)
+    #         loss = criterion(scores, targets)
+    #
+    #         # Backward pass: compute the gradients
+    #         optimizer.zero_grad()
+    #         loss.backward()
+    #
+    #         # Optimization step: update the model parameters
+    #         optimizer.step()
+
+    # Weight the loss function based on symbol frequency.
+    with open(symbol_counts_path, "r") as file:
+        reader = csv.reader(file)
+        symbol_counts = {row[0]: int(row[1]) for row in reader}
+    class_counts = [
+        symbol_counts[label_encoder.inverse_transform([i])[0]] for i in range(num_classes)
+    ]
+    class_weights = 1 / torch.tensor(class_counts, dtype=torch.float32)
+
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+    # criterion = nn.CrossEntropyLoss(class_weights)
+    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-5)
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
+
+    # Lists to store training and validation metrics
+    train_losses = []
+    train_accuracies = []
+    val_losses = []
+    val_accuracies = []
 
     for epoch in range(num_epochs):
         print(f"\nEpoch [{epoch + 1}/{num_epochs}]")
+
+        # Set model to training mode
+        model.train()
+        running_loss = 0.0
+        correct = 0
+        total = 0
+
         for batch_index, (data, targets) in enumerate(tqdm(train_dataloader)):
             # Move data and targets to the device (GPU/CPU)
             data = data.to(device)
@@ -142,12 +224,77 @@ def main():
             # Optimization step: update the model parameters
             optimizer.step()
 
-    # Final accuracy check on training and test sets
-    check_accuracy(train_dataloader, model, device)
-    check_accuracy(validation_dataloader, model, device)
+            # Accumulate loss
+            running_loss += loss.item() * data.size(0)
+
+            # Calculate accuracy
+            _, predicted = torch.max(scores.data, 1)
+            total += targets.size(0)
+            correct += (predicted == targets).sum().item()
+
+        # Calculate average loss and accuracy for the epoch
+        epoch_loss = running_loss / len(train_dataloader)
+        epoch_accuracy = 100 * correct / total
+        train_losses.append(epoch_loss)
+        train_accuracies.append(epoch_accuracy)
+        print(f"Training Loss: {epoch_loss:.4f}, Training Accuracy: {epoch_accuracy:.2f}%")
+
+        # Validation phase
+        model.eval()
+        val_running_loss = 0.0
+        val_correct = 0
+        val_total = 0
+
+        with torch.no_grad():
+            for data, targets in validation_dataloader:
+                data = data.to(device)
+                targets = targets.to(device)
+                outputs = model(data)
+                val_loss = criterion(outputs, targets)
+                val_running_loss += val_loss.item() * data.size(0)
+
+                # Calculate accuracy
+                _, predicted = torch.max(outputs.data, 1)
+                val_total += targets.size(0)
+                val_correct += (predicted == targets).sum().item()
+
+        val_epoch_loss = val_running_loss / len(validation_dataloader)
+        val_epoch_accuracy = 100 * val_correct / val_total
+        val_losses.append(val_epoch_loss)
+        val_accuracies.append(val_epoch_accuracy)
+        print(
+            f"Validation Loss: {val_epoch_loss:.4f}, Validation Accuracy: {val_epoch_accuracy:.2f}%"
+        )
+
+        # Step the scheduler
+        scheduler.step()
+
+    # Plot training and validation loss
+    plt.figure(figsize=(10, 5))
+    plt.plot(range(1, num_epochs + 1), train_losses, label="Training Loss")
+    plt.plot(range(1, num_epochs + 1), val_losses, label="Validation Loss")
+    plt.title("Loss over Epochs")
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.legend()
+    plt.show()
+
+    # Plot training and validation accuracy
+    plt.figure(figsize=(10, 5))
+    plt.plot(range(1, num_epochs + 1), train_accuracies, label="Training Accuracy")
+    plt.plot(range(1, num_epochs + 1), val_accuracies, label="Validation Accuracy")
+    plt.title("Accuracy over Epochs")
+    plt.xlabel("Epoch")
+    plt.ylabel("Accuracy (%)")
+    plt.legend()
+    plt.show()
 
     torch.save(model.state_dict(), model_path)
     print(f"Model saved to {model_path}")
+
+    # Final accuracy check on training and test sets
+    check_accuracy(train_dataloader, model, device)
+    check_accuracy(validation_dataloader, model, device)
 
 
 if __name__ == "__main__":

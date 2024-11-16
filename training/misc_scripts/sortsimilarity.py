@@ -1,4 +1,4 @@
-input_file = "/home/corbin/Repos/Hand-TeX/handtex/data/symbol_metadata/similar_manual.txt"
+input_file = "../../handtex/data/symbol_metadata/similar_manual.txt"
 
 # Split each line into a list of symbols.
 # Sort this list of symbols.
@@ -22,7 +22,7 @@ lines = [" ".join(line) for line in lines]
 lines.sort()
 
 # Write the sorted file back out.
-output_file = "/home/corbin/Repos/Hand-TeX/handtex/data/symbol_metadata/similar_manual_sorted.txt"
+output_file = "../../handtex/data/symbol_metadata/similar_manual_sorted.txt"
 
 with open(output_file, "w") as file:
     file.write("\n".join(lines))

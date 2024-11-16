@@ -6,8 +6,8 @@ from training.train import CNN, model_path, num_classes, device, image_size
 
 
 # Load the model for inference
-def load_model_and_decoder(model_path, in_channels, num_classes, encodings_path="encodings.txt"):
-    checkpoint = torch.load(model_path, weights_only=False)
+def load_model_and_decoder(model_path, num_classes, encodings_path="encodings.txt"):
+    checkpoint = torch.load(model_path, weights_only=True)
 
     # Load model state
     model = CNN(num_classes=num_classes)
@@ -65,9 +65,7 @@ def main():
     import time
 
     start = time.time()
-    loaded_model, label_decoder = load_model_and_decoder(
-        model_path, in_channels=1, num_classes=num_classes
-    )
+    loaded_model, label_decoder = load_model_and_decoder(model_path, num_classes=num_classes)
     print("Model and label encoder loaded for inference.")
     print(f"Model loaded in {time.time() - start:.2f} seconds.")
 

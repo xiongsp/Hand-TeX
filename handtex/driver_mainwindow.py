@@ -48,6 +48,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     # Detection:
     model: trn.CNN
     label_decoder: dict[int, str]
+    current_predictions: list[tuple[str, float]]
 
     # Training:
     train: bool

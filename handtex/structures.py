@@ -42,7 +42,7 @@ class Symbol:
         elif self.textmode and not self.mathmode:
             return "Textmode"
         else:
-            return "Mathmode & Textmode"
+            return "Math & Textmode"
 
 
 @frozen

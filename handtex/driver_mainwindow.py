@@ -60,7 +60,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     symbol_list: sl.SymbolList | None
 
     # Lookalikes:
-    similar_symbols: dict[str, set[str]]
+    similar_symbols: dict[str, tuple[str, ...]]
 
     def __init__(
         self,
@@ -94,7 +94,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.load_config_theme()
 
         self.symbols = ut.load_symbols()
-        self.similar_symbols = ut.load_similar_and_identical_symbol_metadata()
+        self.similar_symbols = ut.load_symbol_metadata_similarity()
 
         if self.train:
             logger.info("Training mode active.")

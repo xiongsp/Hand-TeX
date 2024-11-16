@@ -400,54 +400,42 @@ def load_symbol_svg(symbol: st.Symbol, fill_color: str = "#000000") -> Qc.QByteA
     return Qc.QByteArray(svg_data.encode("utf-8"))
 
 
-def load_similar_and_identical_symbol_metadata() -> dict[str, set[str]]:
+def select_leader_symbols(
+    symbol_keys: list[str], lookalikes: dict[str, tuple[str, ...]]
+) -> list[str]:
     """
-    Load all the metadata for similarity and identicality(TM) of symbols.
-    Then merge the two dictionaries into one.
+    Select the leader symbols from the list of symbol keys.
+    Leaders either have no lookalikes or are the first symbol among a set of lookalikes.
 
-    :return: A dictionary mapping symbol keys to sets of similar and identical symbol keys.
+    :param symbol_keys: List of symbol keys.
+    :param lookalikes: Dictionary mapping symbol keys to sets of lookalike symbol keys.
+    :return: List of leader symbols.
     """
-    similar_symbols = load_similar_symbol_metadata()
-    identical_symbols = load_identical_symbol_metadata()
-    for ik, iv in identical_symbols.items():
-        if ik in similar_symbols:
-            similar_symbols[ik].update(iv)
-        else:
-            similar_symbols[ik] = iv
-    return similar_symbols
+    # Iterate over the lookalike's keys first, to ensure that
+    # the first symbol in the lookalike set is always the leader.
+    # Otherwise, if we iterated over all symbols, which have random order,
+    # a different symbol might appear first and be selected as the leader.
+    leaders = []
+    for key in lookalikes:
+        if not any(k in leaders for k in lookalikes[key]):
+            leaders.append(key)
+    for key in symbol_keys:
+        if key not in leaders and key not in lookalikes:
+            leaders.append(key)
+
+    return leaders
 
 
-def load_identical_symbol_metadata() -> dict[str, set[str]]:
-    """
-    Load the metadata for the identical symbols.
-    Identical means that the svg figure data is indistinguishable.
-
-    :return: A dictionary mapping symbol keys to sets of identical symbol keys.
-    """
-    return load_symbol_equivalence_metadata("identical*")
-
-
-def load_similar_symbol_metadata() -> dict[str, set[str]]:
-    """
-    Load the metadata for the similar symbols.
-    Similar means that the figure would be drawn the same way by hand.
-
-    :return: A dictionary mapping symbol keys to sets of similar symbol keys.
-    """
-    return load_symbol_equivalence_metadata("similar*")
-
-
-def load_symbol_equivalence_metadata(glob_pattern: str) -> dict[str, set[str]]:
+def load_symbol_metadata_similarity() -> dict[str, tuple[str, ...]]:
     """
     Load the metadata for symbols.
     File format: each line contains a space separated list of symbol keys.
 
-    :param glob_pattern: The glob pattern to match the metadata files.
     :return: A dictionary mapping symbol keys to sets of symbol keys.
     """
     with resources.path(symbol_metadata, "") as metadata_dir:
         metadata_dir = Path(metadata_dir)
-    files = list(metadata_dir.glob(glob_pattern))
+    files = list(metadata_dir.glob("similar*"))
 
     symbol_map = {}
     for file in files:
@@ -456,9 +444,9 @@ def load_symbol_equivalence_metadata(glob_pattern: str) -> dict[str, set[str]]:
                 similar_keys = line.strip().split()
                 for key in similar_keys:
                     if key not in symbol_map:
-                        symbol_map[key] = set(similar_keys) - {key}
+                        symbol_map[key] = tuple(k for k in similar_keys if k != key)
                     else:
-                        symbol_map[key].update(set(similar_keys) - {key})
+                        logger.error(f"Duplicate symbol key found: {key}")
 
     return symbol_map
 

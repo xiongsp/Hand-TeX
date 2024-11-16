@@ -2,7 +2,7 @@ latex2e-OT1-_alpha upgreek-OT1-_upalpha
 tipa-OT1-_textbeta latex2e-OT1-_beta upgreek-OT1-_upbeta marvosym-OT1-_Shilling
 tipa-OT1-_textchi latex2e-OT1-_chi upgreek-OT1-_upchi
 latex2e-OT1-_delta upgreek-OT1-_updelta
-latex2e-OT1-_Delta upgreek-OT1-_Updelta amssymb-OT1-_vartriangle
+latex2e-OT1-_Delta upgreek-OT1-_Updelta amssymb-OT1-_vartriangle latex2e-OT1-_bigtriangleup latex2e-OT1-_triangle
 latex2e-OT1-_epsilon upgreek-OT1-_upepsilon
 tipa-OT1-_textepsilon latex2e-OT1-_varepsilon upgreek-OT1-_upvarepsilon
 latex2e-OT1-_eta upgreek-OT1-_upeta
@@ -12,7 +12,7 @@ latex2e-OT1-_Gamma upgreek-OT1-_Upgamma
 tipa-OT1-_textiota latex2e-OT1-_iota upgreek-OT1-_upiota
 latex2e-OT1-_kappa upgreek-OT1-_upkappa
 tipa-OT1-_textlambda latex2e-OT1-_lambda upgreek-OT1-_uplambda amssymb-OT1-_leftthreetimes
-latex2e-OT1-_Lambda upgreek-OT1-_Uplambda
+latex2e-OT1-_Lambda upgreek-OT1-_Uplambda latex2e-OT1-_bigwedge latex2e-OT1-_wedge tipa-OT1-_textturnv
 latex2e-OT1-_mu upgreek-OT1-_upmu
 tipa-OT1-_textomega latex2e-OT1-_omega upgreek-OT1-_upomega
 latex2e-OT1-_Omega upgreek-OT1-_Upomega gensymb-OT1-_ohm tipa-OT1-_textscomega
@@ -34,3 +34,4 @@ latex2e-OT1-_xi upgreek-OT1-_upxi
 latex2e-OT1-_Xi upgreek-OT1-_Upxi
 latex2e-OT1-_zeta upgreek-OT1-_upzeta
 latex2e-OT1-_nabla latex2e-OT1-_bigtriangledown amssymb-OT1-_triangledown
+tipa-OT1-_textrevepsilon textcomp-OT1-_textthreesuperior

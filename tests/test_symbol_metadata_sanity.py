@@ -82,3 +82,29 @@ def test_similar_lists_disjunct() -> None:
             not intersection
         ), f"File {file} contains keys already in another file: {intersection}"
         global_keys |= key_set
+
+
+def test_symbol_name_collisions() -> None:
+    """
+    Look for symbols that have the same command, but aren't
+    in a similarity relation.
+    """
+    # Load symbols.
+    symbols = ut.load_symbols()
+    # Load similarity relations.
+    similarity = ut.load_symbol_metadata_similarity()
+
+    # Check for collisions.
+    for symbol1 in symbols.values():
+        for symbol2 in symbols.values():
+            if symbol1 == symbol2:
+                continue
+            if symbol1.command == symbol2.command:
+                # Check if they are in a similarity relation.
+                if symbol1.key in similarity[symbol2.key]:
+                    continue
+                if symbol2.key in similarity[symbol1.key]:
+                    continue
+                raise AssertionError(
+                    f"Symbols {symbol1.key} and {symbol2.key} have the same command."
+                )

@@ -10,3 +10,9 @@ wasysym-OT1-_sagittarius marvosym-OT1-_Sagittarius
 wasysym-OT1-_capricornus marvosym-OT1-_Capricorn
 wasysym-OT1-_aquarius marvosym-OT1-_Aquarius
 wasysym-OT1-_pisces marvosym-OT1-_Pisces
+wasysym-OT1-_mercury marvosym-OT1-_Mercury
+wasysym-OT1-_earth marvosym-OT1-_Earth
+wasysym-OT1-_female marvosym-OT1-_Venus wasysym-OT1-_venus
+wasysym-OT1-_male marvosym-OT1-_Mars wasysym-OT1-_mars
+wasysym-OT1-_jupiter marvosym-OT1-_Jupiter
+wasysym-OT1-_saturn marvosym-OT1-_Saturn

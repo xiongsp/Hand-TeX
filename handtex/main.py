@@ -63,7 +63,7 @@ def main() -> None:
     Qg.QIcon.setFallbackSearchPaths([":/icons", theme_icons])
     # We need to set an initial theme on Windows, otherwise the icons will fail to load
     # later on, even when switching the theme again.
-    if platform.system() != "Linux" or ut.running_in_flatpak():
+    if platform.system() != "Linux":
         Qg.QIcon.setThemeName("breeze")
         Qg.QIcon.setThemeSearchPaths([":/icons", theme_icons])
 

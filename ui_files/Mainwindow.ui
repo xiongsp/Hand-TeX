@@ -45,6 +45,9 @@
         </property>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="bottomMargin">
+           <number>1</number>
+          </property>
           <item>
            <widget class="QPushButton" name="pushButton_clear">
             <property name="enabled">
@@ -176,7 +179,8 @@
              <string>Symbol List</string>
             </property>
             <property name="icon">
-             <iconset theme="search"/>
+             <iconset theme="search">
+              <normaloff>.</normaloff>.</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -235,6 +239,18 @@
                <layout class="QVBoxLayout" name="verticalLayout_7">
                 <property name="spacing">
                  <number>12</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
                 </property>
                </layout>
               </widget>

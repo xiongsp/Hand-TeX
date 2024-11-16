@@ -73,6 +73,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.setWindowIcon(Qg.QIcon(":/icons/logo.png"))
         self.debug = debug
 
+        self.current_predictions = []
+
         self.train = train
         self.submission_count = 1
         self.current_symbol = None
@@ -103,6 +105,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.data_recorder.has_submissions.connect(self.pushButton_undo_submit.setEnabled)
         else:
             self.sketchpad.new_drawing.connect(self.detect_symbol)
+            self.theme_is_dark_changed.connect(self.show_predictions)
             self.model, self.label_decoder = inf.load_model_and_decoder(
                 "../training/cnn_model.pt", trn.num_classes, "../training/encodings.txt"
             )
@@ -317,6 +320,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         if self.symbol_list is None:
             self.symbol_list = sl.SymbolList(self.symbols, self.similar_symbols)
+            self.theme_is_dark_changed.connect(self.symbol_list.on_theme_change)
         self.symbol_list.show()
 
     # =========================================== Theming ===========================================
@@ -403,6 +407,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.theme_is_dark.set(background_color.lightness() < 128)
             logger.info(f"Theme is dark: {self.theme_is_dark.get()}")
             self.theme_is_dark_changed.emit(self.theme_is_dark)
+            Qc.QTimer.singleShot(0, self.show_predictions)
 
     def simulate_crash(self) -> None:
         """
@@ -419,13 +424,17 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.debug(f"Gathering strokes took {(time.time() - start) * 1000:.2f}ms")
         tensorized = ig.tensorize_strokes(strokes, trn.image_size)
         prediction = inf.predict(tensorized, self.model, self.label_decoder)
-        self.show_predictions(prediction)
+        self.current_predictions = prediction
+        self.show_predictions()
         logger.debug(f"Prediction update took {(time.time() - start) * 1000:.2f}ms")
 
-    def show_predictions(self, predictions: list[tuple[str, float]]) -> None:
+    def show_predictions(
+        self,
+    ) -> None:
         """
         Show the predictions in the result box.
         """
+        print(83756329856429)
 
         # Empty out the widget containing the predictions.
         # self.widget_predictions.layout().deleteLater()
@@ -446,52 +455,74 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # for symbol, confidence in predictions:
         #     print(f"{symbol}: {confidence:.2f}")
         hex_color = self.palette().color(Qg.QPalette.Text).name()
-        for symbol, confidence in predictions:
+        for symbol, confidence in self.current_predictions:
             # Craft a list item with the symbol and confidence.
             # This consists of a horizontal layout with an svg widget on the left,
             # and a vertical stack of labels on the right:
             # \usepackage{ thingy }    # if there is a package
             # \command
             # mode (confidence)
-            outer_layout = Qw.QHBoxLayout()
-            svg_widget = Qsw.QSvgWidget()
-            svg_widget.load(ut.load_symbol_svg(self.symbols[symbol], hex_color))
-            svg_widget.renderer().setAspectRatioMode(Qc.Qt.KeepAspectRatio)
-            svg_widget.setFixedSize(64, 64)
-            outer_layout.addWidget(svg_widget)
 
-            inner_layout = Qw.QVBoxLayout()
-            symbol_data = self.symbols[symbol]
-            label_policy = Qw.QSizePolicy(Qw.QSizePolicy.Preferred, Qw.QSizePolicy.Minimum)
-            if not symbol_data.package_is_default():
-                package_label = Qw.QLabel(f"\\usepackage{{ {symbol_data.package} }}")
-                package_label.setSizePolicy(label_policy)
-                package_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
-                inner_layout.addWidget(package_label)
-            command_label = Qw.QLabel(symbol_data.command)
-            command_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
-            # Make this one 1.5 times bigger.
-            font = command_label.font()
-            font.setPointSize(int(font.pointSize() * 1.5))
-            font.setBold(True)
-            command_label.setSizePolicy(label_policy)
-            command_label.setFont(font)
-            inner_layout.addWidget(command_label)
-            mode_label = Qw.QLabel(f"{symbol_data.mode_str()} (Match: {confidence:.1%})")
-            mode_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
-            font = mode_label.font()
-            font.setPointSize(int(font.pointSize() * 0.9))
-            mode_label.setFont(font)
-            mode_label.setSizePolicy(label_policy)
-            inner_layout.setSpacing(0)
-            inner_layout.setContentsMargins(0, 0, 0, 0)
-            inner_layout.addWidget(mode_label)
-            # Squish the inner layout together vertically.
-            # Do this by making them not expand vertically, with a center alignment vertically.
+            # If this symbol has similar symbols, we want to display
+            # them all together in a framed box.
+            lookalikes = self.similar_symbols.get(symbol, None)
+            stack = None
+            if lookalikes:
+                frame = Qw.QFrame()
+                frame.setStyleSheet(
+                    f"QFrame {{ background: {self.palette().color(Qg.QPalette.AlternateBase).name()}; }}"
+                )
+                stack = Qw.QVBoxLayout()
+                frame.setLayout(stack)
 
-            outer_layout.addLayout(inner_layout)
-            # Add the item to the list.
-            self.widget_predictions.layout().addLayout(outer_layout)
+            for s in [symbol] + list(lookalikes or []):
+                symbol_data = self.symbols[s]
+                outer_layout = Qw.QHBoxLayout()
+                svg_widget = Qsw.QSvgWidget()
+                svg_widget.load(ut.load_symbol_svg(symbol_data, hex_color))
+                svg_widget.renderer().setAspectRatioMode(Qc.Qt.KeepAspectRatio)
+                svg_widget.setFixedSize(64, 64)
+                outer_layout.addWidget(svg_widget)
+
+                inner_layout = Qw.QVBoxLayout()
+                label_policy = Qw.QSizePolicy(Qw.QSizePolicy.Preferred, Qw.QSizePolicy.Minimum)
+                if not symbol_data.package_is_default():
+                    package_label = Qw.QLabel(f"\\usepackage{{ {symbol_data.package} }}")
+                    package_label.setSizePolicy(label_policy)
+                    package_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
+                    inner_layout.addWidget(package_label)
+                command_label = Qw.QLabel(symbol_data.command)
+                command_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
+                # Make this one 1.5 times bigger.
+                font = command_label.font()
+                font.setPointSize(int(font.pointSize() * 1.5))
+                font.setBold(True)
+                command_label.setSizePolicy(label_policy)
+                command_label.setFont(font)
+                inner_layout.addWidget(command_label)
+                mode_label = Qw.QLabel(f"{symbol_data.mode_str()} (Match: {confidence:.1%})")
+                mode_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
+                font = mode_label.font()
+                font.setPointSize(int(font.pointSize() * 0.9))
+                mode_label.setFont(font)
+                mode_label.setSizePolicy(label_policy)
+                inner_layout.setSpacing(0)
+                inner_layout.setContentsMargins(0, 0, 0, 0)
+                inner_layout.addWidget(mode_label)
+                # Squish the inner layout together vertically.
+                # Do this by making them not expand vertically, with a center alignment vertically.
+
+                outer_layout.addLayout(inner_layout)
+
+                if lookalikes:
+                    stack.addLayout(outer_layout)
+                else:
+                    # Pad the outer layout with a left margin, so
+                    # that it lines up with the framed lookalikes.
+                    outer_layout.setContentsMargins(6, 0, 0, 0)
+                    self.widget_predictions.layout().addLayout(outer_layout)
+            if lookalikes:
+                self.widget_predictions.layout().addWidget(frame)
         # Slap a spacer on the end to push the items to the top.
         self.widget_predictions.layout().addStretch()
 

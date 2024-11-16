@@ -46,6 +46,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.setContentsMargins(0, 0, 6, 0)
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(-1, -1, -1, 1)
         self.pushButton_clear = QPushButton(self.layoutWidget)
         self.pushButton_clear.setObjectName(u"pushButton_clear")
         self.pushButton_clear.setEnabled(False)
@@ -126,7 +127,13 @@ class Ui_MainWindow(object):
 
         self.pushButton_symbol_list = QPushButton(self.layoutWidget1)
         self.pushButton_symbol_list.setObjectName(u"pushButton_symbol_list")
-        icon3 = QIcon(QIcon.fromTheme(u"search"))
+        icon3 = QIcon()
+        iconThemeName = u"search"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon3 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon3.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.pushButton_symbol_list.setIcon(icon3)
         self.pushButton_symbol_list.setFlat(True)
 
@@ -165,6 +172,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_7 = QVBoxLayout(self.widget_predictions)
         self.verticalLayout_7.setSpacing(12)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.scrollArea_predictions.setWidget(self.widget_predictions)
 
         self.verticalLayout_4.addWidget(self.scrollArea_predictions)

@@ -22,7 +22,8 @@ class SearchMode(IntEnum):
 class SymbolList(Qw.QWidget, Ui_SymbolList):
 
     symbols: dict[str, st.Symbol]
-    similar_symbols: dict[str, set[str]]
+    last_shown_symbol: str | None
+    similar_symbols: dict[str, tuple[str, ...]]
     icon_size: int
     pixmap_cache: dict[str, Qg.QPixmap]
     current_symbol_keys: list[str | None]
@@ -32,13 +33,14 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
     def __init__(
         self,
         symbols: dict[str, st.Symbol],
-        similar_symbols: dict[str, set[str]],
+        similar_symbols: dict[str, tuple[str, ...]],
         parent=None,
     ):
         super(SymbolList, self).__init__(parent)
         self.setupUi(self)
         self.symbols = symbols
         self.similar_symbols = similar_symbols
+        self.last_show_symbol = None
 
         self.icon_size = 100
         self.listWidget.setIconSize(Qc.QSize(self.icon_size, self.icon_size))
@@ -80,6 +82,12 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
     def closeEvent(self, event) -> None:
         self.state_saver.save()
         event.accept()
+
+    def on_theme_change(self) -> None:
+        # Nuke the cache and redraw.
+        self.pixmap_cache = {}
+        self.show_symbols()
+        self.show_symbol_details(None)
 
     def search_symbols(self) -> None:
         """
@@ -168,7 +176,11 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
 
         self.label_count.setText(str(len(self.current_symbol_keys)))
 
-    def show_symbol_details(self, symbol_key: str):
+    def show_symbol_details(self, symbol_key: str | None):
+        if symbol_key is None:
+            symbol_key = self.last_show_symbol
+        else:
+            self.last_show_symbol = symbol_key
         symbol = self.symbols[symbol_key]
         self.label_id.setText(symbol.key)
         self.label_command.setText(symbol.command)

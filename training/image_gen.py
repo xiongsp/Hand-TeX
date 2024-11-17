@@ -12,7 +12,6 @@ from sklearn.preprocessing import LabelEncoder
 
 import handtex.utils as ut
 
-# TODO create list of lookalike chars, group them together.
 # TODO make synthetic data for compound chars.
 
 
@@ -52,6 +51,10 @@ class StrokeDataset(Dataset):
                 key_and_lookalikes,
             )
             rows = cursor.fetchall()
+            # Shuffle the rows to get more variety in drawings, since drawings
+            # by the same person are sequentially stored in the database.
+            np.random.shuffle(rows)
+
             split_idx = ceil(len(rows) * 0.1)
             if train:
                 selected_rows = rows[split_idx:]  # Remaining 90% for training

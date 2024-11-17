@@ -4,12 +4,14 @@ import csv
 from pathlib import Path
 import random
 import datetime
+from importlib import resources
 
 from loguru import logger
 from PySide6.QtCore import Signal
 
 import handtex.structures as st
 import handtex.utils as ut
+import handtex.data.symbol_metadata
 
 
 class DataRecorder:
@@ -22,30 +24,27 @@ class DataRecorder:
     has_submissions: Signal
 
     # Manage loading/saving symbols for new training data generation.
-    def __init__(self, symbols: dict[str, st.Symbol], has_submissions: Signal):
+    def __init__(self, symbols: dict[str, st.Symbol], has_submissions: Signal, new_data_dir: str):
         self.current_data = []
         self.has_submissions = has_submissions
 
         # Load the new data location from environment variables.
-        if "NEW_DATA_DIR" in os.environ:
-            data_dir = Path(os.environ["NEW_DATA_DIR"])
-        else:
-            data_dir = Path("new_data").absolute()
+        data_dir = Path(new_data_dir).absolute()
         data_dir.mkdir(parents=True, exist_ok=True)
         logger.info(f"New data location: {data_dir}")
 
         self.symbols = symbols
+        lookalikes = ut.load_symbol_metadata_similarity()
+        # We only want to train leaders.
+        leaders = ut.select_leader_symbols(list(self.symbols.keys()), lookalikes)
+        self.symbols = {key: self.symbols[key] for key in leaders}
 
         # Load old frequencies.
         # Load the symbol frequency file from environment variables.
-        if "SYMBOL_FREQUENCY" in os.environ:
-            old_frequencies_path = Path(os.environ["SYMBOL_FREQUENCY"])
-        else:
-            old_frequencies_path = Path("symbol_frequency.csv").absolute()
-        if not old_frequencies_path.exists():
-            raise FileNotFoundError(f"Could not find {old_frequencies_path}")
+        with resources.path(handtex.data.symbol_metadata, "leader_symbol_frequency.csv") as path:
+            leader_frequencies_path = path
 
-        with open(old_frequencies_path, "r") as file:
+        with open(leader_frequencies_path, "r") as file:
             reader = csv.reader(file)
             self.frequencies = {row[0]: int(row[1]) for row in reader}
 
@@ -59,7 +58,16 @@ class DataRecorder:
             with open(new_file, "r") as file:
                 data = json.load(file)
                 for drawing in data:
-                    new_frequencies[drawing["key"]] += 1
+                    # Find it's leader if it isn't one.
+                    new_key = drawing["key"]
+                    if new_key in self.symbols:
+                        new_frequencies[drawing["key"]] += 1
+                    else:
+                        leader = lookalikes[new_key][0]
+                        assert leader in self.symbols
+                        new_frequencies[leader] += 1
+
+        logger.info(f"Training {len(self.symbols)} leader symbols.")
 
         total_new = sum(new_frequencies.values())
         logger.info(f"Loaded {total_new} previously recorded drawings for frequency analysis.")

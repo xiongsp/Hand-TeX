@@ -67,6 +67,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self,
         debug: bool,
         train: bool,
+        new_data_dir: str,
     ) -> None:
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
@@ -102,7 +103,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if self.train:
             logger.info("Training mode active.")
             self.stackedWidget.setCurrentIndex(1)
-            self.data_recorder = dr.DataRecorder(self.symbols, self.has_submission)
+            self.data_recorder = dr.DataRecorder(self.symbols, self.has_submission, new_data_dir)
             self.data_recorder.has_submissions.connect(self.pushButton_undo_submit.setEnabled)
         else:
             self.sketchpad.new_drawing.connect(self.detect_symbol)
@@ -510,6 +511,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 inner_layout.setSpacing(0)
                 inner_layout.setContentsMargins(0, 0, 0, 0)
                 inner_layout.addWidget(mode_label)
+
                 # Squish the inner layout together vertically.
                 # Do this by making them not expand vertically, with a center alignment vertically.
 

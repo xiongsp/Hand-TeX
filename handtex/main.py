@@ -22,6 +22,9 @@ def main() -> None:
     parser.add_argument("--debug", "-d", action="store_true", help="Enable debug mode")
     parser.add_argument("--train", "-t", action="store_true", help="Create new training data")
     parser.add_argument("--version", "-v", action="version", version=f"{__program__} {__version__}")
+    parser.add_argument(
+        "--new-data-dir", "-n", help="Directory to store new training data", default="new_data"
+    )
 
     args = parser.parse_args()
 
@@ -68,7 +71,7 @@ def main() -> None:
         Qg.QIcon.setThemeSearchPaths([":/icons", theme_icons])
 
     try:
-        window = MainWindow(args.debug, args.train)
+        window = MainWindow(args.debug, args.train, args.new_data_dir)
         window.show()
         sys.exit(app.exec())
     except Exception:

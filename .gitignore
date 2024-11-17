@@ -238,4 +238,4 @@ fabric.properties
 /AUR/
 symbol_frequency.csv
 training/cnn_model.pt
-training/detexify_rescaled.db
+*.db

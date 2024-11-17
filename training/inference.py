@@ -1,17 +1,20 @@
 import torch
+from pathlib import Path
 import torch.nn.functional as F
 
 from training.image_gen import tensorize_strokes, load_decoder
-from training.train import CNN, model_path, num_classes, device, image_size
+from training.train import CNN, num_classes, device, image_size
+
+from safetensors.torch import load_file
+import handtex.utils as ut
 
 
 # Load the model for inference
-def load_model_and_decoder(model_path, num_classes, encodings_path="encodings.txt"):
-    checkpoint = torch.load(model_path, weights_only=True)
+def load_model_and_decoder(model_path: Path, num_classes: int, encodings_path: Path):
 
     # Load model state
     model = CNN(num_classes=num_classes)
-    model.load_state_dict(checkpoint)
+    model.load_state_dict(load_file(model_path))
     model.to(device)
     model.eval()  # Set to evaluation mode
 
@@ -56,16 +59,14 @@ def predict(image, model, label_decoder) -> list[tuple[str, float]]:
         return final_results
 
 
-# Example usage for inference
-# Assuming `input_image` is a torch tensor of shape [1, 1, 28, 28]
-# input_image = ... (Load or preprocess your image here)
-# result = predict(input_image, loaded_model, label_encoder)
-# print(f"Predicted label: {result}")
 def main():
+    # Test usage.
     import time
 
     start = time.time()
-    loaded_model, label_decoder = load_model_and_decoder(model_path, num_classes=num_classes)
+    loaded_model, label_decoder = load_model_and_decoder(
+        ut.get_model_path(), num_classes, ut.get_encodings_path()
+    )
     print("Model and label encoder loaded for inference.")
     print(f"Model loaded in {time.time() - start:.2f} seconds.")
 

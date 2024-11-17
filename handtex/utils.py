@@ -22,6 +22,7 @@ from handtex import __program__, __version__
 from handtex.data import color_themes
 from handtex.data import symbols
 from handtex.data import symbol_metadata
+import handtex.data.model
 
 
 T = TypeVar("T")
@@ -471,3 +472,13 @@ def sys_swap_memory_total() -> int:
     except Exception as e:
         logger.exception(e)
         return 0
+
+
+def get_model_path():
+    with resources.path(handtex.data.model, "handtex.safetensors") as model_path:
+        return model_path
+
+
+def get_encodings_path():
+    with resources.path(handtex.data.model, "encodings.txt") as encodings_path:
+        return encodings_path

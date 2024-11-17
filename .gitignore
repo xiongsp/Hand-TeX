@@ -2,6 +2,11 @@
 .directory
 .idea
 
+*.db
+*.pt
+*.safetensors
+
+
 new_drawings
 
 dist-elf
@@ -236,6 +241,3 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 /AUR/
-symbol_frequency.csv
-training/cnn_model.pt
-*.db

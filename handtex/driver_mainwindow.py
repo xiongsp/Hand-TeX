@@ -109,7 +109,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.sketchpad.new_drawing.connect(self.detect_symbol)
             self.theme_is_dark_changed.connect(self.show_predictions)
             self.model, self.label_decoder = inf.load_model_and_decoder(
-                "../training/cnn_model.pt", trn.num_classes, "../training/encodings.txt"
+                ut.get_model_path(), trn.num_classes, ut.get_encodings_path()
             )
 
         self.state_saver = ss.StateSaver("mainwindow")
@@ -436,7 +436,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Show the predictions in the result box.
         """
-        print(83756329856429)
 
         # Empty out the widget containing the predictions.
         # self.widget_predictions.layout().deleteLater()

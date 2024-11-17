@@ -1,22 +1,18 @@
-import torch
-import csv
-import torch.nn.functional as F
-from torch import optim
 import matplotlib.pyplot as plt
+import torch
+import torch.nn.functional as F
+from safetensors.torch import save_file
+from sklearn.preprocessing import LabelEncoder
 from torch import nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-from importlib import resources
-from sklearn.preprocessing import LabelEncoder
-from safetensors.torch import save_file
 
+import handtex.utils as ut
 from training.image_gen import (
     StrokeDataset,
     recalculate_frequencies,
     recalculate_encodings,
 )
-
-import handtex.utils as ut
 
 
 class CNN(nn.Module):

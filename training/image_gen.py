@@ -5,7 +5,7 @@ import cv2
 from math import ceil
 from importlib import resources
 import torch
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 import sqlite3
 import json

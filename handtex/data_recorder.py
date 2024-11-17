@@ -61,7 +61,7 @@ class DataRecorder:
                     # Find it's leader if it isn't one.
                     new_key = drawing["key"]
                     if new_key in self.symbols:
-                        new_frequencies[drawing["key"]] += 1
+                        new_frequencies[new_key] += 1
                     else:
                         leader = lookalikes[new_key][0]
                         assert leader in self.symbols

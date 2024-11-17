@@ -366,6 +366,10 @@ def load_dict_to_attrs_safely(
     return recoverable_exceptions
 
 
+def resource_path(module, resource=""):
+    return resources.as_file(resources.files(module).joinpath(resource))
+
+
 def load_symbols() -> dict[str, st.Symbol]:
     """
     Load the symbols from the symbols.json file.

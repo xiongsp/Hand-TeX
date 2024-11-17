@@ -342,7 +342,6 @@ latex2e-OT1-_Re
 latex2e-OT1-_Rightarrow
 latex2e-OT1-_S
 latex2e-OT1-_SS
-latex2e-OT1-_Sigma
 latex2e-OT1-_Theta
 latex2e-OT1-_Uparrow
 latex2e-OT1-_Updownarrow
@@ -554,7 +553,6 @@ marvosym-OT1-_Smiley
 marvosym-OT1-_Telefon
 marvosym-OT1-_Uranus
 marvosym-OT1-_Yinyang
-marvosym-OT1-_fax
 mathdots-OT1-_iddots
 mathrsfs-OT1-_mathscr{A}
 mathrsfs-OT1-_mathscr{B}

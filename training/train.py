@@ -100,6 +100,8 @@ symbol_keys = ut.select_leader_symbols(symbol_keys, similar_symbols)
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
+print(f"Using {device} device")
+
 num_classes = len(symbol_keys)
 learning_rate = 0.001
 batch_size = 64

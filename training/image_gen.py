@@ -13,7 +13,7 @@ from sklearn.preprocessing import LabelEncoder
 
 import handtex.utils as ut
 import handtex.data.model
-import handtex.data
+import handtex.data.symbol_metadata
 
 # TODO make synthetic data for compound chars.
 
@@ -161,7 +161,7 @@ def tensorize_strokes(stroke_data: list[list[tuple[int, int]]], image_size: int)
     return img_tensor
 
 
-def dump_encoder(label_encoder, labels, path="encodings.txt"):
+def dump_encoder(label_encoder: LabelEncoder, labels: list[str], path: Path | str):
     encoded_labels = label_encoder.transform(labels)
     # Create a decoder dictionary to map encoded labels back to symbols
     decoder: list[tuple[int, str]] = [
@@ -202,7 +202,7 @@ def recalculate_encodings():
     label_encoder.fit(symbol_keys)
 
     encoding_path = ut.get_encodings_path()
-    dump_encoder(label_encoder, encoding_path)
+    dump_encoder(label_encoder, symbol_keys, encoding_path)
 
 
 def recalculate_frequencies():
@@ -214,22 +214,24 @@ def recalculate_frequencies():
     # Limit the number of classes to classify.
     symbol_keys = ut.select_leader_symbols(list(symbols.keys()), similar_symbols)
 
-    with resources.path(handtex.data, "symbol_frequency.csv") as path:
+    with resources.path(handtex.data.symbol_metadata, "symbol_frequency.csv") as path:
         frequencies_path = path
 
-    with resources.path(handtex.data, "leader_symbol_frequency.csv") as path:
+    with resources.path(handtex.data.symbol_metadata, "leader_symbol_frequency.csv") as path:
         leader_frequencies_path = path
 
     # Get the frequencies from the database.
     conn = sqlite3.connect(database_path)
     cursor = conn.cursor()
-    cursor.execute("SELECT key, COUNT(*) FROM samples GROUP BY key ORDER BY key DESC")
+    # cursor.execute("SELECT key, COUNT(*) FROM samples GROUP BY key ORDER BY count ASC")
+    # Sort by the count of each symbol in descending order.
+    cursor.execute("SELECT key, COUNT(*) AS count FROM samples GROUP BY key ORDER BY count DESC")
     rows = cursor.fetchall()
     frequencies = {key: count for key, count in rows}
     conn.close()
 
     with open(frequencies_path, "w") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerows(frequencies.items())
 
     # Calculate new frequencies for the leader symbols
@@ -240,7 +242,7 @@ def recalculate_frequencies():
     # Dump the new frequencies to a CSV file, sorted by frequency.
     sorted_frequencies = sorted(leader_frequencies.items(), key=lambda item: item[1], reverse=True)
     with open(leader_frequencies_path, "w") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerows(sorted_frequencies)
 
     symbol_mean_freq = sum(frequencies.values()) / len(frequencies)

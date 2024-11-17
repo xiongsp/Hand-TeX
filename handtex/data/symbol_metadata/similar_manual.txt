@@ -92,6 +92,7 @@ latex2e-T1-_dj tipa-OT1-_textcrd
 latex2e-T1-_textquotedbl textcomp-OT1-_textquotestraightdblbase
 marvosym-OT1-_EUR marvosym-OT1-_EURcr marvosym-OT1-_EURdig marvosym-OT1-_EURhv marvosym-OT1-_EURtm
 marvosym-OT1-_Ecommerce textcomp-OT1-_textestimated
+marvosym-OT1-_FAX marvosym-OT1-_fax
 marvosym-OT1-_Lightning stmaryrd-OT1-_lightning wasysym-OT1-_lightning
 marvosym-OT1-_Moon wasysym-OT1-_rightmoon
 marvosym-OT1-_Telefon wasysym-OT1-_phone

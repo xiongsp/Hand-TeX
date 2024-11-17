@@ -5,7 +5,7 @@ latex2e-OT1-_Omega gensymb-OT1-_ohm tipa-OT1-_textscomega upgreek-OT1-_Upomega
 latex2e-OT1-_Phi latex2e-OT1-_phi tipa-OT1-_textphi upgreek-OT1-_Upphi
 latex2e-OT1-_Pi latex2e-OT1-_prod upgreek-OT1-_Uppi
 latex2e-OT1-_Psi latex2e-OT1-_psi upgreek-OT1-_Uppsi upgreek-OT1-_uppsi
-latex2e-OT1-_Sigma upgreek-OT1-_Upsigma
+latex2e-OT1-_sum latex2e-OT1-_Sigma upgreek-OT1-_Upsigma
 latex2e-OT1-_Theta upgreek-OT1-_Uptheta
 latex2e-OT1-_Upsilon upgreek-OT1-_Upupsilon
 latex2e-OT1-_Xi upgreek-OT1-_Upxi

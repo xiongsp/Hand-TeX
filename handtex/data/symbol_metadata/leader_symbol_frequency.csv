@@ -1,4 +1,4 @@
-latex2e-OT1-_sum,5834
+latex2e-OT1-_Sigma,5834
 latex2e-OT1-_int,4507
 latex2e-OT1-_alpha,3061
 latex2e-OT1-_bigcirc,2867
@@ -21,7 +21,7 @@ amssymb-OT1-_square,1891
 latex2e-OT1-_longrightarrow,1889
 amssymb-OT1-_neq,1806
 latex2e-OT1-_bot,1775
-latex2e-OT1-_in,1767
+latex2e-OT1-_epsilon,1767
 latex2e-OT1-_subseteq,1723
 latex2e-OT1-_bigoplus,1695
 latex2e-OT1-_Phi,1650
@@ -55,7 +55,7 @@ latex2e-OT1-_oint,1233
 amssymb-OT1-_checkmark,1230
 latex2e-OT1-_bigotimes,1209
 latex2e-OT1-_#,1209
-latex2e-OT1-_Vert,1162
+latex2e-OT1-_mid,1161
 latex2e-OT1-_delta,1108
 latex2e-OT1-_vdash,1101
 amssymb-OT1-_leq,1090
@@ -93,8 +93,8 @@ latex2e-OT1-_textless,761
 marvosym-OT1-_EUR,755
 latex2e-OT1-_models,753
 amssymb-OT1-_gg,753
+latex2e-OT1-_Vert,743
 latex2e-OT1-_textgreater,743
-latex2e-OT1-_parallel,742
 amssymb-OT1-_gtrsim,738
 latex2e-OT1-_hookrightarrow,736
 stmaryrd-OT1-_llbracket,688
@@ -225,6 +225,7 @@ mathrsfs-OT1-_mathscr{H},179
 textcomp-OT1-_textinterrobang,177
 amssymb-OT1-_mathcal{Z},177
 amsmath-OT1-_iiint,176
+latex2e-OT1-_varpi,175
 amssymb-OT1-_curvearrowright,175
 latex2e-OT1-],174
 amssymb-OT1-_mathfrak{A},172
@@ -246,7 +247,6 @@ amssymb-OT1-_because,155
 wasysym-OT1-_sun,155
 stmaryrd-OT1-_longmapsfrom,154
 latex2e-OT1-_Leftarrow,152
-latex2e-OT1-_varpi,150
 marvosym-OT1-_Cross,150
 wasysym-OT1-_cancer,147
 latex2e-OT1-_doteq,146
@@ -303,7 +303,7 @@ latex2e-OT1-_rfloor,105
 amssymb-OT1-_subsetneqq,100
 amssymb-OT1-_ulcorner,99
 amssymb-OT1-_sphericalangle,99
-tipa-OT1-_textupsilon,98
+amssymb-OT1-_mho,98
 latex2e-OT1-_wr,98
 amssymb-OT1-_blacktriangle,97
 tipa-OT1-_textschwa,97
@@ -522,7 +522,6 @@ tipa-OT1-_textrhookschwa,25
 amssymb-OT1-_lessapprox,25
 amssymb-OT1-_gtrapprox,25
 amssymb-OT1-_Rsh,25
-upgreek-OT1-_upvarpi,25
 amssymb-OT1-_mathfrak{u},25
 marvosym-OT1-_Faxmachine,25
 tipa-OT1-_textinvglotstop,24

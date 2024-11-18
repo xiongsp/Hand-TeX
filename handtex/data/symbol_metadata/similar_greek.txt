@@ -32,6 +32,7 @@ latex2e-OT1-_theta tipa-OT1-_texttheta upgreek-OT1-_uptheta
 latex2e-OT1-_upsilon tipa-OT1-_textscriptv upgreek-OT1-_upupsilon
 latex2e-OT1-_varepsilon amssymb-OT1-_mathcal{E} tipa-OT1-_textepsilon upgreek-OT1-_upvarepsilon
 latex2e-OT1-_varphi upgreek-OT1-_upvarphi
+latex2e-OT1-_varpi upgreek-OT1-_upvarpi
 latex2e-OT1-_vartheta upgreek-OT1-_upvartheta
 latex2e-OT1-_xi upgreek-OT1-_upxi
 latex2e-OT1-_zeta upgreek-OT1-_upzeta

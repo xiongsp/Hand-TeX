@@ -242,3 +242,4 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 /AUR/
 /handtex/data/model/encodings.txt
+/training/database/handtex.db copy

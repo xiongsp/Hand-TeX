@@ -1,5 +1,5 @@
-# input_file = "../../handtex/data/symbol_metadata/similar_manual.txt"
-input_file = "../../handtex/data/symbol_metadata/similar_greek.txt"
+input_file = "../../handtex/data/symbol_metadata/similar_manual.txt"
+# input_file = "../../handtex/data/symbol_metadata/similar_greek.txt"
 
 # Split each line into a list of symbols.
 # Sort this list of symbols.

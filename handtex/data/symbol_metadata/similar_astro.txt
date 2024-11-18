@@ -1,10 +1,9 @@
-wasysym-OT1-_aries marvosym-OT1-_Aries wasysym-OT1-_vernal
 wasysym-OT1-_taurus marvosym-OT1-_Taurus
 wasysym-OT1-_gemini marvosym-OT1-_Gemini
 wasysym-OT1-_cancer marvosym-OT1-_Cancer
 wasysym-OT1-_leo marvosym-OT1-_Leo wasysym-OT1-_ascnode
 wasysym-OT1-_virgo marvosym-OT1-_Virgo
-wasysym-OT1-_libra marvosym-OT1-_Libra
+wasysym-OT1-_libra marvosym-OT1-_Libra amssymb-OT1-_bumpeq
 wasysym-OT1-_scorpio marvosym-OT1-_Scorpio
 wasysym-OT1-_sagittarius marvosym-OT1-_Sagittarius
 wasysym-OT1-_capricornus marvosym-OT1-_Capricorn

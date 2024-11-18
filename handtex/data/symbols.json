@@ -32,7 +32,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "latex2e-OT1-_textasteriskcentered",
-    "filename": "BEF70"
+    "filename": "64973"
   },
   {
     "command": "\\textordmasculine",
@@ -46,7 +46,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "latex2e-OT1-_textbackslash",
-    "filename": "DA15E"
+    "filename": "64D5B"
   },
   {
     "command": "\\textparagraph",
@@ -60,14 +60,14 @@
     "mathmode": false,
     "textmode": true,
     "key": "latex2e-OT1-_textbar",
-    "filename": "692A0"
+    "filename": "1041D"
   },
   {
     "command": "\\textperiodcentered",
     "mathmode": false,
     "textmode": true,
     "key": "latex2e-OT1-_textperiodcentered",
-    "filename": "E4E88"
+    "filename": "ACF67"
   },
   {
     "command": "\\textbraceleft",
@@ -88,7 +88,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "latex2e-OT1-_textbraceright",
-    "filename": "B52EF"
+    "filename": "30FD8"
   },
   {
     "command": "\\textquotedblleft",
@@ -144,7 +144,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "latex2e-OT1-_textdaggerdbl",
-    "filename": "E4D89"
+    "filename": "8E8E1"
   },
   {
     "command": "\\textregistered",
@@ -165,21 +165,21 @@
     "mathmode": false,
     "textmode": true,
     "key": "latex2e-OT1-_textsection",
-    "filename": "FC4A5"
+    "filename": "B226D"
   },
   {
     "command": "\\textellipsis",
     "mathmode": false,
     "textmode": true,
     "key": "latex2e-OT1-_textellipsis",
-    "filename": "0E6C6"
+    "filename": "4A946"
   },
   {
     "command": "\\textsterling",
     "mathmode": false,
     "textmode": true,
     "key": "latex2e-OT1-_textsterling",
-    "filename": "19165"
+    "filename": "A300D"
   },
   {
     "command": "\\textemdash",
@@ -193,7 +193,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "latex2e-OT1-_texttrademark",
-    "filename": "0DDEA"
+    "filename": "D68C3"
   },
   {
     "command": "\\textendash",
@@ -207,7 +207,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "latex2e-OT1-_textunderscore",
-    "filename": "D4BE6"
+    "filename": "72CD4"
   },
   {
     "command": "\\textexclamdown",
@@ -242,21 +242,21 @@
     "mathmode": true,
     "textmode": true,
     "key": "latex2e-OT1-_$",
-    "filename": "E458D"
+    "filename": "ACFC3"
   },
   {
     "command": "\\_",
     "mathmode": true,
     "textmode": true,
     "key": "latex2e-OT1-__",
-    "filename": "D4BE6"
+    "filename": "72CD4"
   },
   {
     "command": "\\ddag",
     "mathmode": true,
     "textmode": true,
     "key": "latex2e-OT1-_ddag",
-    "filename": "71035"
+    "filename": "D3954"
   },
   {
     "command": "\\{",
@@ -270,7 +270,7 @@
     "mathmode": true,
     "textmode": true,
     "key": "latex2e-OT1-_P",
-    "filename": "B62A8"
+    "filename": "66B26"
   },
   {
     "command": "\\copyright",
@@ -284,14 +284,14 @@
     "mathmode": true,
     "textmode": true,
     "key": "latex2e-OT1-_dots",
-    "filename": "0E6C6"
+    "filename": "4A946"
   },
   {
     "command": "\\}",
     "mathmode": true,
     "textmode": true,
     "key": "latex2e-OT1-_}",
-    "filename": "B52EF"
+    "filename": "30FD8"
   },
   {
     "command": "\\S",
@@ -312,7 +312,7 @@
     "mathmode": true,
     "textmode": true,
     "key": "latex2e-OT1-_pounds",
-    "filename": "21E51"
+    "filename": "4D919"
   },
   {
     "command": "\\&",
@@ -399,7 +399,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "latex2e-OT1-_o",
-    "filename": "0002D"
+    "filename": "A70EB"
   },
   {
     "command": "\\ss",
@@ -2030,7 +2030,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "textcomp-OT1-_textsterling",
-    "filename": "19165"
+    "filename": "A300D"
   },
   {
     "command": "\\Denarius",
@@ -2174,7 +2174,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "textcomp-OT1-_texttrademark",
-    "filename": "0DDEA"
+    "filename": "D68C3"
   },
   {
     "command": "\\textasteriskcentered",
@@ -2182,7 +2182,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "textcomp-OT1-_textasteriskcentered",
-    "filename": "BEF70"
+    "filename": "64973"
   },
   {
     "command": "\\textordfeminine",
@@ -2238,7 +2238,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "textcomp-OT1-_textperiodcentered",
-    "filename": "E4E88"
+    "filename": "ACF67"
   },
   {
     "command": "\\textbrokenbar",
@@ -2294,7 +2294,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "textcomp-OT1-_textdaggerdbl",
-    "filename": "E4D89"
+    "filename": "8E8E1"
   },
   {
     "command": "\\textquotesingle",
@@ -2382,7 +2382,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "textcomp-OT1-_textsection",
-    "filename": "FC4A5"
+    "filename": "B226D"
   },
   {
     "command": "\\textinterrobangdown",
@@ -2453,28 +2453,28 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_mathdollar",
-    "filename": "E458D"
+    "filename": "ACFC3"
   },
   {
     "command": "\\mathparagraph",
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_mathparagraph",
-    "filename": "B62A8"
+    "filename": "66B26"
   },
   {
     "command": "\\mathsterling",
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_mathsterling",
-    "filename": "21E51"
+    "filename": "4D919"
   },
   {
     "command": "\\mathellipsis",
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_mathellipsis",
-    "filename": "0E6C6"
+    "filename": "4A946"
   },
   {
     "command": "\\mathsection",
@@ -2488,7 +2488,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_mathunderscore",
-    "filename": "D4BE6"
+    "filename": "72CD4"
   },
   {
     "command": "\\amalg",
@@ -2558,7 +2558,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_ddagger",
-    "filename": "71035"
+    "filename": "D3954"
   },
   {
     "command": "\\otimes",
@@ -2600,7 +2600,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_bigtriangleup",
-    "filename": "93861"
+    "filename": "4C016"
   },
   {
     "command": "\\div",
@@ -2621,7 +2621,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_setminus",
-    "filename": "DA15E"
+    "filename": "64D5B"
   },
   {
     "command": "\\uplus",
@@ -2656,7 +2656,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_vee",
-    "filename": "176CB"
+    "filename": "EC415"
   },
   {
     "command": "\\cdot",
@@ -2684,7 +2684,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_wedge",
-    "filename": "0712E"
+    "filename": "0F9BE"
   },
   {
     "command": "\\circ",
@@ -2936,7 +2936,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "wasysym-OT1-_LHD",
-    "filename": "7DF1B"
+    "filename": "7FB12"
   },
   {
     "command": "\\rhd",
@@ -2953,6 +2953,14 @@
     "textmode": false,
     "key": "wasysym-OT1-_unlhd",
     "filename": "96D47"
+  },
+  {
+    "command": "\\Join",
+    "package": "wasysym",
+    "mathmode": true,
+    "textmode": false,
+    "key": "wasysym-OT1-_Join",
+    "filename": "98EBC"
   },
   {
     "command": "\\bigcap",
@@ -3253,7 +3261,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_perp",
-    "filename": "E9F9E"
+    "filename": "63E17"
   },
   {
     "command": "\\smile",
@@ -3298,13 +3306,6 @@
     "filename": "D97C9"
   },
   {
-    "command": "\\Join",
-    "mathmode": true,
-    "textmode": false,
-    "key": "latex2e-OT1-_Join",
-    "filename": "D97C9"
-  },
-  {
     "command": "\\preceq",
     "mathmode": true,
     "textmode": false,
@@ -3330,7 +3331,21 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_mid",
-    "filename": "692A0"
+    "filename": "1041D"
+  },
+  {
+    "command": "\\vert",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_vert",
+    "filename": "1041D"
+  },
+  {
+    "command": "\\Vert",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_Vert",
+    "filename": "47D74"
   },
   {
     "command": "\\propto",
@@ -3386,7 +3401,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_parallel",
-    "filename": "C8D0E"
+    "filename": "47D74"
   },
   {
     "command": "\\simeq",
@@ -3401,6 +3416,27 @@
     "textmode": false,
     "key": "latex2e-OT1-_not_simeq",
     "filename": "9B1CA"
+  },
+  {
+    "command": "\\land",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_land",
+    "filename": "0F9BE"
+  },
+  {
+    "command": "\\lor",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_lor",
+    "filename": "EC415"
+  },
+  {
+    "command": "\\lnot",
+    "mathmode": true,
+    "textmode": false,
+    "key": "latex2e-OT1-_lnot",
+    "filename": "D7496"
   },
   {
     "command": "\\approxeq",
@@ -3875,6 +3911,14 @@
     "textmode": false,
     "key": "amssymb-OT1-_nsubseteq",
     "filename": "AEB3E"
+  },
+  {
+    "command": "\\nsubseteqq",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_nsubseteqq",
+    "filename": "6767B"
   },
   {
     "command": "\\subseteqq",
@@ -4886,6 +4930,38 @@
     "filename": "E116F"
   },
   {
+    "command": "\\llcorner",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_llcorner",
+    "filename": "86DD9"
+  },
+  {
+    "command": "\\lrcorner",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_lrcorner",
+    "filename": "87BC8"
+  },
+  {
+    "command": "\\ulcorner",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_ulcorner",
+    "filename": "09023"
+  },
+  {
+    "command": "\\urcorner",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_urcorner",
+    "filename": "7DF27"
+  },
+  {
     "command": "\\nLeftarrow",
     "package": "amssymb",
     "mathmode": true,
@@ -5390,7 +5466,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_Omega",
-    "filename": "7F8B8"
+    "filename": "EB057"
   },
   {
     "command": "\\Theta",
@@ -5699,7 +5775,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "upgreek-OT1-_upsigma",
-    "filename": "ECCE6"
+    "filename": "51260"
   },
   {
     "command": "\\upvarsigma",
@@ -5707,7 +5783,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "upgreek-OT1-_upvarsigma",
-    "filename": "ECCE6"
+    "filename": "51260"
   },
   {
     "command": "\\uptau",
@@ -5754,7 +5830,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_bot",
-    "filename": "E9F9E"
+    "filename": "63E17"
   },
   {
     "command": "\\forall",
@@ -6059,14 +6135,14 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-|",
-    "filename": "692A0"
+    "filename": "1041D"
   },
   {
     "command": "\\|",
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_|",
-    "filename": "C8D0E"
+    "filename": "47D74"
   },
   {
     "command": "/",
@@ -6172,7 +6248,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_cdots",
-    "filename": "BF6D3"
+    "filename": "02CEA"
   },
   {
     "command": "\\ddots",
@@ -6186,7 +6262,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_ldots",
-    "filename": "0E6C6"
+    "filename": "4A946"
   },
   {
     "command": "\\dotsi",
@@ -6202,7 +6278,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "amsmath-OT1-_dotsb",
-    "filename": "BF6D3"
+    "filename": "02CEA"
   },
   {
     "command": "\\dotsm",
@@ -6210,7 +6286,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "amsmath-OT1-_dotsm",
-    "filename": "BF6D3"
+    "filename": "02CEA"
   },
   {
     "command": "\\dotsc",
@@ -6218,7 +6294,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "amsmath-OT1-_dotsc",
-    "filename": "0E6C6"
+    "filename": "4A946"
   },
   {
     "command": "\\dotso",
@@ -6226,7 +6302,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "amsmath-OT1-_dotso",
-    "filename": "0E6C6"
+    "filename": "4A946"
   },
   {
     "command": "\\aleph",
@@ -6275,7 +6351,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_backslash",
-    "filename": "DA15E"
+    "filename": "64D5B"
   },
   {
     "command": "\\emptyset",
@@ -6345,7 +6421,7 @@
     "mathmode": true,
     "textmode": false,
     "key": "latex2e-OT1-_triangle",
-    "filename": "93861"
+    "filename": "4C016"
   },
   {
     "command": "\\sqrt{}",
@@ -6497,6 +6573,30 @@
     "textmode": false,
     "key": "amssymb-OT1-_vartriangle",
     "filename": "6849B"
+  },
+  {
+    "command": "\\beth",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_beth",
+    "filename": "4CE08"
+  },
+  {
+    "command": "\\daleth",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_daleth",
+    "filename": "9E7D8"
+  },
+  {
+    "command": "\\gimel",
+    "package": "amssymb",
+    "mathmode": true,
+    "textmode": false,
+    "key": "amssymb-OT1-_gimel",
+    "filename": "79ADC"
   },
   {
     "command": "\\textdegree",
@@ -7712,7 +7812,7 @@
     "mathmode": true,
     "textmode": true,
     "key": "gensymb-OT1-_ohm",
-    "filename": "7F8B8"
+    "filename": "EB057"
   },
   {
     "command": "\\conjunction",
@@ -7848,7 +7948,7 @@
     "mathmode": true,
     "textmode": true,
     "key": "wasysym-OT1-_aries",
-    "filename": "7CE8C"
+    "filename": "2CDDF"
   },
   {
     "command": "\\cancer",
@@ -7888,7 +7988,7 @@
     "mathmode": true,
     "textmode": true,
     "key": "wasysym-OT1-_leo",
-    "filename": "5DEBD"
+    "filename": "A8974"
   },
   {
     "command": "\\scorpio",
@@ -7944,7 +8044,7 @@
     "mathmode": true,
     "textmode": true,
     "key": "wasysym-OT1-_ascnode",
-    "filename": "5DEBD"
+    "filename": "A8974"
   },
   {
     "command": "\\descnode",
@@ -7960,7 +8060,7 @@
     "mathmode": true,
     "textmode": true,
     "key": "wasysym-OT1-_vernal",
-    "filename": "7CE8C"
+    "filename": "2CDDF"
   },
   {
     "command": "\\Mercury",
@@ -8248,7 +8348,7 @@
     "mathmode": false,
     "textmode": true,
     "key": "wasysym-OT1-_LEFTarrow",
-    "filename": "7DF1B"
+    "filename": "7FB12"
   },
   {
     "command": "\\RIGHTarrow",
@@ -8336,7 +8436,7 @@
     "mathmode": true,
     "textmode": true,
     "key": "wasysym-OT1-_clock",
-    "filename": "0002D"
+    "filename": "A70EB"
   },
   {
     "command": "\\smiley",
@@ -8513,5 +8613,29 @@
     "textmode": true,
     "key": "marvosym-OT1-_MVRightarrow",
     "filename": "D1DCD"
+  },
+  {
+    "command": "\\leftouterjoin",
+    "package": "stix2",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stix2-OT1-_leftouterjoin",
+    "filename": "FA3B7"
+  },
+  {
+    "command": "\\rightouterjoin",
+    "package": "stix2",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stix2-OT1-_rightouterjoin",
+    "filename": "8BDC7"
+  },
+  {
+    "command": "\\fullouterjoin",
+    "package": "stix2",
+    "mathmode": true,
+    "textmode": false,
+    "key": "stix2-OT1-_fullouterjoin",
+    "filename": "A46FF"
   }
 ]

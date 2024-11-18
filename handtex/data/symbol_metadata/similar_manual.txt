@@ -6,7 +6,10 @@ amssymb-OT1-_blacksquare amssymb-OT1-_centerdot
 amssymb-OT1-_blacktriangle wasysym-OT1-_UParrow
 amssymb-OT1-_blacktriangledown tipa-OT1-_texthalflength wasysym-OT1-_DOWNarrow
 amssymb-OT1-_checkmark wasysym-OT1-_checked
+amssymb-OT1-_complement tipa-OT1-_textstretchc
 amssymb-OT1-_maltese wasysym-OT1-_kreuz
+amssymb-OT1-_mathcal{N} mathrsfs-OT1-_mathscr{N}
+amssymb-OT1-_neq tipa-OT1-_textdoublebarpipe tipa-OT1-_textdoublebarslash
 amssymb-OT1-_nmid amssymb-OT1-_nshortmid
 amssymb-OT1-_subsetneq amssymb-OT1-_varsubsetneq
 amssymb-OT1-_subsetneqq amssymb-OT1-_varsubsetneqq
@@ -15,6 +18,8 @@ amssymb-OT1-_supsetneqq amssymb-OT1-_varsupsetneqq
 amssymb-OT1-_trianglelefteq wasysym-OT1-_unlhd
 amssymb-OT1-_trianglerighteq wasysym-OT1-_unrhd
 bbold-OT1-_mathbb{1} dsfont-OT1-_mathds{1}
+esint-OT1-_fint tipa-OT1-_texthtbardotlessj
+esint-OT1-_oiint esint-OT1-_varoiint
 latex2e-OT1-!` latex2e-OT1-_textexclamdown
 latex2e-OT1-/ textcomp-OT1-_textfractionsolidus
 latex2e-OT1-_$ latex2e-OT1-_mathdollar latex2e-OT1-_textdollar marvosym-OT1-_EyesDollar textcomp-OT1-_textdollar
@@ -22,30 +27,39 @@ latex2e-OT1-_% textcomp-OT1-_textdiscount
 latex2e-OT1-_& cmll-OT1-_with
 latex2e-OT1-_-- latex2e-OT1-_--- latex2e-OT1-_---- latex2e-OT1-__ latex2e-OT1-_mathunderscore latex2e-OT1-_textemdash latex2e-OT1-_textendash latex2e-OT1-_textunderscore textcomp-OT1-_textminus textcomp-OT1-_textthreequartersemdash textcomp-OT1-_texttwelveudash
 latex2e-OT1-_Im amssymb-OT1-_mathfrak{I}
-latex2e-OT1-_Join latex2e-OT1-_bowtie wasysym-OT1-_Bowtie
+wasysym-OT1-_Join latex2e-OT1-_bowtie wasysym-OT1-_Bowtie
+latex2e-OT1-_Leftarrow latex2e-OT1-_Longleftarrow
+latex2e-OT1-_Leftrightarrow latex2e-OT1-_Longleftrightarrow
+latex2e-OT1-_Longrightarrow latex2e-OT1-_Rightarrow
+latex2e-OT1-_O latex2e-OT1-_emptyset latex2e-OT1-_o amssymb-OT1-_varnothing wasysym-OT1-_clock wasysym-OT1-_diameter
+latex2e-OT1-_OE tipa-OT1-_textscoelig
 latex2e-OT1-_P latex2e-OT1-_mathparagraph latex2e-OT1-_textparagraph textcomp-OT1-_textparagraph
 latex2e-OT1-_Re amssymb-OT1-_mathfrak{R}
 latex2e-OT1-_S latex2e-OT1-_mathsection latex2e-OT1-_textsection textcomp-OT1-_textsection
+latex2e-OT1-_amalg latex2e-OT1-_coprod
 latex2e-OT1-_angle amssymb-OT1-_angle
+latex2e-OT1-_approx amssymb-OT1-_thickapprox
 latex2e-OT1-_ast latex2e-OT1-_textasteriskcentered textcomp-OT1-_textasteriskcentered
 latex2e-OT1-_backslash latex2e-OT1-_setminus latex2e-OT1-_textbackslash
 latex2e-OT1-_bigcap latex2e-OT1-_cap
 latex2e-OT1-_bigcirc latex2e-OT1-_circ gensymb-OT1-_degree textcomp-OT1-_textbigcircle textcomp-OT1-_textdegree textcomp-OT1-_textopenbullet wasysym-OT1-_fullmoon wasysym-OT1-_ocircle
-latex2e-OT1-_bigcup latex2e-OT1-_cup
+latex2e-OT1-_bigcup latex2e-OT1-_cup tipa-OT1-_textscu
 latex2e-OT1-_bigodot latex2e-OT1-_odot marvosym-OT1-_Sun tipa-OT1-_textbullseye wasysym-OT1-_astrosun
 latex2e-OT1-_bigoplus latex2e-OT1-_oplus
 latex2e-OT1-_bigotimes latex2e-OT1-_otimes
 latex2e-OT1-_bigsqcup latex2e-OT1-_sqcup
 latex2e-OT1-_biguplus latex2e-OT1-_uplus
-latex2e-OT1-_bigvee latex2e-OT1-_vee
+latex2e-OT1-_bigvee latex2e-OT1-_lor latex2e-OT1-_vee
 latex2e-OT1-_bot latex2e-OT1-_perp
 latex2e-OT1-_bullet latex2e-OT1-_cdot latex2e-OT1-_cdotp latex2e-OT1-_ldotp latex2e-OT1-_textbullet latex2e-OT1-_textperiodcentered textcomp-OT1-_textbullet textcomp-OT1-_textperiodcentered wasysym-OT1-_newmoon
 latex2e-OT1-_cdots latex2e-OT1-_dots latex2e-OT1-_ldots latex2e-OT1-_mathellipsis latex2e-OT1-_textellipsis amsmath-OT1-_dotsb amsmath-OT1-_dotsc amsmath-OT1-_dotsi amsmath-OT1-_dotsm amsmath-OT1-_dotso
 latex2e-OT1-_copyright latex2e-OT1-_textcopyright textcomp-OT1-_textcopyright
 latex2e-OT1-_dag latex2e-OT1-_dagger latex2e-OT1-_textdagger textcomp-OT1-_textdagger
 latex2e-OT1-_ddag latex2e-OT1-_ddagger latex2e-OT1-_textdaggerdbl textcomp-OT1-_textdaggerdbl
+latex2e-OT1-_diamond latex2e-OT1-_diamondsuit amssymb-OT1-_blacklozenge amssymb-OT1-_lozenge
 latex2e-OT1-_div textcomp-OT1-_textdiv
 latex2e-OT1-_downarrow stmaryrd-OT1-_shortdownarrow textcomp-OT1-_textdownarrow tipa-OT1-_textdownstep
+latex2e-OT1-_frown amssymb-OT1-_smallfrown
 latex2e-OT1-_hbar amssymb-OT1-_hbar amssymb-OT1-_hslash tipa-OT1-_textcrh
 latex2e-OT1-_heartsuit marvosym-OT1-_Heart
 latex2e-OT1-_imath tipa-OT1-_textraisevibyi tipa-OT1-_textvibyi
@@ -53,22 +67,26 @@ latex2e-OT1-_int stmaryrd-OT1-_Rbag stmaryrd-OT1-_rbag tipa-OT1-_textesh
 latex2e-OT1-_jmath amssymb-OT1-_mathcal{J}
 latex2e-OT1-_langle textcomp-OT1-_textlangle
 latex2e-OT1-_leftarrow latex2e-OT1-_longleftarrow stmaryrd-OT1-_shortleftarrow textcomp-OT1-_textleftarrow
+latex2e-OT1-_leftrightarrow latex2e-OT1-_longleftrightarrow
 latex2e-OT1-_longmapsto latex2e-OT1-_mapsto
 latex2e-OT1-_longrightarrow latex2e-OT1-_rightarrow marvosym-OT1-_MVRightarrow stmaryrd-OT1-_shortrightarrow textcomp-OT1-_textrightarrow
 latex2e-OT1-_mathsterling latex2e-OT1-_pounds latex2e-OT1-_textsterling textcomp-OT1-_textsterling
-latex2e-OT1-_mid latex2e-OT1-_textbar latex2e-OT1-| amssymb-OT1-_shortmid tipa-OT1-_textpipe tipa-OT1-_textprimstress tipa-OT1-_textsecstress tipa-OT1-_texttoneletterstem tipa-OT1-_textvertline
+latex2e-OT1-_mid latex2e-OT1-_textbar latex2e-OT1-| amssymb-OT1-_shortmid tipa-OT1-_textpipe tipa-OT1-_textprimstress tipa-OT1-_textsecstress tipa-OT1-_texttoneletterstem tipa-OT1-_textvertline latex2e-OT1-_vert latex2e-OT1-_Vert
+latex2e-OT1-_models amssymb-OT1-_vDash
 latex2e-OT1-_nearrow tipa-OT1-_textglobrise
-latex2e-OT1-_neg textcomp-OT1-_textlnot
+latex2e-OT1-_neg textcomp-OT1-_textlnot latex2e-OT1-_lnot
+latex2e-OT1-_ni amssymb-OT1-_backepsilon
 latex2e-OT1-_not_sim amssymb-OT1-_nsim
-latex2e-OT1-_o wasysym-OT1-_clock
 latex2e-OT1-_ominus tipa-OT1-_textbaro
 latex2e-OT1-_parallel latex2e-OT1-_| amssymb-OT1-_shortparallel textcomp-OT1-_textbardbl tipa-OT1-_textdoublepipe tipa-OT1-_textdoublevertline
 latex2e-OT1-_pm textcomp-OT1-_textpm
+latex2e-OT1-_prime tipa-OT1-_textceltpal
 latex2e-OT1-_propto amssymb-OT1-_varpropto
 latex2e-OT1-_rangle textcomp-OT1-_textrangle
 latex2e-OT1-_rightleftharpoons amssymb-OT1-_rightleftharpoons
 latex2e-OT1-_searrow tipa-OT1-_textglobfall
 latex2e-OT1-_sim latex2e-OT1-_textasciitilde amssymb-OT1-_thicksim textcomp-OT1-_texttildelow
+latex2e-OT1-_smile amssymb-OT1-_smallsmile
 latex2e-OT1-_sqrt{} latex2e-OT1-_surd textcomp-OT1-_textsurd
 latex2e-OT1-_star amssymb-OT1-_bigstar
 latex2e-OT1-_textbraceleft latex2e-OT1-_{
@@ -83,8 +101,8 @@ latex2e-OT1-_textregistered amssymb-OT1-_circledR textcomp-OT1-_textregistered
 latex2e-OT1-_texttrademark textcomp-OT1-_texttrademark
 latex2e-OT1-_times textcomp-OT1-_texttimes
 latex2e-OT1-_top amssymb-OT1-_intercal
-latex2e-OT1-_triangleleft amssymb-OT1-_vartriangleleft wasysym-OT1-_lhd
-latex2e-OT1-_triangleright amssymb-OT1-_vartriangleright wasysym-OT1-_rhd
+latex2e-OT1-_triangleleft amssymb-OT1-_blacktriangleleft amssymb-OT1-_vartriangleleft wasysym-OT1-_lhd
+latex2e-OT1-_triangleright amssymb-OT1-_blacktriangleright amssymb-OT1-_vartriangleright wasysym-OT1-_RHD wasysym-OT1-_RIGHTarrow wasysym-OT1-_rhd
 latex2e-OT1-_uparrow stmaryrd-OT1-_shortuparrow textcomp-OT1-_textuparrow tipa-OT1-_textupstep
 latex2e-T1-_DH latex2e-T1-_DJ
 latex2e-T1-_TH latex2e-T1-_th tipa-OT1-_textthorn
@@ -100,6 +118,7 @@ stmaryrd-OT1-_Longmapsfrom stmaryrd-OT1-_Mapsfrom
 stmaryrd-OT1-_Longmapsto stmaryrd-OT1-_Mapsto
 stmaryrd-OT1-_llbracket textcomp-OT1-_textlbrackdbl
 stmaryrd-OT1-_longmapsfrom stmaryrd-OT1-_mapsfrom
+stmaryrd-OT1-_rrbracket textcomp-OT1-_textrbrackdbl
 textcomp-OT1-_textbrokenbar wasysym-OT1-_brokenvert
 textcomp-OT1-_textcent textcomp-OT1-_textcentoldstyle textcomp-OT1-_textcolonmonetary wasysym-OT1-_cent
 textcomp-OT1-_textcurrency wasysym-OT1-_currency
@@ -107,4 +126,3 @@ textcomp-OT1-_textdblhyphen textcomp-OT1-_textdblhyphenchar
 textcomp-OT1-_textperthousand wasysym-OT1-_permil
 textcomp-OT1-_textquotesingle textcomp-OT1-_textquotestraightbase
 wasysym-OT1-_LEFTarrow wasysym-OT1-_LHD
-wasysym-OT1-_RHD wasysym-OT1-_RIGHTarrow

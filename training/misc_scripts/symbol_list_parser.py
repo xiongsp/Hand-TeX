@@ -1,8 +1,9 @@
-import yaml
 import hashlib
 import json
 from dataclasses import dataclass, field
 from typing import Optional
+
+import yaml
 
 
 @dataclass
@@ -77,49 +78,55 @@ class Symbol:
             json.dump([symbol.to_hash() for symbol in symbols], f, indent=2)
 
 
-# Load symbols from the YAML file
-symbols = Symbol.from_yaml("../symbols.yaml")
+def main():
 
-# Create an extended list (dictionary) for easy lookup
-extended_list = {symbol.key: symbol for symbol in symbols}
+    # Load symbols from the YAML file
+    symbols = Symbol.from_yaml("../database/symbols.yaml")
 
+    # Create an extended list (dictionary) for easy lookup
+    extended_list = {symbol.key: symbol for symbol in symbols}
 
-# Post-processing step: shorten filenames without causing collisions and ensure all hashes have the same length
-def shorten_hashes(symbols):
-    # Perform a binary search to find the minimum hash length that avoids collisions
-    def has_collision(candidate_length):
-        seen = set()
+    # Post-processing step: shorten filenames without causing collisions and ensure all hashes have the same length
+    def shorten_hashes(symbols):
+        # Perform a binary search to find the minimum hash length that avoids collisions
+        def has_collision(candidate_length):
+            seen = set()
+            for symbol in symbols:
+                short_hash = symbol.filename[:candidate_length]
+                if short_hash in seen:
+                    return True
+                seen.add(short_hash)
+            return False
+
+        min_length = 1
+        max_length = len(symbols[0].filename) if symbols else 0
+
+        while min_length < max_length:
+            mid_length = (min_length + max_length) // 2
+            if has_collision(mid_length):
+                min_length = mid_length + 1
+            else:
+                max_length = mid_length
+
+        # Ensure all filenames have the same length (minimum non-colliding length)
+        final_length = min_length
         for symbol in symbols:
-            short_hash = symbol.filename[:candidate_length]
-            if short_hash in seen:
-                return True
-            seen.add(short_hash)
-        return False
+            symbol.filename = symbol.filename[:final_length]
 
-    min_length = 1
-    max_length = len(symbols[0].filename) if symbols else 0
+    # Shorten the hashes for all symbols
+    shorten_hashes(symbols)
 
-    while min_length < max_length:
-        mid_length = (min_length + max_length) // 2
-        if has_collision(mid_length):
-            min_length = mid_length + 1
-        else:
-            max_length = mid_length
+    import handtex.utils as ut
+    import handtex.data
 
-    # Ensure all filenames have the same length (minimum non-colliding length)
-    final_length = min_length
-    for symbol in symbols:
-        symbol.filename = symbol.filename[:final_length]
+    # Might need to re-run the script a few times in case one of the inkscapes gets killed.
+    # Only an issue if multi-threading. But you really should multithread with 1000 symbols...
+    with ut.resource_path(handtex.data) as path:
+        symbol_path = path / "symbols.json"
+
+    # Save the symbols to a JSON file
+    Symbol.to_json(symbols, symbol_path)
 
 
-# Shorten the hashes for all symbols
-shorten_hashes(symbols)
-
-from importlib import resources
-import handtex.data
-
-
-symbol_path = resources.files(handtex.data) / "symbols.json"
-
-# Save the symbols to a JSON file
-Symbol.to_json(symbols, symbol_path)
+if __name__ == "__main__":
+    main()

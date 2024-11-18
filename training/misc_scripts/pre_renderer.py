@@ -17,15 +17,17 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # Running this properly requires a shit-ton of texlive packages.
 # You have been warned.
 
-from importlib import resources
+import handtex.utils as ut
 import handtex.data
 
 
 # Might need to re-run the script a few times in case one of the inkscapes gets killed.
 # Only an issue if multi-threading. But you really should multithread with 1000 symbols...
-CPUS = os.cpu_count()
-SYMBOLS_FILE = resources.files(handtex.data) / "symbols.json"
-OUTPUT_DIR = resources.files(handtex.data) / "symbols"
+# CPUS = os.cpu_count()
+CPUS = 1
+with ut.resource_path(handtex.data) as path:
+    SYMBOLS_FILE = path / "symbols.json"
+    OUTPUT_DIR = path / "symbols"
 
 
 # 1. Load symbols from symbols.json
@@ -38,7 +40,7 @@ def load_symbols(file_path):
 # 2. Generate LaTeX files
 def generate_latex_file(symbol):
     # Parse package, encoding, and command from symbol id
-    package, encoding, command = symbol["id"].split("-", maxsplit=2)
+    package, encoding, command = symbol["key"].split("-", maxsplit=2)
     package = package.strip()
     encoding = encoding.strip()
     command = command.strip()

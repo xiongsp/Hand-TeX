@@ -561,6 +561,7 @@
     - \LHD
     - \rhd
     - \unlhd
+    - \Join
 # Table 52: Variable-sized Math Operators
 - mathmode:
     - \bigcap
@@ -620,11 +621,12 @@
     - \prec
     - \succ
     - \bowtie
-    - \Join
     - \preceq
     - \succeq
     - \cong
     - \mid
+    - \vert
+    - \Vert
     - \propto
     - \vdash
     - \dashv
@@ -635,6 +637,9 @@
     - \parallel
     - \simeq
     - \not\simeq #added by me
+    - \land
+    - \lor
+    - \lnot
 # Table 63: AMS Binary Relations
 - package: amssymb
   mathmode:
@@ -707,6 +712,7 @@
 - package: amssymb
   mathmode:
     - \nsubseteq
+    - \nsubseteqq
     - \subseteqq
     - \supsetneqq
     - \nsupseteq
@@ -856,6 +862,10 @@
     - \upuparrows
     - \leftarrowtail
     - \rightarrowtail
+    - \llcorner
+    - \lrcorner
+    - \ulcorner
+    - \urcorner
 # Table 99: AMS Negated Arrows 
     - \nLeftarrow
     - \nLeftrightarrow
@@ -1124,6 +1134,9 @@
     - \blacktriangle
     - \measuredangle
     - \vartriangle
+    - \beth
+    - \daleth
+    - \gimel
 # Table 191: Miscellaneous textcomp Text-mode Math Symbols
 - package: textcomp
   textmode:
@@ -1421,3 +1434,8 @@
     - \CircledA
     #- \FullFHBO
     - \MVRightarrow
+- package: stix2
+  mathmode:
+    - \leftouterjoin
+    - \rightouterjoin
+    - \fullouterjoin

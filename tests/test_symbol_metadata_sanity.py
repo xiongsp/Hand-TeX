@@ -1,27 +1,8 @@
-import handtex.utils as ut
 import re
-import difflib
-import os
-import platform
-import shutil
-import sys
 from importlib import resources
-from io import StringIO
 from pathlib import Path
-from typing import get_type_hints, Generic, TypeVar, Optional
 
-import PySide6
-import PySide6.QtCore as Qc
-import PySide6.QtGui as Qg
-import PySide6.QtWidgets as Qw
-import psutil
-from loguru import logger
-from xdg import XDG_CONFIG_HOME, XDG_CACHE_HOME
-
-import handtex.data
-import handtex.structures as st
-from handtex import __program__, __version__
-from handtex.data import color_themes
+import handtex.utils as ut
 from handtex.data import symbol_metadata
 
 

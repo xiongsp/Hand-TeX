@@ -14,6 +14,7 @@ from sklearn.preprocessing import LabelEncoder
 import handtex.utils as ut
 import handtex.data.model
 import handtex.data.symbol_metadata
+import training.database
 
 # TODO make synthetic data for compound chars.
 
@@ -209,10 +210,12 @@ def recalculate_frequencies():
     symbols = ut.load_symbols()
     similar_symbols = ut.load_symbol_metadata_similarity()
 
-    database_path = "database/handtex.db"
+    # database_path = "database/handtex.db"
+    with ut.resource_path(training.database, "handtex.db") as path:
+        database_path = path
 
     # Limit the number of classes to classify.
-    symbol_keys = ut.select_leader_symbols(list(symbols.keys()), similar_symbols)
+    leader_keys = ut.select_leader_symbols(list(symbols.keys()), similar_symbols)
 
     with resources.path(handtex.data.symbol_metadata, "symbol_frequency.csv") as path:
         frequencies_path = path
@@ -230,13 +233,21 @@ def recalculate_frequencies():
     frequencies = {key: count for key, count in rows}
     conn.close()
 
+    # Look for symbols that weren't included.
+    missing_symbols = set(symbols.keys()) - set(frequencies.keys())
+    if missing_symbols:
+        print(f"Missing frequencies for symbols:")
+        for symbol in missing_symbols:
+            print(symbol)
+        frequencies.update({key: 0 for key in missing_symbols})
+
     with open(frequencies_path, "w") as file:
         writer = csv.writer(file, lineterminator="\n")
         writer.writerows(frequencies.items())
 
     # Calculate new frequencies for the leader symbols
-    leader_frequencies = {key: frequencies[key] for key in symbol_keys}
-    for leader in symbol_keys:
+    leader_frequencies = {key: frequencies[key] for key in leader_keys}
+    for leader in leader_keys:
         for similar in similar_symbols.get(leader, []):
             leader_frequencies[leader] += frequencies[similar]
     # Dump the new frequencies to a CSV file, sorted by frequency.

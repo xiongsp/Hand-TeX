@@ -1,7 +1,7 @@
 import torch
 from pathlib import Path
 import torch.nn.functional as F
-
+import torch.nn as nn
 from training.image_gen import tensorize_strokes, load_decoder
 from training.train import CNN, num_classes, device, image_size
 
@@ -25,23 +25,21 @@ def load_model_and_decoder(model_path: Path, num_classes: int, encodings_path: P
 
 
 # Inference function
-def predict(image, model, label_decoder) -> list[tuple[str, float]]:
+def predict(
+    tensor: torch.Tensor, model: nn.Module, label_decoder: dict[int, str]
+) -> list[tuple[str, float]]:
     """
     Predict the class of a given image using the trained model.
-    Parameters:
-        image: torch.Tensor
-            The input image tensor (should be of shape [1, 1, 28, 28]).
-        model: nn.Module
-            The trained neural network model.
-        label_decoder: LabelEncoder
-            The label encoder used to encode the labels.
-    Returns:
-        list[tuple[str, float]]: A list of tuples containing the predicted label and confidence score.
+
+    :param tensor: The input image tensor (should be of shape [1, 1, image_size, image_size]).
+    :param model: The trained neural network model.
+    :param label_decoder: The label encoder used to encode the labels.
+    :return: A list of tuples containing the predicted label and confidence score
     """
     model.eval()  # Set model to evaluation mode
     with torch.no_grad():
-        image = image.to(device)
-        output = model(image)
+        tensor = tensor.to(device)
+        output = model(tensor)
         _, predicted_class = output.max(1)
         # Return the first 10 results and their confidences, sorted by confidence.
         # Example: [('A', 0.99), ('B', 0.01), ..., ('J', 0.00)]

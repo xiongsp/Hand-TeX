@@ -132,6 +132,14 @@ def strokes_to_grayscale_image_cv2(stroke_data: list[list[tuple[int, int]]], ima
         for stroke in stroke_data
     ]
 
+    # Clear out duplicate consecutive points, so that they can be detected as single points.
+    # Otherwise, a short segment could be scaled down to a single point, and then
+    # not get the point handling treatment, resulting in nothing being drawn.
+    for stroke in stroke_data:
+        for i in range(len(stroke) - 1, 0, -1):
+            if stroke[i] == stroke[i - 1]:
+                stroke.pop(i)
+
     # Iterate through each stroke and draw it
     for stroke in stroke_data:
         if len(stroke) == 1:

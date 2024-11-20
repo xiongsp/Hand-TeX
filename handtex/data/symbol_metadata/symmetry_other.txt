@@ -1,3 +1,21 @@
+wasysym-OT1-_lhd -- mir0 --> latex2e-OT1-_triangleleft
+wasysym-OT1-_rhd -- mir0 --> latex2e-OT1-_triangleright
+amssymb-OT1-_Lleftarrow -- rot180 mir90 --> amssymb-OT1-_Rrightarrow
+latex2e-OT1-_simeq -- mir90 --> amssymb-OT1-_backsimeq
+stmaryrd-OT1-_nnearrow -- rot180 --> stmaryrd-OT1-_sswarrow
+stmaryrd-OT1-_nnearrow -- mir90 --> stmaryrd-OT1-_nnwarrow
+stmaryrd-OT1-_nnearrow -- rot225 mir0 --> stmaryrd-OT1-_ssearrow
+stmaryrd-OT1-_ssearrow -- rot180 --> stmaryrd-OT1-_nnwarrow
+stmaryrd-OT1-_ssearrow -- rot315 mir90 --> stmaryrd-OT1-_sswarrow
+wasysym-OT1-_ascnode -- mir0 --> wasysym-OT1-_descnode
+cmll-OT1-_parr -- rot180 --> cmll-OT1-_with
+textcomp-OT1-_textinterrobang -- rot180 --> textcomp-OT1-_textinterrobangdown
+stmaryrd-OT1-_llceil -- mir90 --> stmaryrd-OT1-_rrceil
+stmaryrd-OT1-_llceil -- mir0 --> stmaryrd-OT1-_llfloor
+stmaryrd-OT1-_llceil -- rot180 --> stmaryrd-OT1-_rrfloor
+stmaryrd-OT1-_llfloor -- mir90 --> stmaryrd-OT1-_rrfloor
+stmaryrd-OT1-_llfloor -- rot180 --> stmaryrd-OT1-_rrceil
+amssymb-OT1-_blacktriangledown -- mir90 --> amssymb-OT1-_blacktriangle
 amssymb-OT1-_eqslantgtr -- mir90 --> amssymb-OT1-_eqslantless
 amssymb-OT1-_fallingdotseq -- mir0 mir90 --> amssymb-OT1-_risingdotseq
 amssymb-OT1-_gtrdot -- rot180 mir90 --> amssymb-OT1-_lessdot
@@ -13,16 +31,28 @@ amssymb-OT1-_diagdown -- rot90 rot270 mir0 mir90 --> amssymb-OT1-_diagup
 amssymb-OT1-_downdownarrows -- rot180 mir0 --> amssymb-OT1-_upuparrows
 amssymb-OT1-_downharpoonleft -- mir0 --> amssymb-OT1-_upharpoonleft
 amssymb-OT1-_downharpoonleft -- mir90 --> amssymb-OT1-_downharpoonright
+amssymb-OT1-_downharpoonleft -- mir90 --> amssymb-OT1-_upharpoonright
 amssymb-OT1-_downharpoonright -- mir0 --> amssymb-OT1-_upharpoonright
+latex2e-OT1-_rightharpoondown -- mir45 --> amssymb-OT1-_upharpoonleft
+latex2e-OT1-_rightharpoondown -- rot270 --> amssymb-OT1-_downharpoonleft
+latex2e-OT1-_rightharpoondown -- mir135 --> amssymb-OT1-_downharpoonright
+latex2e-OT1-_rightharpoondown -- rot90 --> amssymb-OT1-_upharpoonright
+latex2e-OT1-_leftharpoondown -- rot270 --> amssymb-OT1-_upharpoonleft
+latex2e-OT1-_leftharpoondown -- mir45 --> amssymb-OT1-_downharpoonleft
+latex2e-OT1-_leftharpoondown -- rot90 --> amssymb-OT1-_downharpoonright
+latex2e-OT1-_leftharpoondown -- mir135 --> amssymb-OT1-_upharpoonright
 amssymb-OT1-_geq -- mir90 --> amssymb-OT1-_leq
 amssymb-OT1-_geqq -- mir90 --> amssymb-OT1-_leqq
 amssymb-OT1-_geqslant -- mir90 --> amssymb-OT1-_leqslant
 amssymb-OT1-_gg -- rot180 mir90 --> amssymb-OT1-_ll
+amssymb-OT1-_ggg -- rot180 mir90 --> amssymb-OT1-_lll
 amssymb-OT1-_leftarrowtail -- rot180 mir90 --> amssymb-OT1-_rightarrowtail
 amssymb-OT1-_leftleftarrows -- rot180 mir90 --> amssymb-OT1-_rightrightarrows
 amssymb-OT1-_leftrightarrows -- mir0 mir90 --> amssymb-OT1-_rightleftarrows
 amssymb-OT1-_leftrightharpoons -- mir0 mir90 --> amssymb-OT1-_rightleftharpoons
 amssymb-OT1-_leftthreetimes -- mir90 --> amssymb-OT1-_rightthreetimes
+amssymb-OT1-_lesseqgtr -- mir90 --> amssymb-OT1-_gtreqless
+amssymb-OT1-_lesseqqgtr -- mir90 --> amssymb-OT1-_gtreqqless
 amssymb-OT1-_looparrowleft -- mir90 --> amssymb-OT1-_looparrowright
 amssymb-OT1-_Lsh -- mir90 --> amssymb-OT1-_Rsh
 amssymb-OT1-_ltimes -- rot180 mir90 --> amssymb-OT1-_rtimes
@@ -41,7 +71,13 @@ amssymb-OT1-_therefore -- rot180 mir0 --> amssymb-OT1-_because
 amssymb-OT1-_trianglelefteq -- mir90 --> amssymb-OT1-_trianglerighteq
 amssymb-OT1-_twoheadleftarrow -- rot180 mir90 --> amssymb-OT1-_twoheadrightarrow
 amssymb-OT1-_ulcorner -- rot270 mir90 --> amssymb-OT1-_urcorner
+amssymb-OT1-_llcorner -- rot90 mir90 --> amssymb-OT1-_lrcorner
+amssymb-OT1-_llcorner -- rot270 mir0 --> amssymb-OT1-_ulcorner
+amssymb-OT1-_llcorner -- rot180 mir135 --> amssymb-OT1-_urcorner
+amssymb-OT1-_lrcorner -- rot180 mir45 --> amssymb-OT1-_ulcorner
+amssymb-OT1-_lrcorner -- rot90 mir0 --> amssymb-OT1-_urcorner
 amssymb-OT1-_upharpoonleft -- mir90 --> amssymb-OT1-_upharpoonright
+latex2e-OT1-_updownarrow -- rot90 rot270 mir45 mir135 --> latex2e-OT1-_leftrightarrow
 amssymb-OT1-_varsubsetneq -- mir90 --> amssymb-OT1-_varsupsetneq
 amssymb-OT1-_varsubsetneqq -- mir90 --> amssymb-OT1-_varsupsetneqq
 amssymb-OT1-_vartriangleleft -- rot180 mir90 --> amssymb-OT1-_vartriangleright
@@ -84,8 +120,7 @@ latex2e-OT1-_lnot -- rot90 --> latex2e-OT1-_lceil
 latex2e-OT1-_longleftarrow -- rot180 mir90 --> latex2e-OT1-_longrightarrow
 latex2e-OT1-_Longleftarrow -- rot180 mir90 --> latex2e-OT1-_Longrightarrow
 latex2e-OT1-_longmapsto -- rot180 mir90 --> stmaryrd-OT1-_longmapsfrom
-latex2e-OT1-_Longrightarrow -- rot180 mir90 --> latex2e-OT1-_Leftarrow
-latex2e-OT1-_Longrightarrow -- rot270 mir135 --> latex2e-OT1-_Downarrow
+stmaryrd-OT1-_Longmapsto -- rot180 mir90 --> stmaryrd-OT1-_Longmapsfrom
 latex2e-OT1-_O -- rot90 rot270 mir0 mir90 --> wasysym-OT1-_invdiameter
 latex2e-OT1-_Omega -- rot180 mir0 --> amssymb-OT1-_mho
 latex2e-OT1-_pm -- rot180 mir0 --> latex2e-OT1-_mp
@@ -94,11 +129,19 @@ latex2e-OT1-_prec -- rot270 mir135 --> amssymb-OT1-_curlywedge
 latex2e-OT1-_preceq -- mir90 --> latex2e-OT1-_succeq
 latex2e-OT1-_rightharpoondown -- mir0 --> latex2e-OT1-_rightharpoonup
 latex2e-OT1-_searrow -- rot90 mir0 --> latex2e-OT1-_nearrow
+latex2e-OT1-_swarrow -- rot270 mir0 --> latex2e-OT1-_nwarrow
+latex2e-OT1-_searrow -- rot180 mir45 --> latex2e-OT1-_nwarrow
+latex2e-OT1-_swarrow -- rot180 mir135 --> latex2e-OT1-_nearrow
+latex2e-OT1-_searrow -- --> latex2e-OT1-_swarrow
 latex2e-OT1-_sqcap -- rot180 mir0 --> latex2e-OT1-_sqcup
 latex2e-OT1-_sqsubseteq -- mir90 --> latex2e-OT1-_sqsupseteq
 latex2e-OT1-_subset -- rot180 mir90 --> latex2e-OT1-_supset
 latex2e-OT1-_subseteq -- mir90 --> latex2e-OT1-_supseteq
 latex2e-OT1-_textbraceleft -- rot180 mir90 --> latex2e-OT1-_textbraceright
+textcomp-OT1-_textdownarrow -- rot90 mir135 --> textcomp-OT1-_textrightarrow
+textcomp-OT1-_textdownarrow -- rot270 mir45 --> textcomp-OT1-_textleftarrow
+textcomp-OT1-_textuparrow -- rot270 mir45 --> textcomp-OT1-_textrightarrow
+textcomp-OT1-_textuparrow -- rot90 mir135 --> textcomp-OT1-_textleftarrow
 latex2e-OT1-_textgreater -- rot180 mir90 --> latex2e-OT1-_textless
 latex2e-OT1-_textgreater -- rot270 mir135 --> latex2e-OT1-_bigvee
 latex2e-OT1-_textquotedblleft -- rot180 --> latex2e-OT1-_textquotedblright

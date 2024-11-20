@@ -37,6 +37,8 @@ class Ui_SymbolList(object):
         self.comboBox_search_mode.addItem("")
         self.comboBox_search_mode.addItem("")
         self.comboBox_search_mode.addItem("")
+        self.comboBox_search_mode.addItem("")
+        self.comboBox_search_mode.addItem("")
         self.comboBox_search_mode.setObjectName(u"comboBox_search_mode")
 
         self.horizontalLayout.addWidget(self.comboBox_search_mode)
@@ -164,6 +166,26 @@ class Ui_SymbolList(object):
 
         self.formLayout.setWidget(4, QFormLayout.FieldRole, self.label_similar)
 
+        self.label_2 = QLabel(self.verticalLayoutWidget)
+        self.label_2.setObjectName(u"label_2")
+
+        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.label_2)
+
+        self.label_self_symmetry = QLabel(self.verticalLayoutWidget)
+        self.label_self_symmetry.setObjectName(u"label_self_symmetry")
+
+        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.label_self_symmetry)
+
+        self.label_5 = QLabel(self.verticalLayoutWidget)
+        self.label_5.setObjectName(u"label_5")
+
+        self.formLayout.setWidget(6, QFormLayout.LabelRole, self.label_5)
+
+        self.label_other_symmetry = QLabel(self.verticalLayoutWidget)
+        self.label_other_symmetry.setObjectName(u"label_other_symmetry")
+
+        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.label_other_symmetry)
+
 
         self.verticalLayout.addLayout(self.formLayout)
 
@@ -185,6 +207,8 @@ class Ui_SymbolList(object):
         self.comboBox_search_mode.setItemText(1, QCoreApplication.translate("SymbolList", u"Symbol ID", None))
         self.comboBox_search_mode.setItemText(2, QCoreApplication.translate("SymbolList", u"Similar to", None))
         self.comboBox_search_mode.setItemText(3, QCoreApplication.translate("SymbolList", u"Unique", None))
+        self.comboBox_search_mode.setItemText(4, QCoreApplication.translate("SymbolList", u"Symmetric", None))
+        self.comboBox_search_mode.setItemText(5, QCoreApplication.translate("SymbolList", u"Asymmetric", None))
 
         self.lineEdit_search.setPlaceholderText(QCoreApplication.translate("SymbolList", u"Search...", None))
         self.label_11.setText(QCoreApplication.translate("SymbolList", u"Found:", None))
@@ -193,5 +217,9 @@ class Ui_SymbolList(object):
         self.label_3.setText(QCoreApplication.translate("SymbolList", u"Mode:", None))
         self.label_fontenc_label.setText(QCoreApplication.translate("SymbolList", u"Font Encoding:", None))
         self.label_7.setText(QCoreApplication.translate("SymbolList", u"Similar to:", None))
+        self.label_2.setText(QCoreApplication.translate("SymbolList", u"Self-symmetry:", None))
+        self.label_self_symmetry.setText(QCoreApplication.translate("SymbolList", u"<yes/no>", None))
+        self.label_5.setText(QCoreApplication.translate("SymbolList", u"Symmetrical to:", None))
+        self.label_other_symmetry.setText(QCoreApplication.translate("SymbolList", u"<others>", None))
     # retranslateUi
 

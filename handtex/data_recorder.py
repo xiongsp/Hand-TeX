@@ -24,7 +24,13 @@ class DataRecorder:
     has_submissions: Signal
 
     # Manage loading/saving symbols for new training data generation.
-    def __init__(self, symbols: dict[str, st.Symbol], has_submissions: Signal, new_data_dir: str):
+    def __init__(
+        self,
+        symbols: dict[str, st.Symbol],
+        similarities: dict[str, tuple[str, ...]],
+        has_submissions: Signal,
+        new_data_dir: str,
+    ):
         self.current_data = []
         self.has_submissions = has_submissions
 
@@ -34,7 +40,7 @@ class DataRecorder:
         logger.info(f"New data location: {data_dir}")
 
         self.symbols = symbols
-        lookalikes = ut.load_symbol_metadata_similarity()
+        lookalikes = similarities
         # We only want to train leaders.
         leaders = ut.select_leader_symbols(list(self.symbols.keys()), lookalikes)
         self.symbols = {key: self.symbols[key] for key in leaders}

@@ -17,6 +17,8 @@ class SearchMode(IntEnum):
     ID = 1
     SIMILAR = 2
     UNIQUE = 3
+    SYMMETRIC = 4
+    ASYMMETRIC = 5
 
 
 class SymbolList(Qw.QWidget, Ui_SymbolList):
@@ -24,6 +26,8 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
     symbols: dict[str, st.Symbol]
     last_shown_symbol: str | None
     similar_symbols: dict[str, tuple[str, ...]]
+    self_symmetries: dict[str, list[st.Symmetry]]
+    other_symmetries: dict[str, list[tuple[str, list[st.Symmetry]]]]
     icon_size: int
     pixmap_cache: dict[str, Qg.QPixmap]
     current_symbol_keys: list[str | None]
@@ -34,12 +38,16 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self,
         symbols: dict[str, st.Symbol],
         similar_symbols: dict[str, tuple[str, ...]],
+        self_symmetries: dict[str, list[st.Symmetry]],
+        other_symmetries: dict[str, list[tuple[str, list[st.Symmetry]]]],
         parent=None,
     ):
         super(SymbolList, self).__init__(parent)
         self.setupUi(self)
         self.symbols = symbols
         self.similar_symbols = similar_symbols
+        self.self_symmetries = self_symmetries
+        self.other_symmetries = other_symmetries
         self.last_show_symbol = None
 
         self.icon_size = 100
@@ -128,6 +136,47 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
                 for key in self.symbols
                 if search_text.lower() in key.lower() and key not in self.similar_symbols
             ]
+        elif search_mode == SearchMode.SYMMETRIC:
+            self.current_symbol_keys = []
+            for key in self.symbols:
+                if key in self.current_symbol_keys:
+                    continue
+                if search_text and search_text.lower() not in key.lower():
+                    continue
+                if key in self.other_symmetries:
+                    self.current_symbol_keys.append(key)
+                    # Transitive closure of other_symmetries.
+                    other_stack = set()
+                    for other_symbol, _ in self.other_symmetries[key]:
+                        other_stack.add(other_symbol)
+                    while other_stack:
+                        other_symbol = other_stack.pop()
+                        if other_symbol in self.current_symbol_keys:
+                            continue
+                        self.current_symbol_keys.append(other_symbol)
+                        if other_symbol in self.other_symmetries:
+                            for other_other_symbol, _ in self.other_symmetries[other_symbol]:
+                                other_stack.add(other_other_symbol)
+                    self.current_symbol_keys.append(None)
+                elif key in self.self_symmetries:
+                    self.current_symbol_keys.append(key)
+                    self.current_symbol_keys.append(None)
+        elif search_mode == SearchMode.ASYMMETRIC:
+            self.current_symbol_keys = []
+            for key in self.symbols:
+                if key in self.other_symmetries or key in self.self_symmetries:
+                    continue
+                if search_text and search_text.lower() not in key.lower():
+                    continue
+                if any(
+                    similar_key in self.self_symmetries or similar_key in self.other_symmetries
+                    for similar_key in self.similar_symbols.get(key, ())
+                ):
+                    continue
+                self.current_symbol_keys.append(key)
+        else:
+            self.comboBox_search_mode.setCurrentIndex(0)
+            raise ValueError(f"Invalid search mode: {search_mode}")
 
         self.show_symbols()
 
@@ -191,6 +240,14 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self.label_fontenc.setVisible(not symbol.fontenc_is_default())
         self.label_fontenc_label.setVisible(not symbol.fontenc_is_default())
         self.label_fontenc.setText(symbol.fontenc)
+        self.label_self_symmetry.setText("Yes" if symbol_key in self.self_symmetries else "No")
+
+        if symbol_key in self.other_symmetries:
+            self.label_other_symmetry.setText(
+                ", ".join(other_symb for other_symb, _ in self.other_symmetries[symbol_key])
+            )
+        else:
+            self.label_other_symmetry.setText("")
 
         if symbol_key in self.similar_symbols:
             self.label_similar.setText(", ".join(self.similar_symbols[symbol_key]))

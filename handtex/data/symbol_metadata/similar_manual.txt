@@ -128,3 +128,4 @@ textcomp-OT1-_textdblhyphen textcomp-OT1-_textdblhyphenchar
 textcomp-OT1-_textperthousand wasysym-OT1-_permil
 textcomp-OT1-_textquotesingle textcomp-OT1-_textquotestraightbase
 wasysym-OT1-_LEFTarrow wasysym-OT1-_LHD
+wasysym-OT1-_recorder marvosym-OT1-_Pickup

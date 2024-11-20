@@ -1,4 +1,5 @@
 import json
+from enum import StrEnum, auto
 from attrs import frozen
 
 
@@ -58,3 +59,36 @@ class SymbolDrawing:
             "key": self.key,
             "strokes": self.strokes,
         }
+
+
+class Symmetry(StrEnum):
+    rot45 = auto()
+    rot90 = auto()
+    rot135 = auto()
+    rot180 = auto()
+    rot225 = auto()
+    rot270 = auto()
+    rot315 = auto()
+    mir0 = auto()
+    mir45 = auto()
+    mir90 = auto()
+    mir135 = auto()
+
+    def __str__(self):
+        return self.name
+
+    def is_rotation(self):
+        return self.name.startswith("rot")
+
+    def is_mirroring(self):
+        return self.name.startswith("mir")
+
+    @property
+    def angle(self):
+        return int(self.name[3:])
+
+    def invert(self) -> "Symmetry":
+        if self.is_rotation():
+            return Symmetry(f"rot{360 - self.angle}")
+        else:
+            return self

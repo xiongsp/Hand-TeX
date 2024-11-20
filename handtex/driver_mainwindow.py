@@ -62,6 +62,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     # Lookalikes:
     similar_symbols: dict[str, tuple[str, ...]]
+    self_symmetries: dict[str, list[st.Symmetry]]
+    other_symmetries: dict[str, list[tuple[str, list[st.Symmetry]]]]
 
     def __init__(
         self,
@@ -99,11 +101,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.symbols = ut.load_symbols()
         self.similar_symbols = ut.load_symbol_metadata_similarity()
+        self.self_symmetries = ut.load_symbol_metadata_self_symmetry()
+        self.other_symmetries = ut.load_symbol_metadata_other_symmetry()
 
         if self.train:
             logger.info("Training mode active.")
             self.stackedWidget.setCurrentIndex(1)
-            self.data_recorder = dr.DataRecorder(self.symbols, self.has_submission, new_data_dir)
+            self.data_recorder = dr.DataRecorder(
+                self.symbols,
+                self.similar_symbols,
+                self.has_submission,
+                new_data_dir,
+            )
             self.data_recorder.has_submissions.connect(self.pushButton_undo_submit.setEnabled)
         else:
             self.sketchpad.new_drawing.connect(self.detect_symbol)
@@ -321,7 +330,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Open the symbol list.
         """
         if self.symbol_list is None:
-            self.symbol_list = sl.SymbolList(self.symbols, self.similar_symbols)
+            self.symbol_list = sl.SymbolList(
+                self.symbols, self.similar_symbols, self.self_symmetries, self.other_symmetries
+            )
             self.theme_is_dark_changed.connect(self.symbol_list.on_theme_change)
         self.symbol_list.show()
 

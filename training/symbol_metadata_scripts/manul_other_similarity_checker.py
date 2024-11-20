@@ -49,7 +49,7 @@ def main():
 
     symbols = ut.load_symbols()
 
-    symmetry_path = "../../handtex/data/symbol_metadata/symmetry-other.txt"
+    symmetry_path = "../../handtex/data/symbol_metadata/symmetry_other.txt"
     symmetries: list[tuple[str, list[str], str]] = []
     # Example: latex2e-OT1-_lfloor -- mir90 -> latex2e-OT1-_lnot
     pattern = re.compile(r"(\S+) -- (.*?) ?-> (\S+)")

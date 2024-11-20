@@ -53,6 +53,16 @@
          <string>Unique</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>Symmetric</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Asymmetric</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item>
@@ -238,6 +248,34 @@
            </property>
            <property name="textInteractionFlags">
             <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Self-symmetry:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLabel" name="label_self_symmetry">
+           <property name="text">
+            <string>&lt;yes/no&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Symmetrical to:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QLabel" name="label_other_symmetry">
+           <property name="text">
+            <string>&lt;others&gt;</string>
            </property>
           </widget>
          </item>

@@ -1,8 +1,10 @@
 import difflib
+import re
 import os
 import platform
 import shutil
 import sys
+from collections import defaultdict
 from importlib import resources
 from io import StringIO
 from pathlib import Path
@@ -454,6 +456,58 @@ def load_symbol_metadata_similarity() -> dict[str, tuple[str, ...]]:
                         logger.error(f"Duplicate symbol key found: {key}")
 
     return symbol_map
+
+
+def load_symbol_metadata_self_symmetry() -> dict[str, list[st.Symmetry]]:
+    """
+    Load the metadata for symbol self-symmetric transformations.
+
+    File format:
+    symbol_key: symmetry1 symmetry2 symmetry3 ...
+
+    :return: A dictionary mapping symbol keys to lists of symmetries.
+    """
+    with resource_path(symbol_metadata, "symmetry_self.txt") as file_path:
+        with open(file_path, "r") as file:
+            lines = file.readlines()
+
+    symmetries = {}
+    for line in lines:
+        parts = line.strip().split()
+        key = parts[0][:-1]  # Remove the colon at the end.
+        symmetries[key] = [st.Symmetry(sym) for sym in parts[1:]]
+    return symmetries
+
+
+def load_symbol_metadata_other_symmetry() -> dict[str, list[tuple[str, list[st.Symmetry]]]]:
+    """
+    Load the metadata for symbol other-symmetric transformations.
+    The file must not contain two-way assignments.
+    These are instead generated here, ensuring that the symmetry is always two-way.
+
+    File format:
+    symbol_key_from -- symmetry1 symmetry2 ... symmetryn --> symbol_key_to
+
+    :return: A dictionary mapping symbol keys to tuples of target symbol key and list of symmetries.
+    """
+    with resource_path(symbol_metadata, "symmetry_other.txt") as file_path:
+        with open(file_path, "r") as file:
+            lines = file.readlines()
+
+    pattern = re.compile(r"(\S+) -- (.*?) ?--> (\S+)")
+    symmetries = defaultdict(list)
+    for line in lines:
+        match = pattern.match(line)
+        if not match:
+            logger.error(f"Failed to parse line: {line.strip()}")
+            continue
+        key_from = match.group(1)
+        key_to = match.group(3)
+        symmetry_list = [st.Symmetry(sym) for sym in match.group(2).split()]
+        symmetries[key_from].append((key_to, symmetry_list))
+        inverted_symmetry_list = [sym.invert() for sym in symmetry_list]
+        symmetries[key_to].append((key_from, inverted_symmetry_list))
+    return symmetries
 
 
 def sys_virtual_memory_total() -> int:

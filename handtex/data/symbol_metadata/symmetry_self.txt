@@ -107,6 +107,8 @@ amssymb-OT1-_leftrightsquigarrow: mir90
 wasysym-OT1-_taurus: mir90
 marvosym-OT1-_Celtcross: mir90
 amssymb-OT1-_maltese: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+wasysym-OT1-_kreuz: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+amssymb-OT1-_varkappa: rot180
 wasysym-OT1-_gemini: rot180 mir0 mir90
 amssymb-OT1-_circleddash: rot180 mir0 mir90
 amssymb-OT1-_Subset: mir0

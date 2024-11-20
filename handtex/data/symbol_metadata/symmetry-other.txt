@@ -1,0 +1,133 @@
+amssymb-OT1-_eqslantgtr -- mir90 --> amssymb-OT1-_eqslantless
+amssymb-OT1-_fallingdotseq -- mir0 mir90 --> amssymb-OT1-_risingdotseq
+amssymb-OT1-_gtrdot -- rot180 mir90 --> amssymb-OT1-_lessdot
+amssymb-OT1-_ngtr -- rot180 --> amssymb-OT1-_nless
+amssymb-OT1-_blacktriangleleft -- rot180 mir90 --> amssymb-OT1-_blacktriangleright
+amssymb-OT1-_Cap -- rot180 mir0 --> amssymb-OT1-_Cup
+amssymb-OT1-_Cap -- rot90 mir135 --> amssymb-OT1-_Subset
+amssymb-OT1-_circlearrowleft -- mir90 --> amssymb-OT1-_circlearrowright
+amssymb-OT1-_curlyeqprec -- mir90 --> amssymb-OT1-_curlyeqsucc
+amssymb-OT1-_curvearrowleft -- mir90 --> amssymb-OT1-_curvearrowright
+amssymb-OT1-_dashleftarrow -- rot180 mir90 --> amssymb-OT1-_dashrightarrow
+amssymb-OT1-_diagdown -- rot90 rot270 mir0 mir90 --> amssymb-OT1-_diagup
+amssymb-OT1-_downdownarrows -- rot180 mir0 --> amssymb-OT1-_upuparrows
+amssymb-OT1-_downharpoonleft -- mir0 --> amssymb-OT1-_upharpoonleft
+amssymb-OT1-_downharpoonleft -- mir90 --> amssymb-OT1-_downharpoonright
+amssymb-OT1-_downharpoonright -- mir0 --> amssymb-OT1-_upharpoonright
+amssymb-OT1-_geq -- mir90 --> amssymb-OT1-_leq
+amssymb-OT1-_geqq -- mir90 --> amssymb-OT1-_leqq
+amssymb-OT1-_geqslant -- mir90 --> amssymb-OT1-_leqslant
+amssymb-OT1-_gg -- rot180 mir90 --> amssymb-OT1-_ll
+amssymb-OT1-_leftarrowtail -- rot180 mir90 --> amssymb-OT1-_rightarrowtail
+amssymb-OT1-_leftleftarrows -- rot180 mir90 --> amssymb-OT1-_rightrightarrows
+amssymb-OT1-_leftrightarrows -- mir0 mir90 --> amssymb-OT1-_rightleftarrows
+amssymb-OT1-_leftrightharpoons -- mir0 mir90 --> amssymb-OT1-_rightleftharpoons
+amssymb-OT1-_leftthreetimes -- mir90 --> amssymb-OT1-_rightthreetimes
+amssymb-OT1-_looparrowleft -- mir90 --> amssymb-OT1-_looparrowright
+amssymb-OT1-_Lsh -- mir90 --> amssymb-OT1-_Rsh
+amssymb-OT1-_ltimes -- rot180 mir90 --> amssymb-OT1-_rtimes
+amssymb-OT1-_nleftarrow -- rot180 --> amssymb-OT1-_nrightarrow
+amssymb-OT1-_nLeftarrow -- rot180 --> amssymb-OT1-_nRightarrow
+amssymb-OT1-_nprec -- rot180 --> amssymb-OT1-_nsucc
+amssymb-OT1-_ntriangleleft -- rot180 --> amssymb-OT1-_ntriangleright
+amssymb-OT1-_preccurlyeq -- mir90 --> amssymb-OT1-_succcurlyeq
+amssymb-OT1-_rightrightarrows -- rot90 mir45 --> amssymb-OT1-_upuparrows
+amssymb-OT1-_sqsubset -- rot180 mir90 --> amssymb-OT1-_sqsupset
+amssymb-OT1-_Subset -- rot180 mir90 --> amssymb-OT1-_Supset
+amssymb-OT1-_subseteqq -- mir90 --> amssymb-OT1-_supseteqq
+amssymb-OT1-_subsetneq -- mir90 --> amssymb-OT1-_supsetneq
+amssymb-OT1-_subsetneqq -- mir90 --> amssymb-OT1-_supsetneqq
+amssymb-OT1-_therefore -- rot180 mir0 --> amssymb-OT1-_because
+amssymb-OT1-_trianglelefteq -- mir90 --> amssymb-OT1-_trianglerighteq
+amssymb-OT1-_twoheadleftarrow -- rot180 mir90 --> amssymb-OT1-_twoheadrightarrow
+amssymb-OT1-_ulcorner -- rot270 mir90 --> amssymb-OT1-_urcorner
+amssymb-OT1-_upharpoonleft -- mir90 --> amssymb-OT1-_upharpoonright
+amssymb-OT1-_varsubsetneq -- mir90 --> amssymb-OT1-_varsupsetneq
+amssymb-OT1-_varsubsetneqq -- mir90 --> amssymb-OT1-_varsupsetneqq
+amssymb-OT1-_vartriangleleft -- rot180 mir90 --> amssymb-OT1-_vartriangleright
+esint-OT1-_landdownint -- rot180 --> esint-OT1-_landupint
+esint-OT1-_ointclockwise -- rot180 --> esint-OT1-_varointclockwise
+esint-OT1-_ointctrclockwise -- rot180 --> esint-OT1-_varointctrclockwise
+latex2e-OT1-_bigcap -- rot180 mir0 --> latex2e-OT1-_bigcup
+latex2e-OT1-_bigcap -- rot270 mir45 --> latex2e-OT1-_supset
+latex2e-OT1-_bigcap -- rot90 mir135 --> latex2e-OT1-_subset
+latex2e-OT1-_bigcup -- rot90 mir135 --> latex2e-OT1-_supset
+latex2e-OT1-_bigtriangledown -- rot180 mir0 --> latex2e-OT1-_bigtriangleup
+latex2e-OT1-_bigtriangledown -- rot270 mir45 --> latex2e-OT1-_triangleleft
+latex2e-OT1-_bigtriangledown -- rot90 mir135 --> latex2e-OT1-_triangleright
+latex2e-OT1-_bot -- rot270 mir45 --> latex2e-OT1-_vdash
+latex2e-OT1-_bot -- rot90 mir135 --> latex2e-OT1-_dashv
+latex2e-OT1-_cap -- rot180 mir0 --> latex2e-OT1-_cup
+latex2e-OT1-_cdots -- rot90 rot270 mir45 mir135 --> latex2e-OT1-_vdots
+latex2e-OT1-_copyright -- mir90 --> textcomp-OT1-_textcopyleft
+latex2e-OT1-_dashv -- rot180 mir90 --> latex2e-OT1-_vdash
+latex2e-OT1-_dashv -- rot90 mir45 --> latex2e-OT1-_top
+latex2e-OT1-_ddots -- rot90 rot270 mir0 mir90 --> mathdots-OT1-_iddots
+latex2e-OT1-_Delta -- rot180 mir0 --> latex2e-OT1-_bigtriangledown
+latex2e-OT1-_Delta -- rot270 mir45 --> latex2e-OT1-_triangleright
+latex2e-OT1-_Delta -- rot90 mir135 --> latex2e-OT1-_triangleleft
+latex2e-OT1-_downarrow -- rot180 mir0 --> latex2e-OT1-_uparrow
+latex2e-OT1-_Downarrow -- rot180 mir0 --> latex2e-OT1-_Uparrow
+latex2e-OT1-_hookleftarrow -- mir90 --> latex2e-OT1-_hookrightarrow
+latex2e-OT1-_langle -- rot180 mir90 --> latex2e-OT1-_rangle
+latex2e-OT1-_lceil -- mir90 --> latex2e-OT1-_rceil
+latex2e-OT1-_leftarrow -- rot180 mir90 --> latex2e-OT1-_rightarrow
+latex2e-OT1-_Leftarrow -- rot180 mir90 --> latex2e-OT1-_Rightarrow
+latex2e-OT1-_leftarrow -- rot90 mir45 --> latex2e-OT1-_downarrow
+latex2e-OT1-_leftharpoondown -- mir0 --> latex2e-OT1-_leftharpoonup
+latex2e-OT1-_leftharpoondown -- mir90 --> latex2e-OT1-_rightharpoondown
+latex2e-OT1-_leftharpoonup -- mir90 --> latex2e-OT1-_rightharpoonup
+latex2e-OT1-_lfloor -- mir135 --> latex2e-OT1-_lnot
+latex2e-OT1-_lfloor -- mir90 --> latex2e-OT1-_rfloor
+latex2e-OT1-_lnot -- rot270 --> latex2e-OT1-_rfloor
+latex2e-OT1-_lnot -- rot90 --> latex2e-OT1-_lceil
+latex2e-OT1-_longleftarrow -- rot180 mir90 --> latex2e-OT1-_longrightarrow
+latex2e-OT1-_Longleftarrow -- rot180 mir90 --> latex2e-OT1-_Longrightarrow
+latex2e-OT1-_longmapsto -- rot180 mir90 --> stmaryrd-OT1-_longmapsfrom
+latex2e-OT1-_Longrightarrow -- rot180 mir90 --> latex2e-OT1-_Leftarrow
+latex2e-OT1-_Longrightarrow -- rot270 mir135 --> latex2e-OT1-_Downarrow
+latex2e-OT1-_O -- rot90 rot270 mir0 mir90 --> wasysym-OT1-_invdiameter
+latex2e-OT1-_Omega -- rot180 mir0 --> amssymb-OT1-_mho
+latex2e-OT1-_pm -- rot180 mir0 --> latex2e-OT1-_mp
+latex2e-OT1-_prec -- rot180 mir90 --> latex2e-OT1-_succ
+latex2e-OT1-_prec -- rot270 mir135 --> amssymb-OT1-_curlywedge
+latex2e-OT1-_preceq -- mir90 --> latex2e-OT1-_succeq
+latex2e-OT1-_rightharpoondown -- mir0 --> latex2e-OT1-_rightharpoonup
+latex2e-OT1-_searrow -- rot90 mir0 --> latex2e-OT1-_nearrow
+latex2e-OT1-_sqcap -- rot180 mir0 --> latex2e-OT1-_sqcup
+latex2e-OT1-_sqsubseteq -- mir90 --> latex2e-OT1-_sqsupseteq
+latex2e-OT1-_subset -- rot180 mir90 --> latex2e-OT1-_supset
+latex2e-OT1-_subseteq -- mir90 --> latex2e-OT1-_supseteq
+latex2e-OT1-_textbraceleft -- rot180 mir90 --> latex2e-OT1-_textbraceright
+latex2e-OT1-_textgreater -- rot180 mir90 --> latex2e-OT1-_textless
+latex2e-OT1-_textgreater -- rot270 mir135 --> latex2e-OT1-_bigvee
+latex2e-OT1-_textquotedblleft -- rot180 --> latex2e-OT1-_textquotedblright
+latex2e-OT1-_textquoteleft -- rot180 --> latex2e-OT1-_textquoteright
+latex2e-OT1-_triangleleft -- rot180 mir90 --> latex2e-OT1-_triangleright
+latex2e-OT1-_Updownarrow -- rot90 rot270 mir45 mir135 --> latex2e-OT1-_Leftrightarrow
+latex2e-OT1-_varepsilon -- rot90 mir45 --> latex2e-OT1-_omega
+latex2e-OT1-_vdash -- rot270 mir135 --> latex2e-OT1-_top
+latex2e-T1-_dj -- mir90 --> tipa-OT1-_textcrb
+latex2e-T1-_guillemotleft -- rot180 mir90 --> latex2e-T1-_guillemotright
+latex2e-T1-_guilsinglleft -- rot180 mir90 --> latex2e-T1-_guilsinglright
+stix2-OT1-_leftouterjoin -- rot180 mir90 --> stix2-OT1-_rightouterjoin
+stmaryrd-OT1-_lbag -- mir90 --> stmaryrd-OT1-_rbag
+stmaryrd-OT1-_Lbag -- mir90 --> stmaryrd-OT1-_Rbag
+stmaryrd-OT1-_leftarrowtriangle -- rot180 mir90 --> stmaryrd-OT1-_rightarrowtriangle
+stmaryrd-OT1-_llbracket -- rot180 mir90 --> stmaryrd-OT1-_rrbracket
+stmaryrd-OT1-_llparenthesis -- rot180 mir90 --> stmaryrd-OT1-_rrparenthesis
+stmaryrd-OT1-_shortdownarrow -- rot180 mir0 --> stmaryrd-OT1-_shortuparrow
+stmaryrd-OT1-_shortleftarrow -- rot180 mir90 --> stmaryrd-OT1-_shortrightarrow
+textcomp-OT1-_textcopyleft -- mir90 --> textcomp-OT1-_textcopyright
+textcomp-OT1-_textdownarrow -- rot180 mir0 --> textcomp-OT1-_textuparrow
+textcomp-OT1-_textlangle -- rot180 mir90 --> textcomp-OT1-_textrangle
+textcomp-OT1-_textleftarrow -- rot180 mir90 --> textcomp-OT1-_textrightarrow
+textcomp-OT1-_textlquill -- rot180 mir90 --> textcomp-OT1-_textrquill
+tipa-OT1-_textdownstep -- rot180 mir0 --> tipa-OT1-_textupstep
+tipa-OT1-_textlptr -- rot180 mir90 --> tipa-OT1-_textrptr
+wasysym-OT1-_DOWNarrow -- rot180 mir0 --> wasysym-OT1-_UParrow
+wasysym-OT1-_LEFTarrow -- rot180 mir90 --> wasysym-OT1-_RIGHTarrow
+wasysym-OT1-_leftmoon -- rot180 mir90 --> wasysym-OT1-_rightmoon
+wasysym-OT1-_lhd -- rot180 mir90 --> wasysym-OT1-_rhd
+wasysym-OT1-_LHD -- rot180 mir90 --> wasysym-OT1-_RHD
+wasysym-OT1-_unlhd -- mir90 --> wasysym-OT1-_unrhd

@@ -1,0 +1,307 @@
+stmaryrd-OT1-_inplus: mir0
+wasysym-OT1-_neptune: mir90
+stmaryrd-OT1-_leftarrowtriangle: mir0
+textcomp-OT1-_textrquill: mir0
+amssymb-OT1-_llcorner: mir45
+stmaryrd-OT1-_leftrightarrowtriangle: rot180 mir0 mir90
+stmaryrd-OT1-_lbag: rot180
+wasysym-OT1-_conjunction: mir45
+stix2-OT1-_leftouterjoin: mir0
+stix2-OT1-_rightouterjoin: mir0
+stix2-OT1-_fullouterjoin: rot180 mir0 mir90
+tipa-OT1-_textlengthmark: rot180 mir0 mir90
+textcomp-OT1-_textbaht: mir0
+textcomp-OT1-_textwon: mir90
+amssymb-OT1-_leftleftarrows: mir0
+amssymb-OT1-_dashleftarrow: mir0
+amssymb-OT1-_twoheadleftarrow: mir0
+amssymb-OT1-_upuparrows: mir90
+tipa-OT1-_textcloseepsilon: mir0
+textcomp-OT1-_textnaira: rot180
+amssymb-OT1-_doublebarwedge: mir90
+esint-OT1-_sqiint: rot180
+amssymb-OT1-_Supset: mir0
+marvosym-OT1-_Pickup: mir45
+amssymb-OT1-_risingdotseq: rot180
+amssymb-OT1-_Vvdash: mir0
+amssymb-OT1-_Lleftarrow: mir0
+amssymb-OT1-_downdownarrows: mir90
+tipa-OT1-_textcloseomega: mir90
+tipa-OT1-_textcloserevepsilon: mir0
+tipa-OT1-_textdoublebaresh: rot180
+amssymb-OT1-_fallingdotseq: rot180
+wasysym-OT1-_uranus: mir90
+latex2e-OT1-_SS: rot180
+amssymb-OT1-_gtrdot: mir0
+amssymb-OT1-_leftrightarrows: rot180
+textcomp-OT1-_textlquill: mir0
+wasysym-OT1-_opposition: rot180 mir45 mir135
+latex2e-T1-_guilsinglright: mir0
+amssymb-OT1-_nshortparallel: rot180
+amssymb-OT1-_leftarrowtail: mir0
+marvosym-OT1-_Pluto: mir90
+amssymb-OT1-_lrcorner: mir135
+latex2e-T1-_guilsinglleft: mir0
+tipa-OT1-_textturnw: mir90
+dsfont-OT1-_mathds{S}: rot180
+stmaryrd-OT1-_leftrightarroweq: mir90
+amssymb-OT1-_divideontimes: rot180 mir0 mir90
+amssymb-OT1-_lll: mir0
+marvosym-OT1-_Uranus: mir90
+textcomp-OT1-_texteuro: mir0
+amssymb-OT1-_Cup: mir90
+esint-OT1-_sqint: rot180
+stmaryrd-OT1-_niplus: mir0
+amssymb-OT1-_gtreqless: rot180
+wasysym-OT1-_recorder: mir45
+stmaryrd-OT1-_Longmapsfrom: mir0
+amssymb-OT1-_circledS: rot180
+marvosym-OT1-_Neptune: mir90
+wasysym-OT1-_wasylozenge: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+amssymb-OT1-_lesseqgtr: rot180
+amssymb-OT1-_nleftrightarrow: rot180
+dsfont-OT1-_mathds{O}: mir0
+wasysym-OT1-_ataribox: rot180 mir0 mir90
+wasysym-OT1-_LEFTarrow: mir0
+latex2e-OT1-_swarrow: mir45
+amssymb-OT1-_boxminus: rot180 mir0 mir90
+textcomp-OT1-_textbrokenbar: rot180 mir0 mir90
+dsfont-OT1-_mathds{H}: mir0
+stmaryrd-OT1-_Longmapsto: mir0
+amssymb-OT1-_dotplus: mir90
+amssymb-OT1-_eqcirc: rot180 mir0 mir90
+latex2e-OT1-_nwarrow: mir135
+amssymb-OT1-_curlyvee: mir90
+amssymb-OT1-_Cap: mir90
+amssymb-OT1-_circeq: mir90
+amssymb-OT1-_nparallel: rot180
+latex2e-OT1-_OE: mir0
+latex2e-OT1-_oslash: rot180 mir45 mir135
+amssymb-OT1-_doteqdot: rot180 mir0 mir90
+amssymb-OT1-_lessdot: mir0
+dsfont-OT1-_mathds{D}: mir0
+wasysym-OT1-_sagittarius: mir45
+amssymb-OT1-_Rrightarrow: mir0
+latex2e-OT1-_updownarrow: rot180 mir0 mir90
+amssymb-OT1-_sqsupset: mir0
+amssymb-OT1-_leftrightharpoons: rot180
+wasysym-OT1-_invdiameter: rot180 mir45 mir135
+tipa-OT1-_textsci: rot180 mir0 mir90
+tipa-OT1-_textscn: rot180
+amssymb-OT1-_ggg: mir0
+amssymb-OT1-_nLeftrightarrow: rot180
+amssymb-OT1-_Bumpeq: rot180 mir0 mir90
+latex2e-OT1-_Uparrow: mir90
+amssymb-OT1-_lessgtr: rot180
+amssymb-OT1-_curlywedge: mir90
+tipa-OT1-_textsce: mir0
+amssymb-OT1-_barwedge: mir90
+wasysym-OT1-_pisces: rot180 mir0 mir90
+amsmath-OT1-_iiiint: rot180
+tipa-OT1-_textsch: rot180 mir0 mir90
+latex2e-OT1-_Updownarrow: rot180 mir0 mir90
+latex2e-OT1-_textordmasculine: mir90
+stmaryrd-OT1-_rightarrowtriangle: mir0
+amssymb-OT1-_veebar: mir90
+amssymb-OT1-_leftrightsquigarrow: mir90
+wasysym-OT1-_taurus: mir90
+marvosym-OT1-_Celtcross: mir90
+amssymb-OT1-_maltese: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+wasysym-OT1-_gemini: rot180 mir0 mir90
+amssymb-OT1-_circleddash: rot180 mir0 mir90
+amssymb-OT1-_Subset: mir0
+amssymb-OT1-_blacktriangledown: mir90
+tipa-OT1-_textscb: mir0
+wasysym-OT1-_pointer: mir0
+amssymb-OT1-_urcorner: mir45
+latex2e-OT1-_natural: rot180
+amssymb-OT1-_diagdown: rot180 mir45 mir135
+textcomp-OT1-_textquotesingle: mir90
+dsfont-OT1-_mathds{I}: mir0
+amssymb-OT1-_rightarrowtail: mir0
+latex2e-OT1-_colon: rot180 mir0 mir90
+amssymb-OT1-_sqsubset: mir0
+latex2e-T1-_DH: mir0
+dsfont-OT1-_mathds{B}: mir0
+amsmath-OT1-_idotsint: rot180
+amssymb-OT1-_complement: mir0
+amssymb-OT1-_boxdot: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+textcomp-OT1-_textcurrency: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+wasysym-OT1-_earth: mir90
+tipa-OT1-_textramshorns: mir90
+wasysym-OT1-_bell: mir90
+latex2e-T1-_guillemotright: mir0
+amssymb-OT1-_smallsetminus: rot180
+amssymb-OT1-_circledcirc: rot45 rot90 rot135 rot180 rot225 rot270 rot315 mir0 mir45 mir90 mir135
+amssymb-OT1-_between: rot180 mir0 mir90
+amssymb-OT1-_pitchfork: mir90
+amssymb-OT1-_diagup: rot180 mir45 mir135
+latex2e-OT1-_not_sim: rot180
+wasysym-OT1-_mercury: mir90
+textcomp-OT1-_textreferencemark: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+amssymb-OT1-_multimap: mir0
+textcomp-OT1-_textyen: mir90
+amssymb-OT1-_dashrightarrow: mir0
+marvosym-OT1-_CircledA: mir90
+latex2e-OT1-_smile: mir90
+amssymb-OT1-_blacktriangle: mir90
+amssymb-OT1-_mho: mir90
+latex2e-OT1-_wr: rot180
+amssymb-OT1-_ulcorner: mir135
+amssymb-OT1-_sphericalangle: mir0
+latex2e-OT1-_imath: rot180
+amssymb-OT1-_boxplus: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+wasysym-OT1-_aquarius: rot180
+wasysym-OT1-_leftmoon: mir0
+wasysym-OT1-_blacksmiley: mir90
+textcomp-OT1-_textdblhyphen: rot180 mir0 mir90
+amssymb-OT1-_gtrless: rot180
+latex2e-OT1-_mp: mir90
+latex2e-T1-_TH: mir0
+latex2e-OT1-_dashv: mir0
+latex2e-T1-_guillemotleft: mir0
+latex2e-OT1-_frown: mir90
+amssymb-OT1-_circledast: rot180 mir0 mir90
+wasysym-OT1-_libra: mir90
+amssymb-OT1-_rightleftarrows: rot180
+latex2e-OT1-_ddag: rot180 mir0 mir90
+latex2e-OT1-_ominus: rot180 mir0 mir90
+tipa-OT1-_textbabygamma: mir90
+amssymb-OT1-_Vdash: mir0
+latex2e-OT1-_doteq: mir90
+wasysym-OT1-_cancer: rot180
+marvosym-OT1-_Cross: mir90
+latex2e-OT1-_Leftarrow: mir0
+stmaryrd-OT1-_longmapsfrom: mir0
+latex2e-OT1-_asymp: rot180 mir0 mir90
+amssymb-OT1-_because: mir90
+wasysym-OT1-_sun: rot45 rot90 rot135 rot180 rot225 rot270 rot315 mir0 mir45 mir90 mir135
+amssymb-OT1-_rightrightarrows: mir0
+amssymb-OT1-_boxtimes: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+marvosym-OT1-_Ankh: mir90
+latex2e-OT1-_searrow: mir135
+latex2e-OT1-_sqcap: mir90
+dsfont-OT1-_mathds{E}: mir0
+amssymb-OT1-_backsim: rot180
+latex2e-OT1-]: mir0
+amsmath-OT1-_iiint: rot180
+latex2e-OT1-_Downarrow: mir90
+latex2e-T1-_textquotedbl: mir90
+amssymb-OT1-_ltimes: mir0
+latex2e-OT1-_sharp: rot180
+mathdots-OT1-_iddots: rot180 mir45 mir135
+latex2e-OT1-_leftarrow: mir0
+latex2e-OT1-_nearrow: mir45
+latex2e-OT1-_rangle: mir0
+latex2e-OT1-_spadesuit: mir90
+latex2e-OT1-_rightleftharpoons: rot180
+stmaryrd-OT1-_rrbracket: mir0
+latex2e-OT1-_biguplus: mir90
+wasysym-OT1-_male: mir45
+wasysym-OT1-_frownie: mir90
+latex2e-OT1-_clubsuit: mir90
+amsmath-OT1-_iint: rot180
+latex2e-OT1-_textvisiblespace: mir90
+marvosym-OT1-_Telefon: mir90
+marvosym-OT1-_Frowny: mir90
+amssymb-OT1-_rtimes: mir0
+tipa-OT1-_textsca: mir90
+latex2e-OT1-_triangleleft: mir0
+latex2e-OT1-_Upsilon: mir90
+latex2e-OT1-_downarrow: mir90
+textcomp-OT1-_textdollaroldstyle: rot180
+latex2e-OT1-_succ: mir0
+wasysym-OT1-_female: mir90
+latex2e-OT1-_textbraceright: mir0
+latex2e-OT1-_uparrow: mir90
+latex2e-OT1-_div: rot180 mir0 mir90
+esint-OT1-_fint: rot180
+latex2e-OT1-_amalg: mir90
+latex2e-OT1-_supset: mir0
+latex2e-OT1-_Theta: rot180 mir0 mir90
+latex2e-OT1-_vdots: rot180 mir0 mir90
+amssymb-OT1-_twoheadrightarrow: mir0
+esint-OT1-_oiint: rot180
+latex2e-OT1-_bigsqcup: mir90
+latex2e-OT1-_ddots: rot180 mir45 mir135
+latex2e-OT1-_textasciicircum: mir90
+latex2e-OT1-_triangleright: mir0
+amssymb-OT1-_mathcal{N}: rot180
+latex2e-OT1-_top: mir90
+latex2e-OT1-_Xi: rot180 mir0 mir90
+latex2e-OT1-_prec: mir0
+latex2e-OT1-_AA: mir90
+latex2e-OT1-_not_equiv: rot180
+marvosym-OT1-_Bat: mir90
+latex2e-OT1-_ni: mir0
+latex2e-OT1-_bowtie: rot180 mir0 mir90
+amssymb-OT1-_triangleq: mir90
+latex2e-OT1-_diamond: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+latex2e-OT1-_theta: rot180
+latex2e-OT1-_$: rot180
+amssymb-OT1-_blacksquare: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+latex2e-OT1-_ast: rot180 mir0 mir90
+latex2e-OT1-_cdots: rot180 mir0 mir90
+latex2e-OT1-_dag: mir90
+latex2e-OT1-_leftrightarrow: rot180 mir0 mir90
+latex2e-OT1-!`: mir90
+stmaryrd-OT1-_llbracket: mir0
+latex2e-OT1-_Vert: rot180 mir0 mir90
+latex2e-OT1-_textgreater: mir0
+latex2e-OT1-_models: mir0
+amssymb-OT1-_gg: mir0
+marvosym-OT1-_EUR: mir0
+latex2e-OT1-_textless: mir0
+latex2e-OT1-_S: rot180
+latex2e-OT1-_subset: mir0
+latex2e-OT1-_bigodot: rot45 rot90 rot135 rot180 rot225 rot270 rot315 mir0 mir45 mir90 mir135
+latex2e-OT1-_star: mir90
+amssymb-OT1-_therefore: mir90
+latex2e-OT1-_--: rot180 mir0 mir90
+latex2e-OT1-[: mir0
+latex2e-OT1-/: rot180
+latex2e-OT1-_bullet: rot45 rot90 rot135 rot180 rot225 rot270 rot315 mir0 mir45 mir90 mir135
+latex2e-OT1-_bigvee: mir90
+latex2e-OT1-_backslash: rot180
+wasysym-OT1-_smiley: mir90
+latex2e-OT1-_langle: mir0
+amssymb-OT1-_ll: mir0
+latex2e-OT1-_longmapsto: mir0
+latex2e-OT1-_vdash: mir0
+latex2e-OT1-_mid: rot180 mir0 mir90
+latex2e-OT1-_bigotimes: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+latex2e-OT1-_#: rot180
+latex2e-OT1-_oint: rot180
+marvosym-OT1-_Smiley: mir90
+latex2e-OT1-_Psi: mir90
+latex2e-OT1-_Omega: mir90
+latex2e-OT1-_bigcup: mir90
+latex2e-OT1-_chi: rot180
+latex2e-OT1-_exists: mir0
+latex2e-OT1-_bigcap: mir90
+latex2e-OT1-_bigtriangledown: mir90
+latex2e-OT1-_Leftrightarrow: rot180 mir0 mir90
+latex2e-OT1-_forall: mir90
+latex2e-OT1-_heartsuit: mir90
+latex2e-OT1-_Delta: mir90
+latex2e-OT1-_propto: mir0
+latex2e-OT1-_textbraceleft: mir0
+latex2e-OT1-_Phi: rot180 mir0 mir90
+latex2e-OT1-_bigoplus: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+latex2e-OT1-_bot: mir90
+amssymb-OT1-_neq: rot180
+latex2e-OT1-_longrightarrow: mir0
+amssymb-OT1-_square: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+latex2e-OT1-_pm: mir90
+latex2e-OT1-_Pi: mir90
+latex2e-OT1-_times: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+latex2e-OT1-_Longrightarrow: mir0
+latex2e-OT1-_infty: rot180 mir0 mir90
+latex2e-OT1-_O: rot180
+latex2e-OT1-_approx: rot180
+latex2e-OT1-_Lambda: mir90
+latex2e-OT1-_equiv: rot180 mir0 mir90
+latex2e-OT1-_bigcirc: rot45 rot90 rot135 rot180 rot225 rot270 rot315 mir0 mir45 mir90 mir135
+latex2e-OT1-_sim: rot180
+latex2e-OT1-_int: rot180
+latex2e-OT1-_Sigma: mir0

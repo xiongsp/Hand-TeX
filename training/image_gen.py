@@ -16,8 +16,6 @@ import handtex.data.model
 import handtex.data.symbol_metadata
 import training.database
 
-# TODO make synthetic data for compound chars.
-
 
 class StrokeDataset(Dataset):
     def __init__(
@@ -152,6 +150,194 @@ def strokes_to_grayscale_image_cv2(stroke_data: list[list[tuple[int, int]]], ima
                 img, stroke[i], stroke[i + 1], color=(0,), thickness=1, lineType=cv2.LINE_AA
             )  # Draw black lines (0)
     return img
+
+
+def rotation_matrix(angle: float, image_size: int = 1000) -> np.ndarray:
+    """
+    Rotate the stroke data by the given angle around the center of the image.
+    Positive angles rotate counter-clockwise, negative angles rotate clockwise.
+    The center is at coordinates (image_size / 2, image_size / 2), not specific to
+    the image, since the image is expected to be centered in the frame.
+    After rotation, the image may need to be scaled down to fit the original image size.
+
+    :param angle: Angle in degrees to rotate the strokes.
+    :param image_size: Size of the image the strokes are drawn on.
+    :return: Rotation matrix.
+    """
+    angle_rad = np.radians(-angle)
+    cos_theta = np.cos(angle_rad)
+    sin_theta = np.sin(angle_rad)
+    x_offset = image_size / 2
+    y_offset = image_size / 2
+
+    transformation = np.array(
+        [
+            [cos_theta, -sin_theta, -x_offset * cos_theta + y_offset * sin_theta + x_offset],
+            [sin_theta, cos_theta, -x_offset * sin_theta - y_offset * cos_theta + y_offset],
+            [0, 0, 1],
+        ]
+    )
+    return transformation
+
+
+def reflection_matrix(angle: float, image_size: int = 1000) -> np.ndarray:
+    """
+    Reflect the stroke data along an axis that passes through the center of the image
+    at a specified angle. The center is at coordinates (image_size / 2, image_size / 2).
+    Positive angles rotate the axis counter-clockwise, negative angles rotate clockwise.
+
+    :param angle: Angle in degrees defining the axis to reflect across.
+    :param image_size: Size of the image the strokes are drawn on.
+    :return: Reflection matrix.
+    """
+    angle_rad = np.radians(-angle)
+    two_theta = 2 * angle_rad
+    cos_2theta = np.cos(two_theta)
+    sin_2theta = np.sin(two_theta)
+    x_offset = image_size / 2
+    y_offset = image_size / 2
+
+    transformation = np.array(
+        [
+            [cos_2theta, sin_2theta, x_offset - cos_2theta * x_offset - sin_2theta * y_offset],
+            [sin_2theta, -cos_2theta, y_offset - sin_2theta * x_offset + cos_2theta * y_offset],
+            [0, 0, 1],
+        ]
+    )
+    return transformation
+
+
+def scale_matrix(scale_x: float, scale_y: float, image_size: int = 1000) -> np.ndarray:
+    """
+    Scale the stroke data along the x and y axes, relative to the center of the image.
+    The center is at coordinates (image_size / 2, image_size / 2).
+
+    :param scale_x: Scaling factor for the x-axis. Values less than 1 will shrink the x-axis.
+    :param scale_y: Scaling factor for the y-axis. Values less than 1 will shrink the y-axis.
+    :param image_size: Size of the image the strokes are drawn on.
+    :return: Scaling matrix.
+    """
+    x_offset = image_size / 2
+    y_offset = image_size / 2
+
+    transformation = np.array(
+        [
+            [scale_x, 0, x_offset - scale_x * x_offset],
+            [0, scale_y, y_offset - scale_y * y_offset],
+            [0, 0, 1],
+        ]
+    )
+    return transformation
+
+
+def skew_matrix(skew_x: float, skew_y: float, image_size: int = 1000) -> np.ndarray:
+    """
+    Skew the stroke data along the x and y axes, relative to the center of the image.
+    The center is at coordinates (image_size / 2, image_size / 2).
+    If the skewed strokes exceed the image boundaries, they are scaled down to fit.
+
+    :param skew_x: Skew factor along the x-axis. Positive values shear to the right.
+    :param skew_y: Skew factor along the y-axis. Positive values shear upwards.
+    :param image_size: Size of the image the strokes are drawn on.
+    :return: Skew matrix.
+    """
+    x_offset = image_size / 2
+    y_offset = image_size / 2
+
+    transformation = np.array(
+        [
+            [1, skew_x, -skew_x * y_offset],
+            [skew_y, 1, -skew_y * x_offset],
+            [0, 0, 1],
+        ]
+    )
+    return transformation
+
+
+def apply_transformations(
+    stroke_data: list[list[tuple[int, int]]],
+    transformations: list[np.ndarray] | np.ndarray,
+    shuffle_transformations: bool = False,
+    image_size: int = 1000,
+) -> list[list[tuple[int, int]]]:
+    """
+    Apply a sequence of transformation matrices to the stroke data.
+    If the transformed strokes exceed the image boundaries, they are scaled down to fit.
+    Transformations are applied in the ascending order they are provided, unless shuffled.
+
+    :param stroke_data: List of strokes, each stroke being a list of points.
+    :param transformations: List of 3x3 transformation matrices to apply.
+    :param shuffle_transformations: [Optional] If True, shuffle the order of transformations.
+    :param image_size: [Optional] Size of the image the strokes are drawn on.
+    :return: Transformed stroke data.
+    """
+    if not isinstance(transformations, list):
+        transformations = [transformations]
+
+    # Shuffle transformations if required
+    if shuffle_transformations:
+        generator = np.random.default_rng()
+        generator.shuffle(transformations)
+
+    # Combine all transformation matrices into a single matrix
+    total_transformation = np.eye(3)
+    for transformation in transformations:
+        total_transformation = transformation @ total_transformation
+
+    # Flatten all strokes into a single array and keep track of stroke lengths.
+    all_points = []
+    stroke_lengths = []
+    for stroke in stroke_data:
+        all_points.extend(stroke)
+        stroke_lengths.append(len(stroke))
+
+    points_array = np.array(all_points)
+    ones = np.ones((points_array.shape[0], 1))
+    homogeneous_points = np.hstack([points_array, ones])
+
+    transformed_points = homogeneous_points @ total_transformation.T
+    x_new, y_new = transformed_points[:, 0], transformed_points[:, 1]
+
+    # Calculate the bounding box of the transformed points.
+    # We may need to scale the image down to fit again.
+    min_x, min_y = x_new.min(), y_new.min()
+    max_x, max_y = x_new.max(), y_new.max()
+
+    width, height = max_x - min_x, max_y - min_y
+    if width == 0 or height == 0:
+        scale = 1
+    else:
+        scale = min(image_size / width, image_size / height)
+
+    if scale < 1:
+        tx = (1 - scale) * image_size / 2
+        ty = (1 - scale) * image_size / 2
+        scaling_matrix = np.array(
+            [
+                [scale, 0, tx],
+                [0, scale, ty],
+                [0, 0, 1],
+            ]
+        )
+
+        ones = np.ones((transformed_points.shape[0], 1))
+        transformed_points = np.hstack([transformed_points[:, :2], ones])
+        scaled_points = transformed_points @ scaling_matrix.T
+        x_scaled = np.round(scaled_points[:, 0]).astype(int)
+        y_scaled = np.round(scaled_points[:, 1]).astype(int)
+    else:
+        x_scaled = np.round(x_new).astype(int)
+        y_scaled = np.round(y_new).astype(int)
+
+    # Split the transformed points back into strokes.
+    transformed_strokes = []
+    idx = 0
+    for length in stroke_lengths:
+        stroke_points = list(zip(x_scaled[idx : idx + length], y_scaled[idx : idx + length]))
+        transformed_strokes.append(stroke_points)
+        idx += length
+
+    return transformed_strokes
 
 
 def tensorize_strokes(stroke_data: list[list[tuple[int, int]]], image_size: int):

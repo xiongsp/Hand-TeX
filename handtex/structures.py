@@ -62,6 +62,7 @@ class SymbolDrawing:
 
 
 class Symmetry(StrEnum):
+    none = auto()
     rot45 = auto()
     rot90 = auto()
     rot135 = auto()
@@ -76,6 +77,9 @@ class Symmetry(StrEnum):
 
     def __str__(self):
         return self.name
+
+    def is_none(self):
+        return self.name == "none"
 
     def is_rotation(self):
         return self.name.startswith("rot")

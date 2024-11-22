@@ -1,3 +1,4 @@
+import random
 import numpy as np
 import csv
 from pathlib import Path
@@ -12,20 +13,46 @@ import json
 from sklearn.preprocessing import LabelEncoder
 
 import handtex.utils as ut
+import handtex.structures as st
 import handtex.data.model
 import handtex.data.symbol_metadata
 import training.database
 
 
+
+
+def augmentation_amount(real_data_count: int) -> int:
+    """
+    Calculate the amount of augmented data to generate based on the real data count.
+    """
+    max_factor = 10
+    min_factor = 1.2
+    power_base = 1.2
+    stretch = 0.05
+
+    nominator = -2 * (max_factor - min_factor)
+    denominator = 1 + power_base ** (-stretch * real_data_count)
+    offset = min_factor - nominator
+    factor = nominator / denominator + offset
+
+    return int(factor * real_data_count)
+
+
+# Propagate self symmetries to similar symbols.
 class StrokeDataset(Dataset):
     def __init__(
         self,
         db_path,
         symbol_keys: list[str],
         lookalikes: dict[str, tuple[str, ...]],
+        self_symmetries: dict[str, list[st.Symmetry]],
+        other_symmetries: dict[str, list[tuple[str, list[st.Symmetry]]]],
         image_size: int,
         label_encoder: LabelEncoder,
+        validation_split: float = 0.1,
         train: bool = True,
+        shuffle: bool = True,
+        random_augmentation: bool = True,
     ):
         """
         :param db_path: Path to the SQLite database.
@@ -33,12 +60,17 @@ class StrokeDataset(Dataset):
         :param lookalikes: Dictionary of lookalike characters.
         :param image_size: Size of the generated images (images are square)
         :param label_encoder: LabelEncoder object to encode labels.
+        :param validation_split: Fraction of the data to use for validation.
         :param train: If True, load training data, else load validation data.
+        :param shuffle: If True, shuffle the data before making the training/validation split.
+        :param random_augmentation: If True, augment the data with random transformations.
         """
         self.db_path = db_path
         self.image_size = image_size
-        self.primary_keys = []
+        self.primary_keys: list[tuple[int, st.Symmetry, bool]] = []
         self.symbol_keys = []
+        self.self_symmetries = self_symmetries
+        self.other_symmetries = other_symmetries
         self.train = train
 
         # Load primary keys and symbol keys from the database for the provided symbol keys
@@ -46,29 +78,68 @@ class StrokeDataset(Dataset):
         cursor = conn.cursor()
 
         for symbol_key in symbol_keys:
-            # cursor.execute("SELECT id FROM samples WHERE key = ?", (symbol_key,))
+
+            samples: list[tuple[int, st.Symmetry, bool]] = []
+            real_data_count = 0
+            self_symmetry_count = 0
+            other_symmetry_count = 0
+            augmentation_count = 0
+
             key_and_lookalikes = [symbol_key] + list(lookalikes.get(symbol_key, []))
             cursor.execute(
                 f"SELECT id FROM samples WHERE key IN ({','.join(['?']*len(key_and_lookalikes))})",
                 key_and_lookalikes,
             )
             rows = cursor.fetchall()
+
+            for row in rows:
+                samples.append((row[0], st.Symmetry.none, False))
+                real_data_count += 1
+                # If it has self-symmetries, add all of them to the list.
+                for symmetry in self.self_symmetries.get(symbol_key, []):
+                    samples.append((row[0], symmetry, False))
+                    self_symmetry_count += 1
+
+            # If the symbol has other symmetries, augment using them.
+            if symbol_key in self.other_symmetries:
+                for other_key, symmetries in self.other_symmetries[symbol_key]:
+                    cursor.execute(
+                        "SELECT id FROM samples WHERE key = ?",
+                        (other_key,),
+                    )
+                    for row in cursor.fetchall():
+                        for symmetry in symmetries:
+                            samples.append((row[0], symmetry, False))
+                            other_symmetry_count += 1
+
+            # Augment the data to balance the classes.
+            if random_augmentation:
+                augmentation_count = augmentation_amount(real_data_count)
+                for _ in range(augmentation_count):
+                    row = random.choice(samples)
+                    samples.append((row[0], row[1], True))
+
             # Shuffle the rows to get more variety in drawings, since drawings
             # by the same person are sequentially stored in the database.
-            np.random.shuffle(rows)
+            if shuffle:
+                random.shuffle(samples)
 
-            split_idx = ceil(len(rows) * 0.1)
+            split_idx = ceil(len(samples) * validation_split)
             if train:
-                selected_rows = rows[split_idx:]  # Remaining 90% for training
+                selected_rows = samples[split_idx:]
                 print(
-                    f"Loaded {len(rows)} samples of {symbol_key}, "
-                    f"{len(selected_rows)} for training, "
-                    f"{split_idx} for validation."
+                    f"Loaded {len(samples)} total samples of {symbol_key}, "
+                    f"with {real_data_count} real data, "
+                    f"{self_symmetry_count} self-symmetries, "
+                    f"{other_symmetry_count} other symmetries, "
+                    f"and {augmentation_count} random augmentations. "
+                    f"Reserving {len(selected_rows)} for training. "
+                    f"Reserving {split_idx} for validation."
                 )
             else:
-                selected_rows = rows[:split_idx]  # First 10% for validation
+                selected_rows = samples[:split_idx]
 
-            self.primary_keys.extend([row[0] for row in selected_rows])
+            self.primary_keys.extend(selected_rows)
             self.symbol_keys.extend([symbol_key] * len(selected_rows))
 
         conn.close()
@@ -87,9 +158,52 @@ class StrokeDataset(Dataset):
     def __len__(self):
         return len(self.primary_keys)
 
-    def __getitem__(self, idx):
-        primary_key = self.primary_keys[idx]
+    def range_for_symbol(self, symbol: str) -> range:
+        """
+        Get the range of indices for a given symbol.
+        """
+        start = self.symbol_keys.index(symbol)
+        end = len(self.symbol_keys) - self.symbol_keys[::-1].index(symbol)
+        return range(start, end)
+
+    def load_transformed_strokes(self, idx):
+        primary_key, required_transform, do_random_transform = self.primary_keys[idx]
         stroke_data = self.load_stroke_data(primary_key)
+        # If a symmetric character was used, we will need to apply it's transformation.
+        # We may have multiple options here.
+        trans_mats = []
+        if not required_transform.is_none():
+            if required_transform.is_rotation():
+                trans_mats.append(rotation_matrix(required_transform.angle))
+            else:
+                trans_mats.append(reflection_matrix(required_transform.angle))
+
+        # Augment the data with a random transformation.
+        # The transformation is applied to the strokes before converting them to an image.
+        if do_random_transform:
+            operation = random.randint(0, 2)
+            if operation == 0:
+                trans_mats.append(rotation_matrix(np.random.uniform(-5, 5)))
+            elif operation == 1:
+                trans_mats.append(
+                    scale_matrix(np.random.uniform(0.9, 1), np.random.uniform(0.9, 1))
+                )
+            elif operation == 2:
+                trans_mats.append(
+                    skew_matrix(np.random.uniform(-0.1, 0.1), np.random.uniform(-0.1, 0.1))
+                )
+
+        # Apply the transformations to the stroke data.
+        if trans_mats:
+            stroke_data = apply_transformations(stroke_data, trans_mats)
+
+        symbol_key = self.symbol_keys[idx]
+
+        return stroke_data, symbol_key
+
+    def __getitem__(self, idx):
+        stroke_data, _ = self.load_transformed_strokes(idx)
+
         img = strokes_to_grayscale_image_cv2(stroke_data, self.image_size)
 
         # Apply the transform to convert the image to a tensor and normalize it
@@ -461,6 +575,8 @@ def main():
     symbols = ut.load_symbols()
     similar_symbols = ut.load_symbol_metadata_similarity()
     symbol_keys = ut.select_leader_symbols(list(symbols.keys()), similar_symbols)
+    self_symmetries = ut.load_symbol_metadata_self_symmetry()
+    other_symmetries = ut.load_symbol_metadata_other_symmetry()
 
     label_encoder = LabelEncoder()
     label_encoder.fit(symbol_keys)
@@ -469,19 +585,32 @@ def main():
     image_size = 48
 
     # Create training and validation datasets and dataloaders
-    train_dataset = StrokeDataset(
-        db_path, symbol_keys, similar_symbols, image_size, label_encoder, train=True
-    )
-    validation_dataset = StrokeDataset(
-        db_path, symbol_keys, similar_symbols, image_size, label_encoder, train=False
+    all_samples = StrokeDataset(
+        db_path,
+        symbol_keys,
+        similar_symbols,
+        self_symmetries,
+        other_symmetries,
+        image_size,
+        label_encoder,
+        validation_split=0,
+        train=True,
+        shuffle=False,
     )
 
-    # Show one of the images (optional)
-    stroke_data = train_dataset.load_stroke_data(train_dataset.primary_keys[0])
-    img_cv2 = strokes_to_grayscale_image_cv2(stroke_data, image_size)
-    cv2.imshow("Stroke Image", img_cv2)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # Show all the samples for a given symbol.
+    symbol = "latex2e-OT1-_nwarrow"
+    assert symbol in symbol_keys, f"Symbol '{symbol}' not found in the dataset or not a leader"
+    symbol_strokes = (
+        all_samples.load_transformed_strokes(idx) for idx in all_samples.range_for_symbol(symbol)
+    )
+    for idx, (strokes, symbol) in enumerate(symbol_strokes):
+        img = strokes_to_grayscale_image_cv2(strokes, image_size)
+        cv2.imshow(f"{symbol} {idx}", img)
+        # wait for a key press
+        cv2.waitKey(0)
+        # close the window
+        cv2.destroyAllWindows()
 
 
 if __name__ == "__main__":

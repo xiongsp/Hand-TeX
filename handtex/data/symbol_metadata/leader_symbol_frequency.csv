@@ -432,6 +432,7 @@ wasysym-OT1-_invdiameter,44
 amssymb-OT1-_Bbbk,43
 textcomp-OT1-_textflorin,42
 amssymb-OT1-_nvdash,42
+wasysym-OT1-_recorder,41
 amssymb-OT1-_sqsupset,41
 amssymb-OT1-_looparrowright,41
 amssymb-OT1-_leftrightharpoons,41
@@ -514,7 +515,6 @@ stmaryrd-OT1-_niplus,26
 amssymb-OT1-_gtreqless,26
 amssymb-OT1-_Finv,26
 amssymb-OT1-_mathfrak{Q},26
-wasysym-OT1-_recorder,26
 tipa-OT1-_textlhookt,25
 tipa-OT1-_textOlyoghlig,25
 tipa-OT1-_textturnh,25
@@ -670,7 +670,6 @@ amssymb-OT1-_mathfrak{o},15
 amssymb-OT1-_mathfrak{s},15
 dsfont-OT1-_mathds{k},15
 mathrsfs-OT1-_mathscr{Y},15
-marvosym-OT1-_Pickup,15
 latex2e-T1-_NG,14
 tipa-OT1-_texththeng,14
 tipa-OT1-_textcloseepsilon,14

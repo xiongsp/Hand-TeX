@@ -94,6 +94,8 @@ symbols = ut.load_symbols()
 symbol_keys = list(symbols.keys())
 
 similar_symbols = ut.load_symbol_metadata_similarity()
+self_symmetries = ut.load_symbol_metadata_self_symmetry()
+other_symmetries = ut.load_symbol_metadata_other_symmetry()
 
 # Limit the number of classes to classify.
 symbol_keys = ut.select_leader_symbols(symbol_keys, similar_symbols)
@@ -105,7 +107,7 @@ print(f"Using {device} device")
 num_classes = len(symbol_keys)
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 15
+num_epochs = 17
 
 db_path = "database/handtex.db"
 image_size = 48
@@ -121,10 +123,26 @@ def main():
 
     # Create training and validation datasets and dataloaders
     train_dataset = StrokeDataset(
-        db_path, symbol_keys, similar_symbols, image_size, label_encoder, train=True
+        db_path,
+        symbol_keys,
+        similar_symbols,
+        self_symmetries,
+        other_symmetries,
+        image_size,
+        label_encoder,
+        validation_split=0.2,
+        train=True,
     )
     validation_dataset = StrokeDataset(
-        db_path, symbol_keys, similar_symbols, image_size, label_encoder, train=False
+        db_path,
+        symbol_keys,
+        similar_symbols,
+        self_symmetries,
+        other_symmetries,
+        image_size,
+        label_encoder,
+        validation_split=0.2,
+        train=False,
     )
 
     train_dataloader = DataLoader(train_dataset, batch_size, shuffle=True)

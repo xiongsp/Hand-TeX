@@ -12,9 +12,7 @@ amssymb-OT1-_mathcal{N} mathrsfs-OT1-_mathscr{N}
 amssymb-OT1-_neq tipa-OT1-_textdoublebarpipe tipa-OT1-_textdoublebarslash
 amssymb-OT1-_nmid amssymb-OT1-_nshortmid
 amssymb-OT1-_subsetneq amssymb-OT1-_varsubsetneq
-amssymb-OT1-_subsetneqq amssymb-OT1-_varsubsetneqq
 amssymb-OT1-_supsetneq amssymb-OT1-_varsupsetneq
-amssymb-OT1-_supsetneqq amssymb-OT1-_varsupsetneqq
 amssymb-OT1-_trianglelefteq wasysym-OT1-_unlhd
 amssymb-OT1-_trianglerighteq wasysym-OT1-_unrhd
 amssymb-OT1-_ulcorner tipa-OT1-_textopencorner

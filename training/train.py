@@ -12,6 +12,7 @@ from training.image_gen import (
     StrokeDataset,
     recalculate_frequencies,
     recalculate_encodings,
+    build_stroke_cache,
 )
 
 
@@ -107,7 +108,7 @@ print(f"Using {device} device")
 num_classes = len(symbol_keys)
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 17
+num_epochs = 10
 
 db_path = "database/handtex.db"
 image_size = 48
@@ -121,6 +122,8 @@ def main():
     recalculate_frequencies()
     recalculate_encodings()
 
+    stroke_cache = build_stroke_cache(db_path)
+
     # Create training and validation datasets and dataloaders
     train_dataset = StrokeDataset(
         db_path,
@@ -132,6 +135,7 @@ def main():
         label_encoder,
         validation_split=0.2,
         train=True,
+        stroke_cache=stroke_cache,
     )
     validation_dataset = StrokeDataset(
         db_path,
@@ -143,10 +147,11 @@ def main():
         label_encoder,
         validation_split=0.2,
         train=False,
+        stroke_cache=stroke_cache,
     )
 
-    train_dataloader = DataLoader(train_dataset, batch_size, shuffle=True)
-    validation_dataloader = DataLoader(validation_dataset, batch_size, shuffle=True)
+    train_dataloader = DataLoader(train_dataset, batch_size, shuffle=True, num_workers=4)
+    validation_dataloader = DataLoader(validation_dataset, batch_size, shuffle=True, num_workers=4)
 
     model = CNN(num_classes=num_classes).to(device)
 

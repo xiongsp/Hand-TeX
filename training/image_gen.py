@@ -21,7 +21,24 @@ import training.database
 
 
 
-def augmentation_amount(real_data_count: int) -> int:
+def build_stroke_cache(db_path: str) -> dict[str, list[list[tuple[int, int]]]]:
+    """
+    Build a cache of the stroke data for each symbol in the database.
+    """
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT id, strokes FROM samples")
+    rows = cursor.fetchall()
+    cache = {key: json.loads(strokes) for key, strokes in rows}
+
+    conn.close()
+    return cache
+
+
+def augmentation_amount(
+    real_data_count: int, max_factor: float = 10, min_factor: float = 0.2
+) -> int:
     """
     Calculate the amount of augmented data to generate based on the real data count.
     """
@@ -51,6 +68,7 @@ class StrokeDataset(Dataset):
         train: bool = True,
         shuffle: bool = True,
         random_augmentation: bool = True,
+        stroke_cache: dict[str, list[list[tuple[int, int]]]] = None,
     ):
         """
         :param db_path: Path to the SQLite database.
@@ -62,6 +80,7 @@ class StrokeDataset(Dataset):
         :param train: If True, load training data, else load validation data.
         :param shuffle: If True, shuffle the data before making the training/validation split.
         :param random_augmentation: If True, augment the data with random transformations.
+        :param stroke_cache: Cache of stroke data for each symbol key, alternative to loading from database.
         """
         self.db_path = db_path
         self.image_size = image_size
@@ -70,6 +89,7 @@ class StrokeDataset(Dataset):
         self.self_symmetries = self_symmetries
         self.other_symmetries = other_symmetries
         self.train = train
+        self.stroke_cache = stroke_cache
 
         # Load primary keys and symbol keys from the database for the provided symbol keys
         conn = sqlite3.connect(self.db_path)
@@ -224,6 +244,8 @@ class StrokeDataset(Dataset):
         return img_tensor, label_tensor  # Return image tensor and label
 
     def load_stroke_data(self, primary_key):
+        if self.stroke_cache is not None:
+            return self.stroke_cache[primary_key]
         # Connect to the SQLite database
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()

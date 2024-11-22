@@ -25,8 +25,6 @@ def augmentation_amount(real_data_count: int) -> int:
     """
     Calculate the amount of augmented data to generate based on the real data count.
     """
-    max_factor = 10
-    min_factor = 1.2
     power_base = 1.2
     stretch = 0.05
 
@@ -91,14 +89,20 @@ class StrokeDataset(Dataset):
                 key_and_lookalikes,
             )
             rows = cursor.fetchall()
+            real_data_count = len(rows)
 
+            self_symmetric_samples = []
             for row in rows:
                 samples.append((row[0], st.Symmetry.none, False))
-                real_data_count += 1
-                # If it has self-symmetries, add all of them to the list.
+                # If it has self-symmetries, some amount of them will be added to the dataset.
                 for symmetry in self.self_symmetries.get(symbol_key, []):
-                    samples.append((row[0], symmetry, False))
-                    self_symmetry_count += 1
+                    self_symmetric_samples.append((row[0], symmetry, False))
+            # Limit the number of self-symmetries.
+            augmentation_limit = augmentation_amount(
+                len(self_symmetric_samples), max_factor=1, min_factor=0.1
+            )
+            samples.extend(random.choices(self_symmetric_samples, k=augmentation_limit))
+            self_symmetry_count = augmentation_limit
 
             # If the symbol has other symmetries, augment using them.
             if symbol_key in self.other_symmetries:
@@ -107,10 +111,16 @@ class StrokeDataset(Dataset):
                         "SELECT id FROM samples WHERE key = ?",
                         (other_key,),
                     )
+                    other_symmetric_samples = []
                     for row in cursor.fetchall():
                         for symmetry in symmetries:
-                            samples.append((row[0], symmetry, False))
-                            other_symmetry_count += 1
+                            other_symmetric_samples.append((row[0], symmetry, False))
+                    # Limit the number of other symmetries.
+                    augmentation_limit = augmentation_amount(
+                        len(other_symmetric_samples), max_factor=1, min_factor=0.05
+                    )
+                    samples.extend(random.choices(other_symmetric_samples, k=augmentation_limit))
+                    other_symmetry_count += augmentation_limit
 
             # Augment the data to balance the classes.
             if random_augmentation:
@@ -599,7 +609,7 @@ def main():
     )
 
     # Show all the samples for a given symbol.
-    symbol = "latex2e-OT1-_nwarrow"
+    symbol = "amssymb-OT1-_llcorner"
     assert symbol in symbol_keys, f"Symbol '{symbol}' not found in the dataset or not a leader"
     symbol_strokes = (
         all_samples.load_transformed_strokes(idx) for idx in all_samples.range_for_symbol(symbol)

@@ -51,7 +51,7 @@ def predict(
         # Prune the results to the top 10 or less, discarding results with tiny confidence.
         final_results = []
         for label, confidence in results:
-            if final_results and confidence < 0.01:
+            if final_results and confidence < 0.001:
                 break
             final_results.append((label_decoder[label], confidence))
         return final_results

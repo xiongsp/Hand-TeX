@@ -504,9 +504,9 @@ def load_symbol_metadata_other_symmetry() -> dict[str, list[tuple[str, list[st.S
         key_from = match.group(1)
         key_to = match.group(3)
         symmetry_list = [st.Symmetry(sym) for sym in match.group(2).split()]
-        symmetries[key_from].append((key_to, symmetry_list))
         inverted_symmetry_list = [sym.invert() for sym in symmetry_list]
-        symmetries[key_to].append((key_from, inverted_symmetry_list))
+        symmetries[key_from].append((key_to, inverted_symmetry_list))
+        symmetries[key_to].append((key_from, symmetry_list))
     return symmetries
 
 

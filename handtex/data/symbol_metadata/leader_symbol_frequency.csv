@@ -300,7 +300,6 @@ latex2e-OT1-_AE,105
 tipa-OT1-_textyogh,105
 amssymb-OT1-_circlearrowright,105
 latex2e-OT1-_rfloor,105
-amssymb-OT1-_subsetneqq,100
 amssymb-OT1-_ulcorner,99
 amssymb-OT1-_sphericalangle,99
 amssymb-OT1-_mho,98
@@ -324,6 +323,7 @@ amssymb-OT1-_diagup,87
 amssymb-OT1-_mathcal{I},87
 latex2e-OT1-_rceil,86
 marvosym-OT1-_Mobilefone,86
+amssymb-OT1-_subsetneqq,85
 latex2e-OT1-_P,84
 marvosym-OT1-_Moon,84
 amssymb-OT1-_pitchfork,83
@@ -547,7 +547,6 @@ amssymb-OT1-_mathfrak{n},23
 dsfont-OT1-_mathds{T},23
 dsfont-OT1-_mathds{V},23
 mathrsfs-OT1-_mathscr{K},23
-amssymb-OT1-_supsetneqq,22
 latex2e-T1-_guilsinglleft,22
 tipa-OT1-_texthardsign,22
 tipa-OT1-_textltailm,22
@@ -662,6 +661,8 @@ textcomp-OT1-_textdong,15
 esint-OT1-_landupint,15
 amssymb-OT1-_succapprox,15
 amssymb-OT1-_precapprox,15
+amssymb-OT1-_varsubsetneqq,15
+amssymb-OT1-_varsupsetneqq,15
 stmaryrd-OT1-_rrfloor,15
 amssymb-OT1-_mathfrak{T},15
 amssymb-OT1-_mathfrak{c},15
@@ -776,6 +777,7 @@ amssymb-OT1-_ntriangleright,8
 tipa-OT1-_textwynn,7
 textcomp-OT1-_textpeso,7
 amssymb-OT1-_nVDash,7
+amssymb-OT1-_supsetneqq,7
 tipa-OT1-_textrtailr,6
 amssymb-OT1-_ntrianglelefteq,6
 dsfont-OT1-_mathds{J},6

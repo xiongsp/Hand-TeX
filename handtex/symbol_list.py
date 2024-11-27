@@ -26,8 +26,9 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
     symbols: dict[str, st.Symbol]
     last_shown_symbol: str | None
     similar_symbols: dict[str, tuple[str, ...]]
-    self_symmetries: dict[str, list[st.Symmetry]]
-    other_symmetries: dict[str, list[tuple[str, list[st.Symmetry]]]]
+    self_symmetries: dict[str, list[st.Transformation]]
+    other_symmetries: dict[str, list[tuple[str, list[st.Transformation]]]]
+    leaders: list[str]
     icon_size: int
     pixmap_cache: dict[str, Qg.QPixmap]
     current_symbol_keys: list[str | None]
@@ -38,8 +39,8 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self,
         symbols: dict[str, st.Symbol],
         similar_symbols: dict[str, tuple[str, ...]],
-        self_symmetries: dict[str, list[st.Symmetry]],
-        other_symmetries: dict[str, list[tuple[str, list[st.Symmetry]]]],
+        self_symmetries: dict[str, list[st.Transformation]],
+        other_symmetries: dict[str, list[tuple[str, list[st.Transformation]]]],
         parent=None,
     ):
         super(SymbolList, self).__init__(parent)
@@ -48,6 +49,7 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self.similar_symbols = similar_symbols
         self.self_symmetries = self_symmetries
         self.other_symmetries = other_symmetries
+        self.leaders = ut.select_leader_symbols(list(symbols.keys()), similar_symbols)
         self.last_show_symbol = None
 
         self.icon_size = 100
@@ -143,20 +145,18 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
                     continue
                 if search_text and search_text.lower() not in key.lower():
                     continue
+                if key not in self.leaders:
+                    continue
                 if key in self.other_symmetries:
+                    if not any(
+                        other_symmetric_symbol in self.leaders
+                        for other_symmetric_symbol, _ in self.other_symmetries[key]
+                    ):
+                        continue
                     self.current_symbol_keys.append(key)
-                    # Transitive closure of other_symmetries.
-                    other_stack = set()
-                    for other_symbol, _ in self.other_symmetries[key]:
-                        other_stack.add(other_symbol)
-                    while other_stack:
-                        other_symbol = other_stack.pop()
-                        if other_symbol in self.current_symbol_keys:
-                            continue
-                        self.current_symbol_keys.append(other_symbol)
-                        if other_symbol in self.other_symmetries:
-                            for other_other_symbol, _ in self.other_symmetries[other_symbol]:
-                                other_stack.add(other_other_symbol)
+                    for other_symmetry, _ in self.other_symmetries[key]:
+                        if other_symmetry not in self.current_symbol_keys:
+                            self.current_symbol_keys.append(other_symmetry)
                     self.current_symbol_keys.append(None)
                 elif key in self.self_symmetries:
                     self.current_symbol_keys.append(key)

@@ -3,7 +3,9 @@ from importlib import resources
 from pathlib import Path
 
 import handtex.utils as ut
+import structures
 from handtex.data import symbol_metadata
+import handtex.structures as st
 
 
 def test_similar_lists_disjunct() -> None:
@@ -89,3 +91,30 @@ def test_symbol_name_collisions() -> None:
                 raise AssertionError(
                     f"Symbols {symbol1.key} and {symbol2.key} have the same command."
                 )
+
+
+def test_self_symmetry_similarity_conflict() -> None:
+    """
+    Test that only the leader of a similarity group has self-symmetry.
+    """
+
+    similarity: dict[str, tuple[str, ...]] = ut.load_symbol_metadata_similarity()
+    symbols: dict[str, st.Symbol] = ut.load_symbols()
+    leaders: list[str] = ut.select_leader_symbols(list(symbols.keys()), similarity)
+
+    symmetries: dict[str, list[st.Transformation]] = ut.load_symbol_metadata_self_symmetry()
+
+    for leader in leaders:
+        if leader not in symmetries:
+            # No similars get to have self-symmetry.
+            for similar in similarity.get(leader, []):
+                assert similar not in symmetries, f"Similar {similar} has self-symmetry."
+        else:
+            # Only the leader gets to have self-symmetry.
+            # Or at least they need to have identical self-symmetry.
+            for similar in similarity.get(leader, []):
+                if similar not in symmetries:
+                    continue
+                assert set(symmetries.get(leader, [])) == set(
+                    symmetries.get(similar, [])
+                ), f"Similar {similar} has different self-symmetry from leader {leader}."

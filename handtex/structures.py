@@ -61,8 +61,8 @@ class SymbolDrawing:
         }
 
 
-class Symmetry(StrEnum):
-    none = auto()
+class Transformation(StrEnum):
+    identity = auto()
     rot45 = auto()
     rot90 = auto()
     rot135 = auto()
@@ -78,8 +78,8 @@ class Symmetry(StrEnum):
     def __str__(self):
         return self.name
 
-    def is_none(self):
-        return self.name == "none"
+    def is_identity(self):
+        return self.name == "identity"
 
     def is_rotation(self):
         return self.name.startswith("rot")
@@ -91,8 +91,28 @@ class Symmetry(StrEnum):
     def angle(self):
         return int(self.name[3:])
 
-    def invert(self) -> "Symmetry":
+    def invert(self) -> "Transformation":
         if self.is_rotation():
-            return Symmetry(f"rot{360 - self.angle}")
+            return Transformation(f"rot{360 - self.angle}")
         else:
             return self
+
+    # Type if python typing didn't suck:
+    # def merge(self, other: "Transformation") -> "Transformation" | list["Transformation"]:
+    def merge(self, other):
+        if self.is_identity():
+            return other
+        if other.is_identity():
+            return self
+        if self.is_rotation() and other.is_rotation():
+            if (self.angle + other.angle) % 180 == 0:
+                return Transformation("identity")
+            return Transformation(f"rot{(self.angle + other.angle) % 360}")
+        return [self, other]
+
+    def can_merge(self, other):
+        if self.is_identity() or other.is_identity():
+            return True
+        if self.is_rotation() and other.is_rotation():
+            return True
+        return False

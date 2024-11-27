@@ -62,8 +62,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     # Lookalikes:
     similar_symbols: dict[str, tuple[str, ...]]
-    self_symmetries: dict[str, list[st.Symmetry]]
-    other_symmetries: dict[str, list[tuple[str, list[st.Symmetry]]]]
+    self_symmetries: dict[str, list[st.Transformation]]
+    other_symmetries: dict[str, list[tuple[str, list[st.Transformation]]]]
 
     def __init__(
         self,

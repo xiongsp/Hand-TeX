@@ -19,8 +19,6 @@ import handtex.data.symbol_metadata
 import training.database
 
 
-
-
 def build_stroke_cache(db_path: str) -> dict[str, list[list[tuple[int, int]]]]:
     """
     Build a cache of the stroke data for each symbol in the database.
@@ -60,8 +58,8 @@ class StrokeDataset(Dataset):
         db_path,
         symbol_keys: list[str],
         lookalikes: dict[str, tuple[str, ...]],
-        self_symmetries: dict[str, list[st.Symmetry]],
-        other_symmetries: dict[str, list[tuple[str, list[st.Symmetry]]]],
+        self_symmetries: dict[str, list[st.Transformation]],
+        other_symmetries: dict[str, list[tuple[str, list[st.Transformation]]]],
         image_size: int,
         label_encoder: LabelEncoder,
         validation_split: float = 0.1,
@@ -84,7 +82,7 @@ class StrokeDataset(Dataset):
         """
         self.db_path = db_path
         self.image_size = image_size
-        self.primary_keys: list[tuple[int, st.Symmetry, bool]] = []
+        self.primary_keys: list[tuple[int, list[st.Transformation], bool]] = []
         self.symbol_keys = []
         self.self_symmetries = self_symmetries
         self.other_symmetries = other_symmetries
@@ -97,7 +95,7 @@ class StrokeDataset(Dataset):
 
         for symbol_key in symbol_keys:
 
-            samples: list[tuple[int, st.Symmetry, bool]] = []
+            samples: list[tuple[int, [st.Transformation], bool]] = []
             real_data_count = 0
             self_symmetry_count = 0
             other_symmetry_count = 0
@@ -113,10 +111,10 @@ class StrokeDataset(Dataset):
 
             self_symmetric_samples = []
             for row in rows:
-                samples.append((row[0], st.Symmetry.none, False))
+                samples.append((row[0], [], False))
                 # If it has self-symmetries, some amount of them will be added to the dataset.
-                for symmetry in self.self_symmetries.get(symbol_key, []):
-                    self_symmetric_samples.append((row[0], symmetry, False))
+                for transformation in self.self_symmetries.get(symbol_key, []):
+                    self_symmetric_samples.append((row[0], [transformation], False))
             # Limit the number of self-symmetries.
             augmentation_limit = augmentation_amount(
                 len(self_symmetric_samples), max_factor=1, min_factor=0.1
@@ -126,15 +124,16 @@ class StrokeDataset(Dataset):
 
             # If the symbol has other symmetries, augment using them.
             if symbol_key in self.other_symmetries:
-                for other_key, symmetries in self.other_symmetries[symbol_key]:
+                for other_key, transformations in self.other_symmetries[symbol_key]:
+                    other_key: str
+                    transformations: list[st.Transformation]
                     cursor.execute(
                         "SELECT id FROM samples WHERE key = ?",
                         (other_key,),
                     )
                     other_symmetric_samples = []
                     for row in cursor.fetchall():
-                        for symmetry in symmetries:
-                            other_symmetric_samples.append((row[0], symmetry, False))
+                        other_symmetric_samples.append((row[0], transformations, False))
                     # Limit the number of other symmetries.
                     augmentation_limit = augmentation_amount(
                         len(other_symmetric_samples), max_factor=1, min_factor=0.05
@@ -197,16 +196,16 @@ class StrokeDataset(Dataset):
         return range(start, end)
 
     def load_transformed_strokes(self, idx):
-        primary_key, required_transform, do_random_transform = self.primary_keys[idx]
+        primary_key, required_transforms, do_random_transform = self.primary_keys[idx]
         stroke_data = self.load_stroke_data(primary_key)
         # If a symmetric character was used, we will need to apply it's transformation.
         # We may have multiple options here.
         trans_mats = []
-        if not required_transform.is_none():
-            if required_transform.is_rotation():
-                trans_mats.append(rotation_matrix(required_transform.angle))
+        for transformation in required_transforms:
+            if transformation.is_rotation():
+                trans_mats.append(rotation_matrix(transformation.angle))
             else:
-                trans_mats.append(reflection_matrix(required_transform.angle))
+                trans_mats.append(reflection_matrix(transformation.angle))
 
         # Augment the data with a random transformation.
         # The transformation is applied to the strokes before converting them to an image.

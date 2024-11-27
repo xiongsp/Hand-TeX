@@ -21,9 +21,9 @@ from xdg import XDG_CONFIG_HOME, XDG_CACHE_HOME
 import handtex.data
 import handtex.structures as st
 from handtex import __program__, __version__
-from handtex.data import color_themes
-from handtex.data import symbols
-from handtex.data import symbol_metadata
+import handtex.data.color_themes
+import handtex.data.symbols
+import handtex.data.symbol_metadata
 import handtex.data.model
 
 
@@ -170,7 +170,7 @@ def get_available_themes() -> list[tuple[str, str]]:
     """
     # Simply discover all files in the themes folder.
     themes = []
-    with resources.path(color_themes, "") as theme_dir:
+    with resources.path(handtex.data.color_themes, "") as theme_dir:
         theme_dir = Path(theme_dir)
     for theme_file in theme_dir.iterdir():
         # Skip dirs and empty files.
@@ -393,7 +393,7 @@ def load_symbol_svg(symbol: st.Symbol, fill_color: str = "#000000") -> Qc.QByteA
     :param fill_color: The new fill color.
     :return: The raw SVG data.
     """
-    with resources.path(symbols, f"{symbol.filename}.svg") as svg_file:
+    with resources.path(handtex.data.symbols, f"{symbol.filename}.svg") as svg_file:
         svg_data = svg_file.read_text()
 
     # Recolor the SVG data.
@@ -440,7 +440,7 @@ def load_symbol_metadata_similarity() -> dict[str, tuple[str, ...]]:
 
     :return: A dictionary mapping symbol keys to sets of symbol keys.
     """
-    with resources.path(symbol_metadata, "") as metadata_dir:
+    with resources.path(handtex.data.symbol_metadata, "") as metadata_dir:
         metadata_dir = Path(metadata_dir)
     files = list(metadata_dir.glob("similar*"))
 
@@ -458,7 +458,7 @@ def load_symbol_metadata_similarity() -> dict[str, tuple[str, ...]]:
     return symbol_map
 
 
-def load_symbol_metadata_self_symmetry() -> dict[str, list[st.Symmetry]]:
+def load_symbol_metadata_self_symmetry() -> dict[str, list[st.Transformation]]:
     """
     Load the metadata for symbol self-symmetric transformations.
 
@@ -467,7 +467,7 @@ def load_symbol_metadata_self_symmetry() -> dict[str, list[st.Symmetry]]:
 
     :return: A dictionary mapping symbol keys to lists of symmetries.
     """
-    with resource_path(symbol_metadata, "symmetry_self.txt") as file_path:
+    with resource_path(handtex.data.symbol_metadata, "symmetry_self.txt") as file_path:
         with open(file_path, "r") as file:
             lines = file.readlines()
 
@@ -475,22 +475,28 @@ def load_symbol_metadata_self_symmetry() -> dict[str, list[st.Symmetry]]:
     for line in lines:
         parts = line.strip().split()
         key = parts[0][:-1]  # Remove the colon at the end.
-        symmetries[key] = [st.Symmetry(sym) for sym in parts[1:]]
+        symmetries[key] = [st.Transformation(sym) for sym in parts[1:]]
     return symmetries
 
 
-def load_symbol_metadata_other_symmetry() -> dict[str, list[tuple[str, list[st.Symmetry]]]]:
+def load_symbol_metadata_other_symmetry() -> dict[str, list[tuple[str, list[st.Transformation]]]]:
     """
     Load the metadata for symbol other-symmetric transformations.
     The file must not contain two-way assignments.
     These are instead generated here, ensuring that the symmetry is always two-way.
 
     File format:
-    symbol_key_from -- symmetry1 symmetry2 ... symmetryn --> symbol_key_to
+    symbol_key_from -- transform1 transform2 ... transformN --> symbol_key_to
 
-    :return: A dictionary mapping symbol keys to tuples of target symbol key and list of symmetries.
+    # Importantly the list defined in the file describes various single transformations to
+    # apply to the symbol to receive the target symbol. Chained transformations are not supported
+    # in the file format, but are generated here to transitively apply all symmetries.
+
+    :return: A dictionary mapping symbol keys to tuples of target symbol key and list of transforms.
     """
-    with resource_path(symbol_metadata, "symmetry_other.txt") as file_path:
+    symmetries: dict[str, list[tuple[str, list[st.Transformation]]]]
+
+    with resource_path(handtex.data.symbol_metadata, "symmetry_other.txt") as file_path:
         with open(file_path, "r") as file:
             lines = file.readlines()
 
@@ -503,10 +509,69 @@ def load_symbol_metadata_other_symmetry() -> dict[str, list[tuple[str, list[st.S
             continue
         key_from = match.group(1)
         key_to = match.group(3)
-        symmetry_list = [st.Symmetry(sym) for sym in match.group(2).split()]
-        inverted_symmetry_list = [sym.invert() for sym in symmetry_list]
-        symmetries[key_from].append((key_to, inverted_symmetry_list))
-        symmetries[key_to].append((key_from, symmetry_list))
+        transformation_options = [st.Transformation(sym) for sym in match.group(2).split()]
+        for trans in transformation_options:
+            symmetries[key_from].append((key_to, [trans.invert()]))
+            symmetries[key_to].append((key_from, [trans]))
+
+    # Transitively apply symmetries.
+    # We want to perform a depth-first search to apply all symmetries.
+    similarity: dict[str, tuple[str, ...]] = load_symbol_metadata_similarity()
+    symbols: dict[str, st.Symbol] = load_symbols()
+    leaders: list[str] = select_leader_symbols(list(symbols.keys()), similarity)
+
+    for leader in leaders:
+        visited = set()  # Tracks visited nodes
+        queue = [(leader, [])]  # BFS queue with (current_node, accumulated_transforms)
+        new_arcs = []  # List of all arcs discovered via BFS
+
+        while queue:
+            current, path_transforms = queue.pop(0)
+
+            if current in visited:
+                continue
+            visited.add(current)
+
+            for neighbor, transformations in symmetries[current]:
+                new_path_transforms = path_transforms + transformations
+                if neighbor not in visited:
+                    # Record this arc
+                    new_arcs.append((neighbor, new_path_transforms))
+                    # Enqueue for further traversal
+                    queue.append((neighbor, new_path_transforms))
+
+        # Merge the transformations if possible.
+        merged_new_arcs = []
+        for node, transforms in new_arcs:
+            transformations = []
+            for transform in transforms:
+                if transformations and transformations[-1].can_merge(transform):
+                    transformations[-1] = transformations[-1].merge(transform)
+                else:
+                    transformations.append(transform)
+            while st.Transformation.identity in transformations:
+                transformations.remove(st.Transformation.identity)
+            if transformations:
+                merged_new_arcs.append((node, transformations))
+            else:
+                logger.warning(f"Empty transformation list for {node}")
+        # Deduplicate the arcs.
+        new_arcs = []
+        for node, transforms in merged_new_arcs:
+            if (node, transforms) not in new_arcs:
+                new_arcs.append((node, transforms))
+            else:
+                logger.warning(f"Duplicate arc detected: {node} -- {transforms}")
+        # Replace original arcs with the computed transitive arcs
+        # assert we haven't made any nodes unreachable.
+        reachable_old = set(node for node, _ in symmetries[leader])
+        reachable_new = set(node for node, _ in new_arcs)
+        assert reachable_old.issubset(reachable_new), "Some nodes became unreachable."
+        # Newly eachable:
+        if reachable_new - reachable_old:
+            print(f"Newly reachable for {leader}: {reachable_new - reachable_old}")
+        symmetries[leader] = new_arcs
+
     return symmetries
 
 

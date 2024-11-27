@@ -62,6 +62,7 @@ class StrokeDataset(Dataset):
         other_symmetries: dict[str, list[tuple[str, list[st.Transformation]]]],
         image_size: int,
         label_encoder: LabelEncoder,
+        random_seed: int,
         validation_split: float = 0.1,
         train: bool = True,
         shuffle: bool = True,
@@ -69,11 +70,21 @@ class StrokeDataset(Dataset):
         stroke_cache: dict[str, list[list[tuple[int, int]]]] = None,
     ):
         """
+        The primary keys list consists of tuples containing the following:
+        - int: The primary key of the sample in the database.
+        - list[Transformation]: List of transformations to apply to the strokes before using it.
+          These are a result of using symmetries to augment the data.
+        - int | None: If not None, this is the seed to use for random augmentation.
+          It is imperative that this be stored, so that the training and validation datasets
+          generate the same pool of data and thus can be split consistently.
+
+
         :param db_path: Path to the SQLite database.
         :param symbol_keys: List of symbol keys to load stroke data for.
         :param lookalikes: Dictionary of lookalike characters.
         :param image_size: Size of the generated images (images are square)
         :param label_encoder: LabelEncoder object to encode labels.
+        :param random_seed: Seed for the random number generator. Generator for training and validation MUST get the same.
         :param validation_split: Fraction of the data to use for validation.
         :param train: If True, load training data, else load validation data.
         :param shuffle: If True, shuffle the data before making the training/validation split.
@@ -82,12 +93,14 @@ class StrokeDataset(Dataset):
         """
         self.db_path = db_path
         self.image_size = image_size
-        self.primary_keys: list[tuple[int, list[st.Transformation], bool]] = []
+        self.primary_keys: list[tuple[int, list[st.Transformation], int | None]] = []
         self.symbol_keys = []
         self.self_symmetries = self_symmetries
         self.other_symmetries = other_symmetries
         self.train = train
         self.stroke_cache = stroke_cache
+
+        random.seed(random_seed)
 
         # Load primary keys and symbol keys from the database for the provided symbol keys
         conn = sqlite3.connect(self.db_path)
@@ -95,7 +108,7 @@ class StrokeDataset(Dataset):
 
         for symbol_key in symbol_keys:
 
-            samples: list[tuple[int, [st.Transformation], bool]] = []
+            samples: list[tuple[int, [st.Transformation], int | None]] = []
             real_data_count = 0
             self_symmetry_count = 0
             other_symmetry_count = 0
@@ -111,10 +124,10 @@ class StrokeDataset(Dataset):
 
             self_symmetric_samples = []
             for row in rows:
-                samples.append((row[0], [], False))
+                samples.append((row[0], [], None))
                 # If it has self-symmetries, some amount of them will be added to the dataset.
                 for transformation in self.self_symmetries.get(symbol_key, []):
-                    self_symmetric_samples.append((row[0], [transformation], False))
+                    self_symmetric_samples.append((row[0], [transformation], None))
             # Limit the number of self-symmetries.
             augmentation_limit = augmentation_amount(
                 len(self_symmetric_samples), max_factor=1, min_factor=0.1
@@ -133,7 +146,7 @@ class StrokeDataset(Dataset):
                     )
                     other_symmetric_samples = []
                     for row in cursor.fetchall():
-                        other_symmetric_samples.append((row[0], transformations, False))
+                        other_symmetric_samples.append((row[0], transformations, None))
                     # Limit the number of other symmetries.
                     augmentation_limit = augmentation_amount(
                         len(other_symmetric_samples), max_factor=1, min_factor=0.05
@@ -146,7 +159,7 @@ class StrokeDataset(Dataset):
                 augmentation_count = augmentation_amount(real_data_count)
                 for _ in range(augmentation_count):
                     row = random.choice(samples)
-                    samples.append((row[0], row[1], True))
+                    samples.append((row[0], row[1], random.randint(0, 2**32 - 1)))
 
             # Shuffle the rows to get more variety in drawings, since drawings
             # by the same person are sequentially stored in the database.
@@ -196,7 +209,7 @@ class StrokeDataset(Dataset):
         return range(start, end)
 
     def load_transformed_strokes(self, idx):
-        primary_key, required_transforms, do_random_transform = self.primary_keys[idx]
+        primary_key, required_transforms, random_augmentation_seed = self.primary_keys[idx]
         stroke_data = self.load_stroke_data(primary_key)
         # If a symmetric character was used, we will need to apply it's transformation.
         # We may have multiple options here.
@@ -209,7 +222,8 @@ class StrokeDataset(Dataset):
 
         # Augment the data with a random transformation.
         # The transformation is applied to the strokes before converting them to an image.
-        if do_random_transform:
+        if random_augmentation_seed is not None:
+            random.seed(random_augmentation_seed)
             operation = random.randint(0, 2)
             if operation == 0:
                 trans_mats.append(rotation_matrix(np.random.uniform(-5, 5)))
@@ -624,6 +638,7 @@ def main():
         other_symmetries,
         image_size,
         label_encoder,
+        random_seed=0,
         validation_split=0,
         train=True,
         shuffle=False,

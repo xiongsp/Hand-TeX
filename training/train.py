@@ -103,15 +103,17 @@ symbol_keys = ut.select_leader_symbols(symbol_keys, similar_symbols)
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-print(f"Using {device} device")
 
 num_classes = len(symbol_keys)
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 10
+num_epochs = 15
 
 db_path = "database/handtex.db"
 image_size = 48
+
+# Training Loss: 11.7996, Training Accuracy: 93.88%
+# Validation Loss: 13.5945, Validation Accuracy: 93.92%
 
 
 def main():
@@ -124,6 +126,8 @@ def main():
 
     stroke_cache = build_stroke_cache(db_path)
 
+    random_seed = 0
+
     # Create training and validation datasets and dataloaders
     train_dataset = StrokeDataset(
         db_path,
@@ -133,6 +137,7 @@ def main():
         other_symmetries,
         image_size,
         label_encoder,
+        random_seed,
         validation_split=0.2,
         train=True,
         stroke_cache=stroke_cache,
@@ -145,6 +150,7 @@ def main():
         other_symmetries,
         image_size,
         label_encoder,
+        random_seed,
         validation_split=0.2,
         train=False,
         stroke_cache=stroke_cache,

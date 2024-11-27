@@ -182,7 +182,6 @@ class Sketchpad(Qw.QGraphicsView):
         clean_strokes = purge_duplicate_strokes(strokes)
         clean_strokes, scale1 = rescale_viewport(clean_strokes, self.sceneRect())
         clean_strokes, scale2, x_offset, y_offset = scale_and_center(clean_strokes)
-        clean_strokes = [simplify_stroke(stroke) for stroke in clean_strokes]
         return clean_strokes, scale1 * scale2, x_offset, y_offset
 
     def load_strokes(self, drawing: st.SymbolDrawing) -> None:
@@ -331,6 +330,10 @@ def scale_correction_function(x: float) -> float:
 def simplify_stroke(stroke, epsilon=1.25):
     """
     Simplify a stroke using the Ramer-Douglas-Peucker algorithm.
+    Used on training data to keep the database small.
+    The algorithm is too slow for real-time use, it's faster to
+    just draw a bunch of tiny strokes.
+
     :param stroke: List of points [[x1, y1], [x2, y2], ...]
     :param epsilon: Tolerance level for simplification.
     :return: Simplified stroke.

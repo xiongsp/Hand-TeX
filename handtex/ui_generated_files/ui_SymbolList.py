@@ -183,6 +183,7 @@ class Ui_SymbolList(object):
 
         self.label_other_symmetry = QLabel(self.verticalLayoutWidget)
         self.label_other_symmetry.setObjectName(u"label_other_symmetry")
+        self.label_other_symmetry.setWordWrap(True)
 
         self.formLayout.setWidget(6, QFormLayout.FieldRole, self.label_other_symmetry)
 

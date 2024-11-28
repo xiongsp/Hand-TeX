@@ -624,6 +624,7 @@
     - \preceq
     - \succeq
     - \cong
+    - \widehat{=} #added by me
     - \mid
     - \vert
     - \Vert

@@ -105,9 +105,13 @@ class Transformation(StrEnum):
         if other.is_identity():
             return self
         if self.is_rotation() and other.is_rotation():
-            if (self.angle + other.angle) % 180 == 0:
-                return Transformation("identity")
+            if (self.angle + other.angle) % 360 == 0:
+                return Transformation.identity
             return Transformation(f"rot{(self.angle + other.angle) % 360}")
+        if self.is_mirroring() and other.is_mirroring():
+            if self.angle == other.angle:
+                return Transformation.identity
+            return [self, other]
         return [self, other]
 
     def can_merge(self, other):
@@ -115,4 +119,40 @@ class Transformation(StrEnum):
             return True
         if self.is_rotation() and other.is_rotation():
             return True
+        if self.is_mirroring() and other.is_mirroring():
+            if self.angle == other.angle:
+                return True
         return False
+
+
+def simplify_transformations(
+    transforms: tuple[tuple[Transformation, ...], ...]
+) -> tuple[tuple[Transformation, ...], ...]:
+    """
+    Simplify a list of transformations by merging compatible transformations.
+    Identity transformations are removed.
+    """
+    match transforms:
+        case ((),), ((Transformation.identity,),):
+            return ((),)
+        case ((t,),) if isinstance(t, Transformation):
+            return ((t,),)
+
+    simplified = []
+    for transform in transforms:
+        simplified_transform = []
+        for t in transform:
+            if simplified_transform:
+                last = simplified_transform[-1]
+                if last.can_merge(t):
+                    simplified_transform[-1] = last.merge(t)
+                    continue
+            simplified_transform.append(t)
+        # If we just ended up with identity, remove it.
+        if simplified_transform != [Transformation.identity]:
+            simplified.append(tuple(simplified_transform))
+        else:
+            simplified.append(())
+    # Ensure there are no duplicates.
+    simplified = tuple(set(simplified))
+    return simplified

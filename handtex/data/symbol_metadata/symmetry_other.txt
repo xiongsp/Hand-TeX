@@ -15,7 +15,7 @@ stmaryrd-OT1-_llceil -- mir0 --> stmaryrd-OT1-_llfloor
 stmaryrd-OT1-_llceil -- rot180 --> stmaryrd-OT1-_rrfloor
 stmaryrd-OT1-_llfloor -- mir90 --> stmaryrd-OT1-_rrfloor
 stmaryrd-OT1-_llfloor -- rot180 --> stmaryrd-OT1-_rrceil
-amssymb-OT1-_blacktriangledown -- mir90 --> amssymb-OT1-_blacktriangle
+amssymb-OT1-_blacktriangledown -- rot180 mir0 --> amssymb-OT1-_blacktriangle
 amssymb-OT1-_eqslantgtr -- mir90 --> amssymb-OT1-_eqslantless
 amssymb-OT1-_fallingdotseq -- mir0 mir90 --> amssymb-OT1-_risingdotseq
 amssymb-OT1-_gtrdot -- rot180 mir90 --> amssymb-OT1-_lessdot

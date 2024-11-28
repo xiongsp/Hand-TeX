@@ -277,6 +277,9 @@
            <property name="text">
             <string>&lt;others&gt;</string>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
         </layout>

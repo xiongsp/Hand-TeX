@@ -2,7 +2,12 @@ import re
 from importlib import resources
 from pathlib import Path
 
+from loguru import logger
+import networkx as nx
+from matplotlib import pyplot as plt
+
 import handtex.utils as ut
+import handtex.symbol_relations as sr
 import structures
 from handtex.data import symbol_metadata
 import handtex.structures as st
@@ -73,9 +78,9 @@ def test_symbol_name_collisions() -> None:
     in a similarity relation.
     """
     # Load symbols.
-    symbols = ut.load_symbols()
+    symbols = sr.load_symbols()
     # Load similarity relations.
-    similarity = ut.load_symbol_metadata_similarity()
+    similarity = sr.load_symbol_metadata_similarity()
 
     # Check for collisions.
     for symbol1 in symbols.values():
@@ -98,11 +103,11 @@ def test_self_symmetry_similarity_conflict() -> None:
     Test that only the leader of a similarity group has self-symmetry.
     """
 
-    similarity: dict[str, tuple[str, ...]] = ut.load_symbol_metadata_similarity()
-    symbols: dict[str, st.Symbol] = ut.load_symbols()
-    leaders: list[str] = ut.select_leader_symbols(list(symbols.keys()), similarity)
+    similarity: dict[str, tuple[str, ...]] = sr.load_symbol_metadata_similarity()
+    symbols: dict[str, st.Symbol] = sr.load_symbols()
+    leaders: list[str] = sr.select_leader_symbols(list(symbols.keys()), similarity)
 
-    symmetries: dict[str, list[st.Transformation]] = ut.load_symbol_metadata_self_symmetry()
+    symmetries: dict[str, list[st.Transformation]] = sr.load_symbol_metadata_self_symmetry()
 
     for leader in leaders:
         if leader not in symmetries:
@@ -118,3 +123,273 @@ def test_self_symmetry_similarity_conflict() -> None:
                 assert set(symmetries.get(leader, [])) == set(
                     symmetries.get(similar, [])
                 ), f"Similar {similar} has different self-symmetry from leader {leader}."
+
+
+def test_leader_mapping() -> None:
+    """
+    Test that the leader mapping is correct.
+    """
+    similarity_groups = sr.load_symbol_metadata_similarity_groups()
+    to_leader = sr.construct_to_leader_mapping(similarity_groups)
+    # We do not want any leaders in this mapping. Meaning, a key may not map to itself.
+    for key, leader in to_leader.items():
+        assert key != leader, f"Key {key} is it's own leader."
+
+
+def test_self_symmetry_normalization() -> None:
+    """
+    Test that the self-symmetry transformations are normalized.
+    """
+    self_symmetries = sr.load_symbol_metadata_self_symmetry()
+    similarity_groups = sr.load_symbol_metadata_similarity_groups()
+    to_leader = sr.construct_to_leader_mapping(similarity_groups)
+    normalized = sr.normalize_self_symmetry_to_leaders(self_symmetries, to_leader)
+    # Print out differences.
+    # for key, value in symmetries.items():
+    #     if key not in normalized:
+    #         print(f"Key {key} is not in normalized.")
+    #         continue
+    #     if value != normalized[key]:
+    #         print(f"Key {key} has different value: {value} vs {normalized[key]}")
+
+    # We only want leaders in this normalized dictionary.
+    for key in normalized:
+        assert key not in to_leader.keys(), f"Key {key} is not a leader."
+
+
+def test_other_symmetry_normalization() -> None:
+    """
+    Test that the other-symmetry transformations are normalized.
+    """
+    self_symmetries = sr.load_symbol_metadata_self_symmetry()
+    other_symmetries = sr.load_symbol_metadata_other_symmetry()
+    similarity_groups = sr.load_symbol_metadata_similarity_groups()
+    to_leader = sr.construct_to_leader_mapping(similarity_groups)
+    normalized = sr.normalize_other_symmetry_to_leaders(
+        other_symmetries, to_leader, self_symmetries
+    )
+    # Print out differences.
+    # for key, value in symmetries.items():
+    #     if key not in normalized:
+    #         print(f"Key {key} is not in normalized.")
+    #         continue
+    #     if value != normalized[key]:
+    #         print(f"Key {key} has different value: {value} vs {normalized[key]}")
+
+    # We only want leaders in this normalized dictionary.
+    for key in normalized:
+        assert key not in to_leader.keys(), f"Key {key} is not a leader."
+
+        for target, _ in normalized[key]:
+            assert target not in to_leader.keys(), f"Target {target} is not a leader."
+
+
+def test_graph_transitivity() -> None:
+    # Create a small test graph.
+    symbol_keys = ["leftarrow", "rightarrow", "uparrow", "downarrow", "box", "circle"]
+    similarity_groups = []
+    self_symmetries = {
+        "leftarrow": [st.Transformation.mir0],
+        "rightarrow": [st.Transformation.mir0],
+        "uparrow": [st.Transformation.mir90],
+        "downarrow": [st.Transformation.mir90],
+        "box": [
+            st.Transformation.rot90,
+            st.Transformation.rot180,
+            st.Transformation.rot270,
+            st.Transformation.mir0,
+        ],
+        "circle": [st.Transformation.mir0, st.Transformation.mir90],
+    }
+    other_symmetries = {
+        "leftarrow": [
+            ("rightarrow", [st.Transformation.mir0, st.Transformation.rot180]),
+            ("uparrow", [st.Transformation.mir135, st.Transformation.rot270]),
+            ("downarrow", [st.Transformation.mir45, st.Transformation.rot90]),
+        ],
+        "rightarrow": [("leftarrow", [st.Transformation.mir0, st.Transformation.rot180])],
+        "uparrow": [("leftarrow", [st.Transformation.mir135, st.Transformation.rot90])],
+        "downarrow": [("leftarrow", [st.Transformation.mir45, st.Transformation.rot270])],
+    }
+
+    graph = sr.build_graph(symbol_keys, similarity_groups, self_symmetries, other_symmetries)
+    # # Draw the graph, just print the edge labels.
+    # pos = nx.spring_layout(graph)
+    # nx.draw_networkx(graph, pos, with_labels=True)
+    # edge_labels = nx.get_edge_attributes(graph, "transformations")
+    # print(edge_labels)
+    # plt.show()
+
+    # Apply transitivity.
+    graph = sr.apply_transitivity(graph)
+    # # Draw the graph, just print the edge labels.
+    # pos = nx.spring_layout(graph)
+    # nx.draw_networkx(graph, pos, with_labels=True)
+    # edge_labels = nx.get_edge_attributes(graph, "transformations")
+    # print(edge_labels)
+    # plt.show()
+    assert len(graph.edges) == 18
+
+    # raw graph.
+    # {('leftarrow', 'leftarrow'): ((<Transformation.mir0: 'mir0'>,),), ('leftarrow', 'rightarrow'): ((<Transformation.mir0: 'mir0'>, <Transformation.rot180: 'rot180'>),), ('leftarrow', 'uparrow'): ((<Transformation.mir135: 'mir135'>, <Transformation.rot270: 'rot270'>),), ('leftarrow', 'downarrow'): ((<Transformation.mir45: 'mir45'>, <Transformation.rot90: 'rot90'>),), ('rightarrow', 'rightarrow'): ((<Transformation.mir0: 'mir0'>,),), ('uparrow', 'uparrow'): ((<Transformation.mir90: 'mir90'>,),), ('downarrow', 'downarrow'): ((<Transformation.mir90: 'mir90'>,),), ('box', 'box'): ((<Transformation.rot90: 'rot90'>, <Transformation.rot180: 'rot180'>, <Transformation.rot270: 'rot270'>, <Transformation.mir0: 'mir0'>),), ('circle', 'circle'): ((<Transformation.mir0: 'mir0'>, <Transformation.mir90: 'mir90'>),)}
+    #
+    # Transitive graph.
+    # {('leftarrow', 'leftarrow'): ((< Transformation.mir0: 'mir0' >,),),
+    #  ('leftarrow', 'rightarrow'): ((< Transformation.mir0: 'mir0' >, < Transformation.rot180: 'rot180' >),),
+    #  ('leftarrow', 'uparrow'): ((< Transformation.mir135: 'mir135' >, < Transformation.rot270: 'rot270' >),),
+    #  ('leftarrow', 'downarrow'): ((< Transformation.mir45: 'mir45' >, < Transformation.rot90: 'rot90' >),),
+    #  ('rightarrow', 'rightarrow'): ((< Transformation.mir0: 'mir0' >,),),
+    #  ('rightarrow', 'leftarrow'): ((< Transformation.mir0: 'mir0' >, < Transformation.rot180: 'rot180' >),),
+    #  ('rightarrow', 'uparrow'): ((< Transformation.mir0: 'mir0' >, < Transformation.rot180: 'rot180' >),
+    #                              (< Transformation.mir135: 'mir135' >, < Transformation.rot270: 'rot270' >)),
+    #  ('rightarrow', 'downarrow'): ((< Transformation.mir0: 'mir0' >, < Transformation.rot180: 'rot180' >),
+    #                                (< Transformation.mir45: 'mir45' >, < Transformation.rot90: 'rot90' >)),
+    #  ('uparrow', 'uparrow'): ((< Transformation.mir90: 'mir90' >,),),
+    #  ('uparrow', 'leftarrow'): ((< Transformation.mir135: 'mir135' >, < Transformation.rot90: 'rot90' >),),
+    #  ('uparrow', 'rightarrow'): ((< Transformation.mir135: 'mir135' >, < Transformation.rot90: 'rot90' >),
+    #                              (< Transformation.mir0: 'mir0' >, < Transformation.rot180: 'rot180' >)),
+    #  ('uparrow', 'downarrow'): ((< Transformation.mir135: 'mir135' >, < Transformation.rot90: 'rot90' >),
+    #                             (< Transformation.mir45: 'mir45' >, < Transformation.rot90: 'rot90' >)),
+    #  ('downarrow', 'downarrow'): ((< Transformation.mir90: 'mir90' >,),),
+    #  ('downarrow', 'leftarrow'): ((< Transformation.mir45: 'mir45' >, < Transformation.rot270: 'rot270' >),),
+    #  ('downarrow', 'rightarrow'): ((< Transformation.mir45: 'mir45' >, < Transformation.rot270: 'rot270' >),
+    #                                (< Transformation.mir0: 'mir0' >, < Transformation.rot180: 'rot180' >)),
+    #  ('downarrow', 'uparrow'): ((< Transformation.mir45: 'mir45' >, < Transformation.rot270: 'rot270' >),
+    #                             (< Transformation.mir135: 'mir135' >, < Transformation.rot270: 'rot270' >)),
+    #  ('box', 'box'): ((
+    #                       < Transformation.rot90: 'rot90' >, < Transformation.rot180: 'rot180' >, < Transformation.rot270: 'rot270' >, < Transformation.mir0: 'mir0' >),),
+    #  ('circle', 'circle'): ((< Transformation.mir0: 'mir0' >, < Transformation.mir90: 'mir90' >),)}
+
+
+def test_graph_creation() -> None:
+    import time
+
+    start = time.time()
+    g = sr.load_graph()
+    print(f"Graph creation took {1000 * (time.time() - start):.2f} ms.")
+
+    start = time.time()
+    g = sr.apply_transitivity(g)
+    print(f"Transitivity took {1000 * (time.time() - start):.2f} ms.")
+
+    # Try to emulate finding leaders.
+    start = time.time()
+    leader_mapping = {}
+    # If a node has an outgoing edge with no transformation, that is it's leader.
+    for node in g.nodes:
+        if g.out_degree(node) >= 1 and g.in_degree(node) == 0:
+            # Search for the target node.
+            for target in g.successors(node):
+                if "leader" in g[node][target]:
+                    leader_mapping[node] = target
+                    break
+    print(f"Leader mapping took {1000 * (time.time() - start):.2f} ms.")
+    similarity_groups = sr.load_symbol_metadata_similarity_groups()
+    assert leader_mapping == sr.construct_to_leader_mapping(similarity_groups)
+
+    # Find the edge with the most transformations.
+    # The most is the product of the lengths of the transformations.
+    max_edge = None
+    max_product = 0
+    max_layer_edge = None
+    max_layers = 0
+    for edge in g.edges(data=True):
+        product = 1
+        for transformation in edge[2]["transformations"]:
+            product *= len(transformation)
+        if product > max_product:
+            max_edge = edge
+            max_product = product
+        if len(edge[2]["transformations"]) > max_layers:
+            max_layer_edge = edge
+            max_layers = len(edge[2]["transformations"])
+    print(f"Max edge: {max_edge}, product: {max_product}")
+    # Plot the distribution of transformation lengths.
+    transformation_lengths = []
+    for edge in g.edges(data=True):
+        product = 1
+        for transformation in edge[2]["transformations"]:
+            product *= len(transformation)
+        transformation_lengths.append(product)
+
+    # Calculate frequency of each length.
+    from collections import Counter
+
+    print(Counter(transformation_lengths))
+    # Make a bar chart of the frequencies.
+    sorted_by_product = sorted(Counter(transformation_lengths).items())
+    x, y = zip(*sorted_by_product)
+    plt.bar(x, y)
+    plt.show()
+
+    print(f"Max layer edge: {max_layer_edge}, layers: {max_layers}")
+    transformation_layers = []
+    for edge in g.edges(data=True):
+        transformation_layers.append(len(edge[2]["transformations"]))
+    print(Counter(transformation_layers))
+    # Make a bar chart of the frequencies.
+    sorted_by_layers = sorted(Counter(transformation_layers).items())
+    x, y = zip(*sorted_by_layers)
+    plt.bar(x, y)
+    plt.show()
+
+    # return
+    # Trim out all nodes that have no incoming edges to simplify the structure.
+    # for node in list(g.nodes):
+    #     if not g.in_degree(node):
+    #         g.remove_node(node)
+    # Display the graph.
+    pos = nx.spring_layout(g)
+    # Color the nodes not in the leader mapping.
+    colors = []
+    for node in g.nodes:
+        if node in leader_mapping:
+            colors.append("blue")
+        else:
+            colors.append("red")
+    # Make the edges with the leader property dashed
+    # Max edge: ('latex2e-OT1-_bigcirc', 'latex2e-OT1-_bigcirc', {'transformations': (
+    # (<Transformation.rot45: 'rot45'>, <Transformation.rot90: 'rot90'>, <Transformation.rot135: 'rot135'>, <Transformation.rot180: 'rot180'>, <Transformation.rot225: 'rot225'>, <Transformation.rot270: 'rot270'>, <Transformation.rot315: 'rot315'>, <Transformation.mir0: 'mir0'>, <Transformation.mir45: 'mir45'>, <Transformation.mir90: 'mir90'>, <Transformation.mir135: 'mir135'>)
+    # ,)}), product: 11
+
+    edge_styles = []
+    for edge in g.edges:
+        if "leader" in g[edge[0]][edge[1]]:
+            edge_styles.append("dashed")
+        else:
+            edge_styles.append("solid")
+    # nx.draw_networkx(g, pos, node_color=colors, label=True)
+    nx.draw_networkx_edges(g, pos, edge_color="black", style=edge_styles)
+    nx.draw_networkx_labels(g, pos)
+    nx.draw_networkx_nodes(g, pos, node_color=colors)
+
+    plt.show()
+
+
+def test_simplify_transform() -> None:
+    """
+    Test the transformation simplification.
+    """
+    i = st.Transformation.identity
+    r90 = st.Transformation.rot90
+    r180 = st.Transformation.rot180
+    r270 = st.Transformation.rot270
+    m0 = st.Transformation.mir0
+    m90 = st.Transformation.mir90
+    m135 = st.Transformation.mir135
+
+    assert i.merge(i) == i
+    assert i.merge(r90) == r90
+    assert m0.merge(i) == m0
+
+    assert r90.merge(r90) == r180
+    assert r90.merge(r180) == r270
+    assert r90.merge(r270) == i
+
+    assert m0.merge(m0) == i
+    assert m0.merge(m90) == [m0, m90]
+
+    assert st.simplify_transformations(((i, r90, r180, r270, m0, m90, m135),)) == (
+        (r180, m0, m90, m135),
+    )
+    assert st.simplify_transformations(((i, r90, r180, i, i, r270, r180, m0, m0),)) == ((),)

@@ -117,7 +117,7 @@ class StrokeDataset(Dataset):
             )
             return cursor.fetchall()
 
-        for symbol_key in symbol_data.symbol_keys:
+        for symbol_key in symbol_data.leaders:
 
             samples: list[tuple[int, tuple[st.Transformation, ...], int | None]] = []
 

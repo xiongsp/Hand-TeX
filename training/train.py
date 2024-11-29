@@ -8,6 +8,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 import handtex.utils as ut
+import handtex.symbol_relations as sr
 from training.image_gen import (
     StrokeDataset,
     recalculate_frequencies,
@@ -91,23 +92,15 @@ def check_accuracy(loader: DataLoader, model: nn.Module, device: str):
     model.train()  # Set the model back to training mode
 
 
-symbols = ut.load_symbols()
-symbol_keys = list(symbols.keys())
-
-similar_symbols = ut.load_symbol_metadata_similarity()
-self_symmetries = ut.load_symbol_metadata_self_symmetry()
-other_symmetries = ut.load_symbol_metadata_other_symmetry()
-
-# Limit the number of classes to classify.
-symbol_keys = ut.select_leader_symbols(symbol_keys, similar_symbols)
+symbol_data = sr.SymbolData()
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 
-num_classes = len(symbol_keys)
+num_classes = len(symbol_data.leaders)
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 15
+num_epochs = 10
 
 db_path = "database/handtex.db"
 image_size = 48
@@ -119,7 +112,7 @@ image_size = 48
 def main():
 
     label_encoder = LabelEncoder()
-    label_encoder.fit(symbol_keys)
+    label_encoder.fit(symbol_data.leaders)
 
     recalculate_frequencies()
     recalculate_encodings()
@@ -131,28 +124,24 @@ def main():
     # Create training and validation datasets and dataloaders
     train_dataset = StrokeDataset(
         db_path,
-        symbol_keys,
-        similar_symbols,
-        self_symmetries,
-        other_symmetries,
+        symbol_data,
         image_size,
         label_encoder,
         random_seed,
         validation_split=0.2,
         train=True,
+        shuffle=True,
         stroke_cache=stroke_cache,
     )
     validation_dataset = StrokeDataset(
         db_path,
-        symbol_keys,
-        similar_symbols,
-        self_symmetries,
-        other_symmetries,
+        symbol_data,
         image_size,
         label_encoder,
         random_seed,
         validation_split=0.2,
         train=False,
+        shuffle=True,
         stroke_cache=stroke_cache,
     )
 

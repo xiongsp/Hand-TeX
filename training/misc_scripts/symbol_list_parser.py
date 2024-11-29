@@ -117,11 +117,11 @@ def main():
     shorten_hashes(symbols)
 
     import handtex.utils as ut
-    import handtex.data
+    import handtex.data.symbol_metadata
 
     # Might need to re-run the script a few times in case one of the inkscapes gets killed.
     # Only an issue if multi-threading. But you really should multithread with 1000 symbols...
-    with ut.resource_path(handtex.data) as path:
+    with ut.resource_path(handtex.data.symbol_metadata) as path:
         symbol_path = path / "symbols.json"
 
     # Save the symbols to a JSON file

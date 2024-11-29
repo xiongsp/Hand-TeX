@@ -14,7 +14,7 @@ def calculate_md5(filepath):
 
 
 def main():
-    symbols_json = "../../handtex/data/symbols.json"
+    symbols_json = "../../handtex/data/symbol_metadata/symbols.json"
 
     # Load symbols data from symbols.json
     with open(symbols_json, "r") as f:

@@ -19,7 +19,7 @@ from PySide6.QtSvgWidgets import QSvgWidget
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFormLayout,
     QHBoxLayout, QLabel, QLineEdit, QListView,
     QListWidget, QListWidgetItem, QSizePolicy, QSpacerItem,
-    QSplitter, QVBoxLayout, QWidget)
+    QSplitter, QToolButton, QVBoxLayout, QWidget)
 
 class Ui_SymbolList(object):
     def setupUi(self, SymbolList):
@@ -36,9 +36,6 @@ class Ui_SymbolList(object):
         self.comboBox_search_mode.addItem("")
         self.comboBox_search_mode.addItem("")
         self.comboBox_search_mode.addItem("")
-        self.comboBox_search_mode.addItem("")
-        self.comboBox_search_mode.addItem("")
-        self.comboBox_search_mode.addItem("")
         self.comboBox_search_mode.setObjectName(u"comboBox_search_mode")
 
         self.horizontalLayout.addWidget(self.comboBox_search_mode)
@@ -48,6 +45,15 @@ class Ui_SymbolList(object):
         self.lineEdit_search.setClearButtonEnabled(True)
 
         self.horizontalLayout.addWidget(self.lineEdit_search)
+
+        self.toolButton_filter = QToolButton(SymbolList)
+        self.toolButton_filter.setObjectName(u"toolButton_filter")
+        self.toolButton_filter.setText(u"")
+        icon = QIcon(QIcon.fromTheme(u"dialog-filters"))
+        self.toolButton_filter.setIcon(icon)
+        self.toolButton_filter.setToolButtonStyle(Qt.ToolButtonIconOnly)
+
+        self.horizontalLayout.addWidget(self.toolButton_filter)
 
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -65,7 +71,7 @@ class Ui_SymbolList(object):
         self.horizontalLayout.addWidget(self.label_count)
 
         self.horizontalLayout.setStretch(1, 2)
-        self.horizontalLayout.setStretch(2, 1)
+        self.horizontalLayout.setStretch(3, 1)
 
         self.verticalLayout_3.addLayout(self.horizontalLayout)
 
@@ -206,10 +212,7 @@ class Ui_SymbolList(object):
         SymbolList.setWindowTitle(QCoreApplication.translate("SymbolList", u"Symbol List", None))
         self.comboBox_search_mode.setItemText(0, QCoreApplication.translate("SymbolList", u"Command", None))
         self.comboBox_search_mode.setItemText(1, QCoreApplication.translate("SymbolList", u"Symbol ID", None))
-        self.comboBox_search_mode.setItemText(2, QCoreApplication.translate("SymbolList", u"Similar to", None))
-        self.comboBox_search_mode.setItemText(3, QCoreApplication.translate("SymbolList", u"Unique", None))
-        self.comboBox_search_mode.setItemText(4, QCoreApplication.translate("SymbolList", u"Symmetric", None))
-        self.comboBox_search_mode.setItemText(5, QCoreApplication.translate("SymbolList", u"Asymmetric", None))
+        self.comboBox_search_mode.setItemText(2, QCoreApplication.translate("SymbolList", u"Package", None))
 
         self.lineEdit_search.setPlaceholderText(QCoreApplication.translate("SymbolList", u"Search...", None))
         self.label_11.setText(QCoreApplication.translate("SymbolList", u"Found:", None))

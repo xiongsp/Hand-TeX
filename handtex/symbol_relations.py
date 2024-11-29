@@ -1,35 +1,177 @@
 # networkx reimplementation of utils stuff.
-from collections import deque
-import difflib
-from functools import cache
 import re
-import os
-import platform
-import shutil
-import sys
+from itertools import product
 from collections import defaultdict
+from collections import deque
+from functools import cache
 from importlib import resources
-from io import StringIO
 from pathlib import Path
-from typing import get_type_hints, Generic, TypeVar, Optional
 
-import PySide6
-import PySide6.QtCore as Qc
-import PySide6.QtGui as Qg
-import PySide6.QtWidgets as Qw
-import psutil
-from loguru import logger
-from xdg import XDG_CONFIG_HOME, XDG_CACHE_HOME
 import networkx as nx
+from loguru import logger
 
-import handtex.data
+import handtex.data.symbol_metadata
+import handtex.data.symbols
 import handtex.structures as st
 from handtex.utils import resource_path
-from handtex import __program__, __version__
-import handtex.data.color_themes
-import handtex.data.symbols
-import handtex.data.symbol_metadata
-import handtex.data.model
+
+# TODO add hat/widehat= and give it symbol metadata
+
+
+class SymbolData:
+    """
+    A class to hold and process all symbol data.
+    """
+
+    symbol_data: dict[str, st.Symbol]
+    symbol_keys: list[str]
+    to_leader: dict[str, str]
+    leaders: list[str]
+    graph: nx.DiGraph
+    symbols_grouped_by_similarity: list[tuple[str, ...]]
+    symbols_with_self_symmetry: list[str]
+    symbols_grouped_by_transitive_similarity: list[tuple[str, ...]]
+    symmetric_symbols: list[str]
+    asymmetric_symbols: list[str]
+
+    def __init__(self):
+        self.symbol_data = load_symbols()
+        self.symbol_keys = list(self.symbol_data.keys())
+        similarity_groups = load_symbol_metadata_similarity_groups()
+        self_symmetries = load_symbol_metadata_self_symmetry()
+        other_symmetries = load_symbol_metadata_other_symmetry()
+        self.to_leader = construct_to_leader_mapping(similarity_groups)
+        self.leaders = [key for key in self.symbol_keys if key not in self.to_leader]
+        normalized_self_symmetries = normalize_self_symmetry_to_leaders(
+            self_symmetries, self.to_leader
+        )
+        normalized_other_symmetries = normalize_other_symmetry_to_leaders(
+            other_symmetries, self.to_leader, self_symmetries
+        )
+        graph = build_graph(
+            self.symbol_keys,
+            similarity_groups,
+            normalized_self_symmetries,
+            normalized_other_symmetries,
+        )
+        self.graph = apply_transitivity(graph)
+
+        self.symbols_grouped_by_similarity = self._compute_symbols_grouped_by_similarity()
+        self.symbols_with_self_symmetry = list(normalized_self_symmetries.keys())
+        self.symbols_grouped_by_transitive_similarity = (
+            self._compute_symbols_grouped_by_transitive_symmetry()
+        )
+        self.asymmetric_symbols = self._compute_asymmetric_symbols()
+        self.symmetric_symbols = [
+            key for key in self.symbol_keys if key not in self.asymmetric_symbols
+        ]
+
+    def _compute_symbols_grouped_by_similarity(self) -> list[tuple[str, ...]]:
+        """
+        Get a full list of symbols grouped by similarity.
+        Those inside a group are similar to each other.
+
+        :return: A list of tuples of symbol keys.
+        """
+        groups = []
+        for node in self.leaders:
+            # Find all nodes that are reachable from this node with a leader edge.
+            similar_symbols = filter(
+                lambda n: "leader" in self.graph[n][node], nx.ancestors(self.graph, node)
+            )
+            groups.append(tuple((node, *similar_symbols)))
+        return groups
+
+    def _compute_symbols_grouped_by_transitive_symmetry(self) -> list[tuple[str, ...]]:
+        """
+        Get a full list of symbols grouped by transitive symmetry.
+        Transitive symmetry is a weakly connected component of the graph.
+        """
+        return list(tuple(component) for component in nx.weakly_connected_components(self.graph))
+
+    def _compute_asymmetric_symbols(self) -> list[str]:
+        """
+        Get a list of symbols that have edges with non-empty transformations.
+        """
+        empty_transformations = ((),)
+        asymmetric_symbols = []
+        for node in self.symbol_keys:
+            for _, _, data in self.graph.edges(node, data=True):
+                if data["transformations"] != empty_transformations:
+                    asymmetric_symbols.append(node)
+                    break
+        return asymmetric_symbols
+
+    def all_paths_to_symbol(
+        self, symbol_key: str
+    ) -> list[tuple[str, tuple[st.Transformation, ...]]]:
+        """
+        Get all possible paths to a symbol key, starting from some symbol and applying transformations.
+        The tuple of transformations here is a pre-flattened permutation of all possibilities.
+        """
+        # The heavy lifting was already done with transitivity, so each path is just a single inward edge.
+        paths = []
+        # First we need to see IF this symbol has any in-edge relations whatsoever.
+        # We're only checking leaders, so that excludes the non-leaders that have no
+        # path to them, but we must still consider loner symbols that have nothing.
+        if not self.graph.in_edges(symbol_key):
+            return [(symbol_key, ())]
+
+        # We want to insert self symmetries at the end of each path's transformations, if it
+        # isn't a self-loop already. The self-symmetries are a single layer of transformations,
+        # so we can unpack them with a single [0] index.
+        if symbol_key in self.symbols_with_self_symmetry:
+            self_symmetries = self.graph[symbol_key][symbol_key]["transformations"][0]
+        else:
+            self_symmetries = ()
+            # Since there is no self-loop to iterate over for in_edges, we must add the
+            # self-symmetric identity ourselves.
+            paths.append((symbol_key, ()))
+        # We still want to retain the possibility of no self-symmetry being applied, so we
+        # add the identity transformation to the tuple of options.
+        self_symmetries = ((st.Transformation.identity, *self_symmetries),)
+
+        for source, dest, data in self.graph.in_edges(symbol_key, data=True):
+            if source != dest:
+                # Slap on the self-symmetries at the end of the transformations.
+                transformation_list = data["transformations"] + self_symmetries
+            else:
+                # Otherwise use the self-symmetries that are expanded by the identity.
+                transformation_list = self_symmetries
+
+            # We must permute over the transformation options.
+            # The transformations are tuples of tuples. We choose one from each tuple.
+            for transformations in product(*transformation_list):
+                # Attempt to simplify the transformations,
+                # and check if this is a duplicate.
+                simplified_transformations = st.simplify_transformations(transformations)
+                if (source, simplified_transformations) not in paths:
+                    paths.append((source, simplified_transformations))
+                # else:
+                #     logger.warning(
+                #         f"Duplicate path found: {source} -> {symbol_key}. {transformations} -> {simplified_transformations}"
+                #     )
+        return paths
+
+    def all_symbols_to_symbol(self, symbol_key: str) -> list[str]:
+        """
+        Get all symbols that can reach the given symbol key.
+        """
+        return list(nx.ancestors(self.graph, symbol_key))
+
+    @cache
+    def get_similarity_group(self, symbol_key: str) -> tuple[str, ...]:
+        """
+        Finds with similarity group the symbol belongs to.
+
+        :param symbol_key: The symbol key.
+        :return: The similarity group.
+        """
+        for group in self.symbols_grouped_by_similarity:
+            if symbol_key in group:
+                return group
+        # This must never happen.
+        raise KeyError(f"Symbol {symbol_key} not found in any symmetry group.")
 
 
 def load_symbols() -> dict[str, st.Symbol]:
@@ -39,7 +181,7 @@ def load_symbols() -> dict[str, st.Symbol]:
     :return: A dictionary of key to symbols.
     """
 
-    with resource_path(handtex.data, "symbols.json") as symbols_file:
+    with resource_path(handtex.data.symbol_metadata, "symbols.json") as symbols_file:
         symbol_list = st.Symbol.from_json(symbols_file)
     return {symbol.key: symbol for symbol in symbol_list}
 
@@ -206,8 +348,8 @@ def load_symbol_metadata_other_symmetry() -> dict[str, list[tuple[str, list[st.T
         key_to = match.group(3)
         transformation_options = [st.Transformation(sym) for sym in match.group(2).split()]
         transformation_options_inverted = [t.invert() for t in transformation_options]
-        symmetries[key_from].append((key_to, transformation_options_inverted))
-        symmetries[key_to].append((key_from, transformation_options))
+        symmetries[key_from].append((key_to, transformation_options))
+        symmetries[key_to].append((key_from, transformation_options_inverted))
 
     return symmetries
 
@@ -299,7 +441,7 @@ def build_graph(
     for group in similarity_groups:
         leader = group[0]
         for key in group[1:]:
-            graph.add_edge(key, leader, transformations=((),), leader=True)
+            graph.add_edge(key, leader, transformations=(), leader=True)
 
     # Load self-symmetries as self-loops with the given transformations as a list.
     for key, symmetries in normalized_self_symmetries.items():
@@ -329,13 +471,6 @@ def load_graph() -> nx.DiGraph:
     return build_graph(
         symbol_keys, similarity_groups, normalized_self_symmetries, normalized_other_symmetries
     )
-
-
-def load_full_graph() -> nx.DiGraph:
-    """
-    Load the full graph of symbol relations.
-    """
-    return apply_transitivity(load_graph())
 
 
 def apply_transitivity(graph: nx.DiGraph) -> nx.DiGraph:
@@ -388,37 +523,9 @@ def apply_transitivity(graph: nx.DiGraph) -> nx.DiGraph:
 
     # Add all new transitive edges to the graph.
     for source, target, transformations in new_edges:
-        # # Concatenate transformations properly, maintaining the type tuple[tuple[Transformation, ...], ...].
-        # concatenated_transformations = tuple(
-        #     transformation for group in transformations for transformation in group
-        # )
-        # if concatenated_transformations:
-        #     concatenated_transformations = (concatenated_transformations,)
-        #
-        # # Add a new edge with concatenated transformations.
-        # graph.add_edge(source, target, transformations=concatenated_transformations)
         graph.add_edge(source, target, transformations=transformations)
 
     return graph
-
-
-# FUCKING RETARDED! DO NOT DO THIS!
-# def simplify_transformations(graph: nx.DiGraph) -> nx.DiGraph:
-#     """
-#     Simplify the transformations in the graph by merging equivalent transformations
-#     and removing redundant transformations.
-#     """
-#     transforms_total = 0
-#     transforms_simplified = 0
-#     for source, target, data in graph.edges(data=True):
-#         transformations = data["transformations"]
-#         transforms_total += len(transformations)
-#         simplified_transformations = st.simplify_transformations(transformations)
-#         transforms_simplified += len(simplified_transformations)
-#         graph[source][target]["transformations"] = simplified_transformations
-#     print(f"Total transformations: {transforms_total}, simplified: {transforms_simplified}")
-#     return graph
-#
 
 
 @cache

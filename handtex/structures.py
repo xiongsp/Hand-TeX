@@ -125,34 +125,26 @@ class Transformation(StrEnum):
         return False
 
 
-def simplify_transformations(
-    transforms: tuple[tuple[Transformation, ...], ...]
-) -> tuple[tuple[Transformation, ...], ...]:
+def simplify_transformations(transforms: tuple[Transformation, ...]) -> tuple[Transformation, ...]:
     """
     Simplify a list of transformations by merging compatible transformations.
     Identity transformations are removed.
     """
     match transforms:
-        case ((),), ((Transformation.identity,),):
-            return ((),)
-        case ((t,),) if isinstance(t, Transformation):
-            return ((t,),)
+        case () | (Transformation.identity,):
+            return ()
+        case (t,) if isinstance(t, Transformation):
+            return (t,)
 
-    simplified = []
-    for transform in transforms:
-        simplified_transform = []
-        for t in transform:
-            if simplified_transform:
-                last = simplified_transform[-1]
-                if last.can_merge(t):
-                    simplified_transform[-1] = last.merge(t)
-                    continue
-            simplified_transform.append(t)
-        # If we just ended up with identity, remove it.
-        if simplified_transform != [Transformation.identity]:
-            simplified.append(tuple(simplified_transform))
-        else:
-            simplified.append(())
-    # Ensure there are no duplicates.
-    simplified = tuple(set(simplified))
-    return simplified
+    simplified_transform = []
+    for t in transforms:
+        if simplified_transform:
+            last = simplified_transform[-1]
+            if last.can_merge(t):
+                simplified_transform[-1] = last.merge(t)
+                continue
+        simplified_transform.append(t)
+    # If we just ended up with identity, remove it.
+    if simplified_transform != [Transformation.identity]:
+        return tuple(simplified_transform)
+    return ()

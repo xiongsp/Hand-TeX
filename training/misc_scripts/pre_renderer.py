@@ -26,7 +26,7 @@ import handtex.data
 # CPUS = os.cpu_count()
 CPUS = 1
 with ut.resource_path(handtex.data) as path:
-    SYMBOLS_FILE = path / "symbols.json"
+    SYMBOLS_FILE = path / "symbol_metadata" / "symbols.json"
     OUTPUT_DIR = path / "symbols"
 
 

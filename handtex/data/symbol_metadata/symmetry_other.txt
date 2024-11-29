@@ -1,3 +1,4 @@
+wasysym-OT1-_ascnode -- mir0 --> wasysym-OT1-_descnode
 wasysym-OT1-_lhd -- mir0 --> latex2e-OT1-_triangleleft
 wasysym-OT1-_rhd -- mir0 --> latex2e-OT1-_triangleright
 amssymb-OT1-_Lleftarrow -- rot180 mir90 --> amssymb-OT1-_Rrightarrow
@@ -7,7 +8,6 @@ stmaryrd-OT1-_nnearrow -- mir90 --> stmaryrd-OT1-_nnwarrow
 stmaryrd-OT1-_nnearrow -- rot225 mir0 --> stmaryrd-OT1-_ssearrow
 stmaryrd-OT1-_ssearrow -- rot180 --> stmaryrd-OT1-_nnwarrow
 stmaryrd-OT1-_ssearrow -- rot315 mir90 --> stmaryrd-OT1-_sswarrow
-wasysym-OT1-_ascnode -- mir0 --> wasysym-OT1-_descnode
 cmll-OT1-_parr -- rot180 --> cmll-OT1-_with
 textcomp-OT1-_textinterrobang -- rot180 --> textcomp-OT1-_textinterrobangdown
 stmaryrd-OT1-_llceil -- mir90 --> stmaryrd-OT1-_rrceil
@@ -30,8 +30,8 @@ amssymb-OT1-_dashleftarrow -- rot180 mir90 --> amssymb-OT1-_dashrightarrow
 amssymb-OT1-_diagdown -- rot90 rot270 mir0 mir90 --> amssymb-OT1-_diagup
 amssymb-OT1-_downdownarrows -- rot180 mir0 --> amssymb-OT1-_upuparrows
 amssymb-OT1-_downharpoonleft -- mir0 --> amssymb-OT1-_upharpoonleft
+amssymb-OT1-_downharpoonleft -- rot180 --> amssymb-OT1-_upharpoonright
 amssymb-OT1-_downharpoonleft -- mir90 --> amssymb-OT1-_downharpoonright
-amssymb-OT1-_downharpoonleft -- mir90 --> amssymb-OT1-_upharpoonright
 amssymb-OT1-_downharpoonright -- mir0 --> amssymb-OT1-_upharpoonright
 latex2e-OT1-_rightharpoondown -- mir45 --> amssymb-OT1-_upharpoonleft
 latex2e-OT1-_rightharpoondown -- rot270 --> amssymb-OT1-_downharpoonleft
@@ -66,7 +66,6 @@ amssymb-OT1-_sqsubset -- rot180 mir90 --> amssymb-OT1-_sqsupset
 amssymb-OT1-_Subset -- rot180 mir90 --> amssymb-OT1-_Supset
 amssymb-OT1-_subseteqq -- mir90 --> amssymb-OT1-_supseteqq
 amssymb-OT1-_subsetneq -- mir90 --> amssymb-OT1-_supsetneq
-amssymb-OT1-_subsetneqq -- mir90 --> amssymb-OT1-_supsetneqq
 amssymb-OT1-_therefore -- rot180 mir0 --> amssymb-OT1-_because
 amssymb-OT1-_trianglelefteq -- mir90 --> amssymb-OT1-_trianglerighteq
 amssymb-OT1-_twoheadleftarrow -- rot180 mir90 --> amssymb-OT1-_twoheadrightarrow
@@ -78,8 +77,6 @@ amssymb-OT1-_lrcorner -- rot180 mir45 --> amssymb-OT1-_ulcorner
 amssymb-OT1-_lrcorner -- rot90 mir0 --> amssymb-OT1-_urcorner
 amssymb-OT1-_upharpoonleft -- mir90 --> amssymb-OT1-_upharpoonright
 latex2e-OT1-_updownarrow -- rot90 rot270 mir45 mir135 --> latex2e-OT1-_leftrightarrow
-amssymb-OT1-_varsubsetneq -- mir90 --> amssymb-OT1-_varsupsetneq
-amssymb-OT1-_varsubsetneqq -- mir90 --> amssymb-OT1-_varsupsetneqq
 amssymb-OT1-_vartriangleleft -- rot180 mir90 --> amssymb-OT1-_vartriangleright
 esint-OT1-_landdownint -- rot180 --> esint-OT1-_landupint
 esint-OT1-_ointclockwise -- rot180 --> esint-OT1-_varointclockwise
@@ -174,3 +171,5 @@ wasysym-OT1-_leftmoon -- rot180 mir90 --> wasysym-OT1-_rightmoon
 wasysym-OT1-_lhd -- rot180 mir90 --> wasysym-OT1-_rhd
 wasysym-OT1-_LHD -- rot180 mir90 --> wasysym-OT1-_RHD
 wasysym-OT1-_unlhd -- mir90 --> wasysym-OT1-_unrhd
+tipa-OT1-_textcloseepsilon -- rot180 mir90 --> tipa-OT1-_textcloserevepsilon
+tipa-OT1-_textcloseepsilon -- rot90 mir45 --> tipa-OT1-_textcloseomega

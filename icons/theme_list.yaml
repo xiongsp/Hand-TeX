@@ -10,6 +10,7 @@ Files:
       - edit-undo
       - edit-redo
       - dialog-ok
+      - dialog-filters
       - media-skip-forward
       - games-config-theme
       - tools-report-bug

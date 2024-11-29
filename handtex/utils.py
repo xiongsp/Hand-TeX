@@ -1,10 +1,8 @@
 import difflib
-import re
 import os
 import platform
 import shutil
 import sys
-from collections import defaultdict
 from importlib import resources
 from io import StringIO
 from pathlib import Path

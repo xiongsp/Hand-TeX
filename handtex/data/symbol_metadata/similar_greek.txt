@@ -13,7 +13,7 @@ latex2e-OT1-_Xi upgreek-OT1-_Upxi
 latex2e-OT1-_alpha upgreek-OT1-_upalpha
 latex2e-OT1-_beta marvosym-OT1-_Shilling tipa-OT1-_textbeta upgreek-OT1-_upbeta
 latex2e-OT1-_bigtriangledown latex2e-OT1-_nabla amssymb-OT1-_triangledown
-latex2e-OT1-_chi amssymb-OT1-_mathcal{X} tipa-OT1-_textchi upgreek-OT1-_upchi
+latex2e-OT1-_chi tipa-OT1-_textchi upgreek-OT1-_upchi
 latex2e-OT1-_delta upgreek-OT1-_updelta
 latex2e-OT1-_epsilon latex2e-OT1-_in upgreek-OT1-_upepsilon
 latex2e-OT1-_eta upgreek-OT1-_upeta

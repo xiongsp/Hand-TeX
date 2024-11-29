@@ -1,4 +1,5 @@
 import random
+from functools import cache
 import numpy as np
 import csv
 from pathlib import Path
@@ -13,6 +14,7 @@ import json
 from sklearn.preprocessing import LabelEncoder
 
 import handtex.utils as ut
+import handtex.symbol_relations as sr
 import handtex.structures as st
 import handtex.data.model
 import handtex.data.symbol_metadata
@@ -56,10 +58,7 @@ class StrokeDataset(Dataset):
     def __init__(
         self,
         db_path,
-        symbol_keys: list[str],
-        lookalikes: dict[str, tuple[str, ...]],
-        self_symmetries: dict[str, list[st.Transformation]],
-        other_symmetries: dict[str, list[tuple[str, list[st.Transformation]]]],
+        symbol_data: sr.SymbolData,
         image_size: int,
         label_encoder: LabelEncoder,
         random_seed: int,
@@ -68,6 +67,7 @@ class StrokeDataset(Dataset):
         shuffle: bool = True,
         random_augmentation: bool = True,
         stroke_cache: dict[str, list[list[tuple[int, int]]]] = None,
+        debug_single_sample_only: bool = False,
     ):
         """
         The primary keys list consists of tuples containing the following:
@@ -80,8 +80,7 @@ class StrokeDataset(Dataset):
 
 
         :param db_path: Path to the SQLite database.
-        :param symbol_keys: List of symbol keys to load stroke data for.
-        :param lookalikes: Dictionary of lookalike characters.
+        :param symbol_data: SymbolData object containing symbol metadata.
         :param image_size: Size of the generated images (images are square)
         :param label_encoder: LabelEncoder object to encode labels.
         :param random_seed: Seed for the random number generator. Generator for training and validation MUST get the same.
@@ -90,13 +89,12 @@ class StrokeDataset(Dataset):
         :param shuffle: If True, shuffle the data before making the training/validation split.
         :param random_augmentation: If True, augment the data with random transformations.
         :param stroke_cache: Cache of stroke data for each symbol key, alternative to loading from database.
+        :param debug_single_sample_only: If True, only load a single sample for debugging.
         """
         self.db_path = db_path
         self.image_size = image_size
-        self.primary_keys: list[tuple[int, list[st.Transformation], int | None]] = []
+        self.primary_keys: list[tuple[int, tuple[st.Transformation, ...], int | None]] = []
         self.symbol_keys = []
-        self.self_symmetries = self_symmetries
-        self.other_symmetries = other_symmetries
         self.train = train
         self.stroke_cache = stroke_cache
 
@@ -106,60 +104,51 @@ class StrokeDataset(Dataset):
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
 
-        for symbol_key in symbol_keys:
+        @cache
+        def load_primary_keys(_symbol_keys: str | tuple[str]):
+            if isinstance(_symbol_keys, str):
+                _symbol_keys = (_symbol_keys,)
+            command = f"SELECT id FROM samples WHERE key IN ({','.join(['?']*len(_symbol_keys))})"
+            if debug_single_sample_only:
+                command += " LIMIT 1"
+            cursor.execute(
+                command,
+                _symbol_keys,
+            )
+            return cursor.fetchall()
 
-            samples: list[tuple[int, [st.Transformation], int | None]] = []
-            real_data_count = 0
+        for symbol_key in symbol_data.symbol_keys:
+
+            samples: list[tuple[int, tuple[st.Transformation, ...], int | None]] = []
+
+            # Identical values to augmented_symbol_frequency.csv
+            real_data_count = len(load_primary_keys(symbol_key)) + sum(
+                len(load_primary_keys(ancestor))
+                for ancestor in symbol_data.all_symbols_to_symbol(symbol_key)
+            )
             self_symmetry_count = 0
             other_symmetry_count = 0
             augmentation_count = 0
 
-            key_and_lookalikes = [symbol_key] + list(lookalikes.get(symbol_key, []))
-            cursor.execute(
-                f"SELECT id FROM samples WHERE key IN ({','.join(['?']*len(key_and_lookalikes))})",
-                key_and_lookalikes,
-            )
-            rows = cursor.fetchall()
-            real_data_count = len(rows)
+            for current_key, transformations in symbol_data.all_paths_to_symbol(symbol_key):
+                samples.extend(
+                    (row[0], transformations, None) for row in load_primary_keys(current_key)
+                )
+                if current_key in symbol_data.get_similarity_group(symbol_key) and transformations:
+                    # If we don't have transformations, those are just similarity taking over
+                    # with the identity transform, that counts as real data.
+                    # So here, we do have a self-symmetry applied from its similarity group.
+                    self_symmetry_count += len(load_primary_keys(current_key))
 
-            self_symmetric_samples = []
-            for row in rows:
-                samples.append((row[0], [], None))
-                # If it has self-symmetries, some amount of them will be added to the dataset.
-                for transformation in self.self_symmetries.get(symbol_key, []):
-                    self_symmetric_samples.append((row[0], [transformation], None))
-            # Limit the number of self-symmetries.
-            augmentation_limit = augmentation_amount(
-                len(self_symmetric_samples), max_factor=1, min_factor=0.1
-            )
-            samples.extend(random.choices(self_symmetric_samples, k=augmentation_limit))
-            self_symmetry_count = augmentation_limit
-
-            # If the symbol has other symmetries, augment using them.
-            if symbol_key in self.other_symmetries:
-                for other_key, transformations in self.other_symmetries[symbol_key]:
-                    other_key: str
-                    transformations: list[st.Transformation]
-                    cursor.execute(
-                        "SELECT id FROM samples WHERE key = ?",
-                        (other_key,),
-                    )
-                    other_symmetric_samples = []
-                    for row in cursor.fetchall():
-                        other_symmetric_samples.append((row[0], transformations, None))
-                    # Limit the number of other symmetries.
-                    augmentation_limit = augmentation_amount(
-                        len(other_symmetric_samples), max_factor=1, min_factor=0.05
-                    )
-                    samples.extend(random.choices(other_symmetric_samples, k=augmentation_limit))
-                    other_symmetry_count += augmentation_limit
+                if current_key not in symbol_data.get_similarity_group(symbol_key):
+                    other_symmetry_count += len(load_primary_keys(current_key))
 
             # Augment the data to balance the classes.
             if random_augmentation:
                 augmentation_count = augmentation_amount(real_data_count)
                 for _ in range(augmentation_count):
-                    row = random.choice(samples)
-                    samples.append((row[0], row[1], random.randint(0, 2**32 - 1)))
+                    symbol, transformations, _ = random.choice(samples)
+                    samples.append((symbol, transformations, random.randint(0, 2**32 - 1)))
 
             # Shuffle the rows to get more variety in drawings, since drawings
             # by the same person are sequentially stored in the database.
@@ -546,35 +535,31 @@ def recalculate_encodings():
     These are dumped to a text file, where each line is a symbol.
     The line number-1 implies the encoding value (since it's 0-indexed).
     """
-    symbols = ut.load_symbols()
-    similar_symbols = ut.load_symbol_metadata_similarity()
-
-    # Limit the number of classes to classify.
-    symbol_keys = ut.select_leader_symbols(list(symbols.keys()), similar_symbols)
+    # Classify only leaders.
+    symbol_data = sr.SymbolData()
+    leader_keys = symbol_data.leaders
 
     label_encoder = LabelEncoder()
-    label_encoder.fit(symbol_keys)
+    label_encoder.fit(leader_keys)
 
     encoding_path = ut.get_encodings_path()
-    dump_encoder(label_encoder, symbol_keys, encoding_path)
+    dump_encoder(label_encoder, leader_keys, encoding_path)
 
 
 def recalculate_frequencies():
-    symbols = ut.load_symbols()
-    similar_symbols = ut.load_symbol_metadata_similarity()
+    symbol_data = sr.SymbolData()
+    # Limit the number of classes to classify.
+    leader_keys = symbol_data.leaders
 
     # database_path = "database/handtex.db"
     with ut.resource_path(training.database, "handtex.db") as path:
         database_path = path
 
-    # Limit the number of classes to classify.
-    leader_keys = ut.select_leader_symbols(list(symbols.keys()), similar_symbols)
-
     with resources.path(handtex.data.symbol_metadata, "symbol_frequency.csv") as path:
         frequencies_path = path
 
-    with resources.path(handtex.data.symbol_metadata, "leader_symbol_frequency.csv") as path:
-        leader_frequencies_path = path
+    with resources.path(handtex.data.symbol_metadata, "augmented_symbol_frequency.csv") as path:
+        augmented_frequencies_path = path
 
     # Get the frequencies from the database.
     conn = sqlite3.connect(database_path)
@@ -587,7 +572,7 @@ def recalculate_frequencies():
     conn.close()
 
     # Look for symbols that weren't included.
-    missing_symbols = set(symbols.keys()) - set(frequencies.keys())
+    missing_symbols = set(symbol_data.symbol_keys) - set(frequencies.keys())
     if missing_symbols:
         print(f"Missing frequencies for symbols:")
         for symbol in missing_symbols:
@@ -598,33 +583,64 @@ def recalculate_frequencies():
         writer = csv.writer(file, lineterminator="\n")
         writer.writerows(frequencies.items())
 
-    # Calculate new frequencies for the leader symbols
-    leader_frequencies = {key: frequencies[key] for key in leader_keys}
+    # Calculate new augmented frequencies.
+    # Sum up the frequencies of all symbols that are it's ancestor as well.
+    augmented_frequencies = {key: frequencies[key] for key in leader_keys}
     for leader in leader_keys:
-        for similar in similar_symbols.get(leader, []):
-            leader_frequencies[leader] += frequencies[similar]
+        for ancestor in symbol_data.all_symbols_to_symbol(leader):
+            augmented_frequencies[leader] += frequencies[ancestor]
+    # Add in all non-leaders, copying the leader's frequency.
+    for key in frequencies:
+        if key not in leader_keys:
+            augmented_frequencies[key] = frequencies[key]
     # Dump the new frequencies to a CSV file, sorted by frequency.
-    sorted_frequencies = sorted(leader_frequencies.items(), key=lambda item: item[1], reverse=True)
-    with open(leader_frequencies_path, "w") as file:
+    sorted_frequencies = sorted(
+        augmented_frequencies.items(), key=lambda item: item[1], reverse=True
+    )
+    with open(augmented_frequencies_path, "w") as file:
         writer = csv.writer(file, lineterminator="\n")
         writer.writerows(sorted_frequencies)
 
     symbol_mean_freq = sum(frequencies.values()) / len(frequencies)
-    leader_mean_freq = sum(leader_frequencies.values()) / len(leader_frequencies)
-    print(f"Mean frequency of all symbols: {symbol_mean_freq}")
-    print(f"Mean frequency of leader symbols: {leader_mean_freq}")
+    augmented_mean_freq = sum(augmented_frequencies.values()) / len(augmented_frequencies)
+    median_freq = sorted(frequencies.values())[len(frequencies) // 2]
+    augmented_median_freq = sorted(augmented_frequencies.values())[len(augmented_frequencies) // 2]
+    std_dev_freq = np.std(list(frequencies.values()))
+    augmented_std_dev_freq = np.std(list(augmented_frequencies.values()))
+    print(
+        f"Mean frequency of all symbols: {symbol_mean_freq:.2f}, median: {median_freq}, std dev: {std_dev_freq:.2f}"
+    )
+    print(
+        f"Mean frequency of leader symbols: {augmented_mean_freq:.2f}, median: {augmented_median_freq}, std dev: {augmented_std_dev_freq:.2f}"
+    )
+    return
+    # Plot both together in a bar chart.
+    # We want to display the frequency as heights without any labels.
+    # Just display the sorted list of heights overlayed on each other.
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots()
+    ax.bar(
+        range(len(augmented_frequencies)),
+        sorted(augmented_frequencies.values()),
+        label="Leader Symbol Frequencies",
+    )
+    ax.bar(range(len(frequencies)), sorted(frequencies.values()), label="Symbol Frequencies")
+    ax.legend()
+    plt.show()
 
 
 def main():
     # Test data loading.
-    symbols = ut.load_symbols()
-    similar_symbols = ut.load_symbol_metadata_similarity()
-    symbol_keys = ut.select_leader_symbols(list(symbols.keys()), similar_symbols)
-    self_symmetries = ut.load_symbol_metadata_self_symmetry()
-    other_symmetries = ut.load_symbol_metadata_other_symmetry()
+    # symbols = ut.load_symbols()
+    # similar_symbols = ut.load_symbol_metadata_similarity()
+    # symbol_keys = ut.select_leader_symbols(list(symbols.keys()), similar_symbols)
+    # self_symmetries = ut.load_symbol_metadata_self_symmetry()
+    # other_symmetries = ut.load_symbol_metadata_other_symmetry()
+    symbol_data = sr.SymbolData()
 
     label_encoder = LabelEncoder()
-    label_encoder.fit(symbol_keys)
+    label_encoder.fit(symbol_data.symbol_keys)
 
     db_path = "database/handtex.db"
     image_size = 48
@@ -632,21 +648,22 @@ def main():
     # Create training and validation datasets and dataloaders
     all_samples = StrokeDataset(
         db_path,
-        symbol_keys,
-        similar_symbols,
-        self_symmetries,
-        other_symmetries,
+        symbol_data,
         image_size,
         label_encoder,
         random_seed=0,
         validation_split=0,
         train=True,
         shuffle=False,
+        random_augmentation=False,
+        debug_single_sample_only=True,
     )
 
     # Show all the samples for a given symbol.
-    symbol = "amssymb-OT1-_llcorner"
-    assert symbol in symbol_keys, f"Symbol '{symbol}' not found in the dataset or not a leader"
+    symbol = "latex2e-OT1-_textless"
+    assert (
+        symbol in symbol_data.symbol_keys
+    ), f"Symbol '{symbol}' not found in the dataset or not a leader"
     symbol_strokes = (
         all_samples.load_transformed_strokes(idx) for idx in all_samples.range_for_symbol(symbol)
     )

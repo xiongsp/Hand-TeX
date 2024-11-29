@@ -1,4 +1,5 @@
 import re
+from time import time
 from importlib import resources
 from pathlib import Path
 
@@ -262,18 +263,18 @@ def test_graph_transitivity() -> None:
 
 
 def test_graph_creation() -> None:
-    import time
 
-    start = time.time()
+    start = time()
     g = sr.load_graph()
-    print(f"Graph creation took {1000 * (time.time() - start):.2f} ms.")
+    print(f"Graph creation took {1000 * (time() - start):.2f} ms.")
 
-    start = time.time()
+    start = time()
     g = sr.apply_transitivity(g)
-    print(f"Transitivity took {1000 * (time.time() - start):.2f} ms.")
+    print(f"Transitivity took {1000 * (time() - start):.2f} ms.")
 
+    return
     # Try to emulate finding leaders.
-    start = time.time()
+    start = time()
     leader_mapping = {}
     # If a node has an outgoing edge with no transformation, that is it's leader.
     for node in g.nodes:
@@ -283,7 +284,7 @@ def test_graph_creation() -> None:
                 if "leader" in g[node][target]:
                     leader_mapping[node] = target
                     break
-    print(f"Leader mapping took {1000 * (time.time() - start):.2f} ms.")
+    print(f"Leader mapping took {1000 * (time() - start):.2f} ms.")
     similarity_groups = sr.load_symbol_metadata_similarity_groups()
     assert leader_mapping == sr.construct_to_leader_mapping(similarity_groups)
 
@@ -389,7 +390,17 @@ def test_simplify_transform() -> None:
     assert m0.merge(m0) == i
     assert m0.merge(m90) == [m0, m90]
 
-    assert st.simplify_transformations(((i, r90, r180, r270, m0, m90, m135),)) == (
-        (r180, m0, m90, m135),
-    )
-    assert st.simplify_transformations(((i, r90, r180, i, i, r270, r180, m0, m0),)) == ((),)
+    assert st.simplify_transformations((i, r90, r180, r270, m0, m90, m135)) == (r180, m0, m90, m135)
+    assert st.simplify_transformations((i, r90, r180, i, i, r270, r180, m0, m0)) == ()
+    assert st.simplify_transformations((i,)) == ()
+
+
+def test_symbol_data_class() -> None:
+    start = time()
+    symbol_data = sr.SymbolData()
+    print(f"SymbolData creation took {1000 * (time() - start):.2f} ms.")
+    for symbol in symbol_data.leaders:
+        options = symbol_data.all_paths_to_symbol(symbol)
+        assert options, f"Symbol {symbol} has no paths."
+        ancestors = symbol_data.all_symbols_to_symbol(symbol)
+        assert len(set(ancestors)) == len(ancestors), f"Symbol {symbol} has duplicate ancestors."

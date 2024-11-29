@@ -10,6 +10,7 @@ import PySide6.QtSvgWidgets as Qsw
 import PySide6.QtWidgets as Qw
 
 import handtex.utils as ut
+import handtex.symbol_relations as sr
 
 
 def reflection_matrix(angle: float, image_size: int = 100) -> Qg.QTransform:
@@ -47,7 +48,7 @@ def main():
     # Set environment variable to disable the bounding rect check in Qt SVG handler
     os.environ["QT_SVG_DEFAULT_OPTIONS"] = "2"
 
-    symbols = ut.load_symbols()
+    symbols = sr.load_symbols()
 
     symmetry_path = "../../handtex/data/symbol_metadata/symmetry_other.txt"
     symmetries: list[tuple[str, list[str], str]] = []

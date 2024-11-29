@@ -9,6 +9,7 @@ import PySide6.QtSvgWidgets as Qsw
 import PySide6.QtWidgets as Qw
 
 import handtex.utils as ut
+import handtex.symbol_relations as sr
 
 
 def reflection_matrix(angle: float, image_size: int = 100) -> Qg.QTransform:
@@ -46,9 +47,9 @@ def main():
     # Set environment variable to disable the bounding rect check in Qt SVG handler
     os.environ["QT_SVG_DEFAULT_OPTIONS"] = "2"
 
-    symbols = ut.load_symbols()
+    symbols = sr.load_symbols()
 
-    leader_frequency_path = "../../handtex/data/symbol_metadata/leader_symbol_frequency.csv"
+    leader_frequency_path = "../../handtex/data/symbol_metadata/augmented_symbol_frequency.csv"
     with open(leader_frequency_path, "r") as file:
         leader_frequencies = {row[0]: int(row[1]) for row in csv.reader(file)}
 
@@ -56,7 +57,7 @@ def main():
     sorted_symbols = sorted(leader_frequencies.keys(), key=leader_frequencies.get)
     print(len(sorted_symbols))
 
-    start_at = "tipa-OT1-_textbaru"
+    start_at = "amssymb-OT1-_mathcal{X}"
     if start_at:
         start_at_index = sorted_symbols.index(start_at)
         sorted_symbols = sorted_symbols[start_at_index:]

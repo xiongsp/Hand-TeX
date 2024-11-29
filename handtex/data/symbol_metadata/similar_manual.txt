@@ -9,7 +9,7 @@ amssymb-OT1-_checkmark wasysym-OT1-_checked
 amssymb-OT1-_complement tipa-OT1-_textstretchc
 amssymb-OT1-_maltese wasysym-OT1-_kreuz
 amssymb-OT1-_mathcal{N} mathrsfs-OT1-_mathscr{N}
-amssymb-OT1-_neq tipa-OT1-_textdoublebarpipe tipa-OT1-_textdoublebarslash
+amssymb-OT1-_neq tipa-OT1-_textdoublebarslash
 amssymb-OT1-_nmid amssymb-OT1-_nshortmid
 amssymb-OT1-_subsetneq amssymb-OT1-_varsubsetneq
 amssymb-OT1-_supsetneq amssymb-OT1-_varsupsetneq
@@ -57,14 +57,15 @@ latex2e-OT1-_cdots latex2e-OT1-_dots latex2e-OT1-_ldots latex2e-OT1-_mathellipsi
 latex2e-OT1-_copyright latex2e-OT1-_textcopyright textcomp-OT1-_textcopyright
 latex2e-OT1-_dag latex2e-OT1-_dagger latex2e-OT1-_textdagger textcomp-OT1-_textdagger
 latex2e-OT1-_ddag latex2e-OT1-_ddagger latex2e-OT1-_textdaggerdbl textcomp-OT1-_textdaggerdbl
-latex2e-OT1-_diamond latex2e-OT1-_diamondsuit amssymb-OT1-_blacklozenge amssymb-OT1-_lozenge
+latex2e-OT1-_diamondsuit amssymb-OT1-_blacklozenge amssymb-OT1-_lozenge
 latex2e-OT1-_div textcomp-OT1-_textdiv
 latex2e-OT1-_downarrow stmaryrd-OT1-_shortdownarrow textcomp-OT1-_textdownarrow tipa-OT1-_textdownstep
 latex2e-OT1-_frown amssymb-OT1-_smallfrown
 latex2e-OT1-_hbar amssymb-OT1-_hbar amssymb-OT1-_hslash tipa-OT1-_textcrh
 latex2e-OT1-_heartsuit marvosym-OT1-_Heart
 latex2e-OT1-_imath tipa-OT1-_textraisevibyi tipa-OT1-_textvibyi
-latex2e-OT1-_int stmaryrd-OT1-_Rbag stmaryrd-OT1-_rbag tipa-OT1-_textesh
+latex2e-OT1-_int tipa-OT1-_textesh
+stmaryrd-OT1-_Rbag stmaryrd-OT1-_rbag
 latex2e-OT1-_jmath amssymb-OT1-_mathcal{J}
 latex2e-OT1-_langle textcomp-OT1-_textlangle
 latex2e-OT1-_leftarrow latex2e-OT1-_longleftarrow stmaryrd-OT1-_shortleftarrow textcomp-OT1-_textleftarrow

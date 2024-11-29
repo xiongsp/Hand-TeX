@@ -5,6 +5,7 @@ textcomp-OT1-_textrquill: mir0
 amssymb-OT1-_llcorner: mir45
 stmaryrd-OT1-_leftrightarrowtriangle: rot180 mir0 mir90
 stmaryrd-OT1-_lbag: rot180
+stmaryrd-OT1-_rbag: rot180
 wasysym-OT1-_conjunction: mir45
 stix2-OT1-_leftouterjoin: mir0
 stix2-OT1-_rightouterjoin: mir0
@@ -29,6 +30,7 @@ amssymb-OT1-_downdownarrows: mir90
 tipa-OT1-_textcloseomega: mir90
 tipa-OT1-_textcloserevepsilon: mir0
 tipa-OT1-_textdoublebaresh: rot180
+tipa-OT1-_textdoublebarpipe: rot180 mir0 mir90
 amssymb-OT1-_fallingdotseq: rot180
 wasysym-OT1-_uranus: mir90
 latex2e-OT1-_SS: rot180
@@ -239,6 +241,7 @@ latex2e-OT1-_ni: mir0
 latex2e-OT1-_bowtie: rot180 mir0 mir90
 amssymb-OT1-_triangleq: mir90
 latex2e-OT1-_diamond: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+latex2e-OT1-_diamondsuit: rot180 mir0 mir90
 latex2e-OT1-_theta: rot180
 latex2e-OT1-_$: rot180
 amssymb-OT1-_blacksquare: rot90 rot180 rot270 mir0 mir45 mir90 mir135
@@ -279,6 +282,7 @@ latex2e-OT1-_Psi: mir90
 latex2e-OT1-_Omega: mir90
 latex2e-OT1-_bigcup: mir90
 latex2e-OT1-_chi: rot180
+amssymb-OT1-_mathcal{X}: rot180
 latex2e-OT1-_exists: mir0
 latex2e-OT1-_bigcap: mir90
 latex2e-OT1-_bigtriangledown: mir90

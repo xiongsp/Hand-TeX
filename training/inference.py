@@ -26,7 +26,7 @@ def load_model_and_decoder(model_path: Path, num_classes: int, encodings_path: P
 
 # Inference function
 def predict(
-    tensor: torch.Tensor, model: nn.Module, label_decoder: dict[int, str]
+    tensor: torch.Tensor, model: nn.Module, label_decoder: dict[int, str], max_results: int = 20
 ) -> list[tuple[str, float]]:
     """
     Predict the class of a given image using the trained model.
@@ -34,6 +34,7 @@ def predict(
     :param tensor: The input image tensor (should be of shape [1, 1, image_size, image_size]).
     :param model: The trained neural network model.
     :param label_decoder: The label encoder used to encode the labels.
+    :param max_results: The maximum number of results to return.
     :return: A list of tuples containing the predicted label and confidence score
     """
     model.eval()  # Set model to evaluation mode
@@ -48,10 +49,12 @@ def predict(
             confidence = F.softmax(output, dim=1)[0][i].item()
             results.append((i, confidence))
         results.sort(key=lambda x: x[1], reverse=True)
-        # Prune the results to the top 10 or less, discarding results with tiny confidence.
+        # Prune the results to the top 20 or less, discarding results with tiny confidence.
         final_results = []
         for label, confidence in results:
-            if final_results and confidence < 0.001:
+            if len(final_results) >= max_results:
+                break
+            if final_results and confidence < 0.005:
                 break
             final_results.append((label_decoder[label], confidence))
         return final_results

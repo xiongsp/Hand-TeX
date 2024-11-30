@@ -5,13 +5,13 @@ import PySide6.QtWidgets as Qw
 import PySide6.QtSvgWidgets as Qsw
 import handtex.utils as ut
 import matplotlib.pyplot as plt
-from importlib import resources
 from loguru import logger
 from pathlib import Path
 import csv
 import json
 import handtex.data.symbol_metadata
 import handtex.symbol_relations as sr
+from handtex.utils import resource_path
 import training.image_gen as ig
 
 
@@ -22,7 +22,7 @@ def main():
     symbol_data = sr.SymbolData()
     new_data_dir = Path("../../new_drawings")
     # Load frequency data for the current database.
-    with resources.path(handtex.data.symbol_metadata, "symbol_frequency.csv") as path:
+    with resource_path(handtex.data.symbol_metadata, "symbol_frequency.csv") as path:
         frequencies_path = path
 
     with open(frequencies_path, "r") as file:

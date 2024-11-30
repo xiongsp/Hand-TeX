@@ -100,7 +100,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 num_classes = len(symbol_data.leaders)
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 12
+num_epochs = 3
 
 db_path = "database/handtex.db"
 image_size = 48
@@ -230,6 +230,12 @@ def main():
         # Step the scheduler
         scheduler.step()
 
+    # Save the model.
+    model_path = ut.get_model_path()
+    save_file(model.state_dict(), model_path)
+    save_encoder(label_encoder, symbol_data.leaders)
+    print(f"Model saved to {model_path}")
+
     # Plot training and validation loss
     plt.figure(figsize=(10, 5))
     plt.plot(range(1, num_epochs + 1), train_losses, label="Training Loss")
@@ -250,15 +256,9 @@ def main():
     plt.legend()
     plt.show()
 
-    # torch.save(model.state_dict(), model_path)
-    model_path = ut.get_model_path()
-    save_file(model.state_dict(), model_path)
-    save_encoder(label_encoder, symbol_data.leaders)
-    print(f"Model saved to {model_path}")
-
-    # Final accuracy check on training and test sets
-    check_accuracy(train_dataloader, model, device)
-    check_accuracy(validation_dataloader, model, device)
+    # # Final accuracy check on training and test sets
+    # check_accuracy(train_dataloader, model, device)
+    # check_accuracy(validation_dataloader, model, device)
 
 
 if __name__ == "__main__":

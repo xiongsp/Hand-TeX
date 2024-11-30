@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>900</width>
-    <height>606</height>
+    <height>654</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -233,7 +233,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>521</width>
-                 <height>556</height>
+                 <height>604</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -441,19 +441,43 @@
              </layout>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_7">
+             <layout class="QFormLayout" name="formLayout_3">
               <property name="bottomMargin">
                <number>24</number>
               </property>
-              <item>
+              <item row="0" column="0">
                <widget class="QLabel" name="label_7">
                 <property name="text">
                  <string>Train specific symbol:</string>
                 </property>
                </widget>
               </item>
-              <item>
+              <item row="0" column="1">
                <widget class="QLineEdit" name="lineEdit_train_symbol"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_9">
+                <property name="text">
+                 <string>Saving to:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_7">
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_new_data_dir"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_browse_new_data_dir">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset theme="document-open-folder"/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </item>

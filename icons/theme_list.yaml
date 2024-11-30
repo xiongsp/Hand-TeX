@@ -11,6 +11,8 @@ Files:
       - edit-redo
       - dialog-ok
       - dialog-filters
+      - draw-freehand
+      - document-open-folder
       - media-skip-forward
       - games-config-theme
       - tools-report-bug
@@ -25,3 +27,8 @@ Files:
       - dialog-warning
     22:
       - dialog-error
+    64:
+      - dialog-warning
+      - dialog-error
+      - dialog-information
+      - dialog-question

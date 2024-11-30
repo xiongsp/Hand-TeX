@@ -11,6 +11,7 @@ from PySide6.QtCore import Signal
 
 import handtex.structures as st
 import handtex.utils as ut
+import handtex.config as cfg
 import handtex.symbol_relations as sr
 import handtex.data.symbol_metadata
 
@@ -18,10 +19,12 @@ import handtex.data.symbol_metadata
 class DataRecorder:
 
     symbol_data: sr.SymbolData
+    config: cfg.Config
     save_path: Path
     current_data: list[st.SymbolDrawing]
+    frequencies: dict[str, int]
 
-    last_20_symbols: list[str]
+    last_100_symbols: list[str]
 
     has_submissions: Signal
 
@@ -30,18 +33,27 @@ class DataRecorder:
         self,
         symbol_data: sr.SymbolData,
         has_submissions: Signal,
-        new_data_dir: str,
+        new_data_dir: str = "",
     ):
         self.current_data = []
         self.symbol_data = symbol_data
+        self.frequencies = {}
         self.has_submissions = has_submissions
 
         # Don't randomly select one of the last 20 symbols.
-        self.last_20_symbols = []
+        self.last_100_symbols = []
 
-        # Load the new data location from environment variables.
         data_dir = Path(new_data_dir).absolute()
-        data_dir.mkdir(parents=True, exist_ok=True)
+        self.save_path = Path("unset")
+        self.set_new_data_dir(data_dir)
+
+    def set_new_data_dir(self, data_dir: Path) -> None:
+        """
+        Load the present frequencies and set the new data directory.
+
+        :param data_dir: The new data directory.
+        """
+        # Load the new data location from environment variables.
         logger.info(f"New data location: {data_dir}")
 
         # Load frequency data for the current database.
@@ -209,6 +221,7 @@ class DataRecorder:
         Save the collected data to a json file.
         Overwrite the same file if it already exists.
         """
+        self.save_path.parent.mkdir(parents=True, exist_ok=True)
         with open(self.save_path, "w") as file:
             # Use compact json.
             json.dump(

@@ -23,7 +23,7 @@ def main() -> None:
     parser.add_argument("--train", "-t", action="store_true", help="Create new training data")
     parser.add_argument("--version", "-v", action="version", version=f"{__program__} {__version__}")
     parser.add_argument(
-        "--new-data-dir", "-n", help="Directory to store new training data", default="new_data"
+        "--new-data-dir", "-n", help="Directory to store new training data", default=""
     )
 
     args = parser.parse_args()

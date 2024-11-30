@@ -1,6 +1,7 @@
 import platform
 import sys
 from functools import partial
+from pathlib import Path
 import time
 
 import PySide6.QtCore as Qc
@@ -50,13 +51,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     model: trn.CNN
     label_decoder: dict[int, str]
     current_predictions: list[tuple[str, float]]
+    detection_menu_action: Qg.QAction | None
 
     # Training:
-    train: bool
-    data_recorder: dr.DataRecorder
+    data_recorder: dr.DataRecorder | None
     current_symbol: st.Symbol | None
     submission_count: int
     has_submission = Signal(bool)
+    training_menu_action: Qg.QAction | None
 
     # Symbol list:
     symbol_list: sl.SymbolList | None
@@ -75,18 +77,24 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.current_predictions = []
 
-        self.train = train
         self.submission_count = 1
         self.current_symbol = None
 
+        self.training_menu_action = None
+        self.detection_menu_action = None
+
         self.symbol_list = None
 
+        self.data_recorder = None
+
         self.config = self.load_config()
+        # Set the new data directory if one is supplied.
+        if new_data_dir:
+            self.config.new_data_dir = new_data_dir
+            self.config.save()
         self.config.pretty_log()
 
         self.theme_is_dark = ut.Shared[bool](True)
-
-        self.hamburger_menu = Qw.QMenu()
 
         self.initialize_ui()
 
@@ -97,25 +105,20 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.symbol_data = sr.SymbolData()
 
-        if self.train:
-            logger.info("Training mode active.")
-            self.stackedWidget.setCurrentIndex(1)
-            self.data_recorder = dr.DataRecorder(
-                self.symbol_data,
-                self.has_submission,
-                new_data_dir,
-            )
-            self.data_recorder.has_submissions.connect(self.pushButton_undo_submit.setEnabled)
-        else:
-            self.sketchpad.new_drawing.connect(self.detect_symbol)
-            self.theme_is_dark_changed.connect(self.show_predictions)
-            self.model, self.label_decoder = inf.load_model_and_decoder(
-                ut.get_model_path(), ut.get_encodings_path()
-            )
-
         self.state_saver = ss.StateSaver("mainwindow")
         self.init_state_saver()
         self.state_saver.restore()
+
+        self.sketchpad.new_drawing.connect(self.detect_symbol)
+        self.theme_is_dark_changed.connect(self.show_predictions)
+        self.model, self.label_decoder = inf.load_model_and_decoder(
+            ut.get_model_path(), ut.get_encodings_path()
+        )
+
+        if train:
+            self.switch_to_training()
+        else:
+            self.switch_to_classification()
 
         Qc.QTimer.singleShot(0, self.post_init)
 
@@ -149,6 +152,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.pushButton_undo_submit.clicked.connect(self.previous_symbol)
 
         self.pushButton_symbol_list.clicked.connect(self.open_symbol_list)
+        self.pushButton_browse_new_data_dir.clicked.connect(self.browse_new_data_dir2)
+        self.lineEdit_new_data_dir.editingFinished.connect(self.update_new_data_dir)
 
     def init_state_saver(self) -> None:
         """
@@ -174,9 +179,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         sys.excepthook = exception_handler
 
         self.sketchpad.set_pen_width(self.config.stroke_width)
-
-        if self.train:
-            self.get_next_symbol()
 
     def closeEvent(self, event: Qg.QCloseEvent) -> None:
         """
@@ -243,6 +245,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         This is the hamburger menu on the main window.
         It contains several menu-bar-esque actions.
         """
+        self.hamburger_menu = Qw.QMenu()
         self.pushButton_menu.setMenu(self.hamburger_menu)
         # Add theming menu.
         self.theming_menu = self.hamburger_menu.addMenu(
@@ -277,6 +280,21 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 action.setChecked(True)
             self.stroke_width_menu.addAction(action)
 
+        # Offer to enter training mode.
+        action_training = Qg.QAction(
+            Qg.QIcon.fromTheme("draw-freehand"), "Help Symbol Training", self
+        )
+        action_training.triggered.connect(self.switch_to_training)
+        self.hamburger_menu.addAction(action_training)
+        self.training_menu_action = action_training
+        # Offer way back to classification mode.
+        action_classification = Qg.QAction(
+            Qg.QIcon.fromTheme("search"), "Back to Detection Mode", self
+        )
+        action_classification.triggered.connect(self.switch_to_classification)
+        self.hamburger_menu.addAction(action_classification)
+        self.detection_menu_action = action_classification
+
         # Offer opening the log viewer.
         action_open_log = Qg.QAction(
             Qg.QIcon.fromTheme("tools-report-bug"), "Report an issue...", self
@@ -295,6 +313,37 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             action = Qg.QAction("Simulate crash", self)
             action.triggered.connect(self.simulate_crash)
             self.hamburger_menu.addAction(action)
+
+    def switch_to_training(self) -> None:
+        """
+        Switch to training mode.
+        """
+        logger.info("Training mode active.")
+        self.stackedWidget.setCurrentIndex(1)
+        if self.data_recorder is None:
+            self.data_recorder = dr.DataRecorder(
+                self.symbol_data,
+                self.has_submission,
+                self.config.new_data_dir,
+            )
+            self.data_recorder.has_submissions.connect(self.pushButton_undo_submit.setEnabled)
+        self.lineEdit_new_data_dir.setText(str(self.config.new_data_dir))
+        self.training_menu_action.setVisible(False)
+        self.detection_menu_action.setVisible(True)
+        self.get_next_symbol()
+
+    def switch_to_classification(self) -> None:
+        """
+        Switch to classification mode.
+        """
+        logger.info("Classification mode active.")
+        self.stackedWidget.setCurrentIndex(0)
+        self.training_menu_action.setVisible(True)
+        self.detection_menu_action.setVisible(False)
+        self.sketchpad.clear()
+
+    def in_detection_mode(self) -> bool:
+        return self.stackedWidget.currentIndex() == 0
 
     def change_pen_width(self, width: int) -> None:
         """
@@ -325,6 +374,30 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.symbol_list = sl.SymbolList(self.symbol_data)
             self.theme_is_dark_changed.connect(self.symbol_list.on_theme_change)
         self.symbol_list.show()
+
+    def browse_new_data_dir2(self) -> None:
+        """
+        Browse for a new data directory.
+        """
+        logger.debug("Browsing for new data directory.")
+        new_data_dir = Qw.QFileDialog.getExistingDirectory(
+            self, "Select a new data directory", str(self.config.new_data_dir)
+        )
+        if new_data_dir:
+            self.lineEdit_new_data_dir.setText(new_data_dir)
+            self.update_new_data_dir()
+
+    def update_new_data_dir(self) -> None:
+        """
+        Read the current new data directory from the line edit.
+        """
+        new_data_dir = self.lineEdit_new_data_dir.text()
+        self.config.new_data_dir = new_data_dir
+        self.config.save()
+        # Because we can only trigger this event through interaction with
+        # the training mode UI, we can safely assume that the data recorder
+        # was initialized.
+        self.data_recorder.set_new_data_dir(Path(new_data_dir))
 
     # =========================================== Theming ===========================================
 
@@ -421,6 +494,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     # =========================================== Detection ==========================================
 
     def detect_symbol(self) -> None:
+        if not self.in_detection_mode():
+            return
+        if self.model is None:
+            logger.error("Model is not loaded yet, skipping prediction.")
+            return
         # Get the sketch, tensorize it, and predict the symbol.
         start = time.time()
         strokes, _, _, _ = self.sketchpad.get_clean_strokes()
@@ -558,13 +636,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             while (
                 self.current_symbol is not None
                 and new_symbol_key == self.current_symbol.key
-                and new_symbol_key in self.data_recorder.last_20_symbols
+                and new_symbol_key in self.data_recorder.last_100_symbols
             ):
                 new_symbol_key = self.data_recorder.select_symbol(bias)
 
-            self.data_recorder.last_20_symbols.append(new_symbol_key)
-            if len(self.data_recorder.last_20_symbols) > 20:
-                self.data_recorder.last_20_symbols.pop(0)
+            self.data_recorder.last_100_symbols.append(new_symbol_key)
+            if len(self.data_recorder.last_100_symbols) > 100:
+                self.data_recorder.last_100_symbols.pop(0)
             self.set_training_symbol(new_symbol_key)
 
         self.submission_count = 1
@@ -606,6 +684,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Submit the drawing for training.
         """
+        if self.sketchpad.is_empty():
+            gu.show_warning(self, "Empty Drawing", "You cannot submit an empty drawing.")
+            return
         self.data_recorder.submit_drawing(
             st.SymbolDrawing(self.current_symbol.key, *self.sketchpad.get_clean_strokes())
         )

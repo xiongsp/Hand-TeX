@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(900, 606)
+        MainWindow.resize(900, 654)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_3 = QVBoxLayout(self.centralwidget)
@@ -168,7 +168,7 @@ class Ui_MainWindow(object):
         self.scrollArea_predictions.setWidgetResizable(True)
         self.widget_predictions = QWidget()
         self.widget_predictions.setObjectName(u"widget_predictions")
-        self.widget_predictions.setGeometry(QRect(0, 0, 521, 556))
+        self.widget_predictions.setGeometry(QRect(0, 0, 521, 604))
         self.verticalLayout_7 = QVBoxLayout(self.widget_predictions)
         self.verticalLayout_7.setSpacing(12)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
@@ -297,32 +297,54 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_5.addLayout(self.horizontalLayout_3)
 
-        self.horizontalLayout_7 = QHBoxLayout()
-        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
-        self.horizontalLayout_7.setContentsMargins(-1, -1, -1, 24)
+        self.formLayout_3 = QFormLayout()
+        self.formLayout_3.setObjectName(u"formLayout_3")
+        self.formLayout_3.setContentsMargins(-1, -1, -1, 24)
         self.label_7 = QLabel(self.page_train)
         self.label_7.setObjectName(u"label_7")
 
-        self.horizontalLayout_7.addWidget(self.label_7)
+        self.formLayout_3.setWidget(0, QFormLayout.LabelRole, self.label_7)
 
         self.lineEdit_train_symbol = QLineEdit(self.page_train)
         self.lineEdit_train_symbol.setObjectName(u"lineEdit_train_symbol")
 
-        self.horizontalLayout_7.addWidget(self.lineEdit_train_symbol)
+        self.formLayout_3.setWidget(0, QFormLayout.FieldRole, self.lineEdit_train_symbol)
+
+        self.label_9 = QLabel(self.page_train)
+        self.label_9.setObjectName(u"label_9")
+
+        self.formLayout_3.setWidget(1, QFormLayout.LabelRole, self.label_9)
+
+        self.horizontalLayout_7 = QHBoxLayout()
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.lineEdit_new_data_dir = QLineEdit(self.page_train)
+        self.lineEdit_new_data_dir.setObjectName(u"lineEdit_new_data_dir")
+
+        self.horizontalLayout_7.addWidget(self.lineEdit_new_data_dir)
+
+        self.pushButton_browse_new_data_dir = QPushButton(self.page_train)
+        self.pushButton_browse_new_data_dir.setObjectName(u"pushButton_browse_new_data_dir")
+        icon5 = QIcon(QIcon.fromTheme(u"document-open-folder"))
+        self.pushButton_browse_new_data_dir.setIcon(icon5)
+
+        self.horizontalLayout_7.addWidget(self.pushButton_browse_new_data_dir)
 
 
-        self.verticalLayout_5.addLayout(self.horizontalLayout_7)
+        self.formLayout_3.setLayout(1, QFormLayout.FieldRole, self.horizontalLayout_7)
+
+
+        self.verticalLayout_5.addLayout(self.formLayout_3)
 
         self.pushButton_submit = QPushButton(self.page_train)
         self.pushButton_submit.setObjectName(u"pushButton_submit")
-        icon5 = QIcon()
+        icon6 = QIcon()
         iconThemeName = u"dialog-ok"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon5 = QIcon.fromTheme(iconThemeName)
+            icon6 = QIcon.fromTheme(iconThemeName)
         else:
-            icon5.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon6.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.pushButton_submit.setIcon(icon5)
+        self.pushButton_submit.setIcon(icon6)
 
         self.verticalLayout_5.addWidget(self.pushButton_submit)
 
@@ -331,14 +353,14 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setContentsMargins(-1, 24, -1, -1)
         self.pushButton_skip = QPushButton(self.page_train)
         self.pushButton_skip.setObjectName(u"pushButton_skip")
-        icon6 = QIcon()
+        icon7 = QIcon()
         iconThemeName = u"media-skip-forward"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon6 = QIcon.fromTheme(iconThemeName)
+            icon7 = QIcon.fromTheme(iconThemeName)
         else:
-            icon6.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon7.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.pushButton_skip.setIcon(icon6)
+        self.pushButton_skip.setIcon(icon7)
 
         self.horizontalLayout_4.addWidget(self.pushButton_skip)
 
@@ -392,6 +414,8 @@ class Ui_MainWindow(object):
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Random", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Rare Symbols", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Train specific symbol:", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Saving to:", None))
+        self.pushButton_browse_new_data_dir.setText("")
         self.pushButton_submit.setText(QCoreApplication.translate("MainWindow", u"Submit", None))
         self.pushButton_skip.setText(QCoreApplication.translate("MainWindow", u"Skip", None))
         self.pushButton_undo_submit.setText(QCoreApplication.translate("MainWindow", u"Undo Submission", None))

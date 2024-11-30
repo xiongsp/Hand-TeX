@@ -144,6 +144,12 @@ class Sketchpad(Qw.QGraphicsView):
         self.can_undo.emit(False)
         self.can_redo.emit(False)
 
+    def is_empty(self) -> bool:
+        """
+        Check if the sketchpad is empty.
+        """
+        return not self.strokes
+
     def undo(self):
         """
         Undo the last stroke.
@@ -179,6 +185,8 @@ class Sketchpad(Qw.QGraphicsView):
         Apply the RDP algorithm to limit the number of points in each stroke.
         """
         strokes = self.strokes
+        if not strokes:
+            return [], 1, 0, 0
         clean_strokes = purge_duplicate_strokes(strokes)
         clean_strokes, scale1 = rescale_viewport(clean_strokes, self.sceneRect())
         clean_strokes, scale2, x_offset, y_offset = scale_and_center(clean_strokes)

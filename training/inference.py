@@ -10,16 +10,18 @@ import handtex.utils as ut
 
 
 # Load the model for inference
-def load_model_and_decoder(model_path: Path, num_classes: int, encodings_path: Path):
-
-    # Load model state
-    model = CNN(num_classes=num_classes)
-    model.load_state_dict(load_file(model_path))
-    model.to(device)
-    model.eval()  # Set to evaluation mode
+def load_model_and_decoder(model_path: Path, encodings_path: Path):
+    # The decoder was created alongside the model, it knows
+    # how many symbols to build the model with.
 
     # Load label encoder
     label_decoder = load_decoder(encodings_path)
+
+    # Load model state
+    model = CNN(num_classes=len(label_decoder))
+    model.load_state_dict(load_file(model_path))
+    model.to(device)
+    model.eval()  # Set to evaluation mode
 
     return model, label_decoder
 

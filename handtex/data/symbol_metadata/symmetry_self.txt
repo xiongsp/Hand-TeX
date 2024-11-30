@@ -4,8 +4,8 @@ stmaryrd-OT1-_leftarrowtriangle: mir0
 textcomp-OT1-_textrquill: mir0
 amssymb-OT1-_llcorner: mir45
 stmaryrd-OT1-_leftrightarrowtriangle: rot180 mir0 mir90
-stmaryrd-OT1-_lbag: rot180
-stmaryrd-OT1-_rbag: rot180
+stmaryrd-OT1-_Lbag: rot180
+stmaryrd-OT1-_Rbag: rot180
 wasysym-OT1-_conjunction: mir45
 stix2-OT1-_leftouterjoin: mir0
 stix2-OT1-_rightouterjoin: mir0

@@ -173,3 +173,5 @@ wasysym-OT1-_LHD -- rot180 mir90 --> wasysym-OT1-_RHD
 wasysym-OT1-_unlhd -- mir90 --> wasysym-OT1-_unrhd
 tipa-OT1-_textcloseepsilon -- rot180 mir90 --> tipa-OT1-_textcloserevepsilon
 tipa-OT1-_textcloseepsilon -- rot90 mir45 --> tipa-OT1-_textcloseomega
+latex2e-OT1-_uparrow -- rot45 --> latex2e-OT1-_nearrow
+latex2e-OT1-_uparrow -- rot22_5 --> stmaryrd-OT1-_nnearrow

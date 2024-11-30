@@ -63,6 +63,7 @@ class SymbolDrawing:
 
 class Transformation(StrEnum):
     identity = auto()
+    rot22_5 = auto()
     rot45 = auto()
     rot90 = auto()
     rot135 = auto()

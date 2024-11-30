@@ -587,12 +587,13 @@ def recalculate_frequencies():
     # Sum up the frequencies of all symbols that are it's ancestor as well.
     augmented_frequencies = {key: frequencies[key] for key in leader_keys}
     for leader in leader_keys:
-        for ancestor in symbol_data.all_symbols_to_symbol(leader):
-            augmented_frequencies[leader] += frequencies[ancestor]
-    # Add in all non-leaders, copying the leader's frequency.
+        augmented_frequencies[leader] = frequencies[leader] + sum(
+            frequencies[ancestor] for ancestor in symbol_data.all_symbols_to_symbol(leader)
+        )
+    # Add in all non-leaders, copying the leader's augmented frequency.
     for key in frequencies:
         if key not in leader_keys:
-            augmented_frequencies[key] = frequencies[key]
+            augmented_frequencies[key] = augmented_frequencies[symbol_data.to_leader[key]]
     # Dump the new frequencies to a CSV file, sorted by frequency.
     sorted_frequencies = sorted(
         augmented_frequencies.items(), key=lambda item: item[1], reverse=True
@@ -611,9 +612,9 @@ def recalculate_frequencies():
         f"Mean frequency of all symbols: {symbol_mean_freq:.2f}, median: {median_freq}, std dev: {std_dev_freq:.2f}"
     )
     print(
-        f"Mean frequency of leader symbols: {augmented_mean_freq:.2f}, median: {augmented_median_freq}, std dev: {augmented_std_dev_freq:.2f}"
+        f"Mean augmented frequency of symbols: {augmented_mean_freq:.2f}, median: {augmented_median_freq}, std dev: {augmented_std_dev_freq:.2f}"
     )
-    return
+    # return
     # Plot both together in a bar chart.
     # We want to display the frequency as heights without any labels.
     # Just display the sorted list of heights overlayed on each other.

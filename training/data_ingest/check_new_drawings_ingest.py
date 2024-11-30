@@ -34,7 +34,7 @@ def main():
         percentage_overlap = len(drawings_match) / len(data) * 100
         if percentage_overlap == 0:
             print(f"No overlap for {file.name}")
-        elif percentage_overlap == 100:
+        elif percentage_overlap >= 100:
             print(f"Full overlap for {file.name}")
         else:
             print(f"Partial overlap for {file.name}: {percentage_overlap:.2f}%")

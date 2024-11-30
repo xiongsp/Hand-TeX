@@ -100,7 +100,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 num_classes = len(symbol_data.leaders)
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 15
+num_epochs = 12
 
 db_path = "database/handtex.db"
 image_size = 48

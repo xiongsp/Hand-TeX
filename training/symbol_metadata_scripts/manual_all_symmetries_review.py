@@ -1,7 +1,4 @@
-import csv
-import numpy as np
 import os
-import re
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
@@ -85,7 +82,7 @@ def main():
         ):
             symbols_to_inspect.append(symbol)
     # Manual override:
-    # symbols_to_inspect = []
+    symbols_to_inspect = [key for key in symbol_data.leaders if "arrow" in key]
 
     for index, symbol in enumerate(symbols_to_inspect, start=1):
         mainwindow = Qw.QWidget()
@@ -147,11 +144,11 @@ def main():
             painter = Qg.QPainter(pixmap)
             matrices = []
             for transformation in transformations:
-                if transformation.startswith("rot"):
-                    angle = int(transformation[3:])
+                if transformation.is_rotation:
+                    angle = transformation.angle
                     matrices.append(rotation_matrix(-angle, 100))
-                elif transformation.startswith("mir"):
-                    angle = int(transformation[3:])
+                else:
+                    angle = transformation.angle
                     matrices.append(reflection_matrix(180 - angle, 100))
             final_matrix = Qg.QTransform()
             for matrix in matrices:

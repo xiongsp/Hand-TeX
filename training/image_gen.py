@@ -654,7 +654,7 @@ def main():
     )
 
     # Show all the samples for a given symbol.
-    symbol = "latex2e-OT1-_textless"
+    symbol = "latex2e-OT1-_leftarrow"
     assert (
         symbol in symbol_data.symbol_keys
     ), f"Symbol '{symbol}' not found in the dataset or not a leader"

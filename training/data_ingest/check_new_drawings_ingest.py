@@ -12,7 +12,7 @@ def main():
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    for file in new_data_path.glob("*.json"):
+    for file in sorted(new_data_path.glob("*.json")):
         # Get the data from the file.
         with open(file, "r") as f:
             data = json.load(f)

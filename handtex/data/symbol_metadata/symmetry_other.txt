@@ -1,13 +1,33 @@
-wasysym-OT1-_ascnode -- mir0 --> wasysym-OT1-_descnode
-wasysym-OT1-_lhd -- mir0 --> latex2e-OT1-_triangleleft
-wasysym-OT1-_rhd -- mir0 --> latex2e-OT1-_triangleright
-amssymb-OT1-_Lleftarrow -- rot180 mir90 --> amssymb-OT1-_Rrightarrow
-latex2e-OT1-_simeq -- mir90 --> amssymb-OT1-_backsimeq
+stmaryrd-OT1-_shortdownarrow -- rot180 mir0 --> stmaryrd-OT1-_shortuparrow
+stmaryrd-OT1-_shortleftarrow -- rot180 mir90 --> stmaryrd-OT1-_shortrightarrow
+textcomp-OT1-_textdownarrow -- rot180 mir0 --> textcomp-OT1-_textuparrow
+textcomp-OT1-_textleftarrow -- rot180 mir90 --> textcomp-OT1-_textrightarrow
+latex2e-OT1-_uparrow -- rot45 --> latex2e-OT1-_nwarrow
+latex2e-OT1-_uparrow -- rot22_5 --> stmaryrd-OT1-_nnwarrow
+latex2e-OT1-_searrow -- rot90 mir0 --> latex2e-OT1-_nearrow
+latex2e-OT1-_swarrow -- rot270 mir0 --> latex2e-OT1-_nwarrow
+latex2e-OT1-_searrow -- rot180 mir45 --> latex2e-OT1-_nwarrow
+latex2e-OT1-_swarrow -- rot180 mir135 --> latex2e-OT1-_nearrow
+latex2e-OT1-_searrow -- --> latex2e-OT1-_swarrow
+textcomp-OT1-_textdownarrow -- rot90 mir135 --> textcomp-OT1-_textrightarrow
+textcomp-OT1-_textdownarrow -- rot270 mir45 --> textcomp-OT1-_textleftarrow
+textcomp-OT1-_textuparrow -- rot270 mir45 --> textcomp-OT1-_textrightarrow
+textcomp-OT1-_textuparrow -- rot90 mir135 --> textcomp-OT1-_textleftarrow
+latex2e-OT1-_downarrow -- rot180 mir0 --> latex2e-OT1-_uparrow
+latex2e-OT1-_Downarrow -- rot180 mir0 --> latex2e-OT1-_Uparrow
+latex2e-OT1-_leftarrow -- rot180 mir90 --> latex2e-OT1-_rightarrow
+latex2e-OT1-_Leftarrow -- rot180 mir90 --> latex2e-OT1-_Rightarrow
+latex2e-OT1-_leftarrow -- rot90 mir45 --> latex2e-OT1-_downarrow
 stmaryrd-OT1-_nnearrow -- rot180 --> stmaryrd-OT1-_sswarrow
 stmaryrd-OT1-_nnearrow -- mir90 --> stmaryrd-OT1-_nnwarrow
 stmaryrd-OT1-_nnearrow -- rot225 mir0 --> stmaryrd-OT1-_ssearrow
 stmaryrd-OT1-_ssearrow -- rot180 --> stmaryrd-OT1-_nnwarrow
 stmaryrd-OT1-_ssearrow -- rot315 mir90 --> stmaryrd-OT1-_sswarrow
+amssymb-OT1-_Lleftarrow -- rot180 mir90 --> amssymb-OT1-_Rrightarrow
+wasysym-OT1-_ascnode -- mir0 --> wasysym-OT1-_descnode
+wasysym-OT1-_lhd -- mir0 --> latex2e-OT1-_triangleleft
+wasysym-OT1-_rhd -- mir0 --> latex2e-OT1-_triangleright
+latex2e-OT1-_simeq -- mir90 --> amssymb-OT1-_backsimeq
 cmll-OT1-_parr -- rot180 --> cmll-OT1-_with
 textcomp-OT1-_textinterrobang -- rot180 --> textcomp-OT1-_textinterrobangdown
 stmaryrd-OT1-_llceil -- mir90 --> stmaryrd-OT1-_rrceil
@@ -99,14 +119,9 @@ latex2e-OT1-_ddots -- rot90 rot270 mir0 mir90 --> mathdots-OT1-_iddots
 latex2e-OT1-_Delta -- rot180 mir0 --> latex2e-OT1-_bigtriangledown
 latex2e-OT1-_Delta -- rot270 mir45 --> latex2e-OT1-_triangleright
 latex2e-OT1-_Delta -- rot90 mir135 --> latex2e-OT1-_triangleleft
-latex2e-OT1-_downarrow -- rot180 mir0 --> latex2e-OT1-_uparrow
-latex2e-OT1-_Downarrow -- rot180 mir0 --> latex2e-OT1-_Uparrow
 latex2e-OT1-_hookleftarrow -- mir90 --> latex2e-OT1-_hookrightarrow
 latex2e-OT1-_langle -- rot180 mir90 --> latex2e-OT1-_rangle
 latex2e-OT1-_lceil -- mir90 --> latex2e-OT1-_rceil
-latex2e-OT1-_leftarrow -- rot180 mir90 --> latex2e-OT1-_rightarrow
-latex2e-OT1-_Leftarrow -- rot180 mir90 --> latex2e-OT1-_Rightarrow
-latex2e-OT1-_leftarrow -- rot90 mir45 --> latex2e-OT1-_downarrow
 latex2e-OT1-_leftharpoondown -- mir0 --> latex2e-OT1-_leftharpoonup
 latex2e-OT1-_leftharpoondown -- mir90 --> latex2e-OT1-_rightharpoondown
 latex2e-OT1-_leftharpoonup -- mir90 --> latex2e-OT1-_rightharpoonup
@@ -125,20 +140,11 @@ latex2e-OT1-_prec -- rot180 mir90 --> latex2e-OT1-_succ
 latex2e-OT1-_prec -- rot270 mir135 --> amssymb-OT1-_curlywedge
 latex2e-OT1-_preceq -- mir90 --> latex2e-OT1-_succeq
 latex2e-OT1-_rightharpoondown -- mir0 --> latex2e-OT1-_rightharpoonup
-latex2e-OT1-_searrow -- rot90 mir0 --> latex2e-OT1-_nearrow
-latex2e-OT1-_swarrow -- rot270 mir0 --> latex2e-OT1-_nwarrow
-latex2e-OT1-_searrow -- rot180 mir45 --> latex2e-OT1-_nwarrow
-latex2e-OT1-_swarrow -- rot180 mir135 --> latex2e-OT1-_nearrow
-latex2e-OT1-_searrow -- --> latex2e-OT1-_swarrow
 latex2e-OT1-_sqcap -- rot180 mir0 --> latex2e-OT1-_sqcup
 latex2e-OT1-_sqsubseteq -- mir90 --> latex2e-OT1-_sqsupseteq
 latex2e-OT1-_subset -- rot180 mir90 --> latex2e-OT1-_supset
 latex2e-OT1-_subseteq -- mir90 --> latex2e-OT1-_supseteq
 latex2e-OT1-_textbraceleft -- rot180 mir90 --> latex2e-OT1-_textbraceright
-textcomp-OT1-_textdownarrow -- rot90 mir135 --> textcomp-OT1-_textrightarrow
-textcomp-OT1-_textdownarrow -- rot270 mir45 --> textcomp-OT1-_textleftarrow
-textcomp-OT1-_textuparrow -- rot270 mir45 --> textcomp-OT1-_textrightarrow
-textcomp-OT1-_textuparrow -- rot90 mir135 --> textcomp-OT1-_textleftarrow
 latex2e-OT1-_textgreater -- rot180 mir90 --> latex2e-OT1-_textless
 latex2e-OT1-_textgreater -- rot270 mir135 --> latex2e-OT1-_bigvee
 latex2e-OT1-_textquotedblleft -- rot180 --> latex2e-OT1-_textquotedblright
@@ -156,12 +162,8 @@ stmaryrd-OT1-_Lbag -- mir90 --> stmaryrd-OT1-_Rbag
 stmaryrd-OT1-_leftarrowtriangle -- rot180 mir90 --> stmaryrd-OT1-_rightarrowtriangle
 stmaryrd-OT1-_llbracket -- rot180 mir90 --> stmaryrd-OT1-_rrbracket
 stmaryrd-OT1-_llparenthesis -- rot180 mir90 --> stmaryrd-OT1-_rrparenthesis
-stmaryrd-OT1-_shortdownarrow -- rot180 mir0 --> stmaryrd-OT1-_shortuparrow
-stmaryrd-OT1-_shortleftarrow -- rot180 mir90 --> stmaryrd-OT1-_shortrightarrow
 textcomp-OT1-_textcopyleft -- mir90 --> textcomp-OT1-_textcopyright
-textcomp-OT1-_textdownarrow -- rot180 mir0 --> textcomp-OT1-_textuparrow
 textcomp-OT1-_textlangle -- rot180 mir90 --> textcomp-OT1-_textrangle
-textcomp-OT1-_textleftarrow -- rot180 mir90 --> textcomp-OT1-_textrightarrow
 textcomp-OT1-_textlquill -- rot180 mir90 --> textcomp-OT1-_textrquill
 tipa-OT1-_textdownstep -- rot180 mir0 --> tipa-OT1-_textupstep
 tipa-OT1-_textlptr -- rot180 mir90 --> tipa-OT1-_textrptr
@@ -173,5 +175,3 @@ wasysym-OT1-_LHD -- rot180 mir90 --> wasysym-OT1-_RHD
 wasysym-OT1-_unlhd -- mir90 --> wasysym-OT1-_unrhd
 tipa-OT1-_textcloseepsilon -- rot180 mir90 --> tipa-OT1-_textcloserevepsilon
 tipa-OT1-_textcloseepsilon -- rot90 mir45 --> tipa-OT1-_textcloseomega
-latex2e-OT1-_uparrow -- rot45 --> latex2e-OT1-_nearrow
-latex2e-OT1-_uparrow -- rot22_5 --> stmaryrd-OT1-_nnearrow

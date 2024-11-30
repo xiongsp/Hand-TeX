@@ -11,6 +11,7 @@ from pathlib import Path
 import csv
 import json
 import handtex.data.symbol_metadata
+import handtex.symbol_relations as sr
 import training.image_gen as ig
 
 
@@ -18,19 +19,13 @@ def main():
     """
     Load the new data and show each symbol alongside the new drawings.
     """
-    symbols = ut.load_symbols()
+    symbol_data = sr.SymbolData()
     new_data_dir = Path("../../new_drawings")
-    lookalikes = ut.load_symbol_metadata_similarity()
-    # We only want to train leaders.
-    leader_keys = ut.select_leader_symbols(list(symbols.keys()), lookalikes)
-    leaders = {key: symbols[key] for key in leader_keys}
+    # Load frequency data for the current database.
+    with resources.path(handtex.data.symbol_metadata, "symbol_frequency.csv") as path:
+        frequencies_path = path
 
-    # Load old frequencies.
-    # Load the symbol frequency file from environment variables.
-    with ut.resource_path(handtex.data.symbol_metadata, "leader_symbol_frequency.csv") as path:
-        leader_frequencies_path = path
-
-    with open(leader_frequencies_path, "r") as file:
+    with open(frequencies_path, "r") as file:
         reader = csv.reader(file)
         frequencies = {row[0]: int(row[1]) for row in reader}
 
@@ -39,7 +34,7 @@ def main():
 
     # Load new data, gather frequencies from it.
     # All sessions are stored as independant json files.
-    new_frequencies = {key: 0 for key in leader_keys}
+    new_frequencies = {key: 0 for key in symbol_data.all_keys}
     new_drawings: dict[str, list[tuple[str, list[list[tuple[int, int]]]]]] = {}
     for new_file in new_data_dir.glob("*.json"):
         with open(new_file, "r") as file:
@@ -49,14 +44,12 @@ def main():
                 if new_key not in new_drawings:
                     new_drawings[new_key] = []
                 new_drawings[new_key].append((new_file.name, drawing["strokes"]))
+                new_frequencies[new_key] += 1
 
-                # Find it's leader if it isn't one.
-                if new_key in leader_keys:
-                    new_frequencies[new_key] += 1
-                else:
-                    leader = lookalikes[new_key][0]
-                    assert leader in leader_keys
-                    new_frequencies[leader] += 1
+    logger.info(f"Training {len(symbol_data.all_keys)} symbols.")
+
+    total_new = sum(new_frequencies.values())
+    logger.info(f"Loaded {total_new} previously recorded drawings for frequency analysis.")
 
     # Visualize the new frequency by stacking it on top of a histogram of the old frequency.
     # Don't add labels.
@@ -112,7 +105,7 @@ def main():
 
         # Load the symbol svg.
         # Display it next to the number of new drawings, and the symbol key.
-        symbol = symbols[symbol_key]
+        symbol = symbol_data[symbol_key]
         svg_widget = Qsw.QSvgWidget()
         color = app.palette().color(Qg.QPalette.Text).name()
         svg_data = ut.load_symbol_svg(symbol, color)

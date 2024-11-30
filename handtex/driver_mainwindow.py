@@ -102,6 +102,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.save_default_palette()
         self.load_config_theme()
+        start = time.time()
 
         self.symbol_data = sr.SymbolData()
 
@@ -119,6 +120,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.switch_to_training()
         else:
             self.switch_to_classification()
+
+        logger.debug(f"Initialization took {(time.time() - start) * 1000:.2f}ms")
 
         Qc.QTimer.singleShot(0, self.post_init)
 

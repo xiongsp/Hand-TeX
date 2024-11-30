@@ -48,10 +48,16 @@ class Ui_SymbolList(object):
 
         self.toolButton_filter = QToolButton(SymbolList)
         self.toolButton_filter.setObjectName(u"toolButton_filter")
-        self.toolButton_filter.setText(u"")
-        icon = QIcon(QIcon.fromTheme(u"dialog-filters"))
+        self.toolButton_filter.setText(u"Filter")
+        icon = QIcon()
+        iconThemeName = u"dialog-filters"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon = QIcon.fromTheme(iconThemeName)
+        else:
+            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.toolButton_filter.setIcon(icon)
-        self.toolButton_filter.setToolButtonStyle(Qt.ToolButtonIconOnly)
+        self.toolButton_filter.setToolButtonStyle(Qt.ToolButtonFollowStyle)
 
         self.horizontalLayout.addWidget(self.toolButton_filter)
 

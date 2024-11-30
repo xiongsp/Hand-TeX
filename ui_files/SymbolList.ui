@@ -63,13 +63,14 @@
      <item>
       <widget class="QToolButton" name="toolButton_filter">
        <property name="text">
-        <string notr="true"/>
+        <string notr="true">Filter</string>
        </property>
        <property name="icon">
-        <iconset theme="dialog-filters"/>
+        <iconset theme="dialog-filters">
+         <normaloff>.</normaloff>.</iconset>
        </property>
        <property name="toolButtonStyle">
-        <enum>Qt::ToolButtonIconOnly</enum>
+        <enum>Qt::ToolButtonFollowStyle</enum>
        </property>
       </widget>
      </item>

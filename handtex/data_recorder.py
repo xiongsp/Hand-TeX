@@ -11,46 +11,44 @@ from PySide6.QtCore import Signal
 
 import handtex.structures as st
 import handtex.utils as ut
+import handtex.symbol_relations as sr
 import handtex.data.symbol_metadata
 
 
 class DataRecorder:
 
-    symbols: dict[str, st.Symbol]
-    frequencies: dict[str, int]
+    symbol_data: sr.SymbolData
     save_path: Path
     current_data: list[st.SymbolDrawing]
+
+    last_20_symbols: list[str]
 
     has_submissions: Signal
 
     # Manage loading/saving symbols for new training data generation.
     def __init__(
         self,
-        symbols: dict[str, st.Symbol],
-        similarities: dict[str, tuple[str, ...]],
+        symbol_data: sr.SymbolData,
         has_submissions: Signal,
         new_data_dir: str,
     ):
         self.current_data = []
+        self.symbol_data = symbol_data
         self.has_submissions = has_submissions
+
+        # Don't randomly select one of the last 20 symbols.
+        self.last_20_symbols = []
 
         # Load the new data location from environment variables.
         data_dir = Path(new_data_dir).absolute()
         data_dir.mkdir(parents=True, exist_ok=True)
         logger.info(f"New data location: {data_dir}")
 
-        self.symbols = symbols
-        lookalikes = similarities
-        # We only want to train leaders.
-        leaders = ut.select_leader_symbols(list(self.symbols.keys()), lookalikes)
-        self.symbols = {key: self.symbols[key] for key in leaders}
+        # Load frequency data for the current database.
+        with resources.path(handtex.data.symbol_metadata, "augmented_symbol_frequency.csv") as path:
+            augmented_frequencies_path = path
 
-        # Load old frequencies.
-        # Load the symbol frequency file from environment variables.
-        with resources.path(handtex.data.symbol_metadata, "leader_symbol_frequency.csv") as path:
-            leader_frequencies_path = path
-
-        with open(leader_frequencies_path, "r") as file:
+        with open(augmented_frequencies_path, "r") as file:
             reader = csv.reader(file)
             self.frequencies = {row[0]: int(row[1]) for row in reader}
 
@@ -59,21 +57,20 @@ class DataRecorder:
 
         # Load new data, gather frequencies from it.
         # All sessions are stored as independant json files.
-        new_frequencies = {key: 0 for key in self.symbols.keys()}
+        new_frequencies = {key: 0 for key in self.symbol_data.all_keys}
         for new_file in data_dir.glob("*.json"):
             with open(new_file, "r") as file:
                 data = json.load(file)
                 for drawing in data:
-                    # Find it's leader if it isn't one.
                     new_key = drawing["key"]
-                    if new_key in self.symbols:
-                        new_frequencies[new_key] += 1
-                    else:
-                        leader = lookalikes[new_key][0]
-                        assert leader in self.symbols
-                        new_frequencies[leader] += 1
+                    # Add 1 to all symbols in it's symmetry group.
+                    # This is the collection of ancestors for it's leader.
+                    if new_key not in self.symbol_data.leaders:
+                        new_key = self.symbol_data.to_leader[new_key]
+                    for key in self.symbol_data.all_symbols_to_symbol(new_key):
+                        new_frequencies[key] += 1
 
-        logger.info(f"Training {len(self.symbols)} leader symbols.")
+        logger.info(f"Training {len(self.symbol_data.all_keys)} symbols.")
 
         total_new = sum(new_frequencies.values())
         logger.info(f"Loaded {total_new} previously recorded drawings for frequency analysis.")
@@ -100,7 +97,7 @@ class DataRecorder:
         :return: The symbol's key.
         """
         # Calculate the probability of selecting a symbol.
-        symbol_keys = list(self.symbols.keys())
+        symbol_keys = self.symbol_data.all_keys
         symbol_weights = []
         for key in symbol_keys:
             weight = (1 / (self.frequencies[key] + 1)) ** bias

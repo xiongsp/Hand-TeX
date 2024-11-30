@@ -15,6 +15,7 @@ import handtex.gui_utils as gu
 import handtex.structures as st
 import handtex.issue_reporter_driver as ird
 import handtex.utils as ut
+import handtex.symbol_relations as sr
 import handtex.state_saver as ss
 import handtex.data_recorder as dr
 import handtex.symbol_list as sl
@@ -30,7 +31,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     config: cfg.Config = None
     debug: bool
 
-    symbols: dict[str, st.Symbol]
+    symbol_data: sr.SymbolData | None
 
     threadpool: Qc.QThreadPool
 
@@ -59,11 +60,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     # Symbol list:
     symbol_list: sl.SymbolList | None
-
-    # Lookalikes:
-    similar_symbols: dict[str, tuple[str, ...]]
-    self_symmetries: dict[str, list[st.Transformation]]
-    other_symmetries: dict[str, list[tuple[str, list[st.Transformation]]]]
 
     def __init__(
         self,
@@ -99,17 +95,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.save_default_palette()
         self.load_config_theme()
 
-        self.symbols = ut.load_symbols()
-        self.similar_symbols = ut.load_symbol_metadata_similarity()
-        self.self_symmetries = ut.load_symbol_metadata_self_symmetry()
-        self.other_symmetries = ut.load_symbol_metadata_other_symmetry()
+        self.symbol_data = sr.SymbolData()
 
         if self.train:
             logger.info("Training mode active.")
             self.stackedWidget.setCurrentIndex(1)
             self.data_recorder = dr.DataRecorder(
-                self.symbols,
-                self.similar_symbols,
+                self.symbol_data,
                 self.has_submission,
                 new_data_dir,
             )
@@ -118,7 +110,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.sketchpad.new_drawing.connect(self.detect_symbol)
             self.theme_is_dark_changed.connect(self.show_predictions)
             self.model, self.label_decoder = inf.load_model_and_decoder(
-                ut.get_model_path(), trn.num_classes, ut.get_encodings_path()
+                ut.get_model_path(), ut.get_encodings_path()
             )
 
         self.state_saver = ss.StateSaver("mainwindow")
@@ -330,9 +322,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Open the symbol list.
         """
         if self.symbol_list is None:
-            self.symbol_list = sl.SymbolList(
-                self.symbols, self.similar_symbols, self.self_symmetries, self.other_symmetries
-            )
+            self.symbol_list = sl.SymbolList(self.symbol_data)
             self.theme_is_dark_changed.connect(self.symbol_list.on_theme_change)
         self.symbol_list.show()
 
@@ -477,18 +467,19 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
             # If this symbol has similar symbols, we want to display
             # them all together in a framed box.
-            lookalikes = self.similar_symbols.get(symbol, None)
-            stack = None
-            if lookalikes:
+            similarity_group = self.symbol_data.get_similarity_group(symbol)
+            similarity_stack = None
+            frame = None
+            if len(similarity_group) > 1:
                 frame = Qw.QFrame()
                 frame.setStyleSheet(
                     f"QFrame {{ background: {self.palette().color(Qg.QPalette.AlternateBase).name()}; }}"
                 )
-                stack = Qw.QVBoxLayout()
-                frame.setLayout(stack)
+                similarity_stack = Qw.QVBoxLayout()
+                frame.setLayout(similarity_stack)
 
-            for s in [symbol] + list(lookalikes or []):
-                symbol_data = self.symbols[s]
+            for s in similarity_group:
+                symbol_data = self.symbol_data[s]
                 outer_layout = Qw.QHBoxLayout()
                 svg_widget = Qsw.QSvgWidget()
                 svg_widget.load(ut.load_symbol_svg(symbol_data, hex_color))
@@ -527,14 +518,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
                 outer_layout.addLayout(inner_layout)
 
-                if lookalikes:
-                    stack.addLayout(outer_layout)
+                if similarity_stack:
+                    similarity_stack.addLayout(outer_layout)
                 else:
                     # Pad the outer layout with a left margin, so
                     # that it lines up with the framed lookalikes.
                     outer_layout.setContentsMargins(6, 0, 0, 0)
                     self.widget_predictions.layout().addLayout(outer_layout)
-            if lookalikes:
+            if similarity_stack:
                 self.widget_predictions.layout().addWidget(frame)
         # Slap a spacer on the end to push the items to the top.
         self.widget_predictions.layout().addStretch()
@@ -548,14 +539,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Check if the user specified a specific symbol.
         requested_symbol = self.lineEdit_train_symbol.text().strip()
         if requested_symbol:
-            if requested_symbol in self.symbols:
+            if requested_symbol in self.symbol_data:
                 self.set_training_symbol(requested_symbol)
             else:
                 gu.show_warning(
                     self,
                     "Invalid Symbol",
                     f"The symbol '{requested_symbol}' is not a valid symbol."
-                    f"\n\nExample of a valid symbol key: {list(self.symbols.keys())[0]}",
+                    f"\n\nExample of a valid symbol key: {self.symbol_data.leaders[0]}",
                 )
 
         else:
@@ -564,16 +555,23 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 / self.horizontalSlider_selection_bias.maximum()
             )
             new_symbol_key = self.data_recorder.select_symbol(bias)
-            while self.current_symbol is not None and new_symbol_key == self.current_symbol.key:
+            while (
+                self.current_symbol is not None
+                and new_symbol_key == self.current_symbol.key
+                and new_symbol_key in self.data_recorder.last_20_symbols
+            ):
                 new_symbol_key = self.data_recorder.select_symbol(bias)
 
+            self.data_recorder.last_20_symbols.append(new_symbol_key)
+            if len(self.data_recorder.last_20_symbols) > 20:
+                self.data_recorder.last_20_symbols.pop(0)
             self.set_training_symbol(new_symbol_key)
 
         self.submission_count = 1
         self.update_submission_count()
 
     def set_training_symbol(self, new_symbol_key: str) -> None:
-        self.current_symbol = self.symbols[new_symbol_key]
+        self.current_symbol = self.symbol_data[new_symbol_key]
         self.load_training_symbol_data()
         self.sketchpad.clear()
 

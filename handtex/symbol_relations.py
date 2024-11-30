@@ -30,7 +30,7 @@ class SymbolData:
     graph: nx.DiGraph
     symbols_grouped_by_similarity: list[tuple[str, ...]]
     symbols_with_self_symmetry: list[str]
-    symbols_grouped_by_transitive_similarity: list[tuple[str, ...]]
+    symbols_grouped_by_transitive_symmetry: list[tuple[str, ...]]
     symmetric_symbols: list[str]
     asymmetric_symbols: list[str]
 
@@ -58,13 +58,42 @@ class SymbolData:
 
         self.symbols_grouped_by_similarity = self._compute_symbols_grouped_by_similarity()
         self.symbols_with_self_symmetry = list(normalized_self_symmetries.keys())
-        self.symbols_grouped_by_transitive_similarity = (
+        self.symbols_grouped_by_transitive_symmetry = (
             self._compute_symbols_grouped_by_transitive_symmetry()
         )
         self.asymmetric_symbols = self._compute_asymmetric_symbols()
         self.symmetric_symbols = [
             key for key in self.symbol_keys if key not in self.asymmetric_symbols
         ]
+
+    def __getitem__(self, item):
+        return self.symbol_data[item]
+
+    def __contains__(self, item):
+        return item in self.symbol_data
+
+    @property
+    def all_keys(self):
+        return self.symbol_keys
+
+    @cache
+    def has_self_symmetry(self, symbol_key: str) -> bool:
+        """
+        Check if a symbol has self-symmetry.
+        """
+        return self.graph.has_edge(symbol_key, symbol_key)
+
+    @cache
+    def has_other_symmetry(self, symbol_key: str) -> bool:
+        """
+        Check if a symbol has other-symmetry.
+        We define this as having an outgoing edge to another symbol
+        which has a non-empty transformations attribute.
+        """
+        for source, dest, data in self.graph.out_edges(symbol_key, data=True):
+            if source != dest and data["transformations"]:
+                return True
+        return False
 
     def _compute_symbols_grouped_by_similarity(self) -> list[tuple[str, ...]]:
         """
@@ -156,6 +185,7 @@ class SymbolData:
     def all_symbols_to_symbol(self, symbol_key: str) -> list[str]:
         """
         Get all symbols that can reach the given symbol key.
+        This will never include the symbol key itself.
         """
         return list(nx.ancestors(self.graph, symbol_key))
 
@@ -168,6 +198,20 @@ class SymbolData:
         :return: The similarity group.
         """
         for group in self.symbols_grouped_by_similarity:
+            if symbol_key in group:
+                return group
+        # This must never happen.
+        raise KeyError(f"Symbol {symbol_key} not found in any symmetry group.")
+
+    @cache
+    def get_symmetry_group(self, symbol_key: str) -> tuple[str, ...]:
+        """
+        Finds with symmetry group the symbol belongs to.
+
+        :param symbol_key: The symbol key.
+        :return: The symmetry group.
+        """
+        for group in self.symbols_grouped_by_transitive_symmetry:
             if symbol_key in group:
                 return group
         # This must never happen.

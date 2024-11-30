@@ -9,26 +9,21 @@ from PySide6.QtCore import Qt
 import handtex.state_saver as ss
 import handtex.structures as st
 import handtex.utils as ut
+import handtex.symbol_relations as sr
 from handtex.ui_generated_files.ui_SymbolList import Ui_SymbolList
 
 
 class SearchMode(IntEnum):
     COMMAND = 0
     ID = 1
-    SIMILAR = 2
-    UNIQUE = 3
-    SYMMETRIC = 4
-    ASYMMETRIC = 5
+    PACKAGE = 2
 
 
 class SymbolList(Qw.QWidget, Ui_SymbolList):
 
     symbols: dict[str, st.Symbol]
     last_shown_symbol: str | None
-    similar_symbols: dict[str, tuple[str, ...]]
-    self_symmetries: dict[str, list[st.Transformation]]
-    other_symmetries: dict[str, list[tuple[str, list[st.Transformation]]]]
-    leaders: list[str]
+    symbol_data: sr.SymbolData
     icon_size: int
     pixmap_cache: dict[str, Qg.QPixmap]
     current_symbol_keys: list[str | None]
@@ -37,26 +32,19 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
 
     def __init__(
         self,
-        symbols: dict[str, st.Symbol],
-        similar_symbols: dict[str, tuple[str, ...]],
-        self_symmetries: dict[str, list[st.Transformation]],
-        other_symmetries: dict[str, list[tuple[str, list[st.Transformation]]]],
+        symbol_data: sr.SymbolData,
         parent=None,
     ):
         super(SymbolList, self).__init__(parent)
         self.setupUi(self)
-        self.symbols = symbols
-        self.similar_symbols = similar_symbols
-        self.self_symmetries = self_symmetries
-        self.other_symmetries = other_symmetries
-        self.leaders = ut.select_leader_symbols(list(symbols.keys()), similar_symbols)
+        self.symbol_data = symbol_data
         self.last_show_symbol = None
 
         self.icon_size = 100
         self.listWidget.setIconSize(Qc.QSize(self.icon_size, self.icon_size))
 
         self.pixmap_cache = {}
-        self.current_symbol_keys = list(symbols.keys())
+        self.current_symbol_keys = symbol_data.all_keys
 
         self.show_symbols()
 
@@ -105,75 +93,24 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         """
         search_text = self.lineEdit_search.text().strip()
         search_mode = SearchMode(self.comboBox_search_mode.currentIndex())
+        search_pool = self.symbol_data.all_keys
 
         if search_mode == SearchMode.COMMAND:
             self.current_symbol_keys = [
                 key
-                for key in self.symbols
-                if search_text.lower() in self.symbols[key].command.lower()
+                for key in search_pool
+                if search_text.lower() in self.symbol_data[key].command.lower()
             ]
         elif search_mode == SearchMode.ID:
             self.current_symbol_keys = [
-                key for key in self.symbols if search_text.lower() in key.lower()
+                key for key in search_pool if search_text.lower() in key.lower()
             ]
-        elif search_mode == SearchMode.SIMILAR:
-            if search_text in self.similar_symbols:
-                # List all symbols that are in the similarity group.
-                self.current_symbol_keys = list(self.similar_symbols[search_text])
-            else:
-                # List all symbols that are in similarity groups, grouped
-                # by being in a similarity group.
-                self.current_symbol_keys = []
-                for key in self.similar_symbols:
-                    if key in self.current_symbol_keys:
-                        continue
-                    if not search_text or search_text.lower() in key.lower():
-                        self.current_symbol_keys.append(key)
-                        self.current_symbol_keys.extend(list(self.similar_symbols[key]))
-                        self.current_symbol_keys.append(None)
-        elif search_mode == SearchMode.UNIQUE:
-            # Exclude all symbols that are in similarity groups.
+        elif search_mode == SearchMode.PACKAGE:
             self.current_symbol_keys = [
                 key
-                for key in self.symbols
-                if search_text.lower() in key.lower() and key not in self.similar_symbols
+                for key in search_pool
+                if search_text.lower() in self.symbol_data[key].package.lower()
             ]
-        elif search_mode == SearchMode.SYMMETRIC:
-            self.current_symbol_keys = []
-            for key in self.symbols:
-                if key in self.current_symbol_keys:
-                    continue
-                if search_text and search_text.lower() not in key.lower():
-                    continue
-                if key not in self.leaders:
-                    continue
-                if key in self.other_symmetries:
-                    if not any(
-                        other_symmetric_symbol in self.leaders
-                        for other_symmetric_symbol, _ in self.other_symmetries[key]
-                    ):
-                        continue
-                    self.current_symbol_keys.append(key)
-                    for other_symmetry, _ in self.other_symmetries[key]:
-                        if other_symmetry not in self.current_symbol_keys:
-                            self.current_symbol_keys.append(other_symmetry)
-                    self.current_symbol_keys.append(None)
-                elif key in self.self_symmetries:
-                    self.current_symbol_keys.append(key)
-                    self.current_symbol_keys.append(None)
-        elif search_mode == SearchMode.ASYMMETRIC:
-            self.current_symbol_keys = []
-            for key in self.symbols:
-                if key in self.other_symmetries or key in self.self_symmetries:
-                    continue
-                if search_text and search_text.lower() not in key.lower():
-                    continue
-                if any(
-                    similar_key in self.self_symmetries or similar_key in self.other_symmetries
-                    for similar_key in self.similar_symbols.get(key, ())
-                ):
-                    continue
-                self.current_symbol_keys.append(key)
         else:
             self.comboBox_search_mode.setCurrentIndex(0)
             raise ValueError(f"Invalid search mode: {search_mode}")
@@ -217,7 +154,7 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
                 # Adjust width value based on how wide your items are.
                 self.listWidget.addItem(spacer_item)
                 continue
-            label = self.symbols[key].command
+            label = self.symbol_data[key].command
             pixmap = self.get_symbol_pixmap(key)
 
             item = Qw.QListWidgetItem(pixmap, label)
@@ -230,7 +167,7 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
             symbol_key = self.last_show_symbol
         else:
             self.last_show_symbol = symbol_key
-        symbol = self.symbols[symbol_key]
+        symbol = self.symbol_data[symbol_key]
         self.label_id.setText(symbol.key)
         self.label_command.setText(symbol.command)
         self.label_mode.setText(symbol.mode_str())
@@ -240,17 +177,19 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self.label_fontenc.setVisible(not symbol.fontenc_is_default())
         self.label_fontenc_label.setVisible(not symbol.fontenc_is_default())
         self.label_fontenc.setText(symbol.fontenc)
-        self.label_self_symmetry.setText("Yes" if symbol_key in self.self_symmetries else "No")
+        self.label_self_symmetry.setText(
+            "Yes" if self.symbol_data.has_self_symmetry(symbol_key) else "No"
+        )
 
-        if symbol_key in self.other_symmetries:
+        if self.symbol_data.has_other_symmetry(symbol_key):
             self.label_other_symmetry.setText(
-                ", ".join(other_symb for other_symb, _ in self.other_symmetries[symbol_key])
+                ", ".join(self.symbol_data.get_symmetry_group(symbol_key))
             )
         else:
             self.label_other_symmetry.setText("")
 
-        if symbol_key in self.similar_symbols:
-            self.label_similar.setText(", ".join(self.similar_symbols[symbol_key]))
+        if len(self.symbol_data.get_similarity_group(symbol_key)) > 1:
+            self.label_similar.setText(", ".join(self.symbol_data.get_similarity_group(symbol_key)))
         else:
             self.label_similar.setText("")
 
@@ -263,7 +202,7 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         if symbol_key in self.pixmap_cache:
             return self.pixmap_cache[symbol_key]
         hex_color = self.palette().color(Qg.QPalette.Text).name()
-        svg_xml = ut.load_symbol_svg(self.symbols[symbol_key], hex_color)
+        svg_xml = ut.load_symbol_svg(self.symbol_data[symbol_key], hex_color)
         svg_renderer = Qs.QSvgRenderer()
         svg_renderer.load(svg_xml)
         svg_renderer.setAspectRatioMode(Qt.KeepAspectRatio)

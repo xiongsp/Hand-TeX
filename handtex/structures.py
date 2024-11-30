@@ -61,69 +61,99 @@ class SymbolDrawing:
         }
 
 
-class Transformation(StrEnum):
-    identity = auto()
-    rot22_5 = auto()
-    rot45 = auto()
-    rot90 = auto()
-    rot135 = auto()
-    rot180 = auto()
-    rot225 = auto()
-    rot270 = auto()
-    rot315 = auto()
-    mir0 = auto()
-    mir45 = auto()
-    mir90 = auto()
-    mir135 = auto()
+from typing import overload, Union
+
+
+class Transformation:
+    @overload
+    def __init__(self, angle: str): ...
+
+    @overload
+    def __init__(self, angle: float = 0.0, is_rotation: bool = True): ...
+
+    def __init__(self, angle: float | str = 0.0, is_rotation: bool = True):
+        if isinstance(angle, str):
+            value = angle
+            if value == "identity":
+                self.angle = 0.0
+                self.is_rotation = True
+            elif value.startswith("rot"):
+                self.angle = float(value[3:].replace("_", ".")) % 360
+                self.is_rotation = True
+            elif value.startswith("mir"):
+                self.angle = float(value[3:].replace("_", ".")) % 180
+                self.is_rotation = False
+            else:
+                raise ValueError(f"Invalid transformation string: {value}")
+        else:
+            self.angle = angle % 360 if is_rotation else angle % 180
+            self.is_rotation = is_rotation
 
     def __str__(self):
-        return self.name
+        if self.is_rotation:
+            if self.angle == 0:
+                return "identity"
+            return f"rot{self.angle}"
+        return f"mir{self.angle}"
 
-    def is_identity(self):
-        return self.name == "identity"
+    def __repr__(self):
+        return f"<{self}>"
 
-    def is_rotation(self):
-        return self.name.startswith("rot")
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Transformation):
+            return NotImplemented
+        return self.angle == other.angle and self.is_rotation == other.is_rotation
 
-    def is_mirroring(self):
-        return self.name.startswith("mir")
+    def __hash__(self) -> int:
+        return hash((self.angle, self.is_rotation))
 
     @property
-    def angle(self):
-        return int(self.name[3:])
+    def is_identity(self):
+        return self.is_rotation and self.angle == 0
 
     def invert(self) -> "Transformation":
-        if self.is_rotation():
-            return Transformation(f"rot{360 - self.angle}")
+        if self.is_rotation:
+            return Transformation(angle=(360 - self.angle) % 360, is_rotation=True)
         else:
             return self
 
-    # Type if python typing didn't suck:
-    # def merge(self, other: "Transformation") -> "Transformation" | list["Transformation"]:
-    def merge(self, other):
-        if self.is_identity():
+    def merge(self, other: "Transformation"):
+        if self.is_identity:
             return other
-        if other.is_identity():
+        if other.is_identity:
             return self
-        if self.is_rotation() and other.is_rotation():
-            if (self.angle + other.angle) % 360 == 0:
-                return Transformation.identity
-            return Transformation(f"rot{(self.angle + other.angle) % 360}")
-        if self.is_mirroring() and other.is_mirroring():
+        if self.is_rotation and other.is_rotation:
+            combined_angle = (self.angle + other.angle) % 360
+            if combined_angle == 0:
+                return Transformation(angle=0.0, is_rotation=True)
+            return Transformation(angle=combined_angle, is_rotation=True)
+        if not self.is_rotation and not other.is_rotation:
             if self.angle == other.angle:
-                return Transformation.identity
+                return Transformation(angle=0.0, is_rotation=True)  # Identity
             return [self, other]
         return [self, other]
 
-    def can_merge(self, other):
-        if self.is_identity() or other.is_identity():
+    def can_merge(self, other: "Transformation") -> bool:
+        if self.is_identity or other.is_identity:
             return True
-        if self.is_rotation() and other.is_rotation():
+        if self.is_rotation and other.is_rotation:
             return True
-        if self.is_mirroring() and other.is_mirroring():
-            if self.angle == other.angle:
-                return True
+        if not self.is_rotation and not other.is_rotation:
+            return self.angle == other.angle
         return False
+
+    # Enum-like class attributes for easy access
+    @classmethod
+    def identity(cls):
+        return cls(angle=0.0, is_rotation=True)
+
+    @classmethod
+    def rot(cls, angle: float):
+        return cls(angle=angle, is_rotation=True)
+
+    @classmethod
+    def mir(cls, angle: float):
+        return cls(angle=angle, is_rotation=False)
 
 
 def simplify_transformations(transforms: tuple[Transformation, ...]) -> tuple[Transformation, ...]:
@@ -132,9 +162,11 @@ def simplify_transformations(transforms: tuple[Transformation, ...]) -> tuple[Tr
     Identity transformations are removed.
     """
     match transforms:
-        case () | (Transformation.identity,):
+        case ():
             return ()
         case (t,) if isinstance(t, Transformation):
+            if t.is_identity:
+                return ()
             return (t,)
 
     simplified_transform = []
@@ -146,6 +178,6 @@ def simplify_transformations(transforms: tuple[Transformation, ...]) -> tuple[Tr
                 continue
         simplified_transform.append(t)
     # If we just ended up with identity, remove it.
-    if simplified_transform != [Transformation.identity]:
+    if simplified_transform != [Transformation.identity()]:
         return tuple(simplified_transform)
     return ()

@@ -158,7 +158,7 @@ class SymbolData:
             paths.append((symbol_key, ()))
         # We still want to retain the possibility of no self-symmetry being applied, so we
         # add the identity transformation to the tuple of options.
-        self_symmetries = ((st.Transformation.identity, *self_symmetries),)
+        self_symmetries = ((st.Transformation.identity(), *self_symmetries),)
 
         for source, dest, data in self.graph.in_edges(symbol_key, data=True):
             if source != dest:
@@ -584,6 +584,6 @@ def get_leader(symbol_key: str, graph: nx.DiGraph) -> tuple[str, bool]:
     :return: A tuple of the leader symbol key and True if the symbol is a leader.
     """
     for _, target, data in graph.edges(symbol_key, data=True):
-        if data["transformations"] == ((st.Transformation.identity,),):
+        if data["transformations"] == ((st.Transformation.identity(),),):
             return target, False
     return symbol_key, True

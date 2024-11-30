@@ -204,7 +204,7 @@ class StrokeDataset(Dataset):
         # We may have multiple options here.
         trans_mats = []
         for transformation in required_transforms:
-            if transformation.is_rotation():
+            if transformation.is_rotation:
                 trans_mats.append(rotation_matrix(transformation.angle))
             else:
                 trans_mats.append(reflection_matrix(transformation.angle))
@@ -526,7 +526,7 @@ def load_decoder(path: Path) -> dict[int, str]:
     return decoder
 
 
-def recalculate_encodings():
+def save_encoder(label_encoder: LabelEncoder, leader_keys: list[str]):
     """
     Encodings are the integer labels assigned to each symbol.
     These are required for the model to classify the symbols,
@@ -535,13 +535,6 @@ def recalculate_encodings():
     These are dumped to a text file, where each line is a symbol.
     The line number-1 implies the encoding value (since it's 0-indexed).
     """
-    # Classify only leaders.
-    symbol_data = sr.SymbolData()
-    leader_keys = symbol_data.leaders
-
-    label_encoder = LabelEncoder()
-    label_encoder.fit(leader_keys)
-
     encoding_path = ut.get_encodings_path()
     dump_encoder(label_encoder, leader_keys, encoding_path)
 

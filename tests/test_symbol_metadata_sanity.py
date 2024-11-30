@@ -190,27 +190,27 @@ def test_graph_transitivity() -> None:
     symbol_keys = ["leftarrow", "rightarrow", "uparrow", "downarrow", "box", "circle"]
     similarity_groups = []
     self_symmetries = {
-        "leftarrow": [st.Transformation.mir0],
-        "rightarrow": [st.Transformation.mir0],
-        "uparrow": [st.Transformation.mir90],
-        "downarrow": [st.Transformation.mir90],
+        "leftarrow": [st.Transformation.mir(0)],
+        "rightarrow": [st.Transformation.mir(0)],
+        "uparrow": [st.Transformation.mir(90)],
+        "downarrow": [st.Transformation.mir(90)],
         "box": [
-            st.Transformation.rot90,
-            st.Transformation.rot180,
-            st.Transformation.rot270,
-            st.Transformation.mir0,
+            st.Transformation.rot(90),
+            st.Transformation.rot(180),
+            st.Transformation.rot(270),
+            st.Transformation.mir(0),
         ],
-        "circle": [st.Transformation.mir0, st.Transformation.mir90],
+        "circle": [st.Transformation.mir(0), st.Transformation.mir(90)],
     }
     other_symmetries = {
         "leftarrow": [
-            ("rightarrow", [st.Transformation.mir0, st.Transformation.rot180]),
-            ("uparrow", [st.Transformation.mir135, st.Transformation.rot270]),
-            ("downarrow", [st.Transformation.mir45, st.Transformation.rot90]),
+            ("rightarrow", [st.Transformation.mir(0), st.Transformation.rot(180)]),
+            ("uparrow", [st.Transformation.mir(135), st.Transformation.rot(270)]),
+            ("downarrow", [st.Transformation.mir(45), st.Transformation.rot(90)]),
         ],
-        "rightarrow": [("leftarrow", [st.Transformation.mir0, st.Transformation.rot180])],
-        "uparrow": [("leftarrow", [st.Transformation.mir135, st.Transformation.rot90])],
-        "downarrow": [("leftarrow", [st.Transformation.mir45, st.Transformation.rot270])],
+        "rightarrow": [("leftarrow", [st.Transformation.mir(0), st.Transformation.rot(180)])],
+        "uparrow": [("leftarrow", [st.Transformation.mir(135), st.Transformation.rot(90)])],
+        "downarrow": [("leftarrow", [st.Transformation.mir(45), st.Transformation.rot(270)])],
     }
 
     graph = sr.build_graph(symbol_keys, similarity_groups, self_symmetries, other_symmetries)
@@ -232,34 +232,34 @@ def test_graph_transitivity() -> None:
     assert len(graph.edges) == 18
 
     # raw graph.
-    # {('leftarrow', 'leftarrow'): ((<Transformation.mir0: 'mir0'>,),), ('leftarrow', 'rightarrow'): ((<Transformation.mir0: 'mir0'>, <Transformation.rot180: 'rot180'>),), ('leftarrow', 'uparrow'): ((<Transformation.mir135: 'mir135'>, <Transformation.rot270: 'rot270'>),), ('leftarrow', 'downarrow'): ((<Transformation.mir45: 'mir45'>, <Transformation.rot90: 'rot90'>),), ('rightarrow', 'rightarrow'): ((<Transformation.mir0: 'mir0'>,),), ('uparrow', 'uparrow'): ((<Transformation.mir90: 'mir90'>,),), ('downarrow', 'downarrow'): ((<Transformation.mir90: 'mir90'>,),), ('box', 'box'): ((<Transformation.rot90: 'rot90'>, <Transformation.rot180: 'rot180'>, <Transformation.rot270: 'rot270'>, <Transformation.mir0: 'mir0'>),), ('circle', 'circle'): ((<Transformation.mir0: 'mir0'>, <Transformation.mir90: 'mir90'>),)}
+    # {('leftarrow', 'leftarrow'): ((<Transformation.mir(0): 'mir0'>,),), ('leftarrow', 'rightarrow'): ((<Transformation.mir(0): 'mir0'>, <Transformation.rot(180): 'rot180'>),), ('leftarrow', 'uparrow'): ((<Transformation.mir(135): 'mir135'>, <Transformation.rot(270): 'rot270'>),), ('leftarrow', 'downarrow'): ((<Transformation.mir(45): 'mir45'>, <Transformation.rot(90): 'rot90'>),), ('rightarrow', 'rightarrow'): ((<Transformation.mir(0): 'mir0'>,),), ('uparrow', 'uparrow'): ((<Transformation.mir(90): 'mir90'>,),), ('downarrow', 'downarrow'): ((<Transformation.mir(90): 'mir90'>,),), ('box', 'box'): ((<Transformation.rot(90): 'rot90'>, <Transformation.rot(180): 'rot180'>, <Transformation.rot(270): 'rot270'>, <Transformation.mir(0): 'mir0'>),), ('circle', 'circle'): ((<Transformation.mir(0): 'mir0'>, <Transformation.mir(90): 'mir90'>),)}
     #
     # Transitive graph.
-    # {('leftarrow', 'leftarrow'): ((< Transformation.mir0: 'mir0' >,),),
-    #  ('leftarrow', 'rightarrow'): ((< Transformation.mir0: 'mir0' >, < Transformation.rot180: 'rot180' >),),
-    #  ('leftarrow', 'uparrow'): ((< Transformation.mir135: 'mir135' >, < Transformation.rot270: 'rot270' >),),
-    #  ('leftarrow', 'downarrow'): ((< Transformation.mir45: 'mir45' >, < Transformation.rot90: 'rot90' >),),
-    #  ('rightarrow', 'rightarrow'): ((< Transformation.mir0: 'mir0' >,),),
-    #  ('rightarrow', 'leftarrow'): ((< Transformation.mir0: 'mir0' >, < Transformation.rot180: 'rot180' >),),
-    #  ('rightarrow', 'uparrow'): ((< Transformation.mir0: 'mir0' >, < Transformation.rot180: 'rot180' >),
-    #                              (< Transformation.mir135: 'mir135' >, < Transformation.rot270: 'rot270' >)),
-    #  ('rightarrow', 'downarrow'): ((< Transformation.mir0: 'mir0' >, < Transformation.rot180: 'rot180' >),
-    #                                (< Transformation.mir45: 'mir45' >, < Transformation.rot90: 'rot90' >)),
-    #  ('uparrow', 'uparrow'): ((< Transformation.mir90: 'mir90' >,),),
-    #  ('uparrow', 'leftarrow'): ((< Transformation.mir135: 'mir135' >, < Transformation.rot90: 'rot90' >),),
-    #  ('uparrow', 'rightarrow'): ((< Transformation.mir135: 'mir135' >, < Transformation.rot90: 'rot90' >),
-    #                              (< Transformation.mir0: 'mir0' >, < Transformation.rot180: 'rot180' >)),
-    #  ('uparrow', 'downarrow'): ((< Transformation.mir135: 'mir135' >, < Transformation.rot90: 'rot90' >),
-    #                             (< Transformation.mir45: 'mir45' >, < Transformation.rot90: 'rot90' >)),
-    #  ('downarrow', 'downarrow'): ((< Transformation.mir90: 'mir90' >,),),
-    #  ('downarrow', 'leftarrow'): ((< Transformation.mir45: 'mir45' >, < Transformation.rot270: 'rot270' >),),
-    #  ('downarrow', 'rightarrow'): ((< Transformation.mir45: 'mir45' >, < Transformation.rot270: 'rot270' >),
-    #                                (< Transformation.mir0: 'mir0' >, < Transformation.rot180: 'rot180' >)),
-    #  ('downarrow', 'uparrow'): ((< Transformation.mir45: 'mir45' >, < Transformation.rot270: 'rot270' >),
-    #                             (< Transformation.mir135: 'mir135' >, < Transformation.rot270: 'rot270' >)),
+    # {('leftarrow', 'leftarrow'): ((< Transformation.mir(0): 'mir0' >,),),
+    #  ('leftarrow', 'rightarrow'): ((< Transformation.mir(0): 'mir0' >, < Transformation.rot(180): 'rot180' >),),
+    #  ('leftarrow', 'uparrow'): ((< Transformation.mir(135): 'mir135' >, < Transformation.rot(270): 'rot270' >),),
+    #  ('leftarrow', 'downarrow'): ((< Transformation.mir(45): 'mir45' >, < Transformation.rot(90): 'rot90' >),),
+    #  ('rightarrow', 'rightarrow'): ((< Transformation.mir(0): 'mir0' >,),),
+    #  ('rightarrow', 'leftarrow'): ((< Transformation.mir(0): 'mir0' >, < Transformation.rot(180): 'rot180' >),),
+    #  ('rightarrow', 'uparrow'): ((< Transformation.mir(0): 'mir0' >, < Transformation.rot(180): 'rot180' >),
+    #                              (< Transformation.mir(135): 'mir135' >, < Transformation.rot(270): 'rot270' >)),
+    #  ('rightarrow', 'downarrow'): ((< Transformation.mir(0): 'mir0' >, < Transformation.rot(180): 'rot180' >),
+    #                                (< Transformation.mir(45): 'mir45' >, < Transformation.rot(90): 'rot90' >)),
+    #  ('uparrow', 'uparrow'): ((< Transformation.mir(90): 'mir90' >,),),
+    #  ('uparrow', 'leftarrow'): ((< Transformation.mir(135): 'mir135' >, < Transformation.rot(90): 'rot90' >),),
+    #  ('uparrow', 'rightarrow'): ((< Transformation.mir(135): 'mir135' >, < Transformation.rot(90): 'rot90' >),
+    #                              (< Transformation.mir(0): 'mir0' >, < Transformation.rot(180): 'rot180' >)),
+    #  ('uparrow', 'downarrow'): ((< Transformation.mir(135): 'mir135' >, < Transformation.rot(90): 'rot90' >),
+    #                             (< Transformation.mir(45): 'mir45' >, < Transformation.rot(90): 'rot90' >)),
+    #  ('downarrow', 'downarrow'): ((< Transformation.mir(90): 'mir90' >,),),
+    #  ('downarrow', 'leftarrow'): ((< Transformation.mir(45): 'mir45' >, < Transformation.rot(270): 'rot270' >),),
+    #  ('downarrow', 'rightarrow'): ((< Transformation.mir(45): 'mir45' >, < Transformation.rot(270): 'rot270' >),
+    #                                (< Transformation.mir(0): 'mir0' >, < Transformation.rot(180): 'rot180' >)),
+    #  ('downarrow', 'uparrow'): ((< Transformation.mir(45): 'mir45' >, < Transformation.rot(270): 'rot270' >),
+    #                             (< Transformation.mir(135): 'mir135' >, < Transformation.rot(270): 'rot270' >)),
     #  ('box', 'box'): ((
-    #                       < Transformation.rot90: 'rot90' >, < Transformation.rot180: 'rot180' >, < Transformation.rot270: 'rot270' >, < Transformation.mir0: 'mir0' >),),
-    #  ('circle', 'circle'): ((< Transformation.mir0: 'mir0' >, < Transformation.mir90: 'mir90' >),)}
+    #                       < Transformation.rot(90): 'rot90' >, < Transformation.rot(180): 'rot180' >, < Transformation.rot(270): 'rot270' >, < Transformation.mir(0): 'mir0' >),),
+    #  ('circle', 'circle'): ((< Transformation.mir(0): 'mir0' >, < Transformation.mir(90): 'mir90' >),)}
 
 
 def test_graph_creation() -> None:
@@ -350,7 +350,7 @@ def test_graph_creation() -> None:
             colors.append("red")
     # Make the edges with the leader property dashed
     # Max edge: ('latex2e-OT1-_bigcirc', 'latex2e-OT1-_bigcirc', {'transformations': (
-    # (<Transformation.rot45: 'rot45'>, <Transformation.rot90: 'rot90'>, <Transformation.rot135: 'rot135'>, <Transformation.rot180: 'rot180'>, <Transformation.rot225: 'rot225'>, <Transformation.rot270: 'rot270'>, <Transformation.rot315: 'rot315'>, <Transformation.mir0: 'mir0'>, <Transformation.mir45: 'mir45'>, <Transformation.mir90: 'mir90'>, <Transformation.mir135: 'mir135'>)
+    # (<Transformation.rot(45): 'rot45'>, <Transformation.rot(90): 'rot90'>, <Transformation.rot(135): 'rot135'>, <Transformation.rot(180): 'rot180'>, <Transformation.rot(225): 'rot225'>, <Transformation.rot(270): 'rot270'>, <Transformation.rot(315): 'rot315'>, <Transformation.mir(0): 'mir0'>, <Transformation.mir(45): 'mir45'>, <Transformation.mir(90): 'mir90'>, <Transformation.mir(135): 'mir135'>)
     # ,)}), product: 11
 
     edge_styles = []
@@ -371,13 +371,13 @@ def test_simplify_transform() -> None:
     """
     Test the transformation simplification.
     """
-    i = st.Transformation.identity
-    r90 = st.Transformation.rot90
-    r180 = st.Transformation.rot180
-    r270 = st.Transformation.rot270
-    m0 = st.Transformation.mir0
-    m90 = st.Transformation.mir90
-    m135 = st.Transformation.mir135
+    i = st.Transformation.identity()
+    r90 = st.Transformation.rot(90)
+    r180 = st.Transformation.rot(180)
+    r270 = st.Transformation.rot(270)
+    m0 = st.Transformation.mir(0)
+    m90 = st.Transformation.mir(90)
+    m135 = st.Transformation.mir(135)
 
     assert i.merge(i) == i
     assert i.merge(r90) == r90
@@ -405,3 +405,8 @@ def test_symbol_data_class() -> None:
         ancestors = symbol_data.all_symbols_to_symbol(symbol)
         assert len(set(ancestors)) == len(ancestors), f"Symbol {symbol} has duplicate ancestors."
         assert symbol not in ancestors, f"Symbol {symbol} is it's own ancestor."
+        # No transformation list should contain identity.
+        for source, trans in options:
+            assert not any(
+                t.is_identity for t in trans
+            ), f"Symbol {source}->{symbol} contains identity transformation in {trans}"

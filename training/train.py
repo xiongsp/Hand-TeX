@@ -12,7 +12,7 @@ import handtex.symbol_relations as sr
 from training.image_gen import (
     StrokeDataset,
     recalculate_frequencies,
-    recalculate_encodings,
+    save_encoder,
     build_stroke_cache,
 )
 
@@ -100,7 +100,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 num_classes = len(symbol_data.leaders)
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 10
+num_epochs = 15
 
 db_path = "database/handtex.db"
 image_size = 48
@@ -115,7 +115,6 @@ def main():
     label_encoder.fit(symbol_data.leaders)
 
     recalculate_frequencies()
-    recalculate_encodings()
 
     stroke_cache = build_stroke_cache(db_path)
 
@@ -254,6 +253,7 @@ def main():
     # torch.save(model.state_dict(), model_path)
     model_path = ut.get_model_path()
     save_file(model.state_dict(), model_path)
+    save_encoder(label_encoder, symbol_data.leaders)
     print(f"Model saved to {model_path}")
 
     # Final accuracy check on training and test sets

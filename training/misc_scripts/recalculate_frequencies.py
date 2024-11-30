@@ -1,9 +1,8 @@
-from training.image_gen import recalculate_frequencies, recalculate_encodings
+from training.image_gen import recalculate_frequencies
 
 
 def main():
     recalculate_frequencies()
-    recalculate_encodings()
 
 
 if __name__ == "__main__":

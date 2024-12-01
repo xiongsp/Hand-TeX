@@ -17,9 +17,12 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtSvgWidgets import QSvgWidget
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFormLayout,
-    QHBoxLayout, QLabel, QLineEdit, QListView,
-    QListWidget, QListWidgetItem, QSizePolicy, QSpacerItem,
-    QSplitter, QToolButton, QVBoxLayout, QWidget)
+    QFrame, QHBoxLayout, QLabel, QListView,
+    QListWidget, QListWidgetItem, QPushButton, QSizePolicy,
+    QSpacerItem, QSpinBox, QSplitter, QVBoxLayout,
+    QWidget)
+
+from handtex.CustomQ.CRegexLineEdit import RegexLineEdit
 
 class Ui_SymbolList(object):
     def setupUi(self, SymbolList):
@@ -32,23 +35,22 @@ class Ui_SymbolList(object):
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(6, -1, 6, -1)
-        self.comboBox_search_mode = QComboBox(SymbolList)
-        self.comboBox_search_mode.addItem("")
-        self.comboBox_search_mode.addItem("")
-        self.comboBox_search_mode.addItem("")
-        self.comboBox_search_mode.setObjectName(u"comboBox_search_mode")
+        self.comboBox_search_field = QComboBox(SymbolList)
+        self.comboBox_search_field.addItem("")
+        self.comboBox_search_field.addItem("")
+        self.comboBox_search_field.setObjectName(u"comboBox_search_field")
 
-        self.horizontalLayout.addWidget(self.comboBox_search_mode)
+        self.horizontalLayout.addWidget(self.comboBox_search_field)
 
-        self.lineEdit_search = QLineEdit(SymbolList)
+        self.lineEdit_search = RegexLineEdit(SymbolList)
         self.lineEdit_search.setObjectName(u"lineEdit_search")
         self.lineEdit_search.setClearButtonEnabled(True)
 
         self.horizontalLayout.addWidget(self.lineEdit_search)
 
-        self.toolButton_filter = QToolButton(SymbolList)
-        self.toolButton_filter.setObjectName(u"toolButton_filter")
-        self.toolButton_filter.setText(u"Filter")
+        self.pushButton_filter = QPushButton(SymbolList)
+        self.pushButton_filter.setObjectName(u"pushButton_filter")
+        self.pushButton_filter.setText(u"Filters")
         icon = QIcon()
         iconThemeName = u"dialog-filters"
         if QIcon.hasThemeIcon(iconThemeName):
@@ -56,10 +58,31 @@ class Ui_SymbolList(object):
         else:
             icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.toolButton_filter.setIcon(icon)
-        self.toolButton_filter.setToolButtonStyle(Qt.ToolButtonFollowStyle)
+        self.pushButton_filter.setIcon(icon)
+        self.pushButton_filter.setCheckable(True)
 
-        self.horizontalLayout.addWidget(self.toolButton_filter)
+        self.horizontalLayout.addWidget(self.pushButton_filter)
+
+        self.pushButton_clear_filters = QPushButton(SymbolList)
+        self.pushButton_clear_filters.setObjectName(u"pushButton_clear_filters")
+        icon1 = QIcon()
+        iconThemeName = u"edit-clear"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon1 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
+        self.pushButton_clear_filters.setIcon(icon1)
+
+        self.horizontalLayout.addWidget(self.pushButton_clear_filters)
+
+        self.comboBox_sort = QComboBox(SymbolList)
+        self.comboBox_sort.addItem("")
+        self.comboBox_sort.addItem("")
+        self.comboBox_sort.addItem("")
+        self.comboBox_sort.setObjectName(u"comboBox_sort")
+
+        self.horizontalLayout.addWidget(self.comboBox_sort)
 
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -77,9 +100,84 @@ class Ui_SymbolList(object):
         self.horizontalLayout.addWidget(self.label_count)
 
         self.horizontalLayout.setStretch(1, 2)
-        self.horizontalLayout.setStretch(3, 1)
+        self.horizontalLayout.setStretch(5, 1)
 
         self.verticalLayout_3.addLayout(self.horizontalLayout)
+
+        self.widget_filters = QWidget(SymbolList)
+        self.widget_filters.setObjectName(u"widget_filters")
+        self.horizontalLayout_2 = QHBoxLayout(self.widget_filters)
+        self.horizontalLayout_2.setSpacing(6)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalLayout_2.setContentsMargins(6, 12, 6, 12)
+        self.comboBox_case = QComboBox(self.widget_filters)
+        self.comboBox_case.addItem("")
+        self.comboBox_case.addItem("")
+        self.comboBox_case.addItem("")
+        self.comboBox_case.setObjectName(u"comboBox_case")
+
+        self.horizontalLayout_2.addWidget(self.comboBox_case)
+
+        self.comboBox_mode = QComboBox(self.widget_filters)
+        self.comboBox_mode.addItem("")
+        self.comboBox_mode.addItem("")
+        self.comboBox_mode.addItem("")
+        self.comboBox_mode.setObjectName(u"comboBox_mode")
+
+        self.horizontalLayout_2.addWidget(self.comboBox_mode)
+
+        self.pushButton_packages = QPushButton(self.widget_filters)
+        self.pushButton_packages.setObjectName(u"pushButton_packages")
+
+        self.horizontalLayout_2.addWidget(self.pushButton_packages)
+
+        self.pushButton_encodings = QPushButton(self.widget_filters)
+        self.pushButton_encodings.setObjectName(u"pushButton_encodings")
+
+        self.horizontalLayout_2.addWidget(self.pushButton_encodings)
+
+        self.comboBox_symmetry = QComboBox(self.widget_filters)
+        self.comboBox_symmetry.addItem("")
+        self.comboBox_symmetry.addItem("")
+        self.comboBox_symmetry.addItem("")
+        self.comboBox_symmetry.setObjectName(u"comboBox_symmetry")
+
+        self.horizontalLayout_2.addWidget(self.comboBox_symmetry)
+
+        self.line = QFrame(self.widget_filters)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.Shape.VLine)
+        self.line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.horizontalLayout_2.addWidget(self.line)
+
+        self.comboBox_grouping = QComboBox(self.widget_filters)
+        self.comboBox_grouping.addItem("")
+        self.comboBox_grouping.addItem("")
+        self.comboBox_grouping.addItem("")
+        self.comboBox_grouping.addItem("")
+        self.comboBox_grouping.setObjectName(u"comboBox_grouping")
+
+        self.horizontalLayout_2.addWidget(self.comboBox_grouping)
+
+        self.label_4 = QLabel(self.widget_filters)
+        self.label_4.setObjectName(u"label_4")
+
+        self.horizontalLayout_2.addWidget(self.label_4)
+
+        self.spinBox_group_min_size = QSpinBox(self.widget_filters)
+        self.spinBox_group_min_size.setObjectName(u"spinBox_group_min_size")
+        self.spinBox_group_min_size.setMinimum(1)
+        self.spinBox_group_min_size.setMaximum(9999)
+
+        self.horizontalLayout_2.addWidget(self.spinBox_group_min_size)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
+
+
+        self.verticalLayout_3.addWidget(self.widget_filters)
 
         self.splitter = QSplitter(SymbolList)
         self.splitter.setObjectName(u"splitter")
@@ -100,12 +198,12 @@ class Ui_SymbolList(object):
         self.verticalLayout.setSpacing(24)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(6, 0, 0, 0)
-        self.label_id = QLabel(self.verticalLayoutWidget)
-        self.label_id.setObjectName(u"label_id")
-        self.label_id.setText(u"<symbol id>")
-        self.label_id.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.label_command = QLabel(self.verticalLayoutWidget)
+        self.label_command.setObjectName(u"label_command")
+        self.label_command.setText(u"<command>")
+        self.label_command.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-        self.verticalLayout.addWidget(self.label_id)
+        self.verticalLayout.addWidget(self.label_command, 0, Qt.AlignHCenter)
 
         self.widget_symbol_view = QSvgWidget(self.verticalLayoutWidget)
         self.widget_symbol_view.setObjectName(u"widget_symbol_view")
@@ -121,13 +219,6 @@ class Ui_SymbolList(object):
         self.label.setObjectName(u"label")
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label)
-
-        self.label_command = QLabel(self.verticalLayoutWidget)
-        self.label_command.setObjectName(u"label_command")
-        self.label_command.setText(u"<command>")
-        self.label_command.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
-
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.label_command)
 
         self.label_package_label = QLabel(self.verticalLayoutWidget)
         self.label_package_label.setObjectName(u"label_package_label")
@@ -199,6 +290,13 @@ class Ui_SymbolList(object):
 
         self.formLayout.setWidget(6, QFormLayout.FieldRole, self.label_other_symmetry)
 
+        self.label_id = QLabel(self.verticalLayoutWidget)
+        self.label_id.setObjectName(u"label_id")
+        self.label_id.setText(u"<symbol id>")
+        self.label_id.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.label_id)
+
 
         self.verticalLayout.addLayout(self.formLayout)
 
@@ -207,7 +305,7 @@ class Ui_SymbolList(object):
 
         self.verticalLayout_3.addWidget(self.splitter)
 
-        self.verticalLayout_3.setStretch(1, 1)
+        self.verticalLayout_3.setStretch(2, 1)
 
         self.retranslateUi(SymbolList)
 
@@ -216,13 +314,37 @@ class Ui_SymbolList(object):
 
     def retranslateUi(self, SymbolList):
         SymbolList.setWindowTitle(QCoreApplication.translate("SymbolList", u"Symbol List", None))
-        self.comboBox_search_mode.setItemText(0, QCoreApplication.translate("SymbolList", u"Command", None))
-        self.comboBox_search_mode.setItemText(1, QCoreApplication.translate("SymbolList", u"Symbol ID", None))
-        self.comboBox_search_mode.setItemText(2, QCoreApplication.translate("SymbolList", u"Package", None))
+        self.comboBox_search_field.setItemText(0, QCoreApplication.translate("SymbolList", u"Command", None))
+        self.comboBox_search_field.setItemText(1, QCoreApplication.translate("SymbolList", u"Symbol ID", None))
 
         self.lineEdit_search.setPlaceholderText(QCoreApplication.translate("SymbolList", u"Search...", None))
+        self.pushButton_clear_filters.setText(QCoreApplication.translate("SymbolList", u"Clear Filters", None))
+        self.comboBox_sort.setItemText(0, QCoreApplication.translate("SymbolList", u"Sort by Groups", None))
+        self.comboBox_sort.setItemText(1, QCoreApplication.translate("SymbolList", u"Sorted Ascending", None))
+        self.comboBox_sort.setItemText(2, QCoreApplication.translate("SymbolList", u"Sorted Descending", None))
+
         self.label_11.setText(QCoreApplication.translate("SymbolList", u"Found:", None))
-        self.label.setText(QCoreApplication.translate("SymbolList", u"Command:", None))
+        self.comboBox_case.setItemText(0, QCoreApplication.translate("SymbolList", u"Case Insensitive", None))
+        self.comboBox_case.setItemText(1, QCoreApplication.translate("SymbolList", u"Case Sensitive", None))
+        self.comboBox_case.setItemText(2, QCoreApplication.translate("SymbolList", u"Regex", None))
+
+        self.comboBox_mode.setItemText(0, QCoreApplication.translate("SymbolList", u"Math & Textmode", None))
+        self.comboBox_mode.setItemText(1, QCoreApplication.translate("SymbolList", u"Mathmode", None))
+        self.comboBox_mode.setItemText(2, QCoreApplication.translate("SymbolList", u"Textmode", None))
+
+        self.pushButton_packages.setText(QCoreApplication.translate("SymbolList", u"Packages", None))
+        self.pushButton_encodings.setText(QCoreApplication.translate("SymbolList", u"Font Encodings", None))
+        self.comboBox_symmetry.setItemText(0, QCoreApplication.translate("SymbolList", u"Ignore Symmetry", None))
+        self.comboBox_symmetry.setItemText(1, QCoreApplication.translate("SymbolList", u"Symmetric Symbols", None))
+        self.comboBox_symmetry.setItemText(2, QCoreApplication.translate("SymbolList", u"Asymmetric Symbols", None))
+
+        self.comboBox_grouping.setItemText(0, QCoreApplication.translate("SymbolList", u"No Grouping", None))
+        self.comboBox_grouping.setItemText(1, QCoreApplication.translate("SymbolList", u"Group by Package", None))
+        self.comboBox_grouping.setItemText(2, QCoreApplication.translate("SymbolList", u"Group by Similarity", None))
+        self.comboBox_grouping.setItemText(3, QCoreApplication.translate("SymbolList", u"Group by Symmetry", None))
+
+        self.label_4.setText(QCoreApplication.translate("SymbolList", u"Minimimum Group Size:", None))
+        self.label.setText(QCoreApplication.translate("SymbolList", u"Symbol ID:", None))
         self.label_package_label.setText(QCoreApplication.translate("SymbolList", u"Package:", None))
         self.label_3.setText(QCoreApplication.translate("SymbolList", u"Mode:", None))
         self.label_fontenc_label.setText(QCoreApplication.translate("SymbolList", u"Font Encoding:", None))

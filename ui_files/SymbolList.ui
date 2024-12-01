@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Symbol List</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,1">
+  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,1">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -24,7 +24,7 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,2,0,1,0,0">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,2,0,0,0,1,0,0">
      <property name="leftMargin">
       <number>6</number>
      </property>
@@ -32,7 +32,7 @@
       <number>6</number>
      </property>
      <item>
-      <widget class="QComboBox" name="comboBox_search_mode">
+      <widget class="QComboBox" name="comboBox_search_field">
        <item>
         <property name="text">
          <string>Command</string>
@@ -43,15 +43,10 @@
          <string>Symbol ID</string>
         </property>
        </item>
-       <item>
-        <property name="text">
-         <string>Package</string>
-        </property>
-       </item>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_search">
+      <widget class="RegexLineEdit" name="lineEdit_search">
        <property name="placeholderText">
         <string>Search...</string>
        </property>
@@ -61,17 +56,47 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButton_filter">
+      <widget class="QPushButton" name="pushButton_filter">
        <property name="text">
-        <string notr="true">Filter</string>
+        <string notr="true">Filters</string>
        </property>
        <property name="icon">
         <iconset theme="dialog-filters">
          <normaloff>.</normaloff>.</iconset>
        </property>
-       <property name="toolButtonStyle">
-        <enum>Qt::ToolButtonFollowStyle</enum>
+       <property name="checkable">
+        <bool>true</bool>
        </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_clear_filters">
+       <property name="text">
+        <string>Clear Filters</string>
+       </property>
+       <property name="icon">
+        <iconset theme="edit-clear">
+         <normaloff>.</normaloff>.</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_sort">
+       <item>
+        <property name="text">
+         <string>Sort by Groups</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sorted Ascending</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sorted Descending</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item>
@@ -102,6 +127,159 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QWidget" name="widget_filters" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="leftMargin">
+       <number>6</number>
+      </property>
+      <property name="topMargin">
+       <number>12</number>
+      </property>
+      <property name="rightMargin">
+       <number>6</number>
+      </property>
+      <property name="bottomMargin">
+       <number>12</number>
+      </property>
+      <item>
+       <widget class="QComboBox" name="comboBox_case">
+        <item>
+         <property name="text">
+          <string>Case Insensitive</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Case Sensitive</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Regex</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_mode">
+        <item>
+         <property name="text">
+          <string>Math &amp; Textmode</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Mathmode</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Textmode</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_packages">
+        <property name="text">
+         <string>Packages</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_encodings">
+        <property name="text">
+         <string>Font Encodings</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_symmetry">
+        <item>
+         <property name="text">
+          <string>Ignore Symmetry</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Symmetric Symbols</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Asymmetric Symbols</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_grouping">
+        <item>
+         <property name="text">
+          <string>No Grouping</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Group by Package</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Group by Similarity</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Group by Symmetry</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Minimimum Group Size:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinBox_group_min_size">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>9999</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <widget class="QSplitter" name="splitter">
@@ -139,10 +317,10 @@
        <property name="leftMargin">
         <number>6</number>
        </property>
-       <item>
-        <widget class="QLabel" name="label_id">
+       <item alignment="Qt::AlignHCenter">
+        <widget class="QLabel" name="label_command">
          <property name="text">
-          <string notr="true">&lt;symbol id&gt;</string>
+          <string notr="true">&lt;command&gt;</string>
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -165,17 +343,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Command:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="label_command">
-           <property name="text">
-            <string notr="true">&lt;command&gt;</string>
-           </property>
-           <property name="textInteractionFlags">
-            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+            <string>Symbol ID:</string>
            </property>
           </widget>
          </item>
@@ -281,6 +449,16 @@
            </property>
           </widget>
          </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_id">
+           <property name="text">
+            <string notr="true">&lt;symbol id&gt;</string>
+           </property>
+           <property name="textInteractionFlags">
+            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>
@@ -295,6 +473,11 @@
    <extends>QWidget</extends>
    <header>PySide6.QWidgets</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RegexLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>handtex.CustomQ.CRegexLineEdit</header>
   </customwidget>
  </customwidgets>
  <resources/>

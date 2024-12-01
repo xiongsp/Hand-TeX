@@ -1,4 +1,3 @@
-# networkx reimplementation of utils stuff.
 import re
 from itertools import product
 from collections import defaultdict
@@ -9,6 +8,7 @@ from pathlib import Path
 
 import networkx as nx
 from loguru import logger
+from natsort import natsorted
 
 import handtex.data.symbol_metadata
 import handtex.data.symbols
@@ -27,12 +27,14 @@ class SymbolData:
     symbol_keys: list[str]
     to_leader: dict[str, str]
     leaders: list[str]
+    packages: list[str]
+    encodings: list[str]
     graph: nx.DiGraph
     symbols_grouped_by_similarity: list[tuple[str, ...]]
     symbols_with_self_symmetry: list[str]
     symbols_grouped_by_transitive_symmetry: list[tuple[str, ...]]
-    symmetric_symbols: list[str]
     asymmetric_symbols: list[str]
+    symbols_grouped_by_package: list[tuple[str, ...]]
 
     def __init__(self):
         self.symbol_data = load_symbols()
@@ -42,6 +44,10 @@ class SymbolData:
         other_symmetries = load_symbol_metadata_other_symmetry()
         self.to_leader = construct_to_leader_mapping(similarity_groups)
         self.leaders = [key for key in self.symbol_keys if key not in self.to_leader]
+        self.packages = natsorted(list(set(symbol.package for symbol in self.symbol_data.values())))
+        self.encodings = natsorted(
+            list(set(symbol.fontenc for symbol in self.symbol_data.values()))
+        )
         normalized_self_symmetries = normalize_self_symmetry_to_leaders(
             self_symmetries, self.to_leader
         )
@@ -62,9 +68,7 @@ class SymbolData:
             self._compute_symbols_grouped_by_transitive_symmetry()
         )
         self.asymmetric_symbols = self._compute_asymmetric_symbols()
-        self.symmetric_symbols = [
-            key for key in self.symbol_keys if key not in self.asymmetric_symbols
-        ]
+        self.symbols_grouped_by_package = self._compute_symbols_grouped_by_package()
 
     def __getitem__(self, item):
         return self.symbol_data[item]
@@ -81,6 +85,7 @@ class SymbolData:
         """
         Check if a symbol has self-symmetry.
         """
+        symbol_key = self.to_leader.get(symbol_key, symbol_key)
         return self.graph.has_edge(symbol_key, symbol_key)
 
     @cache
@@ -90,6 +95,7 @@ class SymbolData:
         We define this as having an outgoing edge to another symbol
         which has a non-empty transformations attribute.
         """
+        symbol_key = self.to_leader.get(symbol_key, symbol_key)
         for source, dest, data in self.graph.out_edges(symbol_key, data=True):
             if source != dest and data["transformations"]:
                 return True
@@ -122,14 +128,27 @@ class SymbolData:
         """
         Get a list of symbols that have edges with non-empty transformations.
         """
-        empty_transformations = ((),)
         asymmetric_symbols = []
-        for node in self.symbol_keys:
-            for _, _, data in self.graph.edges(node, data=True):
-                if data["transformations"] != empty_transformations:
-                    asymmetric_symbols.append(node)
+        for node in self.leaders:
+            for _, _, data in self.graph.out_edges(node, data=True):
+                if data["transformations"]:
                     break
+            else:
+                asymmetric_symbols.extend(self.get_similarity_group(node))
+
         return asymmetric_symbols
+
+    def _compute_symbols_grouped_by_package(self) -> list[tuple[str, ...]]:
+        """
+        Get a list of symbols grouped by package.
+        """
+        grouped = defaultdict(list)
+        for symbol in self.symbol_data.values():
+            grouped[symbol.package].append(symbol.key)
+        grouping = []
+        for package in sorted(grouped.keys()):
+            grouping.append(tuple(grouped[package]))
+        return grouping
 
     def all_paths_to_symbol(
         self, symbol_key: str
@@ -192,7 +211,7 @@ class SymbolData:
     @cache
     def get_similarity_group(self, symbol_key: str) -> tuple[str, ...]:
         """
-        Finds with similarity group the symbol belongs to.
+        Finds which similarity group the symbol belongs to.
 
         :param symbol_key: The symbol key.
         :return: The similarity group.
@@ -216,6 +235,21 @@ class SymbolData:
                 return group
         # This must never happen.
         raise KeyError(f"Symbol {symbol_key} not found in any symmetry group.")
+
+    def filter(
+        self, math_mode: bool, text_mode: bool, packages: list[str], encodings: list[str]
+    ) -> list[str]:
+        """
+        Filter the symbols based on the given parameters.
+        """
+        return [
+            key
+            for key, symbol in self.symbol_data.items()
+            if symbol.mathmode == math_mode
+            and symbol.textmode == text_mode
+            and symbol.package in packages
+            and symbol.fontenc in encodings
+        ]
 
 
 def load_symbols() -> dict[str, st.Symbol]:

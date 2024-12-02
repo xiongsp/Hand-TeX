@@ -10,6 +10,7 @@ import PySide6.QtSvgWidgets as Qsw
 import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Signal
 from loguru import logger
+from PySide6.QtCore import Slot
 
 import handtex.config as cfg
 import handtex.data_recorder as dr
@@ -20,9 +21,9 @@ import handtex.structures as st
 import handtex.symbol_list as sl
 import handtex.symbol_relations as sr
 import handtex.utils as ut
-import training.image_gen as ig
+import handtex.worker_thread as wt
 import training.inference as inf
-import training.train as trn
+import training.model as mdl
 from handtex import __program__, __version__
 from handtex.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 
@@ -33,7 +34,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     symbol_data: sr.SymbolData | None
 
-    threadpool: Qc.QThreadPool
+    inference_queue: Qc.QThreadPool
 
     hamburger_menu: Qw.QMenu
     theming_menu: Qw.QMenu
@@ -47,8 +48,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     state_saver: ss.StateSaver
 
     # Detection:
-    model: trn.CNN
-    label_decoder: dict[int, str]
+    model: mdl.CNN | None
+    label_decoder: dict[int, str] | None
     current_predictions: list[tuple[str, float]]
     detection_menu_action: Qg.QAction | None
 
@@ -97,7 +98,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.initialize_ui()
 
-        self.threadpool = Qc.QThreadPool.globalInstance()
+        # Set up the thread pool for inference.
+        # We want to limit this to one thread, so it acts as an
+        # asynchronous dispatcher.
+        self.inference_queue = Qc.QThreadPool()
+        self.inference_queue.setMaxThreadCount(1)
 
         self.save_default_palette()
         self.load_config_theme()
@@ -111,9 +116,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.sketchpad.new_drawing.connect(self.detect_symbol)
         self.theme_is_dark_changed.connect(self.show_predictions)
-        self.model, self.label_decoder = inf.load_model_and_decoder(
-            ut.get_model_path(), ut.get_encodings_path()
-        )
+
+        self.model = None
+        self.label_decoder = None
+        self.start_model_loader()
 
         if train:
             self.switch_to_training()
@@ -188,10 +194,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         logger.info("Closing window.")
         self.state_saver.save()
-        if self.threadpool.activeThreadCount():
+        if self.inference_queue.activeThreadCount():
             # Process Qt events so that the message shows up.
             Qc.QCoreApplication.processEvents()
-            self.threadpool.waitForDone()
+            self.inference_queue.waitForDone()
 
         event.accept()
 
@@ -495,21 +501,70 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     # =========================================== Detection ==========================================
 
+    def start_model_loader(self) -> None:
+        worker = wt.Worker(
+            inf.load_model_and_decoder,
+            ut.get_model_path(),
+            ut.get_encodings_path(),
+            no_progress_callback=True,
+        )
+        worker.signals.result.connect(self.model_loader_result)
+        worker.signals.error.connect(self.model_loader_error)
+        self.inference_queue.start(worker)
+
+    def model_loader_result(self, result) -> None:
+        self.model, self.label_decoder = result
+        logger.info("Model loaded. Proceeding to cold-start the model.")
+        self.start_detection([[(0, 0)]], dry_run=True)
+
+    @Slot(wt.WorkerError)
+    def model_loader_error(self, error: wt.WorkerError) -> None:
+
+        gu.show_exception(
+            self,
+            self.tr("Model Loading Failed"),
+            self.tr("Failed to load the model from {mpath} or the encodings from {epath}").format(
+                mpath=ut.get_model_path(), epath=ut.get_encodings_path()
+            ),
+            error,
+        )
+
     def detect_symbol(self) -> None:
         if not self.in_detection_mode():
             return
         if self.model is None:
             logger.error("Model is not loaded yet, skipping prediction.")
             return
-        # Get the sketch, tensorize it, and predict the symbol.
-        start = time.time()
+        # Get the sketch and predict the symbol.
         strokes, _, _, _ = self.sketchpad.get_clean_strokes()
-        logger.debug(f"Gathering strokes took {(time.time() - start) * 1000:.2f}ms")
-        tensorized = ig.tensorize_strokes(strokes, trn.image_size)
-        prediction = inf.predict(tensorized, self.model, self.label_decoder)
-        self.current_predictions = prediction
+        self.start_detection(strokes)
+
+    def start_detection(self, strokes: list[list[tuple[int, int]]], dry_run: bool = False) -> None:
+        """
+        Start the detection process.
+
+        :param strokes: The strokes to detect.
+        :param dry_run: If true, don't show the predictions. This is to prevent a cold-start on GPU.
+        """
+        worker = wt.Worker(
+            inf.predict, strokes, self.model, self.label_decoder, no_progress_callback=True
+        )
+        if not dry_run:
+            worker.signals.result.connect(self.detection_result)
+        worker.signals.error.connect(self.detection_error)
+        self.inference_queue.start(worker)
+
+    def detection_result(self, result: list[tuple[str, float]]) -> None:
+        self.current_predictions = result
         self.show_predictions()
-        logger.debug(f"Prediction update took {(time.time() - start) * 1000:.2f}ms")
+
+    def detection_error(self, error: wt.WorkerError) -> None:
+        gu.show_exception(
+            self,
+            self.tr("Detection Failed"),
+            self.tr("Failed to detect the symbol."),
+            error,
+        )
 
     def show_predictions(
         self,

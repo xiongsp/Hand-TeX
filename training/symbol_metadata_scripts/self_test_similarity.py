@@ -57,8 +57,7 @@ def main():
         for sample in samples:
             key, strokes = sample
             strokes = json.loads(strokes)
-            tensor = ig.tensorize_strokes(strokes, trn.image_size)
-            predictions = inf.predict(tensor, model, label_decoder)
+            predictions = inf.predict(strokes, model, label_decoder)
 
             for symbol, confidence in predictions:
                 if symbol == leader:

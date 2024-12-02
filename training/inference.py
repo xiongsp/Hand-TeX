@@ -6,6 +6,7 @@ import torch.nn.functional as F
 from safetensors.torch import load_file
 
 from training.hyperparameters import image_size
+import training.image_gen as ig
 from training.model import CNN
 
 
@@ -34,17 +35,21 @@ def load_model_and_decoder(model_path: Path, encodings_path: Path):
 
 
 def predict(
-    tensor: torch.Tensor, model: nn.Module, label_decoder: dict[int, str], max_results: int = 20
+    strokes: list[list[tuple[int, int]]],
+    model: nn.Module,
+    label_decoder: dict[int, str],
+    max_results: int = 20,
 ) -> list[tuple[str, float]]:
     """
     Predict the class of a given image using the trained model.
 
-    :param tensor: The input image tensor (should be of shape [1, 1, image_size, image_size]).
+    :param strokes: The strokes of the image to predict.
     :param model: The trained neural network model.
     :param label_decoder: The label encoder used to encode the labels.
     :param max_results: The maximum number of results to return.
     :return: A list of tuples containing the predicted label and confidence score
     """
+    tensor = ig.tensorize_strokes(strokes, image_size)
     model.eval()
     device = "cuda" if torch.cuda.is_available() else "cpu"
     with torch.no_grad():

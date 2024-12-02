@@ -1,18 +1,21 @@
-from PIL import Image
-import PySide6.QtCore as Qc
-import PySide6.QtGui as Qg
-import PySide6.QtWidgets as Qw
-import PySide6.QtSvgWidgets as Qsw
-import handtex.utils as ut
-import matplotlib.pyplot as plt
-from loguru import logger
-from pathlib import Path
 import csv
 import json
+from collections import defaultdict
+from pathlib import Path
+
+import PySide6.QtCore as Qc
+import PySide6.QtGui as Qg
+import PySide6.QtSvgWidgets as Qsw
+import PySide6.QtWidgets as Qw
+import matplotlib.pyplot as plt
+from PIL import Image
+from loguru import logger
+
 import handtex.data.symbol_metadata
 import handtex.symbol_relations as sr
-from handtex.utils import resource_path
+import handtex.utils as ut
 import training.image_gen as ig
+from handtex.utils import resource_path
 
 
 def main():
@@ -27,14 +30,14 @@ def main():
 
     with open(frequencies_path, "r") as file:
         reader = csv.reader(file)
-        frequencies = {row[0]: int(row[1]) for row in reader}
+        frequencies = defaultdict(int, {row[0]: int(row[1]) for row in reader})
 
     total_old = sum(frequencies.values())
     logger.info(f"Loaded {total_old} training set drawings for frequency analysis.")
 
     # Load new data, gather frequencies from it.
     # All sessions are stored as independant json files.
-    new_frequencies = {key: 0 for key in symbol_data.all_keys}
+    new_frequencies = defaultdict(int, {key: 0 for key in symbol_data.all_keys})
     new_drawings: dict[str, list[tuple[str, list[list[tuple[int, int]]]]]] = {}
     for new_file in new_data_dir.glob("*.json"):
         with open(new_file, "r") as file:
@@ -50,6 +53,14 @@ def main():
 
     total_new = sum(new_frequencies.values())
     logger.info(f"Loaded {total_new} previously recorded drawings for frequency analysis.")
+
+    # Ensure both dicts have the same keys.
+    for key in frequencies.keys():
+        if key not in new_frequencies:
+            new_frequencies[key] = 0
+    for key in new_frequencies.keys():
+        if key not in frequencies:
+            frequencies[key] = 0
 
     # Visualize the new frequency by stacking it on top of a histogram of the old frequency.
     # Don't add labels.
@@ -105,6 +116,9 @@ def main():
 
         # Load the symbol svg.
         # Display it next to the number of new drawings, and the symbol key.
+        if symbol_key not in symbol_data:
+            # Use the varnothing symbol as a placeholder.
+            symbol_key = "amssymb-OT1-_varnothing"
         symbol = symbol_data[symbol_key]
         svg_widget = Qsw.QSvgWidget()
         color = app.palette().color(Qg.QPalette.Text).name()

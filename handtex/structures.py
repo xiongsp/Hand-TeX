@@ -1,5 +1,5 @@
 import json
-from enum import StrEnum, auto
+
 from attrs import frozen
 
 
@@ -44,6 +44,18 @@ class Symbol:
             return "Textmode"
         else:
             return "Math & Textmode"
+
+    @classmethod
+    def dummy(cls, key: str) -> "Symbol":
+        return cls(
+            command=key,
+            package="?",
+            fontenc="?",
+            mathmode=False,
+            textmode=False,
+            key=key,
+            filename="",
+        )
 
 
 @frozen

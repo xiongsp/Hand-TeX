@@ -1,31 +1,30 @@
 import platform
 import sys
+import time
 from functools import partial
 from pathlib import Path
-import time
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
-import PySide6.QtWidgets as Qw
 import PySide6.QtSvgWidgets as Qsw
+import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Signal
 from loguru import logger
 
 import handtex.config as cfg
-import handtex.gui_utils as gu
-import handtex.structures as st
-import handtex.issue_reporter_driver as ird
-import handtex.utils as ut
-import handtex.symbol_relations as sr
-import handtex.state_saver as ss
 import handtex.data_recorder as dr
+import handtex.gui_utils as gu
+import handtex.issue_reporter_driver as ird
+import handtex.state_saver as ss
+import handtex.structures as st
 import handtex.symbol_list as sl
+import handtex.symbol_relations as sr
+import handtex.utils as ut
+import training.image_gen as ig
+import training.inference as inf
+import training.train as trn
 from handtex import __program__, __version__
 from handtex.ui_generated_files.ui_Mainwindow import Ui_MainWindow
-
-import training.image_gen as ig
-import training.train as trn
-import training.inference as inf
 
 
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
@@ -623,12 +622,15 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             if requested_symbol in self.symbol_data:
                 self.set_training_symbol(requested_symbol)
             else:
-                gu.show_warning(
+                response = gu.show_question(
                     self,
-                    "Invalid Symbol",
-                    f"The symbol '{requested_symbol}' is not a valid symbol."
-                    f"\n\nExample of a valid symbol key: {self.symbol_data.leaders[0]}",
+                    "Unknown Symbol",
+                    f"The symbol '{requested_symbol}' is not a recognized symbol."
+                    f"\n\nExample of a valid symbol key: {self.symbol_data.leaders[0]}"
+                    "\n\nDo you want to train this symbol anyway?",
                 )
+                if response == Qw.QMessageBox.Yes:
+                    self.set_training_symbol(requested_symbol)
 
         else:
             bias = (
@@ -652,7 +654,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.update_submission_count()
 
     def set_training_symbol(self, new_symbol_key: str) -> None:
-        self.current_symbol = self.symbol_data[new_symbol_key]
+        if new_symbol_key in self.symbol_data:
+            self.current_symbol = self.symbol_data[new_symbol_key]
+        else:
+            self.current_symbol = st.Symbol.dummy(new_symbol_key)
         self.load_training_symbol_data()
         self.sketchpad.clear()
 
@@ -667,8 +672,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             str(self.data_recorder.get_symbol_sample_count(self.current_symbol.key))
         )
 
+        # Check if the symbol filename is missing, and if so, insert the varnothing symbol.
+        # This can happen particularly when a new symbol is being trained that doesn't yet exist.
+        if not self.current_symbol.filename:
+            symbol_nothing = self.symbol_data["amssymb-OT1-_varnothing"]
+            symbol_obj = symbol_nothing
+        else:
+            symbol_obj = self.current_symbol
+
         hex_color = self.palette().color(Qg.QPalette.Text).name()
-        self.widget_training_symbol.load(ut.load_symbol_svg(self.current_symbol, hex_color))
+        self.widget_training_symbol.load(ut.load_symbol_svg(symbol_obj, hex_color))
         self.widget_training_symbol.renderer().setAspectRatioMode(Qc.Qt.KeepAspectRatio)
         self.widget_training_symbol.setFixedSize(200, 200)
 

@@ -1,19 +1,19 @@
-import os
-import json
 import csv
-from pathlib import Path
-import random
 import datetime
+import json
+import random
+from collections import defaultdict
 from importlib import resources
+from pathlib import Path
 
-from loguru import logger
 from PySide6.QtCore import Signal
+from loguru import logger
 
-import handtex.structures as st
-import handtex.utils as ut
 import handtex.config as cfg
-import handtex.symbol_relations as sr
 import handtex.data.symbol_metadata
+import handtex.structures as st
+import handtex.symbol_relations as sr
+import handtex.utils as ut
 
 
 class DataRecorder:
@@ -22,7 +22,7 @@ class DataRecorder:
     config: cfg.Config
     save_path: Path
     current_data: list[st.SymbolDrawing]
-    frequencies: dict[str, int]
+    frequencies: defaultdict[str, int]
 
     last_100_symbols: list[str]
 
@@ -37,7 +37,7 @@ class DataRecorder:
     ):
         self.current_data = []
         self.symbol_data = symbol_data
-        self.frequencies = {}
+        self.frequencies = defaultdict(int)
         self.has_submissions = has_submissions
 
         # Don't randomly select one of the last 20 symbols.
@@ -62,7 +62,7 @@ class DataRecorder:
 
         with open(augmented_frequencies_path, "r") as file:
             reader = csv.reader(file)
-            self.frequencies = {row[0]: int(row[1]) for row in reader}
+            self.frequencies = defaultdict(int, {row[0]: int(row[1]) for row in reader})
 
         total_old = sum(self.frequencies.values())
         logger.info(f"Loaded {total_old} training set drawings for frequency analysis.")

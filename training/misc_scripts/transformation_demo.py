@@ -9,6 +9,7 @@ import numpy as np
 from PIL import Image
 
 import handtex.utils as ut
+import handtex.symbol_relations as sr
 import training.image_gen as ig
 
 
@@ -16,7 +17,7 @@ def main():
     """
     Load the new data and show each symbol alongside the new drawings.
     """
-    symbols = ut.load_symbols()
+    symbols = sr.load_symbols()
     test_set = (
         "latex2e-OT1-_rightarrow",
         "latex2e-OT1-_int",

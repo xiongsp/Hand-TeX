@@ -1,23 +1,22 @@
-import random
-from functools import cache
-import numpy as np
 import csv
-from pathlib import Path
-import cv2
-from math import ceil
-from importlib import resources
-import torch
-from torch.utils.data import Dataset
-import torchvision.transforms as transforms
-import sqlite3
 import json
-from sklearn.preprocessing import LabelEncoder
+import random
+import sqlite3
+from functools import cache
+from importlib import resources
+from math import ceil
 
-import handtex.utils as ut
-import handtex.symbol_relations as sr
-import handtex.structures as st
-import handtex.data.model
+import cv2
+import numpy as np
+import torch
+import torchvision.transforms as transforms
+from sklearn.preprocessing import LabelEncoder
+from torch.utils.data import Dataset
+
 import handtex.data.symbol_metadata
+import handtex.structures as st
+import handtex.symbol_relations as sr
+import handtex.utils as ut
 import training.database
 
 
@@ -30,10 +29,10 @@ def build_stroke_cache(db_path: str) -> dict[str, list[list[tuple[int, int]]]]:
 
     cursor.execute("SELECT id, strokes FROM samples")
     rows = cursor.fetchall()
-    cache = {key: json.loads(strokes) for key, strokes in rows}
+    stroke_cache = {key: json.loads(strokes) for key, strokes in rows}
 
     conn.close()
-    return cache
+    return stroke_cache
 
 
 def augmentation_amount(
@@ -53,7 +52,6 @@ def augmentation_amount(
     return int(factor * real_data_count)
 
 
-# Propagate self symmetries to similar symbols.
 class StrokeDataset(Dataset):
     def __init__(
         self,
@@ -504,41 +502,6 @@ def tensorize_strokes(stroke_data: list[list[tuple[int, int]]], image_size: int)
     return img_tensor
 
 
-def dump_encoder(label_encoder: LabelEncoder, labels: list[str], path: Path | str):
-    encoded_labels = label_encoder.transform(labels)
-    # Create a decoder dictionary to map encoded labels back to symbols
-    decoder: list[tuple[int, str]] = [
-        (encoded, symbol) for encoded, symbol in zip(encoded_labels, labels)
-    ]
-    # Sort the decoder by encoded label for easy lookup, ascending.
-    decoder.sort(key=lambda x: x[0])
-    # Assert the encodings are consecutive integers starting from 0
-    assert all(encoded == i for i, (encoded, _) in enumerate(decoder)), "Invalid label encodings"
-    # Dump the sorted symbols to a plain text file.
-    encoding_str = "\n".join((symbol for _, symbol in decoder))
-    with open(path, "w") as file:
-        file.write(encoding_str)
-
-
-def load_decoder(path: Path) -> dict[int, str]:
-    with open(path, "r") as file:
-        decoder = {i: symbol.strip() for i, symbol in enumerate(file)}
-    return decoder
-
-
-def save_encoder(label_encoder: LabelEncoder, leader_keys: list[str]):
-    """
-    Encodings are the integer labels assigned to each symbol.
-    These are required for the model to classify the symbols,
-    since it only operates on integers.
-    Each symbol is assigned a sequential integer encoding.
-    These are dumped to a text file, where each line is a symbol.
-    The line number-1 implies the encoding value (since it's 0-indexed).
-    """
-    encoding_path = ut.get_encodings_path()
-    dump_encoder(label_encoder, leader_keys, encoding_path)
-
-
 def recalculate_frequencies():
     symbol_data = sr.SymbolData()
     # Limit the number of classes to classify.
@@ -607,7 +570,7 @@ def recalculate_frequencies():
     print(
         f"Mean augmented frequency of symbols: {augmented_mean_freq:.2f}, median: {augmented_median_freq}, std dev: {augmented_std_dev_freq:.2f}"
     )
-    # return
+    return
     # Plot both together in a bar chart.
     # We want to display the frequency as heights without any labels.
     # Just display the sorted list of heights overlayed on each other.

@@ -1,113 +1,54 @@
 import matplotlib.pyplot as plt
 import torch
-import torch.nn.functional as F
 from safetensors.torch import save_file
 from sklearn.preprocessing import LabelEncoder
 from torch import nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-import handtex.utils as ut
 import handtex.symbol_relations as sr
+import handtex.utils as ut
+from training.hyperparameters import (
+    db_path,
+    batch_size,
+    num_epochs,
+    image_size,
+    learning_rate,
+)
 from training.image_gen import (
     StrokeDataset,
     recalculate_frequencies,
-    save_encoder,
     build_stroke_cache,
 )
+from training.model import CNN
 
 
-class CNN(nn.Module):
-    def __init__(self, num_classes: int, image_size: int) -> None:
-        """
-        Define the layers of the convolutional neural network.
-
-        :param num_classes: The number of classes we want to predict, in our case 10 (digits 0 to 9).
-        :param image_size: The size of the input image.
-        """
-        super(CNN, self).__init__()
-
-        self.image_size = image_size
-
-        # Image size is cut in half with each pooling.
-        # This makes the fully connected layer have x * image_size/4 * image_size/4 input features.
-        self.conv1 = nn.Conv2d(1, 16, kernel_size=3, padding=1)
-        self.bn1 = nn.BatchNorm2d(16)
-        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
-        self.bn2 = nn.BatchNorm2d(32)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.conv3 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
-        self.bn3 = nn.BatchNorm2d(64)
-        self.pool2 = nn.MaxPool2d(2, 2)
-        self.fc1 = nn.Linear(64 * image_size // 4 * image_size // 4, 1024)
-        self.dropout = nn.Dropout(0.5)
-        self.fc2 = nn.Linear(1024, num_classes)
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Define the forward pass of the neural network.
-
-        :param x: The input tensor.
-        :return: The output tensor after passing through the network.
-        """
-        x = F.relu(self.bn1(self.conv1(x)))
-        x = self.pool(F.relu(self.bn2(self.conv2(x))))
-        x = F.relu(self.bn3(self.conv3(x)))
-        x = self.pool2(F.relu(x))
-        x = x.view(-1, 64 * self.image_size // 4 * self.image_size // 4)
-        x = F.relu(self.fc1(x))
-        x = self.dropout(x)
-        x = self.fc2(x)
-        return x
-
-
-def check_accuracy(loader: DataLoader, model: nn.Module, device: str):
+def save_encoder(label_encoder: LabelEncoder, leader_keys: list[str]):
     """
-    Checks the accuracy of the model on the given dataset loader.
-
-    :param loader: The DataLoader for the dataset to check accuracy on.
-    :param model: The neural network model.
-    :param device: The device to run the model on (CPU or GPU).
+    Encodings are the integer labels assigned to each symbol.
+    These are required for the model to classify the symbols,
+    since it only operates on integers.
+    Each symbol is assigned a sequential integer encoding.
+    These are dumped to a text file, where each line is a symbol.
+    The line number-1 implies the encoding value (since it's 0-indexed).
     """
-    if loader.dataset.train:  # noqa
-        print("Checking accuracy on training data")
-    else:
-        print("Checking accuracy on test data")
+    encoded_labels = label_encoder.transform(leader_keys)
+    # Create a decoder dictionary to map encoded labels back to symbols
+    decoder: list[tuple[int, str]] = [
+        (encoded, symbol) for encoded, symbol in zip(encoded_labels, leader_keys)
+    ]
+    # Sort the decoder by encoded label for easy lookup, ascending.
+    decoder.sort(key=lambda x: x[0])
 
-    num_correct = 0
-    num_samples = 0
-    model.eval()  # Set the model to evaluation mode
+    # Assert the encodings are consecutive integers starting from 0
+    assert all(encoded == i for i, (encoded, _) in enumerate(decoder)), "Invalid label encodings"
 
-    with torch.no_grad():  # Disable gradient calculation
-        for x, y in loader:
-            x = x.to(device)
-            y = y.to(device)
+    # Dump the sorted symbols to a plain text file.
+    encoding_path = ut.get_encodings_path()
+    encoding_str = "\n".join((symbol for _, symbol in decoder))
+    with open(encoding_path, "w") as file:
+        file.write(encoding_str)
 
-            # Forward pass: compute the model output
-            scores = model(x)
-            _, predictions = scores.max(1)  # Get the index of the max log-probability
-            num_correct += (predictions == y).sum()  # Count correct predictions
-            num_samples += predictions.size(0)  # Count total samples
-
-        # Calculate accuracy
-        accuracy = float(num_correct) / float(num_samples) * 100
-        print(f"Got {num_correct}/{num_samples} with accuracy {accuracy:.2f}%")
-
-    model.train()  # Set the model back to training mode
-
-
-symbol_data = sr.SymbolData()
-
-device = "cuda" if torch.cuda.is_available() else "cpu"
-
-
-num_classes = len(symbol_data.leaders)
-learning_rate = 0.001
-batch_size = 64
-num_epochs = 15
-
-db_path = "database/handtex.db"
-image_size = 56
 
 # Training Loss: 11.7996, Training Accuracy: 93.88%
 # Validation Loss: 13.5945, Validation Accuracy: 93.92%
@@ -117,6 +58,9 @@ image_size = 56
 
 
 def main():
+    symbol_data = sr.SymbolData()
+
+    num_classes = len(symbol_data.leaders)
 
     label_encoder = LabelEncoder()
     label_encoder.fit(symbol_data.leaders)
@@ -154,6 +98,7 @@ def main():
     train_dataloader = DataLoader(train_dataset, batch_size, shuffle=True, num_workers=4)
     validation_dataloader = DataLoader(validation_dataset, batch_size, shuffle=True, num_workers=4)
 
+    device = "cuda" if torch.cuda.is_available() else "cpu"
     model = CNN(num_classes=num_classes, image_size=image_size).to(device)
 
     criterion = nn.CrossEntropyLoss()
@@ -262,10 +207,6 @@ def main():
     plt.ylabel("Accuracy (%)")
     plt.legend()
     plt.show()
-
-    # # Final accuracy check on training and test sets
-    # check_accuracy(train_dataloader, model, device)
-    # check_accuracy(validation_dataloader, model, device)
 
 
 if __name__ == "__main__":

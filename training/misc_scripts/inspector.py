@@ -27,6 +27,7 @@ def visualize_symbol_instances(db_path, symbol_key=None):
             conn.close()
             return
         print(f"Found {len(rows)} samples for symbol key: {symbol_key}")
+    conn.close()
 
     # Loop over each instance and plot the strokes
     for idx, row in enumerate(rows):
@@ -73,14 +74,12 @@ def visualize_symbol_instances(db_path, symbol_key=None):
 
         plt.show()
 
-    conn.close()
-
 
 if __name__ == "__main__":
     db_path = "../database/handtex.db"
 
     # Check if symbol key is provided as a command-line argument
-    symbol_key = None
+    symbol_key = "stmaryrd-OT1-_ssearrow"
 
     if len(sys.argv) > 1:
         symbol_key = sys.argv[1]

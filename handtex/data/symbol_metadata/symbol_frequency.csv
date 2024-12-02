@@ -224,6 +224,7 @@ amssymb-OT1-_rightsquigarrow,220
 marvosym-OT1-_Yinyang,219
 latex2e-OT1-_diamond,216
 tipa-OT1-_textomega,216
+latex2e-OT1-_nearrow,214
 latex2e-OT1-_bigcirc,212
 latex2e-OT1-_uparrow,212
 upgreek-OT1-_Upsigma,211
@@ -252,7 +253,6 @@ latex2e-OT1-_downarrow,194
 latex2e-OT1-_prime,194
 upgreek-OT1-_updelta,194
 amssymb-OT1-_mathcal{S},192
-latex2e-OT1-_nearrow,192
 mathdots-OT1-_iddots,192
 amssymb-OT1-_mathcal{C},191
 latex2e-OT1-_coprod,191
@@ -309,8 +309,8 @@ upgreek-OT1-_upsigma,156
 amssymb-OT1-_because,155
 latex2e-OT1-_asymp,155
 wasysym-OT1-_sun,155
+latex2e-OT1-_searrow,154
 amssymb-OT1-_thicksim,153
-latex2e-OT1-_searrow,152
 latex2e-OT1-_triangleright,152
 latex2e-OT1-_textasteriskcentered,151
 textcomp-OT1-_textrightarrow,151
@@ -646,7 +646,6 @@ amssymb-OT1-_smallfrown,41
 amssymb-OT1-_sqsupset,41
 latex2e-OT1-_ldotp,41
 latex2e-OT1-_textquoteright,41
-stmaryrd-OT1-_nnearrow,41
 textcomp-OT1-_textdownarrow,41
 upgreek-OT1-_Uplambda,41
 amssymb-OT1-_geqq,40
@@ -657,6 +656,7 @@ latex2e-OT1-_updownarrow,40
 latex2e-T1-_quotesinglbase,40
 textcomp-OT1-_textrangle,40
 amssymb-OT1-_blacktriangledown,39
+latex2e-OT1-_nwarrow,39
 marvosym-OT1-_Jupiter,39
 tipa-OT1-_textceltpal,39
 tipa-OT1-_textglotstop,39
@@ -693,7 +693,6 @@ wasysym-OT1-_currency,36
 amssymb-OT1-_curvearrowleft,35
 amssymb-OT1-_dotplus,35
 amssymb-OT1-_eqcirc,35
-latex2e-OT1-_nwarrow,35
 textcomp-OT1-_textordfeminine,35
 tipa-OT1-_texthtt,35
 tipa-OT1-_textturnv,35
@@ -702,9 +701,9 @@ wasysym-OT1-_kreuz,35
 amssymb-OT1-_mathcal{Y},34
 amssymb-OT1-_mathfrak{r},34
 dsfont-OT1-_mathds{H},34
+latex2e-OT1-_swarrow,34
 marvosym-OT1-_Gemini,34
 mathrsfs-OT1-_mathscr{G},34
-stmaryrd-OT1-_nnwarrow,34
 textcomp-OT1-_textonequarter,34
 wasysym-OT1-_virgo,34
 amssymb-OT1-_backepsilon,33
@@ -719,7 +718,6 @@ amssymb-OT1-_mathfrak{N},32
 amssymb-OT1-_ngeqq,32
 latex2e-OT1-_mathellipsis,32
 latex2e-OT1-_mathsterling,32
-latex2e-OT1-_swarrow,32
 marvosym-OT1-_Saturn,32
 mathrsfs-OT1-_mathscr{J},32
 tipa-OT1-_textscj,32
@@ -743,6 +741,7 @@ amssymb-OT1-_nleftrightarrow,30
 dsfont-OT1-_mathds{O},30
 latex2e-OT1-_rightharpoondown,30
 marvosym-OT1-_Moon,30
+stmaryrd-OT1-_nnwarrow,30
 tipa-OT1-_textbaro,30
 tipa-OT1-_textturnh,30
 wasysym-OT1-_ataribox,30
@@ -853,7 +852,6 @@ esint-OT1-_varointclockwise,22
 latex2e-T1-_guilsinglleft,22
 marvosym-OT1-_Pfund,22
 mathrsfs-OT1-_mathscr{Q},22
-stmaryrd-OT1-_sswarrow,22
 textcomp-OT1-_textleftarrow,22
 tipa-OT1-_textbarc,22
 tipa-OT1-_textcrinvglotstop,22
@@ -905,6 +903,7 @@ latex2e-OT1-_textparagraph,19
 latex2e-T1-_NG,19
 mathrsfs-OT1-_mathscr{W},19
 stmaryrd-OT1-_inplus,19
+stmaryrd-OT1-_sswarrow,19
 textcomp-OT1-_textbullet,19
 tipa-OT1-_textObardotlessj,19
 tipa-OT1-_textbarglotstop,19
@@ -948,6 +947,7 @@ amssymb-OT1-_mathfrak{x},17
 amssymb-OT1-_precnsim,17
 amssymb-OT1-_supsetneqq,17
 dsfont-OT1-_mathds{L},17
+stmaryrd-OT1-_nnearrow,17
 textcomp-OT1-_textcolonmonetary,17
 textcomp-OT1-_textinterrobangdown,17
 tipa-OT1-_textbeltl,17
@@ -1022,7 +1022,6 @@ dsfont-OT1-_mathds{h},14
 esint-OT1-_sqiint,14
 marvosym-OT1-_Sagittarius,14
 stmaryrd-OT1-_Longmapsto,14
-stmaryrd-OT1-_ssearrow,14
 tipa-OT1-_textdzlig,14
 tipa-OT1-_textfishhookr,14
 tipa-OT1-_textsecstress,14
@@ -1049,6 +1048,7 @@ amssymb-OT1-_mathfrak{H},12
 amssymb-OT1-_mathfrak{i},12
 amssymb-OT1-_nVDash,12
 latex2e-OT1-_textordmasculine,12
+stmaryrd-OT1-_ssearrow,12
 textcomp-OT1-_textcircledP,12
 textcomp-OT1-_textpeso,12
 tipa-OT1-_textctz,12

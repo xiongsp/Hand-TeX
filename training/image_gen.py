@@ -637,7 +637,7 @@ def main():
     label_encoder.fit(symbol_data.symbol_keys)
 
     db_path = "database/handtex.db"
-    image_size = 48
+    image_size = 56
 
     # Create training and validation datasets and dataloaders
     all_samples = StrokeDataset(
@@ -661,8 +661,11 @@ def main():
     symbol_strokes = (
         all_samples.load_transformed_strokes(idx) for idx in all_samples.range_for_symbol(symbol)
     )
-    for idx, (strokes, symbol) in enumerate(symbol_strokes):
+    for idx, ((strokes, symbol), (current_key, transformations)) in enumerate(
+        zip(symbol_strokes, symbol_data.all_paths_to_symbol(symbol))
+    ):
         img = strokes_to_grayscale_image_cv2(strokes, image_size)
+        print(f"Current symbol: {current_key} with transformations: {transformations}")
         cv2.imshow(f"{symbol} {idx}", img)
         # wait for a key press
         cv2.waitKey(0)

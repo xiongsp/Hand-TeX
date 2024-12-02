@@ -18,15 +18,19 @@ from training.image_gen import (
 
 
 class CNN(nn.Module):
-    def __init__(self, num_classes: int) -> None:
+    def __init__(self, num_classes: int, image_size: int) -> None:
         """
         Define the layers of the convolutional neural network.
 
         :param num_classes: The number of classes we want to predict, in our case 10 (digits 0 to 9).
+        :param image_size: The size of the input image.
         """
         super(CNN, self).__init__()
 
-        # Image size: 48 -> 24 -> 12 after each pooling.
+        self.image_size = image_size
+
+        # Image size is cut in half with each pooling.
+        # This makes the fully connected layer have x * image_size/4 * image_size/4 input features.
         self.conv1 = nn.Conv2d(1, 16, kernel_size=3, padding=1)
         self.bn1 = nn.BatchNorm2d(16)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
@@ -35,7 +39,7 @@ class CNN(nn.Module):
         self.conv3 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
         self.bn3 = nn.BatchNorm2d(64)
         self.pool2 = nn.MaxPool2d(2, 2)
-        self.fc1 = nn.Linear(64 * 12 * 12, 1024)
+        self.fc1 = nn.Linear(64 * image_size // 4 * image_size // 4, 1024)
         self.dropout = nn.Dropout(0.5)
         self.fc2 = nn.Linear(1024, num_classes)
 
@@ -50,7 +54,7 @@ class CNN(nn.Module):
         x = self.pool(F.relu(self.bn2(self.conv2(x))))
         x = F.relu(self.bn3(self.conv3(x)))
         x = self.pool2(F.relu(x))
-        x = x.view(-1, 64 * 12 * 12)
+        x = x.view(-1, 64 * self.image_size // 4 * self.image_size // 4)
         x = F.relu(self.fc1(x))
         x = self.dropout(x)
         x = self.fc2(x)
@@ -100,13 +104,16 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 num_classes = len(symbol_data.leaders)
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 3
+num_epochs = 15
 
 db_path = "database/handtex.db"
-image_size = 48
+image_size = 56
 
 # Training Loss: 11.7996, Training Accuracy: 93.88%
 # Validation Loss: 13.5945, Validation Accuracy: 93.92%
+
+# Training Loss: 7.1964, Training Accuracy: 96.10%
+# Validation Loss: 8.8431, Validation Accuracy: 95.72%
 
 
 def main():
@@ -147,7 +154,7 @@ def main():
     train_dataloader = DataLoader(train_dataset, batch_size, shuffle=True, num_workers=4)
     validation_dataloader = DataLoader(validation_dataset, batch_size, shuffle=True, num_workers=4)
 
-    model = CNN(num_classes=num_classes).to(device)
+    model = CNN(num_classes=num_classes, image_size=image_size).to(device)
 
     criterion = nn.CrossEntropyLoss()
     # criterion = nn.CrossEntropyLoss(class_weights)

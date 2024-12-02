@@ -18,7 +18,7 @@ def load_model_and_decoder(model_path: Path, encodings_path: Path):
     label_decoder = load_decoder(encodings_path)
 
     # Load model state
-    model = CNN(num_classes=len(label_decoder))
+    model = CNN(num_classes=len(label_decoder), image_size=image_size)
     model.load_state_dict(load_file(model_path))
     model.to(device)
     model.eval()  # Set to evaluation mode

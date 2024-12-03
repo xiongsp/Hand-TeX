@@ -502,6 +502,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     # =========================================== Detection ==========================================
 
     def start_model_loader(self) -> None:
+        """
+        Start a worker thread to load the model.
+        """
         worker = wt.Worker(
             inf.load_model_and_decoder,
             ut.get_model_path(),
@@ -513,13 +516,17 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.inference_queue.start(worker)
 
     def model_loader_result(self, result) -> None:
+        """
+        The model was loaded without errors.
+        We just need to make sure that the model is properly loaded into vram,
+        so we do a dry-run prediction to touch the gpu.
+        """
         self.model, self.label_decoder = result
         logger.info("Model loaded. Proceeding to cold-start the model.")
         self.start_detection([[(0, 0)]], dry_run=True)
 
     @Slot(wt.WorkerError)
     def model_loader_error(self, error: wt.WorkerError) -> None:
-
         gu.show_exception(
             self,
             self.tr("Model Loading Failed"),
@@ -530,13 +537,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         )
 
     def detect_symbol(self) -> None:
+        """
+        Gather the strokes from the sketchpad and start the detection process.
+        """
         if not self.in_detection_mode():
             return
         if self.model is None:
             logger.error("Model is not loaded yet, skipping prediction.")
             return
         # Get the sketch and predict the symbol.
+        start = time.time()
         strokes, _, _, _ = self.sketchpad.get_clean_strokes()
+        logger.debug(f"Got {len(strokes)} strokes in {(time.time() - start) * 1000:.2f}ms.")
         self.start_detection(strokes)
 
     def start_detection(self, strokes: list[list[tuple[int, int]]], dry_run: bool = False) -> None:

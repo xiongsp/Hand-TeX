@@ -188,9 +188,24 @@ class Sketchpad(Qw.QGraphicsView):
         if not strokes:
             return [], 1, 0, 0
         clean_strokes = purge_duplicate_strokes(strokes)
-        clean_strokes, scale1 = rescale_viewport(clean_strokes, self.sceneRect())
-        clean_strokes, scale2, x_offset, y_offset = scale_and_center(clean_strokes)
-        return clean_strokes, scale1 * scale2, x_offset, y_offset
+        import time
+
+        start = time.time()
+        rescaled_clean_strokes, scale1 = rescale_viewport(clean_strokes, self.sceneRect())
+        centered_clean_strokes, scale2, x_offset, y_offset = scale_and_center(
+            rescaled_clean_strokes
+        )
+        print(f"normal: {1000 * (time.time() - start):.2f} ms")
+        start = time.time()
+        centered_clean_strokes2, scale22, x_offset2, y_offset2 = rescale_and_center_viewport(
+            clean_strokes, self.sceneRect()
+        )
+        print(f"fast?: {1000 * (time.time() - start):.2f} ms")
+        assert centered_clean_strokes == centered_clean_strokes2
+        assert scale2 == scale22
+        assert x_offset == x_offset2
+        assert y_offset == y_offset2
+        return centered_clean_strokes, scale1 * scale2, x_offset, y_offset
 
     def load_strokes(self, drawing: st.SymbolDrawing) -> None:
         """
@@ -264,6 +279,68 @@ def rescale_viewport(
         scaled_sublist = [(int(x * scale), int(y * scale)) for x, y in sublist]
         scaled_coordinates.append(scaled_sublist)
     return scaled_coordinates, scale
+
+
+import numpy as np
+
+
+def rescale_and_center_viewport(
+    coordinates: list[list[tuple[int, int]]], rect: Qc.QRectF
+) -> tuple[list[list[tuple[int, int]]], float, float, float]:
+    """
+    Transform the coordinate space from the viewport to a 0-CANVAS_SIZE space, and then scale and center the coordinates.
+    Preserve the aspect ratio of the viewport.
+
+    :param coordinates: The coordinates to transform.
+    :param rect: The viewport rectangle.
+    :return: The transformed coordinates, the scaling factor, and the x and y offset.
+    """
+    # Step 1: Rescale the viewport
+    width, height = rect.width(), rect.height()
+
+    initial_scale = CANVAS_SIZE / max(width, height)
+
+    scaled_coordinates = []
+    for sublist in coordinates:
+        scaled_sublist = [(int(x * initial_scale), int(y * initial_scale)) for x, y in sublist]
+        scaled_coordinates.append(scaled_sublist)
+
+    # Step 2: Scale and center the rescaled coordinates
+    all_points = [point for sublist in scaled_coordinates for point in sublist]
+
+    if len(all_points) == 1:
+        return (
+            [[(CANVAS_SIZE // 2, CANVAS_SIZE // 2)]],
+            1,
+            CANVAS_SIZE / 2 - all_points[0][0],
+            CANVAS_SIZE / 2 - all_points[0][1],
+        )
+
+    xs, ys = zip(*all_points)
+
+    min_x, max_x = min(xs), max(xs)
+    min_y, max_y = min(ys), max(ys)
+
+    width, height = max_x - min_x, max_y - min_y
+
+    # Determine the scaling factor to fit in CANVAS_SIZExCANVAS_SIZE, preserving aspect ratio
+    scale_factor = CANVAS_SIZE / max(width, height)
+
+    # Correct the scaling factor if needed
+    scale_factor = scale_correction_function(scale_factor)
+
+    offset_x = (CANVAS_SIZE - width * scale_factor) / 2 - min_x * scale_factor
+    offset_y = (CANVAS_SIZE - height * scale_factor) / 2 - min_y * scale_factor
+
+    # Scale and center all coordinates
+    centered_coords = []
+    for sublist in scaled_coordinates:
+        centered_sublist = [
+            (int(x * scale_factor + offset_x), int(y * scale_factor + offset_y)) for x, y in sublist
+        ]
+        centered_coords.append(centered_sublist)
+
+    return centered_coords, scale_factor, offset_x, offset_y
 
 
 def scale_and_center(

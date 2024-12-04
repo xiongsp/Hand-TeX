@@ -69,6 +69,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         train: bool,
         new_data_dir: str,
     ) -> None:
+        start = time.time()
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(f"{__program__} {__version__}")
@@ -82,8 +83,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.training_menu_action = None
         self.detection_menu_action = None
-
-        self.symbol_list = None
 
         self.data_recorder = None
 
@@ -106,7 +105,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.save_default_palette()
         self.load_config_theme()
-        start = time.time()
 
         self.symbol_data = sr.SymbolData()
 
@@ -125,6 +123,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.switch_to_training()
         else:
             self.switch_to_classification()
+
+        # Asynchronously load the symbol list.
+        self.symbol_list = sl.SymbolList(self.symbol_data)
+        self.theme_is_dark_changed.connect(self.symbol_list.on_theme_change)
 
         logger.debug(f"Initialization took {(time.time() - start) * 1000:.2f}ms")
 
@@ -375,12 +377,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         issue_reporter.exec()
 
     def open_symbol_list(self) -> None:
-        """
-        Open the symbol list.
-        """
-        if self.symbol_list is None:
-            self.symbol_list = sl.SymbolList(self.symbol_data)
-            self.theme_is_dark_changed.connect(self.symbol_list.on_theme_change)
         self.symbol_list.show()
 
     def browse_new_data_dir2(self) -> None:

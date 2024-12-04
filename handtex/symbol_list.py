@@ -1,4 +1,5 @@
 import re
+import time
 from enum import IntEnum
 
 import PySide6.QtCore as Qc
@@ -13,6 +14,8 @@ import handtex.state_saver as ss
 import handtex.structures as st
 import handtex.utils as ut
 import handtex.symbol_relations as sr
+import handtex.gui_utils as gu
+import handtex.worker_thread as wt
 from handtex.ui_generated_files.ui_SymbolList import Ui_SymbolList
 
 
@@ -63,6 +66,9 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
     disable_filtering: bool  # Used to ignore filter signals while resetting the filters.
     search_pool: list[str | None]  # All symbol keys, used for searching.
 
+    symbol_queue: Qc.QThreadPool
+    loaded: bool
+
     state_saver: ss.StateSaver
 
     def __init__(
@@ -73,7 +79,7 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         super(SymbolList, self).__init__(parent)
         self.setupUi(self)
         self.symbol_data = symbol_data
-        self.last_show_symbol = None
+        self.last_show_symbol = symbol_data.all_keys[0]
         self.disable_filtering = False
         self.search_pool = symbol_data.all_keys
 
@@ -83,7 +89,11 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self.pixmap_cache = {}
         self.current_symbol_keys = self.search_pool
 
-        self.show_symbols()
+        self.symbol_queue = Qc.QThreadPool()
+        self.symbol_queue.setMaxThreadCount(1)
+
+        self.loaded = False
+        self.preload_symbols()
 
         self.listWidget.currentItemChanged.connect(self.on_symbol_selected)
         self.listWidget.setCurrentRow(0)
@@ -353,7 +363,29 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
             return
         self.show_symbol_details(symbol_key)
 
-    def show_symbols(self) -> None:
+    def preload_symbols(self) -> None:
+        worker = wt.Worker(self.show_symbols, True, no_progress_callback=True)
+        worker.signals.error.connect(self.show_symbol_errors)
+        worker.signals.result.connect(self.preload_done)
+        self.symbol_queue.start(worker)
+
+    def preload_done(self) -> None:
+        self.loaded = True
+        self.show_symbol_details(None)
+
+    def show_symbol_errors(self, error: wt.WorkerError) -> None:
+        gu.show_exception(
+            self,
+            self.tr("Symbol List Loading Failed"),
+            self.tr("Failed to load the symbol list."),
+            error,
+        )
+
+    def show_symbols(self, preloading: bool = False) -> None:
+        if not self.loaded and not preloading:
+            return
+        if preloading:
+            logger.info("Preloading symbols.")
         self.listWidget.clear()
         separator_pixmap = Qg.QPixmap(self.icon_size, self.icon_size)
         separator_pixmap.fill(Qt.transparent)
@@ -387,10 +419,14 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         )
 
     def show_symbol_details(self, symbol_key: str | None):
+        if not self.loaded:
+            return
         if symbol_key is None:
             symbol_key = self.last_show_symbol
         else:
             self.last_show_symbol = symbol_key
+        if symbol_key is None:
+            return
         symbol = self.symbol_data[symbol_key]
         self.label_id.setText(symbol.key)
         self.label_command.setText(symbol.command)

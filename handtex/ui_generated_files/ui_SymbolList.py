@@ -28,7 +28,7 @@ class Ui_SymbolList(object):
     def setupUi(self, SymbolList):
         if not SymbolList.objectName():
             SymbolList.setObjectName(u"SymbolList")
-        SymbolList.resize(900, 600)
+        SymbolList.resize(1078, 600)
         self.verticalLayout_3 = QVBoxLayout(SymbolList)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, -1, 0, 0)
@@ -51,13 +51,7 @@ class Ui_SymbolList(object):
         self.pushButton_filter = QPushButton(SymbolList)
         self.pushButton_filter.setObjectName(u"pushButton_filter")
         self.pushButton_filter.setText(u"Filters")
-        icon = QIcon()
-        iconThemeName = u"dialog-filters"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"dialog-filters"))
         self.pushButton_filter.setIcon(icon)
         self.pushButton_filter.setCheckable(True)
 
@@ -65,13 +59,7 @@ class Ui_SymbolList(object):
 
         self.pushButton_clear_filters = QPushButton(SymbolList)
         self.pushButton_clear_filters.setObjectName(u"pushButton_clear_filters")
-        icon1 = QIcon()
-        iconThemeName = u"edit-clear"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon1 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon1 = QIcon(QIcon.fromTheme(u"edit-clear"))
         self.pushButton_clear_filters.setIcon(icon1)
 
         self.horizontalLayout.addWidget(self.pushButton_clear_filters)
@@ -247,19 +235,19 @@ class Ui_SymbolList(object):
         self.label_fontenc_label = QLabel(self.verticalLayoutWidget)
         self.label_fontenc_label.setObjectName(u"label_fontenc_label")
 
-        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_fontenc_label)
+        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_fontenc_label)
 
         self.label_fontenc = QLabel(self.verticalLayoutWidget)
         self.label_fontenc.setObjectName(u"label_fontenc")
         self.label_fontenc.setText(u"<fontenc>")
         self.label_fontenc.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.label_fontenc)
+        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.label_fontenc)
 
         self.label_7 = QLabel(self.verticalLayoutWidget)
         self.label_7.setObjectName(u"label_7")
 
-        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_7)
+        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.label_7)
 
         self.label_similar = QLabel(self.verticalLayoutWidget)
         self.label_similar.setObjectName(u"label_similar")
@@ -267,28 +255,28 @@ class Ui_SymbolList(object):
         self.label_similar.setWordWrap(True)
         self.label_similar.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.label_similar)
+        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.label_similar)
 
         self.label_2 = QLabel(self.verticalLayoutWidget)
         self.label_2.setObjectName(u"label_2")
 
-        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.label_2)
+        self.formLayout.setWidget(6, QFormLayout.LabelRole, self.label_2)
 
         self.label_self_symmetry = QLabel(self.verticalLayoutWidget)
         self.label_self_symmetry.setObjectName(u"label_self_symmetry")
 
-        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.label_self_symmetry)
+        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.label_self_symmetry)
 
         self.label_5 = QLabel(self.verticalLayoutWidget)
         self.label_5.setObjectName(u"label_5")
 
-        self.formLayout.setWidget(6, QFormLayout.LabelRole, self.label_5)
+        self.formLayout.setWidget(7, QFormLayout.LabelRole, self.label_5)
 
         self.label_other_symmetry = QLabel(self.verticalLayoutWidget)
         self.label_other_symmetry.setObjectName(u"label_other_symmetry")
         self.label_other_symmetry.setWordWrap(True)
 
-        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.label_other_symmetry)
+        self.formLayout.setWidget(7, QFormLayout.FieldRole, self.label_other_symmetry)
 
         self.label_id = QLabel(self.verticalLayoutWidget)
         self.label_id.setObjectName(u"label_id")
@@ -296,6 +284,16 @@ class Ui_SymbolList(object):
         self.label_id.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.label_id)
+
+        self.label_xelatex_required_label = QLabel(self.verticalLayoutWidget)
+        self.label_xelatex_required_label.setObjectName(u"label_xelatex_required_label")
+
+        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_xelatex_required_label)
+
+        self.label_xelatex_required = QLabel(self.verticalLayoutWidget)
+        self.label_xelatex_required.setObjectName(u"label_xelatex_required")
+
+        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.label_xelatex_required)
 
 
         self.verticalLayout.addLayout(self.formLayout)
@@ -353,5 +351,7 @@ class Ui_SymbolList(object):
         self.label_self_symmetry.setText(QCoreApplication.translate("SymbolList", u"<yes/no>", None))
         self.label_5.setText(QCoreApplication.translate("SymbolList", u"Symmetrical to:", None))
         self.label_other_symmetry.setText(QCoreApplication.translate("SymbolList", u"<others>", None))
+        self.label_xelatex_required_label.setText(QCoreApplication.translate("SymbolList", u"Compiler:", None))
+        self.label_xelatex_required.setText(QCoreApplication.translate("SymbolList", u"XeLaTeX or LuaLaTeX required", None))
     # retranslateUi
 

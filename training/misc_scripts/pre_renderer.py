@@ -43,12 +43,11 @@ def generate_latex_file(symbol):
     package, encoding, command = symbol["key"].split("-", maxsplit=2)
     package = package.strip()
     encoding = encoding.strip()
-    command = command.strip()
 
     # Construct LaTeX document
     tex_content = f"""
     \\documentclass[10pt]{{article}}
-    \\usepackage[utf8]{{inputenc}}
+    {'\\usepackage[utf8]{{inputenc}}' if symbol['pdflatex'] else ''}
     \\usepackage[{encoding}]{{fontenc}}
     {'\\usepackage{{' + package + '}}' if package != 'latex2e' else ''}
     \\pagestyle{{empty}}
@@ -56,7 +55,8 @@ def generate_latex_file(symbol):
     {'$' + symbol['command'] + '$' if symbol['mathmode'] else symbol['command']}
     \\end{{document}}
     """
-    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".tex")
+    suffix = ".tex" if symbol["pdflatex"] else ".xelatex"
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
     with open(temp_file.name, "w") as file:
         file.write(tex_content)
     return temp_file.name
@@ -64,10 +64,17 @@ def generate_latex_file(symbol):
 
 # 3. Render LaTeX to PDF using Tectonic
 def render_latex_to_pdf(tex_path):
-    pdf_path = tex_path.replace(".tex", ".pdf")
-    subprocess.run(
-        ["pdflatex", "-output-directory", os.path.dirname(tex_path), tex_path], check=True
-    )
+    if tex_path.endswith(".xelatex"):
+        pdf_path = tex_path.replace(".xelatex", ".pdf")
+        # tex_path = tex_path.replace(".xelatex", ".tex")
+        subprocess.run(
+            ["xelatex", "-output-directory", os.path.dirname(tex_path), tex_path], check=True
+        )
+    else:
+        pdf_path = tex_path.replace(".tex", ".pdf")
+        subprocess.run(
+            ["pdflatex", "-output-directory", os.path.dirname(tex_path), tex_path], check=True
+        )
     return pdf_path
 
 

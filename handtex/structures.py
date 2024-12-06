@@ -10,6 +10,7 @@ class Symbol:
     fontenc: str
     mathmode: bool
     textmode: bool
+    pdflatex: bool
     key: str
     filename: str
 
@@ -22,6 +23,8 @@ class Symbol:
             symbol["package"] = "latex2e"
         if "fontenc" not in symbol:
             symbol["fontenc"] = "OT1"
+        if "pdflatex" not in symbol:
+            symbol["pdflatex"] = True
         return cls(**symbol)
 
     @classmethod
@@ -45,6 +48,12 @@ class Symbol:
         else:
             return "Math & Textmode"
 
+    def compiler_str(self) -> str:
+        if self.pdflatex:
+            return "pdfLaTeX"
+        else:
+            return "XeLaTeX/LuaLaTeX"
+
     @classmethod
     def dummy(cls, key: str) -> "Symbol":
         return cls(
@@ -53,6 +62,7 @@ class Symbol:
             fontenc="?",
             mathmode=False,
             textmode=False,
+            pdflatex=True,
             key=key,
             filename="",
         )

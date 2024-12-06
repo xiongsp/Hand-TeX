@@ -431,6 +431,8 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self.label_id.setText(symbol.key)
         self.label_command.setText(symbol.command)
         self.label_mode.setText(symbol.mode_str())
+        self.label_xelatex_required.setVisible(not symbol.pdflatex)
+        self.label_xelatex_required_label.setVisible(not symbol.pdflatex)
         suffix = ""
         if symbol.package_is_default():
             suffix = " (default)"

@@ -13,6 +13,7 @@ class Symbol:
     fontenc: Optional[str] = None
     mathmode: bool = False
     textmode: bool = True
+    pdflatex: bool = True
     key: str = field(init=False)
     filename: str = field(init=False)
 
@@ -59,17 +60,16 @@ class Symbol:
                                     command=cmd,
                                     package=symbol.get("package"),
                                     fontenc=symbol.get("fontenc"),
+                                    pdflatex=symbol.get("pdflatex", True),
                                     **mode_args,
                                 )
                             )
-
         return symbol_list
 
     @classmethod
     def from_json(cls, json_file):
         with open(json_file, "r") as f:
             symbols = json.load(f)
-
         return [cls(**symbol) for symbol in symbols]
 
     @staticmethod

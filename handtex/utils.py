@@ -23,6 +23,7 @@ import handtex.data.color_themes
 import handtex.data.symbols
 import handtex.data.symbol_metadata
 import handtex.data.model
+import handtex.data.custom_icons
 
 
 T = TypeVar("T")
@@ -379,8 +380,16 @@ def load_symbol_svg(symbol: st.Symbol, fill_color: str = "#000000") -> Qc.QByteA
     :param fill_color: The new fill color.
     :return: The raw SVG data.
     """
-    with resources.path(handtex.data.symbols, f"{symbol.filename}.svg") as svg_file:
-        svg_data = svg_file.read_text()
+    try:
+        with resources.path(handtex.data.symbols, f"{symbol.filename}.svg") as svg_file:
+            svg_data = svg_file.read_text()
+    except FileNotFoundError:
+        logger.error(f"Failed to load SVG for symbol {symbol.key}")
+        # Instead, load the image-missing icon.
+        with resources.files(handtex.data.custom_icons) as data_path:
+            custom_icon_path: Path = data_path / "image-missing.svg"
+            svg_data = custom_icon_path.read_text()
+        return Qc.QByteArray(svg_data.encode("utf-8"))
 
     # Recolor the SVG data.
     if fill_color == "#000000":

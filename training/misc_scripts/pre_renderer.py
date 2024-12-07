@@ -181,12 +181,12 @@ def main():
     symbols = load_symbols(SYMBOLS_FILE)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    with ThreadPoolExecutor(max_workers=1) as executor:
+    with ThreadPoolExecutor(max_workers=8) as executor:
         futures = [executor.submit(process_symbol, symbol) for symbol in symbols]
         for future in as_completed(futures):
             future.result()  # This will raise any exceptions caught during processing
 
-    print(f"Expecting to find {len(symbols)} SVG files in the {OUTPUT_DIR} directory.")
+    print(f"\n\nExpecting to find {len(symbols)} SVG files in the {OUTPUT_DIR} directory.")
 
     # Find out which symbols failed to render.
     missing_symbols = []

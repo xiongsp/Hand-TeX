@@ -13,7 +13,7 @@ lines = [line.strip().split() for line in lines]
 
 for line in lines:
     # sort so that lines beginning with latex2e are first.
-    line.sort()
+    line.sort(key=lambda x: x.lower())
     line.sort(key=lambda x: x.startswith("latex2e"), reverse=True)
 
 # Merge back into strings per row.

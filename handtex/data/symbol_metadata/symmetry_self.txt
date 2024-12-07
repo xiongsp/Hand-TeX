@@ -311,3 +311,11 @@ latex2e-OT1-_bigcirc: rot45 rot90 rot135 rot180 rot225 rot270 rot315 mir0 mir45 
 latex2e-OT1-_sim: rot180
 latex2e-OT1-_int: rot180
 latex2e-OT1-_Sigma: mir0
+amssymb-OT1-_sphericalangle: mir0
+stix-OT1-_sphericalangle: mir0
+fdsymbol-OT1-_sphericalangle: mir0
+stix-OT1-_lftimes: mir0
+stix-OT1-_otimeslhrim: mir0
+latex2e-OT1-_hat{=}: mir90
+amssymb-OT1-_lesseqqgtr: rot180
+amssymb-OT1-_gtreqqless: rot180

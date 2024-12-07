@@ -57,7 +57,7 @@ def main():
     sorted_symbols = sorted(leader_frequencies.keys(), key=leader_frequencies.get)
     print(len(sorted_symbols))
 
-    start_at = "amssymb-OT1-_mathcal{X}"
+    start_at = "amssymb-OT1-_sphericalangle"
     if start_at:
         start_at_index = sorted_symbols.index(start_at)
         sorted_symbols = sorted_symbols[start_at_index:]

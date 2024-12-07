@@ -1,3 +1,20 @@
+stix-OT1-_midbarvee -- rot180 mir0 --> stix-OT1-_midbarwedge
+latex2e-OT1-_smile -- rot180 mir0 --> latex2e-OT1-_frown
+MnSymbol-OT1-_diamonddots -- rot45 rot135 rot225 rot315 --> MnSymbol-OT1-_squaredots
+stix-OT1-_plussim -- rot180 --> stix-OT1-_simplus
+stix-OT1-_supsetplus -- mir90 --> stix-OT1-_subsetplus
+MnSymbol-OT1-_diamondplus -- rot45 rot135 rot225 rot315 --> amssymb-OT1-_boxtimes
+MnSymbol-OT1-_diamondminus -- rot90 rot270 mir45 mir135 --> MnSymbol-OT1-_diamondvert
+MnSymbol-OT1-_diamondbackslash -- rot90 rot270 mir0 mir90 --> MnSymbol-OT1-_diamondslash
+stix-OT1-_concavediamondtickleft -- rot180 mir90 --> stix-OT1-_concavediamondtickright
+stix-OT1-_lftimes -- rot180 mir90 --> stix-OT1-_rftimes
+stix-OT1-_otimeslhrim -- rot180 mir90 --> stix-OT1-_otimesrhrim
+MnSymbol-OT1-_diamondtimes -- rot45 rot135 rot225 rot315 --> amssymb-OT1-_boxplus
+amssymb-OT1-_boxminus -- rot90 rot270 mir45 mir135 --> stmaryrd-OT1-_boxbar
+txfonts-OT1-_boxdotLeft -- rot180 mir90 --> txfonts-OT1-_boxdotRight
+txfonts-OT1-_boxdotleft -- rot180 mir90 --> txfonts-OT1-_boxdotright
+txfonts-OT1-_boxLeft -- rot180 mir90 --> txfonts-OT1-_boxRight
+txfonts-OT1-_boxleft -- rot180 mir90 --> txfonts-OT1-_boxright
 stmaryrd-OT1-_shortdownarrow -- rot180 mir0 --> stmaryrd-OT1-_shortuparrow
 stmaryrd-OT1-_shortleftarrow -- rot180 mir90 --> stmaryrd-OT1-_shortrightarrow
 textcomp-OT1-_textdownarrow -- rot180 mir0 --> textcomp-OT1-_textuparrow
@@ -177,3 +194,6 @@ tipa-OT1-_textcloseepsilon -- rot180 mir90 --> tipa-OT1-_textcloserevepsilon
 tipa-OT1-_textcloseepsilon -- rot90 mir45 --> tipa-OT1-_textcloseomega
 latex2e-OT1-_bigoplus -- rot45 --> latex2e-OT1-_bigotimes
 stmaryrd-OT1-_inplus -- rot180 mir90 --> stmaryrd-OT1-_niplus
+amssymb-OT1-_lessgtr -- mir0 --> amssymb-OT1-_gtrless
+tipa-OT1-_textrevepsilon -- rot180 mir90 --> tipa-OT1-_textepsilon
+stmaryrd-OT1-_minuso -- rot90 rot270 mir45 mir135 --> stmaryrd-OT1-_baro

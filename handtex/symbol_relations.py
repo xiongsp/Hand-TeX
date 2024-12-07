@@ -220,7 +220,7 @@ class SymbolData:
             if symbol_key in group:
                 return group
         # This must never happen.
-        raise KeyError(f"Symbol {symbol_key} not found in any symmetry group.")
+        raise KeyError(f"Symbol {symbol_key} not found in any similarity group.")
 
     @cache
     def get_symmetry_group(self, symbol_key: str) -> tuple[str, ...]:
@@ -329,6 +329,8 @@ def load_symbol_metadata_similarity() -> dict[str, tuple[str, ...]]:
     for file in files:
         with file.open("r") as f:
             for line in f:
+                if not line.strip():
+                    continue
                 similar_keys = line.strip().split()
                 for key in similar_keys:
                     if key not in symbol_map:

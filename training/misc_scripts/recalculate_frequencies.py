@@ -1,4 +1,4 @@
-from training.image_gen import recalculate_frequencies
+from training.data_loader import recalculate_frequencies
 
 
 def main():

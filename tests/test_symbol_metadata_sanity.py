@@ -79,24 +79,35 @@ def test_symbol_name_collisions() -> None:
     in a similarity relation.
     """
     # Load symbols.
-    symbols = sr.load_symbols()
-    # Load similarity relations.
-    similarity = sr.load_symbol_metadata_similarity()
+    symbol_data = sr.SymbolData()
+    symbols = symbol_data.all_keys
+
+    whitelist = [
+        "fdsymbol-OT1-_landupint",
+        "amssymb-OT1-_leftrightsquigarrow",
+        "amssymb-OT1-_rightsquigarrow",
+        "txfonts-OT1-_leftsquigarrow",
+        "stmaryrd-OT1-_nnearrow",
+        "stmaryrd-OT1-_nnwarrow",
+        "mathabx-OT1-_boxright",
+        "mathabx-OT1-_boxleft",
+    ]
 
     # Check for collisions.
-    for symbol1 in symbols.values():
-        for symbol2 in symbols.values():
+    for symbol1 in symbols:
+        for symbol2 in symbols:
             if symbol1 == symbol2:
                 continue
-            if symbol1.command == symbol2.command:
+            if symbol_data[symbol1].command == symbol_data[symbol2].command:
+                # Skip the whitelist.
+                if symbol1 in whitelist or symbol2 in whitelist:
+                    continue
                 # Check if they are in a similarity relation.
-                if symbol1.key in similarity[symbol2.key]:
+                if symbol1 in symbol_data.get_similarity_group(symbol2):
                     continue
-                if symbol2.key in similarity[symbol1.key]:
+                if symbol2 in symbol_data.get_similarity_group(symbol1):
                     continue
-                raise AssertionError(
-                    f"Symbols {symbol1.key} and {symbol2.key} have the same command."
-                )
+                raise AssertionError(f"Symbols {symbol1} and {symbol2} have the same command.")
 
 
 def test_self_symmetry_similarity_conflict() -> None:

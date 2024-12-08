@@ -50,6 +50,8 @@
   - \&
   - '\#'
   - \%
+  - '*'
+  - '+'
 - \--
 - \---
 - \----
@@ -498,6 +500,7 @@
     - \oplus
     - \times
     - \ast
+    - \dot*
     - \dagger
     - \oslash
     - \triangleleft
@@ -1666,7 +1669,7 @@
     - \medslash
     - \utimes
     - \curlywedgedot
-    - \medvert
+#    - \medvert
     - \vbipropto
     - \ddotdot
     - \medvertdot

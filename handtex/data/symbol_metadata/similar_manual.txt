@@ -3,9 +3,6 @@ MnSymbol-OT1-_Nwarrow txfonts-OT1-_Nwarrow
 MnSymbol-OT1-_Searrow txfonts-OT1-_Searrow
 MnSymbol-OT1-_Swarrow txfonts-OT1-_Swarrow
 MnSymbol-OT1-_boxbox stix-OT1-_boxbox stmaryrd-OT1-_boxbox
-MnSymbol-OT1-_filledmedtriangledown MnSymbol-OT1-_filledtriangledown
-MnSymbol-OT1-_filledmedtriangleleft MnSymbol-OT1-_filledtriangleleft
-MnSymbol-OT1-_filledmedtriangleright MnSymbol-OT1-_filledtriangleright
 MnSymbol-OT1-_filledstar MnSymbol-OT1-_medstar MnSymbol-OT1-_smallstar MnSymbol-OT1-_thinstar
 MnSymbol-OT1-_leftslice stmaryrd-OT1-_leftslice
 MnSymbol-OT1-_neqslantgtr stix-OT1-_neqslantgtr
@@ -30,16 +27,16 @@ amssymb-OT1-_Rrightarrow MnSymbol-OT1-_Rrightarrow txfonts-OT1-_Rrightarrow
 amssymb-OT1-_Rsh mathabx-OT1-_Rsh MnSymbol-OT1-_Rsh
 amssymb-OT1-_Subset mathabx-OT1-_Subset stix-OT1-_Subset
 amssymb-OT1-_Supset mathabx-OT1-_Supset stix-OT1-_Supset
-amssymb-OT1-_Vdash mathabx-OT1-_Vdash stix-OT1-_Vdash
-amssymb-OT1-_Vvdash fdsymbol-OT1-_Vvdash mathabx-OT1-_Vvdash MnSymbol-OT1-_Vvdash stix-OT1-_Vvdash
+amssymb-OT1-_Vdash mathabx-OT1-_Vdash stix-OT1-_Vdash fdsymbol-OT1-_rightVdash MnSymbol-OT1-_rightVdash
+amssymb-OT1-_Vvdash fdsymbol-OT1-_Vvdash mathabx-OT1-_Vvdash MnSymbol-OT1-_Vvdash stix-OT1-_Vvdash txfonts-OT1-_VvDash
 amssymb-OT1-_approxeq fdsymbol-OT1-_approxeq MnSymbol-OT1-_approxeq stix-OT1-_approxeq
 amssymb-OT1-_backsim fdsymbol-OT1-_backsim MnSymbol-OT1-_backsim stix-OT1-_backsim
 amssymb-OT1-_backsimeq fdsymbol-OT1-_backsimeq MnSymbol-OT1-_backsimeq stix-OT1-_backsimeq
 amssymb-OT1-_barwedge fdsymbol-OT1-_barwedge logix-OT1-_Nand mathabx-OT1-_barwedge stix-OT1-_barwedge stix-OT1-_varbarwedge
 amssymb-OT1-_between fdsymbol-OT1-_between mathabx-OT1-_between MnSymbol-OT1-_between stix-OT1-_between
-amssymb-OT1-_blacksquare amssymb-OT1-_centerdot amssymb-OT1-_square fdsymbol-OT1-_centerdot mathabx-OT1-_boxvoid mathabx-OT1-_square MnSymbol-OT1-_filledmedsquare MnSymbol-OT1-_filledsquare MnSymbol-OT1-_medsquare MnSymbol-OT1-_smallsquare stmaryrd-OT1-_boxempty stmaryrd-OT1-_oblong
+amssymb-OT1-_blacksquare amssymb-OT1-_centerdot amssymb-OT1-_square fdsymbol-OT1-_centerdot mathabx-OT1-_boxvoid mathabx-OT1-_square MnSymbol-OT1-_filledmedsquare MnSymbol-OT1-_filledsquare MnSymbol-OT1-_medsquare MnSymbol-OT1-_smallsquare stmaryrd-OT1-_boxempty stmaryrd-OT1-_oblong mathabx-OT1-_sqbullet
 amssymb-OT1-_blacktriangle wasysym-OT1-_UParrow
-amssymb-OT1-_blacktriangledown mathabx-OT1-_blacktriangledown tipa-OT1-_texthalflength wasysym-OT1-_DOWNarrow
+amssymb-OT1-_blacktriangledown mathabx-OT1-_blacktriangledown tipa-OT1-_texthalflength wasysym-OT1-_DOWNarrow MnSymbol-OT1-_filledmedtriangledown MnSymbol-OT1-_filledtriangledown
 amssymb-OT1-_boxdot mathabx-OT1-_boxcirc mathabx-OT1-_boxdot MnSymbol-OT1-_boxdot stix-OT1-_boxcircle stix-OT1-_boxdot stmaryrd-OT1-_boxcircle stmaryrd-OT1-_boxdot
 amssymb-OT1-_boxminus mathabx-OT1-_boxminus MnSymbol-OT1-_boxminus stix-OT1-_boxminus
 amssymb-OT1-_boxplus mathabx-OT1-_boxplus MnSymbol-OT1-_boxplus stix-OT1-_boxplus
@@ -59,7 +56,7 @@ amssymb-OT1-_curlywedge fdsymbol-OT1-_curlywedge mathabx-OT1-_curlywedge MnSymbo
 amssymb-OT1-_curvearrowleft mathabx-OT1-_curvearrowleft
 amssymb-OT1-_curvearrowright mathabx-OT1-_curvearrowright
 amssymb-OT1-_divideontimes fdsymbol-OT1-_divideontimes mathabx-OT1-_divideontimes stix-OT1-_divideontimes
-amssymb-OT1-_dotplus fdsymbol-OT1-_dotplus mathabx-OT1-_dotplus stix-OT1-_dotplus
+amssymb-OT1-_dotplus fdsymbol-OT1-_dotplus mathabx-OT1-_dotplus stix-OT1-_dotplus logix-OT1-_DPlus mathabx-OT1-_circplus
 amssymb-OT1-_doublebarwedge fdsymbol-OT1-_doublebarwedge mathabx-OT1-_doublebarwedge stix-OT1-_doublebarwedge stix-OT1-_vardoublebarwedge
 amssymb-OT1-_downdownarrows mathabx-OT1-_downdownarrows MnSymbol-OT1-_downdownarrows
 amssymb-OT1-_downharpoonleft fdsymbol-OT1-_downharpoonleft mathabx-OT1-_downharpoonleft
@@ -98,7 +95,7 @@ amssymb-OT1-_lesseqqgtr MnSymbol-OT1-_lesseqqgtr stix-OT1-_lesseqqgtr
 amssymb-OT1-_lessgtr MnSymbol-OT1-_lessgtr stix-OT1-_lessgtr
 amssymb-OT1-_lesssim MnSymbol-OT1-_lesssim stix-OT1-_lesssim
 amssymb-OT1-_ll MnSymbol-OT1-_ll stix-OT1-_ll
-amssymb-OT1-_llcorner stix-OT1-_llcorner
+amssymb-OT1-_llcorner stix-OT1-_llcorner MnSymbol-OT1-_lefthalfcup
 amssymb-OT1-_lll MnSymbol-OT1-_lll stix-OT1-_lll
 amssymb-OT1-_lnapprox MnSymbol-OT1-_lnapprox stix-OT1-_lnapprox
 amssymb-OT1-_lneq stix-OT1-_lneq
@@ -106,7 +103,7 @@ amssymb-OT1-_lneqq amssymb-OT1-_lvertneqq MnSymbol-OT1-_lneqq stix-OT1-_lneqq st
 amssymb-OT1-_lnsim MnSymbol-OT1-_lnsim stix-OT1-_lnsim
 amssymb-OT1-_looparrowleft mathabx-OT1-_looparrowleft MnSymbol-OT1-_looparrowleft
 amssymb-OT1-_looparrowright mathabx-OT1-_looparrowright MnSymbol-OT1-_looparrowright
-amssymb-OT1-_lrcorner stix-OT1-_lrcorner
+amssymb-OT1-_lrcorner stix-OT1-_lrcorner MnSymbol-OT1-_righthalfcup
 amssymb-OT1-_ltimes fdsymbol-OT1-_ltimes mathabx-OT1-_ltimes MnSymbol-OT1-_ltimes stix-OT1-_ltimes txfonts-OT1-_lJoin
 amssymb-OT1-_maltese wasysym-OT1-_kreuz
 amssymb-OT1-_mathcal{N} mathrsfs-OT1-_mathscr{N}
@@ -169,19 +166,19 @@ amssymb-OT1-_succsim fdsymbol-OT1-_succsim mathabx-OT1-_succsim MnSymbol-OT1-_su
 amssymb-OT1-_supseteqq mathabx-OT1-_supseteqq stix-OT1-_supseteqq
 amssymb-OT1-_supsetneq amssymb-OT1-_varsupsetneq mathabx-OT1-_supsetneq mathabx-OT1-_varsupsetneq stix-OT1-_supsetneq stix-OT1-_varsupsetneq
 amssymb-OT1-_supsetneqq mathabx-OT1-_supsetneqq stix-OT1-_supsetneqq
-amssymb-OT1-_therefore mathabx-OT1-_therefore
+amssymb-OT1-_therefore mathabx-OT1-_therefore MnSymbol-OT1-_uptherefore
 amssymb-OT1-_trianglelefteq stix-OT1-_unlhd wasysym-OT1-_unlhd
 amssymb-OT1-_trianglerighteq stix-OT1-_unrhd wasysym-OT1-_unrhd
 amssymb-OT1-_twoheadleftarrow MnSymbol-OT1-_twoheadleftarrow
 amssymb-OT1-_twoheadrightarrow MnSymbol-OT1-_twoheadrightarrow
-amssymb-OT1-_ulcorner stix-OT1-_ulcorner tipa-OT1-_textopencorner
+amssymb-OT1-_ulcorner stix-OT1-_ulcorner tipa-OT1-_textopencorner MnSymbol-OT1-_lefthalfcap
 amssymb-OT1-_upharpoonleft fdsymbol-OT1-_upharpoonleft mathabx-OT1-_upharpoonleft
 amssymb-OT1-_upharpoonright fdsymbol-OT1-_upharpoonright mathabx-OT1-_upharpoonright
 amssymb-OT1-_upuparrows mathabx-OT1-_upuparrows MnSymbol-OT1-_upuparrows
-amssymb-OT1-_urcorner stix-OT1-_urcorner tipa-OT1-_textcorner
+amssymb-OT1-_urcorner stix-OT1-_urcorner tipa-OT1-_textcorner MnSymbol-OT1-_righthalfcap
 amssymb-OT1-_varsubsetneqq mathabx-OT1-_varsubsetneqq stix-OT1-_varsubsetneqq
 amssymb-OT1-_varsupsetneqq mathabx-OT1-_varsupsetneqq stix-OT1-_varsupsetneqq
-amssymb-OT1-_veebar fdsymbol-OT1-_veebar mathabx-OT1-_veebar stix-OT1-_veebar
+amssymb-OT1-_veebar fdsymbol-OT1-_veebar mathabx-OT1-_veebar stix-OT1-_veebar stix-OT1-_varveebar
 bbold-OT1-_mathbb{1} dsfont-OT1-_mathds{1}
 esint-OT1-_fint fdsymbol-OT1-_fint fdsymbol-OT1-_intbar MnSymbol-OT1-_strokedint stix-OT1-_fint stix-OT1-_fintup stix-OT1-_intbar stix-OT1-_intbarup tipa-OT1-_texthtbardotlessj txfonts-OT1-_fint
 esint-OT1-_landdownint MnSymbol-OT1-_landdownint
@@ -199,13 +196,12 @@ fdsymbol-OT1-_backcong MnSymbol-OT1-_backcong stix-OT1-_backcong
 fdsymbol-OT1-_bigcapdot MnSymbol-OT1-_bigcapdot
 fdsymbol-OT1-_bigcapplus fdsymbol-OT1-_capplus MnSymbol-OT1-_bigcapplus MnSymbol-OT1-_capplus stmaryrd-OT1-_nplus
 fdsymbol-OT1-_bigcupdot MnSymbol-OT1-_bigcupdot stix-OT1-_bigcupdot
-fdsymbol-OT1-_bigcupplus MnSymbol-OT1-_bigcupplus
 fdsymbol-OT1-_bigcurlyvee MnSymbol-OT1-_bigcurlyvee
 fdsymbol-OT1-_bigcurlywedge MnSymbol-OT1-_bigcurlywedge
 fdsymbol-OT1-_bigdoublevee MnSymbol-OT1-_bigdoublevee
 fdsymbol-OT1-_bigdoublewedge MnSymbol-OT1-_bigdoublewedge
 fdsymbol-OT1-_bigoast MnSymbol-OT1-_bigoast
-fdsymbol-OT1-_bigplus fdsymbol-OT1-_plus MnSymbol-OT1-_bigplus MnSymbol-OT1-_plus
+fdsymbol-OT1-_bigplus fdsymbol-OT1-_plus MnSymbol-OT1-_bigplus MnSymbol-OT1-_plus logix-OT1-_Pls stix-OT1-_tplus latex2e-OT1-+
 fdsymbol-OT1-_bigsqcap MnSymbol-OT1-_bigsqcap stix-OT1-_bigsqcap
 fdsymbol-OT1-_bigsqcapdot MnSymbol-OT1-_bigsqcapdot
 fdsymbol-OT1-_bigsqcapplus fdsymbol-OT1-_sqcapplus MnSymbol-OT1-_bigsqcapplus MnSymbol-OT1-_sqcapplus txfonts-OT1-_bigsqcapplus txfonts-OT1-_sqcapplus
@@ -217,7 +213,7 @@ fdsymbol-OT1-_bumpeqq stix-OT1-_bumpeqq
 fdsymbol-OT1-_capdot MnSymbol-OT1-_capdot stix-OT1-_capdot
 fdsymbol-OT1-_coloneq mathabx-OT1-_coloneq MnSymbol-OT1-_coloneq stix-OT1-_coloneq txfonts-OT1-_coloneq
 fdsymbol-OT1-_cupdot MnSymbol-OT1-_cupdot stix-OT1-_cupdot
-fdsymbol-OT1-_cupplus MnSymbol-OT1-_cupplus
+fdsymbol-OT1-_cupplus MnSymbol-OT1-_cupplus fdsymbol-OT1-_bigcupplus MnSymbol-OT1-_bigcupplus
 fdsymbol-OT1-_dashVv mathabx-OT1-_dashVv
 fdsymbol-OT1-_ddotdot MnSymbol-OT1-_ddotdot
 fdsymbol-OT1-_dotminus logix-OT1-_DMinus MnSymbol-OT1-_dotminus stix-OT1-_dotminus
@@ -225,15 +221,14 @@ fdsymbol-OT1-_dotsminusdots stix-OT1-_dotsminusdots
 fdsymbol-OT1-_dottimes logix-OT1-_DTimes mathabx-OT1-_dottimes stix-OT1-_dottimes
 fdsymbol-OT1-_doublecap mathabx-OT1-_doublecap MnSymbol-OT1-_doublecap
 fdsymbol-OT1-_doublecup mathabx-OT1-_doublecup MnSymbol-OT1-_doublecup
-fdsymbol-OT1-_doublesqcap MnSymbol-OT1-_doublesqcap
-fdsymbol-OT1-_doublesqcup MnSymbol-OT1-_doublesqcup
+fdsymbol-OT1-_doublesqcap MnSymbol-OT1-_doublesqcap mathabx-OT1-_sqdoublecap
+fdsymbol-OT1-_doublesqcup MnSymbol-OT1-_doublesqcup mathabx-OT1-_sqdoublecup
 fdsymbol-OT1-_doublevee MnSymbol-OT1-_doublevee
 fdsymbol-OT1-_doublewedge MnSymbol-OT1-_doublewedge
-fdsymbol-OT1-_downVdash MnSymbol-OT1-_downVdash
+fdsymbol-OT1-_downVdash MnSymbol-OT1-_downVdash stix-OT1-_Barv
 fdsymbol-OT1-_downY MnSymbol-OT1-_downY
-fdsymbol-OT1-_downmodels MnSymbol-OT1-_downmodels
+fdsymbol-OT1-_downmodels MnSymbol-OT1-_downmodels fdsymbol-OT1-_downvDash stix-OT1-_barV
 fdsymbol-OT1-_downupharpoons mathabx-OT1-_downupharpoons
-fdsymbol-OT1-_downvdash MnSymbol-OT1-_downvdash
 fdsymbol-OT1-_dtimes MnSymbol-OT1-_dtimes stix-OT1-_btimes
 fdsymbol-OT1-_eqcolon mathabx-OT1-_eqcolon stix-OT1-_eqcolon txfonts-OT1-_eqcolon
 fdsymbol-OT1-_eqdot MnSymbol-OT1-_eqdot stix-OT1-_eqdot
@@ -241,7 +236,7 @@ fdsymbol-OT1-_eqsim MnSymbol-OT1-_eqsim stix-OT1-_eqsim txfonts-OT1-_eqsim
 fdsymbol-OT1-_equal MnSymbol-OT1-_equal
 fdsymbol-OT1-_hdotdot MnSymbol-OT1-_hdotdot
 fdsymbol-OT1-_intBar stix-OT1-_intBar stix-OT1-_intBarup
-fdsymbol-OT1-_intprod stix-OT1-_intprod
+fdsymbol-OT1-_intprod stix-OT1-_intprod logix-OT1-_InvNt
 fdsymbol-OT1-_intprodr stix-OT1-_intprodr
 fdsymbol-OT1-_landdownint stix-OT1-_awint stix-OT1-_awintup
 fdsymbol-OT1-_landupint stix-OT1-_intclockwise stix-OT1-_intclockwiseup
@@ -249,7 +244,7 @@ fdsymbol-OT1-_leftVdash MnSymbol-OT1-_leftVdash
 fdsymbol-OT1-_leftY MnSymbol-OT1-_leftY
 fdsymbol-OT1-_leftfootline MnSymbol-OT1-_leftfootline
 fdsymbol-OT1-_leftmodels MnSymbol-OT1-_leftmodels
-fdsymbol-OT1-_leftvdash MnSymbol-OT1-_leftvdash
+fdsymbol-OT1-_leftvdash MnSymbol-OT1-_leftvdash stix-OT1-_shortlefttack
 fdsymbol-OT1-_longmapsfrom stmaryrd-OT1-_longmapsfrom stmaryrd-OT1-_mapsfrom
 fdsymbol-OT1-_measuredrightangle stix-OT1-_measuredrightangle
 fdsymbol-OT1-_medbackslash MnSymbol-OT1-_medbackslash
@@ -307,12 +302,10 @@ fdsymbol-OT1-_pullback stix-OT1-_pullback
 fdsymbol-OT1-_pushout stix-OT1-_pushout
 fdsymbol-OT1-_rcirclerightint MnSymbol-OT1-_rcirclerightint
 fdsymbol-OT1-_revangle stix-OT1-_revangle
-fdsymbol-OT1-_rightVdash MnSymbol-OT1-_rightVdash
 fdsymbol-OT1-_rightY MnSymbol-OT1-_rightY
 fdsymbol-OT1-_rightangle stix-OT1-_rightangle
 fdsymbol-OT1-_rightfootline MnSymbol-OT1-_rightfootline
 fdsymbol-OT1-_rightmodels MnSymbol-OT1-_rightmodels
-fdsymbol-OT1-_rightvdash MnSymbol-OT1-_rightvdash
 fdsymbol-OT1-_simneqq stix-OT1-_simneqq
 fdsymbol-OT1-_sphericalangleup stix-OT1-_sphericalangleup
 fdsymbol-OT1-_sqcapdot MnSymbol-OT1-_sqcapdot
@@ -325,10 +318,10 @@ fdsymbol-OT1-_sumint fdsymbol-OT1-_varsumint MnSymbol-OT1-_sumint stix-OT1-_sumi
 fdsymbol-OT1-_timesbar stix-OT1-_timesbar
 fdsymbol-OT1-_triplesim MnSymbol-OT1-_triplesim
 fdsymbol-OT1-_udotdot MnSymbol-OT1-_udotdot
-fdsymbol-OT1-_upVdash MnSymbol-OT1-_upVdash
+fdsymbol-OT1-_upVdash MnSymbol-OT1-_upVdash stix-OT1-_vBar
 fdsymbol-OT1-_upY MnSymbol-OT1-_upY
 fdsymbol-OT1-_updownharpoons mathabx-OT1-_updownharpoons
-fdsymbol-OT1-_upmodels MnSymbol-OT1-_upmodels
+fdsymbol-OT1-_upmodels MnSymbol-OT1-_upmodels fdsymbol-OT1-_upvDash
 fdsymbol-OT1-_upvdash MnSymbol-OT1-_upvdash
 fdsymbol-OT1-_utimes MnSymbol-OT1-_utimes
 fdsymbol-OT1-_vDdash stix-OT1-_vDdash
@@ -345,7 +338,7 @@ latex2e-OT1-/ textcomp-OT1-_textfractionsolidus
 latex2e-OT1-_$ latex2e-OT1-_mathdollar latex2e-OT1-_textdollar marvosym-OT1-_EyesDollar textcomp-OT1-_textdollar
 latex2e-OT1-_% textcomp-OT1-_textdiscount
 latex2e-OT1-_& cmll-OT1-_with stmaryrd-OT1-_binampersand
-latex2e-OT1-_-- latex2e-OT1-_--- latex2e-OT1-_---- latex2e-OT1-__ latex2e-OT1-_mathunderscore latex2e-OT1-_textemdash latex2e-OT1-_textendash latex2e-OT1-_textunderscore fdsymbol-OT1-_minus logix-OT1-_Minus MnSymbol-OT1-_minus stix-OT1-_tminus textcomp-OT1-_textminus textcomp-OT1-_textthreequartersemdash textcomp-OT1-_texttwelveudash
+latex2e-OT1-_-- latex2e-OT1-_--- latex2e-OT1-_---- latex2e-OT1-__ latex2e-OT1-_mathunderscore latex2e-OT1-_textemdash latex2e-OT1-_textendash latex2e-OT1-_textunderscore fdsymbol-OT1-_minus logix-OT1-_Minus MnSymbol-OT1-_minus stix-OT1-_tminus textcomp-OT1-_textminus textcomp-OT1-_textthreequartersemdash textcomp-OT1-_texttwelveudash MnSymbol-OT1-_leftrightline
 latex2e-OT1-_Downarrow MnSymbol-OT1-_Downarrow
 latex2e-OT1-_Im amssymb-OT1-_mathfrak{I}
 latex2e-OT1-_Leftarrow latex2e-OT1-_Longleftarrow MnSymbol-OT1-_Leftarrow MnSymbol-OT1-_Longleftarrow
@@ -358,20 +351,20 @@ latex2e-OT1-_Updownarrow MnSymbol-OT1-_Updownarrow
 latex2e-OT1-_amalg latex2e-OT1-_coprod fdsymbol-OT1-_amalg fdsymbol-OT1-_coprod fdsymbol-OT1-_varamalg fdsymbol-OT1-_varcoprod MnSymbol-OT1-_amalg MnSymbol-OT1-_coprod stix-OT1-_amalg stix-OT1-_coprod
 latex2e-OT1-_angle amssymb-OT1-_angle fdsymbol-OT1-_angle stix-OT1-_angle
 latex2e-OT1-_approx amssymb-OT1-_thickapprox fdsymbol-OT1-_approx fdsymbol-OT1-_thickapprox MnSymbol-OT1-_approx stix-OT1-_approx stix-OT1-_thickapprox
-latex2e-OT1-_ast latex2e-OT1-_textasteriskcentered fdsymbol-OT1-_ast logix-OT1-_Asterick mathabx-OT1-_ast mathabx-OT1-_Asterisk MnSymbol-OT1-_ast stix-OT1-_ast textcomp-OT1-_textasteriskcentered
+latex2e-OT1-* latex2e-OT1-_ast latex2e-OT1-_textasteriskcentered fdsymbol-OT1-_ast logix-OT1-_Asterick mathabx-OT1-_ast mathabx-OT1-_Asterisk MnSymbol-OT1-_ast stix-OT1-_ast textcomp-OT1-_textasteriskcentered
 latex2e-OT1-_asymp stix-OT1-_asymp
 latex2e-OT1-_backslash latex2e-OT1-_setminus latex2e-OT1-_textbackslash fdsymbol-OT1-_setminus stix-OT1-_setminus
 latex2e-OT1-_bigcap latex2e-OT1-_cap fdsymbol-OT1-_bigcap fdsymbol-OT1-_cap mathabx-OT1-_cap MnSymbol-OT1-_bigcap MnSymbol-OT1-_cap stix-OT1-_bigcap stix-OT1-_cap
-latex2e-OT1-_bigcirc latex2e-OT1-_circ gensymb-OT1-_degree MnSymbol-OT1-_bigcircle MnSymbol-OT1-_circ textcomp-OT1-_textbigcircle textcomp-OT1-_textdegree textcomp-OT1-_textopenbullet wasysym-OT1-_fullmoon wasysym-OT1-_ocircle
+latex2e-OT1-_bigcirc latex2e-OT1-_circ gensymb-OT1-_degree MnSymbol-OT1-_bigcircle MnSymbol-OT1-_circ textcomp-OT1-_textbigcircle textcomp-OT1-_textdegree textcomp-OT1-_textopenbullet wasysym-OT1-_fullmoon wasysym-OT1-_ocircle mathabx-OT1-_ovoid stmaryrd-OT1-_varbigcirc txfonts-OT1-_medcirc txfonts-OT1-_medbullet mathabx-OT1-_udot
 latex2e-OT1-_bigcup latex2e-OT1-_cup fdsymbol-OT1-_bigcup fdsymbol-OT1-_cup mathabx-OT1-_cup MnSymbol-OT1-_bigcup MnSymbol-OT1-_cup stix-OT1-_bigcup stix-OT1-_cup tipa-OT1-_textscu
-latex2e-OT1-_bigodot latex2e-OT1-_odot fdsymbol-OT1-_bigodot marvosym-OT1-_Sun mathabx-OT1-_odot MnSymbol-OT1-_bigodot MnSymbol-OT1-_odot stix-OT1-_bigodot stix-OT1-_odot stmaryrd-OT1-_varodot tipa-OT1-_textbullseye wasysym-OT1-_astrosun
-latex2e-OT1-_bigoplus latex2e-OT1-_oplus fdsymbol-OT1-_bigoplus mathabx-OT1-_oplus MnSymbol-OT1-_bigoplus MnSymbol-OT1-_oplus stix-OT1-_bigoplus stix-OT1-_oplus
+latex2e-OT1-_bigodot latex2e-OT1-_odot fdsymbol-OT1-_bigodot marvosym-OT1-_Sun mathabx-OT1-_odot MnSymbol-OT1-_bigodot MnSymbol-OT1-_odot stix-OT1-_bigodot stix-OT1-_odot stmaryrd-OT1-_varodot tipa-OT1-_textbullseye wasysym-OT1-_astrosun mathabx-OT1-_ocirc MnSymbol-OT1-_ocirc
+latex2e-OT1-_bigoplus latex2e-OT1-_oplus fdsymbol-OT1-_bigoplus mathabx-OT1-_oplus MnSymbol-OT1-_bigoplus MnSymbol-OT1-_oplus stix-OT1-_bigoplus stix-OT1-_oplus stmaryrd-OT1-_varoplus
 latex2e-OT1-_bigotimes latex2e-OT1-_otimes fdsymbol-OT1-_bigotimes mathabx-OT1-_otimes MnSymbol-OT1-_bigotimes MnSymbol-OT1-_otimes stix-OT1-_bigotimes stix-OT1-_otimes stmaryrd-OT1-_varotimes
 latex2e-OT1-_bigsqcup latex2e-OT1-_sqcup fdsymbol-OT1-_bigsqcup fdsymbol-OT1-_sqcup mathabx-OT1-_sqcup MnSymbol-OT1-_bigsqcup MnSymbol-OT1-_sqcup stix-OT1-_bigsqcup stix-OT1-_sqcup
 latex2e-OT1-_biguplus latex2e-OT1-_uplus mathabx-OT1-_uplus stix-OT1-_biguplus stix-OT1-_uplus
-latex2e-OT1-_bigvee latex2e-OT1-_lor latex2e-OT1-_vee fdsymbol-OT1-_bigvee fdsymbol-OT1-_vee mathabx-OT1-_vee MnSymbol-OT1-_bigvee MnSymbol-OT1-_vee stix-OT1-_bigvee stix-OT1-_vee
+latex2e-OT1-_bigvee latex2e-OT1-_lor latex2e-OT1-_vee fdsymbol-OT1-_bigvee fdsymbol-OT1-_vee mathabx-OT1-_vee MnSymbol-OT1-_bigvee MnSymbol-OT1-_vee stix-OT1-_bigvee stix-OT1-_vee logix-OT1-_Or
 latex2e-OT1-_bot latex2e-OT1-_perp stix-OT1-_perp
-latex2e-OT1-_bowtie fdsymbol-OT1-_bowtie MnSymbol-OT1-_bowtie stix-OT1-_bowtie txfonts-OT1-_lrtimes txfonts-OT1-_rJoin wasysym-OT1-_Bowtie wasysym-OT1-_Join
+latex2e-OT1-_bowtie fdsymbol-OT1-_bowtie MnSymbol-OT1-_bowtie stix-OT1-_bowtie txfonts-OT1-_lrtimes txfonts-OT1-_rJoin wasysym-OT1-_Bowtie wasysym-OT1-_Join stix-OT1-_fbowtie
 latex2e-OT1-_bullet latex2e-OT1-_cdot latex2e-OT1-_cdotp latex2e-OT1-_ldotp latex2e-OT1-_textbullet latex2e-OT1-_textperiodcentered fdsymbol-OT1-_cdot MnSymbol-OT1-_bullet MnSymbol-OT1-_cdot textcomp-OT1-_textbullet textcomp-OT1-_textperiodcentered wasysym-OT1-_newmoon
 latex2e-OT1-_cdots latex2e-OT1-_dots latex2e-OT1-_ldots latex2e-OT1-_mathellipsis latex2e-OT1-_textellipsis amsmath-OT1-_dotsb amsmath-OT1-_dotsc amsmath-OT1-_dotsi amsmath-OT1-_dotsm amsmath-OT1-_dotso
 latex2e-OT1-_cong fdsymbol-OT1-_cong MnSymbol-OT1-_cong stix-OT1-_cong
@@ -391,7 +384,7 @@ latex2e-OT1-_hat{=} latex2e-OT1-_widehat{=}
 latex2e-OT1-_hbar amssymb-OT1-_hbar amssymb-OT1-_hslash tipa-OT1-_textcrh
 latex2e-OT1-_heartsuit marvosym-OT1-_Heart
 latex2e-OT1-_imath tipa-OT1-_textraisevibyi tipa-OT1-_textvibyi
-latex2e-OT1-_infty stix-OT1-_infty
+latex2e-OT1-_infty stix-OT1-_infty MnSymbol-OT1-_hbipropto
 latex2e-OT1-_int fdsymbol-OT1-_int MnSymbol-OT1-_int stix-OT1-_int stix-OT1-_intup tipa-OT1-_textesh
 latex2e-OT1-_jmath amssymb-OT1-_mathcal{J}
 latex2e-OT1-_langle textcomp-OT1-_textlangle
@@ -406,10 +399,10 @@ latex2e-OT1-_mathparagraph latex2e-OT1-_P latex2e-OT1-_textparagraph textcomp-OT
 latex2e-OT1-_mathsection latex2e-OT1-_S latex2e-OT1-_textsection textcomp-OT1-_textsection
 latex2e-OT1-_mathsterling latex2e-OT1-_pounds latex2e-OT1-_textsterling textcomp-OT1-_textsterling
 latex2e-OT1-_mid latex2e-OT1-_textbar latex2e-OT1-_vert latex2e-OT1-| amssymb-OT1-_shortmid fdsymbol-OT1-_mid fdsymbol-OT1-_shortmid stix-OT1-_mid stix-OT1-_shortmid tipa-OT1-_textpipe tipa-OT1-_textprimstress tipa-OT1-_textsecstress tipa-OT1-_texttoneletterstem tipa-OT1-_textvertline
-latex2e-OT1-_models amssymb-OT1-_vDash mathabx-OT1-_vDash stix-OT1-_models stix-OT1-_vDash
+latex2e-OT1-_models amssymb-OT1-_vDash mathabx-OT1-_vDash stix-OT1-_models stix-OT1-_vDash fdsymbol-OT1-_rightvDash
 latex2e-OT1-_mp fdsymbol-OT1-_mp logix-OT1-_MinusPlus MnSymbol-OT1-_mp stix-OT1-_mp
 latex2e-OT1-_nearrow mathabx-OT1-_nearrow MnSymbol-OT1-_nearrow tipa-OT1-_textglobrise
-latex2e-OT1-_ni amssymb-OT1-_backepsilon stix-OT1-_ni
+latex2e-OT1-_ni amssymb-OT1-_backepsilon stix-OT1-_ni stix-OT1-_smallni
 latex2e-OT1-_not_approx fdsymbol-OT1-_napprox mathabx-OT1-_napprox MnSymbol-OT1-_napprox
 latex2e-OT1-_not_equiv fdsymbol-OT1-_nequiv MnSymbol-OT1-_nequiv txfonts-OT1-_nequiv
 latex2e-OT1-_not_sim amssymb-OT1-_nsim fdsymbol-OT1-_nsim mathabx-OT1-_nsim MnSymbol-OT1-_nsim
@@ -417,7 +410,7 @@ latex2e-OT1-_not_simeq fdsymbol-OT1-_nsimeq mathabx-OT1-_nsimeq MnSymbol-OT1-_ns
 latex2e-OT1-_nwarrow mathabx-OT1-_nwarrow MnSymbol-OT1-_nwarrow
 latex2e-OT1-_oint fdsymbol-OT1-_oint MnSymbol-OT1-_oint stix-OT1-_oint stix-OT1-_ointup
 latex2e-OT1-_ominus mathabx-OT1-_ominus MnSymbol-OT1-_ominus stix-OT1-_ominus stmaryrd-OT1-_varominus tipa-OT1-_textbaro
-latex2e-OT1-_oslash mathabx-OT1-_oslash MnSymbol-OT1-_oslash stix-OT1-_oslash
+latex2e-OT1-_oslash mathabx-OT1-_oslash MnSymbol-OT1-_oslash stix-OT1-_oslash stmaryrd-OT1-_varoslash MnSymbol-OT1-_bigoslash
 latex2e-OT1-_parallel latex2e-OT1-_Vert latex2e-OT1-_| amssymb-OT1-_shortparallel fdsymbol-OT1-_parallel fdsymbol-OT1-_shortparallel MnSymbol-OT1-_shortparallel stix-OT1-_parallel stix-OT1-_shortparallel textcomp-OT1-_textbardbl tipa-OT1-_textdoublepipe tipa-OT1-_textdoublevertline
 latex2e-OT1-_pm fdsymbol-OT1-_pm logix-OT1-_PlusMinus MnSymbol-OT1-_pm stix-OT1-_pm textcomp-OT1-_textpm
 latex2e-OT1-_prec fdsymbol-OT1-_prec MnSymbol-OT1-_prec stix-OT1-_prec
@@ -455,12 +448,12 @@ latex2e-OT1-_textquoteright latex2e-T1-_quotesinglbase
 latex2e-OT1-_textregistered amssymb-OT1-_circledR textcomp-OT1-_textregistered
 latex2e-OT1-_texttrademark textcomp-OT1-_texttrademark
 latex2e-OT1-_times fdsymbol-OT1-_bigtimes fdsymbol-OT1-_times logix-OT1-_Times MnSymbol-OT1-_bigtimes MnSymbol-OT1-_times stix-OT1-_bigtimes stix-OT1-_times stix-OT1-_vectimes textcomp-OT1-_texttimes txfonts-OT1-_varprod
-latex2e-OT1-_top amssymb-OT1-_intercal fdsymbol-OT1-_intercal stix-OT1-_intercal
-latex2e-OT1-_triangleleft amssymb-OT1-_blacktriangleleft amssymb-OT1-_vartriangleleft mathabx-OT1-_blacktriangleleft mathabx-OT1-_smalltriangleleft MnSymbol-OT1-_smalltriangleleft stix-OT1-_lhd wasysym-OT1-_lhd
-latex2e-OT1-_triangleright amssymb-OT1-_blacktriangleright amssymb-OT1-_vartriangleright mathabx-OT1-_blacktriangleright stix-OT1-_rhd wasysym-OT1-_RHD wasysym-OT1-_rhd wasysym-OT1-_RIGHTarrow
+latex2e-OT1-_top amssymb-OT1-_intercal fdsymbol-OT1-_intercal stix-OT1-_intercal fdsymbol-OT1-_downvdash MnSymbol-OT1-_downvdash stix-OT1-_shortdowntack
+latex2e-OT1-_triangleleft amssymb-OT1-_blacktriangleleft amssymb-OT1-_vartriangleleft mathabx-OT1-_blacktriangleleft mathabx-OT1-_smalltriangleleft MnSymbol-OT1-_smalltriangleleft stix-OT1-_lhd wasysym-OT1-_lhd MnSymbol-OT1-_filledmedtriangleleft MnSymbol-OT1-_filledtriangleleft wasysym-OT1-_LEFTarrow wasysym-OT1-_LHD
+latex2e-OT1-_triangleright amssymb-OT1-_blacktriangleright amssymb-OT1-_vartriangleright mathabx-OT1-_blacktriangleright stix-OT1-_rhd wasysym-OT1-_RHD wasysym-OT1-_rhd wasysym-OT1-_RIGHTarrow MnSymbol-OT1-_filledmedtriangleright MnSymbol-OT1-_filledtriangleright mathabx-OT1-_smalltriangleright MnSymbol-OT1-_smalltriangleright MnSymbol-OT1-_medtriangleright
 latex2e-OT1-_uparrow logix-OT1-_Lnand MnSymbol-OT1-_uparrow stmaryrd-OT1-_shortuparrow textcomp-OT1-_textuparrow tipa-OT1-_textupstep
 latex2e-OT1-_updownarrow MnSymbol-OT1-_updownarrow
-latex2e-OT1-_vdash stix-OT1-_vdash
+latex2e-OT1-_vdash stix-OT1-_vdash fdsymbol-OT1-_rightassert fdsymbol-OT1-_rightvdash MnSymbol-OT1-_rightvdash stix-OT1-_assert
 latex2e-OT1-_vdots fdsymbol-OT1-_vdots stix-OT1-_vdots
 latex2e-OT1-_wr stix-OT1-_wr
 latex2e-T1-_DH latex2e-T1-_DJ
@@ -478,7 +471,7 @@ marvosym-OT1-_Pickup wasysym-OT1-_recorder
 marvosym-OT1-_Telefon wasysym-OT1-_phone
 mathabx-OT1-_DashV stix-OT1-_DashV
 mathabx-OT1-_Dashv stix-OT1-_Dashv
-mathabx-OT1-_VDash stix-OT1-_VDash
+mathabx-OT1-_VDash stix-OT1-_VDash fdsymbol-OT1-_rightVDash
 mathabx-OT1-_blacktriangleup MnSymbol-OT1-_filledmedtriangleup MnSymbol-OT1-_filledtriangleup
 mathabx-OT1-_boxbackslash MnSymbol-OT1-_boxbackslash stix-OT1-_boxbslash stmaryrd-OT1-_boxbslash
 mathabx-OT1-_boxslash MnSymbol-OT1-_boxslash stix-OT1-_boxdiag stmaryrd-OT1-_boxslash
@@ -493,10 +486,7 @@ mathabx-OT1-_nsubset stix-OT1-_nsubset
 mathabx-OT1-_nsupset stix-OT1-_nsupset
 mathabx-OT1-_obackslash MnSymbol-OT1-_obackslash
 mathabx-OT1-_obot stix-OT1-_obot
-mathabx-OT1-_ocirc MnSymbol-OT1-_ocirc
 mathabx-OT1-_odiv stix-OT1-_odiv
-mathabx-OT1-_smalltriangleright MnSymbol-OT1-_smalltriangleright
-mathabx-OT1-_smalltriangleup MnSymbol-OT1-_smalltriangleup
 mathabx-OT1-_sqsubsetneq stix-OT1-_sqsubsetneq
 mathabx-OT1-_sqsupsetneq stix-OT1-_sqsupsetneq
 mathabx-OT1-_updownarrows MnSymbol-OT1-_updownarrows
@@ -514,7 +504,6 @@ stix-OT1-_llparenthesis stmaryrd-OT1-_llparenthesis
 stix-OT1-_lowint stix-OT1-_lowintup
 stix-OT1-_multimapinv txfonts-OT1-_multimapinv
 stix-OT1-_npolint stix-OT1-_npolintup stix-OT1-_scpolint stix-OT1-_scpolintup
-stix-OT1-_obar stmaryrd-OT1-_obar
 stix-OT1-_obslash stmaryrd-OT1-_obslash
 stix-OT1-_ogreaterthan stmaryrd-OT1-_ogreaterthan
 stix-OT1-_olessthan stmaryrd-OT1-_olessthan
@@ -524,7 +513,7 @@ stix-OT1-_rppolint stix-OT1-_rppolintup
 stix-OT1-_rrparenthesis stmaryrd-OT1-_rrparenthesis
 stix-OT1-_sslash stmaryrd-OT1-_sslash
 stix-OT1-_talloblong stmaryrd-OT1-_talloblong
-stix-OT1-_upand stmaryrd-OT1-_bindnasrepma
+stix-OT1-_upand stmaryrd-OT1-_bindnasrepma cmll-OT1-_parr txfonts-OT1-_invamp
 stix-OT1-_upint stix-OT1-_upintup
 stmaryrd-OT1-_Longmapsto stmaryrd-OT1-_Mapsto
 stmaryrd-OT1-_llbracket textcomp-OT1-_textlbrackdbl
@@ -535,4 +524,17 @@ textcomp-OT1-_textcurrency wasysym-OT1-_currency
 textcomp-OT1-_textdblhyphen textcomp-OT1-_textdblhyphenchar
 textcomp-OT1-_textperthousand wasysym-OT1-_permil
 textcomp-OT1-_textquotesingle textcomp-OT1-_textquotestraightbase
-wasysym-OT1-_LEFTarrow wasysym-OT1-_LHD
+mathabx-OT1-_oasterisk mathabx-OT1-_ocoasterisk MnSymbol-OT1-_oast
+mathabx-OT1-_otriangleup MnSymbol-OT1-_otriangle
+txfonts-OT1-_opentimes txfonts-OT1-_openJoin
+logix-OT1-_DAsterisk latex2e-OT1-_dot*
+MnSymbol-OT1-_downtherefore amssymb-OT1-_because
+stix-OT1-_obar stmaryrd-OT1-_obar MnSymbol-OT1-_overt stix-OT1-_circledvert stmaryrd-OT1-_varobar txfonts-OT1-_circledbar stix-OT1-_circledvert
+mathabx-OT1-_coasterisk mathabx-OT1-_coAsterisk
+mathabx-OT1-_bigvarstar mathabx-OT1-_varstar
+fdsymbol-OT1-_crossing MnSymbol-OT1-_hcrossing
+fdsymbol-OT1-_leftfootline fdsymbol-OT1-_longleftfootline
+fdsymbol-OT1-_rightfootline fdsymbol-OT1-_longrightfootline
+stix-OT1-_varisinobar stix-OT1-_isinobar
+stix-OT1-_varniobar stix-OT1-_niobar
+stix-OT1-_simrdots stix-OT1-_kernelcontraction

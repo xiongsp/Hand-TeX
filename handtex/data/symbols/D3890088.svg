@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg fill="#000000" version="1.1" viewBox="0 0 5.1875 5.3906" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<g id="a">
+<path d="m1-5.1562 2.3906 5.1094h0.39062l2.4062-5.1094-0.57812-0.28125-2.0156 4.3281-2.0312-4.3281z"/>
+</g>
+</defs>
+<g transform="translate(-149.71 -129.33)">
+<use x="148.71201" y="134.765" xlink:href="#a"/>
+</g>
+</svg>

@@ -384,6 +384,22 @@
     "filename": "95637651"
   },
   {
+    "command": "*",
+    "mathmode": true,
+    "textmode": true,
+    "pdflatex": true,
+    "key": "latex2e-OT1-*",
+    "filename": "3AE49B34"
+  },
+  {
+    "command": "+",
+    "mathmode": true,
+    "textmode": true,
+    "pdflatex": true,
+    "key": "latex2e-OT1-+",
+    "filename": "3D919CBB"
+  },
+  {
     "command": "\\--",
     "mathmode": false,
     "textmode": true,
@@ -2849,6 +2865,14 @@
     "pdflatex": true,
     "key": "latex2e-OT1-_ast",
     "filename": "0DCF6FE8"
+  },
+  {
+    "command": "\\dot*",
+    "mathmode": true,
+    "textmode": false,
+    "pdflatex": true,
+    "key": "latex2e-OT1-_dot*",
+    "filename": "FC2C2B69"
   },
   {
     "command": "\\dagger",
@@ -11396,15 +11420,6 @@
     "pdflatex": true,
     "key": "MnSymbol-OT1-_curlywedgedot",
     "filename": "15C3F5AF"
-  },
-  {
-    "command": "\\medvert",
-    "package": "MnSymbol",
-    "mathmode": true,
-    "textmode": false,
-    "pdflatex": true,
-    "key": "MnSymbol-OT1-_medvert",
-    "filename": "B897DDB8"
   },
   {
     "command": "\\vbipropto",

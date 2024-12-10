@@ -190,8 +190,8 @@ def main():
         for button in button_list:
             if button.isChecked():
                 selected_transformations.append(button.data)
-        if not selected_transformations:
-            continue
+        # if not selected_transformations:
+        #     continue
         print(f"{s_from} -- " + " ".join(selected_transformations) + f" --> {s_to}")
 
 

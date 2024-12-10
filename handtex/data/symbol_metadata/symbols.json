@@ -3783,20 +3783,20 @@
     "filename": "83712038"
   },
   {
-    "command": "\\hat{=}",
+    "command": "\\hat=",
     "mathmode": true,
     "textmode": false,
     "pdflatex": true,
-    "key": "latex2e-OT1-_hat{=}",
-    "filename": "07B0C518"
+    "key": "latex2e-OT1-_hat=",
+    "filename": "EF7D4F31"
   },
   {
-    "command": "\\widehat{=}",
+    "command": "\\widehat=",
     "mathmode": true,
     "textmode": false,
     "pdflatex": true,
-    "key": "latex2e-OT1-_widehat{=}",
-    "filename": "45D95B8F"
+    "key": "latex2e-OT1-_widehat=",
+    "filename": "7DF60586"
   },
   {
     "command": "\\mid",

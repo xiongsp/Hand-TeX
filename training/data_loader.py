@@ -326,11 +326,15 @@ def recalculate_frequencies():
     augmented_median_freq = sorted(augmented_frequencies.values())[len(augmented_frequencies) // 2]
     std_dev_freq = np.std(list(frequencies.values()))
     augmented_std_dev_freq = np.std(list(augmented_frequencies.values()))
+    leader_count = len(leader_keys)
     print(
         f"Mean frequency of all symbols: {symbol_mean_freq:.2f}, median: {median_freq}, std dev: {std_dev_freq:.2f}"
     )
     print(
         f"Mean augmented frequency of symbols: {augmented_mean_freq:.2f}, median: {augmented_median_freq}, std dev: {augmented_std_dev_freq:.2f}"
+    )
+    print(
+        f"Total symbols: {len(symbol_data.all_keys)} | Leader count: {leader_count} | Unique leaders: {len(symbol_data.symbols_grouped_by_transitive_symmetry)}"
     )
     return
     # Plot both together in a bar chart.

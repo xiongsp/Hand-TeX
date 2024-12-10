@@ -447,13 +447,23 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
 
         if self.symbol_data.has_other_symmetry(symbol_key):
             self.label_other_symmetry.setText(
-                ", ".join(self.symbol_data.get_symmetry_group(symbol_key))
+                ", ".join(
+                    key
+                    for key in self.symbol_data.get_symmetry_group(symbol_key)
+                    if key != symbol_key
+                )
             )
         else:
             self.label_other_symmetry.setText("")
 
         if len(self.symbol_data.get_similarity_group(symbol_key)) > 1:
-            self.label_similar.setText(", ".join(self.symbol_data.get_similarity_group(symbol_key)))
+            self.label_similar.setText(
+                ", ".join(
+                    key
+                    for key in self.symbol_data.get_similarity_group(symbol_key)
+                    if key != symbol_key
+                )
+            )
         else:
             self.label_similar.setText("")
 

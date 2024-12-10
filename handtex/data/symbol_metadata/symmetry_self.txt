@@ -316,6 +316,6 @@ stix-OT1-_sphericalangle: mir0
 fdsymbol-OT1-_sphericalangle: mir0
 stix-OT1-_lftimes: mir0
 stix-OT1-_otimeslhrim: mir0
-latex2e-OT1-_hat{=}: mir90
+latex2e-OT1-_hat=: mir90
 amssymb-OT1-_lesseqqgtr: rot180
 amssymb-OT1-_gtreqqless: rot180

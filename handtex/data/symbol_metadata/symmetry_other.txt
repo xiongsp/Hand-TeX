@@ -1,261 +1,128 @@
-MnSymbol-OT1-_curlyvee -- mir0 --> MnSymbol-OT1-_curlywedge
-tipa-OT1-_textrtaild -- mir0 --> tipa-OT1-_texthtq
-tipa-OT1-_textglotstop -- mir0 --> tipa-OT1-_textinvglotstop
-tipa-OT1-_textglotstop -- mir90 --> tipa-OT1-_textrevglotstop
-tipa-OT1-_textturnscripta -- rot180 --> tipa-OT1-_textscripta
-tipa-OT1-_textcrinvglotstop -- mir0 --> tipa-OT1-_textbarglotstop
-tipa-OT1-_textbarrevglotstop -- mir90 --> tipa-OT1-_textbarglotstop
-MnSymbol-OT1-_rhookuparrow -- rot45 --> MnSymbol-OT1-_rhooknwarrow
-latex2e-OT1-_hookrightarrow -- rot315 --> MnSymbol-OT1-_lhooksearrow
-tipa-OT1-_textlhtlongi -- mir90 --> tipa-OT1-_textfishhookr
-tipa-OT1-_textlhtlongi -- mir0 --> tipa-OT1-_textscj
-tipa-OT1-_textlonglegr -- rot180 --> tipa-OT1-_textturnlonglegr
-tipa-OT1-_textscr -- mir0 --> tipa-OT1-_textinvscr
+latex2e-OT1-_bigcap -- rot180 mir0 --> latex2e-OT1-_bigcup
+latex2e-OT1-_bigcap -- rot270 mir45 --> latex2e-OT1-_supset
+latex2e-OT1-_bigcap -- rot90 mir135 --> latex2e-OT1-_subset
+latex2e-OT1-_bigcup -- rot90 mir135 --> latex2e-OT1-_supset
+latex2e-OT1-_bigoplus -- rot45 --> latex2e-OT1-_bigotimes
+latex2e-OT1-_bigtriangledown -- rot180 mir0 --> latex2e-OT1-_bigtriangleup
+latex2e-OT1-_bigtriangledown -- rot270 mir45 --> latex2e-OT1-_triangleleft
+latex2e-OT1-_bigtriangledown -- rot90 mir135 --> latex2e-OT1-_triangleright
+latex2e-OT1-_bot -- rot270 mir45 --> latex2e-OT1-_vdash
+latex2e-OT1-_bot -- rot90 mir135 --> latex2e-OT1-_dashv
+latex2e-OT1-_bowtie -- rot90 rot270 mir45 mir135 --> MnSymbol-OT1-_vertbowtie
+latex2e-OT1-_cap -- rot180 mir0 --> latex2e-OT1-_cup
+latex2e-OT1-_cdots -- rot90 rot270 mir45 mir135 --> latex2e-OT1-_vdots
+latex2e-OT1-_copyright -- mir90 --> textcomp-OT1-_textcopyleft
+latex2e-OT1-_dashv -- rot180 mir90 --> latex2e-OT1-_vdash
+latex2e-OT1-_dashv -- rot90 mir45 --> latex2e-OT1-_top
+latex2e-OT1-_ddots -- rot90 rot270 mir0 mir90 --> mathdots-OT1-_iddots
+latex2e-OT1-_Delta -- rot180 mir0 --> latex2e-OT1-_bigtriangledown
+latex2e-OT1-_Delta -- rot270 mir45 --> latex2e-OT1-_triangleright
+latex2e-OT1-_Delta -- rot90 mir135 --> latex2e-OT1-_triangleleft
+latex2e-OT1-_downarrow -- rot180 mir0 --> latex2e-OT1-_uparrow
+latex2e-OT1-_Downarrow -- rot180 mir0 --> latex2e-OT1-_Uparrow
+latex2e-OT1-_hookleftarrow -- mir90 --> latex2e-OT1-_hookrightarrow
+latex2e-OT1-_hookleftarrow -- rot180 --> MnSymbol-OT1-_rhookrightarrow
+latex2e-OT1-_hookleftarrow -- rot225 --> MnSymbol-OT1-_rhooknearrow
 latex2e-OT1-_hookleftarrow -- rot270 --> MnSymbol-OT1-_rhookuparrow
 latex2e-OT1-_hookleftarrow -- rot45 --> MnSymbol-OT1-_rhookswarrow
 latex2e-OT1-_hookleftarrow -- rot90 --> MnSymbol-OT1-_rhookdownarrow
-latex2e-OT1-_hookleftarrow -- rot180 --> MnSymbol-OT1-_rhookrightarrow
-latex2e-OT1-_hookleftarrow -- rot225 --> MnSymbol-OT1-_rhooknearrow
-latex2e-OT1-_hookrightarrow -- rot90 --> MnSymbol-OT1-_lhookuparrow
 latex2e-OT1-_hookrightarrow -- rot180 --> MnSymbol-OT1-_lhookleftarrow
 latex2e-OT1-_hookrightarrow -- rot270 --> MnSymbol-OT1-_lhookdownarrow
+latex2e-OT1-_hookrightarrow -- rot315 --> MnSymbol-OT1-_lhooksearrow
 latex2e-OT1-_hookrightarrow -- rot45 --> MnSymbol-OT1-_lhooknearrow
-MnSymbol-OT1-_lhooknearrow -- rot90 --> MnSymbol-OT1-_lhooknwarrow
-MnSymbol-OT1-_lhooknearrow -- rot180 --> MnSymbol-OT1-_lhookswarrow
-MnSymbol-OT1-_lhooknearrow -- mir0 --> MnSymbol-OT1-_rhooksearrow
-amssymb-OT1-_dashrightarrow -- rot90 mir45 --> MnSymbol-OT1-_dasheduparrow
-amssymb-OT1-_dashrightarrow -- rot270 mir135 --> MnSymbol-OT1-_dasheddownarrow
-amssymb-OT1-_dashrightarrow -- rot45 --> MnSymbol-OT1-_dashednearrow
-MnSymbol-OT1-_dashednearrow -- rot90 mir90 --> MnSymbol-OT1-_dashednwarrow
-MnSymbol-OT1-_dashednearrow -- rot180 mir135 --> MnSymbol-OT1-_dashedswarrow
-MnSymbol-OT1-_dashednearrow -- rot270 mir0 --> MnSymbol-OT1-_dashedsearrow
-tipa-OT1-_textrthook -- mir90 --> tipa-OT1-_textpalhook
-tipa-OT1-_textrthook -- mir0 --> tipa-OT1-_texthooktop
-stix-OT1-_rsqhook -- mir90 --> stix-OT1-_lsqhook
-mathabx-OT1-_curvearrowbotleftright -- rot180 mir0 --> mathabx-OT1-_curvearrowleftright
-mathabx-OT1-_curvearrowbotleftright -- rot90 mir135 --> MnSymbol-OT1-_curvearrowdownup
-mathabx-OT1-_curvearrowbotleftright -- rot225 --> MnSymbol-OT1-_curvearrownesw
-mathabx-OT1-_curvearrowbotleftright -- rot315 --> MnSymbol-OT1-_curvearrownwse
-mathabx-OT1-_curvearrowbotleftright -- rot135 --> MnSymbol-OT1-_curvearrowsenw
-mathabx-OT1-_curvearrowbotleftright -- rot45 --> MnSymbol-OT1-_curvearrowswne
-mathabx-OT1-_curvearrowbotleftright -- rot270 mir45 --> MnSymbol-OT1-_curvearrowupdown
-mathabx-OT1-_righttoleftarrow -- rot180 --> mathabx-OT1-_lefttorightarrow
-mathabx-OT1-_righttoleftarrow -- rot270 --> mathabx-OT1-_downtouparrow
-mathabx-OT1-_righttoleftarrow -- rot90 --> mathabx-OT1-_uptodownarrow
-amssymb-OT1-_looparrowright -- rot180 --> mathabx-OT1-_looparrowdownleft
-mathabx-OT1-_looparrowdownleft -- mir90 --> mathabx-OT1-_looparrowdownright
-stix-OT1-_leftarrowsubset -- rot180 mir90 --> stix-OT1-_rightarrowsupset
-stix-OT1-_leftarrowless -- rot180 mir90 --> stix-OT1-_rightarrowgtr
-stmaryrd-OT1-_curlyveedownarrow -- rot180 mir0 --> stmaryrd-OT1-_curlywedgeuparrow
-stmaryrd-OT1-_curlyveeuparrow -- rot180 mir0 --> stmaryrd-OT1-_curlywedgedownarrow
-latex2e-OT1-_lnot -- mir0 --> fdsymbol-OT1-_intprod
-fdsymbol-OT1-_intprod -- mir90 --> fdsymbol-OT1-_intprodr
-fdsymbol-OT1-_rightY -- rot270 mir135 --> fdsymbol-OT1-_downY
-fdsymbol-OT1-_rightY -- rot180 mir90 --> fdsymbol-OT1-_leftY
-fdsymbol-OT1-_rightY -- rot90 mir45 --> fdsymbol-OT1-_upY
-fdsymbol-OT1-_minusfdots -- mir0 mir90 --> fdsymbol-OT1-_minusrdots
-MnSymbol-OT1-_closedcurlyvee -- rot180 mir0 --> MnSymbol-OT1-_closedcurlywedge
-MnSymbol-OT1-_closedcurlyvee -- rot270 mir45 --> MnSymbol-OT1-_closedprec
-MnSymbol-OT1-_closedcurlyvee -- rot90 mir135 --> MnSymbol-OT1-_closedsucc
-stix-OT1-_closedvarcap -- rot180 mir0 --> stix-OT1-_closedvarcup
-MnSymbol-OT1-_closedequal -- rot180 mir0 --> MnSymbol-OT1-_equalclosed
-fdsymbol-OT1-_doublevee -- rot180 mir0 --> fdsymbol-OT1-_doublewedge
-MnSymbol-OT1-_doublecurlyvee -- rot180 mir0 --> MnSymbol-OT1-_doublecurlywedge
-fdsymbol-OT1-_nwseharpoonnesw -- rot135 rot315 --> fdsymbol-OT1-_updownharpoonleftright
-fdsymbol-OT1-_nwseharpoonnesw -- rot45 rot225 --> fdsymbol-OT1-_leftrightharpoonupdown
-stix-OT1-_lbracklltick -- rot180 --> stix-OT1-_rbrackurtick
-stix-OT1-_lbracklltick -- mir0 --> stix-OT1-_lbrackultick
-stix-OT1-_lbracklltick -- mir90 --> stix-OT1-_rbracklrtick
-stix-OT1-_lvzigzag -- rot180 mir90 --> stix-OT1-_rvzigzag
-stix-OT1-_Lvzigzag -- rot180 mir90 --> stix-OT1-_Rvzigzag
-stix-OT1-_Lbrbrak -- rot180 mir90 --> stix-OT1-_Rbrbrak
-stix-OT1-_lblkbrbrak -- rot180 mir90 --> stix-OT1-_rblkbrbrak
-stix-OT1-_llangle -- rot180 mir90 --> stix-OT1-_rrangle
-stix-OT1-_langledot -- rot180 mir90 --> stix-OT1-_rangledot
-fdsymbol-OT1-_neswharpoonsenw -- mir90 --> fdsymbol-OT1-_nwseharpoonnesw
-fdsymbol-OT1-_neswharpoonsenw -- rot135 rot315 --> fdsymbol-OT1-_leftrightharpoondownup
-fdsymbol-OT1-_neswharpoonsenw -- rot90 --> fdsymbol-OT1-_nwseharpoonswne
-fdsymbol-OT1-_neswharpoonsenw -- rot225 --> fdsymbol-OT1-_updownharpoonrightleft
-fdsymbol-OT1-_neswharpoonsenw -- mir45 --> fdsymbol-OT1-_neswharpoonnwse
-amssymb-OT1-_twoheadrightarrow -- rot270 mir135 --> MnSymbol-OT1-_twoheaddownarrow
-amssymb-OT1-_twoheadrightarrow -- rot90 mir45 --> MnSymbol-OT1-_twoheaduparrow
-amssymb-OT1-_twoheadrightarrow -- rot45 --> MnSymbol-OT1-_twoheadnearrow
-MnSymbol-OT1-_twoheadnearrow -- rot90 mir90 --> MnSymbol-OT1-_twoheadnwarrow
-MnSymbol-OT1-_twoheadnearrow -- rot180 mir135 --> MnSymbol-OT1-_twoheadswarrow
-MnSymbol-OT1-_twoheadnearrow -- rot270 mir0 --> MnSymbol-OT1-_twoheadsearrow
-mathabx-OT1-_updownarrows -- mir0 mir90 --> mathabx-OT1-_downuparrows
-mathabx-OT1-_updownarrows -- rot90 rot270 --> amssymb-OT1-_rightleftarrows
-stix-OT1-_Lparengtr -- rot90 mir45 --> stix-OT1-_Rparenless
-fdsymbol-OT1-_sphericalangledown -- rot180 mir0 --> fdsymbol-OT1-_sphericalangleup
-stix-OT1-_lparenless -- rot180 mir90 --> stix-OT1-_rparengtr
-stix-OT1-_wideangledown -- mir0 --> stix-OT1-_wideangleup
-stix-OT1-_measanglerutone -- rot90 --> stix-OT1-_measangleultonw
-stix-OT1-_measanglerutone -- mir45 --> stix-OT1-_measangleurtone
-stix-OT1-_measanglerutone -- mir135 --> stix-OT1-_measangledltosw
-stix-OT1-_measanglerutone -- rot270 --> stix-OT1-_measangledrtose
-stix-OT1-_measanglerutone -- rot180 --> stix-OT1-_measangleldtosw
-stix-OT1-_measanglerutone -- mir90 --> stix-OT1-_measanglelutonw
-stix-OT1-_measanglerutone -- mir0 --> stix-OT1-_measanglerdtose
-fdsymbol-OT1-_measuredangle -- mir90 --> fdsymbol-OT1-_revmeasuredangle
-fdsymbol-OT1-_angle -- mir90 --> fdsymbol-OT1-_revangle
-MnSymbol-OT1-_rightfree -- rot90 mir45 --> MnSymbol-OT1-_upfree
-MnSymbol-OT1-_rightfree -- rot180 mir90 --> MnSymbol-OT1-_leftfree
-MnSymbol-OT1-_rightfree -- rot270 mir135 --> MnSymbol-OT1-_downfree
-MnSymbol-OT1-_rightfree -- rot45 --> MnSymbol-OT1-_nefree
-MnSymbol-OT1-_nefree -- rot90 mir90 --> MnSymbol-OT1-_nwfree
-MnSymbol-OT1-_nefree -- rot180 mir135 --> MnSymbol-OT1-_swfree
-MnSymbol-OT1-_nefree -- rot270 mir0 --> MnSymbol-OT1-_sefree
-fdsymbol-OT1-_downupharpoons -- rot135 rot315 --> fdsymbol-OT1-_swneharpoons
-fdsymbol-OT1-_downupharpoons -- rot45 rot225 --> fdsymbol-OT1-_nwseharpoons
-mathabx-OT1-_leftleftharpoons -- rot180 mir90 --> mathabx-OT1-_rightrightharpoons
-mathabx-OT1-_leftleftharpoons -- rot90 mir45 --> mathabx-OT1-_downdownharpoons
-mathabx-OT1-_leftleftharpoons -- rot270 mir135 --> mathabx-OT1-_upupharpoons
-fdsymbol-OT1-_updownharpoons -- mir90 --> mathabx-OT1-_downupharpoons
-fdsymbol-OT1-_updownharpoons -- rot135 rot315 --> fdsymbol-OT1-_neswharpoons
-fdsymbol-OT1-_updownharpoons -- rot45 rot225 --> fdsymbol-OT1-_senwharpoons
-mathabx-OT1-_rightharpoondown -- rot135 --> fdsymbol-OT1-_nwharpoonne
-fdsymbol-OT1-_nwharpoonne -- rot90 --> fdsymbol-OT1-_swharpoonnw
-fdsymbol-OT1-_nwharpoonne -- mir135 --> fdsymbol-OT1-_nwharpoonsw
-fdsymbol-OT1-_nwharpoonne -- mir0 --> fdsymbol-OT1-_swharpoonse
-fdsymbol-OT1-_nwharpoonne -- rot180 --> fdsymbol-OT1-_seharpoonsw
-fdsymbol-OT1-_nwharpoonne -- mir90 --> fdsymbol-OT1-_neharpoonnw
-fdsymbol-OT1-_nwharpoonne -- rot270 --> fdsymbol-OT1-_neharpoonse
-fdsymbol-OT1-_nwharpoonne -- mir45 --> fdsymbol-OT1-_seharpoonne
-stix-OT1-_Not -- mir90 --> stix-OT1-_bNot
-mathabx-OT1-_barleftharpoon -- mir90 --> mathabx-OT1-_barrightharpoon
-mathabx-OT1-_barleftharpoon -- rot180 --> mathabx-OT1-_rightbarharpoon
-mathabx-OT1-_barleftharpoon -- mir0 --> mathabx-OT1-_leftbarharpoon
-stix-OT1-_lbrackubar -- mir90 --> stix-OT1-_rbrackubar
-stix-OT1-_angleubar -- mir90 --> stix-OT1-_revangleubar
-amssymb-OT1-_barwedge -- rot180 mir0 --> amssymb-OT1-_veebar
-amssymb-OT1-_doublebarwedge -- rot180 mir0 --> fdsymbol-OT1-_veedoublebar
-stix-OT1-_doublebarvee -- rot180 mir0 --> stix-OT1-_wedgedoublebar
-stix-OT1-_VDash -- rot180 mir90 --> fdsymbol-OT1-_leftVDash
-stix-OT1-_VDash -- rot270 mir135 --> fdsymbol-OT1-_downVDash
-stix-OT1-_VDash -- rot90 mir45 --> fdsymbol-OT1-_upVDash
-mathabx-OT1-_vDash -- rot270 mir135 --> fdsymbol-OT1-_downvDash
-mathabx-OT1-_vDash -- rot90 mir45 --> fdsymbol-OT1-_upvDash
-mathabx-OT1-_vDash -- rot180 mir90 --> fdsymbol-OT1-_leftvDash
-amssymb-OT1-_Vdash -- rot180 mir90 --> MnSymbol-OT1-_leftVdash
-amssymb-OT1-_Vdash -- rot270 mir135 --> fdsymbol-OT1-_downVdash
-amssymb-OT1-_Vdash -- rot90 mir45 --> fdsymbol-OT1-_upVdash
-amssymb-OT1-_Vdash -- rot315 --> MnSymbol-OT1-_seVdash
-MnSymbol-OT1-_seVdash -- rot90 mir0 --> MnSymbol-OT1-_neVdash
-MnSymbol-OT1-_seVdash -- rot180 mir45 --> MnSymbol-OT1-_nwVdash
-MnSymbol-OT1-_seVdash -- rot270 mir90 --> MnSymbol-OT1-_swVdash
-MnSymbol-OT1-_upfootline -- rot180 mir0 --> MnSymbol-OT1-_downfootline
-fdsymbol-OT1-_leftfootline -- rot180 mir90 --> fdsymbol-OT1-_rightfootline
-fdsymbol-OT1-_leftfootline -- rot270 mir135 --> MnSymbol-OT1-_upfootline
-MnSymbol-OT1-_Leftrightline -- rot90 rot270 mir45 mir135 --> tipa-OT1-_textdoublepipe
-stmaryrd-OT1-_vartimes -- rot90 rot270 mir45 mir135 --> txfonts-OT1-_opentimes
-latex2e-OT1-_vdash -- rot315 --> MnSymbol-OT1-_sevdash
-latex2e-OT1-_vdash -- rot45 --> MnSymbol-OT1-_nevdash
-latex2e-OT1-_vdash -- rot225 --> MnSymbol-OT1-_swvdash
-latex2e-OT1-_vdash -- rot135 --> MnSymbol-OT1-_nwvdash
-latex2e-OT1-_vdash -- rot180 mir90 --> fdsymbol-OT1-_leftvdash
-latex2e-OT1-_vdash -- rot90 mir45 --> fdsymbol-OT1-_upvdash
-latex2e-OT1-_vdash -- rot270 mir135 --> fdsymbol-OT1-_downvdash
-fdsymbol-OT1-_crossing -- rot90 rot270 mir45 mir135 --> MnSymbol-OT1-_vcrossing
-fdsymbol-OT1-_crossing -- rot135 rot315 --> MnSymbol-OT1-_nwsecrossing
-fdsymbol-OT1-_crossing -- rot45 rot225 --> MnSymbol-OT1-_neswcrossing
-MnSymbol-OT1-_sefootline -- rot90 mir0 --> MnSymbol-OT1-_nefootline
-MnSymbol-OT1-_sefootline -- rot180 mir45 --> MnSymbol-OT1-_nwfootline
-MnSymbol-OT1-_sefootline -- rot270 mir90 --> MnSymbol-OT1-_swfootline
-MnSymbol-OT1-_sefootline -- rot315 --> MnSymbol-OT1-_downfootline
-MnSymbol-OT1-_hbipropto -- rot90 rot270 mir45 mir135 --> MnSymbol-OT1-_vbipropto
-MnSymbol-OT1-_hbipropto -- rot45 rot225 --> MnSymbol-OT1-_neswbipropto
-MnSymbol-OT1-_hbipropto -- rot135 rot315 --> MnSymbol-OT1-_nwsebipropto
-latex2e-OT1-_bowtie -- rot90 rot270 mir45 mir135 --> MnSymbol-OT1-_vertbowtie
-MnSymbol-OT1-_righttherefore -- rot180 mir90 --> MnSymbol-OT1-_lefttherefore
-amssymb-OT1-_therefore -- rot270 mir45 --> MnSymbol-OT1-_righttherefore
-amssymb-OT1-_therefore -- rot180 mir0 --> MnSymbol-OT1-_downtherefore
-wasysym-OT1-_wasylozenge -- rot45 rot135 rot225 rot315 --> stix-OT1-_concavediamond
-fdsymbol-OT1-_owns -- mir90 rot180 --> latex2e-OT1-_in
-stix-OT1-_midbarvee -- rot180 mir0 --> stix-OT1-_midbarwedge
-latex2e-OT1-_smile -- rot180 mir0 --> latex2e-OT1-_frown
-MnSymbol-OT1-_diamonddots -- rot45 rot135 rot225 rot315 --> MnSymbol-OT1-_squaredots
-stix-OT1-_plussim -- rot180 --> stix-OT1-_simplus
-stix-OT1-_supsetplus -- mir90 --> stix-OT1-_subsetplus
-MnSymbol-OT1-_diamondplus -- rot45 rot135 rot225 rot315 --> amssymb-OT1-_boxtimes
-MnSymbol-OT1-_diamondminus -- rot90 rot270 mir45 mir135 --> MnSymbol-OT1-_diamondvert
-MnSymbol-OT1-_diamondbackslash -- rot90 rot270 mir0 mir90 --> MnSymbol-OT1-_diamondslash
-stix-OT1-_concavediamondtickleft -- rot180 mir90 --> stix-OT1-_concavediamondtickright
-stix-OT1-_lftimes -- rot180 mir90 --> stix-OT1-_rftimes
-stix-OT1-_otimeslhrim -- rot180 mir90 --> stix-OT1-_otimesrhrim
-MnSymbol-OT1-_diamondtimes -- rot45 rot135 rot225 rot315 --> amssymb-OT1-_boxplus
-amssymb-OT1-_boxminus -- rot90 rot270 mir45 mir135 --> stmaryrd-OT1-_boxbar
-txfonts-OT1-_boxdotLeft -- rot180 mir90 --> txfonts-OT1-_boxdotRight
-txfonts-OT1-_boxdotleft -- rot180 mir90 --> txfonts-OT1-_boxdotright
-txfonts-OT1-_boxLeft -- rot180 mir90 --> txfonts-OT1-_boxRight
-txfonts-OT1-_boxleft -- rot180 mir90 --> txfonts-OT1-_boxright
-stmaryrd-OT1-_shortdownarrow -- rot180 mir0 --> stmaryrd-OT1-_shortuparrow
-stmaryrd-OT1-_shortleftarrow -- rot180 mir90 --> stmaryrd-OT1-_shortrightarrow
-textcomp-OT1-_textdownarrow -- rot180 mir0 --> textcomp-OT1-_textuparrow
-textcomp-OT1-_textleftarrow -- rot180 mir90 --> textcomp-OT1-_textrightarrow
-latex2e-OT1-_uparrow -- rot45 --> latex2e-OT1-_nwarrow
-latex2e-OT1-_uparrow -- rot22_5 --> stmaryrd-OT1-_nnwarrow
-latex2e-OT1-_searrow -- rot90 mir0 --> latex2e-OT1-_nearrow
-latex2e-OT1-_swarrow -- rot270 mir0 --> latex2e-OT1-_nwarrow
-latex2e-OT1-_searrow -- rot180 mir45 --> latex2e-OT1-_nwarrow
-latex2e-OT1-_swarrow -- rot180 mir135 --> latex2e-OT1-_nearrow
-latex2e-OT1-_searrow -- --> latex2e-OT1-_swarrow
-textcomp-OT1-_textdownarrow -- rot90 mir135 --> textcomp-OT1-_textrightarrow
-textcomp-OT1-_textdownarrow -- rot270 mir45 --> textcomp-OT1-_textleftarrow
-textcomp-OT1-_textuparrow -- rot270 mir45 --> textcomp-OT1-_textrightarrow
-textcomp-OT1-_textuparrow -- rot90 mir135 --> textcomp-OT1-_textleftarrow
-latex2e-OT1-_downarrow -- rot180 mir0 --> latex2e-OT1-_uparrow
-latex2e-OT1-_Downarrow -- rot180 mir0 --> latex2e-OT1-_Uparrow
+latex2e-OT1-_hookrightarrow -- rot90 --> MnSymbol-OT1-_lhookuparrow
+latex2e-OT1-_langle -- rot180 mir90 --> latex2e-OT1-_rangle
+latex2e-OT1-_lceil -- mir90 --> latex2e-OT1-_rceil
 latex2e-OT1-_leftarrow -- rot180 mir90 --> latex2e-OT1-_rightarrow
 latex2e-OT1-_Leftarrow -- rot180 mir90 --> latex2e-OT1-_Rightarrow
 latex2e-OT1-_leftarrow -- rot90 mir45 --> latex2e-OT1-_downarrow
-stmaryrd-OT1-_nnearrow -- rot180 --> stmaryrd-OT1-_sswarrow
-stmaryrd-OT1-_nnearrow -- mir90 --> stmaryrd-OT1-_nnwarrow
-stmaryrd-OT1-_nnearrow -- rot225 mir0 --> stmaryrd-OT1-_ssearrow
-stmaryrd-OT1-_ssearrow -- rot180 --> stmaryrd-OT1-_nnwarrow
-stmaryrd-OT1-_ssearrow -- rot315 mir90 --> stmaryrd-OT1-_sswarrow
-amssymb-OT1-_Lleftarrow -- rot180 mir90 --> amssymb-OT1-_Rrightarrow
-wasysym-OT1-_ascnode -- mir0 --> wasysym-OT1-_descnode
-wasysym-OT1-_lhd -- mir0 --> latex2e-OT1-_triangleleft
-wasysym-OT1-_rhd -- mir0 --> latex2e-OT1-_triangleright
+latex2e-OT1-_leftharpoondown -- mir0 --> latex2e-OT1-_leftharpoonup
+latex2e-OT1-_leftharpoondown -- mir135 --> amssymb-OT1-_upharpoonright
+latex2e-OT1-_leftharpoondown -- mir45 --> amssymb-OT1-_downharpoonleft
+latex2e-OT1-_leftharpoondown -- mir90 --> latex2e-OT1-_rightharpoondown
+latex2e-OT1-_leftharpoondown -- rot270 --> amssymb-OT1-_upharpoonleft
+latex2e-OT1-_leftharpoondown -- rot90 --> amssymb-OT1-_downharpoonright
+latex2e-OT1-_leftharpoonup -- mir90 --> latex2e-OT1-_rightharpoonup
+latex2e-OT1-_lfloor -- mir135 --> latex2e-OT1-_lnot
+latex2e-OT1-_lfloor -- mir90 --> latex2e-OT1-_rfloor
+latex2e-OT1-_lnot -- mir0 --> fdsymbol-OT1-_intprod
+latex2e-OT1-_lnot -- rot270 --> latex2e-OT1-_rfloor
+latex2e-OT1-_lnot -- rot90 --> latex2e-OT1-_lceil
+latex2e-OT1-_longleftarrow -- rot180 mir90 --> latex2e-OT1-_longrightarrow
+latex2e-OT1-_Longleftarrow -- rot180 mir90 --> latex2e-OT1-_Longrightarrow
+latex2e-OT1-_longmapsto -- rot180 mir90 --> stmaryrd-OT1-_longmapsfrom
+latex2e-OT1-_O -- rot90 rot270 mir0 mir90 --> wasysym-OT1-_invdiameter
+latex2e-OT1-_Omega -- rot180 mir0 --> amssymb-OT1-_mho
+latex2e-OT1-_pm -- rot180 mir0 --> latex2e-OT1-_mp
+latex2e-OT1-_prec -- rot180 mir90 --> latex2e-OT1-_succ
+latex2e-OT1-_prec -- rot270 mir135 --> amssymb-OT1-_curlywedge
+latex2e-OT1-_preceq -- mir90 --> latex2e-OT1-_succeq
+latex2e-OT1-_rightharpoondown -- mir0 --> latex2e-OT1-_rightharpoonup
+latex2e-OT1-_rightharpoondown -- mir135 --> amssymb-OT1-_downharpoonright
+latex2e-OT1-_rightharpoondown -- mir45 --> amssymb-OT1-_upharpoonleft
+latex2e-OT1-_rightharpoondown -- rot270 --> amssymb-OT1-_downharpoonleft
+latex2e-OT1-_rightharpoondown -- rot90 --> amssymb-OT1-_upharpoonright
+latex2e-OT1-_searrow -- --> latex2e-OT1-_swarrow
+latex2e-OT1-_searrow -- rot180 mir45 --> latex2e-OT1-_nwarrow
+latex2e-OT1-_searrow -- rot90 mir0 --> latex2e-OT1-_nearrow
 latex2e-OT1-_simeq -- mir90 --> amssymb-OT1-_backsimeq
-cmll-OT1-_parr -- rot180 --> cmll-OT1-_with
-textcomp-OT1-_textinterrobang -- rot180 --> textcomp-OT1-_textinterrobangdown
-stmaryrd-OT1-_llceil -- mir90 --> stmaryrd-OT1-_rrceil
-stmaryrd-OT1-_llceil -- mir0 --> stmaryrd-OT1-_llfloor
-stmaryrd-OT1-_llceil -- rot180 --> stmaryrd-OT1-_rrfloor
-stmaryrd-OT1-_llfloor -- mir90 --> stmaryrd-OT1-_rrfloor
-stmaryrd-OT1-_llfloor -- rot180 --> stmaryrd-OT1-_rrceil
+latex2e-OT1-_smile -- rot180 mir0 --> latex2e-OT1-_frown
+latex2e-OT1-_sqcap -- rot180 mir0 --> latex2e-OT1-_sqcup
+latex2e-OT1-_sqsubseteq -- mir90 --> latex2e-OT1-_sqsupseteq
+latex2e-OT1-_subset -- rot180 mir90 --> latex2e-OT1-_supset
+latex2e-OT1-_subseteq -- mir90 --> latex2e-OT1-_supseteq
+latex2e-OT1-_swarrow -- rot180 mir135 --> latex2e-OT1-_nearrow
+latex2e-OT1-_swarrow -- rot270 mir0 --> latex2e-OT1-_nwarrow
+latex2e-OT1-_textbraceleft -- rot180 mir90 --> latex2e-OT1-_textbraceright
+latex2e-OT1-_textgreater -- rot180 mir90 --> latex2e-OT1-_textless
+latex2e-OT1-_textgreater -- rot270 mir135 --> latex2e-OT1-_bigvee
+latex2e-OT1-_textquotedblleft -- rot180 --> latex2e-OT1-_textquotedblright
+latex2e-OT1-_textquoteleft -- rot180 --> latex2e-OT1-_textquoteright
+latex2e-OT1-_triangleleft -- rot180 mir90 --> latex2e-OT1-_triangleright
+latex2e-OT1-_uparrow -- rot22_5 --> stmaryrd-OT1-_nnwarrow
+latex2e-OT1-_uparrow -- rot45 --> latex2e-OT1-_nwarrow
+latex2e-OT1-_updownarrow -- rot90 rot270 mir45 mir135 --> latex2e-OT1-_leftrightarrow
+latex2e-OT1-_Updownarrow -- rot90 rot270 mir45 mir135 --> latex2e-OT1-_Leftrightarrow
+latex2e-OT1-_varepsilon -- rot90 mir45 --> latex2e-OT1-_omega
+latex2e-OT1-_vdash -- rot135 --> MnSymbol-OT1-_nwvdash
+latex2e-OT1-_vdash -- rot180 mir90 --> fdsymbol-OT1-_leftvdash
+latex2e-OT1-_vdash -- rot225 --> MnSymbol-OT1-_swvdash
+latex2e-OT1-_vdash -- rot270 mir135 --> fdsymbol-OT1-_downvdash
+latex2e-OT1-_vdash -- rot270 mir135 --> latex2e-OT1-_top
+latex2e-OT1-_vdash -- rot315 --> MnSymbol-OT1-_sevdash
+latex2e-OT1-_vdash -- rot45 --> MnSymbol-OT1-_nevdash
+latex2e-OT1-_vdash -- rot90 mir45 --> fdsymbol-OT1-_upvdash
+latex2e-T1-_dj -- mir90 --> tipa-OT1-_textcrb
+latex2e-T1-_guillemotleft -- rot180 mir90 --> latex2e-T1-_guillemotright
+latex2e-T1-_guilsinglleft -- rot180 mir90 --> latex2e-T1-_guilsinglright
+amssymb-OT1-_barwedge -- rot180 mir0 --> amssymb-OT1-_veebar
 amssymb-OT1-_blacktriangledown -- rot180 mir0 --> amssymb-OT1-_blacktriangle
-amssymb-OT1-_eqslantgtr -- mir90 --> amssymb-OT1-_eqslantless
-amssymb-OT1-_fallingdotseq -- mir0 mir90 --> amssymb-OT1-_risingdotseq
-amssymb-OT1-_gtrdot -- rot180 mir90 --> amssymb-OT1-_lessdot
-amssymb-OT1-_ngtr -- rot180 --> amssymb-OT1-_nless
 amssymb-OT1-_blacktriangleleft -- rot180 mir90 --> amssymb-OT1-_blacktriangleright
+amssymb-OT1-_boxminus -- rot90 rot270 mir45 mir135 --> stmaryrd-OT1-_boxbar
 amssymb-OT1-_Cap -- rot180 mir0 --> amssymb-OT1-_Cup
 amssymb-OT1-_Cap -- rot90 mir135 --> amssymb-OT1-_Subset
 amssymb-OT1-_circlearrowleft -- mir90 --> amssymb-OT1-_circlearrowright
 amssymb-OT1-_curlyeqprec -- mir90 --> amssymb-OT1-_curlyeqsucc
 amssymb-OT1-_curvearrowleft -- mir90 --> amssymb-OT1-_curvearrowright
 amssymb-OT1-_dashleftarrow -- rot180 mir90 --> amssymb-OT1-_dashrightarrow
+amssymb-OT1-_dashrightarrow -- rot270 mir135 --> MnSymbol-OT1-_dasheddownarrow
+amssymb-OT1-_dashrightarrow -- rot45 --> MnSymbol-OT1-_dashednearrow
+amssymb-OT1-_dashrightarrow -- rot90 mir45 --> MnSymbol-OT1-_dasheduparrow
 amssymb-OT1-_diagdown -- rot90 rot270 mir0 mir90 --> amssymb-OT1-_diagup
+amssymb-OT1-_doublebarwedge -- rot180 mir0 --> fdsymbol-OT1-_veedoublebar
 amssymb-OT1-_downdownarrows -- rot180 mir0 --> amssymb-OT1-_upuparrows
 amssymb-OT1-_downharpoonleft -- mir0 --> amssymb-OT1-_upharpoonleft
-amssymb-OT1-_downharpoonleft -- rot180 --> amssymb-OT1-_upharpoonright
 amssymb-OT1-_downharpoonleft -- mir90 --> amssymb-OT1-_downharpoonright
+amssymb-OT1-_downharpoonleft -- rot180 --> amssymb-OT1-_upharpoonright
 amssymb-OT1-_downharpoonright -- mir0 --> amssymb-OT1-_upharpoonright
-latex2e-OT1-_rightharpoondown -- mir45 --> amssymb-OT1-_upharpoonleft
-latex2e-OT1-_rightharpoondown -- rot270 --> amssymb-OT1-_downharpoonleft
-latex2e-OT1-_rightharpoondown -- mir135 --> amssymb-OT1-_downharpoonright
-latex2e-OT1-_rightharpoondown -- rot90 --> amssymb-OT1-_upharpoonright
-latex2e-OT1-_leftharpoondown -- rot270 --> amssymb-OT1-_upharpoonleft
-latex2e-OT1-_leftharpoondown -- mir45 --> amssymb-OT1-_downharpoonleft
-latex2e-OT1-_leftharpoondown -- rot90 --> amssymb-OT1-_downharpoonright
-latex2e-OT1-_leftharpoondown -- mir135 --> amssymb-OT1-_upharpoonright
+amssymb-OT1-_eqslantgtr -- mir90 --> amssymb-OT1-_eqslantless
+amssymb-OT1-_fallingdotseq -- mir0 mir90 --> amssymb-OT1-_risingdotseq
 amssymb-OT1-_geq -- mir90 --> amssymb-OT1-_leq
 amssymb-OT1-_geqq -- mir90 --> amssymb-OT1-_leqq
 amssymb-OT1-_geqslant -- mir90 --> amssymb-OT1-_leqslant
 amssymb-OT1-_gg -- rot180 mir90 --> amssymb-OT1-_ll
 amssymb-OT1-_ggg -- rot180 mir90 --> amssymb-OT1-_lll
+amssymb-OT1-_gtrdot -- rot180 mir90 --> amssymb-OT1-_lessdot
 amssymb-OT1-_leftarrowtail -- rot180 mir90 --> amssymb-OT1-_rightarrowtail
 amssymb-OT1-_leftleftarrows -- rot180 mir90 --> amssymb-OT1-_rightrightarrows
 amssymb-OT1-_leftrightarrows -- mir0 mir90 --> amssymb-OT1-_rightleftarrows
@@ -263,9 +130,18 @@ amssymb-OT1-_leftrightharpoons -- mir0 mir90 --> amssymb-OT1-_rightleftharpoons
 amssymb-OT1-_leftthreetimes -- mir90 --> amssymb-OT1-_rightthreetimes
 amssymb-OT1-_lesseqgtr -- mir90 --> amssymb-OT1-_gtreqless
 amssymb-OT1-_lesseqqgtr -- mir90 --> amssymb-OT1-_gtreqqless
+amssymb-OT1-_lessgtr -- mir0 --> amssymb-OT1-_gtrless
+amssymb-OT1-_llcorner -- rot180 mir135 --> amssymb-OT1-_urcorner
+amssymb-OT1-_llcorner -- rot270 mir0 --> amssymb-OT1-_ulcorner
+amssymb-OT1-_llcorner -- rot90 mir90 --> amssymb-OT1-_lrcorner
+amssymb-OT1-_Lleftarrow -- rot180 mir90 --> amssymb-OT1-_Rrightarrow
 amssymb-OT1-_looparrowleft -- mir90 --> amssymb-OT1-_looparrowright
+amssymb-OT1-_looparrowright -- rot180 --> mathabx-OT1-_looparrowdownleft
+amssymb-OT1-_lrcorner -- rot180 mir45 --> amssymb-OT1-_ulcorner
+amssymb-OT1-_lrcorner -- rot90 mir0 --> amssymb-OT1-_urcorner
 amssymb-OT1-_Lsh -- mir90 --> amssymb-OT1-_Rsh
 amssymb-OT1-_ltimes -- rot180 mir90 --> amssymb-OT1-_rtimes
+amssymb-OT1-_ngtr -- rot180 --> amssymb-OT1-_nless
 amssymb-OT1-_nleftarrow -- rot180 --> amssymb-OT1-_nrightarrow
 amssymb-OT1-_nLeftarrow -- rot180 --> amssymb-OT1-_nRightarrow
 amssymb-OT1-_nprec -- rot180 --> amssymb-OT1-_nsucc
@@ -277,96 +153,220 @@ amssymb-OT1-_Subset -- rot180 mir90 --> amssymb-OT1-_Supset
 amssymb-OT1-_subseteqq -- mir90 --> amssymb-OT1-_supseteqq
 amssymb-OT1-_subsetneq -- mir90 --> amssymb-OT1-_supsetneq
 amssymb-OT1-_therefore -- rot180 mir0 --> amssymb-OT1-_because
+amssymb-OT1-_therefore -- rot180 mir0 --> MnSymbol-OT1-_downtherefore
+amssymb-OT1-_therefore -- rot270 mir45 --> MnSymbol-OT1-_righttherefore
 amssymb-OT1-_trianglelefteq -- mir90 --> amssymb-OT1-_trianglerighteq
 amssymb-OT1-_twoheadleftarrow -- rot180 mir90 --> amssymb-OT1-_twoheadrightarrow
+amssymb-OT1-_twoheadrightarrow -- rot270 mir135 --> MnSymbol-OT1-_twoheaddownarrow
+amssymb-OT1-_twoheadrightarrow -- rot45 --> MnSymbol-OT1-_twoheadnearrow
+amssymb-OT1-_twoheadrightarrow -- rot90 mir45 --> MnSymbol-OT1-_twoheaduparrow
 amssymb-OT1-_ulcorner -- rot270 mir90 --> amssymb-OT1-_urcorner
-amssymb-OT1-_llcorner -- rot90 mir90 --> amssymb-OT1-_lrcorner
-amssymb-OT1-_llcorner -- rot270 mir0 --> amssymb-OT1-_ulcorner
-amssymb-OT1-_llcorner -- rot180 mir135 --> amssymb-OT1-_urcorner
-amssymb-OT1-_lrcorner -- rot180 mir45 --> amssymb-OT1-_ulcorner
-amssymb-OT1-_lrcorner -- rot90 mir0 --> amssymb-OT1-_urcorner
 amssymb-OT1-_upharpoonleft -- mir90 --> amssymb-OT1-_upharpoonright
-latex2e-OT1-_updownarrow -- rot90 rot270 mir45 mir135 --> latex2e-OT1-_leftrightarrow
 amssymb-OT1-_vartriangleleft -- rot180 mir90 --> amssymb-OT1-_vartriangleright
+amssymb-OT1-_Vdash -- rot180 mir90 --> MnSymbol-OT1-_leftVdash
+amssymb-OT1-_Vdash -- rot270 mir135 --> fdsymbol-OT1-_downVdash
+amssymb-OT1-_Vdash -- rot315 --> MnSymbol-OT1-_seVdash
+amssymb-OT1-_Vdash -- rot90 mir45 --> fdsymbol-OT1-_upVdash
+cmll-OT1-_parr -- rot180 --> cmll-OT1-_with
 esint-OT1-_landdownint -- rot180 --> esint-OT1-_landupint
 esint-OT1-_ointclockwise -- rot180 --> esint-OT1-_varointclockwise
 esint-OT1-_ointctrclockwise -- rot180 --> esint-OT1-_varointctrclockwise
-latex2e-OT1-_bigcap -- rot180 mir0 --> latex2e-OT1-_bigcup
-latex2e-OT1-_bigcap -- rot270 mir45 --> latex2e-OT1-_supset
-latex2e-OT1-_bigcap -- rot90 mir135 --> latex2e-OT1-_subset
-latex2e-OT1-_bigcup -- rot90 mir135 --> latex2e-OT1-_supset
-latex2e-OT1-_bigtriangledown -- rot180 mir0 --> latex2e-OT1-_bigtriangleup
-latex2e-OT1-_bigtriangledown -- rot270 mir45 --> latex2e-OT1-_triangleleft
-latex2e-OT1-_bigtriangledown -- rot90 mir135 --> latex2e-OT1-_triangleright
-latex2e-OT1-_bot -- rot270 mir45 --> latex2e-OT1-_vdash
-latex2e-OT1-_bot -- rot90 mir135 --> latex2e-OT1-_dashv
-latex2e-OT1-_cap -- rot180 mir0 --> latex2e-OT1-_cup
-latex2e-OT1-_cdots -- rot90 rot270 mir45 mir135 --> latex2e-OT1-_vdots
-latex2e-OT1-_copyright -- mir90 --> textcomp-OT1-_textcopyleft
-latex2e-OT1-_dashv -- rot180 mir90 --> latex2e-OT1-_vdash
-latex2e-OT1-_dashv -- rot90 mir45 --> latex2e-OT1-_top
-latex2e-OT1-_ddots -- rot90 rot270 mir0 mir90 --> mathdots-OT1-_iddots
-latex2e-OT1-_Delta -- rot180 mir0 --> latex2e-OT1-_bigtriangledown
-latex2e-OT1-_Delta -- rot270 mir45 --> latex2e-OT1-_triangleright
-latex2e-OT1-_Delta -- rot90 mir135 --> latex2e-OT1-_triangleleft
-latex2e-OT1-_hookleftarrow -- mir90 --> latex2e-OT1-_hookrightarrow
-latex2e-OT1-_langle -- rot180 mir90 --> latex2e-OT1-_rangle
-latex2e-OT1-_lceil -- mir90 --> latex2e-OT1-_rceil
-latex2e-OT1-_leftharpoondown -- mir0 --> latex2e-OT1-_leftharpoonup
-latex2e-OT1-_leftharpoondown -- mir90 --> latex2e-OT1-_rightharpoondown
-latex2e-OT1-_leftharpoonup -- mir90 --> latex2e-OT1-_rightharpoonup
-latex2e-OT1-_lfloor -- mir135 --> latex2e-OT1-_lnot
-latex2e-OT1-_lfloor -- mir90 --> latex2e-OT1-_rfloor
-latex2e-OT1-_lnot -- rot270 --> latex2e-OT1-_rfloor
-latex2e-OT1-_lnot -- rot90 --> latex2e-OT1-_lceil
-latex2e-OT1-_longleftarrow -- rot180 mir90 --> latex2e-OT1-_longrightarrow
-latex2e-OT1-_Longleftarrow -- rot180 mir90 --> latex2e-OT1-_Longrightarrow
-latex2e-OT1-_longmapsto -- rot180 mir90 --> stmaryrd-OT1-_longmapsfrom
-stmaryrd-OT1-_Longmapsto -- rot180 mir90 --> stmaryrd-OT1-_Longmapsfrom
-latex2e-OT1-_O -- rot90 rot270 mir0 mir90 --> wasysym-OT1-_invdiameter
-latex2e-OT1-_Omega -- rot180 mir0 --> amssymb-OT1-_mho
-latex2e-OT1-_pm -- rot180 mir0 --> latex2e-OT1-_mp
-latex2e-OT1-_prec -- rot180 mir90 --> latex2e-OT1-_succ
-latex2e-OT1-_prec -- rot270 mir135 --> amssymb-OT1-_curlywedge
-latex2e-OT1-_preceq -- mir90 --> latex2e-OT1-_succeq
-latex2e-OT1-_rightharpoondown -- mir0 --> latex2e-OT1-_rightharpoonup
-latex2e-OT1-_sqcap -- rot180 mir0 --> latex2e-OT1-_sqcup
-latex2e-OT1-_sqsubseteq -- mir90 --> latex2e-OT1-_sqsupseteq
-latex2e-OT1-_subset -- rot180 mir90 --> latex2e-OT1-_supset
-latex2e-OT1-_subseteq -- mir90 --> latex2e-OT1-_supseteq
-latex2e-OT1-_textbraceleft -- rot180 mir90 --> latex2e-OT1-_textbraceright
-latex2e-OT1-_textgreater -- rot180 mir90 --> latex2e-OT1-_textless
-latex2e-OT1-_textgreater -- rot270 mir135 --> latex2e-OT1-_bigvee
-latex2e-OT1-_textquotedblleft -- rot180 --> latex2e-OT1-_textquotedblright
-latex2e-OT1-_textquoteleft -- rot180 --> latex2e-OT1-_textquoteright
-latex2e-OT1-_triangleleft -- rot180 mir90 --> latex2e-OT1-_triangleright
-latex2e-OT1-_Updownarrow -- rot90 rot270 mir45 mir135 --> latex2e-OT1-_Leftrightarrow
-latex2e-OT1-_varepsilon -- rot90 mir45 --> latex2e-OT1-_omega
-latex2e-OT1-_vdash -- rot270 mir135 --> latex2e-OT1-_top
-latex2e-T1-_dj -- mir90 --> tipa-OT1-_textcrb
-latex2e-T1-_guillemotleft -- rot180 mir90 --> latex2e-T1-_guillemotright
-latex2e-T1-_guilsinglleft -- rot180 mir90 --> latex2e-T1-_guilsinglright
+fdsymbol-OT1-_angle -- mir90 --> fdsymbol-OT1-_revangle
+fdsymbol-OT1-_crossing -- rot135 rot315 --> MnSymbol-OT1-_nwsecrossing
+fdsymbol-OT1-_crossing -- rot45 rot225 --> MnSymbol-OT1-_neswcrossing
+fdsymbol-OT1-_crossing -- rot90 rot270 mir45 mir135 --> MnSymbol-OT1-_vcrossing
+fdsymbol-OT1-_doublevee -- rot180 mir0 --> fdsymbol-OT1-_doublewedge
+fdsymbol-OT1-_downupharpoons -- rot135 rot315 --> fdsymbol-OT1-_swneharpoons
+fdsymbol-OT1-_downupharpoons -- rot45 rot225 --> fdsymbol-OT1-_nwseharpoons
+fdsymbol-OT1-_intprod -- mir90 --> fdsymbol-OT1-_intprodr
+fdsymbol-OT1-_leftfootline -- rot180 mir90 --> fdsymbol-OT1-_rightfootline
+fdsymbol-OT1-_leftfootline -- rot270 mir135 --> MnSymbol-OT1-_upfootline
+fdsymbol-OT1-_measuredangle -- mir90 --> fdsymbol-OT1-_revmeasuredangle
+fdsymbol-OT1-_minusfdots -- mir0 mir90 --> fdsymbol-OT1-_minusrdots
+fdsymbol-OT1-_neswharpoonsenw -- mir45 --> fdsymbol-OT1-_neswharpoonnwse
+fdsymbol-OT1-_neswharpoonsenw -- mir90 --> fdsymbol-OT1-_nwseharpoonnesw
+fdsymbol-OT1-_neswharpoonsenw -- rot135 rot315 --> fdsymbol-OT1-_leftrightharpoondownup
+fdsymbol-OT1-_neswharpoonsenw -- rot225 --> fdsymbol-OT1-_updownharpoonrightleft
+fdsymbol-OT1-_neswharpoonsenw -- rot90 --> fdsymbol-OT1-_nwseharpoonswne
+fdsymbol-OT1-_nwharpoonne -- mir0 --> fdsymbol-OT1-_swharpoonse
+fdsymbol-OT1-_nwharpoonne -- mir135 --> fdsymbol-OT1-_nwharpoonsw
+fdsymbol-OT1-_nwharpoonne -- mir45 --> fdsymbol-OT1-_seharpoonne
+fdsymbol-OT1-_nwharpoonne -- mir90 --> fdsymbol-OT1-_neharpoonnw
+fdsymbol-OT1-_nwharpoonne -- rot180 --> fdsymbol-OT1-_seharpoonsw
+fdsymbol-OT1-_nwharpoonne -- rot270 --> fdsymbol-OT1-_neharpoonse
+fdsymbol-OT1-_nwharpoonne -- rot90 --> fdsymbol-OT1-_swharpoonnw
+fdsymbol-OT1-_nwseharpoonnesw -- rot135 rot315 --> fdsymbol-OT1-_updownharpoonleftright
+fdsymbol-OT1-_nwseharpoonnesw -- rot45 rot225 --> fdsymbol-OT1-_leftrightharpoonupdown
+fdsymbol-OT1-_owns -- mir90 rot180 --> latex2e-OT1-_in
+fdsymbol-OT1-_rightY -- rot180 mir90 --> fdsymbol-OT1-_leftY
+fdsymbol-OT1-_rightY -- rot270 mir135 --> fdsymbol-OT1-_downY
+fdsymbol-OT1-_rightY -- rot90 mir45 --> fdsymbol-OT1-_upY
+fdsymbol-OT1-_sphericalangledown -- rot180 mir0 --> fdsymbol-OT1-_sphericalangleup
+fdsymbol-OT1-_updownharpoons -- mir90 --> mathabx-OT1-_downupharpoons
+fdsymbol-OT1-_updownharpoons -- rot135 rot315 --> fdsymbol-OT1-_neswharpoons
+fdsymbol-OT1-_updownharpoons -- rot45 rot225 --> fdsymbol-OT1-_senwharpoons
+mathabx-OT1-_barleftharpoon -- mir0 --> mathabx-OT1-_leftbarharpoon
+mathabx-OT1-_barleftharpoon -- mir90 --> mathabx-OT1-_barrightharpoon
+mathabx-OT1-_barleftharpoon -- rot180 --> mathabx-OT1-_rightbarharpoon
+mathabx-OT1-_curvearrowbotleftright -- rot135 --> MnSymbol-OT1-_curvearrowsenw
+mathabx-OT1-_curvearrowbotleftright -- rot180 mir0 --> mathabx-OT1-_curvearrowleftright
+mathabx-OT1-_curvearrowbotleftright -- rot225 --> MnSymbol-OT1-_curvearrownesw
+mathabx-OT1-_curvearrowbotleftright -- rot270 mir45 --> MnSymbol-OT1-_curvearrowupdown
+mathabx-OT1-_curvearrowbotleftright -- rot315 --> MnSymbol-OT1-_curvearrownwse
+mathabx-OT1-_curvearrowbotleftright -- rot45 --> MnSymbol-OT1-_curvearrowswne
+mathabx-OT1-_curvearrowbotleftright -- rot90 mir135 --> MnSymbol-OT1-_curvearrowdownup
+mathabx-OT1-_leftleftharpoons -- rot180 mir90 --> mathabx-OT1-_rightrightharpoons
+mathabx-OT1-_leftleftharpoons -- rot270 mir135 --> mathabx-OT1-_upupharpoons
+mathabx-OT1-_leftleftharpoons -- rot90 mir45 --> mathabx-OT1-_downdownharpoons
+mathabx-OT1-_looparrowdownleft -- mir90 --> mathabx-OT1-_looparrowdownright
+mathabx-OT1-_rightharpoondown -- rot135 --> fdsymbol-OT1-_nwharpoonne
+mathabx-OT1-_righttoleftarrow -- rot180 --> mathabx-OT1-_lefttorightarrow
+mathabx-OT1-_righttoleftarrow -- rot270 --> mathabx-OT1-_downtouparrow
+mathabx-OT1-_righttoleftarrow -- rot90 --> mathabx-OT1-_uptodownarrow
+mathabx-OT1-_updownarrows -- mir0 mir90 --> mathabx-OT1-_downuparrows
+mathabx-OT1-_updownarrows -- rot90 rot270 --> amssymb-OT1-_rightleftarrows
+mathabx-OT1-_vDash -- rot180 mir90 --> fdsymbol-OT1-_leftvDash
+mathabx-OT1-_vDash -- rot270 mir135 --> fdsymbol-OT1-_downvDash
+mathabx-OT1-_vDash -- rot90 mir45 --> fdsymbol-OT1-_upvDash
+MnSymbol-OT1-_closedcurlyvee -- rot180 mir0 --> MnSymbol-OT1-_closedcurlywedge
+MnSymbol-OT1-_closedcurlyvee -- rot270 mir45 --> MnSymbol-OT1-_closedprec
+MnSymbol-OT1-_closedcurlyvee -- rot90 mir135 --> MnSymbol-OT1-_closedsucc
+MnSymbol-OT1-_closedequal -- rot180 mir0 --> MnSymbol-OT1-_equalclosed
+MnSymbol-OT1-_curlyvee -- mir0 --> MnSymbol-OT1-_curlywedge
+MnSymbol-OT1-_dashednearrow -- rot180 mir135 --> MnSymbol-OT1-_dashedswarrow
+MnSymbol-OT1-_dashednearrow -- rot270 mir0 --> MnSymbol-OT1-_dashedsearrow
+MnSymbol-OT1-_dashednearrow -- rot90 mir90 --> MnSymbol-OT1-_dashednwarrow
+MnSymbol-OT1-_diamondbackslash -- rot90 rot270 mir0 mir90 --> MnSymbol-OT1-_diamondslash
+MnSymbol-OT1-_diamonddots -- rot45 rot135 rot225 rot315 --> MnSymbol-OT1-_squaredots
+MnSymbol-OT1-_diamondminus -- rot90 rot270 mir45 mir135 --> MnSymbol-OT1-_diamondvert
+MnSymbol-OT1-_diamondplus -- rot45 rot135 rot225 rot315 --> amssymb-OT1-_boxtimes
+MnSymbol-OT1-_diamondtimes -- rot45 rot135 rot225 rot315 --> amssymb-OT1-_boxplus
+MnSymbol-OT1-_doublecurlyvee -- rot180 mir0 --> MnSymbol-OT1-_doublecurlywedge
+MnSymbol-OT1-_hbipropto -- rot135 rot315 --> MnSymbol-OT1-_nwsebipropto
+MnSymbol-OT1-_hbipropto -- rot45 rot225 --> MnSymbol-OT1-_neswbipropto
+MnSymbol-OT1-_hbipropto -- rot90 rot270 mir45 mir135 --> MnSymbol-OT1-_vbipropto
+MnSymbol-OT1-_Leftrightline -- rot90 rot270 mir45 mir135 --> tipa-OT1-_textdoublepipe
+MnSymbol-OT1-_lhooknearrow -- mir0 --> MnSymbol-OT1-_rhooksearrow
+MnSymbol-OT1-_lhooknearrow -- rot180 --> MnSymbol-OT1-_lhookswarrow
+MnSymbol-OT1-_lhooknearrow -- rot90 --> MnSymbol-OT1-_lhooknwarrow
+MnSymbol-OT1-_nefree -- rot180 mir135 --> MnSymbol-OT1-_swfree
+MnSymbol-OT1-_nefree -- rot270 mir0 --> MnSymbol-OT1-_sefree
+MnSymbol-OT1-_nefree -- rot90 mir90 --> MnSymbol-OT1-_nwfree
+MnSymbol-OT1-_rhookuparrow -- rot45 --> MnSymbol-OT1-_rhooknwarrow
+MnSymbol-OT1-_rightfree -- rot180 mir90 --> MnSymbol-OT1-_leftfree
+MnSymbol-OT1-_rightfree -- rot270 mir135 --> MnSymbol-OT1-_downfree
+MnSymbol-OT1-_rightfree -- rot45 --> MnSymbol-OT1-_nefree
+MnSymbol-OT1-_rightfree -- rot90 mir45 --> MnSymbol-OT1-_upfree
+MnSymbol-OT1-_righttherefore -- rot180 mir90 --> MnSymbol-OT1-_lefttherefore
+MnSymbol-OT1-_sefootline -- rot180 mir45 --> MnSymbol-OT1-_nwfootline
+MnSymbol-OT1-_sefootline -- rot270 mir90 --> MnSymbol-OT1-_swfootline
+MnSymbol-OT1-_sefootline -- rot315 --> MnSymbol-OT1-_downfootline
+MnSymbol-OT1-_sefootline -- rot90 mir0 --> MnSymbol-OT1-_nefootline
+MnSymbol-OT1-_seVdash -- rot180 mir45 --> MnSymbol-OT1-_nwVdash
+MnSymbol-OT1-_seVdash -- rot270 mir90 --> MnSymbol-OT1-_swVdash
+MnSymbol-OT1-_seVdash -- rot90 mir0 --> MnSymbol-OT1-_neVdash
+MnSymbol-OT1-_twoheadnearrow -- rot180 mir135 --> MnSymbol-OT1-_twoheadswarrow
+MnSymbol-OT1-_twoheadnearrow -- rot270 mir0 --> MnSymbol-OT1-_twoheadsearrow
+MnSymbol-OT1-_twoheadnearrow -- rot90 mir90 --> MnSymbol-OT1-_twoheadnwarrow
+MnSymbol-OT1-_upfootline -- rot180 mir0 --> MnSymbol-OT1-_downfootline
+stix-OT1-_angleubar -- mir90 --> stix-OT1-_revangleubar
+stix-OT1-_closedvarcap -- rot180 mir0 --> stix-OT1-_closedvarcup
+stix-OT1-_concavediamondtickleft -- rot180 mir90 --> stix-OT1-_concavediamondtickright
+stix-OT1-_doublebarvee -- rot180 mir0 --> stix-OT1-_wedgedoublebar
+stix-OT1-_langledot -- rot180 mir90 --> stix-OT1-_rangledot
+stix-OT1-_lblkbrbrak -- rot180 mir90 --> stix-OT1-_rblkbrbrak
+stix-OT1-_lbracklltick -- mir0 --> stix-OT1-_lbrackultick
+stix-OT1-_lbracklltick -- mir90 --> stix-OT1-_rbracklrtick
+stix-OT1-_lbracklltick -- rot180 --> stix-OT1-_rbrackurtick
+stix-OT1-_lbrackubar -- mir90 --> stix-OT1-_rbrackubar
+stix-OT1-_Lbrbrak -- rot180 mir90 --> stix-OT1-_Rbrbrak
+stix-OT1-_leftarrowless -- rot180 mir90 --> stix-OT1-_rightarrowgtr
+stix-OT1-_leftarrowsubset -- rot180 mir90 --> stix-OT1-_rightarrowsupset
+stix-OT1-_lftimes -- rot180 mir90 --> stix-OT1-_rftimes
+stix-OT1-_llangle -- rot180 mir90 --> stix-OT1-_rrangle
+stix-OT1-_Lparengtr -- rot90 mir45 --> stix-OT1-_Rparenless
+stix-OT1-_lparenless -- rot180 mir90 --> stix-OT1-_rparengtr
+stix-OT1-_lvzigzag -- rot180 mir90 --> stix-OT1-_rvzigzag
+stix-OT1-_Lvzigzag -- rot180 mir90 --> stix-OT1-_Rvzigzag
+stix-OT1-_measanglerutone -- mir0 --> stix-OT1-_measanglerdtose
+stix-OT1-_measanglerutone -- mir135 --> stix-OT1-_measangledltosw
+stix-OT1-_measanglerutone -- mir45 --> stix-OT1-_measangleurtone
+stix-OT1-_measanglerutone -- mir90 --> stix-OT1-_measanglelutonw
+stix-OT1-_measanglerutone -- rot180 --> stix-OT1-_measangleldtosw
+stix-OT1-_measanglerutone -- rot270 --> stix-OT1-_measangledrtose
+stix-OT1-_measanglerutone -- rot90 --> stix-OT1-_measangleultonw
+stix-OT1-_midbarvee -- rot180 mir0 --> stix-OT1-_midbarwedge
+stix-OT1-_Not -- mir90 --> stix-OT1-_bNot
+stix-OT1-_otimeslhrim -- rot180 mir90 --> stix-OT1-_otimesrhrim
+stix-OT1-_plussim -- rot180 --> stix-OT1-_simplus
+stix-OT1-_rsqhook -- mir90 --> stix-OT1-_lsqhook
+stix-OT1-_supsetplus -- mir90 --> stix-OT1-_subsetplus
+stix-OT1-_VDash -- rot180 mir90 --> fdsymbol-OT1-_leftVDash
+stix-OT1-_VDash -- rot270 mir135 --> fdsymbol-OT1-_downVDash
+stix-OT1-_VDash -- rot90 mir45 --> fdsymbol-OT1-_upVDash
+stix-OT1-_wideangledown -- mir0 --> stix-OT1-_wideangleup
 stix2-OT1-_leftouterjoin -- rot180 mir90 --> stix2-OT1-_rightouterjoin
+stmaryrd-OT1-_curlyveedownarrow -- rot180 mir0 --> stmaryrd-OT1-_curlywedgeuparrow
+stmaryrd-OT1-_curlyveeuparrow -- rot180 mir0 --> stmaryrd-OT1-_curlywedgedownarrow
+stmaryrd-OT1-_inplus -- rot180 mir90 --> stmaryrd-OT1-_niplus
 stmaryrd-OT1-_lbag -- mir90 --> stmaryrd-OT1-_rbag
 stmaryrd-OT1-_Lbag -- mir90 --> stmaryrd-OT1-_Rbag
 stmaryrd-OT1-_leftarrowtriangle -- rot180 mir90 --> stmaryrd-OT1-_rightarrowtriangle
 stmaryrd-OT1-_llbracket -- rot180 mir90 --> stmaryrd-OT1-_rrbracket
+stmaryrd-OT1-_llceil -- mir0 --> stmaryrd-OT1-_llfloor
+stmaryrd-OT1-_llceil -- mir90 --> stmaryrd-OT1-_rrceil
+stmaryrd-OT1-_llceil -- rot180 --> stmaryrd-OT1-_rrfloor
+stmaryrd-OT1-_llfloor -- mir90 --> stmaryrd-OT1-_rrfloor
+stmaryrd-OT1-_llfloor -- rot180 --> stmaryrd-OT1-_rrceil
 stmaryrd-OT1-_llparenthesis -- rot180 mir90 --> stmaryrd-OT1-_rrparenthesis
+stmaryrd-OT1-_Longmapsto -- rot180 mir90 --> stmaryrd-OT1-_Longmapsfrom
+stmaryrd-OT1-_minuso -- rot90 rot270 mir45 mir135 --> stmaryrd-OT1-_baro
+stmaryrd-OT1-_nnearrow -- mir90 --> stmaryrd-OT1-_nnwarrow
+stmaryrd-OT1-_nnearrow -- rot180 --> stmaryrd-OT1-_sswarrow
+stmaryrd-OT1-_nnearrow -- rot225 mir0 --> stmaryrd-OT1-_ssearrow
+stmaryrd-OT1-_shortdownarrow -- rot180 mir0 --> stmaryrd-OT1-_shortuparrow
+stmaryrd-OT1-_shortleftarrow -- rot180 mir90 --> stmaryrd-OT1-_shortrightarrow
+stmaryrd-OT1-_ssearrow -- rot180 --> stmaryrd-OT1-_nnwarrow
+stmaryrd-OT1-_ssearrow -- rot315 mir90 --> stmaryrd-OT1-_sswarrow
+stmaryrd-OT1-_vartimes -- rot90 rot270 mir45 mir135 --> txfonts-OT1-_opentimes
 textcomp-OT1-_textcopyleft -- mir90 --> textcomp-OT1-_textcopyright
+textcomp-OT1-_textdownarrow -- rot180 mir0 --> textcomp-OT1-_textuparrow
+textcomp-OT1-_textdownarrow -- rot270 mir45 --> textcomp-OT1-_textleftarrow
+textcomp-OT1-_textdownarrow -- rot90 mir135 --> textcomp-OT1-_textrightarrow
+textcomp-OT1-_textinterrobang -- rot180 --> textcomp-OT1-_textinterrobangdown
 textcomp-OT1-_textlangle -- rot180 mir90 --> textcomp-OT1-_textrangle
+textcomp-OT1-_textleftarrow -- rot180 mir90 --> textcomp-OT1-_textrightarrow
 textcomp-OT1-_textlquill -- rot180 mir90 --> textcomp-OT1-_textrquill
+textcomp-OT1-_textuparrow -- rot270 mir45 --> textcomp-OT1-_textrightarrow
+textcomp-OT1-_textuparrow -- rot90 mir135 --> textcomp-OT1-_textleftarrow
+tipa-OT1-_textbarrevglotstop -- mir90 --> tipa-OT1-_textbarglotstop
+tipa-OT1-_textcloseepsilon -- rot180 mir90 --> tipa-OT1-_textcloserevepsilon
+tipa-OT1-_textcloseepsilon -- rot90 mir45 --> tipa-OT1-_textcloseomega
+tipa-OT1-_textcrinvglotstop -- mir0 --> tipa-OT1-_textbarglotstop
 tipa-OT1-_textdownstep -- rot180 mir0 --> tipa-OT1-_textupstep
+tipa-OT1-_textglotstop -- mir0 --> tipa-OT1-_textinvglotstop
+tipa-OT1-_textglotstop -- mir90 --> tipa-OT1-_textrevglotstop
+tipa-OT1-_textlhtlongi -- mir0 --> tipa-OT1-_textscj
+tipa-OT1-_textlhtlongi -- mir90 --> tipa-OT1-_textfishhookr
+tipa-OT1-_textlonglegr -- rot180 --> tipa-OT1-_textturnlonglegr
 tipa-OT1-_textlptr -- rot180 mir90 --> tipa-OT1-_textrptr
+tipa-OT1-_textrevepsilon -- rot180 mir90 --> tipa-OT1-_textepsilon
+tipa-OT1-_textrtaild -- mir0 --> tipa-OT1-_texthtq
+tipa-OT1-_textrthook -- mir0 --> tipa-OT1-_texthooktop
+tipa-OT1-_textrthook -- mir90 --> tipa-OT1-_textpalhook
+tipa-OT1-_textscr -- mir0 --> tipa-OT1-_textinvscr
+tipa-OT1-_textturnscripta -- rot180 --> tipa-OT1-_textscripta
+txfonts-OT1-_boxdotLeft -- rot180 mir90 --> txfonts-OT1-_boxdotRight
+txfonts-OT1-_boxdotleft -- rot180 mir90 --> txfonts-OT1-_boxdotright
+txfonts-OT1-_boxLeft -- rot180 mir90 --> txfonts-OT1-_boxRight
+txfonts-OT1-_boxleft -- rot180 mir90 --> txfonts-OT1-_boxright
+wasysym-OT1-_ascnode -- mir0 --> wasysym-OT1-_descnode
 wasysym-OT1-_DOWNarrow -- rot180 mir0 --> wasysym-OT1-_UParrow
 wasysym-OT1-_LEFTarrow -- rot180 mir90 --> wasysym-OT1-_RIGHTarrow
 wasysym-OT1-_leftmoon -- rot180 mir90 --> wasysym-OT1-_rightmoon
+wasysym-OT1-_lhd -- mir0 --> latex2e-OT1-_triangleleft
 wasysym-OT1-_lhd -- rot180 mir90 --> wasysym-OT1-_rhd
 wasysym-OT1-_LHD -- rot180 mir90 --> wasysym-OT1-_RHD
+wasysym-OT1-_rhd -- mir0 --> latex2e-OT1-_triangleright
 wasysym-OT1-_unlhd -- mir90 --> wasysym-OT1-_unrhd
-tipa-OT1-_textcloseepsilon -- rot180 mir90 --> tipa-OT1-_textcloserevepsilon
-tipa-OT1-_textcloseepsilon -- rot90 mir45 --> tipa-OT1-_textcloseomega
-latex2e-OT1-_bigoplus -- rot45 --> latex2e-OT1-_bigotimes
-stmaryrd-OT1-_inplus -- rot180 mir90 --> stmaryrd-OT1-_niplus
-amssymb-OT1-_lessgtr -- mir0 --> amssymb-OT1-_gtrless
-tipa-OT1-_textrevepsilon -- rot180 mir90 --> tipa-OT1-_textepsilon
-stmaryrd-OT1-_minuso -- rot90 rot270 mir45 mir135 --> stmaryrd-OT1-_baro
+wasysym-OT1-_wasylozenge -- rot45 rot135 rot225 rot315 --> stix-OT1-_concavediamond

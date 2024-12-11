@@ -15,6 +15,7 @@ latex2e-OT1-_bigcap: mir90
 latex2e-OT1-_bigcirc: rot45 rot90 rot135 rot180 rot225 rot270 rot315 mir0 mir45 mir90 mir135
 latex2e-OT1-_bigcup: mir90
 latex2e-OT1-_bigodot: rot45 rot90 rot135 rot180 rot225 rot270 rot315 mir0 mir45 mir90 mir135
+amssymb-OT1-_circledcirc: rot45 rot90 rot135 rot180 rot225 rot270 rot315 mir0 mir45 mir90 mir135
 latex2e-OT1-_bigoplus: rot90 rot180 rot270 mir0 mir45 mir90 mir135
 latex2e-OT1-_bigotimes: rot90 rot180 rot270 mir0 mir45 mir90 mir135
 latex2e-OT1-_bigsqcup: mir90
@@ -136,6 +137,7 @@ amssymb-OT1-_blacksquare: rot90 rot180 rot270 mir0 mir45 mir90 mir135
 amssymb-OT1-_blacktriangle: mir90
 amssymb-OT1-_blacktriangledown: mir90
 amssymb-OT1-_boxdot: rot90 rot180 rot270 mir0 mir45 mir90 mir135
+mathabx-OT1-_boxcirc: rot90 rot180 rot270 mir0 mir45 mir90 mir135
 amssymb-OT1-_boxminus: rot180 mir0 mir90
 amssymb-OT1-_boxplus: rot90 rot180 rot270 mir0 mir45 mir90 mir135
 amssymb-OT1-_boxtimes: rot90 rot180 rot270 mir0 mir45 mir90 mir135
@@ -152,7 +154,6 @@ amssymb-OT1-_curlyvee: mir90
 amssymb-OT1-_curlywedge: mir90
 amssymb-OT1-_dashleftarrow: mir0
 amssymb-OT1-_dashrightarrow: mir0
-amssymb-OT1-_diagdown: rot180 mir45 mir135
 amssymb-OT1-_diagup: rot180 mir45 mir135
 amssymb-OT1-_divideontimes: rot180 mir0 mir90
 amssymb-OT1-_doteqdot: rot180 mir0 mir90
@@ -199,7 +200,7 @@ amssymb-OT1-_rightrightarrows: mir0
 amssymb-OT1-_risingdotseq: rot180
 amssymb-OT1-_Rrightarrow: mir0
 amssymb-OT1-_rtimes: mir0
-amssymb-OT1-_smallsetminus: rot180
+amssymb-OT1-_diagdown: rot180 mir45 mir135
 amssymb-OT1-_sphericalangle: mir0
 amssymb-OT1-_sphericalangle: mir0
 amssymb-OT1-_sqsubset: mir0

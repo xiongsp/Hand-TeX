@@ -16624,24 +16624,6 @@
     "filename": "2B99786A"
   },
   {
-    "command": "\\xbsol",
-    "package": "stix",
-    "mathmode": true,
-    "textmode": false,
-    "pdflatex": true,
-    "key": "stix-OT1-_xbsol",
-    "filename": "A3CB7BD4"
-  },
-  {
-    "command": "\\xsol",
-    "package": "stix",
-    "mathmode": true,
-    "textmode": false,
-    "pdflatex": true,
-    "key": "stix-OT1-_xsol",
-    "filename": "05C596D8"
-  },
-  {
     "command": "\\conjquant",
     "package": "stix",
     "mathmode": true,

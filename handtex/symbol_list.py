@@ -330,8 +330,11 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
             self.current_symbol_keys = filter(lambda key: key is not None, self.current_symbol_keys)
         else:
             self.current_symbol_keys = list(filter(filter_separators, self.current_symbol_keys))
-            if self.current_symbol_keys == [None]:
-                self.current_symbol_keys.clear()
+            # Remove leading and trailing separators.
+            if self.current_symbol_keys and self.current_symbol_keys[0] is None:
+                self.current_symbol_keys.pop(0)
+            if self.current_symbol_keys and self.current_symbol_keys[-1] is None:
+                self.current_symbol_keys.pop(-1)
 
         # Sort the search pool. Watch for case sensitivity.
         def get_sort_item(key: str) -> str:

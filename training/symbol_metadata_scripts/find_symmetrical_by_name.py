@@ -19,6 +19,7 @@ def find_flipped_pairs(symbols, opposing_pairs):
 
     # Step 3: Find matching pairs based on opposing substrings
     flipped_pairs = []
+    # O(sodding terrible)
     for i, symbol in enumerate(tqdm(symbols)):
         for j, candidate in enumerate(symbols):
             if i != j:  # Avoid comparing the symbol with itself
@@ -42,29 +43,33 @@ def generate_opposing_word_pairs(pairs):
 
 # Updated base word pairs inspired by symbol list
 base_word_pairs = [
-    # ("right", "left"),  # Added lowercase handling for Right/Left
-    # ("up", "down"),  # Added lowercase handling for Up/Down
-    # ("greater", "less"),  # Added lowercase handling for Greater/Less
-    # ("in", "out"),  # Added lowercase handling for In/Out
-    # ("r", "l"),  # Added lowercase handling for R/L
-    # ("u", "d"),  # Added lowercase handling for U/D
-    # ("leftright", "rightleft"),
-    # ("subset", "supset"),
-    # ("cap", "cup"),
-    # ("leq", "geq"),
-    # ("prec", "succ"),
-    # ("langle", "rangle"),
-    # ("lfloor", "rfloor"),
-    # ("ll", "gg"),
-    # ("lt", "gt"),
+    ("right", "left"),  # Added lowercase handling for Right/Left
+    ("up", "down"),  # Added lowercase handling for Up/Down
+    ("greater", "less"),  # Added lowercase handling for Greater/Less
+    ("in", "out"),  # Added lowercase handling for In/Out
+    ("r", "l"),  # Added lowercase handling for R/L
+    ("u", "d"),  # Added lowercase handling for U/D
+    ("leftright", "rightleft"),
+    ("subset", "supset"),
+    ("cap", "cup"),
+    ("leq", "geq"),
+    ("prec", "succ"),
+    ("langle", "rangle"),
+    ("lfloor", "rfloor"),
+    ("ll", "gg"),
+    ("lt", "gt"),
     ("rising", "falling"),
     ("less", "gtr"),
 ]
 
 opposing_word_pairs = generate_opposing_word_pairs(base_word_pairs)
 
+import handtex.symbol_relations as sr
+
+symbol_data = sr.SymbolData()
+
 # Parse the symbols from the given file
-symbols_list = parse_symbols("../../handtex/data/symbol_metadata/symbol_frequency.csv")
+symbols_list = symbol_data.all_keys
 
 # Find and print the matching pairs
 matching_pairs = find_flipped_pairs(symbols_list, opposing_word_pairs)
@@ -76,5 +81,10 @@ matching_pairs = list(set(matching_pairs))
 matching_pairs.sort(key=lambda pair: pair[0])
 # Remove any that contain a {
 matching_pairs = [pair for pair in matching_pairs if "{" not in pair[0] and "{" not in pair[1]]
-for pair in matching_pairs:
-    print(f"{pair[0]} -- -> {pair[1]}")
+
+for s_from, s_to in matching_pairs:
+    if s_from in symbol_data.get_symmetry_group(s_to) or s_to in symbol_data.get_symmetry_group(
+        s_from
+    ):
+        continue
+    print(f"{s_from} -- --> {s_to}")

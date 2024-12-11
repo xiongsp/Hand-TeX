@@ -1,7 +1,7 @@
 amssymb-OT1-_mho tipa-OT1-_textupsilon
 latex2e-OT1-_Delta latex2e-OT1-_bigtriangleup latex2e-OT1-_triangle amssymb-OT1-_vartriangle upgreek-OT1-_Updelta stix-OT1-_triangle MnSymbol-OT1-_medtriangleup mathabx-OT1-_smalltriangleup MnSymbol-OT1-_smalltriangleup stix-OT1-_triangleserifs
 latex2e-OT1-_Gamma upgreek-OT1-_Upgamma
-latex2e-OT1-_Lambda latex2e-OT1-_bigwedge latex2e-OT1-_land latex2e-OT1-_wedge tipa-OT1-_textturnv upgreek-OT1-_Uplambda mathabx-OT1-_wedge stix-OT1-_wedge MnSymbol-OT1-_wedge fdsymbol-OT1-_wedge fdsymbol-OT1-_bigwedge stix-OT1-_bigwedge MnSymbol-OT1-_bigwedge
+latex2e-OT1-_Lambda latex2e-OT1-_bigwedge latex2e-OT1-_land latex2e-OT1-_wedge tipa-OT1-_textturnv upgreek-OT1-_Uplambda mathabx-OT1-_wedge stix-OT1-_wedge MnSymbol-OT1-_wedge fdsymbol-OT1-_wedge fdsymbol-OT1-_bigwedge stix-OT1-_bigwedge MnSymbol-OT1-_bigwedge logix-OT1-_Nd
 latex2e-OT1-_Omega gensymb-OT1-_ohm tipa-OT1-_textscomega upgreek-OT1-_Upomega
 latex2e-OT1-_Phi latex2e-OT1-_phi tipa-OT1-_textphi upgreek-OT1-_Upphi upgreek-OT1-_upphi
 latex2e-OT1-_Pi latex2e-OT1-_prod upgreek-OT1-_Uppi stix-OT1-_prod MnSymbol-OT1-_prod fdsymbol-OT1-_prod fdsymbol-OT1-_varprod MnSymbol-OT1-_smallprod

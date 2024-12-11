@@ -348,7 +348,7 @@ def test_graph_creation() -> None:
     # return
     # Trim out all nodes that have no incoming edges to simplify the structure.
     # for node in list(g.nodes):
-    #     if not g.in_degree(node):
+    #     if not g.edges(node):
     #         g.remove_node(node)
     # Display the graph.
     pos = nx.spring_layout(g)

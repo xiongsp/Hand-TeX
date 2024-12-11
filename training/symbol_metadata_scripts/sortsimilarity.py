@@ -20,7 +20,8 @@ for line in lines:
 lines = [" ".join(line) for line in lines]
 
 # Sort the entire file by rows.
-lines.sort()
+lines.sort(key=lambda x: x.lower())
+lines.sort(key=lambda x: x.startswith("latex2e"), reverse=True)
 
 # Write the sorted file back out.
 output_file = "../../handtex/data/symbol_metadata/similar_manual_sorted.txt"

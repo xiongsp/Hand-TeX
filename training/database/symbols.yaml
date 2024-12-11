@@ -2394,8 +2394,8 @@
     - \sumint
     - \upint
     - \varointclockwise
-    - \xbsol
-    - \xsol
+#    - \xbsol
+#    - \xsol
     - \conjquant
     - \npolint
 # Table 91: stix Integrals with Explicit Slant

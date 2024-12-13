@@ -24,6 +24,7 @@ import training.image_gen as ig
 def build_stroke_cache(db_path: str) -> dict[str, list[list[tuple[int, int]]]]:
     """
     Build a cache of the stroke data for each symbol in the database.
+    This maps the id to the strokes, the key information is lost.
     """
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()

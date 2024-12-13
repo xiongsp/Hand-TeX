@@ -199,6 +199,9 @@ def simplify_transformations(transforms: tuple[Transformation, ...]) -> tuple[Tr
                 simplified_transform[-1] = last.merge(t)
                 continue
         simplified_transform.append(t)
+    # Trim out identity at the end.
+    while simplified_transform and simplified_transform[-1].is_identity:
+        simplified_transform.pop()
     # If we just ended up with identity, remove it.
     if simplified_transform != [Transformation.identity()]:
         return tuple(simplified_transform)

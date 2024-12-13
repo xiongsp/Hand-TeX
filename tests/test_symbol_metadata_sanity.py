@@ -403,6 +403,7 @@ def test_simplify_transform() -> None:
 
     assert st.simplify_transformations((i, r90, r180, r270, m0, m90, m135)) == (r180, m0, m90, m135)
     assert st.simplify_transformations((i, r90, r180, i, i, r270, r180, m0, m0)) == ()
+    assert st.simplify_transformations((r90, r90, m0, m0, i)) == (r180,)
     assert st.simplify_transformations((i,)) == ()
 
 

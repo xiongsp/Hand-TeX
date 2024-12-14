@@ -1,5 +1,5 @@
-# input_file = "../../handtex/data/symbol_metadata/symmetry_other.txt"
-input_file = "../../handtex/data/symbol_metadata/symmetry_self.txt"
+input_file = "../../handtex/data/symbol_metadata/symmetry_other.txt"
+# input_file = "../../handtex/data/symbol_metadata/symmetry_self.txt"
 
 # Split each line into a list of symbols.
 # Sort this list of symbols.

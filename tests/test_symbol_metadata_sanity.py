@@ -407,6 +407,20 @@ def test_simplify_transform() -> None:
     assert st.simplify_transformations((i,)) == ()
 
 
+def test_for_accidental_similarity() -> None:
+    """
+    Look for symbols that have an empty transformation path to another symbol.
+    These should've been in a similarity relation instead.
+    Such relations are in the graph, but they have the leader property set to true.
+    """
+    graph = sr.load_graph()
+    for source, dest, data in graph.edges(data=True):
+        if source == dest:
+            continue
+        if not data["transformations"]:
+            assert "leader" in data, f"Edge {source}->{dest} has no transformations."
+
+
 def test_symbol_data_class() -> None:
     start = time()
     symbol_data = sr.SymbolData()

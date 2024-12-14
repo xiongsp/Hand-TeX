@@ -3,7 +3,7 @@ wasysym-OT1-_gemini marvosym-OT1-_Gemini
 wasysym-OT1-_cancer marvosym-OT1-_Cancer
 wasysym-OT1-_leo wasysym-OT1-_ascnode
 wasysym-OT1-_virgo marvosym-OT1-_Virgo
-wasysym-OT1-_libra marvosym-OT1-_Libra amssymb-OT1-_bumpeq MnSymbol-OT1-_bumpeq fdsymbol-OT1-_bumpeq stix-OT1-_bumpeq
+wasysym-OT1-_libra amssymb-OT1-_bumpeq MnSymbol-OT1-_bumpeq fdsymbol-OT1-_bumpeq stix-OT1-_bumpeq mathabx-OT1-_bumpedeq
 wasysym-OT1-_scorpio marvosym-OT1-_Scorpio
 wasysym-OT1-_sagittarius marvosym-OT1-_Sagittarius
 wasysym-OT1-_capricornus marvosym-OT1-_Capricorn

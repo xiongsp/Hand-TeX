@@ -79,7 +79,8 @@ if __name__ == "__main__":
     db_path = "../database/handtex.db"
 
     # Check if symbol key is provided as a command-line argument
-    symbol_key = "stmaryrd-OT1-_ssearrow"
+    # tipa-OT1-_textprimstress
+    symbol_key = "tipa-OT1-_textsecstress"
 
     if len(sys.argv) > 1:
         symbol_key = sys.argv[1]

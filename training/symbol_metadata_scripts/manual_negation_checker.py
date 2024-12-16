@@ -11,57 +11,32 @@ import PySide6.QtWidgets as Qw
 
 import handtex.utils as ut
 import handtex.symbol_relations as sr
-
-
-def reflection_matrix(angle: float, image_size: int = 100) -> Qg.QTransform:
-    """
-    Reflect the stroke data along an axis that passes through the center of the image
-    at a specified angle. The center is at coordinates (image_size / 2, image_size / 2).
-    Positive angles rotate the axis counter-clockwise.
-
-    :param angle: Angle in degrees defining the axis to reflect across.
-    :param image_size: Size of the image the strokes are drawn on.
-    :return: QTransform reflection matrix.
-    """
-    x_offset = image_size / 2
-    y_offset = image_size / 2
-
-    transformation = Qg.QTransform()
-    # Translate to center
-    transformation.translate(x_offset, y_offset)
-    # Rotate to align reflection axis with x-axis
-    transformation.rotate(angle)
-    # Reflect across x-axis (scale y by -1)
-    transformation.scale(1, -1)
-    # Rotate back to original orientation
-    transformation.rotate(-angle)
-    # Translate back to original position
-    transformation.translate(-x_offset, -y_offset)
-
-    return transformation
+import handtex.structures as st
 
 
 def main():
     """
-    Show existing symmetry info and help creating better associations.
+    Show existing negation strategy and allow user to select a better one.
     """
     # Set environment variable to disable the bounding rect check in Qt SVG handler
     os.environ["QT_SVG_DEFAULT_OPTIONS"] = "2"
 
     symbols = sr.load_symbols()
 
-    symmetry_path = "../../handtex/data/symbol_metadata/symmetry_other.txt"
-    symmetries: list[tuple[str, list[str], str]] = []
-    # Example: latex2e-OT1-_lfloor -- mir90 -> latex2e-OT1-_lnot
-    pattern = re.compile(r"(\S+) -- (.*?) ?-> (\S+)")
+    symmetry_path = "../../handtex/data/symbol_metadata/negations.txt"
+    symmetries: list[tuple[str, st.Negation, str]] = []
+    # Example: latex2e-OT1-_lfloor -/ rot22 o0 /- latex2e-OT1-_lnot
+    pattern = re.compile(r"(\S+) -/ *(.*?) */- (\S+)")
     with open(symmetry_path, "r") as file:
         for line in file.readlines():
             match = pattern.match(line)
             if match:
-                symmetries.append((match.group(1), match.group(2).split(), match.group(3)))
+                symmetries.append(
+                    (match.group(1), st.Negation.from_string(match.group(2)), match.group(3))
+                )
 
     app = Qw.QApplication.instance() or Qw.QApplication([])
-    for index, (s_from, syms, s_to) in enumerate(symmetries, start=1):
+    for index, (s_from, negation, s_to) in enumerate(symmetries, start=1):
         mainwindow = Qw.QWidget()
         # We have a drawing of the actual symbol in the top left.
         # Then we have all the new drawings in a grid below that.
@@ -106,93 +81,203 @@ def main():
         scroll_area.setWidgetResizable(True)
         scroll_area.setFrameShape(Qw.QFrame.Shape.NoFrame)
 
-        grid = Qw.QGridLayout()
-        scroll_widget = Qw.QWidget()
-        scroll_widget.setLayout(grid)
-        scroll_area.setWidget(scroll_widget)
-        mainlayout.addWidget(scroll_area)
-        mainlayout.addSpacerItem(Qw.QSpacerItem(0, 0, Qw.QSizePolicy.Policy.Expanding))
+        # grid = Qw.QGridLayout()
+        # scroll_widget = Qw.QWidget()
+        # scroll_widget.setLayout(grid)
+        # scroll_area.setWidget(scroll_widget)
+        # mainlayout.addWidget(scroll_area)
+        # mainlayout.addSpacerItem(Qw.QSpacerItem(0, 0, Qw.QSizePolicy.Policy.Expanding))
 
-        button_list = []
+        # Create a UI for tuning the parameters:
+        # preset "slash"
+        # slider for rotation, from -180 to 180 at 22.5 degree increments
+        # slider for offset angle, from 0 to 360 at 45 degree increments
+        # slider for offset factor, 0, 0.25 or 0.5
+        # slider for scale factor, from 0.5 to 2 at 0.25 increments
 
-        # Draw 7 copies of the symbol, each with a rotation of 45 degrees.
-        for i in range(1, 8):
-            # Insert the SVG image, but rotated.
-            angle = i * 45
-            # Render to a 100x100 pixmap.
-            pixmap = Qg.QPixmap(100, 100)
+        # Create a preview window for the current settings.
+        preview = Qw.QWidget()
+        preview_section = Qw.QHBoxLayout()
+        preview_symbol = Qw.QLabel(preview)
+        preview_symbol.setFixedSize(200, 200)
+        preview_bar = Qw.QLabel(preview)
+        preview_bar.setFixedSize(200, 200)
+        # Stack the two previews on top of each other, so they overlap.
+        preview_symbol.setGeometry(0, 0, 200, 200)
+        preview_bar.setGeometry(0, 0, 200, 200)
+        preview.setFixedSize(200, 200)
+        preview_section.addWidget(preview)
+
+        # settings area.
+        settings_layout = Qw.QVBoxLayout()
+        preview_section.addLayout(settings_layout)
+        mainlayout.addLayout(preview_section)
+
+        svg_data_vert = ut.load_symbol_svg(symbols["latex2e-OT1-_mid"], color)
+
+        def render_preview():
+            nonlocal svg_data_vert
+            nonlocal negation
+            bar_angle = negation.vert_angle
+            bar_offset_angle = negation.offset_angle
+            bar_offset_factor = negation.offset_factor
+            bar_scale_factor = negation.scale_factor
+            image_width = 200
+
+            pixmap = Qg.QPixmap(image_width, image_width)
             pixmap.fill(Qc.Qt.GlobalColor.transparent)
-            base_renderer = Qs.QSvgRenderer(svg_data)
+
+            base_renderer = Qs.QSvgRenderer(svg_data_vert)
             base_renderer.setAspectRatioMode(Qc.Qt.AspectRatioMode.KeepAspectRatio)
+
             painter = Qg.QPainter(pixmap)
-            painter.translate(50, 50)
-            painter.rotate(-angle)
-            painter.translate(-50, -50)
+            painter.translate(image_width // 2, image_width // 2)
+            painter.rotate(-bar_angle)
+
+            midpoint_x = image_width // 2
+            midpoint_y = image_width // 2
+
+            # If scale < 1, we shrink the bar.
+            if bar_scale_factor < 1:
+                painter.scale(bar_scale_factor, bar_scale_factor)
+                # Also offset it to keep the centerpoint in the same place.
+                # painter.translate(
+                #     (1 - bar_scale_factor) * image_width // 2,
+                #     (1 - bar_scale_factor) * image_width // 2,
+                # )
+
+            painter.translate(-image_width // 2, -image_width // 2)
+
+            if bar_offset_factor > 0:
+                # Translate bar. This is a function of the image width to render at.
+                # In the direction of the angle. Basically polar coordinates.
+                bar_offset_angle -= bar_angle
+                # print(bar_offset_angle)
+                offset = bar_offset_factor * (image_width / 2) / min(bar_scale_factor, 1)
+                painter.translate(
+                    offset * np.cos(np.radians(bar_offset_angle)),
+                    -offset * np.sin(np.radians(bar_offset_angle)),
+                )
+                midpoint_x += offset * np.cos(np.radians(bar_offset_angle)) // 2
+                midpoint_y += -offset * np.sin(np.radians(bar_offset_angle)) // 2
+
             base_renderer.render(painter)
+            # Draw a dot for the centerpoint
+            painter.setPen(Qg.QPen(Qc.Qt.GlobalColor.red))
+            # painter.drawEllipse(midpoint_x - 2, midpoint_y - 2, 4, 4)
+            # print(midpoint_x, midpoint_y)
+
+            preview_bar.setPixmap(pixmap)
             painter.end()
 
-            # Create a checkable label.
-            button = Qw.QPushButton()
-            button.setCheckable(True)
-            button.setIcon(Qg.QIcon(pixmap))
-            button.setIconSize(Qc.QSize(100, 100))
-            button.setToolTip(f"Rotation: {angle}")
-            button.setStyleSheet(
-                "QPushButton:checked { background-color: %s }"
-                % app.palette().color(Qg.QPalette.Highlight).name()
-            )
-            button.data = f"rot{angle}"
-            button_list.append(button)
-            grid.addWidget(button, 1, i)
+            pixmap2 = Qg.QPixmap(image_width, image_width)
+            pixmap2.fill(Qc.Qt.GlobalColor.transparent)
+            painter2 = Qg.QPainter(pixmap2)
+            # Next, we render the symbol on top.
+            # We just need to scale it down in case the scale factor is greater than 1.
+            symbol_renderer = Qs.QSvgRenderer(svg_data)
+            symbol_renderer.setAspectRatioMode(Qc.Qt.AspectRatioMode.KeepAspectRatio)
+            if bar_scale_factor > 1:
+                painter2.translate(image_width // 2, image_width // 2)
+                painter2.scale(1 / bar_scale_factor, 1 / bar_scale_factor)
+                painter2.translate(-image_width // 2, -image_width // 2)
+            symbol_renderer.render(painter2)
+            painter2.end()
+            preview_symbol.setPixmap(pixmap2)
+            update_sliders()
 
-        # Draw 8 copies of the symbol, each flipped around the central axis at increments of 22.5 degrees.
-        for i in range(4):
-            # Insert the SVG image, but flipped using a reflection matrix.
-            angle = i * 45
-            transformation = reflection_matrix(180 - angle, 100)
-            # Render to a 100x100 pixmap.
-            pixmap = Qg.QPixmap(100, 100)
-            pixmap.fill(Qc.Qt.GlobalColor.transparent)
-            base_renderer = Qs.QSvgRenderer(
-                svg_data
-            )  # Create a new renderer for each transformation
-            base_renderer.setAspectRatioMode(Qc.Qt.AspectRatioMode.KeepAspectRatio)
-            painter = Qg.QPainter(pixmap)
-            painter.setTransform(transformation, combine=True)
-            base_renderer.render(painter)
-            painter.end()
+        def set_to_slash():
+            nonlocal negation
+            negation = st.Negation.from_string("slash")
+            render_preview()
 
-            # Create a checkable label.
-            button = Qw.QPushButton()
-            button.setCheckable(True)
-            button.setIcon(Qg.QIcon(pixmap))
-            button.setIconSize(Qc.QSize(100, 100))
-            button.setToolTip(f"Flip Angle: {angle}")
-            button.setStyleSheet(
-                "QPushButton:checked { background-color: %s }"
-                % app.palette().color(Qg.QPalette.Highlight).name()
-            )
-            button.data = f"mir{angle}"
-            button_list.append(button)
-            grid.addWidget(button, 2, i + 1)
+        def update_preview():
+            nonlocal negation
+            # Grab values from the sliders.
+            angle = angle_slider.value() * 22.5
+            offset_angle = offset_angle_slider.value() * 45
+            offset_factor = offset_factor_slider.value() * 0.15
+            scale_factor = scale_factor_slider.value() * 0.25
+            negation = st.Negation(angle, offset_angle, offset_factor, scale_factor)
+            render_preview()
+            settings_label.setText(str(negation))
 
-        # If syms are given, check the corresponding buttons.
-        for sym in syms:
-            for button in button_list:
-                if button.data == sym:
-                    button.setChecked(True)
+        def update_sliders():
+            nonlocal negation
+            nonlocal angle_slider
+            nonlocal offset_angle_slider
+            nonlocal offset_factor_slider
+            nonlocal scale_factor_slider
+            # print(f"setting sliders to {negation=}")
+            angle_slider.setValue(int(negation.angle / 22.5))
+            offset_angle_slider.setValue(int(negation.offset_angle / 45))
+            offset_factor_slider.setValue(int(negation.offset_factor / 0.15))
+            scale_factor_slider.setValue(int(negation.scale_factor / 0.25))
+
+        # Show a preview of the current settings as a string.
+        settings_label = Qw.QLabel()
+        settings_layout.addWidget(settings_label)
+
+        # Controls:
+        slash_button = Qw.QPushButton("Slash")
+        slash_button.clicked.connect(set_to_slash)
+        settings_layout.addWidget(slash_button)
+
+        angle_slider = Qw.QSlider(Qc.Qt.Orientation.Horizontal)
+        # We want to support 22.5 degree increments from 0 to 180.
+        # That means we need 8 steps.
+        angle_slider.setRange(0, 8)
+        angle_slider.setTickInterval(1)
+        angle_slider.setTickPosition(Qw.QSlider.TickPosition.TicksBelow)
+
+        offset_angle_slider = Qw.QSlider(Qc.Qt.Orientation.Horizontal)
+        # We want to support 45 degree increments from 0 to 360.
+        # That means we need 8 steps.
+        offset_angle_slider.setRange(0, 8)
+        offset_angle_slider.setTickInterval(1)
+        offset_angle_slider.setTickPosition(Qw.QSlider.TickPosition.TicksBelow)
+
+        offset_factor_slider = Qw.QSlider(Qc.Qt.Orientation.Horizontal)
+        offset_factor_slider.setRange(0, 3)
+        offset_factor_slider.setTickInterval(1)
+        offset_factor_slider.setTickPosition(Qw.QSlider.TickPosition.TicksBelow)
+
+        scale_factor_slider = Qw.QSlider(Qc.Qt.Orientation.Horizontal)
+        # We want to support values from 0.5 to 2 in 0.25 increments.
+        # That means we need 7 steps.
+        scale_factor_slider.setRange(2, 14)
+        scale_factor_slider.setTickInterval(1)
+        scale_factor_slider.setTickPosition(Qw.QSlider.TickPosition.TicksBelow)
+
+        update_sliders()
+
+        angle_slider.valueChanged.connect(update_preview)
+        offset_angle_slider.valueChanged.connect(update_preview)
+        offset_factor_slider.valueChanged.connect(update_preview)
+        scale_factor_slider.valueChanged.connect(update_preview)
+
+        label_angle = Qw.QLabel("Angle")
+        settings_layout.addWidget(label_angle)
+        settings_layout.addWidget(angle_slider)
+
+        label_offset_angle = Qw.QLabel("Offset Angle")
+        settings_layout.addWidget(label_offset_angle)
+        settings_layout.addWidget(offset_angle_slider)
+
+        label_offset_factor = Qw.QLabel("Offset Factor")
+        settings_layout.addWidget(label_offset_factor)
+        settings_layout.addWidget(offset_factor_slider)
+
+        label_scale_factor = Qw.QLabel("Scale Factor")
+        settings_layout.addWidget(label_scale_factor)
+        settings_layout.addWidget(scale_factor_slider)
+
+        update_preview()
 
         mainwindow.show()
         app.exec()
-        # Gather all button data from checked buttons.
-        # Format: symbol: transformation1 transformation2 ...
-        selected_transformations = []
-        for button in button_list:
-            if button.isChecked():
-                selected_transformations.append(button.data)
-        # if not selected_transformations:
-        #     continue
-        print(f"{s_from} -- " + " ".join(selected_transformations) + f" --> {s_to}")
+        # Print the settings
+        print(f"{s_from} -/ {negation} /- {s_to}")
 
 
 if __name__ == "__main__":

@@ -35,6 +35,7 @@ class GroupBy(IntEnum):
     PACKAGE = 1
     SIMILARITY = 2
     SYMMETRY = 3
+    NEGATION = 4
 
 
 class Symmetry(IntEnum):
@@ -170,6 +171,7 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self.comboBox_grouping.currentIndexChanged.connect(self.update_filters)
         self.pushButton_clear_filters.clicked.connect(self.clear_filters)
         self.spinBox_group_min_size.valueChanged.connect(self.update_filters)
+        self.spinBox_group_max_size.valueChanged.connect(self.update_filters)
         # This one doesn't affect the underlying search pool.
         self.comboBox_case.currentIndexChanged.connect(self.search_symbols)
 
@@ -201,10 +203,16 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
                 grouping = self.symbol_data.symbols_grouped_by_similarity
             elif group_by == GroupBy.SYMMETRY:
                 grouping = self.symbol_data.symbols_grouped_by_transitive_symmetry
+            elif group_by == GroupBy.NEGATION:
+                grouping = self.symbol_data.symbols_grouped_by_negation
             else:
                 raise ValueError(f"Invalid grouping: {group_by}")
             grouping = [
-                group for group in grouping if len(group) >= self.spinBox_group_min_size.value()
+                group
+                for group in grouping
+                if self.spinBox_group_max_size.value()
+                >= len(group)
+                >= self.spinBox_group_min_size.value()
             ]
 
             self.search_pool = []
@@ -458,6 +466,13 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
             )
         else:
             self.label_other_symmetry.setText("")
+
+        if self.symbol_data.has_negation(symbol_key):
+            self.label_negation.setText(
+                ", ".join(key for key in self.symbol_data.get_negation_of(symbol_key))
+            )
+        else:
+            self.label_negation.setText("")
 
         if len(self.symbol_data.get_similarity_group(symbol_key)) > 1:
             self.label_similar.setText(

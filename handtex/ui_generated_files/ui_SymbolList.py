@@ -28,7 +28,7 @@ class Ui_SymbolList(object):
     def setupUi(self, SymbolList):
         if not SymbolList.objectName():
             SymbolList.setObjectName(u"SymbolList")
-        SymbolList.resize(1078, 600)
+        SymbolList.resize(1190, 600)
         self.verticalLayout_3 = QVBoxLayout(SymbolList)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, -1, 0, 0)
@@ -144,6 +144,7 @@ class Ui_SymbolList(object):
         self.comboBox_grouping.addItem("")
         self.comboBox_grouping.addItem("")
         self.comboBox_grouping.addItem("")
+        self.comboBox_grouping.addItem("")
         self.comboBox_grouping.setObjectName(u"comboBox_grouping")
 
         self.horizontalLayout_2.addWidget(self.comboBox_grouping)
@@ -159,6 +160,19 @@ class Ui_SymbolList(object):
         self.spinBox_group_min_size.setMaximum(9999)
 
         self.horizontalLayout_2.addWidget(self.spinBox_group_min_size)
+
+        self.label_9 = QLabel(self.widget_filters)
+        self.label_9.setObjectName(u"label_9")
+
+        self.horizontalLayout_2.addWidget(self.label_9)
+
+        self.spinBox_group_max_size = QSpinBox(self.widget_filters)
+        self.spinBox_group_max_size.setObjectName(u"spinBox_group_max_size")
+        self.spinBox_group_max_size.setMinimum(1)
+        self.spinBox_group_max_size.setMaximum(9999)
+        self.spinBox_group_max_size.setValue(9999)
+
+        self.horizontalLayout_2.addWidget(self.spinBox_group_max_size)
 
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -295,6 +309,18 @@ class Ui_SymbolList(object):
 
         self.formLayout.setWidget(3, QFormLayout.FieldRole, self.label_xelatex_required)
 
+        self.label_6 = QLabel(self.verticalLayoutWidget)
+        self.label_6.setObjectName(u"label_6")
+
+        self.formLayout.setWidget(8, QFormLayout.LabelRole, self.label_6)
+
+        self.label_negation = QLabel(self.verticalLayoutWidget)
+        self.label_negation.setObjectName(u"label_negation")
+        self.label_negation.setText(u"<symbol>")
+        self.label_negation.setWordWrap(True)
+
+        self.formLayout.setWidget(8, QFormLayout.FieldRole, self.label_negation)
+
 
         self.verticalLayout.addLayout(self.formLayout)
 
@@ -340,8 +366,10 @@ class Ui_SymbolList(object):
         self.comboBox_grouping.setItemText(1, QCoreApplication.translate("SymbolList", u"Group by Package", None))
         self.comboBox_grouping.setItemText(2, QCoreApplication.translate("SymbolList", u"Group by Similarity", None))
         self.comboBox_grouping.setItemText(3, QCoreApplication.translate("SymbolList", u"Group by Symmetry", None))
+        self.comboBox_grouping.setItemText(4, QCoreApplication.translate("SymbolList", u"Group by Negation", None))
 
         self.label_4.setText(QCoreApplication.translate("SymbolList", u"Minimimum Group Size:", None))
+        self.label_9.setText(QCoreApplication.translate("SymbolList", u"Maximum Group Size:", None))
         self.label.setText(QCoreApplication.translate("SymbolList", u"Symbol ID:", None))
         self.label_package_label.setText(QCoreApplication.translate("SymbolList", u"Package:", None))
         self.label_3.setText(QCoreApplication.translate("SymbolList", u"Mode:", None))
@@ -353,5 +381,6 @@ class Ui_SymbolList(object):
         self.label_other_symmetry.setText(QCoreApplication.translate("SymbolList", u"<others>", None))
         self.label_xelatex_required_label.setText(QCoreApplication.translate("SymbolList", u"Compiler:", None))
         self.label_xelatex_required.setText(QCoreApplication.translate("SymbolList", u"XeLaTeX or LuaLaTeX required", None))
+        self.label_6.setText(QCoreApplication.translate("SymbolList", u"Negation of:", None))
     # retranslateUi
 

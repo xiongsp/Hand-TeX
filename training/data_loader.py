@@ -130,7 +130,9 @@ class StrokeDataset(Dataset):
             other_symmetry_count = 0
             augmentation_count = 0
 
-            for current_key, transformations in symbol_data.all_paths_to_symbol(symbol_key):
+            for current_key, transformations in symbol_data.all_transformation_paths_to_symbol(
+                symbol_key
+            ):
                 samples.extend(
                     (row[0], transformations, None) for row in load_primary_keys(current_key)
                 )
@@ -392,7 +394,7 @@ def main():
         all_samples.load_transformed_strokes(idx) for idx in all_samples.range_for_symbol(symbol)
     )
     for idx, ((strokes, symbol), (current_key, transformations)) in enumerate(
-        zip(symbol_strokes, symbol_data.all_paths_to_symbol(symbol))
+        zip(symbol_strokes, symbol_data.all_transformation_paths_to_symbol(symbol))
     ):
         img = ig.strokes_to_grayscale_image_cv2(strokes, image_size)
         print(f"Current symbol: {current_key} with transformations: {transformations}")

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1078</width>
+    <width>1190</width>
     <height>600</height>
    </rect>
   </property>
@@ -244,6 +244,11 @@
           <string>Group by Symmetry</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>Group by Negation</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>
@@ -259,6 +264,26 @@
          <number>1</number>
         </property>
         <property name="maximum">
+         <number>9999</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Maximum Group Size:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinBox_group_max_size">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>9999</number>
+        </property>
+        <property name="value">
          <number>9999</number>
         </property>
        </widget>
@@ -468,6 +493,23 @@
           <widget class="QLabel" name="label_xelatex_required">
            <property name="text">
             <string>XeLaTeX or LuaLaTeX required</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Negation of:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="1">
+          <widget class="QLabel" name="label_negation">
+           <property name="text">
+            <string notr="true">&lt;symbol&gt;</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>

@@ -426,7 +426,7 @@ def test_symbol_data_class() -> None:
     symbol_data = sr.SymbolData()
     print(f"SymbolData creation took {1000 * (time() - start):.2f} ms.")
     for symbol in symbol_data.leaders:
-        options = symbol_data.all_paths_to_symbol(symbol)
+        options = symbol_data.all_transformation_paths_to_symbol(symbol)
         assert options, f"Symbol {symbol} has no paths."
         ancestors = symbol_data.all_symbols_to_symbol(symbol)
         assert len(set(ancestors)) == len(ancestors), f"Symbol {symbol} has duplicate ancestors."

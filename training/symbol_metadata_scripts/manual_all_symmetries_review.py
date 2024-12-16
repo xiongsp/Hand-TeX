@@ -78,7 +78,8 @@ def main():
     for symbol in symbol_data.leaders:
         # If the symbol has any paths with a transformation, add it to the list.
         if any(
-            transformations for path, transformations in symbol_data.all_paths_to_symbol(symbol)
+            transformations
+            for path, transformations in symbol_data.all_transformation_paths_to_symbol(symbol)
         ):
             symbols_to_inspect.append(symbol)
     # Manual override:
@@ -93,7 +94,7 @@ def main():
         mainlayout = Qw.QVBoxLayout()
         mainwindow.setLayout(mainlayout)
 
-        paths = symbol_data.all_paths_to_symbol(symbol)
+        paths = symbol_data.all_transformation_paths_to_symbol(symbol)
 
         # Load the symbol svg.
         # Display it next to the number of new drawings, and the symbol key.

@@ -1,4 +1,5 @@
 import json
+from typing import overload
 
 from attrs import frozen
 
@@ -81,9 +82,6 @@ class SymbolDrawing:
             "key": self.key,
             "strokes": self.strokes,
         }
-
-
-from typing import overload, Union
 
 
 class Transformation:
@@ -206,3 +204,93 @@ def simplify_transformations(transforms: tuple[Transformation, ...]) -> tuple[Tr
     if simplified_transform != [Transformation.identity()]:
         return tuple(simplified_transform)
     return ()
+
+
+class Negation:
+    """
+    Track the position of a straight line to negate a symbol.
+    Modifiers:
+    - angle: a rotation transformation, starting at 0 degrees being horizontal
+    - offset: uangle, oangle, Oangle (e.g. u180, o90, O45) to offset the line from the center by 0.15, 0.3, 0.45
+    - scale: s0.5, s2 to scale the line by 50% or 200% relative to the symbol
+
+    String format examples:
+    - "rot45"
+    - "rot45 o90 s0.5"
+    - "o90"
+    - "O45
+    - "s2"
+    - "slash"  # Preset for a simple slash: rot-22.5
+
+    If the string is empty, assume slash.
+    """
+
+    def __init__(
+        self, angle: float, offset_angle: float, offset_factor: float, scale_factor: float
+    ):
+        self.angle = angle
+        self.offset_angle = offset_angle
+        self.offset_factor = offset_factor
+        self.scale_factor = scale_factor
+
+    @classmethod
+    def from_string(cls, negation_str: str) -> "Negation":
+        negation_str = negation_str.strip()
+        if not negation_str or negation_str == "slash":
+            return cls(angle=67.5, offset_angle=0, offset_factor=0, scale_factor=1.5)
+        angle = 0
+        offset_angle = 0
+        offset_factor = 0
+        scale_factor = 1
+        for part in negation_str.split():
+            if part.startswith("rot"):
+                angle = float(part[3:])
+            elif part.startswith("u"):
+                offset_angle = float(part[1:])
+                offset_factor = 0.15
+            elif part.startswith("o"):
+                offset_angle = float(part[1:])
+                offset_factor = 0.3
+            elif part.startswith("O"):
+                offset_angle = float(part[1:])
+                offset_factor = 0.45
+            elif part.startswith("s"):
+                scale_factor = float(part[1:])
+        return cls(angle, offset_angle, offset_factor, scale_factor)
+
+    @property
+    def vert_angle(self):
+        """
+        The angle to apply to a vertical line to negate the symbol.
+        """
+        return self.angle - 90
+
+    def is_slash(self):
+        return (
+            self.angle == 67.5
+            and self.offset_angle == 0
+            and self.offset_factor == 0
+            and self.scale_factor == 1.5
+        )
+
+    def __str__(self):
+        if self.is_slash():
+            return "slash"
+        parts = []
+        if self.angle != 0:
+            parts.append(f"rot{self.angle}")
+        if self.offset_factor != 0:
+            if self.offset_factor - 0.15 < 1e-6:
+                parts.append(f"u{self.offset_angle}")
+            elif self.offset_factor - 0.3 < 1e-6:
+                parts.append(f"o{self.offset_angle}")
+            elif self.offset_factor - 0.45 < 1e-6:
+                parts.append(f"O{self.offset_angle}")
+            else:
+                raise ValueError(f"Invalid offset factor: {self.offset_factor}")
+        if self.scale_factor != 1:
+            parts.append(f"s{self.scale_factor}")
+        return " ".join(parts)
+
+    def __repr__(self):
+        return f"<Negation({self.angle=}, {self.offset_angle=}, {self.offset_factor=}, {self.scale_factor=})>"

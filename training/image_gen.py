@@ -116,6 +116,29 @@ def scale_matrix(scale_x: float, scale_y: float, image_size: int = 1000) -> np.n
     return transformation
 
 
+def translation_matrix(
+    translate_x: float, translate_y: float, image_size: int = 1000
+) -> np.ndarray:
+    """
+    Translate the stroke data by the given x and y offsets, in proportion to the image size.
+
+    :param translate_x: Offset to translate the strokes along the x-axis.
+    :param translate_y: Offset to translate the strokes along the y-axis.
+    :param image_size: Size of the image the strokes are drawn on.
+    :return: Translation matrix.
+    """
+    x_offset = image_size * translate_x
+    y_offset = image_size * translate_y
+    transformation = np.array(
+        [
+            [1, 0, x_offset],
+            [0, 1, y_offset],
+            [0, 0, 1],
+        ]
+    )
+    return transformation
+
+
 def skew_matrix(skew_x: float, skew_y: float, image_size: int = 1000) -> np.ndarray:
     """
     Skew the stroke data along the x and y axes, relative to the center of the image.
@@ -209,7 +232,7 @@ def apply_transformations(
         ones = np.ones((transformed_points.shape[0], 1))
         transformed_points = np.hstack([transformed_points[:, :2], ones])
         scaled_points = transformed_points @ scaling_matrix.T
-        x_scaled = np.round(scaled_points[:, 0]).astype(int)
+        x_scaled = np.round(scaled_points[:, 0]).astype(int)  # Replace with x_new??
         y_scaled = np.round(scaled_points[:, 1]).astype(int)
     else:
         x_scaled = np.round(x_new).astype(int)

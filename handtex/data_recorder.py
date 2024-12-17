@@ -23,6 +23,7 @@ class DataRecorder:
     save_path: Path
     current_data: list[st.SymbolDrawing]
     frequencies: defaultdict[str, int]
+    augmented_frequencies: defaultdict[str, int]
 
     last_100_symbols: list[str]
 
@@ -38,6 +39,7 @@ class DataRecorder:
         self.current_data = []
         self.symbol_data = symbol_data
         self.frequencies = defaultdict(int)
+        self.augmented_frequencies = defaultdict(int)
         self.has_submissions = has_submissions
 
         # Don't randomly select one of the last 20 symbols.
@@ -57,14 +59,21 @@ class DataRecorder:
         logger.info(f"New data location: {data_dir}")
 
         # Load frequency data for the current database.
+        with resources.path(handtex.data.symbol_metadata, "symbol_frequency.csv") as path:
+            frequencies_path = path
+
         with resources.path(handtex.data.symbol_metadata, "augmented_symbol_frequency.csv") as path:
             augmented_frequencies_path = path
 
+        with open(frequencies_path, "r") as file:
+            reader = csv.reader(file)
+            frequencies = defaultdict(int, {row[0]: int(row[1]) for row in reader})
+
         with open(augmented_frequencies_path, "r") as file:
             reader = csv.reader(file)
-            self.frequencies = defaultdict(int, {row[0]: int(row[1]) for row in reader})
+            augmented_frequencies = defaultdict(int, {row[0]: int(row[1]) for row in reader})
 
-        total_old = sum(self.frequencies.values())
+        total_old = sum(frequencies.values())
         logger.info(f"Loaded {total_old} training set drawings for frequency analysis.")
 
         # Load new data, gather frequencies from it.
@@ -89,7 +98,11 @@ class DataRecorder:
 
         # Combine the old and new frequencies.
         for key, value in new_frequencies.items():
-            self.frequencies[key] += value
+            frequencies[key] += value
+
+        self.frequencies = frequencies
+        self.augmented_frequencies = augmented_frequencies
+
         logger.info(f"Total of {sum(self.frequencies.values())} drawings for frequency analysis.")
 
         # Assign the save path.
@@ -112,7 +125,8 @@ class DataRecorder:
         symbol_keys = self.symbol_data.all_keys
         symbol_weights = []
         for key in symbol_keys:
-            weight = (1 / (self.frequencies[key] + 1)) ** bias
+            balanced_frequency = (self.frequencies[key] + self.augmented_frequencies[key] + 1) / 2
+            weight = (1 / balanced_frequency) ** bias
             symbol_weights.append(weight)
         return random.choices(symbol_keys, weights=symbol_weights)[0]
 
@@ -124,7 +138,11 @@ class DataRecorder:
         :param key: The symbol's key.
         :return: The rarity of the symbol.
         """
-        sorted_symbols = sorted(self.frequencies.items(), key=lambda item: item[1])
+        averaged_frequencies = {
+            key: (1 + self.frequencies[key] + self.augmented_frequencies[key]) / 2
+            for key in self.frequencies
+        }
+        sorted_symbols = sorted(averaged_frequencies, key=lambda item: item[1])
         total_symbols = len(sorted_symbols)
 
         target_rank = None

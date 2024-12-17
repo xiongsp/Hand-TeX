@@ -224,7 +224,9 @@ def test_graph_transitivity() -> None:
         "downarrow": [("leftarrow", [st.Transformation.mir(45), st.Transformation.rot(270)])],
     }
 
-    graph = sr.build_graph(symbol_keys, similarity_groups, self_symmetries, other_symmetries)
+    graph = sr.build_graph_without_negations(
+        symbol_keys, similarity_groups, self_symmetries, other_symmetries
+    )
     # # Draw the graph, just print the edge labels.
     # pos = nx.spring_layout(graph)
     # nx.draw_networkx(graph, pos, with_labels=True)
@@ -276,11 +278,13 @@ def test_graph_transitivity() -> None:
 def test_graph_creation() -> None:
 
     start = time()
-    g = sr.load_graph()
-    print(f"Graph creation took {1000 * (time() - start):.2f} ms.")
-
-    start = time()
-    g = sr.apply_transitivity(g)
+    # g = sr.load_graph()
+    # print(f"Graph creation took {1000 * (time() - start):.2f} ms.")
+    #
+    # start = time()
+    # g = sr.apply_transitivity(g)
+    symbol_data = sr.SymbolData()
+    g = symbol_data.graph
     print(f"Transitivity took {1000 * (time() - start):.2f} ms.")
 
     return
@@ -299,51 +303,51 @@ def test_graph_creation() -> None:
     similarity_groups = sr.load_symbol_metadata_similarity_groups()
     assert leader_mapping == sr.construct_to_leader_mapping(similarity_groups)
 
-    # Find the edge with the most transformations.
-    # The most is the product of the lengths of the transformations.
-    max_edge = None
-    max_product = 0
-    max_layer_edge = None
-    max_layers = 0
-    for edge in g.edges(data=True):
-        product = 1
-        for transformation in edge[2]["transformations"]:
-            product *= len(transformation)
-        if product > max_product:
-            max_edge = edge
-            max_product = product
-        if len(edge[2]["transformations"]) > max_layers:
-            max_layer_edge = edge
-            max_layers = len(edge[2]["transformations"])
-    print(f"Max edge: {max_edge}, product: {max_product}")
-    # Plot the distribution of transformation lengths.
-    transformation_lengths = []
-    for edge in g.edges(data=True):
-        product = 1
-        for transformation in edge[2]["transformations"]:
-            product *= len(transformation)
-        transformation_lengths.append(product)
-
-    # Calculate frequency of each length.
-    from collections import Counter
-
-    print(Counter(transformation_lengths))
-    # Make a bar chart of the frequencies.
-    sorted_by_product = sorted(Counter(transformation_lengths).items())
-    x, y = zip(*sorted_by_product)
-    plt.bar(x, y)
-    plt.show()
-
-    print(f"Max layer edge: {max_layer_edge}, layers: {max_layers}")
-    transformation_layers = []
-    for edge in g.edges(data=True):
-        transformation_layers.append(len(edge[2]["transformations"]))
-    print(Counter(transformation_layers))
-    # Make a bar chart of the frequencies.
-    sorted_by_layers = sorted(Counter(transformation_layers).items())
-    x, y = zip(*sorted_by_layers)
-    plt.bar(x, y)
-    plt.show()
+    # # Find the edge with the most transformations.
+    # # The most is the product of the lengths of the transformations.
+    # max_edge = None
+    # max_product = 0
+    # max_layer_edge = None
+    # max_layers = 0
+    # for edge in g.edges(data=True):
+    #     product = 1
+    #     for transformation in edge[2]["transformations"]:
+    #         product *= len(transformation)
+    #     if product > max_product:
+    #         max_edge = edge
+    #         max_product = product
+    #     if len(edge[2]["transformations"]) > max_layers:
+    #         max_layer_edge = edge
+    #         max_layers = len(edge[2]["transformations"])
+    # print(f"Max edge: {max_edge}, product: {max_product}")
+    # # Plot the distribution of transformation lengths.
+    # transformation_lengths = []
+    # for edge in g.edges(data=True):
+    #     product = 1
+    #     for transformation in edge[2]["transformations"]:
+    #         product *= len(transformation)
+    #     transformation_lengths.append(product)
+    #
+    # # Calculate frequency of each length.
+    # from collections import Counter
+    #
+    # print(Counter(transformation_lengths))
+    # # Make a bar chart of the frequencies.
+    # sorted_by_product = sorted(Counter(transformation_lengths).items())
+    # x, y = zip(*sorted_by_product)
+    # plt.bar(x, y)
+    # plt.show()
+    #
+    # print(f"Max layer edge: {max_layer_edge}, layers: {max_layers}")
+    # transformation_layers = []
+    # for edge in g.edges(data=True):
+    #     transformation_layers.append(len(edge[2]["transformations"]))
+    # print(Counter(transformation_layers))
+    # # Make a bar chart of the frequencies.
+    # sorted_by_layers = sorted(Counter(transformation_layers).items())
+    # x, y = zip(*sorted_by_layers)
+    # plt.bar(x, y)
+    # plt.show()
 
     # return
     # Trim out all nodes that have no incoming edges to simplify the structure.
@@ -352,6 +356,9 @@ def test_graph_creation() -> None:
     #         g.remove_node(node)
     # Display the graph.
     pos = nx.spring_layout(g)
+    # Move MnSymbol-OT1-_backapprox to the corner
+    pos["MnSymbol-OT1-_backapprox"] = (-1, -1)
+    pos["MnSymbol-OT1-_nbackapprox"] = (-1, -1.1)
     # Color the nodes not in the leader mapping.
     colors = []
     for node in g.nodes:
@@ -365,13 +372,23 @@ def test_graph_creation() -> None:
     # ,)}), product: 11
 
     edge_styles = []
+    edge_colors = []
+    edge_alpha = []
     for edge in g.edges:
         if "leader" in g[edge[0]][edge[1]]:
             edge_styles.append("dashed")
+            edge_colors.append("black")
+            edge_alpha.append(0.0)
+        elif "negation" in g[edge[0]][edge[1]]:
+            edge_styles.append("dotted")
+            edge_colors.append("green")
+            edge_alpha.append(1)
         else:
             edge_styles.append("solid")
+            edge_colors.append("black")
+            edge_alpha.append(0.0)
     # nx.draw_networkx(g, pos, node_color=colors, label=True)
-    nx.draw_networkx_edges(g, pos, edge_color="black", style=edge_styles)
+    nx.draw_networkx_edges(g, pos, edge_color=edge_colors, style=edge_styles, alpha=edge_alpha)
     nx.draw_networkx_labels(g, pos)
     nx.draw_networkx_nodes(g, pos, node_color=colors)
 
@@ -413,12 +430,44 @@ def test_for_accidental_similarity() -> None:
     These should've been in a similarity relation instead.
     Such relations are in the graph, but they have the leader property set to true.
     """
-    graph = sr.load_graph()
+    graph = sr.SymbolData().graph
     for source, dest, data in graph.edges(data=True):
         if source == dest:
             continue
-        if not data["transformations"]:
-            assert "leader" in data, f"Edge {source}->{dest} has no transformations."
+        if not data.get("transformations", False):
+            assert (
+                "leader" in data or "negation" in data
+            ), f"Edge {source}->{dest} has no transformations."
+
+
+def test_negation_similarity_disjunct() -> None:
+    symbol_data = sr.SymbolData()
+    # Look at the negations and make sure none of them
+    # are in a similarity relation.
+    # We do this by checking that no node has an incoming negation edge
+    # at the same time as having an outgoing leader edge to a node,
+    # which also has an incoming negation edge.
+    for node in symbol_data.graph.nodes:
+        leader = None
+        for pred in symbol_data.graph.predecessors(node):
+            if "leader" in symbol_data.graph[pred][node]:
+                leader = pred
+                break
+        else:
+            continue
+
+        # We can't have them both posses negations.
+        for pred in symbol_data.graph.predecessors(leader):
+            if "negation" in symbol_data.graph[pred][leader]:
+                break
+        else:
+            continue
+
+        # Ok, now this one doesn't get to have a negation.
+        for pred in symbol_data.graph.predecessors(node):
+            assert (
+                "negation" not in symbol_data.graph[pred][node]
+            ), f"Node {node} has a negation and a leader with a negation."
 
 
 def test_symbol_data_class() -> None:
@@ -426,13 +475,16 @@ def test_symbol_data_class() -> None:
     symbol_data = sr.SymbolData()
     print(f"SymbolData creation took {1000 * (time() - start):.2f} ms.")
     for symbol in symbol_data.leaders:
-        options = symbol_data.all_transformation_paths_to_symbol(symbol)
+        options = symbol_data.all_paths_to_symbol(symbol)
         assert options, f"Symbol {symbol} has no paths."
         ancestors = symbol_data.all_symbols_to_symbol(symbol)
         assert len(set(ancestors)) == len(ancestors), f"Symbol {symbol} has duplicate ancestors."
         assert symbol not in ancestors, f"Symbol {symbol} is it's own ancestor."
         # No transformation list should contain identity.
-        for source, trans in options:
+        for source, trans, neg in options:
             assert not any(
                 t.is_identity for t in trans
             ), f"Symbol {source}->{symbol} contains identity transformation in {trans}"
+            # Negations can't be self loops.
+            if neg:
+                assert source != symbol, f"Symbol {source} is a negation of itself."

@@ -1,4 +1,5 @@
 import json
+from math import sin, cos, pi
 from typing import overload
 
 from attrs import frozen
@@ -211,7 +212,7 @@ class Negation:
     Track the position of a straight line to negate a symbol.
     Modifiers:
     - angle: a rotation transformation, starting at 0 degrees being horizontal
-    - offset: uangle, oangle, Oangle (e.g. u180, o90, O45) to offset the line from the center by 0.15, 0.3, 0.45
+    - offset: uangle, oangle, Oangle, Uangle (e.g. u180, o90, O45) to offset the line from the center by 0.15, 0.3, 0.45, 1.1
     - scale: s0.5, s2 to scale the line by 50% or 200% relative to the symbol
 
     String format examples:
@@ -222,7 +223,7 @@ class Negation:
     - "s2"
     - "slash"  # Preset for a simple slash: rot-22.5
 
-    If the string is empty, assume slash.
+    If the string is empty, assume defaults.
     """
 
     def __init__(
@@ -236,8 +237,11 @@ class Negation:
     @classmethod
     def from_string(cls, negation_str: str) -> "Negation":
         negation_str = negation_str.strip()
-        if not negation_str or negation_str == "slash":
+        if negation_str == "slash":
             return cls(angle=67.5, offset_angle=0, offset_factor=0, scale_factor=1.5)
+        if negation_str == "bar":
+            return cls(angle=0, offset_angle=0, offset_factor=0, scale_factor=1)
+
         angle = 0
         offset_angle = 0
         offset_factor = 0
@@ -254,6 +258,9 @@ class Negation:
             elif part.startswith("O"):
                 offset_angle = float(part[1:])
                 offset_factor = 0.45
+            elif part.startswith("U"):
+                offset_angle = float(part[1:])
+                offset_factor = 1.2
             elif part.startswith("s"):
                 scale_factor = float(part[1:])
         return cls(angle, offset_angle, offset_factor, scale_factor)
@@ -264,6 +271,23 @@ class Negation:
         The angle to apply to a vertical line to negate the symbol.
         """
         return self.angle - 90
+
+    @property
+    def x_offset(self):
+        """
+        Calculate the horizontal component of the offset.
+        The offset is in terms of the distance from the center to the edge.
+        """
+        # Convert polar coordinated (in degrees) to cartesian coordinates
+        return self.offset_factor * cos(self.offset_angle * pi / 180) / 2
+
+    @property
+    def y_offset(self):
+        """
+        Calculate the vertical component of the offset.
+        The offset is in terms of the distance from the center to the edge.
+        """
+        return self.offset_factor * sin(self.offset_angle * pi / 180) / 2
 
     def is_slash(self):
         return (
@@ -286,10 +310,15 @@ class Negation:
                 parts.append(f"o{self.offset_angle}")
             elif self.offset_factor - 0.45 < 1e-6:
                 parts.append(f"O{self.offset_angle}")
+            elif self.offset_factor - 1.2 < 1e-6:
+                parts.append(f"U{self.offset_angle}")
             else:
                 raise ValueError(f"Invalid offset factor: {self.offset_factor}")
         if self.scale_factor != 1:
             parts.append(f"s{self.scale_factor}")
+
+        if not parts:
+            return "bar"
         return " ".join(parts)
 
     def __repr__(self):

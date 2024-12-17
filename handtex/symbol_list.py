@@ -426,7 +426,7 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
             self.listWidget.addItem(item)
 
         self.label_count.setText(
-            str(len(list(filter(lambda k: k is not None, self.current_symbol_keys))))
+            str(sum(1 for _ in (filter(lambda k: k is not None, self.current_symbol_keys))))
         )
 
     def show_symbol_details(self, symbol_key: str | None):

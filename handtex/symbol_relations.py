@@ -57,12 +57,11 @@ class SymbolData:
             other_symmetries, self.to_leader, self_symmetries
         )
         normalized_negations = normalize_negations_to_leaders(negations, self.to_leader)
-        graph = build_graph(
+        graph = build_graph_without_negations(
             self.symbol_keys,
             similarity_groups,
             normalized_self_symmetries,
             normalized_other_symmetries,
-            normalized_negations,
         )
         self.graph = apply_transitivity(graph)
 
@@ -73,6 +72,9 @@ class SymbolData:
         )
         self.asymmetric_symbols = self._compute_asymmetric_symbols()
         self.symbols_grouped_by_package = self._compute_symbols_grouped_by_package()
+
+        self.graph = add_negation_to_graph(self.graph, normalized_negations)
+        self.graph = apply_negation_transitivity(self.graph)
         self.symbols_grouped_by_negation = self._compute_symbols_grouped_by_negation(negations)
 
     def __getitem__(self, item):
@@ -115,10 +117,11 @@ class SymbolData:
         :return: The negation symbol key.
         """
         symbol_key = self.to_leader.get(symbol_key, symbol_key)
+        symbols = []
         for source, dest, data in self.graph.in_edges(symbol_key, data=True):
             if "negation" in data:
-                return self.get_similarity_group(source)
-        return []
+                symbols.append(source)
+        return symbols
 
     @cache
     def has_negation(self, symbol_key: str) -> bool:
@@ -191,11 +194,16 @@ class SymbolData:
         Grouping by negation means that symbols and those similar to them that are negations of each other.
         """
         negation_groups = []
+        visited = set()
         for symbol_to, (symbol_from, negation) in normalized_negations.items():
             negation_group = self.get_similarity_group(symbol_to) + self.get_similarity_group(
                 symbol_from
             )
             negation_groups.append(tuple(negation_group))
+            visited.update(negation_group)
+        for symbol in self.all_keys:
+            if symbol not in visited:
+                negation_groups.append((symbol,))
         return negation_groups
 
     def all_transformation_paths_to_symbol(
@@ -228,6 +236,8 @@ class SymbolData:
         self_symmetries = ((st.Transformation.identity(), *self_symmetries),)
 
         for source, dest, data in self.graph.in_edges(symbol_key, data=True):
+            if "transformations" not in data:
+                continue
             if source != dest:
                 # Slap on the self-symmetries at the end of the transformations.
                 transformation_list = data["transformations"] + self_symmetries
@@ -247,6 +257,32 @@ class SymbolData:
                 #     logger.warning(
                 #         f"Duplicate path found: {source} -> {symbol_key}. {transformations} -> {simplified_transformations}"
                 #     )
+        return paths
+
+    def all_paths_to_symbol(
+        self, symbol_key: str
+    ) -> list[tuple[str, tuple[st.Transformation, ...], st.Negation | None]]:
+        """
+        Get all possible paths to a symbol key, starting from some symbol and applying transformations.
+        Optionally add a negation on the end. Multiple negations are not supported.
+        """
+        paths = []
+        # First, gather the usual transformation paths.
+        for source, transformations in self.all_transformation_paths_to_symbol(symbol_key):
+            paths.append((source, transformations, None))
+        # Find the un-negated leader.
+        negation_leader = next(
+            filter(
+                lambda l: l == self.to_leader.get(l, l),
+                self.get_negation_of(symbol_key),
+            ),
+            None,
+        )
+        if negation_leader is not None:
+            negation = self.graph[negation_leader][symbol_key]["negation"]
+            for source, transformations in self.all_transformation_paths_to_symbol(negation_leader):
+                paths.append((source, transformations, negation))
+
         return paths
 
     def all_symbols_to_symbol(self, symbol_key: str) -> list[str]:
@@ -604,12 +640,11 @@ def normalize_negations_to_leaders(
     return normalized_negations
 
 
-def build_graph(
+def build_graph_without_negations(
     symbol_keys: list[str],
     similarity_groups: list[tuple[str, ...]],
     normalized_self_symmetries: dict[str, list[st.Transformation]],
     normalized_other_symmetries: dict[str, list[tuple[str, list[st.Transformation]]]],
-    normalized_negations: dict[str, tuple[str, st.Negation]],
 ) -> nx.DiGraph:
     """
     Build a complete graph of all known symbol relations.
@@ -625,7 +660,6 @@ def build_graph(
     :param similarity_groups: List of tuples of symbol keys.
     :param normalized_self_symmetries: Dictionary mapping symbol keys to lists of self-symmetries.
     :param normalized_other_symmetries: Dictionary mapping symbol keys to tuples of target symbol key and list of transforms.
-    :param normalized_negations: Dictionary mapping a negated symbol key to the key and negation it can be derived from.
     :return: A directed graph of symbol relations.
     """
     graph = nx.DiGraph()
@@ -653,35 +687,26 @@ def build_graph(
         for target, transforms in symmetries:
             graph.add_edge(key, target, transformations=(tuple(transforms),))
 
+    return graph
+
+
+def add_negation_to_graph(
+    graph: nx.DiGraph,
+    normalized_negations: dict[str, tuple[str, st.Negation]],
+) -> nx.DiGraph:
+    """
+    Add negations to the graph of symbol relations.
+
+    :param graph: The graph of symbol relations.
+    :param normalized_negations: Dictionary mapping a negated symbol key to the key and negation it can be derived from.
+    :return: The graph with negations added.
+    """
+
     # Load negations as edges with the given negation.
     for key, (source, negation) in normalized_negations.items():
         graph.add_edge(source, key, negation=negation)
 
     return graph
-
-
-def load_graph() -> nx.DiGraph:
-    """
-    Load the graph of symbol relations.
-    """
-    symbol_keys = list(load_symbols().keys())
-    similarity_groups = load_symbol_metadata_similarity_groups()
-    self_symmetries = load_symbol_metadata_self_symmetry()
-    other_symmetries = load_symbol_metadata_other_symmetry()
-    negations = load_symbol_data_negation()
-    to_leader = construct_to_leader_mapping(similarity_groups)
-    normalized_self_symmetries = normalize_self_symmetry_to_leaders(self_symmetries, to_leader)
-    normalized_other_symmetries = normalize_other_symmetry_to_leaders(
-        other_symmetries, to_leader, self_symmetries
-    )
-    normalized_negations = normalize_negations_to_leaders(negations, to_leader)
-    return build_graph(
-        symbol_keys,
-        similarity_groups,
-        normalized_self_symmetries,
-        normalized_other_symmetries,
-        normalized_negations,
-    )
 
 
 def apply_transitivity(graph: nx.DiGraph) -> nx.DiGraph:
@@ -738,6 +763,26 @@ def apply_transitivity(graph: nx.DiGraph) -> nx.DiGraph:
     # Add all new transitive edges to the graph.
     for source, target, transformations in new_edges:
         graph.add_edge(source, target, transformations=transformations)
+
+    return graph
+
+
+def apply_negation_transitivity(graph: nx.DiGraph) -> nx.DiGraph:
+    new_negations = []
+    # We now need to apply transitivity to the negations.
+    # This means that is A is a negation of B, and C has an empty transformation to B,
+    # then A is also a negation of C.
+    # The previous step ensured that all transformations are just one edge away.
+    for source, target, data in graph.edges(data=True):
+        if "negation" in data:
+            for source_source, _, source_data in graph.in_edges(source, data=True):
+                if "transformations" in source_data and not source_data["transformations"]:
+                    # graph.add_edge(source_source, target, negation=data)
+                    new_negations.append((source_source, target, data))
+
+    # Add all new negations to the graph.
+    for source, target, data in new_negations:
+        graph.add_edge(source, target, negation=data)
 
     return graph
 

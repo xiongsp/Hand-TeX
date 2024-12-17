@@ -194,9 +194,12 @@ def main():
         def update_preview():
             nonlocal negation
             # Grab values from the sliders.
-            angle = angle_slider.value() * 22.5
+            angle = angle_slider.value() * 11.25
             offset_angle = offset_angle_slider.value() * 45
-            offset_factor = offset_factor_slider.value() * 0.15
+            if offset_factor_slider.value() < 4:
+                offset_factor = offset_factor_slider.value() * 0.15
+            else:
+                offset_factor = 1.2
             scale_factor = scale_factor_slider.value() * 0.25
             negation = st.Negation(angle, offset_angle, offset_factor, scale_factor)
             render_preview()
@@ -209,8 +212,12 @@ def main():
             nonlocal offset_factor_slider
             nonlocal scale_factor_slider
             # print(f"setting sliders to {negation=}")
-            angle_slider.setValue(int(negation.angle / 22.5))
+            angle_slider.setValue(int(negation.angle / 11.25))
             offset_angle_slider.setValue(int(negation.offset_angle / 45))
+            if negation.offset_factor < 1.2:
+                offset_factor_slider.setValue(int(negation.offset_factor / 0.15))
+            else:
+                offset_factor_slider.setValue(4)
             offset_factor_slider.setValue(int(negation.offset_factor / 0.15))
             scale_factor_slider.setValue(int(negation.scale_factor / 0.25))
 
@@ -224,9 +231,9 @@ def main():
         settings_layout.addWidget(slash_button)
 
         angle_slider = Qw.QSlider(Qc.Qt.Orientation.Horizontal)
-        # We want to support 22.5 degree increments from 0 to 180.
-        # That means we need 8 steps.
-        angle_slider.setRange(0, 8)
+        # We want to support 11.25 degree increments from 0 to 180.
+        # That means we need 16 steps.
+        angle_slider.setRange(0, 16)
         angle_slider.setTickInterval(1)
         angle_slider.setTickPosition(Qw.QSlider.TickPosition.TicksBelow)
 
@@ -238,7 +245,7 @@ def main():
         offset_angle_slider.setTickPosition(Qw.QSlider.TickPosition.TicksBelow)
 
         offset_factor_slider = Qw.QSlider(Qc.Qt.Orientation.Horizontal)
-        offset_factor_slider.setRange(0, 3)
+        offset_factor_slider.setRange(0, 4)
         offset_factor_slider.setTickInterval(1)
         offset_factor_slider.setTickPosition(Qw.QSlider.TickPosition.TicksBelow)
 

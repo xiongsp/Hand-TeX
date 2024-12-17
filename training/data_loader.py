@@ -3,6 +3,7 @@ import json
 import random
 import sqlite3
 from functools import cache
+from itertools import cycle
 from importlib import resources
 from math import ceil
 
@@ -19,6 +20,7 @@ import handtex.symbol_relations as sr
 import handtex.utils as ut
 import training.database
 import training.image_gen as ig
+import handtex.sketchpad as sp
 
 
 def build_stroke_cache(db_path: str) -> dict[str, list[list[tuple[int, int]]]]:
@@ -74,6 +76,7 @@ class StrokeDataset(Dataset):
         - int: The primary key of the sample in the database.
         - list[Transformation]: List of transformations to apply to the strokes before using it.
           These are a result of using symmetries to augment the data.
+        - tuple[Negation | None, int]: An optional negation and the id of the slash to apply to the symbol.
         - int | None: If not None, this is the seed to use for random augmentation.
           It is imperative that this be stored, so that the training and validation datasets
           generate the same pool of data and thus can be split consistently.
@@ -93,7 +96,14 @@ class StrokeDataset(Dataset):
         """
         self.db_path = db_path
         self.image_size = image_size
-        self.primary_keys: list[tuple[int, tuple[st.Transformation, ...], int | None]] = []
+        self.primary_keys: list[
+            tuple[
+                int,
+                tuple[st.Transformation, ...],
+                tuple[st.Negation | None, int],
+                int | None,
+            ]
+        ] = []
         self.symbol_keys = []
         self.train = train
         self.stroke_cache = stroke_cache
@@ -105,7 +115,7 @@ class StrokeDataset(Dataset):
         cursor = conn.cursor()
 
         @cache
-        def load_primary_keys(_symbol_keys: str | tuple[str]):
+        def load_primary_keys(_symbol_keys: str | tuple[str]) -> list[tuple[int]]:
             if isinstance(_symbol_keys, str):
                 _symbol_keys = (_symbol_keys,)
             command = f"SELECT id FROM samples WHERE key IN ({','.join(['?']*len(_symbol_keys))})"
@@ -117,9 +127,20 @@ class StrokeDataset(Dataset):
             )
             return cursor.fetchall()
 
+        # For negations, we need a cycle of the symbol keys to use for the slash.
+        vertical_line_keys = symbol_data.get_similarity_group("latex2e-OT1-|")
+        negation_cycle = cycle(load_primary_keys(vertical_line_keys))
+
         for symbol_key in symbol_data.leaders:
 
-            samples: list[tuple[int, tuple[st.Transformation, ...], int | None]] = []
+            samples: list[
+                tuple[
+                    int,
+                    tuple[st.Transformation, ...],
+                    tuple[st.Negation | None, int],
+                    int | None,
+                ]
+            ] = []
 
             # Identical values to augmented_symbol_frequency.csv
             real_data_count = len(load_primary_keys(symbol_key)) + sum(
@@ -128,13 +149,16 @@ class StrokeDataset(Dataset):
             )
             self_symmetry_count = 0
             other_symmetry_count = 0
+            negation_count = 0
             augmentation_count = 0
 
-            for current_key, transformations in symbol_data.all_transformation_paths_to_symbol(
+            for current_key, transformations, negation in symbol_data.all_paths_to_symbol(
                 symbol_key
             ):
+                # The [0] access is to unwrap the sqlite row tuples.
                 samples.extend(
-                    (row[0], transformations, None) for row in load_primary_keys(current_key)
+                    (row[0], transformations, (negation, slash_id[0]), None)
+                    for row, slash_id in zip(load_primary_keys(current_key), negation_cycle)
                 )
                 if current_key in symbol_data.get_similarity_group(symbol_key) and transformations:
                     # If we don't have transformations, those are just similarity taking over
@@ -145,12 +169,17 @@ class StrokeDataset(Dataset):
                 if current_key not in symbol_data.get_similarity_group(symbol_key):
                     other_symmetry_count += len(load_primary_keys(current_key))
 
+                if negation is not None:
+                    negation_count += len(load_primary_keys(current_key))
+
             # Augment the data to balance the classes.
             if random_augmentation:
                 augmentation_count = augmentation_amount(real_data_count)
                 for _ in range(augmentation_count):
-                    symbol, transformations, _ = random.choice(samples)
-                    samples.append((symbol, transformations, random.randint(0, 2**32 - 1)))
+                    symbol, transformations, negation_tuple, _ = random.choice(samples)
+                    samples.append(
+                        (symbol, transformations, negation_tuple, random.randint(0, 2**32 - 1))
+                    )
 
             # Shuffle the rows to get more variety in drawings, since drawings
             # by the same person are sequentially stored in the database.
@@ -200,7 +229,9 @@ class StrokeDataset(Dataset):
         return range(start, end)
 
     def load_transformed_strokes(self, idx):
-        primary_key, required_transforms, random_augmentation_seed = self.primary_keys[idx]
+        primary_key, required_transforms, (negation, slash_id), random_augmentation_seed = (
+            self.primary_keys[idx]
+        )
         stroke_data = self.load_stroke_data(primary_key)
         # If a symmetric character was used, we will need to apply it's transformation.
         # We may have multiple options here.
@@ -230,6 +261,20 @@ class StrokeDataset(Dataset):
         # Apply the transformations to the stroke data.
         if trans_mats:
             stroke_data = ig.apply_transformations(stroke_data, trans_mats)
+
+        # Next, prepare the negation, if any.
+        if negation is not None:
+            negation_stroke_data = self.load_stroke_data(slash_id)
+            trans_mats = [
+                ig.scale_matrix(negation.scale_factor, negation.scale_factor),
+                ig.rotation_matrix(negation.vert_angle),
+                ig.translation_matrix(-negation.x_offset, -negation.y_offset, 1000),
+            ]
+            negation_stroke_data = ig.apply_transformations(negation_stroke_data, trans_mats)
+            stroke_data += negation_stroke_data
+            # Now we may need to rescale the image to fit the strokes, so apply an identity transform
+            # and let the transformation function handle the scaling.
+            stroke_data = ig.apply_transformations(stroke_data, np.eye(3))
 
         symbol_key = self.symbol_keys[idx]
 
@@ -386,18 +431,20 @@ def main():
     )
 
     # Show all the samples for a given symbol.
-    symbol = "latex2e-OT1-_leftarrow"
+    symbol = "MnSymbol-OT1-_nUparrow"
     assert (
         symbol in symbol_data.symbol_keys
     ), f"Symbol '{symbol}' not found in the dataset or not a leader"
     symbol_strokes = (
         all_samples.load_transformed_strokes(idx) for idx in all_samples.range_for_symbol(symbol)
     )
-    for idx, ((strokes, symbol), (current_key, transformations)) in enumerate(
-        zip(symbol_strokes, symbol_data.all_transformation_paths_to_symbol(symbol))
+    for idx, ((strokes, symbol), (current_key, transformations, negation)) in enumerate(
+        zip(symbol_strokes, symbol_data.all_paths_to_symbol(symbol))
     ):
         img = ig.strokes_to_grayscale_image_cv2(strokes, image_size)
-        print(f"Current symbol: {current_key} with transformations: {transformations}")
+        print(
+            f"Current symbol: {current_key} with transformations: {transformations} and negation: {negation}"
+        )
         cv2.imshow(f"{symbol} {idx}", img)
         # wait for a key press
         cv2.waitKey(0)

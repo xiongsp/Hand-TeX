@@ -1,3 +1,12 @@
+MnSymbol-OT1-_nneswline -- mir90 --> MnSymbol-OT1-_nnwseline
+stix-OT1-_supseteq -- mir90 --> stix-OT1-_subseteq
+stix-OT1-_nsqsupset -- rot180 --> stix-OT1-_nsqsubset
+stix-OT1-_isins -- rot180 mir90 --> stix-OT1-_nis
+stix-OT1-_circledvert -- rot90 rot270 mir45 mir135 --> stix-OT1-_circlehbar
+mathabx-OT1-_nsubseteqq -- mir90 --> mathabx-OT1-_nsupseteqq
+mathabx-OT1-_nsubseteq -- mir90 --> mathabx-OT1-_nsupseteq
+mathabx-OT1-_nsucceq -- mir90 --> mathabx-OT1-_npreceq
+mathabx-OT1-_nsucc -- mir90 --> mathabx-OT1-_nprec
 stix-OT1-_upintup -- rot180 --> stix-OT1-_lowintup
 latex2e-OT1-[ -- rot180 mir90 --> latex2e-OT1-]
 latex2e-OT1-_backslash -- rot135 rot315 mir0 mir90 --> latex2e-OT1-/
@@ -224,6 +233,7 @@ fdsymbol-OT1-_minusfdots -- mir0 mir90 --> fdsymbol-OT1-_minusrdots
 fdsymbol-OT1-_ndashVv -- rot180 --> fdsymbol-OT1-_nVvdash
 fdsymbol-OT1-_nDdashv -- rot180 --> fdsymbol-OT1-_nvDdash
 fdsymbol-OT1-_ndownvdash -- rot180 --> fdsymbol-OT1-_nupvdash
+fdsymbol-OT1-_ndownVdash -- rot180 --> fdsymbol-OT1-_nupVdash 
 fdsymbol-OT1-_neswharpoonsenw -- mir45 --> fdsymbol-OT1-_neswharpoonnwse
 fdsymbol-OT1-_neswharpoonsenw -- mir90 --> fdsymbol-OT1-_nwseharpoonnesw
 fdsymbol-OT1-_neswharpoonsenw -- rot135 rot315 --> fdsymbol-OT1-_leftrightharpoondownup
@@ -249,10 +259,7 @@ fdsymbol-OT1-_owns -- mir90 rot180 --> latex2e-OT1-_in
 fdsymbol-OT1-_revangle -- mir0 --> stix-OT1-_turnangle
 fdsymbol-OT1-_revangle -- rot90 --> stix-OT1-_bigslopedwedge
 fdsymbol-OT1-_rightY -- rot180 mir90 --> fdsymbol-OT1-_leftY
-fdsymbol-OT1-_rightY -- rot180 mir90 --> fdsymbol-OT1-_leftY
 fdsymbol-OT1-_rightY -- rot270 mir135 --> fdsymbol-OT1-_downY
-fdsymbol-OT1-_rightY -- rot270 mir135 --> fdsymbol-OT1-_downY
-fdsymbol-OT1-_rightY -- rot90 mir45 --> fdsymbol-OT1-_upY
 fdsymbol-OT1-_rightY -- rot90 mir45 --> fdsymbol-OT1-_upY
 fdsymbol-OT1-_sphericalangledown -- rot180 mir0 --> fdsymbol-OT1-_sphericalangleup
 fdsymbol-OT1-_sphericalangledown -- rot90 mir135 --> fdsymbol-OT1-_sphericalangle
@@ -302,6 +309,8 @@ mathabx-OT1-_looparrowdownleft -- mir90 --> mathabx-OT1-_looparrowdownright
 mathabx-OT1-_notperp -- mir135 --> mathabx-OT1-_ndashv
 mathabx-OT1-_nsqSubset -- rot180 mir90 --> mathabx-OT1-_nsqSupset
 mathabx-OT1-_nsqsubseteqq -- mir90 --> mathabx-OT1-_nsqsupseteqq
+mathabx-OT1-_nsqsubseteq -- mir90 --> mathabx-OT1-_nsqsupseteq
+mathabx-OT1-_nsqsubset -- mir90 rot180 --> mathabx-OT1-_nsqsupset
 mathabx-OT1-_nSupset -- rot180 mir90 --> mathabx-OT1-_nSubset
 mathabx-OT1-_nVdash -- rot180 --> mathabx-OT1-_ndashV
 mathabx-OT1-_nVvash -- rot180 --> mathabx-OT1-_ndashVv
@@ -484,7 +493,6 @@ stix-OT1-_gtrarr -- mir90 --> stix-OT1-_ltlarr
 stix-OT1-_isinobar -- mir90 --> stix-OT1-_niobar
 stix-OT1-_langledot -- rot180 mir90 --> stix-OT1-_rangledot
 stix-OT1-_late -- mir90 --> stix-OT1-_smte
-stix-OT1-_lblkbrbrak -- rot180 mir90 --> stix-OT1-_rblkbrbrak
 stix-OT1-_lbracklltick -- mir0 --> stix-OT1-_lbrackultick
 stix-OT1-_lbracklltick -- mir90 --> stix-OT1-_rbracklrtick
 stix-OT1-_lbracklltick -- rot180 --> stix-OT1-_rbrackurtick

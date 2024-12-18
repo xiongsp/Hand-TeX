@@ -143,7 +143,7 @@ class StrokeDataset(Dataset):
             ] = []
 
             # Identical values to augmented_symbol_frequency.csv
-            real_data_count = len(load_primary_keys(symbol_key)) + sum(
+            real_data_count = sum(
                 len(load_primary_keys(ancestor))
                 for ancestor in symbol_data.all_symbols_to_symbol(symbol_key)
             )
@@ -172,6 +172,7 @@ class StrokeDataset(Dataset):
                 if negation is not None:
                     negation_count += len(load_primary_keys(current_key))
 
+            assert samples, f"No samples found for symbol key: {symbol_key}"
             # Augment the data to balance the classes.
             if random_augmentation:
                 augmentation_count = augmentation_amount(real_data_count)
@@ -272,9 +273,10 @@ class StrokeDataset(Dataset):
             ]
             negation_stroke_data = ig.apply_transformations(negation_stroke_data, trans_mats)
             stroke_data += negation_stroke_data
-            # Now we may need to rescale the image to fit the strokes, so apply an identity transform
-            # and let the transformation function handle the scaling.
-            stroke_data = ig.apply_transformations(stroke_data, np.eye(3))
+            # # Now we may need to rescale the image to fit the strokes, so apply an identity transform
+            # # and let the transformation function handle the scaling.
+            # stroke_data = ig.apply_transformations(stroke_data, np.eye(3))
+            stroke_data, _, _, _ = sp.rescale_and_center_viewport(stroke_data, 1000, 1000)
 
         symbol_key = self.symbol_keys[idx]
 
@@ -351,9 +353,9 @@ def recalculate_frequencies():
 
     # Calculate new augmented frequencies.
     # Sum up the frequencies of all symbols that are it's ancestor as well.
-    augmented_frequencies = {key: frequencies[key] for key in leader_keys}
+    augmented_frequencies = {}
     for leader in leader_keys:
-        augmented_frequencies[leader] = frequencies[leader] + sum(
+        augmented_frequencies[leader] = sum(
             frequencies[ancestor] for ancestor in symbol_data.all_symbols_to_symbol(leader)
         )
     # Add in all non-leaders, copying the leader's augmented frequency.
@@ -361,9 +363,11 @@ def recalculate_frequencies():
         if key not in leader_keys:
             augmented_frequencies[key] = augmented_frequencies[symbol_data.to_leader[key]]
     # Dump the new frequencies to a CSV file, sorted by frequency.
+    # Sort by name, then by frequency.
     sorted_frequencies = sorted(
-        augmented_frequencies.items(), key=lambda item: item[1], reverse=True
+        augmented_frequencies.items(), key=lambda item: item[0], reverse=False
     )
+    sorted_frequencies = sorted(sorted_frequencies, key=lambda item: item[1], reverse=True)
     with open(augmented_frequencies_path, "w") as file:
         writer = csv.writer(file, lineterminator="\n")
         writer.writerows(sorted_frequencies)
@@ -431,7 +435,7 @@ def main():
     )
 
     # Show all the samples for a given symbol.
-    symbol = "MnSymbol-OT1-_nUparrow"
+    symbol = "stix-OT1-_lbag"
     assert (
         symbol in symbol_data.symbol_keys
     ), f"Symbol '{symbol}' not found in the dataset or not a leader"

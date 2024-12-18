@@ -49,22 +49,34 @@ def main():
 
     symbols = sr.load_symbols()
 
-    leader_frequency_path = "../../handtex/data/symbol_metadata/augmented_symbol_frequency.csv"
-    with open(leader_frequency_path, "r") as file:
-        leader_frequencies = {row[0]: int(row[1]) for row in csv.reader(file)}
+    # leader_frequency_path = "../../handtex/data/symbol_metadata/augmented_symbol_frequency.csv"
+    # with open(leader_frequency_path, "r") as file:
+    #     leader_frequencies = {row[0]: int(row[1]) for row in csv.reader(file)}
+    #
+    # # Get list list of symbols, sorted ascending by frequency.
+    # sorted_symbols = sorted(leader_frequencies.keys(), key=leader_frequencies.get)
+    # print(len(sorted_symbols))
+    #
+    # start_at = ""
+    # if start_at:
+    #     start_at_index = sorted_symbols.index(start_at)
+    #     sorted_symbols = sorted_symbols[start_at_index:]
 
-    # Get list list of symbols, sorted ascending by frequency.
-    sorted_symbols = sorted(leader_frequencies.keys(), key=leader_frequencies.get)
-    print(len(sorted_symbols))
-
-    start_at = "amssymb-OT1-_sphericalangle"
-    if start_at:
-        start_at_index = sorted_symbols.index(start_at)
-        sorted_symbols = sorted_symbols[start_at_index:]
+    symmetry_path = "../../handtex/data/symbol_metadata/symmetry_self.txt"
+    symmetries: list[tuple[str, list[str]]] = []
+    # Example: latex2e-OT1-_lfloor -- mir90 -> latex2e-OT1-_lnot
+    with open(symmetry_path, "r") as file:
+        for line in file.readlines():
+            if not line.strip():
+                continue
+            symbol, syms = line.split(":", maxsplit=1)
+            syms = syms.strip().split()
+            symmetries.append((symbol, syms))
 
     # Visualize the new drawings for each symbol.
     app = Qw.QApplication.instance() or Qw.QApplication([])
-    for index, symbol_key in enumerate(sorted_symbols, start=1):
+    # for index, symbol_key in enumerate(sorted_symbols, start=1):
+    for index, (symbol_key, syms) in enumerate(symmetries, start=1):
         mainwindow = Qw.QWidget()
         # We have a drawing of the actual symbol in the top left.
         # Then we have all the new drawings in a grid below that.
@@ -85,7 +97,8 @@ def main():
         svg_widget.setFixedSize(200, 200)
 
         symbol_info = Qw.QLabel()
-        symbol_info.setText(f"Symbol: {symbol_key} ({index}/{len(sorted_symbols)})")
+        # symbol_info.setText(f"Symbol: {symbol_key} ({index}/{len(sorted_symbols)})")
+        symbol_info.setText(f"Symbol: {symbol_key} ({index}/{len(symmetries)})")
         font = symbol_info.font()
         font.setPointSize(16)
         symbol_info.setFont(font)
@@ -138,6 +151,8 @@ def main():
             )
             button.data = f"rot{angle}"
             button_list.append(button)
+            if button.data in syms:
+                button.setChecked(True)
             grid.addWidget(button, 1, i)
 
         # Draw 8 copies of the symbol, each flipped around the central axis at increments of 22.5 degrees.
@@ -168,6 +183,8 @@ def main():
                 % app.palette().color(Qg.QPalette.Highlight).name()
             )
             button.data = f"mir{angle}"
+            if button.data in syms:
+                button.setChecked(True)
             button_list.append(button)
             grid.addWidget(button, 2, i + 1)
 

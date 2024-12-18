@@ -9,6 +9,25 @@ import handtex.utils as ut
 import training.inference as inf
 import training.train as trn
 import training.image_gen as ig
+import handtex.symbol_relations as sr
+
+
+def main2():
+    """
+    Grab all the new symbol keys.
+    """
+    symbol_data = sr.SymbolData()
+
+    since_key = "stix2-OT1-_fullouterjoin"
+    all_keys = symbol_data.all_keys
+    start_index = all_keys.index(since_key)
+    keys = all_keys[start_index:]
+
+    # Also remove all symbols that aren't leaders.
+    keys = filter(lambda key: key in symbol_data.leaders, keys)
+
+    for key in keys:
+        print(f"{key}: ")
 
 
 def main():
@@ -275,4 +294,5 @@ def evaluate_results():
 
 if __name__ == "__main__":
     # main()
-    evaluate_results()
+    # evaluate_results()
+    main2()

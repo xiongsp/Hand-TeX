@@ -142,7 +142,7 @@ class DataRecorder:
             key: (1 + self.frequencies[key] + self.augmented_frequencies[key]) / 2
             for key in self.frequencies
         }
-        sorted_symbols = sorted(averaged_frequencies, key=lambda item: item[1])
+        sorted_symbols = sorted(averaged_frequencies.items(), key=lambda item: item[1])
         total_symbols = len(sorted_symbols)
 
         target_rank = None

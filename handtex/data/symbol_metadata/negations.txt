@@ -5,6 +5,7 @@ latex2e-OT1-_--- -/ rot67.5 s0.75 /- MnSymbol-OT1-_nleftrightline
 latex2e-OT1-_approx -/ slash /- latex2e-OT1-_not_approx
 latex2e-OT1-_asymp -/ rot67.5 s1.25 /- mathabx-OT1-_notasymp
 latex2e-OT1-_bigcirc -/ rot90.0 s1.5 /- stmaryrd-OT1-_baro
+latex2e-OT1-_bigcirc -/ s1.5 /- stmaryrd-OT1-_minuso
 latex2e-OT1-_cap -/ U90 s0.75 /- stix-OT1-_barcap
 latex2e-OT1-_cong -/ slash /- amssymb-OT1-_ncong
 latex2e-OT1-_cup -/ U90 s0.75 /- stix-OT1-_barcup

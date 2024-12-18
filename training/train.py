@@ -15,7 +15,7 @@ from training.hyperparameters import (
     image_size,
     learning_rate,
 )
-from training.image_gen import (
+from training.data_loader import (
     StrokeDataset,
     recalculate_frequencies,
     build_stroke_cache,

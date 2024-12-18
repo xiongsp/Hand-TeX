@@ -479,7 +479,7 @@ def test_symbol_data_class() -> None:
         assert options, f"Symbol {symbol} has no paths."
         ancestors = symbol_data.all_symbols_to_symbol(symbol)
         assert len(set(ancestors)) == len(ancestors), f"Symbol {symbol} has duplicate ancestors."
-        assert symbol not in ancestors, f"Symbol {symbol} is it's own ancestor."
+        assert symbol in ancestors, f"Symbol {symbol} can't reach itself!"
         # No transformation list should contain identity.
         for source, trans, neg in options:
             assert not any(

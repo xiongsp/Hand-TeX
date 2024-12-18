@@ -285,12 +285,12 @@ class SymbolData:
 
         return paths
 
-    def all_symbols_to_symbol(self, symbol_key: str) -> list[str]:
+    def all_symbols_to_symbol(self, symbol_key: str) -> set[str]:
         """
-        Get all symbols that can reach the given symbol key.
-        This will never include the symbol key itself.
+        Get all symbols that can be used to reach the given symbol key.
+        This includes the symbol key itself.
         """
-        return list(nx.ancestors(self.graph, symbol_key))
+        return {symbol_key for symbol_key, _, _ in self.all_paths_to_symbol(symbol_key)}
 
     @cache
     def get_similarity_group(self, symbol_key: str) -> tuple[str, ...]:
@@ -470,6 +470,8 @@ def load_symbol_metadata_self_symmetry() -> dict[str, list[st.Transformation]]:
 
     symmetries = {}
     for line in lines:
+        if not line.strip():
+            continue
         parts = line.strip().split()
         key = parts[0][:-1]  # Remove the colon at the end.
         symmetries[key] = [st.Transformation(sym) for sym in parts[1:]]

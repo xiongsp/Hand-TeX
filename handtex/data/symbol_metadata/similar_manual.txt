@@ -595,3 +595,4 @@ tipa-OT1-_textglotstop tipa-OT1-_textraiseglotstop
 tipa-OT1-_textlhtlongy tipa-OT1-_textvibyy
 tipa-OT1-_textturnlonglegr tipa-OT1-_textturnr
 txfonts-OT1-_openJoin txfonts-OT1-_opentimes
+stmaryrd-OT1-_fatsemi stix-OT1-_fcmp

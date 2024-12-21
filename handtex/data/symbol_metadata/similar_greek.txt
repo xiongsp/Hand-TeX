@@ -37,4 +37,4 @@ latex2e-OT1-_vartheta upgreek-OT1-_upvartheta
 latex2e-OT1-_xi upgreek-OT1-_upxi
 latex2e-OT1-_zeta upgreek-OT1-_upzeta
 textcomp-OT1-_textthreesuperior tipa-OT1-_textrevepsilon
-tipa-OT1-_textbabygamma tipa-OT1-_textgamma
+tipa-OT1-_textbabygamma tipa-OT1-_textgamma tipa-OT1-_textramshorns

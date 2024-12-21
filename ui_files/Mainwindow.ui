@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>900</width>
-    <height>654</height>
+    <height>682</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,120 +38,227 @@
       <property name="childrenCollapsible">
        <bool>false</bool>
       </property>
-      <widget class="QWidget" name="layoutWidget">
-       <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
-        <property name="rightMargin">
-         <number>6</number>
-        </property>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <property name="bottomMargin">
-           <number>1</number>
-          </property>
-          <item>
-           <widget class="QPushButton" name="pushButton_clear">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Clear</string>
-            </property>
-            <property name="icon">
-             <iconset theme="edit-clear">
-              <normaloff>.</normaloff>.</iconset>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_undo">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Undo</string>
-            </property>
-            <property name="text">
-             <string>Undo</string>
-            </property>
-            <property name="icon">
-             <iconset theme="edit-undo">
-              <normaloff>.</normaloff>.</iconset>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_redo">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Redo</string>
-            </property>
-            <property name="text">
-             <string>Redo</string>
-            </property>
-            <property name="icon">
-             <iconset theme="edit-redo">
-              <normaloff>.</normaloff>.</iconset>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="Sketchpad" name="sketchpad">
-          <property name="minimumSize">
-           <size>
-            <width>200</width>
-            <height>200</height>
-           </size>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Plain</enum>
-          </property>
-          <property name="lineWidth">
-           <number>0</number>
-          </property>
-          <property name="verticalScrollBarPolicy">
-           <enum>Qt::ScrollBarAlwaysOff</enum>
-          </property>
-          <property name="horizontalScrollBarPolicy">
-           <enum>Qt::ScrollBarAlwaysOff</enum>
-          </property>
-          <property name="renderHints">
-           <set>QPainter::Antialiasing</set>
-          </property>
-          <property name="transformationAnchor">
-           <enum>QGraphicsView::NoAnchor</enum>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <widget class="QStackedWidget" name="stackedWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="page_sketch" native="true">
+        <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
+         <property name="rightMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <property name="bottomMargin">
+            <number>1</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="pushButton_clear">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Clear</string>
+             </property>
+             <property name="icon">
+              <iconset theme="edit-clear"/>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_undo">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="toolTip">
+              <string>Undo</string>
+             </property>
+             <property name="text">
+              <string>Undo</string>
+             </property>
+             <property name="icon">
+              <iconset theme="edit-undo"/>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_redo">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="toolTip">
+              <string>Redo</string>
+             </property>
+             <property name="text">
+              <string>Redo</string>
+             </property>
+             <property name="icon">
+              <iconset theme="edit-redo"/>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="Sketchpad" name="sketchpad">
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="lineWidth">
+            <number>0</number>
+           </property>
+           <property name="verticalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="renderHints">
+            <set>QPainter::Antialiasing</set>
+           </property>
+           <property name="transformationAnchor">
+            <enum>QGraphicsView::NoAnchor</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="page_image">
+        <widget class="QPushButton" name="pushButton_back_to_drawing">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>20</y>
+           <width>181</width>
+           <height>38</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Back to Sketchpad</string>
+         </property>
+         <property name="icon">
+          <iconset theme="draw-freehand"/>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_back_to_drawing_2">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>20</y>
+           <width>181</width>
+           <height>38</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>New Image</string>
+         </property>
+         <property name="icon">
+          <iconset theme="insert-image"/>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_10">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>540</y>
+           <width>67</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string notr="true">&lt;invertimage&gt;</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="checkBox">
+         <property name="geometry">
+          <rect>
+           <x>120</x>
+           <y>540</y>
+           <width>151</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Invert colors</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_11">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>580</y>
+           <width>67</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string notr="true">&lt;image-rotate-right-symbolic&gt;</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_12">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>610</y>
+           <width>67</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string notr="true">&lt;contrast&gt;</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_13">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>640</y>
+           <width>67</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string notr="true">&lt;adjustcurves&gt;</string>
+         </property>
+        </widget>
+       </widget>
       </widget>
       <widget class="QWidget" name="layoutWidget1">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -179,8 +286,7 @@
              <string>Symbol List</string>
             </property>
             <property name="icon">
-             <iconset theme="search">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="search"/>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -193,8 +299,7 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset theme="application-menu">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="application-menu"/>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -232,8 +337,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>521</width>
-                 <height>604</height>
+                 <width>527</width>
+                 <height>628</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -487,8 +592,7 @@
                <string>Submit</string>
               </property>
               <property name="icon">
-               <iconset theme="dialog-ok">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset theme="dialog-ok"/>
               </property>
              </widget>
             </item>
@@ -503,8 +607,7 @@
                  <string>Skip</string>
                 </property>
                 <property name="icon">
-                 <iconset theme="media-skip-forward">
-                  <normaloff>.</normaloff>.</iconset>
+                 <iconset theme="media-skip-forward"/>
                 </property>
                </widget>
               </item>
@@ -517,8 +620,7 @@
                  <string>Undo Submission</string>
                 </property>
                 <property name="icon">
-                 <iconset theme="edit-undo">
-                  <normaloff>.</normaloff>.</iconset>
+                 <iconset theme="edit-undo"/>
                 </property>
                </widget>
               </item>

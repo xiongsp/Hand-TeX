@@ -57,7 +57,7 @@ def main():
         for sample in samples:
             key, strokes = sample
             strokes = json.loads(strokes)
-            predictions = inf.predict(strokes, model, label_decoder)
+            predictions = inf.predict_strokes(strokes, model, label_decoder)
 
             for symbol, confidence in predictions:
                 if symbol == leader:

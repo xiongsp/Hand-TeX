@@ -22,6 +22,12 @@ Files:
       - process-stop
       - window-close
       - search
+      - insert-image
+      - invertimage
+      - image-rotate-right-symbolic
+      - contrast
+      - adjustcurves
+      - viewimage
   status:
     16:
       - dialog-warning

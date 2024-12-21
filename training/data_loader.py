@@ -20,6 +20,7 @@ import handtex.symbol_relations as sr
 import handtex.utils as ut
 import training.database
 import training.image_gen as ig
+import training.hyperparameters as hyp
 import handtex.sketchpad as sp
 
 
@@ -66,10 +67,12 @@ class StrokeDataset(Dataset):
         random_seed: int,
         validation_split: float = 0.1,
         train: bool = True,
+        sample_limit: int | None = 1000,
         shuffle: bool = True,
         random_augmentation: bool = True,
         stroke_cache: dict[str, list[list[tuple[int, int]]]] = None,
         debug_single_sample_only: bool = False,
+        distribution_stats: dict[str, tuple[int, int, int, int, int, int]] | None = None,
     ):
         """
         The primary keys list consists of tuples containing the following:
@@ -93,6 +96,7 @@ class StrokeDataset(Dataset):
         :param random_augmentation: If True, augment the data with random transformations.
         :param stroke_cache: Cache of stroke data for each symbol key, alternative to loading from database.
         :param debug_single_sample_only: If True, only load a single sample for debugging.
+        :param distribution_stats: If not none, it is populated with the statistics of the dataset.
         """
         self.db_path = db_path
         self.image_size = image_size
@@ -182,6 +186,9 @@ class StrokeDataset(Dataset):
                         (symbol, transformations, negation_tuple, random.randint(0, 2**32 - 1))
                     )
 
+            if sample_limit is not None:
+                samples = samples[:sample_limit]
+
             # Shuffle the rows to get more variety in drawings, since drawings
             # by the same person are sequentially stored in the database.
             if shuffle:
@@ -195,10 +202,20 @@ class StrokeDataset(Dataset):
                     f"with {real_data_count} real data, "
                     f"{self_symmetry_count} self-symmetries, "
                     f"{other_symmetry_count} other symmetries, "
+                    f"{negation_count} negations, "
                     f"and {augmentation_count} random augmentations. "
                     f"Reserving {len(selected_rows)} for training. "
                     f"Reserving {split_idx} for validation."
                 )
+                if distribution_stats is not None:
+                    distribution_stats[symbol_key] = (
+                        len(samples),
+                        real_data_count,
+                        self_symmetry_count,
+                        other_symmetry_count,
+                        negation_count,
+                        augmentation_count,
+                    )
             else:
                 selected_rows = samples[:split_idx]
 
@@ -273,10 +290,9 @@ class StrokeDataset(Dataset):
             ]
             negation_stroke_data = ig.apply_transformations(negation_stroke_data, trans_mats)
             stroke_data += negation_stroke_data
-            # # Now we may need to rescale the image to fit the strokes, so apply an identity transform
-            # # and let the transformation function handle the scaling.
-            # stroke_data = ig.apply_transformations(stroke_data, np.eye(3))
-            stroke_data, _, _, _ = sp.rescale_and_center_viewport(stroke_data, 1000, 1000)
+
+        # Rescale the image to ensure the rotations and reflections fit within the image bounds.
+        stroke_data, _, _, _ = sp.rescale_and_center_viewport(stroke_data, 1000, 1000)
 
         symbol_key = self.symbol_keys[idx]
 
@@ -418,13 +434,117 @@ def main():
     label_encoder.fit(symbol_data.symbol_keys)
 
     db_path = "database/handtex.db"
-    image_size = 56
+
+    # stats = {}
+    stats = None
+
+    if stats is not None:
+        # Create training and validation datasets and dataloaders
+        all_samples = StrokeDataset(
+            db_path,
+            symbol_data,
+            hyp.image_size,
+            label_encoder,
+            random_seed=0,
+            validation_split=0,
+            train=True,
+            shuffle=False,
+            random_augmentation=True,
+            debug_single_sample_only=False,
+            distribution_stats=stats,
+        )
+        # Gather stats and visualize them as stacked columns.
+        import matplotlib.pyplot as plt
+
+        # distribution_stats[symbol_key] = (
+        #     len(samples),
+        #     real_data_count,
+        #     self_symmetry_count,
+        #     other_symmetry_count,
+        #     negation_count,
+        #     augmentation_count,
+        # )
+
+        # Sort stats by total count.
+        sorted_stats = sorted(stats.items(), key=lambda item: item[1][0], reverse=True)
+        sorted_keys = [key for key, _ in sorted_stats]
+        array = np.array([values for _, values in sorted_stats])
+        means = np.mean(array, axis=0)
+        medians = np.median(array, axis=0)
+        std_devs = np.std(array, axis=0)
+        min_vals = np.min(array, axis=0)
+        max_vals = np.max(array, axis=0)
+
+        def print_categories_int(values):
+            print(
+                f"Total: {values[0]}, Real: {values[1]}, Self: {values[2]}, Other: {values[3]}, Negation: {values[4]}, Augmentation: {values[5]}"
+            )
+
+        def print_categories_float(values):
+            print(
+                f"Total: {values[0]:.2f}, Real: {values[1]:.2f}, Self: {values[2]:.2f}, Other: {values[3]:.2f}, Negation: {values[4]:.2f}, Augmentation: {values[5]:.2f}"
+            )
+
+        print("Means:")
+        print_categories_float(means)
+        print("Medians:")
+        print_categories_int(medians)
+        print("Standard Deviations:")
+        print_categories_float(std_devs)
+        print("Minimums:")
+        print_categories_int(min_vals)
+        print("Maximums:")
+        print_categories_int(max_vals)
+
+        # Plot the data, sorted by the total count.
+        # We want to plot columns for each symbol key, so that the column
+        # is divided into the categories, skipping the total.
+        # We want to plot the categories as stacked columns.
+        plt.bar(
+            range(len(stats)),
+            array[:, 1],
+            label="Real",
+            color="blue",
+        )
+        plt.bar(
+            range(len(stats)),
+            array[:, 2],
+            label="Self",
+            color="green",
+            bottom=array[:, 1],
+        )
+        plt.bar(
+            range(len(stats)),
+            array[:, 3],
+            label="Other",
+            color="red",
+            bottom=array[:, 2] + array[:, 1],
+        )
+        plt.bar(
+            range(len(stats)),
+            array[:, 4],
+            label="Negation",
+            color="purple",
+            bottom=array[:, 3] + array[:, 2] + array[:, 1],
+        )
+        plt.bar(
+            range(len(stats)),
+            array[:, 5],
+            label="Augmentation",
+            color="orange",
+            bottom=array[:, 4] + array[:, 3] + array[:, 2] + array[:, 1],
+        )
+        plt.legend()
+        plt.xticks(range(len(stats)), sorted_keys, rotation=90)
+        plt.show()
+
+        return
 
     # Create training and validation datasets and dataloaders
     all_samples = StrokeDataset(
         db_path,
         symbol_data,
-        image_size,
+        hyp.image_size,
         label_encoder,
         random_seed=0,
         validation_split=0,
@@ -432,10 +552,11 @@ def main():
         shuffle=False,
         random_augmentation=False,
         debug_single_sample_only=True,
+        distribution_stats=None,
     )
 
     # Show all the samples for a given symbol.
-    symbol = "stix-OT1-_lbag"
+    symbol = "MnSymbol-OT1-_nneswarrows"
     assert (
         symbol in symbol_data.symbol_keys
     ), f"Symbol '{symbol}' not found in the dataset or not a leader"
@@ -445,7 +566,7 @@ def main():
     for idx, ((strokes, symbol), (current_key, transformations, negation)) in enumerate(
         zip(symbol_strokes, symbol_data.all_paths_to_symbol(symbol))
     ):
-        img = ig.strokes_to_grayscale_image_cv2(strokes, image_size)
+        img = ig.strokes_to_grayscale_image_cv2(strokes, hyp.image_size)
         print(
             f"Current symbol: {current_key} with transformations: {transformations} and negation: {negation}"
         )

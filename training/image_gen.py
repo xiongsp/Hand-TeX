@@ -33,7 +33,7 @@ def strokes_to_grayscale_image_cv2(stroke_data: list[list[tuple[int, int]]], ima
 
         for i in range(len(stroke) - 1):
             cv2.line(
-                img, stroke[i], stroke[i + 1], color=(0,), thickness=1, lineType=cv2.LINE_AA
+                img, stroke[i], stroke[i + 1], color=(0,), thickness=1, lineType=cv2.LINE_4
             )  # Draw black lines (0)
     return img
 

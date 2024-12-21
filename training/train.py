@@ -57,7 +57,7 @@ def save_encoder(label_encoder: LabelEncoder, leader_keys: list[str]):
 # Validation Loss: 8.8431, Validation Accuracy: 95.72%
 
 
-def main():
+def main(resume_from_checkpoint=False):
     symbol_data = sr.SymbolData()
 
     num_classes = len(symbol_data.leaders)
@@ -112,7 +112,35 @@ def main():
     val_losses = []
     val_accuracies = []
 
-    for epoch in range(num_epochs):
+    best_val_accuracy = 0.0
+    checkpoint_path = "best_model_checkpoint.chkpt"
+
+    start_epoch = 0
+
+    # Optionally load from checkpoint
+    if resume_from_checkpoint:
+        print(f"Attempting to resume from checkpoint at {checkpoint_path}...")
+        checkpoint = torch.load(checkpoint_path, weights_only=False)
+        model.load_state_dict(checkpoint["model_state_dict"])
+        optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+        scheduler.load_state_dict(checkpoint["scheduler_state_dict"])
+        best_val_accuracy = checkpoint["best_val_accuracy"]
+        start_epoch = checkpoint["epoch"]
+
+        # Load train and validation metrics if they exist in the checkpoint
+        if "train_losses" in checkpoint:
+            train_losses = checkpoint["train_losses"]
+            train_accuracies = checkpoint["train_accuracies"]
+            val_losses = checkpoint["val_losses"]
+            val_accuracies = checkpoint["val_accuracies"]
+        else:
+            train_losses, train_accuracies, val_losses, val_accuracies = [], [], [], []
+
+        print(
+            f"Resumed from epoch {start_epoch} with best validation accuracy: {best_val_accuracy:.2f}%"
+        )
+
+    for epoch in range(start_epoch, num_epochs):
         print(f"\nEpoch [{epoch + 1}/{num_epochs}]")
 
         # Set model to training mode
@@ -158,6 +186,9 @@ def main():
         val_correct = 0
         val_total = 0
 
+        all_preds = []
+        all_targets = []
+
         with torch.no_grad():
             for data, targets in validation_dataloader:
                 data = data.to(device)
@@ -171,6 +202,9 @@ def main():
                 val_total += targets.size(0)
                 val_correct += (predicted == targets).sum().item()
 
+                all_preds.extend(predicted.cpu().numpy())
+                all_targets.extend(targets.cpu().numpy())
+
         val_epoch_loss = val_running_loss / len(validation_dataloader)
         val_epoch_accuracy = 100 * val_correct / val_total
         val_losses.append(val_epoch_loss)
@@ -178,6 +212,26 @@ def main():
         print(
             f"Validation Loss: {val_epoch_loss:.4f}, Validation Accuracy: {val_epoch_accuracy:.2f}%"
         )
+
+        # Save checkpoint if validation accuracy improves
+        if val_epoch_accuracy > best_val_accuracy:
+            best_val_accuracy = val_epoch_accuracy
+            torch.save(
+                {
+                    "epoch": epoch + 1,
+                    "model_state_dict": model.state_dict(),
+                    "optimizer_state_dict": optimizer.state_dict(),
+                    "scheduler_state_dict": scheduler.state_dict(),
+                    "best_val_accuracy": best_val_accuracy,
+                    "train_losses": train_losses,
+                    "train_accuracies": train_accuracies,
+                    "val_losses": val_losses,
+                    "val_accuracies": val_accuracies,
+                },
+                checkpoint_path,
+            )
+
+            print(f"Checkpoint saved at {checkpoint_path}")
 
         # Step the scheduler
         scheduler.step()
@@ -208,6 +262,30 @@ def main():
     plt.legend()
     plt.show()
 
+    # Identify and print top ten most misclassified symbols
+    from collections import Counter
+
+    misclassifications = [
+        (target, pred) for target, pred in zip(all_targets, all_preds) if target != pred
+    ]
+
+    misclass_counter = Counter(misclassifications)
+    top_misclassified = misclass_counter.most_common(50)
+
+    print("\nTop 50 Most Misclassified Symbols:")
+    for (actual, predicted), count in top_misclassified:
+        actual_label = label_encoder.inverse_transform([actual])[0]
+        predicted_label = label_encoder.inverse_transform([predicted])[0]
+        print(f"Actual: {actual_label}, Predicted: {predicted_label}, Count: {count}")
+
 
 if __name__ == "__main__":
-    main()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Train a CNN model with optional checkpointing.")
+    parser.add_argument(
+        "--resume", action="store_true", help="Resume training from the latest checkpoint."
+    )
+    args = parser.parse_args()
+
+    main(resume_from_checkpoint=args.resume)

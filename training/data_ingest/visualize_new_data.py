@@ -156,6 +156,8 @@ def main():
         mainlayout.addWidget(scroll_area)
         mainlayout.addSpacerItem(Qw.QSpacerItem(0, 0, Qw.QSizePolicy.Policy.Expanding))
 
+        print("--------------------")
+
         for i, (path, drawing) in enumerate(drawings):
             image = ig.strokes_to_grayscale_image_cv2(drawing, 100)
             image = Image.fromarray(image)
@@ -172,6 +174,8 @@ def main():
             # When clicked, show the path and drawing code.
             # Ensure the text is selectable.
             label.clicked.connect(lambda: print(path, drawing))
+            # Print number of points in the drawing.
+            print(f"{sum(len(stroke) for stroke in drawing)} points.")
 
         mainwindow.show()
 

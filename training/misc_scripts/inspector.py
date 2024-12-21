@@ -80,7 +80,7 @@ if __name__ == "__main__":
 
     # Check if symbol key is provided as a command-line argument
     # tipa-OT1-_textprimstress
-    symbol_key = "tipa-OT1-_textsecstress"
+    symbol_key = "MnSymbol-OT1-_nnwfree"
 
     if len(sys.argv) > 1:
         symbol_key = sys.argv[1]

@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from safetensors.torch import load_file
+import numpy as np
 
 from training.hyperparameters import image_size
 import training.image_gen as ig
@@ -34,7 +35,7 @@ def load_model_and_decoder(model_path: Path, encodings_path: Path):
     return model, label_decoder
 
 
-def predict(
+def predict_strokes(
     strokes: list[list[tuple[int, int]]],
     model: nn.Module,
     label_decoder: dict[int, str],
@@ -50,6 +51,49 @@ def predict(
     :return: A list of tuples containing the predicted label and confidence score
     """
     tensor = ig.tensorize_strokes(strokes, image_size)
+    return predict(tensor, model, label_decoder, max_results)
+
+
+def predict_image(
+    image_data: np.ndarray,
+    model: nn.Module,
+    label_decoder: dict[int, str],
+    max_results: int = 20,
+) -> list[tuple[str, float]]:
+    """
+    Predict the class of a given image using the trained model.
+    The image must be an 8-bit grayscale image.
+    The background should be white and the symbol black.
+
+    :param image_data: The image data to predict.
+    :param model: The trained neural network model.
+    :param label_decoder: The label encoder used to encode the labels.
+    :param max_results: The maximum number of results to return.
+    :return: A list of tuples containing the predicted label and confidence score
+    """
+    # Turn the array into a tensor
+    assert image_data.dtype == np.uint8
+    assert image_data.ndim == 2
+    assert image_data.shape == (image_size, image_size)
+    tensor = torch.from_numpy(image_data).unsqueeze(0).unsqueeze(0).float()
+    return predict(tensor, model, label_decoder, max_results)
+
+
+def predict(
+    tensor: torch.Tensor,
+    model: nn.Module,
+    label_decoder: dict[int, str],
+    max_results: int = 20,
+) -> list[tuple[str, float]]:
+    """
+    Predict the class of a given image using the trained model.
+
+    :param tensor: The tensor of the image to predict.
+    :param model: The trained neural network model.
+    :param label_decoder: The label encoder used to encode the labels.
+    :param max_results: The maximum number of results to return.
+    :return: A list of tuples containing the predicted label and confidence score
+    """
     model.eval()
     device = "cuda" if torch.cuda.is_available() else "cpu"
     with torch.no_grad():

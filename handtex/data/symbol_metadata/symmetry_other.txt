@@ -1,3 +1,4 @@
+stix-OT1-_multimapinv -- rot90 mir45 --> stix-OT1-_midcir
 latex2e-OT1-[ -- rot180 mir90 --> latex2e-OT1-]
 latex2e-OT1-_backslash -- rot135 rot315 mir0 mir90 --> latex2e-OT1-/
 latex2e-OT1-_bigcap -- rot180 mir0 --> latex2e-OT1-_bigcup
@@ -254,7 +255,6 @@ fdsymbol-OT1-_rightY -- rot90 mir45 --> fdsymbol-OT1-_upY
 fdsymbol-OT1-_sphericalangledown -- rot180 mir0 --> fdsymbol-OT1-_sphericalangleup
 fdsymbol-OT1-_sphericalangledown -- rot90 mir135 --> fdsymbol-OT1-_sphericalangle
 fdsymbol-OT1-_sqcapdot -- rot180 mir0 --> fdsymbol-OT1-_sqcupdot
-fdsymbol-OT1-_upbowtie -- rot90 rot270 mir45 mir135 --> stix-OT1-_bowtie
 fdsymbol-OT1-_updownharpoons -- mir90 --> mathabx-OT1-_downupharpoons
 fdsymbol-OT1-_updownharpoons -- rot135 rot315 --> fdsymbol-OT1-_neswharpoons
 fdsymbol-OT1-_updownharpoons -- rot45 rot225 --> fdsymbol-OT1-_senwharpoons
@@ -318,7 +318,6 @@ mathabx-OT1-_righttoleftarrow -- rot90 --> mathabx-OT1-_uptodownarrow
 mathabx-OT1-_sqdoublecap -- rot90 mir135 --> mathabx-OT1-_sqSubset
 mathabx-OT1-_sqSubset -- rot180 mir90 --> mathabx-OT1-_sqSupset
 mathabx-OT1-_sqsubseteqq -- mir90 --> mathabx-OT1-_sqsupseteqq
-mathabx-OT1-_sqsupseteqq -- mir90 --> mathabx-OT1-_sqsubseteqq
 mathabx-OT1-_updownarrows -- mir0 mir90 --> mathabx-OT1-_downuparrows
 mathabx-OT1-_updownarrows -- rot90 rot270 --> amssymb-OT1-_rightleftarrows
 mathabx-OT1-_vDash -- rot180 mir90 --> fdsymbol-OT1-_leftvDash

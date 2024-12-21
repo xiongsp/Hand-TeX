@@ -244,3 +244,4 @@ fabric.properties
 /handtex/data/model/encodings.txt
 /training/database/handtex.db copy
 training/database/TRAINING DATA LICENSE.txt
+*.chkpt

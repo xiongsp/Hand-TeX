@@ -1,3 +1,12 @@
+amssymb-OT1-_lessgtr -/ rot78.75 s1.5 /- MnSymbol-OT1-_nlessgtr
+amssymb-OT1-_lesssim -/ rot78.75 s1.25 /- stix-OT1-_nlesssim
+amssymb-OT1-_gtrless -/ slash /- MnSymbol-OT1-_ngtrless
+amssymb-OT1-_gtrsim -/ rot78.75 s1.25 /- stix-OT1-_ngtrsim
+MnSymbol-OT1-_upModels -/ rot22.5 o90 /- MnSymbol-OT1-_nupModels
+MnSymbol-OT1-_rightModels -/ rot67.5 o0 /- MnSymbol-OT1-_nrightModels
+fdsymbol-OT1-_downmodels -/ rot22.5 u270 /- fdsymbol-OT1-_ndownmodels
+latex2e-OT1-_lor -/ U90 /- stix-OT1-_barvee
+latex2e-OT1-_land -/ U90 /- stix-OT1-_barwedge
 latex2e-OT1-/ -/ U90 s0.5 /- stix-OT1-_dsol
 latex2e-OT1-[ -/ U270 s0.5 /- stix-OT1-_lbrackubar
 latex2e-OT1-] -/ U270 s0.5 /- stix-OT1-_rbrackubar
@@ -20,7 +29,6 @@ latex2e-OT1-_in -/ U90 /- stix-OT1-_varisinobar
 latex2e-OT1-_int -/ U270 s0.5 /- stix-OT1-_lowint
 latex2e-OT1-_int -/ U90 s0.5 /- stix-OT1-_upint
 latex2e-OT1-_land -/ bar /- stix-OT1-_midbarwedge
-latex2e-OT1-_land -/ U270 /- stix-OT1-_barwedge
 latex2e-OT1-_land -/ U270 /- stix-OT1-_wedgebar
 latex2e-OT1-_Leftarrow -/ rot67.5 o0 s0.75 /- amssymb-OT1-_nLeftarrow
 latex2e-OT1-_leftarrow -/ rot67.5 u0 s0.75 /- amssymb-OT1-_nleftarrow
@@ -29,11 +37,9 @@ latex2e-OT1-_leftharpoonup -/ rot67.5 o270 s0.75 /- fdsymbol-OT1-_nleftharpoonup
 latex2e-OT1-_leftrightarrow -/ rot67.5 s0.75 /- amssymb-OT1-_nleftrightarrow
 latex2e-OT1-_Leftrightarrow -/ rot78.75 s0.75 /- amssymb-OT1-_nLeftrightarrow
 latex2e-OT1-_lor -/ bar /- stix-OT1-_midbarvee
-latex2e-OT1-_lor -/ U270 /- stix-OT1-_barvee
 latex2e-OT1-_lor -/ U270 /- stix-OT1-_veebar
 latex2e-OT1-_mid -/ rot157.5 s0.5 /- stix-OT1-_revnmid
 latex2e-OT1-_mid -/ rot45.0 o90 s0.5 /- amssymb-OT1-_nmid
-latex2e-OT1-_models -/ rot67.5 u0 s1.25 /- MnSymbol-OT1-_nrightmodels
 latex2e-OT1-_nearrow -/ rot112.5 u225 s0.75 /- MnSymbol-OT1-_nnearrow
 latex2e-OT1-_nwarrow -/ rot67.5 s0.75 /- MnSymbol-OT1-_nnwarrow
 latex2e-OT1-_parallel -/ rot33.75 s0.75 /- amssymb-OT1-_nparallel
@@ -103,9 +109,6 @@ amssymb-OT1-_ggg -/ rot67.5 /- MnSymbol-OT1-_nggg
 amssymb-OT1-_gtrdot -/ rot78.75 s1.5 /- MnSymbol-OT1-_ngtrdot
 amssymb-OT1-_gtreqless -/ rot78.75 s1.25 /- MnSymbol-OT1-_ngtreqless
 amssymb-OT1-_gtreqqless -/ rot78.75 s1.25 /- MnSymbol-OT1-_ngtreqqless
-amssymb-OT1-_gtrless -/ slash /- MnSymbol-OT1-_ngtrless
-amssymb-OT1-_gtrsim -/ rot78.75 s1.25 /- MnSymbol-OT1-_gnsim
-amssymb-OT1-_gtrsim -/ rot78.75 s1.25 /- stix-OT1-_ngtrsim
 amssymb-OT1-_gtrsim -/ U270 s0.75 /- stix-OT1-_gsime
 amssymb-OT1-_leftarrowtail -/ rot67.5 s0.75 /- MnSymbol-OT1-_nleftarrowtail
 amssymb-OT1-_leftleftarrows -/ rot67.5 u0 /- MnSymbol-OT1-_nleftleftarrows
@@ -117,9 +120,6 @@ amssymb-OT1-_leqslant -/ slash /- amssymb-OT1-_nleqslant
 amssymb-OT1-_lessdot -/ rot78.75 s1.5 /- MnSymbol-OT1-_nlessdot
 amssymb-OT1-_lesseqgtr -/ rot78.75 s1.5 /- MnSymbol-OT1-_nlesseqgtr
 amssymb-OT1-_lesseqqgtr -/ rot78.75 s1.5 /- MnSymbol-OT1-_nlesseqqgtr
-amssymb-OT1-_lessgtr -/ rot78.75 s1.5 /- MnSymbol-OT1-_nlessgtr
-amssymb-OT1-_lesssim -/ rot78.75 s1.25 /- MnSymbol-OT1-_lnsim
-amssymb-OT1-_lesssim -/ rot78.75 s1.25 /- stix-OT1-_nlesssim
 amssymb-OT1-_lesssim -/ U270 s0.75 /- stix-OT1-_lsime
 amssymb-OT1-_ll -/ rot78.75 s1.25 /- MnSymbol-OT1-_nll
 amssymb-OT1-_ll -/ U270 /- stix-OT1-_partialmeetcontraction
@@ -152,7 +152,7 @@ amssymb-OT1-_upharpoonleft -/ rot22.5 u315 s0.75 /- fdsymbol-OT1-_nupharpoonleft
 amssymb-OT1-_upharpoonright -/ rot22.5 u180 s0.75 /- fdsymbol-OT1-_nupharpoonright
 amssymb-OT1-_upuparrows -/ rot22.5 u270 /- MnSymbol-OT1-_nupuparrows
 amssymb-OT1-_Vdash -/ rot67.5 o0 s1.25 /- MnSymbol-OT1-_nrightVdash
-amssymb-OT1-_vDash -/ rot67.5 u0 s1.25 /- fdsymbol-OT1-_nrightvDash
+latex2e-OT1-_models -/ rot67.5 u0 s1.25 /- MnSymbol-OT1-_nrightmodels
 amssymb-OT1-_Vdash -/ slash /- mathabx-OT1-_nVdash
 amssymb-OT1-_Vdash -/ slash /- mathabx-OT1-_nVdash
 amssymb-OT1-_Vvdash -/ rot67.5 O0 /- fdsymbol-OT1-_nVvdash
@@ -164,10 +164,7 @@ fdsymbol-OT1-_dashVv -/ rot78.75 O180 /- fdsymbol-OT1-_ndashVv
 fdsymbol-OT1-_Ddashv -/ rot78.75 u180 s1.25 /- fdsymbol-OT1-_nDdashv
 fdsymbol-OT1-_Doteq -/ rot67.5 s1.25 /- fdsymbol-OT1-_nDoteq
 fdsymbol-OT1-_downAssert -/ rot22.5 O270 /- fdsymbol-OT1-_ndownAssert
-fdsymbol-OT1-_downmodels -/ rot22.5 u270 /- fdsymbol-OT1-_ndownmodels
 fdsymbol-OT1-_downupharpoons -/ rot11.25 /- fdsymbol-OT1-_ndownupharpoons
-fdsymbol-OT1-_downvDash -/ rot11.25 u270 /- fdsymbol-OT1-_ndownvDash
-fdsymbol-OT1-_downVDash -/ rot22.5 o270 /- fdsymbol-OT1-_ndownVDash
 fdsymbol-OT1-_downvdash -/ rot22.5 u270 /- fdsymbol-OT1-_ndownvdash
 fdsymbol-OT1-_eqdot -/ rot67.5 o90 s1.5 /- fdsymbol-OT1-_neqdot
 fdsymbol-OT1-_eqsim -/ slash /- fdsymbol-OT1-_neqsim
@@ -195,7 +192,6 @@ fdsymbol-OT1-_nwseharpoonswne -/ rot56.25 /- fdsymbol-OT1-_nnwseharpoonswne
 fdsymbol-OT1-_owns -/ rot78.75 s1.5 /- fdsymbol-OT1-_nowns
 fdsymbol-OT1-_preceqq -/ rot78.75 s1.5 /- fdsymbol-OT1-_npreceqq
 fdsymbol-OT1-_revangle -/ U270 /- stix-OT1-_revangleubar
-fdsymbol-OT1-_rightVDash -/ rot78.75 o0 /- fdsymbol-OT1-_nrightVDash
 fdsymbol-OT1-_seharpoonne -/ rot67.5 u135 /- fdsymbol-OT1-_nseharpoonne
 fdsymbol-OT1-_seharpoonsw -/ rot67.5 u180 /- fdsymbol-OT1-_nseharpoonsw
 fdsymbol-OT1-_senwharpoons -/ rot67.5 /- fdsymbol-OT1-_nsenwharpoons
@@ -213,8 +209,6 @@ fdsymbol-OT1-_updownharpoonleftright -/ rot22.5 s0.75 /- fdsymbol-OT1-_nupdownha
 fdsymbol-OT1-_updownharpoonrightleft -/ rot11.25 s0.75 /- fdsymbol-OT1-_nupdownharpoonrightleft
 fdsymbol-OT1-_updownharpoons -/ rot22.5 /- fdsymbol-OT1-_nupdownharpoons
 fdsymbol-OT1-_upmodels -/ rot11.25 u90 /- fdsymbol-OT1-_nupmodels
-fdsymbol-OT1-_upvDash -/ rot11.25 u90 /- fdsymbol-OT1-_nupvDash
-fdsymbol-OT1-_upVDash -/ rot22.5 o90 /- fdsymbol-OT1-_nupVDash
 fdsymbol-OT1-_vDdash -/ rot78.75 u0 s1.25 /- fdsymbol-OT1-_nvDdash
 fdsymbol-OT1-_veeeq -/ rot78.75 s1.5 /- fdsymbol-OT1-_nveeeq
 fdsymbol-OT1-_wedgeq -/ rot67.5 u270 s1.5 /- fdsymbol-OT1-_nwedgeq
@@ -365,7 +359,6 @@ MnSymbol-OT1-_rhookuparrow -/ rot22.5 u270 s0.75 /- MnSymbol-OT1-_nrhookuparrow
 MnSymbol-OT1-_rightfree -/ rot67.5 u180 s0.75 /- MnSymbol-OT1-_nrightfree
 MnSymbol-OT1-_rightlsquigarrow -/ rot67.5 u180 s0.75 /- MnSymbol-OT1-_nrightlsquigarrow
 MnSymbol-OT1-_rightmapsto -/ rot67.5 u180 s0.75 /- MnSymbol-OT1-_nrightmapsto
-MnSymbol-OT1-_rightModels -/ rot67.5 o0 /- MnSymbol-OT1-_nrightModels
 MnSymbol-OT1-_Searrow -/ rot67.5 o135 /- MnSymbol-OT1-_nSearrow
 MnSymbol-OT1-_searrowtail -/ rot67.5 s0.75 /- MnSymbol-OT1-_nsearrowtail
 MnSymbol-OT1-_sefootline -/ rot67.5 u135 s0.75 /- MnSymbol-OT1-_nsefootline
@@ -405,7 +398,6 @@ MnSymbol-OT1-_upfootline -/ rot22.5 s0.75 /- MnSymbol-OT1-_nupfootline
 MnSymbol-OT1-_upfree -/ rot22.5 u270 s0.75 /- MnSymbol-OT1-_nupfree
 MnSymbol-OT1-_uplsquigarrow -/ rot157.5 o270 s0.75 /- MnSymbol-OT1-_nuplsquigarrow
 MnSymbol-OT1-_upmapsto -/ rot22.5 u270 s0.75 /- MnSymbol-OT1-_nupmapsto
-MnSymbol-OT1-_upModels -/ rot22.5 o90 /- MnSymbol-OT1-_nupModels
 stix-OT1-_csub -/ U270 /- stix-OT1-_csube
 stix-OT1-_csup -/ U270 /- stix-OT1-_csupe
 stix-OT1-_lat -/ U270 /- stix-OT1-_late

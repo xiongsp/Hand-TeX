@@ -11,6 +11,7 @@ import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Signal
 from loguru import logger
 from PySide6.QtCore import Slot
+import numpy as np
 
 import handtex.config as cfg
 import handtex.data_recorder as dr
@@ -22,10 +23,16 @@ import handtex.symbol_list as sl
 import handtex.symbol_relations as sr
 import handtex.utils as ut
 import handtex.worker_thread as wt
+from training.hyperparameters import image_size
 import training.inference as inf
 import training.model as mdl
 from handtex import __program__, __version__
 from handtex.ui_generated_files.ui_Mainwindow import Ui_MainWindow
+
+# TODO find samples that are a std dev higher in point count than the average and use more aggressive smoothing.
+# TODO fix scaling for langle/rangle and textasciicircum
+# TODO make curated dataset of symbols used exclusively for validation. Should contain 1 sample per symbol.
+# TODO with the above, start distilling model to shrink size.
 
 
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
@@ -289,6 +296,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             if width == self.config.stroke_width:
                 action.setChecked(True)
             self.stroke_width_menu.addAction(action)
+
+        # Scan image.
+        # This didn't work out, so it's disabled for now. The model just can't
+        # handle the complexity of real-world images.
+        # action_scan = Qg.QAction(Qg.QIcon.fromTheme("viewimage"), "Open Image", self)
+        # action_scan.triggered.connect(self.browse_image)
+        # self.hamburger_menu.addAction(action_scan)
 
         # Offer to enter training mode.
         action_training = Qg.QAction(
@@ -555,7 +569,23 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         :param dry_run: If true, don't show the predictions. This is to prevent a cold-start on GPU.
         """
         worker = wt.Worker(
-            inf.predict, strokes, self.model, self.label_decoder, no_progress_callback=True
+            inf.predict_strokes, strokes, self.model, self.label_decoder, no_progress_callback=True
+        )
+        if not dry_run:
+            worker.signals.result.connect(self.detection_result)
+        worker.signals.error.connect(self.detection_error)
+        self.inference_queue.start(worker)
+
+    def start_detection_image(self, image_data: np.ndarray, dry_run: bool = False) -> None:
+        """
+        Start the detection process.
+        This one works for numpy image data.
+
+        :param image_data: The image to detect.
+        :param dry_run: If true, don't show the predictions. This is to prevent a cold-start on GPU.
+        """
+        worker = wt.Worker(
+            inf.predict_image, image_data, self.model, self.label_decoder, no_progress_callback=True
         )
         if not dry_run:
             worker.signals.result.connect(self.detection_result)
@@ -673,6 +703,53 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Slap a spacer on the end to push the items to the top.
         self.widget_predictions.layout().addStretch()
 
+    # ======================================= Loading Images =======================================
+
+    def browse_image(self) -> None:
+        """
+        Load an image from the filesystem.
+        """
+        image_path, _ = Qw.QFileDialog.getOpenFileName(
+            self, "Open Image", str(Path.home()), "Image Files (*.png *.jpg *.jpeg *.bmp *.gif)"
+        )
+        if not image_path:
+            return
+        self.load_image_from_path(image_path)
+
+    def load_image_from_path(self, image_path: str) -> None:
+        """
+        Load an image from the filesystem.
+        """
+        logger.info(f"Loading image from {image_path}.")
+        image = Qg.QImage(image_path)
+        if image.isNull():
+            gu.show_warning(self, "Invalid Image", "The selected image is not valid.")
+            return
+        # Scale the image down to fit the canvas size and then run inference.
+        scaled_image = image.scaled(
+            Qc.QSize(image_size, image_size), Qc.Qt.KeepAspectRatio, Qc.Qt.SmoothTransformation
+        )
+        # Assuming 'scaled_image' is a QImage object
+        if scaled_image.format() != Qg.QImage.Format_Grayscale8:
+            grayscale_image = scaled_image.convertToFormat(Qg.QImage.Format_Grayscale8)
+        else:
+            grayscale_image = scaled_image
+
+        # Convert QImage to a NumPy array directly
+        width = grayscale_image.width()
+        height = grayscale_image.height()
+        image_data = np.array(grayscale_image.constBits()).reshape((height, width))
+        # Snap the image values to 0 and 255, threshold 127.
+        image_data = np.where(image_data > 127, 255, 0).astype(np.uint8)
+        # # debug-render the image
+        # import matplotlib.pyplot as plt
+        #
+        # plt.imshow(image_data, cmap="gray")
+        # plt.show()
+
+        # Convert the image to 1-channel 8-bit grayscale.
+        self.start_detection_image(image_data)
+
     # =========================================== Training ===========================================
 
     def get_next_symbol(self) -> None:
@@ -767,7 +844,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             gu.show_warning(self, "Empty Drawing", "You cannot submit an empty drawing.")
             return
         self.data_recorder.submit_drawing(
-            st.SymbolDrawing(self.current_symbol.key, *self.sketchpad.get_clean_strokes())
+            st.SymbolDrawing(
+                self.current_symbol.key, *self.sketchpad.get_clean_strokes(simplify=True)
+            )
         )
         self.sketchpad.clear()
         self.submission_count += 1

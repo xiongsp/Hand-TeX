@@ -203,6 +203,7 @@ class DataRecorder:
 
         self.save_data()
 
+        # Debug:
         # def plot_strokes(strokes):
         #     from matplotlib import pyplot as plt
         #

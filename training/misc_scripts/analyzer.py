@@ -412,6 +412,6 @@ if __name__ == "__main__":
     import handtex.symbol_relations as sr
 
     symbol_data = sr.SymbolData()
-    symbol_key = symbol_data.get_similarity_group("latex2e-OT1-|")
+    # symbol_key = symbol_data.get_similarity_group("textcomp-OT1-_textdblhyphen")
 
     analyze_symbol_data(db_path, symbol_key)

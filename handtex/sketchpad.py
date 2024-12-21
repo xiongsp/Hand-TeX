@@ -179,7 +179,9 @@ class Sketchpad(Qw.QGraphicsView):
         self.can_undo.emit(bool(self.strokes))
         self.can_redo.emit(bool(self.redo_strokes))
 
-    def get_clean_strokes(self) -> tuple[list[list[tuple[int, int]]], float, int, int]:
+    def get_clean_strokes(
+        self, simplify: bool = False
+    ) -> tuple[list[list[tuple[int, int]]], float, int, int]:
         """
         Normalize the coordinates to a 0-CANVAS_SIZE space.
         Apply the RDP algorithm to limit the number of points in each stroke.
@@ -188,6 +190,9 @@ class Sketchpad(Qw.QGraphicsView):
         if not strokes:
             return [], 1, 0, 0
         clean_strokes = purge_duplicate_strokes(strokes)
+
+        if simplify:
+            clean_strokes = [simplify_stroke(stroke) for stroke in clean_strokes]
 
         centered_clean_strokes, scale, x_offset, y_offset = rescale_and_center_viewport(
             clean_strokes, self.sceneRect().width(), self.sceneRect().height()

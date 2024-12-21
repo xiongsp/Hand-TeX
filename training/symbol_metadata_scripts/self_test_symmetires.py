@@ -98,7 +98,7 @@ def main():
             strokes = json.loads(strokes)
             for col_type, matrix in collision_types:
                 strokes = ig.apply_transformations(strokes, matrix)
-                predictions = inf.predict(strokes, model, label_decoder)
+                predictions = inf.predict_strokes(strokes, model, label_decoder)
 
                 for symbol, confidence in predictions:
                     if confidence < min_confidence:

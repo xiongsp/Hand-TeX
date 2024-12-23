@@ -79,8 +79,8 @@ def main(resume_from_checkpoint=False):
         label_encoder,
         random_seed,
         validation_split=0.2,
+        sample_limit=1000,
         train=True,
-        shuffle=True,
         stroke_cache=stroke_cache,
     )
     validation_dataset = StrokeDataset(
@@ -90,8 +90,8 @@ def main(resume_from_checkpoint=False):
         label_encoder,
         random_seed,
         validation_split=0.2,
+        sample_limit=100,
         train=False,
-        shuffle=True,
         stroke_cache=stroke_cache,
     )
 

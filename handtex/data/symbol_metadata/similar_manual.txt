@@ -466,7 +466,7 @@ logix-OT1-_CircNd stmaryrd-OT1-_owedge stmaryrd-OT1-_varowedge txfonts-OT1-_circ
 logix-OT1-_CircOr stmaryrd-OT1-_ovee stmaryrd-OT1-_varovee txfonts-OT1-_circledvee
 logix-OT1-_Dnd stix-OT1-_wedgeodot
 logix-OT1-_Dor stix-OT1-_veeodot
-logix-OT1-_MulMapDual txfonts-OT1-_multimapboth
+logix-OT1-_MulMapDual txfonts-OT1-_multimapboth stix-OT1-_dualmap
 logix-OT1-_MulMapInv stix-OT1-_multimapinv txfonts-OT1-_multimapinv
 logix-OT1-_Nor stix-OT1-_barvee
 logix-OT1-_NotClsImpl stix-OT1-_nsupset

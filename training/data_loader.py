@@ -68,7 +68,6 @@ class StrokeDataset(Dataset):
         validation_split: float = 0.1,
         train: bool = True,
         sample_limit: int | None = 1000,
-        shuffle: bool = True,
         random_augmentation: bool = True,
         stroke_cache: dict[str, list[list[tuple[int, int]]]] = None,
         debug_single_sample_only: bool = False,
@@ -92,7 +91,6 @@ class StrokeDataset(Dataset):
         :param random_seed: Seed for the random number generator. Generator for training and validation MUST get the same.
         :param validation_split: Fraction of the data to use for validation.
         :param train: If True, load training data, else load validation data.
-        :param shuffle: If True, shuffle the data before making the training/validation split.
         :param random_augmentation: If True, augment the data with random transformations.
         :param stroke_cache: Cache of stroke data for each symbol key, alternative to loading from database.
         :param debug_single_sample_only: If True, only load a single sample for debugging.
@@ -120,6 +118,8 @@ class StrokeDataset(Dataset):
 
         @cache
         def load_primary_keys(_symbol_keys: str | tuple[str]) -> list[tuple[int]]:
+            nonlocal cursor, debug_single_sample_only
+
             if isinstance(_symbol_keys, str):
                 _symbol_keys = (_symbol_keys,)
             command = f"SELECT id FROM samples WHERE key IN ({','.join(['?']*len(_symbol_keys))})"
@@ -129,7 +129,23 @@ class StrokeDataset(Dataset):
                 command,
                 _symbol_keys,
             )
-            return cursor.fetchall()
+            cursor_samples = cursor.fetchall()
+
+            # If we only have one sample, just return that, we have no choice.
+            if len(cursor_samples) == 1:
+                return cursor_samples
+
+            # Perform the validation split here, to prevent that samples get
+            # reused between training and validation datasets.
+            # Validation gets the first x% of the samples.
+            nonlocal validation_split, train
+            # The split needs to be less than half, to work correctly with rounding up
+            # on small numbers of samples. Nobody uses more than 50% for validation anyway.
+            assert validation_split < 0.5
+            split_idx = ceil(len(cursor_samples) * validation_split)
+            if train:
+                return cursor_samples[split_idx:]
+            return cursor_samples[:split_idx]
 
         # For negations, we need a cycle of the symbol keys to use for the slash.
         vertical_line_keys = symbol_data.get_similarity_group("latex2e-OT1-|")
@@ -189,14 +205,7 @@ class StrokeDataset(Dataset):
             if sample_limit is not None:
                 samples = samples[:sample_limit]
 
-            # Shuffle the rows to get more variety in drawings, since drawings
-            # by the same person are sequentially stored in the database.
-            if shuffle:
-                random.shuffle(samples)
-
-            split_idx = ceil(len(samples) * validation_split)
             if train:
-                selected_rows = samples[split_idx:]
                 print(
                     f"Loaded {len(samples)} total samples of {symbol_key}, "
                     f"with {real_data_count} real data, "
@@ -204,8 +213,6 @@ class StrokeDataset(Dataset):
                     f"{other_symmetry_count} other symmetries, "
                     f"{negation_count} negations, "
                     f"and {augmentation_count} random augmentations. "
-                    f"Reserving {len(selected_rows)} for training. "
-                    f"Reserving {split_idx} for validation."
                 )
                 if distribution_stats is not None:
                     distribution_stats[symbol_key] = (
@@ -216,11 +223,9 @@ class StrokeDataset(Dataset):
                         negation_count,
                         augmentation_count,
                     )
-            else:
-                selected_rows = samples[:split_idx]
 
-            self.primary_keys.extend(selected_rows)
-            self.symbol_keys.extend([symbol_key] * len(selected_rows))
+            self.primary_keys.extend(samples)
+            self.symbol_keys.extend([symbol_key] * len(samples))
 
         conn.close()
 
@@ -549,7 +554,6 @@ def main():
         random_seed=0,
         validation_split=0,
         train=True,
-        shuffle=False,
         random_augmentation=False,
         debug_single_sample_only=True,
         distribution_stats=None,

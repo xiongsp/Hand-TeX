@@ -1,6 +1,7 @@
 import sqlite3
 import json
 from pathlib import Path
+from rdp import rdp
 
 
 def main():
@@ -27,6 +28,7 @@ def main():
             db_data = cursor.fetchall()
             for db_drawing in db_data:
                 db_strokes = json.loads(db_drawing[2])
+                # db_strokes = [rdp(stroke, epsilon=6) for stroke in db_strokes]
                 if strokes == db_strokes:
                     drawings_match.append(drawing)
 

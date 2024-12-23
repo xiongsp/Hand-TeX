@@ -86,8 +86,8 @@ input_cursor.execute("SELECT * FROM samples")
 rows = input_cursor.fetchall()
 
 
-total_points = 0
-total_points_cleaned = 0
+total_strokes = 0
+total_strokes_cleaned = 0
 
 counts: dict[str, list[int]] = defaultdict(list)
 
@@ -95,8 +95,7 @@ counts: dict[str, list[int]] = defaultdict(list)
 for row in rows:
     _, key, strokes_json = row
     strokes: list[list[tuple[int, int]]] = json.loads(strokes_json)
-    points = sum(len(stroke) for stroke in strokes)
-    counts[key].append(points)
+    counts[key].append(len(strokes))
 
 thresholds_min_points = {}
 
@@ -108,38 +107,74 @@ for key, point_counts in counts.items():
     mean_points = sum(point_counts) / len(point_counts)
     std_dev = (sum((x - mean_points) ** 2 for x in point_counts) / (len(point_counts) - 1)) ** 0.5
 
-    thresholds_min_points[key] = int(mean_points + std_dev)
+    thresholds_min_points[key] = int(mean_points + 5 * std_dev)
 
 # Print a sorted list of the thresholds.
 for key, threshold in sorted(thresholds_min_points.items(), key=lambda x: x[1]):
     print(f"{key}: {threshold}")
 
 
+# def operation(s_id, symbol_key, s):
+#     point_count = sum(len(stroke) for stroke in s)
+#     global total_points
+#     global total_points_cleaned
+#     total_points += point_count
+#     if (
+#         key != "latex2e-OT1-/"
+#         or point_count < thresholds_min_points[symbol_key]
+#         or point_count < 15
+#         or s_id > 339935
+#     ):
+#         total_points_cleaned += point_count
+#         return s
+#
+#     simple_strokes = [rdp(stroke, epsilon=6) for stroke in s]
+#
+#     # If we don't have an improvement, smooth harder. Add a constant offset for small strokes.
+#     simple_count = sum(len(stroke) for stroke in simple_strokes)
+#     tag = f"({point_count} p - {1- simple_count/point_count:.2%})"
+#     if simple_count >= 0.6 * point_count + 5:
+#         simple_strokes = [rdp(stroke, epsilon=10) for stroke in s]
+#         simple_count = sum(len(stroke) for stroke in simple_strokes)
+#         tag = f" ({point_count} p - {1 -simple_count/point_count:.2%} SUPER)"
+#
+#     # Plot it to see what it looks like.
+#     # plot_stroke_pair(simple_strokes, s, f"{symbol_key} (ID: {s_id}) {tag}")
+#
+#     total_points_cleaned += simple_count
+#
+#     return simple_strokes
+
+import handtex.symbol_relations as sr
+
+symbol_data = sr.SymbolData()
+
+
 def operation(s_id, symbol_key, s):
-    point_count = sum(len(stroke) for stroke in s)
-    global total_points
-    global total_points_cleaned
-    total_points += point_count
-    if point_count < thresholds_min_points[symbol_key] and s_id <= 339935:
-        total_points_cleaned += point_count
+    if symbol_key not in symbol_data.get_similarity_group("latex2e-OT1-_textasciicircum"):
         return s
 
-    simple_strokes = [rdp(stroke, epsilon=6) for stroke in s]
+    # We want to squish the strokes to fit within a width of 400.
+    min_y = min(min(point[1] for point in stroke) for stroke in s)
+    max_y = max(max(point[1] for point in stroke) for stroke in s)
 
-    # If we don't have an improvement, smooth harder. Add a constant offset for small strokes.
-    simple_count = sum(len(stroke) for stroke in simple_strokes)
-    tag = f"({point_count} p - {1- simple_count/point_count:.2%})"
-    if simple_count >= 0.6 * point_count + 5:
-        simple_strokes = [rdp(stroke, epsilon=10) for stroke in s]
-        simple_count = sum(len(stroke) for stroke in simple_strokes)
-        tag = f" ({point_count} p - {1 -simple_count/point_count:.2%} SUPER)"
+    height = max_y - min_y
+    scaled = False
+    if height > 400:
+        s_old = s
+        scaled = True
+        scale = 0.45
+        # We need to keep it centered on a 1000x1000 canvas.
+        offset = (1000 - height * scale) / 2
+        s_new = [
+            [(int(point[0]), int((point[1] - min_y) * scale + offset)) for point in stroke]
+            for stroke in s
+        ]
+        s = [rdp(stroke, epsilon=3) for stroke in s_new]
+        # Plot it to see what it looks like.
+        # plot_stroke_pair(s, s_old, f"{symbol_key} (ID: {s_id}) {'(scaled)' if scaled else ''}")
 
-    # Plot it to see what it looks like.
-    # plot_stroke_pair(simple_strokes, s, f"{symbol_key} (ID: {s_id}) {tag}")
-
-    total_points_cleaned += simple_count
-
-    return simple_strokes
+    return s
 
 
 # Process each row, removing consecutive duplicate coordinates
@@ -154,11 +189,7 @@ for row in tqdm(rows):
         (sample_id, key, op_strokes_json),
     )
 
-print(f"Total points before cleaning: {total_points}")
-print(f"Total points after cleaning: {total_points_cleaned}")
-print(
-    f"Total points removed: {total_points - total_points_cleaned} ({(total_points - total_points_cleaned) / total_points:.2%})"
-)
+print(f"Total points before cleaning: {total_strokes}")
 
 # Commit changes and close connections
 output_conn.commit()

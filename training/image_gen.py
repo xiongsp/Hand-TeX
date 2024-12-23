@@ -32,9 +32,8 @@ def strokes_to_grayscale_image_cv2(stroke_data: list[list[tuple[int, int]]], ima
             stroke.append((point[0] + 1, point[1] + 1))
 
         for i in range(len(stroke) - 1):
-            cv2.line(
-                img, stroke[i], stroke[i + 1], color=(0,), thickness=1, lineType=cv2.LINE_4
-            )  # Draw black lines (0)
+            # Line_AA for anti-aliasing doesn't converge during training as well as the hard edge of LINE_4
+            cv2.line(img, stroke[i], stroke[i + 1], color=(0,), thickness=1, lineType=cv2.LINE_4)
     return img
 
 

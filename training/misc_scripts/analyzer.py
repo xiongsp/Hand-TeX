@@ -125,6 +125,9 @@ def analyze_symbol_data(db_path, symbol_key=None | str | list[str]):
                     if dist < 100:  # Only include distances less than 100
                         distances.append(dist)
 
+            if total_points < 2:
+                print(f"Skipping sample with less than 2 points: {sample_id}")
+
             # Calculate bounding box size for this sample
             if sample_x_coords and sample_y_coords:
                 min_x_sample = min(sample_x_coords)
@@ -165,6 +168,7 @@ def analyze_symbol_data(db_path, symbol_key=None | str | list[str]):
                     min_height = height
                     shortest_sample = strokes
                     dataset_shortest_sample = strokes
+                    print(f"Min bbox sample: {sample_id}")
                 if height > max_height:
                     max_height = height
                     tallest_sample = strokes
@@ -234,87 +238,84 @@ def analyze_symbol_data(db_path, symbol_key=None | str | list[str]):
     print(f"Smallest max(width, height): {min_max_dim}")
 
     # Prepare plots for entire dataset, if no specific key was provided
-    if symbol_key is None or isinstance(symbol_key, list) or isinstance(symbol_key, tuple):
-        # Prepare bounding box sizes for histogram
-        widths = [size[0] for size in bounding_box_sizes]
-        heights = [size[1] for size in bounding_box_sizes]
-        max_of_wh = [max(w, h) for w, h in bounding_box_sizes]
+    # Prepare bounding box sizes for histogram
+    widths = [size[0] for size in bounding_box_sizes]
+    heights = [size[1] for size in bounding_box_sizes]
+    max_of_wh = [max(w, h) for w, h in bounding_box_sizes]
 
-        # Plot heatmap of coordinate points
-        plt.figure(figsize=(8, 6))
-        plt.hist2d(all_x_coords, all_y_coords, bins=100, cmap="hot")
-        plt.colorbar(label="Number of Points")
-        plt.title("Heatmap of Coordinate Points for All Symbols")
-        plt.xlabel("X Coordinate")
-        plt.ylabel("Y Coordinate")
-        plt.gca().invert_yaxis()  # Invert y-axis to match drawing coordinates
-        plt.show()
+    # Plot heatmap of coordinate points
+    plt.figure(figsize=(8, 6))
+    plt.hist2d(all_x_coords, all_y_coords, bins=100, cmap="hot")
+    plt.colorbar(label="Number of Points")
+    plt.title("Heatmap of Coordinate Points for All Symbols")
+    plt.xlabel("X Coordinate")
+    plt.ylabel("Y Coordinate")
+    plt.gca().invert_yaxis()  # Invert y-axis to match drawing coordinates
+    plt.show()
 
-        # Plot histogram of bounding box areas
-        plt.figure(figsize=(8, 6))
-        plt.hist(areas, bins=30, color="blue", edgecolor="black")
-        plt.title("Histogram of Bounding Box Areas for All Symbols")
-        plt.xlabel("Bounding Box Area")
-        plt.ylabel("Frequency")
-        plt.show()
+    # Plot histogram of bounding box areas
+    plt.figure(figsize=(8, 6))
+    plt.hist(areas, bins=30, color="blue", edgecolor="black")
+    plt.title("Histogram of Bounding Box Areas for All Symbols")
+    plt.xlabel("Bounding Box Area")
+    plt.ylabel("Frequency")
+    plt.show()
 
-        # Plot histogram of bounding box widths
-        plt.figure(figsize=(8, 6))
-        plt.hist(widths, bins=30, color="green", edgecolor="black")
-        plt.title("Histogram of Bounding Box Widths for All Symbols")
-        plt.xlabel("Width")
-        plt.ylabel("Frequency")
-        plt.show()
+    # Plot histogram of bounding box widths
+    plt.figure(figsize=(8, 6))
+    plt.hist(widths, bins=30, color="green", edgecolor="black")
+    plt.title("Histogram of Bounding Box Widths for All Symbols")
+    plt.xlabel("Width")
+    plt.ylabel("Frequency")
+    plt.show()
 
-        # Plot histogram of bounding box heights
-        plt.figure(figsize=(8, 6))
-        plt.hist(heights, bins=30, color="purple", edgecolor="black")
-        plt.title("Histogram of Bounding Box Heights for All Symbols")
-        plt.xlabel("Height")
-        plt.ylabel("Frequency")
-        plt.show()
+    # Plot histogram of bounding box heights
+    plt.figure(figsize=(8, 6))
+    plt.hist(heights, bins=30, color="purple", edgecolor="black")
+    plt.title("Histogram of Bounding Box Heights for All Symbols")
+    plt.xlabel("Height")
+    plt.ylabel("Frequency")
+    plt.show()
 
-        # Plot histogram of maximum of width and height
-        plt.figure(figsize=(8, 6))
-        plt.hist(max_of_wh, bins=30, color="brown", edgecolor="black")
-        plt.title("Histogram of Maximum of Width and Height for All Symbols")
-        plt.xlabel("Max(Width, Height)")
-        plt.ylabel("Frequency")
-        plt.show()
+    # Plot histogram of maximum of width and height
+    plt.figure(figsize=(8, 6))
+    plt.hist(max_of_wh, bins=30, color="brown", edgecolor="black")
+    plt.title("Histogram of Maximum of Width and Height for All Symbols")
+    plt.xlabel("Max(Width, Height)")
+    plt.ylabel("Frequency")
+    plt.show()
 
-        # Plot histogram of distances between consecutive points (less than 100)
-        plt.figure(figsize=(8, 6))
-        plt.hist(distances, bins=100, color="orange", edgecolor="black")
-        plt.title(
-            "Histogram of Distances Between Consecutive Points for All Symbols (Distance < 100)"
-        )
-        plt.xlabel("Distance")
-        plt.ylabel("Frequency")
-        plt.show()
+    # Plot histogram of distances between consecutive points (less than 100)
+    plt.figure(figsize=(8, 6))
+    plt.hist(distances, bins=100, color="orange", edgecolor="black")
+    plt.title("Histogram of Distances Between Consecutive Points for All Symbols (Distance < 100)")
+    plt.xlabel("Distance")
+    plt.ylabel("Frequency")
+    plt.show()
 
-        # Plot histogram of number of coordinates per sample
-        plt.figure(figsize=(8, 6))
-        plt.hist(num_coordinates_per_sample, bins=30, color="red", edgecolor="black")
-        plt.title("Histogram of Number of Coordinates per Sample for All Symbols")
-        plt.xlabel("Number of Coordinates")
-        plt.ylabel("Frequency")
-        plt.show()
+    # Plot histogram of number of coordinates per sample
+    plt.figure(figsize=(8, 6))
+    plt.hist(num_coordinates_per_sample, bins=30, color="red", edgecolor="black")
+    plt.title("Histogram of Number of Coordinates per Sample for All Symbols")
+    plt.xlabel("Number of Coordinates")
+    plt.ylabel("Frequency")
+    plt.show()
 
-        # Plot histogram of symbol frequencies
-        cursor.execute("SELECT key, COUNT(*) FROM samples GROUP BY key ORDER BY COUNT(*) ASC")
-        symbol_frequencies = cursor.fetchall()
-        keys = [row[0] for row in symbol_frequencies]
-        frequencies = [row[1] for row in symbol_frequencies]
-        median_frequency = np.median(frequencies)
-
-        plt.figure(figsize=(12, 6))
-        plt.bar(keys, frequencies, color="cyan", edgecolor="black")
-        plt.title(f"Histogram of Symbol Frequencies (Median Frequency: {median_frequency})")
-        plt.xlabel("Symbol Key")
-        plt.ylabel("Frequency")
-        plt.xticks(rotation=90, fontsize=8)
-        plt.tight_layout()
-        plt.show()
+    # Plot histogram of symbol frequencies
+    # cursor.execute("SELECT key, COUNT(*) FROM samples GROUP BY key ORDER BY COUNT(*) ASC")
+    # symbol_frequencies = cursor.fetchall()
+    # keys = [row[0] for row in symbol_frequencies]
+    # frequencies = [row[1] for row in symbol_frequencies]
+    # median_frequency = np.median(frequencies)
+    #
+    # plt.figure(figsize=(12, 6))
+    # plt.bar(keys, frequencies, color="cyan", edgecolor="black")
+    # plt.title(f"Histogram of Symbol Frequencies (Median Frequency: {median_frequency})")
+    # plt.xlabel("Symbol Key")
+    # plt.ylabel("Frequency")
+    # plt.xticks(rotation=90, fontsize=8)
+    # plt.tight_layout()
+    # plt.show()
 
     # Plot additional visualizations for specific samples, or for dataset-level extremes
     def plot_strokes(_strokes, title):
@@ -412,6 +413,7 @@ if __name__ == "__main__":
     import handtex.symbol_relations as sr
 
     symbol_data = sr.SymbolData()
-    # symbol_key = symbol_data.get_similarity_group("textcomp-OT1-_textdblhyphen")
+    symbol_key = symbol_data.get_similarity_group("latex2e-OT1-/")
+    # symbol_key = "latex2e-OT1-_backslash"
 
     analyze_symbol_data(db_path, symbol_key)

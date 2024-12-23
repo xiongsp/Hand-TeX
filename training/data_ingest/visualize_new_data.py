@@ -16,6 +16,7 @@ import handtex.symbol_relations as sr
 import handtex.utils as ut
 import training.image_gen as ig
 from handtex.utils import resource_path
+from rdp import rdp
 
 
 def main():
@@ -46,7 +47,9 @@ def main():
                 new_key = drawing["key"]
                 if new_key not in new_drawings:
                     new_drawings[new_key] = []
-                new_drawings[new_key].append((new_file.name, drawing["strokes"]))
+                strokes = drawing["strokes"]
+                # strokes = [rdp(stroke, epsilon=6) for stroke in strokes]
+                new_drawings[new_key].append((new_file.name, strokes))
                 new_frequencies[new_key] += 1
 
     logger.info(f"Training {len(symbol_data.all_keys)} symbols.")

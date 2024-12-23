@@ -1,4 +1,3 @@
-stix-OT1-_multimapinv -- rot90 mir45 --> stix-OT1-_midcir
 latex2e-OT1-[ -- rot180 mir90 --> latex2e-OT1-]
 latex2e-OT1-_backslash -- rot135 rot315 mir0 mir90 --> latex2e-OT1-/
 latex2e-OT1-_bigcap -- rot180 mir0 --> latex2e-OT1-_bigcup
@@ -517,6 +516,7 @@ stix-OT1-_measanglerutone -- rot180 --> stix-OT1-_measangleldtosw
 stix-OT1-_measanglerutone -- rot270 --> stix-OT1-_measangledrtose
 stix-OT1-_measanglerutone -- rot90 --> stix-OT1-_measangleultonw
 stix-OT1-_midbarvee -- rot180 mir0 --> stix-OT1-_midbarwedge
+stix-OT1-_multimapinv -- rot90 mir45 --> stix-OT1-_midcir
 stix-OT1-_Not -- mir90 --> stix-OT1-_bNot
 stix-OT1-_nsqsupset -- rot180 --> stix-OT1-_nsqsubset
 stix-OT1-_olcross -- rot45 rot135 rot225 rot315 --> mathabx-OT1-_pluscirc

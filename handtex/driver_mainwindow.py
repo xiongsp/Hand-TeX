@@ -29,8 +29,6 @@ import training.model as mdl
 from handtex import __program__, __version__
 from handtex.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 
-# TODO find samples that are a std dev higher in point count than the average and use more aggressive smoothing.
-# TODO fix scaling for langle/rangle and textasciicircum
 # TODO make curated dataset of symbols used exclusively for validation. Should contain 1 sample per symbol.
 # TODO with the above, start distilling model to shrink size.
 
@@ -779,9 +777,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             )
             new_symbol_key = self.data_recorder.select_symbol(bias)
             while (
-                self.current_symbol is not None
-                and new_symbol_key == self.current_symbol.key
-                and new_symbol_key in self.data_recorder.last_100_symbols
+                (self.current_symbol is not None and new_symbol_key == self.current_symbol.key)
+                or new_symbol_key in self.data_recorder.last_100_symbols
+                or self.data_recorder.get_symbol_rarity(new_symbol_key) < (100 * bias - 50)
             ):
                 new_symbol_key = self.data_recorder.select_symbol(bias)
 
@@ -806,7 +804,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             return
         self.label_training_name.setText(self.current_symbol.command)
         self.label_symbol_rarity.setText(
-            str(self.data_recorder.get_symbol_rarity(self.current_symbol.key))
+            f"{self.data_recorder.get_symbol_rarity(self.current_symbol.key)}%"
         )
         self.label_symbol_samples.setText(
             str(self.data_recorder.get_symbol_sample_count(self.current_symbol.key))

@@ -130,7 +130,7 @@ class DataRecorder:
             symbol_weights.append(weight)
         return random.choices(symbol_keys, weights=symbol_weights)[0]
 
-    def get_symbol_rarity(self, key: str) -> str:
+    def get_symbol_rarity(self, key: str) -> int | None:
         """
         Get the rarity of a symbol based on the frequency of the symbol in the training set.
         The rarity is the percentile of symbols that outrank it.
@@ -152,11 +152,11 @@ class DataRecorder:
                 break
 
         if target_rank is None:
-            return "?%"
+            return 9001
 
         percentile = round((1 - (target_rank / total_symbols)) * 100)
 
-        return f"{percentile}%"
+        return percentile
 
     def get_symbol_sample_count(self, key: str) -> int:
         """

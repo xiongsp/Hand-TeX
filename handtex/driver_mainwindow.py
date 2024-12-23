@@ -163,6 +163,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.spinBox_max_submissions.valueChanged.connect(self.update_submission_count)
 
         self.pushButton_submit.clicked.connect(self.submit_training_drawing)
+        self.pushButton_submit.setShortcut("Ctrl+Space")
         self.pushButton_skip.clicked.connect(self.get_next_symbol)
         self.pushButton_undo_submit.clicked.connect(self.previous_symbol)
 
@@ -352,6 +353,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.lineEdit_new_data_dir.setText(str(self.config.new_data_dir))
         self.training_menu_action.setVisible(False)
         self.detection_menu_action.setVisible(True)
+        self.pushButton_submit.setShortcutEnabled(True)
         self.get_next_symbol()
 
     def switch_to_classification(self) -> None:
@@ -362,6 +364,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(0)
         self.training_menu_action.setVisible(True)
         self.detection_menu_action.setVisible(False)
+        self.pushButton_submit.setShortcutEnabled(False)
         self.sketchpad.clear()
 
     def in_detection_mode(self) -> bool:

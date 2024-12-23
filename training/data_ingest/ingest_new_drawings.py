@@ -33,7 +33,7 @@ def main():
         for drawing in data:
             key = drawing["key"]
             strokes = drawing["strokes"]
-            # strokes = [rdp(stroke, epsilon=6) for stroke in strokes]
+            # strokes = [rdp(stroke, epsilon=4) for stroke in strokes]
             cursor.execute(
                 "INSERT INTO samples (key, strokes) VALUES (?, ?)", (key, json.dumps(strokes))
             )

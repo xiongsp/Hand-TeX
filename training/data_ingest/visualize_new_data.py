@@ -48,7 +48,7 @@ def main():
                 if new_key not in new_drawings:
                     new_drawings[new_key] = []
                 strokes = drawing["strokes"]
-                # strokes = [rdp(stroke, epsilon=6) for stroke in strokes]
+                # strokes = [rdp(stroke, epsilon=4) for stroke in strokes]
                 new_drawings[new_key].append((new_file.name, strokes))
                 new_frequencies[new_key] += 1
 

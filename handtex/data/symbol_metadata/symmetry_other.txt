@@ -1,10 +1,11 @@
+stmaryrd-OT1-_baro -- rot135 rot315 --> amssymb-OT1-_varnothing
 latex2e-OT1-[ -- rot180 mir90 --> latex2e-OT1-]
 latex2e-OT1-_backslash -- rot135 rot315 mir0 mir90 --> latex2e-OT1-/
 latex2e-OT1-_bigcap -- rot180 mir0 --> latex2e-OT1-_bigcup
 latex2e-OT1-_bigcap -- rot270 mir45 --> latex2e-OT1-_supset
 latex2e-OT1-_bigcap -- rot90 mir135 --> latex2e-OT1-_subset
 latex2e-OT1-_bigcup -- rot90 mir135 --> latex2e-OT1-_supset
-latex2e-OT1-_bigoplus -- rot45 --> latex2e-OT1-_bigotimes
+latex2e-OT1-_bigoplus -- rot45 rot135 rot225 rot315 --> latex2e-OT1-_bigotimes
 latex2e-OT1-_bigtriangledown -- rot180 mir0 --> latex2e-OT1-_bigtriangleup
 latex2e-OT1-_bigtriangledown -- rot270 mir45 --> latex2e-OT1-_triangleleft
 latex2e-OT1-_bigtriangledown -- rot90 mir135 --> latex2e-OT1-_triangleright
@@ -259,7 +260,6 @@ fdsymbol-OT1-_updownharpoons -- rot135 rot315 --> fdsymbol-OT1-_neswharpoons
 fdsymbol-OT1-_updownharpoons -- rot45 rot225 --> fdsymbol-OT1-_senwharpoons
 fdsymbol-OT1-_veedot -- rot180 mir0 --> fdsymbol-OT1-_wedgedot
 logix-OT1-_CircMinusPlus -- rot180 mir0 --> logix-OT1-_CircPlusMinus
-logix-OT1-_CircPls -- rot45 rot135 rot225 rot315 --> logix-OT1-_CircTimes
 logix-OT1-_CircXor -- rot180 mir0 --> logix-OT1-_CircNor
 logix-OT1-_MulMap -- rot180 mir90 --> logix-OT1-_MulMapInv
 logix-OT1-_MulMapDual -- rot45 rot225 --> wasysym-OT1-_opposition

@@ -1,5 +1,3 @@
-mathabx-OT1-_wedge -- rot180 mir0 --> latex2e-OT1-_vee
-stmaryrd-OT1-_baro -- rot135 rot315 --> amssymb-OT1-_varnothing
 latex2e-OT1-[ -- rot180 mir90 --> latex2e-OT1-]
 latex2e-OT1-_backslash -- rot135 rot315 mir0 mir90 --> latex2e-OT1-/
 latex2e-OT1-_bigcap -- rot180 mir0 --> latex2e-OT1-_bigcup
@@ -324,6 +322,7 @@ mathabx-OT1-_vDash -- rot180 mir90 --> fdsymbol-OT1-_leftvDash
 mathabx-OT1-_VDash -- rot180 mir90 --> mathabx-OT1-_DashV
 mathabx-OT1-_vDash -- rot270 mir135 --> fdsymbol-OT1-_downvDash
 mathabx-OT1-_vDash -- rot90 mir45 --> fdsymbol-OT1-_upvDash
+mathabx-OT1-_wedge -- rot180 mir0 --> latex2e-OT1-_vee
 MnSymbol-OT1-_backslashdiv -- rot90 rot270 mir0 mir90 --> MnSymbol-OT1-_slashdiv
 MnSymbol-OT1-_closedcurlyvee -- rot180 mir0 --> MnSymbol-OT1-_closedcurlywedge
 MnSymbol-OT1-_closedcurlyvee -- rot270 mir45 --> MnSymbol-OT1-_closedprec
@@ -556,6 +555,7 @@ stix-OT1-_veemidvert -- rot90 mir135 --> stix-OT1-_lat
 stix-OT1-_whitesquaretickleft -- rot180 mir90 --> stix-OT1-_whitesquaretickright
 stix-OT1-_wideangledown -- mir0 --> stix-OT1-_wideangleup
 stix2-OT1-_leftouterjoin -- rot180 mir90 --> stix2-OT1-_rightouterjoin
+stmaryrd-OT1-_baro -- rot135 rot315 --> amssymb-OT1-_varnothing
 stmaryrd-OT1-_bbslash -- mir0 --> stmaryrd-OT1-_sslash
 stmaryrd-OT1-_boxslash -- rot135 rot315 --> MnSymbol-OT1-_diamondminus
 stmaryrd-OT1-_curlyveedownarrow -- rot180 mir0 --> stmaryrd-OT1-_curlywedgeuparrow

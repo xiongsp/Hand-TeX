@@ -36,6 +36,7 @@ class SymbolData:
     asymmetric_symbols: list[str]
     symbols_grouped_by_package: list[tuple[str, ...]]
     symbols_grouped_by_negation: list[tuple[str, ...]]
+    symbols_grouped_by_inside: list[list[str]]
 
     def __init__(self):
         self.symbol_data = load_symbols()
@@ -44,6 +45,7 @@ class SymbolData:
         self_symmetries = load_symbol_metadata_self_symmetry()
         other_symmetries = load_symbol_metadata_other_symmetry()
         negations = load_symbol_data_negation()
+        inside = load_symbol_data_inside()
         self.to_leader = construct_to_leader_mapping(similarity_groups)
         self.leaders = [key for key in self.symbol_keys if key not in self.to_leader]
         self.packages = natsorted(list(set(symbol.package for symbol in self.symbol_data.values())))
@@ -56,8 +58,7 @@ class SymbolData:
         normalized_other_symmetries = normalize_other_symmetry_to_leaders(
             other_symmetries, self.to_leader, self_symmetries
         )
-        normalized_negations = normalize_negations_to_leaders(negations, self.to_leader)
-        graph = build_graph_without_negations(
+        graph = build_pure_transformation_graph(
             self.symbol_keys,
             similarity_groups,
             normalized_self_symmetries,
@@ -73,9 +74,15 @@ class SymbolData:
         self.asymmetric_symbols = self._compute_asymmetric_symbols()
         self.symbols_grouped_by_package = self._compute_symbols_grouped_by_package()
 
+        normalized_negations = normalize_negations_to_leaders(negations, self.to_leader)
         self.graph = add_negation_to_graph(self.graph, normalized_negations)
         self.graph = apply_negation_transitivity(self.graph)
         self.symbols_grouped_by_negation = self._compute_symbols_grouped_by_negation(negations)
+
+        normalized_inside = normalize_inside_to_leaders(inside, self.to_leader)
+        self.graph = add_inside_to_graph(self.graph, normalized_inside)
+        self.graph = apply_inside_transitivity(self.graph)
+        self.symbols_grouped_by_inside = self._compute_symbols_grouped_by_inside(inside)
 
     def __getitem__(self, item):
         return self.symbol_data[item]
@@ -130,6 +137,17 @@ class SymbolData:
         """
         symbol_key = self.to_leader.get(symbol_key, symbol_key)
         return any("negation" in data for _, _, data in self.graph.in_edges(symbol_key, data=True))
+
+    @cache
+    def get_inside_of_shape(self, symbol_key: str) -> st.Inside | None:
+        """
+        Get the shape that the symbol is inside of.
+        """
+        symbol_key = self.to_leader.get(symbol_key, symbol_key)
+        for source, dest, data in self.graph.in_edges(symbol_key, data=True):
+            if "inside" in data:
+                return data["inside"]
+        return None
 
     def transformation_ancestors(self, symbol_key: str) -> set[str]:
         """
@@ -196,6 +214,8 @@ class SymbolData:
         negation_groups = []
         visited = set()
         for symbol_to, (symbol_from, negation) in normalized_negations.items():
+            if symbol_to in visited:
+                continue
             negation_group = self.get_similarity_group(symbol_to) + self.get_similarity_group(
                 symbol_from
             )
@@ -205,6 +225,36 @@ class SymbolData:
             if symbol not in visited:
                 negation_groups.append((symbol,))
         return negation_groups
+
+    def _compute_symbols_grouped_by_inside(
+        self, inside: dict[str, tuple[str, st.Inside]]
+    ) -> list[list[str]]:
+        """
+        Grouping the symbols by the type they are inside of.
+        """
+        group_circle: list[str] = []
+        group_square: list[str] = []
+        group_triangle: list[str] = []
+        for symbol, (inside_symbol, inside_shape) in inside.items():
+            similarity_group = self.get_similarity_group(symbol)
+            if inside_shape == st.Inside.Circle:
+                group_circle.extend(similarity_group)
+            elif inside_shape == st.Inside.Square:
+                group_square.extend(similarity_group)
+            elif inside_shape == st.Inside.Triangle:
+                group_triangle.extend(similarity_group)
+
+        leftovers: list[str] = []
+
+        for symbol in self.all_keys:
+            if (
+                symbol not in group_circle
+                and symbol not in group_square
+                and symbol not in group_triangle
+            ):
+                leftovers.append(symbol)
+
+        return [group_circle, group_square, group_triangle, leftovers]
 
     def all_transformation_paths_to_symbol(
         self, symbol_key: str
@@ -261,10 +311,10 @@ class SymbolData:
 
     def all_paths_to_symbol(
         self, symbol_key: str
-    ) -> list[tuple[str, tuple[st.Transformation, ...], st.Negation | None]]:
+    ) -> list[tuple[str, tuple[st.Transformation, ...], st.Negation | st.Inside | None]]:
         """
         Get all possible paths to a symbol key, starting from some symbol and applying transformations.
-        Optionally add a negation on the end. Multiple negations are not supported.
+        Optionally add a negation xor place it inside a shape at the end. Multiple negations are not supported.
         """
         paths = []
         # First, gather the usual transformation paths.
@@ -282,6 +332,22 @@ class SymbolData:
             negation = self.graph[negation_leader][symbol_key]["negation"]
             for source, transformations in self.all_transformation_paths_to_symbol(negation_leader):
                 paths.append((source, transformations, negation))
+
+        inside_of_shape = self.get_inside_of_shape(symbol_key)
+        if inside_of_shape is not None:
+            # Find the inner symbol leader.
+            inner_leader = next(
+                filter(
+                    lambda l: l == self.to_leader.get(l, l),
+                    (
+                        source
+                        for source, _, data in self.graph.in_edges(symbol_key, data=True)
+                        if "inside" in data
+                    ),
+                )
+            )
+            for source, transformations in self.all_transformation_paths_to_symbol(inner_leader):
+                paths.append((source, transformations, inside_of_shape))
 
         return paths
 
@@ -642,14 +708,72 @@ def normalize_negations_to_leaders(
     return normalized_negations
 
 
-def build_graph_without_negations(
+def load_symbol_data_inside() -> dict[str, tuple[str, st.Inside]]:
+    """
+    Load the metadata for symbols being inside a basic shape.
+    This has the format:
+    - symbol: a symbol key
+    - inner_symbol: the symbol key of the symbol inside the basic shape
+    - shape: the name of the basic shape: circle, square, triangle
+
+    Format in the file:
+    symbol is inner_symbol in shape
+
+    :return: A dictionary mapping a symbol key to the inside key and shape.
+    """
+    inside: dict[str, tuple[str, st.Inside]] = {}
+
+    with resource_path(handtex.data.symbol_metadata, "inside.txt") as file_path:
+        with open(file_path, "r") as file:
+            lines = file.readlines()
+
+    pattern = re.compile(r"(\S+) is (\S+) in (\S+)")
+    for line in lines:
+        if not line.strip():
+            continue
+        re_match = pattern.match(line)
+        if not re_match:
+            logger.error(f"Failed to parse line: {line.strip()}")
+            continue
+        match re_match.groups():
+            case symbol, inner_symbol, "circle":
+                inside[symbol] = (inner_symbol, st.Inside.Circle)
+            case symbol, inner_symbol, "square":
+                inside[symbol] = (inner_symbol, st.Inside.Square)
+            case symbol, inner_symbol, "triangle":
+                inside[symbol] = (inner_symbol, st.Inside.Triangle)
+            case _:
+                logger.error(f"Unknown shape: {re_match.group(3)}")
+
+    return inside
+
+
+def normalize_inside_to_leaders(
+    inside: dict[str, tuple[str, st.Inside]], to_leader: dict[str, str]
+) -> dict[str, tuple[str, st.Inside]]:
+    """
+    We want to ensure that the inside relations only pertain to leader symbols.
+    """
+    normalized_inside = {}
+    for key, (inner_key, shape) in inside.items():
+        leader = to_leader.get(key, key)
+        inner_leader = to_leader.get(inner_key, inner_key)
+        if leader not in normalized_inside:
+            normalized_inside[leader] = (inner_leader, shape)
+        else:
+            if normalized_inside[leader] != (inner_leader, shape):
+                logger.error(f"Leader {leader} has different inside relations than symbol {key}.")
+    return normalized_inside
+
+
+def build_pure_transformation_graph(
     symbol_keys: list[str],
     similarity_groups: list[tuple[str, ...]],
     normalized_self_symmetries: dict[str, list[st.Transformation]],
     normalized_other_symmetries: dict[str, list[tuple[str, list[st.Transformation]]]],
 ) -> nx.DiGraph:
     """
-    Build a complete graph of all known symbol relations.
+    Build a complete graph of all known symbol relations that pertain to similarity and symmetry.
 
     Nodes are the symbol keys.
     Edges are transformations between symbols. Each edge has a transformations attribute,
@@ -707,6 +831,25 @@ def add_negation_to_graph(
     # Load negations as edges with the given negation.
     for key, (source, negation) in normalized_negations.items():
         graph.add_edge(source, key, negation=negation)
+
+    return graph
+
+
+def add_inside_to_graph(
+    graph: nx.DiGraph,
+    normalized_inside: dict[str, tuple[str, st.Inside]],
+) -> nx.DiGraph:
+    """
+    Add inside relations to the graph of symbol relations.
+
+    :param graph: The graph of symbol relations.
+    :param normalized_inside: Dictionary mapping a symbol key to the inside key and shape.
+    :return: The graph with inside relations added.
+    """
+
+    # Load inside relations as edges with the given inside relation.
+    for key, (inner_key, shape) in normalized_inside.items():
+        graph.add_edge(inner_key, key, inside=shape)
 
     return graph
 
@@ -785,6 +928,24 @@ def apply_negation_transitivity(graph: nx.DiGraph) -> nx.DiGraph:
     # Add all new negations to the graph.
     for source, target, data in new_negations:
         graph.add_edge(source, target, negation=data)
+
+    return graph
+
+
+def apply_inside_transitivity(graph: nx.DiGraph) -> nx.DiGraph:
+    new_inside = []
+    # We now need to apply transitivity to the inside relations.
+    # This means that if A is inside B, and A is similar to C, then C is inside B etc.
+    # The previous step ensured that all transformations are just one edge away.
+    for source, target, data in graph.edges(data=True):
+        if "inside" in data:
+            for source_source, _, source_data in graph.in_edges(source, data=True):
+                if "transformations" in source_data and not source_data["transformations"]:
+                    new_inside.append((source_source, target, data))
+
+    # Add all new inside relations to the graph.
+    for source, target, data in new_inside:
+        graph.add_edge(source, target, inside=data)
 
     return graph
 

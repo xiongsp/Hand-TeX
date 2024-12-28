@@ -28,7 +28,7 @@ class Ui_SymbolList(object):
     def setupUi(self, SymbolList):
         if not SymbolList.objectName():
             SymbolList.setObjectName(u"SymbolList")
-        SymbolList.resize(1190, 600)
+        SymbolList.resize(1292, 600)
         self.verticalLayout_3 = QVBoxLayout(SymbolList)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, -1, 0, 0)
@@ -140,6 +140,7 @@ class Ui_SymbolList(object):
         self.horizontalLayout_2.addWidget(self.line)
 
         self.comboBox_grouping = QComboBox(self.widget_filters)
+        self.comboBox_grouping.addItem("")
         self.comboBox_grouping.addItem("")
         self.comboBox_grouping.addItem("")
         self.comboBox_grouping.addItem("")
@@ -321,6 +322,16 @@ class Ui_SymbolList(object):
 
         self.formLayout.setWidget(8, QFormLayout.FieldRole, self.label_negation)
 
+        self.label_8 = QLabel(self.verticalLayoutWidget)
+        self.label_8.setObjectName(u"label_8")
+
+        self.formLayout.setWidget(9, QFormLayout.LabelRole, self.label_8)
+
+        self.label_inside_shape = QLabel(self.verticalLayoutWidget)
+        self.label_inside_shape.setObjectName(u"label_inside_shape")
+
+        self.formLayout.setWidget(9, QFormLayout.FieldRole, self.label_inside_shape)
+
 
         self.verticalLayout.addLayout(self.formLayout)
 
@@ -367,6 +378,7 @@ class Ui_SymbolList(object):
         self.comboBox_grouping.setItemText(2, QCoreApplication.translate("SymbolList", u"Group by Similarity", None))
         self.comboBox_grouping.setItemText(3, QCoreApplication.translate("SymbolList", u"Group by Symmetry", None))
         self.comboBox_grouping.setItemText(4, QCoreApplication.translate("SymbolList", u"Group by Negation", None))
+        self.comboBox_grouping.setItemText(5, QCoreApplication.translate("SymbolList", u"Group by Inside", None))
 
         self.label_4.setText(QCoreApplication.translate("SymbolList", u"Minimimum Group Size:", None))
         self.label_9.setText(QCoreApplication.translate("SymbolList", u"Maximum Group Size:", None))
@@ -382,5 +394,7 @@ class Ui_SymbolList(object):
         self.label_xelatex_required_label.setText(QCoreApplication.translate("SymbolList", u"Compiler:", None))
         self.label_xelatex_required.setText(QCoreApplication.translate("SymbolList", u"XeLaTeX or LuaLaTeX required", None))
         self.label_6.setText(QCoreApplication.translate("SymbolList", u"Negation of:", None))
+        self.label_8.setText(QCoreApplication.translate("SymbolList", u"Inside of:", None))
+        self.label_inside_shape.setText(QCoreApplication.translate("SymbolList", u"<shape>", None))
     # retranslateUi
 

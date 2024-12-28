@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1190</width>
+    <width>1292</width>
     <height>600</height>
    </rect>
   </property>
@@ -247,6 +247,11 @@
         <item>
          <property name="text">
           <string>Group by Negation</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Group by Inside</string>
          </property>
         </item>
        </widget>
@@ -510,6 +515,20 @@
            </property>
            <property name="wordWrap">
             <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="0">
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Inside of:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="1">
+          <widget class="QLabel" name="label_inside_shape">
+           <property name="text">
+            <string notr="true">&lt;shape&gt;</string>
            </property>
           </widget>
          </item>

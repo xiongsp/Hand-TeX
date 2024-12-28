@@ -1,4 +1,5 @@
 import json
+from enum import Enum, auto
 from math import sin, cos, pi
 from typing import overload
 
@@ -323,3 +324,9 @@ class Negation:
 
     def __repr__(self):
         return f"<Negation({self.angle=}, {self.offset_angle=}, {self.offset_factor=}, {self.scale_factor=})>"
+
+
+class Inside(Enum):
+    Circle = auto()
+    Triangle = auto()
+    Square = auto()

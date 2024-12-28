@@ -36,6 +36,7 @@ class GroupBy(IntEnum):
     SIMILARITY = 2
     SYMMETRY = 3
     NEGATION = 4
+    INSIDE = 5
 
 
 class Symmetry(IntEnum):
@@ -205,6 +206,8 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
                 grouping = self.symbol_data.symbols_grouped_by_transitive_symmetry
             elif group_by == GroupBy.NEGATION:
                 grouping = self.symbol_data.symbols_grouped_by_negation
+            elif group_by == GroupBy.INSIDE:
+                grouping = self.symbol_data.symbols_grouped_by_inside
             else:
                 raise ValueError(f"Invalid grouping: {group_by}")
             grouping = [
@@ -473,6 +476,16 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
             )
         else:
             self.label_negation.setText("")
+
+        match self.symbol_data.get_inside_of_shape(symbol_key):
+            case st.Inside.Circle:
+                self.label_inside_shape.setText("Circle")
+            case st.Inside.Square:
+                self.label_inside_shape.setText("Square")
+            case st.Inside.Triangle:
+                self.label_inside_shape.setText("Triangle")
+            case None:
+                self.label_inside_shape.setText("")
 
         if len(self.symbol_data.get_similarity_group(symbol_key)) > 1:
             self.label_similar.setText(

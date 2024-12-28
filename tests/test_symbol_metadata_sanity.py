@@ -224,7 +224,7 @@ def test_graph_transitivity() -> None:
         "downarrow": [("leftarrow", [st.Transformation.mir(45), st.Transformation.rot(270)])],
     }
 
-    graph = sr.build_graph_without_negations(
+    graph = sr.build_pure_transformation_graph(
         symbol_keys, similarity_groups, self_symmetries, other_symmetries
     )
     # # Draw the graph, just print the edge labels.
@@ -436,7 +436,7 @@ def test_for_accidental_similarity() -> None:
             continue
         if not data.get("transformations", False):
             assert (
-                "leader" in data or "negation" in data
+                "leader" in data or "negation" in data or "inside" in data
             ), f"Edge {source}->{dest} has no transformations."
 
 

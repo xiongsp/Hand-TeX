@@ -20,8 +20,11 @@ import handtex.symbol_relations as sr
 import handtex.utils as ut
 import training.database
 import training.image_gen as ig
+import training.shape_classifier as sc
 import training.hyperparameters as hyp
 import handtex.sketchpad as sp
+
+# TODO support symbol inside relation.
 
 
 def build_stroke_cache(db_path: str) -> dict[str, list[list[tuple[int, int]]]]:
@@ -67,7 +70,7 @@ class StrokeDataset(Dataset):
         random_seed: int,
         validation_split: float = 0.1,
         train: bool = True,
-        sample_limit: int | None = 1000,
+        sample_limit: int | None = None,
         random_augmentation: bool = True,
         stroke_cache: dict[str, list[list[tuple[int, int]]]] = None,
         debug_single_sample_only: bool = False,
@@ -78,7 +81,7 @@ class StrokeDataset(Dataset):
         - int: The primary key of the sample in the database.
         - list[Transformation]: List of transformations to apply to the strokes before using it.
           These are a result of using symmetries to augment the data.
-        - tuple[Negation | None, int]: An optional negation and the id of the slash to apply to the symbol.
+        - tuple[Negation | Inside | None, int]: An optional negation and the id of the slash / shape to apply to the symbol.
         - int | None: If not None, this is the seed to use for random augmentation.
           It is imperative that this be stored, so that the training and validation datasets
           generate the same pool of data and thus can be split consistently.
@@ -102,7 +105,7 @@ class StrokeDataset(Dataset):
             tuple[
                 int,
                 tuple[st.Transformation, ...],
-                tuple[st.Negation | None, int],
+                tuple[st.Negation | st.Inside | None, int],
                 int | None,
             ]
         ] = []
@@ -117,19 +120,22 @@ class StrokeDataset(Dataset):
         cursor = conn.cursor()
 
         @cache
-        def load_primary_keys(_symbol_keys: str | tuple[str]) -> list[tuple[int]]:
+        def load_primary_keys(
+            _symbol_keys: str | tuple[str], *, ignore_single_debug_sample_limit: bool = False
+        ) -> list[int]:
             nonlocal cursor, debug_single_sample_only
 
             if isinstance(_symbol_keys, str):
                 _symbol_keys = (_symbol_keys,)
             command = f"SELECT id FROM samples WHERE key IN ({','.join(['?']*len(_symbol_keys))})"
-            if debug_single_sample_only:
+            if debug_single_sample_only and not ignore_single_debug_sample_limit:
                 command += " LIMIT 1"
             cursor.execute(
                 command,
                 _symbol_keys,
             )
-            cursor_samples = cursor.fetchall()
+            # Unwrap the tuples, since squealite returns each row as such, even when selecting a single column.
+            cursor_samples = [row[0] for row in cursor.fetchall()]
 
             # If we only have one sample, just return that, we have no choice.
             if len(cursor_samples) == 1:
@@ -151,13 +157,37 @@ class StrokeDataset(Dataset):
         vertical_line_keys = symbol_data.get_similarity_group("latex2e-OT1-|")
         negation_cycle = cycle(load_primary_keys(vertical_line_keys))
 
+        # For inside-relations, we need a cycle for circles, squares, and triangles.
+        # These need to be filtered for fitness to fit around a symbol.
+        circle_keys = symbol_data.get_similarity_group("latex2e-OT1-_bigcirc")
+        square_keys = symbol_data.get_similarity_group("amssymb-OT1-_square")
+        triangle_keys = symbol_data.get_similarity_group("latex2e-OT1-_bigtriangleup")
+        circle_cycle = cycle(
+            filter(
+                lambda s_id: sc.is_good_circle(self.load_stroke_data(s_id))[0],
+                load_primary_keys(circle_keys, ignore_single_debug_sample_limit=True),
+            )
+        )
+        square_cycle = cycle(
+            filter(
+                lambda s_id: sc.is_good_square(self.load_stroke_data(s_id))[0],
+                load_primary_keys(square_keys, ignore_single_debug_sample_limit=True),
+            )
+        )
+        triangle_cycle = cycle(
+            filter(
+                lambda s_id: sc.is_good_triangle(self.load_stroke_data(s_id))[0],
+                load_primary_keys(triangle_keys, ignore_single_debug_sample_limit=True),
+            )
+        )
+
         for symbol_key in symbol_data.leaders:
 
             samples: list[
                 tuple[
                     int,
                     tuple[st.Transformation, ...],
-                    tuple[st.Negation | None, int],
+                    tuple[st.Negation | st.Inside | None, int],
                     int | None,
                 ]
             ] = []
@@ -171,15 +201,30 @@ class StrokeDataset(Dataset):
             other_symmetry_count = 0
             negation_count = 0
             augmentation_count = 0
+            inside_count = 0
 
-            for current_key, transformations, negation in symbol_data.all_paths_to_symbol(
+            for current_key, transformations, composition in symbol_data.all_paths_to_symbol(
                 symbol_key
             ):
-                # The [0] access is to unwrap the sqlite row tuples.
-                samples.extend(
-                    (row[0], transformations, (negation, slash_id[0]), None)
-                    for row, slash_id in zip(load_primary_keys(current_key), negation_cycle)
-                )
+                for symbol_id in load_primary_keys(current_key):
+                    # We need to check what composition we have, if any.
+                    if composition is None:
+                        composition_id = 0
+                    elif isinstance(composition, st.Negation):
+                        composition_id = next(negation_cycle)
+                    elif composition == st.Inside.Circle:
+                        composition_id = next(circle_cycle)
+                    elif composition == st.Inside.Square:
+                        composition_id = next(square_cycle)
+                    elif composition == st.Inside.Triangle:
+                        composition_id = next(triangle_cycle)
+                    else:
+                        raise ValueError(f"Unknown composition: {composition}")
+
+                    samples.append(
+                        (symbol_id, transformations, (composition, composition_id), None)
+                    )
+
                 if current_key in symbol_data.get_similarity_group(symbol_key) and transformations:
                     # If we don't have transformations, those are just similarity taking over
                     # with the identity transform, that counts as real data.
@@ -189,8 +234,11 @@ class StrokeDataset(Dataset):
                 if current_key not in symbol_data.get_similarity_group(symbol_key):
                     other_symmetry_count += len(load_primary_keys(current_key))
 
-                if negation is not None:
+                if isinstance(composition, st.Negation):
                     negation_count += len(load_primary_keys(current_key))
+
+                if isinstance(composition, st.Inside):
+                    inside_count += len(load_primary_keys(current_key))
 
             assert samples, f"No samples found for symbol key: {symbol_key}"
             # Augment the data to balance the classes.
@@ -212,6 +260,7 @@ class StrokeDataset(Dataset):
                     f"{self_symmetry_count} self-symmetries, "
                     f"{other_symmetry_count} other symmetries, "
                     f"{negation_count} negations, "
+                    f"{inside_count} inside relations,"
                     f"and {augmentation_count} random augmentations. "
                 )
                 if distribution_stats is not None:
@@ -240,7 +289,7 @@ class StrokeDataset(Dataset):
             ]
         )
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.primary_keys)
 
     def range_for_symbol(self, symbol: str) -> range:
@@ -251,8 +300,8 @@ class StrokeDataset(Dataset):
         end = len(self.symbol_keys) - self.symbol_keys[::-1].index(symbol)
         return range(start, end)
 
-    def load_transformed_strokes(self, idx):
-        primary_key, required_transforms, (negation, slash_id), random_augmentation_seed = (
+    def load_transformed_strokes(self, idx) -> tuple[list[list[tuple[int, int]]], str]:
+        primary_key, required_transforms, (composition, composite_id), random_augmentation_seed = (
             self.primary_keys[idx]
         )
         stroke_data = self.load_stroke_data(primary_key)
@@ -286,7 +335,10 @@ class StrokeDataset(Dataset):
             stroke_data = ig.apply_transformations(stroke_data, trans_mats)
 
         # Next, prepare the negation, if any.
-        if negation is not None:
+        if isinstance(composition, st.Negation):
+            negation: st.Negation = composition
+            slash_id: int = composite_id
+
             negation_stroke_data = self.load_stroke_data(slash_id)
             trans_mats = [
                 ig.scale_matrix(negation.scale_factor, negation.scale_factor),
@@ -295,6 +347,33 @@ class StrokeDataset(Dataset):
             ]
             negation_stroke_data = ig.apply_transformations(negation_stroke_data, trans_mats)
             stroke_data += negation_stroke_data
+        # Otherwise, prepare the inside relation, if any.
+        elif isinstance(composition, st.Inside):
+            inside: st.Inside = composition
+            outer_id: int = composite_id
+
+            outer_stroke_data = self.load_stroke_data(outer_id)
+            # Find out how large we need to scale the outer symbol to fit the inner symbol.
+            center_x, center_y = 500, 500
+            square_side_length = 1000
+            if inside == st.Inside.Circle:
+                _, square_side_length = sc.is_good_circle(outer_stroke_data)
+            elif inside == st.Inside.Square:
+                _, square_side_length = sc.is_good_square(outer_stroke_data)
+            elif inside == st.Inside.Triangle:
+                _, square_side_length, center_x, center_y = sc.is_good_triangle(outer_stroke_data)
+            else:
+                raise ValueError(f"Unknown inside relation: {inside}")
+
+            scale = square_side_length / 1000
+            scale *= 0.9  # Add a 10% margin to fit.
+
+            trans_mats = [
+                ig.scale_matrix(scale, scale),
+                ig.translation_matrix((center_x - 500) / 1000, (center_y - 500) / 1000, 1000),
+            ]
+            stroke_data = ig.apply_transformations(stroke_data, trans_mats)
+            stroke_data += outer_stroke_data
 
         # Rescale the image to ensure the rotations and reflections fit within the image bounds.
         stroke_data, _, _, _ = sp.rescale_and_center_viewport(stroke_data, 1000, 1000)
@@ -303,7 +382,7 @@ class StrokeDataset(Dataset):
 
         return stroke_data, symbol_key
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx) -> tuple[torch.Tensor, torch.Tensor]:
         stroke_data, _ = self.load_transformed_strokes(idx)
 
         img = ig.strokes_to_grayscale_image_cv2(stroke_data, self.image_size)
@@ -315,7 +394,7 @@ class StrokeDataset(Dataset):
         )  # Convert label to tensor
         return img_tensor, label_tensor  # Return image tensor and label
 
-    def load_stroke_data(self, primary_key):
+    def load_stroke_data(self, primary_key) -> list[list[tuple[int, int]]]:
         if self.stroke_cache is not None:
             return self.stroke_cache[primary_key]
         # Connect to the SQLite database
@@ -560,19 +639,30 @@ def main():
     )
 
     # Show all the samples for a given symbol.
-    symbol = "MnSymbol-OT1-_nneswarrows"
-    assert (
-        symbol in symbol_data.symbol_keys
-    ), f"Symbol '{symbol}' not found in the dataset or not a leader"
-    symbol_strokes = (
+    symbol = "MnSymbol-OT1-_boxminus"
+    leader = symbol_data.to_leader.get(symbol, symbol)
+    if symbol != leader:
+        print(f"Symbol '{symbol}' is not a leader, using leader '{leader}' instead.")
+        symbol = leader
+    assert symbol in symbol_data.symbol_keys, f"Symbol '{symbol}' not found in the dataset"
+
+    symbol_strokes = list(
         all_samples.load_transformed_strokes(idx) for idx in all_samples.range_for_symbol(symbol)
     )
-    for idx, ((strokes, symbol), (current_key, transformations, negation)) in enumerate(
+    for idx, ((strokes, symbol), (current_key, transformations, composition)) in enumerate(
         zip(symbol_strokes, symbol_data.all_paths_to_symbol(symbol))
     ):
+        if len(symbol_strokes) != len(symbol_data.all_paths_to_symbol(symbol)):
+            # The stored strokes can only be recorded per path if the symbol the path
+            # originates from has a sample in the database. As of writing, 1700 symbols
+            # have 0 samples, but when augmented with similarity, symmetry, and composition,
+            # each symbol does have a sample.
+            # This discrepancy causes the de-synchronization between the existing paths
+            # and the expected paths, hence producing wrong info here.
+            print("THE CLAIMED PATHS MAY NOT BE CORRECT!!")
         img = ig.strokes_to_grayscale_image_cv2(strokes, hyp.image_size)
         print(
-            f"Current symbol: {current_key} with transformations: {transformations} and negation: {negation}"
+            f"Current symbol: {current_key} with transformations: {transformations} and composition: {composition}"
         )
         cv2.imshow(f"{symbol} {idx}", img)
         # wait for a key press

@@ -151,28 +151,44 @@ symbol_data = sr.SymbolData()
 
 
 def operation(s_id, symbol_key, s):
-    if symbol_key not in symbol_data.get_similarity_group("latex2e-OT1-_textasciicircum"):
+    if symbol_key not in symbol_data.get_similarity_group(
+        #     "latex2e-T1-_guilsinglright"
+        # ) + symbol_data.get_similarity_group(
+        #     "latex2e-T1-_guilsinglleft"
+        #     ) + symbol_data.get_similarity_group(
+        "latex2e-OT1-_|"
+    ) + symbol_data.get_similarity_group("amssymb-OT1-_intercal"):
         return s
 
+    # # We want to squish the strokes to fit within a width of 400.
+    # min_y = min(min(point[1] for point in stroke) for stroke in s)
+    # max_y = max(max(point[1] for point in stroke) for stroke in s)
     # We want to squish the strokes to fit within a width of 400.
-    min_y = min(min(point[1] for point in stroke) for stroke in s)
-    max_y = max(max(point[1] for point in stroke) for stroke in s)
+    min_x = min(min(point[0] for point in stroke) for stroke in s)
+    max_x = max(max(point[0] for point in stroke) for stroke in s)
 
-    height = max_y - min_y
+    # height = max_y - min_y
+    width = max_x - min_x
     scaled = False
-    if height > 400:
+    # if height > 400:
+    if width > 600:
         s_old = s
         scaled = True
-        scale = 0.45
+        scale = 0.65
         # We need to keep it centered on a 1000x1000 canvas.
-        offset = (1000 - height * scale) / 2
+        # offset = (1000 - height * scale) / 2
+        # s_new = [
+        #     [(int(point[0]), int((point[1] - min_y) * scale + offset)) for point in stroke]
+        #     for stroke in s
+        # ]
+        offset = (1000 - width * scale) / 2
         s_new = [
-            [(int(point[0]), int((point[1] - min_y) * scale + offset)) for point in stroke]
+            [(int((point[0] - min_x) * scale + offset), int(point[1])) for point in stroke]
             for stroke in s
         ]
         s = [rdp(stroke, epsilon=3) for stroke in s_new]
         # Plot it to see what it looks like.
-        # plot_stroke_pair(s, s_old, f"{symbol_key} (ID: {s_id}) {'(scaled)' if scaled else ''}")
+        plot_stroke_pair(s, s_old, f"{symbol_key} (ID: {s_id}) {'(scaled)' if scaled else ''}")
 
     return s
 

@@ -30,3 +30,7 @@ db_path = "database/handtex.db"
 # 18 epochs:
 # Training Loss: 9.0018, Training Accuracy: 95.92%
 # Validation Loss: 9.2644, Validation Accuracy: 96.31%
+
+
+# Simplified model 10 epochs:
+# Validation accuracy: 85.31%

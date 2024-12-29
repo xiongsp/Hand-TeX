@@ -4,6 +4,7 @@ from collections import defaultdict
 import json
 from rdp import rdp
 from tqdm import tqdm
+from training.shape_classifier import resample_strokes
 from scipy.signal import savgol_filter
 from scipy.interpolate import splprep, splev
 
@@ -193,11 +194,86 @@ def operation(s_id, symbol_key, s):
     return s
 
 
+def stroke_has_stair_steps(stroke: list[list[list[int]]]) -> bool:
+    """
+    We want to detect when the stroke has a series of stair steps in it,
+    which resulted from scaling the stroke.
+
+    Stair steps are defined as a series of 3 points that form a perfect right angle.
+
+    :param stroke: a list of strokes, which are a list of (x, y) coordinates.
+    :return: True is the stroke has stair steps, False otherwise.
+    """
+    min_step_count = 3
+    min_step_size = 8
+    max_step_size = 40
+
+    for stroke in stroke:
+        steps = 0
+        for i in range(2, len(stroke)):
+            x0, y0 = stroke[i - 2]
+            x1, y1 = stroke[i - 1]
+            x2, y2 = stroke[i]
+
+            # Check if the points form a right angle.
+            if (x1 - x0) * (x2 - x1) + (y1 - y0) * (y2 - y1) == 0:
+                # Check if the step size is within the threshold.
+                if (
+                    abs(x1 - x0) < max_step_size
+                    and abs(y1 - y0) < max_step_size
+                    and abs(x2 - x1) < max_step_size
+                    and abs(y2 - y1) < max_step_size
+                ):
+                    if (
+                        abs(x1 - x0) > min_step_size
+                        or abs(y1 - y0) > min_step_size
+                        or abs(x2 - x1) > min_step_size
+                        or abs(y2 - y1) > min_step_size
+                    ):
+                        steps += 1
+
+            if steps >= min_step_count:
+                return True
+    return False
+
+
+# TODO fix the parallel symbol being slanty
+def operation_fix_stairs(s_id, symbol_key, s):
+    if not stroke_has_stair_steps(s):
+        return s
+
+    # Perform resampling to create more intermediate points.
+    resampled_s = resample_strokes(s, 3)
+    # Perform smoothing to remove the stair steps.
+    smoothed_s = [rdp(stroke, epsilon=7) for stroke in resampled_s]
+
+    # Get difference if point counts.
+    total_points = sum(len(stroke) for stroke in s)
+    total_points_resampled = sum(len(stroke) for stroke in resampled_s)
+    total_points_smoothed = sum(len(stroke) for stroke in smoothed_s)
+
+    # assert total_points_smoothed <= total_points
+
+    # Just show it for now.
+    if total_points_smoothed > total_points:
+        # plot_stroke_pair(
+        #     s,
+        #     smoothed_s,
+        #     f"{symbol_key} (ID: {s_id}) ({total_points} -> {total_points_resampled} -> {total_points_smoothed} [{1- total_points_smoothed/total_points:.2%}])",
+        # )
+        print(
+            f"{symbol_key} (ID: {s_id}) ({total_points} -> {total_points_resampled} -> {total_points_smoothed} [{1- total_points_smoothed/total_points:.2%}])"
+        )
+
+        return s
+    return smoothed_s
+
+
 # Process each row, removing consecutive duplicate coordinates
 for row in tqdm(rows):
     sample_id, key, strokes_json = row
     strokes = json.loads(strokes_json)
-    op_strokes = operation(sample_id, key, strokes)
+    op_strokes = operation_fix_stairs(sample_id, key, strokes)
     op_strokes_json = json.dumps(op_strokes)
     # Insert the cleaned data into the new database
     output_cursor.execute(

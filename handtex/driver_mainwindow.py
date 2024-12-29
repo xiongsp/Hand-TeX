@@ -342,7 +342,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Switch to training mode.
         """
         logger.info("Training mode active.")
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget_right.setCurrentIndex(1)
         if self.data_recorder is None:
             self.data_recorder = dr.DataRecorder(
                 self.symbol_data,
@@ -361,14 +361,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Switch to classification mode.
         """
         logger.info("Classification mode active.")
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget_right.setCurrentIndex(0)
         self.training_menu_action.setVisible(True)
         self.detection_menu_action.setVisible(False)
         self.pushButton_submit.setShortcutEnabled(False)
         self.sketchpad.clear()
 
     def in_detection_mode(self) -> bool:
-        return self.stackedWidget.currentIndex() == 0
+        return self.stackedWidget_right.currentIndex() == 0
 
     def change_pen_width(self, width: int) -> None:
         """

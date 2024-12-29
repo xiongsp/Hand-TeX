@@ -38,11 +38,11 @@
       <property name="childrenCollapsible">
        <bool>false</bool>
       </property>
-      <widget class="QStackedWidget" name="stackedWidget">
+      <widget class="QStackedWidget" name="stackedWidget_left">
        <property name="currentIndex">
         <number>0</number>
        </property>
-       <widget class="QWidget" name="page_sketch" native="true">
+       <widget class="QWidget" name="page_sketch">
         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
          <property name="rightMargin">
           <number>6</number>
@@ -309,7 +309,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QStackedWidget" name="stackedWidget1">
+         <widget class="QStackedWidget" name="stackedWidget_right">
           <property name="currentIndex">
            <number>0</number>
           </property>
@@ -337,8 +337,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>527</width>
-                 <height>628</height>
+                 <width>517</width>
+                 <height>632</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_7">

@@ -329,6 +329,7 @@ class Ui_SymbolList(object):
 
         self.label_inside_shape = QLabel(self.verticalLayoutWidget)
         self.label_inside_shape.setObjectName(u"label_inside_shape")
+        self.label_inside_shape.setText(u"<shape>")
 
         self.formLayout.setWidget(9, QFormLayout.FieldRole, self.label_inside_shape)
 
@@ -395,6 +396,5 @@ class Ui_SymbolList(object):
         self.label_xelatex_required.setText(QCoreApplication.translate("SymbolList", u"XeLaTeX or LuaLaTeX required", None))
         self.label_6.setText(QCoreApplication.translate("SymbolList", u"Negation of:", None))
         self.label_8.setText(QCoreApplication.translate("SymbolList", u"Inside of:", None))
-        self.label_inside_shape.setText(QCoreApplication.translate("SymbolList", u"<shape>", None))
     # retranslateUi
 

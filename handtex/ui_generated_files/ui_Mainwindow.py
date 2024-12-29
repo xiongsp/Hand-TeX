@@ -39,8 +39,8 @@ class Ui_MainWindow(object):
         self.splitter.setOrientation(Qt.Horizontal)
         self.splitter.setHandleWidth(3)
         self.splitter.setChildrenCollapsible(False)
-        self.stackedWidget = QStackedWidget(self.splitter)
-        self.stackedWidget.setObjectName(u"stackedWidget")
+        self.stackedWidget_left = QStackedWidget(self.splitter)
+        self.stackedWidget_left.setObjectName(u"stackedWidget_left")
         self.page_sketch = QWidget()
         self.page_sketch.setObjectName(u"page_sketch")
         self.verticalLayout = QVBoxLayout(self.page_sketch)
@@ -97,7 +97,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.sketchpad)
 
         self.verticalLayout.setStretch(1, 1)
-        self.stackedWidget.addWidget(self.page_sketch)
+        self.stackedWidget_left.addWidget(self.page_sketch)
         self.page_image = QWidget()
         self.page_image.setObjectName(u"page_image")
         self.pushButton_back_to_drawing = QPushButton(self.page_image)
@@ -131,8 +131,8 @@ class Ui_MainWindow(object):
         self.label_13.setObjectName(u"label_13")
         self.label_13.setGeometry(QRect(20, 640, 67, 22))
         self.label_13.setText(u"<adjustcurves>")
-        self.stackedWidget.addWidget(self.page_image)
-        self.splitter.addWidget(self.stackedWidget)
+        self.stackedWidget_left.addWidget(self.page_image)
+        self.splitter.addWidget(self.stackedWidget_left)
         self.layoutWidget1 = QWidget(self.splitter)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
         self.verticalLayout_2 = QVBoxLayout(self.layoutWidget1)
@@ -163,8 +163,8 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
 
-        self.stackedWidget1 = QStackedWidget(self.layoutWidget1)
-        self.stackedWidget1.setObjectName(u"stackedWidget1")
+        self.stackedWidget_right = QStackedWidget(self.layoutWidget1)
+        self.stackedWidget_right.setObjectName(u"stackedWidget_right")
         self.page_classify = QWidget()
         self.page_classify.setObjectName(u"page_classify")
         self.verticalLayout_4 = QVBoxLayout(self.page_classify)
@@ -175,7 +175,7 @@ class Ui_MainWindow(object):
         self.scrollArea_predictions.setWidgetResizable(True)
         self.widget_predictions = QWidget()
         self.widget_predictions.setObjectName(u"widget_predictions")
-        self.widget_predictions.setGeometry(QRect(0, 0, 527, 628))
+        self.widget_predictions.setGeometry(QRect(0, 0, 517, 632))
         self.verticalLayout_7 = QVBoxLayout(self.widget_predictions)
         self.verticalLayout_7.setSpacing(12)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
@@ -184,7 +184,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addWidget(self.scrollArea_predictions)
 
-        self.stackedWidget1.addWidget(self.page_classify)
+        self.stackedWidget_right.addWidget(self.page_classify)
         self.page_train = QWidget()
         self.page_train.setObjectName(u"page_train")
         self.verticalLayout_5 = QVBoxLayout(self.page_train)
@@ -369,9 +369,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_5.addLayout(self.horizontalLayout_4)
 
-        self.stackedWidget1.addWidget(self.page_train)
+        self.stackedWidget_right.addWidget(self.page_train)
 
-        self.verticalLayout_2.addWidget(self.stackedWidget1)
+        self.verticalLayout_2.addWidget(self.stackedWidget_right)
 
         self.splitter.addWidget(self.layoutWidget1)
 
@@ -381,8 +381,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
-        self.stackedWidget1.setCurrentIndex(0)
+        self.stackedWidget_left.setCurrentIndex(0)
+        self.stackedWidget_right.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

@@ -1,3 +1,6 @@
+stix-OT1-_csup -- rot90 mir45 --> stix-OT1-_closedvarcap
+MnSymbol-OT1-_cupplus -- rot180 mir0 --> MnSymbol-OT1-_capplus
+stix-OT1-_odiv -- rot45 rot225 --> stix-OT1-_odotslashdot
 latex2e-OT1-[ -- rot180 mir90 --> latex2e-OT1-]
 latex2e-OT1-_backslash -- rot135 rot315 mir0 mir90 --> latex2e-OT1-/
 latex2e-OT1-_bigcap -- rot180 mir0 --> latex2e-OT1-_bigcup
@@ -455,10 +458,8 @@ stix-OT1-_bsolhsub -- mir90 --> stix-OT1-_suphsol
 stix-OT1-_btimes -- rot180 mir0 --> fdsymbol-OT1-_utimes
 stix-OT1-_capwedge -- rot180 mir0 --> stix-OT1-_cupvee
 stix-OT1-_circledequal -- rot90 rot270 mir45 mir135 --> stix-OT1-_circledparallel
-stix-OT1-_circledvert -- rot90 rot270 mir45 mir135 --> stix-OT1-_circlehbar
 stix-OT1-_cirmid -- rot180 mir0 --> stix-OT1-_midcir
 stix-OT1-_closedvarcap -- rot180 mir0 --> stix-OT1-_closedvarcup
-stix-OT1-_concavediamondtickleft -- rot180 mir90 --> stix-OT1-_concavediamondtickright
 stix-OT1-_csub -- rot180 mir90 --> stix-OT1-_csup
 stix-OT1-_csube -- mir90 --> stix-OT1-_csupe
 stix-OT1-_cupovercap -- rot90 rot270 mir45 mir135 --> stix-OT1-_suphsub
@@ -650,4 +651,3 @@ wasysym-OT1-_lhd -- rot180 mir90 --> wasysym-OT1-_rhd
 wasysym-OT1-_LHD -- rot180 mir90 --> wasysym-OT1-_RHD
 wasysym-OT1-_rhd -- mir0 --> latex2e-OT1-_triangleright
 wasysym-OT1-_unlhd -- mir90 --> wasysym-OT1-_unrhd
-wasysym-OT1-_wasylozenge -- rot45 rot135 rot225 rot315 --> stix-OT1-_concavediamond

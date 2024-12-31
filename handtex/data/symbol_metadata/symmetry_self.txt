@@ -34,7 +34,6 @@ latex2e-OT1-_ddag: rot180 mir0 mir90
 latex2e-OT1-_ddots: rot180 mir45 mir135
 latex2e-OT1-_Delta: mir90
 latex2e-OT1-_diamond: rot90 rot180 rot270 mir0 mir45 mir90 mir135
-latex2e-OT1-_diamondsuit: rot180 mir0 mir90
 latex2e-OT1-_div: rot180 mir0 mir90
 latex2e-OT1-_doteq: mir90
 latex2e-OT1-_Downarrow: mir90
@@ -156,7 +155,6 @@ amssymb-OT1-_dashrightarrow: mir0
 amssymb-OT1-_diagdown: rot180 mir45 mir135
 amssymb-OT1-_diagup: rot180 mir45 mir135
 amssymb-OT1-_divideontimes: rot180 mir0 mir90
-amssymb-OT1-_doteqdot: rot180 mir0 mir90
 amssymb-OT1-_dotplus: mir90
 amssymb-OT1-_doublebarwedge: mir90
 amssymb-OT1-_downdownarrows: mir90
@@ -644,8 +642,6 @@ stix-OT1-_closedvarcup: mir90
 stix-OT1-_closedvarcupsmashprod: mir90
 stix-OT1-_Coloneq: mir0
 stix-OT1-_concavediamond: rot90 rot180 rot270 mir0 mir45 mir90 mir135
-stix-OT1-_concavediamondtickleft: mir0
-stix-OT1-_concavediamondtickright: mir0
 stix-OT1-_csub: mir0
 stix-OT1-_csup: mir0
 stix-OT1-_cupbarcap: rot180 mir0 mir90

@@ -140,6 +140,8 @@ def main(resume_from_checkpoint=False):
             f"Resumed from epoch {start_epoch} with best validation accuracy: {best_val_accuracy:.2f}%"
         )
 
+    all_preds, all_targets = None, None
+
     for epoch in range(start_epoch, num_epochs):
         print(f"\nEpoch [{epoch + 1}/{num_epochs}]")
 
@@ -262,21 +264,70 @@ def main(resume_from_checkpoint=False):
     plt.legend()
     plt.show()
 
-    # Identify and print top ten most misclassified symbols
+    # We have no stats.
+    if all_preds is None:
+        return
+
     from collections import Counter
 
     misclassifications = [
         (target, pred) for target, pred in zip(all_targets, all_preds) if target != pred
     ]
 
+    # Counter for misclassified pairs
     misclass_counter = Counter(misclassifications)
-    top_misclassified = misclass_counter.most_common(50)
 
-    print("\nTop 50 Most Misclassified Symbols:")
-    for (actual, predicted), count in top_misclassified:
-        actual_label = label_encoder.inverse_transform([actual])[0]
-        predicted_label = label_encoder.inverse_transform([predicted])[0]
-        print(f"Actual: {actual_label}, Predicted: {predicted_label}, Count: {count}")
+    # Dictionary to hold the total count for each symbol in the dataset (use the symbol directly as the key)
+    total_counts = {
+        symbol: len(validation_dataset.range_for_symbol(symbol))
+        for symbol in label_encoder.classes_
+    }
+
+    # List to hold misclassifications with their percentage
+    misclass_percentage = []
+
+    # Calculate the misclassification percentage
+    for (actual, predicted), count in misclass_counter.items():
+        actual_label = label_encoder.inverse_transform([actual])[
+            0
+        ]  # Convert 'actual' index to label
+        total_count = total_counts.get(
+            actual_label, 0
+        )  # Use the label directly to lookup in total_counts
+        if total_count > 0:
+            percentage = (count / total_count) * 100  # Calculate percentage misclassification
+            misclass_percentage.append(((actual_label, predicted), percentage, count))
+
+    # Sort by misclassification percentage
+    top_misclassified_by_percentage = sorted(misclass_percentage, key=lambda x: x[1], reverse=True)[
+        :50
+    ]
+
+    # Print top 50 most misclassified symbols by percentage
+    print("\nTop 50 Most Misclassified Symbols (by Percentage):")
+    for (actual, predicted), percentage, count in top_misclassified_by_percentage:
+        predicted_label = label_encoder.inverse_transform([predicted])[
+            0
+        ]  # Convert 'predicted' index to label
+        print(
+            f"Actual: {actual}, Predicted: {predicted_label}, Count: {count}, Percentage: {percentage:.2f}%"
+        )
+
+    # # Identify and print top ten most misclassified symbols
+    # from collections import Counter
+    #
+    # misclassifications = [
+    #     (target, pred) for target, pred in zip(all_targets, all_preds) if target != pred
+    # ]
+    #
+    # misclass_counter = Counter(misclassifications)
+    # top_misclassified = misclass_counter.most_common(50)
+    #
+    # print("\nTop 50 Most Misclassified Symbols:")
+    # for (actual, predicted), count in top_misclassified:
+    #     actual_label = label_encoder.inverse_transform([actual])[0]
+    #     predicted_label = label_encoder.inverse_transform([predicted])[0]
+    #     print(f"Actual: {actual_label}, Predicted: {predicted_label}, Count: {count}")
 
 
 if __name__ == "__main__":

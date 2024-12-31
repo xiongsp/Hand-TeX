@@ -103,7 +103,7 @@ amssymb-OT1-_ggg -/ rot67.5 /- MnSymbol-OT1-_nggg
 amssymb-OT1-_gtrdot -/ rot78.75 s1.5 /- MnSymbol-OT1-_ngtrdot
 amssymb-OT1-_gtreqless -/ rot78.75 s1.25 /- MnSymbol-OT1-_ngtreqless
 amssymb-OT1-_gtreqqless -/ rot78.75 s1.25 /- MnSymbol-OT1-_ngtreqqless
-amssymb-OT1-_gtrless -/ slash /- MnSymbol-OT1-_ngtrless
+amssymb-OT1-_gtrless -/ rot78.75 s1.75 /- MnSymbol-OT1-_ngtrless
 amssymb-OT1-_gtrsim -/ rot78.75 s1.25 /- stix-OT1-_ngtrsim
 amssymb-OT1-_gtrsim -/ U270 s0.75 /- stix-OT1-_gsime
 amssymb-OT1-_leftarrowtail -/ rot67.5 s0.75 /- MnSymbol-OT1-_nleftarrowtail

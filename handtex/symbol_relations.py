@@ -56,7 +56,7 @@ class SymbolData:
             self_symmetries, self.to_leader
         )
         normalized_other_symmetries = normalize_other_symmetry_to_leaders(
-            other_symmetries, self.to_leader, self_symmetries
+            other_symmetries, self.to_leader, normalized_self_symmetries
         )
         graph = build_pure_transformation_graph(
             self.symbol_keys,

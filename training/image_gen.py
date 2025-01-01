@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import torchvision.transforms as transforms
+from noise import pnoise2
 
 
 def strokes_to_grayscale_image_cv2(stroke_data: list[list[tuple[int, int]]], image_size: int):
@@ -262,3 +263,66 @@ def tensorize_strokes(stroke_data: list[list[tuple[int, int]]], image_size: int)
     img_tensor = img_tensor.unsqueeze(0)
 
     return img_tensor
+
+
+def augment_strokes_with_perlin(
+    strokes: list[list[tuple[int, int]]],
+    scale: float = 1000.0,  # Controls the "zoom" of the noise
+    amplitude: float = 150.0,  # Controls the intensity of the distortion
+    octaves: int = 3,  # Number of detail levels in the noise
+    persistence: float = 0.5,  # How each octave contributes to the overall noise
+    lacunarity: float = 2.0,  # Frequency multiplier for each octave
+    seed: int = 42,  # Random seed for reproducibility
+) -> list[list[tuple[int, int]]]:
+    """
+    Augments stroke data with Perlin noise distortions.
+
+    Parameters:
+    - strokes: List of strokes, where each stroke is a list of 2D coordinates.
+    - scale: Scale factor for the Perlin noise.
+    - amplitude: Amplitude of the noise distortion.
+    - octaves: Number of noise octaves for detail.
+    - persistence: Controls the contribution of each octave.
+    - lacunarity: Frequency multiplier between octaves.
+    - seed: Seed for the Perlin noise generator.
+
+    Returns:
+    - List of augmented strokes with distorted coordinates.
+    """
+    distorted_strokes = []
+
+    for stroke in strokes:
+        distorted_stroke = []
+        for x, y in stroke:
+            # Normalize the coordinates to the scale of the noise
+            noise_x = pnoise2(
+                x / scale,
+                y / scale,
+                octaves=octaves,
+                persistence=persistence,
+                lacunarity=lacunarity,
+                repeatx=1000,  # Match canvas size for seamless noise
+                repeaty=1000,
+                base=seed,
+            )
+
+            noise_y = pnoise2(
+                y / scale,
+                x / scale,  # Swap x and y for variety in distortion
+                octaves=octaves,
+                persistence=persistence,
+                lacunarity=lacunarity,
+                repeatx=1000,
+                repeaty=1000,
+                base=seed + 1,  # Slightly different seed for y-axis noise
+            )
+
+            # Apply the noise as a distortion
+            new_x = x + amplitude * noise_x
+            new_y = y + amplitude * noise_y
+
+            distorted_stroke.append([int(new_x), int(new_y)])
+
+        distorted_strokes.append(distorted_stroke)
+
+    return distorted_strokes

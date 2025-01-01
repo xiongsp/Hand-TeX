@@ -24,8 +24,6 @@ import training.shape_classifier as sc
 import training.hyperparameters as hyp
 import handtex.sketchpad as sp
 
-# TODO support symbol inside relation.
-
 
 def build_stroke_cache(db_path: str) -> dict[str, list[list[tuple[int, int]]]]:
     """
@@ -44,7 +42,7 @@ def build_stroke_cache(db_path: str) -> dict[str, list[list[tuple[int, int]]]]:
 
 
 def augmentation_amount(
-    real_data_count: int, max_factor: float = 10, min_factor: float = 0.2
+    real_data_count: int, max_factor: float = 20, min_factor: float = 0.2
 ) -> int:
     """
     Calculate the amount of augmented data to generate based on the real data count.
@@ -241,13 +239,15 @@ class StrokeDataset(Dataset):
                     inside_count += len(load_primary_keys(current_key))
 
             assert samples, f"No samples found for symbol key: {symbol_key}"
+
             # Augment the data to balance the classes.
             if random_augmentation:
                 augmentation_count = augmentation_amount(real_data_count)
                 for _ in range(augmentation_count):
-                    symbol, transformations, negation_tuple, _ = random.choice(samples)
+                    symbol, transformations, composition_tuple, _ = random.choice(samples)
+                    # Use 16 bits of randomness, so as not to overflow the perlin noise algorithm.
                     samples.append(
-                        (symbol, transformations, negation_tuple, random.randint(0, 2**32 - 1))
+                        (symbol, transformations, composition_tuple, random.randint(0, 2**16 - 1))
                     )
 
             if sample_limit is not None:
@@ -314,22 +314,6 @@ class StrokeDataset(Dataset):
             else:
                 trans_mats.append(ig.reflection_matrix(transformation.angle))
 
-        # Augment the data with a random transformation.
-        # The transformation is applied to the strokes before converting them to an image.
-        if random_augmentation_seed is not None:
-            random.seed(random_augmentation_seed)
-            operation = random.randint(0, 2)
-            if operation == 0:
-                trans_mats.append(ig.rotation_matrix(np.random.uniform(-5, 5)))
-            elif operation == 1:
-                trans_mats.append(
-                    ig.scale_matrix(np.random.uniform(0.9, 1), np.random.uniform(0.9, 1))
-                )
-            elif operation == 2:
-                trans_mats.append(
-                    ig.skew_matrix(np.random.uniform(-0.1, 0.1), np.random.uniform(-0.1, 0.1))
-                )
-
         # Apply the transformations to the stroke data.
         if trans_mats:
             stroke_data = ig.apply_transformations(stroke_data, trans_mats)
@@ -374,6 +358,32 @@ class StrokeDataset(Dataset):
             ]
             stroke_data = ig.apply_transformations(stroke_data, trans_mats)
             stroke_data += outer_stroke_data
+
+        # Augment the data with a random transformation.
+        # The transformation is applied to the strokes before converting them to an image.
+        trans_mats = []
+        if random_augmentation_seed is not None:
+            # Apply some type of random augmentation, using perlin noise 7/10 times.
+            random.seed(random_augmentation_seed)
+            operation = random.randint(0, 9)
+            if operation == 0:
+                trans_mats.append(ig.rotation_matrix(np.random.uniform(-5, 5)))
+            elif operation == 1:
+                trans_mats.append(
+                    ig.scale_matrix(np.random.uniform(0.9, 1), np.random.uniform(0.9, 1))
+                )
+            elif operation == 2:
+                trans_mats.append(
+                    ig.skew_matrix(np.random.uniform(-0.1, 0.1), np.random.uniform(-0.1, 0.1))
+                )
+            else:
+                stroke_data = ig.augment_strokes_with_perlin(
+                    stroke_data, seed=random_augmentation_seed
+                )
+
+        # Apply the transformations to the stroke data.
+        if trans_mats:
+            stroke_data = ig.apply_transformations(stroke_data, trans_mats)
 
         # Rescale the image to ensure the rotations and reflections fit within the image bounds.
         stroke_data, _, _, _ = sp.rescale_and_center_viewport(stroke_data, 1000, 1000)
@@ -633,13 +643,13 @@ def main():
         random_seed=0,
         validation_split=0,
         train=True,
-        random_augmentation=False,
+        random_augmentation=True,
         debug_single_sample_only=True,
         distribution_stats=None,
     )
 
     # Show all the samples for a given symbol.
-    symbol = "MnSymbol-OT1-_boxminus"
+    symbol = "amssymb-OT1-_precapprox"
     leader = symbol_data.to_leader.get(symbol, symbol)
     if symbol != leader:
         print(f"Symbol '{symbol}' is not a leader, using leader '{leader}' instead.")
@@ -652,7 +662,7 @@ def main():
     for idx, ((strokes, symbol), (current_key, transformations, composition)) in enumerate(
         zip(symbol_strokes, symbol_data.all_paths_to_symbol(symbol))
     ):
-        if len(symbol_strokes) != len(symbol_data.all_paths_to_symbol(symbol)):
+        if len(symbol_strokes) < len(symbol_data.all_paths_to_symbol(symbol)):
             # The stored strokes can only be recorded per path if the symbol the path
             # originates from has a sample in the database. As of writing, 1700 symbols
             # have 0 samples, but when augmented with similarity, symmetry, and composition,
@@ -669,6 +679,20 @@ def main():
         cv2.waitKey(0)
         # close the window
         cv2.destroyAllWindows()
+
+    # If we had more samples than paths, those are augmentations for sure.
+    # Just show them now.
+    if len(symbol_strokes) > len(symbol_data.all_paths_to_symbol(symbol)):
+        for idx, (strokes, symbol) in enumerate(
+            symbol_strokes[len(symbol_data.all_paths_to_symbol(symbol)) :]
+        ):
+            img = ig.strokes_to_grayscale_image_cv2(strokes, hyp.image_size)
+            print(f"Current symbol: {symbol} with some augmentation.")
+            cv2.imshow(f"{symbol} {idx}", img)
+            # wait for a key press
+            cv2.waitKey(0)
+            # close the window
+            cv2.destroyAllWindows()
 
 
 if __name__ == "__main__":

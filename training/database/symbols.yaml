@@ -713,6 +713,12 @@
     - \subset
     - \supseteq
     - \subseteq
+    - \not\sqsupseteq
+    - \not\supset
+    - \not\sqsubseteq
+    - \not\subset
+    - \not\supseteq
+    - \not\subseteq
 # Table 79: AMS Subset and Superset Relations
 - package: amssymb
   mathmode:

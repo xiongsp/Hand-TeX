@@ -4452,6 +4452,54 @@
     "filename": "BC327913"
   },
   {
+    "command": "\\not\\sqsupseteq",
+    "mathmode": true,
+    "textmode": false,
+    "pdflatex": true,
+    "key": "latex2e-OT1-_not_sqsupseteq",
+    "filename": "1B9B4024"
+  },
+  {
+    "command": "\\not\\supset",
+    "mathmode": true,
+    "textmode": false,
+    "pdflatex": true,
+    "key": "latex2e-OT1-_not_supset",
+    "filename": "A9888090"
+  },
+  {
+    "command": "\\not\\sqsubseteq",
+    "mathmode": true,
+    "textmode": false,
+    "pdflatex": true,
+    "key": "latex2e-OT1-_not_sqsubseteq",
+    "filename": "AD291A25"
+  },
+  {
+    "command": "\\not\\subset",
+    "mathmode": true,
+    "textmode": false,
+    "pdflatex": true,
+    "key": "latex2e-OT1-_not_subset",
+    "filename": "927295FD"
+  },
+  {
+    "command": "\\not\\supseteq",
+    "mathmode": true,
+    "textmode": false,
+    "pdflatex": true,
+    "key": "latex2e-OT1-_not_supseteq",
+    "filename": "1E45557D"
+  },
+  {
+    "command": "\\not\\subseteq",
+    "mathmode": true,
+    "textmode": false,
+    "pdflatex": true,
+    "key": "latex2e-OT1-_not_subseteq",
+    "filename": "1B0A1623"
+  },
+  {
     "command": "\\nsubseteq",
     "package": "amssymb",
     "mathmode": true,

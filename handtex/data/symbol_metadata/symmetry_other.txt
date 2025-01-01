@@ -1,3 +1,4 @@
+latex2e-OT1-_not_subset -- rot180 --> latex2e-OT1-_not_supset
 stix-OT1-_csup -- rot90 mir45 --> stix-OT1-_closedvarcap
 MnSymbol-OT1-_cupplus -- rot180 mir0 --> MnSymbol-OT1-_capplus
 stix-OT1-_odiv -- rot45 rot225 --> stix-OT1-_odotslashdot

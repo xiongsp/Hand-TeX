@@ -156,7 +156,7 @@ amssymb-OT1-_boxtimes mathabx-OT1-_boxtimes MnSymbol-OT1-_boxtimes stix-OT1-_box
 amssymb-OT1-_Bumpeq fdsymbol-OT1-_Bumpeq mathabx-OT1-_Bumpedeq MnSymbol-OT1-_Bumpeq stix-OT1-_Bumpeq
 amssymb-OT1-_checkmark wasysym-OT1-_checked
 amssymb-OT1-_circeq fdsymbol-OT1-_circeq mathabx-OT1-_circeq MnSymbol-OT1-_circeq stix-OT1-_circeq
-amssymb-OT1-_circlearrowleft mathabx-OT1-_circlearrowleft MnSymbol-OT1-_rcirclearrowup
+amssymb-OT1-_circlearrowleft mathabx-OT1-_circlearrowleft MnSymbol-OT1-_rcirclearrowup mathabx-OT1-_downtouparrow
 amssymb-OT1-_circlearrowright mathabx-OT1-_circlearrowright MnSymbol-OT1-_lcirclearrowup
 amssymb-OT1-_circledast fdsymbol-OT1-_bigoast logix-OT1-_CircAsterick mathabx-OT1-_oasterisk mathabx-OT1-_ocoasterisk MnSymbol-OT1-_bigoast MnSymbol-OT1-_oast stix-OT1-_circledast stmaryrd-OT1-_varoast
 amssymb-OT1-_circledcirc mathabx-OT1-_ocirc MnSymbol-OT1-_bigocirc MnSymbol-OT1-_ocirc stix-OT1-_circledcirc stmaryrd-OT1-_varocircle
@@ -247,11 +247,11 @@ amssymb-OT1-_npreceq fdsymbol-OT1-_npreceq logix-OT1-_NotPreq MnSymbol-OT1-_npre
 amssymb-OT1-_nRightarrow mathabx-OT1-_nRightarrow MnSymbol-OT1-_nRightarrow
 amssymb-OT1-_nrightarrow mathabx-OT1-_nrightarrow MnSymbol-OT1-_nrightarrow
 amssymb-OT1-_nshortparallel fdsymbol-OT1-_nshortparallel MnSymbol-OT1-_nshortparallel
-amssymb-OT1-_nsubseteq stix-OT1-_nsubseteq
+amssymb-OT1-_nsubseteq stix-OT1-_nsubseteq latex2e-OT1-_not_subseteq
 amssymb-OT1-_nsubseteqq stix-OT1-_nsubseteqq
 amssymb-OT1-_nsucc fdsymbol-OT1-_nsucc logix-OT1-_NotSuc MnSymbol-OT1-_nsucc
 amssymb-OT1-_nsucceq fdsymbol-OT1-_nsucceq logix-OT1-_NotSucq MnSymbol-OT1-_nsucceq
-amssymb-OT1-_nsupseteq stix-OT1-_nsupseteq
+amssymb-OT1-_nsupseteq stix-OT1-_nsupseteq latex2e-OT1-_not_supseteq
 amssymb-OT1-_nsupseteqq stix-OT1-_nsupseteqq
 amssymb-OT1-_ntriangleleft MnSymbol-OT1-_nlessclosed
 amssymb-OT1-_ntrianglelefteq MnSymbol-OT1-_nleqclosed
@@ -464,7 +464,7 @@ logix-OT1-_Dor stix-OT1-_veeodot
 logix-OT1-_MulMapDual stix-OT1-_dualmap txfonts-OT1-_multimapboth
 logix-OT1-_MulMapInv stix-OT1-_multimapinv txfonts-OT1-_multimapinv
 logix-OT1-_Nor stix-OT1-_barvee
-logix-OT1-_NotClsImpl stix-OT1-_nsupset
+logix-OT1-_NotClsImpl stix-OT1-_nsupset latex2e-OT1-_not_supset
 marvosym-OT1-_Ecommerce textcomp-OT1-_textestimated
 marvosym-OT1-_EUR marvosym-OT1-_EURcr marvosym-OT1-_EURdig marvosym-OT1-_EURhv marvosym-OT1-_EURtm textcomp-OT1-_texteuro
 marvosym-OT1-_FAX marvosym-OT1-_fax
@@ -535,8 +535,8 @@ MnSymbol-OT1-_Nwarrow txfonts-OT1-_Nwarrow
 MnSymbol-OT1-_nwlsquigarrow MnSymbol-OT1-_nwrsquigarrow
 MnSymbol-OT1-_partialvardlcircleleftint MnSymbol-OT1-_partialvartlcircleleftint
 MnSymbol-OT1-_partialvardlcirclerightint MnSymbol-OT1-_partialvartlcirclerightint
-MnSymbol-OT1-_partialvardrcircleleftint MnSymbol-OT1-_partialvartrcircleleftint MnSymbol-OT1-_rcirclearrowleft
-MnSymbol-OT1-_partialvardrcirclerightint MnSymbol-OT1-_partialvartrcirclerightint MnSymbol-OT1-_rcirclearrowright
+MnSymbol-OT1-_partialvardrcircleleftint MnSymbol-OT1-_partialvartrcircleleftint MnSymbol-OT1-_rcirclearrowleft mathabx-OT1-_righttoleftarrow
+MnSymbol-OT1-_partialvardrcirclerightint MnSymbol-OT1-_partialvartrcirclerightint MnSymbol-OT1-_rcirclearrowright mathabx-OT1-_lefttorightarrow
 MnSymbol-OT1-_rightslice stix-OT1-_gtcc stmaryrd-OT1-_rightslice
 MnSymbol-OT1-_Searrow txfonts-OT1-_Searrow
 MnSymbol-OT1-_selsquigarrow MnSymbol-OT1-_sersquigarrow
@@ -602,3 +602,7 @@ tipa-OT1-_textturnlonglegr tipa-OT1-_textturnr
 txfonts-OT1-_openJoin txfonts-OT1-_opentimes
 mathabx-OT1-_rightleftharpoon fdsymbol-OT1-_leftrightharpoonupdown
 amssymb-OT1-_digamma stix-OT1-_bNot
+MnSymbol-OT1-_rcirclearrowdown mathabx-OT1-_uptodownarrow
+latex2e-OT1-_not_sqsupseteq stix-OT1-_nsqsupseteq
+latex2e-OT1-_not_subset stix-OT1-_nsubset
+latex2e-OT1-_not_sqsubseteq stix-OT1-_nsqsubseteq

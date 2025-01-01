@@ -91,6 +91,31 @@ def test_symbol_name_collisions() -> None:
         "stmaryrd-OT1-_nnwarrow",
         "mathabx-OT1-_boxright",
         "mathabx-OT1-_boxleft",
+        "fdsymbol-OT1-_landdownint",
+        "fdsymbol-OT1-_landupint",
+        "mathabx-OT1-_nsucc",
+        "mathabx-OT1-_nprec",
+        "mathabx-OT1-_nsucceq",
+        "mathabx-OT1-_npreceq",
+        "mathabx-OT1-_nsubseteq",
+        "mathabx-OT1-_nsupseteq",
+        "mathabx-OT1-_nsubseteqq",
+        "mathabx-OT1-_nsupseteqq",
+        "MnSymbol-OT1-_gnapprox",
+        "MnSymbol-OT1-_lnapprox",
+        "MnSymbol-OT1-_gnsim",
+        "MnSymbol-OT1-_lnsim",
+        "txfonts-OT1-_varprod",
+        "txfonts-OT1-_coloneq",
+        "txfonts-OT1-_eqcolon",
+        "mathabx-OT1-_nsuccapprox",
+        "mathabx-OT1-_nprecapprox",
+        "mathabx-OT1-_nsqsubset",
+        "mathabx-OT1-_nsqsupset",
+        "mathabx-OT1-_nsupset",
+        "mathabx-OT1-_nsubset",
+        "mathabx-OT1-_nsqsubseteq",
+        "mathabx-OT1-_nsqsupseteq",
     ]
 
     # Check for collisions.
@@ -122,19 +147,13 @@ def test_self_symmetry_similarity_conflict() -> None:
     symmetries: dict[str, list[st.Transformation]] = sr.load_symbol_metadata_self_symmetry()
 
     for leader in leaders:
-        if leader not in symmetries:
-            # No similars get to have self-symmetry.
-            for similar in similarity.get(leader, []):
-                assert similar not in symmetries, f"Similar {similar} has self-symmetry."
-        else:
-            # Only the leader gets to have self-symmetry.
-            # Or at least they need to have identical self-symmetry.
-            for similar in similarity.get(leader, []):
-                if similar not in symmetries:
-                    continue
-                assert set(symmetries.get(leader, [])) == set(
-                    symmetries.get(similar, [])
-                ), f"Similar {similar} has different self-symmetry from leader {leader}."
+        # Self symmetries must match the leader's.
+        for similar in similarity.get(leader, []):
+            if similar not in symmetries:
+                continue
+            assert set(symmetries.get(leader, [])) == set(
+                symmetries.get(similar, [])
+            ), f"Similar {similar} has different self-symmetry from leader {leader}."
 
 
 def test_leader_mapping() -> None:

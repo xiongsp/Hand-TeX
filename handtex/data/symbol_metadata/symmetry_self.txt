@@ -8,7 +8,7 @@ latex2e-OT1-_--: rot180 mir0 mir90
 latex2e-OT1-_AA: mir90
 latex2e-OT1-_amalg: mir90
 latex2e-OT1-_approx: rot180
-latex2e-OT1-_ast: rot180 mir0 mir90
+latex2e-OT1-*: rot180 mir0 mir90
 latex2e-OT1-_asymp: rot180 mir0 mir90
 latex2e-OT1-_backslash: rot180
 latex2e-OT1-_bigcap: mir90

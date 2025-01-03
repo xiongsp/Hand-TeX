@@ -113,6 +113,7 @@ def predict(
             if len(final_results) >= max_results:
                 break
             if final_results and confidence < 0.005:
-                break
+                # break
+                pass
             final_results.append((label_decoder[label], confidence))
         return final_results

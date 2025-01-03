@@ -1,7 +1,7 @@
 learning_rate = 0.001
 batch_size = 64
 num_epochs = 10
-image_size = 64
+image_size = 80
 db_path = "database/handtex.db"
 
 # With 1024 nodes for fully connected layer, 10 epochs:
@@ -34,3 +34,8 @@ db_path = "database/handtex.db"
 
 # Simplified model 10 epochs:
 # Validation accuracy: 85.31%
+
+# 3 epochs:
+# Actually pretty nice.
+# Training Loss: 38.9639, Training Accuracy: 84.40%
+# Validation Loss: 45.1656, Validation Accuracy: 83.03%

@@ -83,7 +83,7 @@ def main():
         ):
             symbols_to_inspect.append(symbol)
     # Manual override:
-    symbols_to_inspect = [key for key in symbol_data.leaders if "arrow" in key]
+    symbols_to_inspect = [key for key in symbol_data.leaders if "harpoon" in key]
 
     for index, symbol in enumerate(symbols_to_inspect, start=1):
         mainwindow = Qw.QWidget()

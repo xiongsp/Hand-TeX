@@ -649,7 +649,7 @@ def main():
     )
 
     # Show all the samples for a given symbol.
-    symbol = "amssymb-OT1-_precapprox"
+    symbol = "logix-OT1-_CircOr"
     leader = symbol_data.to_leader.get(symbol, symbol)
     if symbol != leader:
         print(f"Symbol '{symbol}' is not a leader, using leader '{leader}' instead.")

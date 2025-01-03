@@ -599,7 +599,7 @@ tipa-OT1-_textglotstop tipa-OT1-_textraiseglotstop
 tipa-OT1-_textlhtlongy tipa-OT1-_textvibyy
 tipa-OT1-_textpalhook tipa-OT1-_textscj
 tipa-OT1-_textturnlonglegr tipa-OT1-_textturnr
-txfonts-OT1-_openJoin txfonts-OT1-_opentimes
+txfonts-OT1-_openJoin txfonts-OT1-_opentimes stix-OT1-_gla
 mathabx-OT1-_rightleftharpoon fdsymbol-OT1-_leftrightharpoonupdown
 amssymb-OT1-_digamma stix-OT1-_bNot
 MnSymbol-OT1-_rcirclearrowdown mathabx-OT1-_uptodownarrow

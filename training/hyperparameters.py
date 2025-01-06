@@ -1,7 +1,7 @@
 learning_rate = 0.001
 batch_size = 64
 num_epochs = 10
-image_size = 80
+image_size = 64
 db_path = "database/handtex.db"
 
 # With 1024 nodes for fully connected layer, 10 epochs:

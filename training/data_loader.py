@@ -318,16 +318,22 @@ class StrokeDataset(Dataset):
         if trans_mats:
             stroke_data = ig.apply_transformations(stroke_data, trans_mats)
 
+        # Rescale the image to ensure the rotations and reflections fit within the image bounds.
+        # This is necessary to ensure the compositions align correctly.
+        stroke_data, _, _, _ = sp.rescale_and_center_viewport(stroke_data, 1000, 1000)
+
         # Next, prepare the negation, if any.
         if isinstance(composition, st.Negation):
             negation: st.Negation = composition
             slash_id: int = composite_id
 
             negation_stroke_data = self.load_stroke_data(slash_id)
+            # Use -y_offset, since the negation views up as positive y, but in the image it's
+            # in the negative y direction.
             trans_mats = [
                 ig.scale_matrix(negation.scale_factor, negation.scale_factor),
                 ig.rotation_matrix(negation.vert_angle),
-                ig.translation_matrix(-negation.x_offset, -negation.y_offset, 1000),
+                ig.translation_matrix(negation.x_offset, -negation.y_offset, 1000),
             ]
             negation_stroke_data = ig.apply_transformations(negation_stroke_data, trans_mats)
             stroke_data += negation_stroke_data

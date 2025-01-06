@@ -74,8 +74,6 @@ latex2e-OT1-_uparrow -/ rot22.5 o270 s0.75 /- MnSymbol-OT1-_nuparrow
 latex2e-OT1-_Uparrow -/ rot22.5 O270 s0.75 /- MnSymbol-OT1-_nUparrow
 latex2e-OT1-_updownarrow -/ rot22.5 s0.75 /- MnSymbol-OT1-_nupdownarrow
 latex2e-OT1-_Updownarrow -/ rot22.5 s0.75 /- MnSymbol-OT1-_nUpdownarrow
-latex2e-OT1-_vdash -/ rot45.0 s1.5 /- amssymb-OT1-_nvdash
-latex2e-OT1-_vdash -/ rot56.25 u180 s1.25 /- amssymb-OT1-_nvdash
 latex2e-OT1-_vdash -/ rot67.5 u0 s1.25 /- MnSymbol-OT1-_nrightvdash
 latex2e-OT1-_vdash -/ rot90.0 u180 /- stix-OT1-_varVdash
 latex2e-OT1-_Vert -/ rot22.5 s0.75 /- MnSymbol-OT1-_nUpdownline
@@ -150,8 +148,6 @@ amssymb-OT1-_upharpoonleft -/ rot22.5 u315 s0.75 /- fdsymbol-OT1-_nupharpoonleft
 amssymb-OT1-_upharpoonright -/ rot22.5 u180 s0.75 /- fdsymbol-OT1-_nupharpoonright
 amssymb-OT1-_upuparrows -/ rot22.5 u270 /- MnSymbol-OT1-_nupuparrows
 amssymb-OT1-_Vdash -/ rot67.5 o0 s1.25 /- MnSymbol-OT1-_nrightVdash
-amssymb-OT1-_Vdash -/ slash /- mathabx-OT1-_nVdash
-amssymb-OT1-_Vdash -/ slash /- mathabx-OT1-_nVdash
 amssymb-OT1-_Vvdash -/ rot67.5 O0 /- fdsymbol-OT1-_nVvdash
 amssymb-OT1-_Vvdash -/ rot67.5 s1.25 /- mathabx-OT1-_nVvash
 fdsymbol-OT1-_angle -/ U270 /- stix-OT1-_angleubar
@@ -236,8 +232,6 @@ mathabx-OT1-_succapprox -/ rot90.0 s1.25 /- mathabx-OT1-_nsuccapprox
 mathabx-OT1-_supseteq -/ rot90.0 s1.5 /- mathabx-OT1-_nsupseteq
 mathabx-OT1-_supseteqq -/ rot90.0 s1.25 /- mathabx-OT1-_nsupseteqq
 mathabx-OT1-_updownarrows -/ rot22.5 /- MnSymbol-OT1-_nupdownarrows
-mathabx-OT1-_VDash -/ slash /- mathabx-OT1-_nVDash
-mathabx-OT1-_vDash -/ slash /- mathabx-OT1-_nvDash
 MnSymbol-OT1-_backapprox -/ slash /- MnSymbol-OT1-_nbackapprox
 MnSymbol-OT1-_backapproxeq -/ rot67.5 s1.75 /- MnSymbol-OT1-_nbackapproxeq
 MnSymbol-OT1-_backeqsim -/ slash /- MnSymbol-OT1-_nbackeqsim
@@ -317,7 +311,7 @@ MnSymbol-OT1-_neswarrows -/ rot123.75 /- MnSymbol-OT1-_nneswarrows
 MnSymbol-OT1-_neswline -/ rot112.5 s0.75 /- MnSymbol-OT1-_nneswline
 MnSymbol-OT1-_Neswline -/ rot112.5 s0.75 /- MnSymbol-OT1-_nNeswline
 MnSymbol-OT1-_neVdash -/ rot112.5 O45 /- MnSymbol-OT1-_nneVdash
-MnSymbol-OT1-_nevdash -/ rot112.5 o45 /- MnSymbol-OT1-_nnevdash
+MnSymbol-OT1-_nevdash -/ rot112.5 O45 /- MnSymbol-OT1-_nnevdash
 MnSymbol-OT1-_Nwarrow -/ rot67.5 o315 /- MnSymbol-OT1-_nNwarrow
 MnSymbol-OT1-_nwarrowtail -/ rot67.5 s0.75 /- MnSymbol-OT1-_nnwarrowtail
 MnSymbol-OT1-_nwfootline -/ rot67.5 u315 s0.75 /- MnSymbol-OT1-_nnwfootline
@@ -333,7 +327,7 @@ MnSymbol-OT1-_nwsearrows -/ rot67.5 /- MnSymbol-OT1-_nnwsearrows
 MnSymbol-OT1-_Nwseline -/ rot67.5 /- MnSymbol-OT1-_nNwseline
 MnSymbol-OT1-_nwseline -/ rot67.5 s0.75 /- MnSymbol-OT1-_nnwseline
 MnSymbol-OT1-_nwVdash -/ rot67.5 O135 /- MnSymbol-OT1-_nnwVdash
-MnSymbol-OT1-_nwvdash -/ rot67.5 o135 /- MnSymbol-OT1-_nnwvdash
+MnSymbol-OT1-_nwvdash -/ rot67.5 O135 /- MnSymbol-OT1-_nnwvdash
 MnSymbol-OT1-_rcirclearrowdown -/ rot78.75 s1.5 /- MnSymbol-OT1-_nrcirclearrowdown
 MnSymbol-OT1-_rcirclearrowleft -/ rot78.75 s1.25 /- MnSymbol-OT1-_nrcirclearrowleft
 MnSymbol-OT1-_rcirclearrowright -/ rot78.75 s1.25 /- MnSymbol-OT1-_nrcirclearrowright
@@ -369,7 +363,7 @@ MnSymbol-OT1-_semodels -/ rot67.5 o315 /- MnSymbol-OT1-_nsemodels
 MnSymbol-OT1-_senwarrows -/ rot45.0 /- MnSymbol-OT1-_nsenwarrows
 MnSymbol-OT1-_sesearrows -/ rot67.5 o135 /- MnSymbol-OT1-_nsesearrows
 MnSymbol-OT1-_seVdash -/ rot56.25 O315 /- MnSymbol-OT1-_nseVdash
-MnSymbol-OT1-_sevdash -/ rot67.5 o315 /- MnSymbol-OT1-_nsevdash
+MnSymbol-OT1-_sevdash -/ rot67.5 O315 /- MnSymbol-OT1-_nsevdash
 MnSymbol-OT1-_squigarrowdownup -/ rot22.5 s0.75 /- MnSymbol-OT1-_nsquigarrowdownup
 MnSymbol-OT1-_squigarrowleftright -/ rot67.5 s0.75 /- MnSymbol-OT1-_nsquigarrowleftright
 MnSymbol-OT1-_squigarrownwse -/ rot22.5 s0.75 /- MnSymbol-OT1-_nsquigarrownwse
@@ -385,7 +379,7 @@ MnSymbol-OT1-_swmodels -/ rot112.5 O225 /- MnSymbol-OT1-_nswmodels
 MnSymbol-OT1-_swnearrows -/ rot112.5 /- MnSymbol-OT1-_nswnearrows
 MnSymbol-OT1-_swswarrows -/ rot112.5 o45 /- MnSymbol-OT1-_nswswarrows
 MnSymbol-OT1-_swVdash -/ rot112.5 O225 /- MnSymbol-OT1-_nswVdash
-MnSymbol-OT1-_swvdash -/ rot112.5 o225 /- MnSymbol-OT1-_nswvdash
+MnSymbol-OT1-_swvdash -/ rot112.5 O225 /- MnSymbol-OT1-_nswvdash
 MnSymbol-OT1-_twoheaddownarrow -/ rot22.5 o90 s0.75 /- MnSymbol-OT1-_ntwoheaddownarrow
 MnSymbol-OT1-_twoheadnearrow -/ rot112.5 O225 s0.75 /- MnSymbol-OT1-_ntwoheadnearrow
 MnSymbol-OT1-_twoheadnwarrow -/ rot67.5 O315 s0.75 /- MnSymbol-OT1-_ntwoheadnwarrow

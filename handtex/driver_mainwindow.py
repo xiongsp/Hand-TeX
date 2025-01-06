@@ -650,11 +650,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                     f"QFrame {{ background: {self.palette().color(Qg.QPalette.AlternateBase).name()}; }}"
                 )
                 similarity_stack = Qw.QVBoxLayout()
+                # Set spacing between items in the layout.
+                similarity_stack.setSpacing(12)
                 frame.setLayout(similarity_stack)
 
             for s in similarity_group:
                 symbol_data = self.symbol_data[s]
                 outer_layout = Qw.QHBoxLayout()
+                outer_layout.setSpacing(6)
                 svg_widget = Qsw.QSvgWidget()
                 svg_widget.load(ut.load_symbol_svg(symbol_data, hex_color))
                 svg_widget.renderer().setAspectRatioMode(Qc.Qt.KeepAspectRatio)

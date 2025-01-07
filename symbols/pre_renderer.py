@@ -18,16 +18,20 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # You have been warned.
 
 import handtex.utils as ut
+
 import handtex.data
+import symbols
 
 
 # Might need to re-run the script a few times in case one of the inkscapes gets killed.
 # Only an issue if multi-threading. But you really should multithread with 1000 symbols...
 # CPUS = os.cpu_count()
-CPUS = 1
+CPUS = 16
 with ut.resource_path(handtex.data) as path:
     SYMBOLS_FILE = path / "symbol_metadata" / "symbols.json"
-    OUTPUT_DIR = path / "symbols"
+
+with ut.resource_path(symbols) as path:
+    OUTPUT_DIR = path / "svg"
 
 
 # 1. Load symbols from symbols.json
@@ -160,8 +164,9 @@ def process_symbol(symbol):
     if os.path.exists(os.path.join(OUTPUT_DIR, f"{symbol['filename']}.svg")):
         print(f"Symbol {symbol['command']} already exists. Skipping.")
         return
+
+    tex_path = generate_latex_file(symbol)
     try:
-        tex_path = generate_latex_file(symbol)
         pdf_path = render_latex_to_pdf(tex_path)
         svg_path = convert_pdf_to_svg(pdf_path)
         cropped_svg_path = crop_svg(svg_path)

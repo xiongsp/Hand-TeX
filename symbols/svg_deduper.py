@@ -14,7 +14,7 @@ def calculate_md5(filepath):
 
 
 def main():
-    symbols_json = "../../handtex/data/symbol_metadata/symbols.json"
+    symbols_json = "../handtex/data/symbol_metadata/symbols.json"
 
     # Load symbols data from symbols.json
     with open(symbols_json, "r") as f:
@@ -28,7 +28,7 @@ def main():
         assert " " not in key["key"], f"Key '{key['key']}' contains a space."
 
     # Directory containing SVG files
-    symbols_dir = "../../handtex/data/symbols"
+    symbols_dir = "svg"
 
     # Dictionary to store md5 hashes and corresponding filenames
     hash_to_filenames = defaultdict(list)

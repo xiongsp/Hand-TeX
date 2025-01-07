@@ -11,7 +11,7 @@ import handtex.symbol_relations as sr
 
 def main():
 
-    symbol_list_path = "../database/symbols.yaml"
+    symbol_list_path = "../../symbols/symbols.yaml"
     with open(symbol_list_path, "r") as f:
         lines = f.readlines()
 

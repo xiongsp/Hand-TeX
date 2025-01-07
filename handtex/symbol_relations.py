@@ -11,7 +11,6 @@ from loguru import logger
 from natsort import natsorted
 
 import handtex.data.symbol_metadata
-import handtex.data.symbols
 import handtex.structures as st
 from handtex.utils import resource_path
 

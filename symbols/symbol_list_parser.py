@@ -81,7 +81,7 @@ class Symbol:
 def main():
 
     # Load symbols from the YAML file
-    symbols = Symbol.from_yaml("../database/symbols.yaml")
+    symbols = Symbol.from_yaml("symbols.yaml")
 
     # Check the list for duplicates: two symbols with the same key.
     seen = set()

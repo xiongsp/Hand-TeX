@@ -1,4 +1,6 @@
 import difflib
+import tarfile
+import time
 import os
 import platform
 import shutil
@@ -20,7 +22,6 @@ import handtex.data
 import handtex.structures as st
 from handtex import __program__, __version__
 import handtex.data.color_themes
-import handtex.data.symbols
 import handtex.data.symbol_metadata
 import handtex.data.model
 import handtex.data.custom_icons
@@ -371,6 +372,29 @@ def resource_path(module, resource=""):
     return resources.as_file(resources.files(module).joinpath(resource))
 
 
+# Cache to store SVG data
+svg_cache: dict[str, str] = {}
+
+
+def preload_svg_tar(tar_path: Path | str = ""):
+    """
+    Preload all SVG files from the compressed TAR archive into memory.
+    :param tar_path: Path to the TAR archive.
+    tar --transform='s:.*/::' --owner=0 --group=0 --mode=644 -cJf symbols.tar.xz symbols/*.svg
+    """
+    if not tar_path:
+        with resource_path(handtex.data, "symbols.tar.xz") as blob_path:
+            tar_path = blob_path
+
+    global svg_cache
+    start = time.time()
+    with tarfile.open(tar_path, "r:xz") as tar:
+        for member in tar.getmembers():
+            if member.isfile() and member.name.endswith(".svg"):
+                svg_cache[member.name] = tar.extractfile(member).read().decode("utf-8")
+    print(f"Loading blob took {1000 * (time.time() - start):.2f}ms")
+
+
 def load_symbol_svg(symbol: st.Symbol, fill_color: str = "#000000") -> Qc.QByteArray:
     """
     Load the SVG for the given symbol key, applying the new fill color.
@@ -380,10 +404,14 @@ def load_symbol_svg(symbol: st.Symbol, fill_color: str = "#000000") -> Qc.QByteA
     :param fill_color: The new fill color.
     :return: The raw SVG data.
     """
+    global svg_cache
+
+    if not svg_cache:
+        preload_svg_tar()
+
     try:
-        with resource_path(handtex.data.symbols, f"{symbol.filename}.svg") as svg_file:
-            svg_data = svg_file.read_text()
-    except FileNotFoundError:
+        svg_data = svg_cache[f"{symbol.filename}.svg"]
+    except KeyError:
         logger.error(f"Failed to load SVG for symbol {symbol.key}")
         # Instead, load the image-missing icon.
         with resources.files(handtex.data.custom_icons) as data_path:

@@ -380,7 +380,6 @@ def preload_svg_tar(tar_path: Path | str = ""):
     """
     Preload all SVG files from the compressed TAR archive into memory.
     :param tar_path: Path to the TAR archive.
-    tar --transform='s:.*/::' --owner=0 --group=0 --mode=644 -cJf symbols.tar.xz symbols/*.svg
     """
     if not tar_path:
         with resource_path(handtex.data, "symbols.tar.xz") as blob_path:

@@ -15,8 +15,6 @@ import handtex.data.symbols
 import handtex.structures as st
 from handtex.utils import resource_path
 
-# TODO add something to auto-add a slash at some angle to the symbol
-
 
 class SymbolData:
     """

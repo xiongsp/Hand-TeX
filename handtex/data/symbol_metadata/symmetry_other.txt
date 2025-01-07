@@ -1,3 +1,4 @@
+wasysym-OT1-_wasylozenge -- rot45 rot135 rot225 rot315 --> stix-OT1-_concavediamond
 latex2e-OT1-_not_subset -- rot180 --> latex2e-OT1-_not_supset
 stix-OT1-_csup -- rot90 mir45 --> stix-OT1-_closedvarcap
 MnSymbol-OT1-_cupplus -- rot180 mir0 --> MnSymbol-OT1-_capplus

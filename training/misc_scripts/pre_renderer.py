@@ -40,9 +40,12 @@ def load_symbols(file_path):
 # 2. Generate LaTeX files
 def generate_latex_file(symbol):
     # Parse package, encoding, and command from symbol id
-    package, encoding, command = symbol["key"].split("-", maxsplit=2)
+    package, command = symbol["key"].split("-", maxsplit=1)
     package = package.strip()
-    encoding = encoding.strip()
+    if "fontenc" in symbol:
+        encoding = symbol["fontenc"]
+    else:
+        encoding = "OT1"
 
     # Construct LaTeX document
     tex_content = f"""

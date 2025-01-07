@@ -21,7 +21,7 @@ class Symbol:
         # Create an ID for the symbol
         package = self.package or "latex2e"
         fontenc = self.fontenc or "OT1"
-        self.key = f"{package}-{fontenc}-{self.command.replace('\\', '_')}"
+        self.key = f"{package}-{self.command.replace('\\', '_')}"
         # Generate initial filename based on hash of the ID
         self.filename = hashlib.md5(self.key.encode()).hexdigest().upper()
 

@@ -51,17 +51,17 @@ def main2():
     """
     These aren't the same, despite the name.
 
-    mathabx-OT1-_leftsquigarrow txfonts-OT1-_leftsquigarrow
-    mathabx-OT1-_leftrightsquigarrow amssymb-OT1-_leftrightsquigarrow
-    amssymb-OT1-_rightsquigarrow mathabx-OT1-_rightsquigarrow
-    txfonts-OT1-_boxright mathabx-OT1-_boxright
-    mathabx-OT1-_boxleft txfonts-OT1-_boxleft
+    mathabx-_leftsquigarrow txfonts-_leftsquigarrow
+    mathabx-_leftrightsquigarrow amssymb-_leftrightsquigarrow
+    amssymb-_rightsquigarrow mathabx-_rightsquigarrow
+    txfonts-_boxright mathabx-_boxright
+    mathabx-_boxleft txfonts-_boxleft
 
     nnearrow isn't the same as nnearrow.
     same for nnwarrow and nnwarrow.
 
-    ~ Add to similarity group ('esint-OT1-_landupint', 'MnSymbol-OT1-_landupint'):
-    fdsymbol-OT1-_landupint
+    ~ Add to similarity group ('esint-_landupint', 'MnSymbol-_landupint'):
+    fdsymbol-_landupint
     """
 
     # Use symbol relations data to find duplicate commands and auto-suggest similarity groupings.

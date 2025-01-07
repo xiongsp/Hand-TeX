@@ -19,13 +19,13 @@ def main():
     """
     symbols = sr.load_symbols()
     test_set = (
-        "latex2e-OT1-_rightarrow",
-        "latex2e-OT1-_int",
-        "latex2e-OT1-_mid",
-        "latex2e-OT1-_sum",
-        "latex2e-OT1-_alpha",
-        "latex2e-OT1-_cdot",
-        "amssymb-OT1-_lll",
+        "latex2e-_rightarrow",
+        "latex2e-_int",
+        "latex2e-_mid",
+        "latex2e-_sum",
+        "latex2e-_alpha",
+        "latex2e-_cdot",
+        "amssymb-_lll",
     )
     db_path = "../database/handtex.db"
 
@@ -44,7 +44,7 @@ def main():
     #     strokes = json.loads(cursor.fetchone()[0])
     #     test_strokes.append(strokes)
 
-    # key = "latex2e-OT1-_lambda"
+    # key = "latex2e-_lambda"
     # cursor.execute("SELECT strokes FROM samples WHERE key = ?", (key,))
     # test_strokes = [json.loads(s[0]) for s in cursor.fetchall()]
 

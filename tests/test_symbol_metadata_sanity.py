@@ -83,39 +83,39 @@ def test_symbol_name_collisions() -> None:
     symbols = symbol_data.all_keys
 
     whitelist = [
-        "fdsymbol-OT1-_landupint",
-        "amssymb-OT1-_leftrightsquigarrow",
-        "amssymb-OT1-_rightsquigarrow",
-        "txfonts-OT1-_leftsquigarrow",
-        "stmaryrd-OT1-_nnearrow",
-        "stmaryrd-OT1-_nnwarrow",
-        "mathabx-OT1-_boxright",
-        "mathabx-OT1-_boxleft",
-        "fdsymbol-OT1-_landdownint",
-        "fdsymbol-OT1-_landupint",
-        "mathabx-OT1-_nsucc",
-        "mathabx-OT1-_nprec",
-        "mathabx-OT1-_nsucceq",
-        "mathabx-OT1-_npreceq",
-        "mathabx-OT1-_nsubseteq",
-        "mathabx-OT1-_nsupseteq",
-        "mathabx-OT1-_nsubseteqq",
-        "mathabx-OT1-_nsupseteqq",
-        "MnSymbol-OT1-_gnapprox",
-        "MnSymbol-OT1-_lnapprox",
-        "MnSymbol-OT1-_gnsim",
-        "MnSymbol-OT1-_lnsim",
-        "txfonts-OT1-_varprod",
-        "txfonts-OT1-_coloneq",
-        "txfonts-OT1-_eqcolon",
-        "mathabx-OT1-_nsuccapprox",
-        "mathabx-OT1-_nprecapprox",
-        "mathabx-OT1-_nsqsubset",
-        "mathabx-OT1-_nsqsupset",
-        "mathabx-OT1-_nsupset",
-        "mathabx-OT1-_nsubset",
-        "mathabx-OT1-_nsqsubseteq",
-        "mathabx-OT1-_nsqsupseteq",
+        "fdsymbol-_landupint",
+        "amssymb-_leftrightsquigarrow",
+        "amssymb-_rightsquigarrow",
+        "txfonts-_leftsquigarrow",
+        "stmaryrd-_nnearrow",
+        "stmaryrd-_nnwarrow",
+        "mathabx-_boxright",
+        "mathabx-_boxleft",
+        "fdsymbol-_landdownint",
+        "fdsymbol-_landupint",
+        "mathabx-_nsucc",
+        "mathabx-_nprec",
+        "mathabx-_nsucceq",
+        "mathabx-_npreceq",
+        "mathabx-_nsubseteq",
+        "mathabx-_nsupseteq",
+        "mathabx-_nsubseteqq",
+        "mathabx-_nsupseteqq",
+        "MnSymbol-_gnapprox",
+        "MnSymbol-_lnapprox",
+        "MnSymbol-_gnsim",
+        "MnSymbol-_lnsim",
+        "txfonts-_varprod",
+        "txfonts-_coloneq",
+        "txfonts-_eqcolon",
+        "mathabx-_nsuccapprox",
+        "mathabx-_nprecapprox",
+        "mathabx-_nsqsubset",
+        "mathabx-_nsqsupset",
+        "mathabx-_nsupset",
+        "mathabx-_nsubset",
+        "mathabx-_nsqsubseteq",
+        "mathabx-_nsqsupseteq",
     ]
 
     # Check for collisions.
@@ -378,9 +378,9 @@ def test_graph_creation() -> None:
     #         g.remove_node(node)
     # Display the graph.
     pos = nx.spring_layout(g)
-    # Move MnSymbol-OT1-_backapprox to the corner
-    pos["MnSymbol-OT1-_backapprox"] = (-1, -1)
-    pos["MnSymbol-OT1-_nbackapprox"] = (-1, -1.1)
+    # Move MnSymbol-_backapprox to the corner
+    pos["MnSymbol-_backapprox"] = (-1, -1)
+    pos["MnSymbol-_nbackapprox"] = (-1, -1.1)
     # Color the nodes not in the leader mapping.
     colors = []
     for node in g.nodes:
@@ -389,7 +389,7 @@ def test_graph_creation() -> None:
         else:
             colors.append("red")
     # Make the edges with the leader property dashed
-    # Max edge: ('latex2e-OT1-_bigcirc', 'latex2e-OT1-_bigcirc', {'transformations': (
+    # Max edge: ('latex2e-_bigcirc', 'latex2e-_bigcirc', {'transformations': (
     # (<Transformation.rot(45): 'rot45'>, <Transformation.rot(90): 'rot90'>, <Transformation.rot(135): 'rot135'>, <Transformation.rot(180): 'rot180'>, <Transformation.rot(225): 'rot225'>, <Transformation.rot(270): 'rot270'>, <Transformation.rot(315): 'rot315'>, <Transformation.mir(0): 'mir0'>, <Transformation.mir(45): 'mir45'>, <Transformation.mir(90): 'mir90'>, <Transformation.mir(135): 'mir135'>)
     # ,)}), product: 11
 

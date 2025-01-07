@@ -9,8 +9,8 @@ from handtex.data import symbol_metadata
 """
 Example:
 
-amssymb-OT1-_Cap -- rot180 mir0 --> amssymb-OT1-_Cup
-amssymb-OT1-_Cap -- rot90 mir135 --> amssymb-OT1-_Subset
+amssymb-_Cap -- rot180 mir0 --> amssymb-_Cup
+amssymb-_Cap -- rot90 mir135 --> amssymb-_Subset
 """
 
 

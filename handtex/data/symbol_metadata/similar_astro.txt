@@ -1,17 +1,17 @@
-wasysym-OT1-_taurus marvosym-OT1-_Taurus
-wasysym-OT1-_gemini marvosym-OT1-_Gemini
-wasysym-OT1-_cancer marvosym-OT1-_Cancer
-wasysym-OT1-_leo wasysym-OT1-_ascnode
-wasysym-OT1-_virgo marvosym-OT1-_Virgo
-wasysym-OT1-_libra amssymb-OT1-_bumpeq MnSymbol-OT1-_bumpeq fdsymbol-OT1-_bumpeq stix-OT1-_bumpeq mathabx-OT1-_bumpedeq
-wasysym-OT1-_scorpio marvosym-OT1-_Scorpio
-wasysym-OT1-_sagittarius marvosym-OT1-_Sagittarius
-wasysym-OT1-_capricornus marvosym-OT1-_Capricorn
-wasysym-OT1-_aquarius marvosym-OT1-_Aquarius
-wasysym-OT1-_pisces marvosym-OT1-_Pisces
-wasysym-OT1-_mercury marvosym-OT1-_Mercury
-wasysym-OT1-_earth marvosym-OT1-_Earth
-wasysym-OT1-_female marvosym-OT1-_Venus wasysym-OT1-_venus
-wasysym-OT1-_male marvosym-OT1-_Mars wasysym-OT1-_mars
-wasysym-OT1-_jupiter marvosym-OT1-_Jupiter
-wasysym-OT1-_saturn marvosym-OT1-_Saturn
+wasysym-_taurus marvosym-_Taurus
+wasysym-_gemini marvosym-_Gemini
+wasysym-_cancer marvosym-_Cancer
+wasysym-_leo wasysym-_ascnode
+wasysym-_virgo marvosym-_Virgo
+wasysym-_libra amssymb-_bumpeq MnSymbol-_bumpeq fdsymbol-_bumpeq stix-_bumpeq mathabx-_bumpedeq
+wasysym-_scorpio marvosym-_Scorpio
+wasysym-_sagittarius marvosym-_Sagittarius
+wasysym-_capricornus marvosym-_Capricorn
+wasysym-_aquarius marvosym-_Aquarius
+wasysym-_pisces marvosym-_Pisces
+wasysym-_mercury marvosym-_Mercury
+wasysym-_earth marvosym-_Earth
+wasysym-_female marvosym-_Venus wasysym-_venus
+wasysym-_male marvosym-_Mars wasysym-_mars
+wasysym-_jupiter marvosym-_Jupiter
+wasysym-_saturn marvosym-_Saturn

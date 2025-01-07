@@ -121,7 +121,7 @@ def main():
         # Display it next to the number of new drawings, and the symbol key.
         if symbol_key not in symbol_data:
             # Use the varnothing symbol as a placeholder.
-            symbol_key = "amssymb-OT1-_varnothing"
+            symbol_key = "amssymb-_varnothing"
         symbol = symbol_data[symbol_key]
         svg_widget = Qsw.QSvgWidget()
         color = app.palette().color(Qg.QPalette.Text).name()

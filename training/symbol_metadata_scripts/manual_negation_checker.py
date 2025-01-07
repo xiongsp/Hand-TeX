@@ -25,7 +25,7 @@ def main():
 
     symmetry_path = "../../handtex/data/symbol_metadata/negations.txt"
     symmetries: list[tuple[str, st.Negation, str]] = []
-    # Example: latex2e-OT1-_lfloor -/ rot22 o0 /- latex2e-OT1-_lnot
+    # Example: latex2e-_lfloor -/ rot22 o0 /- latex2e-_lnot
     pattern = re.compile(r"(\S+) -/ *(.*?) */- (\S+)")
     with open(symmetry_path, "r") as file:
         for line in file.readlines():
@@ -113,7 +113,7 @@ def main():
         preview_section.addLayout(settings_layout)
         mainlayout.addLayout(preview_section)
 
-        svg_data_vert = ut.load_symbol_svg(symbols["latex2e-OT1-_mid"], color)
+        svg_data_vert = ut.load_symbol_svg(symbols["latex2e-_mid"], color)
 
         def render_preview():
             nonlocal svg_data_vert

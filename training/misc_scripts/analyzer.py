@@ -413,7 +413,7 @@ if __name__ == "__main__":
     import handtex.symbol_relations as sr
 
     symbol_data = sr.SymbolData()
-    symbol_key = symbol_data.get_similarity_group("latex2e-OT1-/")
-    # symbol_key = "latex2e-OT1-_backslash"
+    symbol_key = symbol_data.get_similarity_group("latex2e-/")
+    # symbol_key = "latex2e-_backslash"
 
     analyze_symbol_data(db_path, symbol_key)

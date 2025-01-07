@@ -1,40 +1,40 @@
-amssymb-OT1-_mho tipa-OT1-_textupsilon
-latex2e-OT1-_Delta latex2e-OT1-_bigtriangleup latex2e-OT1-_triangle amssymb-OT1-_vartriangle upgreek-OT1-_Updelta stix-OT1-_triangle MnSymbol-OT1-_medtriangleup mathabx-OT1-_smalltriangleup MnSymbol-OT1-_smalltriangleup stix-OT1-_triangleserifs
-latex2e-OT1-_Gamma upgreek-OT1-_Upgamma
-latex2e-OT1-_Lambda latex2e-OT1-_bigwedge latex2e-OT1-_land latex2e-OT1-_wedge tipa-OT1-_textturnv upgreek-OT1-_Uplambda mathabx-OT1-_wedge stix-OT1-_wedge MnSymbol-OT1-_wedge fdsymbol-OT1-_wedge fdsymbol-OT1-_bigwedge stix-OT1-_bigwedge MnSymbol-OT1-_bigwedge logix-OT1-_Nd
-latex2e-OT1-_Omega gensymb-OT1-_ohm tipa-OT1-_textscomega upgreek-OT1-_Upomega
-latex2e-OT1-_Phi latex2e-OT1-_phi tipa-OT1-_textphi upgreek-OT1-_Upphi upgreek-OT1-_upphi
-latex2e-OT1-_Pi latex2e-OT1-_prod upgreek-OT1-_Uppi stix-OT1-_prod MnSymbol-OT1-_prod fdsymbol-OT1-_prod fdsymbol-OT1-_varprod MnSymbol-OT1-_smallprod
-latex2e-OT1-_Psi latex2e-OT1-_psi upgreek-OT1-_Uppsi upgreek-OT1-_uppsi
-latex2e-OT1-_Sigma latex2e-OT1-_sum upgreek-OT1-_Upsigma MnSymbol-OT1-_sum fdsymbol-OT1-_sum stix-OT1-_sum fdsymbol-OT1-_varsum
-latex2e-OT1-_Theta upgreek-OT1-_Uptheta
-latex2e-OT1-_Upsilon marvosym-OT1-_Aries upgreek-OT1-_Upupsilon wasysym-OT1-_aries wasysym-OT1-_vernal
-latex2e-OT1-_Xi upgreek-OT1-_Upxi
-latex2e-OT1-_alpha upgreek-OT1-_upalpha
-latex2e-OT1-_beta marvosym-OT1-_Shilling tipa-OT1-_textbeta upgreek-OT1-_upbeta
-latex2e-OT1-_bigtriangledown latex2e-OT1-_nabla amssymb-OT1-_triangledown mathabx-OT1-_smalltriangledown MnSymbol-OT1-_smalltriangledown MnSymbol-OT1-_medtriangledown
-latex2e-OT1-_chi tipa-OT1-_textchi upgreek-OT1-_upchi
-latex2e-OT1-_delta upgreek-OT1-_updelta
-latex2e-OT1-_epsilon latex2e-OT1-_in upgreek-OT1-_upepsilon fdsymbol-OT1-_in stix-OT1-_in stix-OT1-_smallin
-latex2e-OT1-_eta upgreek-OT1-_upeta
-latex2e-OT1-_gamma upgreek-OT1-_upgamma
-latex2e-OT1-_iota tipa-OT1-_textiota upgreek-OT1-_upiota
-latex2e-OT1-_kappa upgreek-OT1-_upkappa
-latex2e-OT1-_lambda amssymb-OT1-_leftthreetimes tipa-OT1-_textlambda upgreek-OT1-_uplambda fdsymbol-OT1-_leftthreetimes MnSymbol-OT1-_leftthreetimes stix-OT1-_leftthreetimes
-latex2e-OT1-_mu upgreek-OT1-_upmu
-latex2e-OT1-_nu amssymb-OT1-_mathcal{V}
-latex2e-OT1-_omega tipa-OT1-_textomega upgreek-OT1-_upomega
-latex2e-OT1-_pi upgreek-OT1-_uppi
-latex2e-OT1-_rho upgreek-OT1-_uprho upgreek-OT1-_upvarrho
-latex2e-OT1-_sigma upgreek-OT1-_upsigma upgreek-OT1-_upvarsigma
-latex2e-OT1-_tau upgreek-OT1-_uptau
-latex2e-OT1-_theta tipa-OT1-_texttheta upgreek-OT1-_uptheta
-latex2e-OT1-_upsilon tipa-OT1-_textscriptv upgreek-OT1-_upupsilon
-latex2e-OT1-_varepsilon amssymb-OT1-_mathcal{E} tipa-OT1-_textepsilon upgreek-OT1-_upvarepsilon
-latex2e-OT1-_varphi upgreek-OT1-_upvarphi
-latex2e-OT1-_varpi upgreek-OT1-_upvarpi
-latex2e-OT1-_vartheta upgreek-OT1-_upvartheta
-latex2e-OT1-_xi upgreek-OT1-_upxi
-latex2e-OT1-_zeta upgreek-OT1-_upzeta
-textcomp-OT1-_textthreesuperior tipa-OT1-_textrevepsilon
-tipa-OT1-_textbabygamma tipa-OT1-_textgamma tipa-OT1-_textramshorns
+amssymb-_mho tipa-_textupsilon
+latex2e-_Delta latex2e-_bigtriangleup latex2e-_triangle amssymb-_vartriangle upgreek-_Updelta stix-_triangle MnSymbol-_medtriangleup mathabx-_smalltriangleup MnSymbol-_smalltriangleup stix-_triangleserifs
+latex2e-_Gamma upgreek-_Upgamma
+latex2e-_Lambda latex2e-_bigwedge latex2e-_land latex2e-_wedge tipa-_textturnv upgreek-_Uplambda mathabx-_wedge stix-_wedge MnSymbol-_wedge fdsymbol-_wedge fdsymbol-_bigwedge stix-_bigwedge MnSymbol-_bigwedge logix-_Nd
+latex2e-_Omega gensymb-_ohm tipa-_textscomega upgreek-_Upomega
+latex2e-_Phi latex2e-_phi tipa-_textphi upgreek-_Upphi upgreek-_upphi
+latex2e-_Pi latex2e-_prod upgreek-_Uppi stix-_prod MnSymbol-_prod fdsymbol-_prod fdsymbol-_varprod MnSymbol-_smallprod
+latex2e-_Psi latex2e-_psi upgreek-_Uppsi upgreek-_uppsi
+latex2e-_Sigma latex2e-_sum upgreek-_Upsigma MnSymbol-_sum fdsymbol-_sum stix-_sum fdsymbol-_varsum
+latex2e-_Theta upgreek-_Uptheta
+latex2e-_Upsilon marvosym-_Aries upgreek-_Upupsilon wasysym-_aries wasysym-_vernal
+latex2e-_Xi upgreek-_Upxi
+latex2e-_alpha upgreek-_upalpha
+latex2e-_beta marvosym-_Shilling tipa-_textbeta upgreek-_upbeta
+latex2e-_bigtriangledown latex2e-_nabla amssymb-_triangledown mathabx-_smalltriangledown MnSymbol-_smalltriangledown MnSymbol-_medtriangledown
+latex2e-_chi tipa-_textchi upgreek-_upchi
+latex2e-_delta upgreek-_updelta
+latex2e-_epsilon latex2e-_in upgreek-_upepsilon fdsymbol-_in stix-_in stix-_smallin
+latex2e-_eta upgreek-_upeta
+latex2e-_gamma upgreek-_upgamma
+latex2e-_iota tipa-_textiota upgreek-_upiota
+latex2e-_kappa upgreek-_upkappa
+latex2e-_lambda amssymb-_leftthreetimes tipa-_textlambda upgreek-_uplambda fdsymbol-_leftthreetimes MnSymbol-_leftthreetimes stix-_leftthreetimes
+latex2e-_mu upgreek-_upmu
+latex2e-_nu amssymb-_mathcal{V}
+latex2e-_omega tipa-_textomega upgreek-_upomega
+latex2e-_pi upgreek-_uppi
+latex2e-_rho upgreek-_uprho upgreek-_upvarrho
+latex2e-_sigma upgreek-_upsigma upgreek-_upvarsigma
+latex2e-_tau upgreek-_uptau
+latex2e-_theta tipa-_texttheta upgreek-_uptheta
+latex2e-_upsilon tipa-_textscriptv upgreek-_upupsilon
+latex2e-_varepsilon amssymb-_mathcal{E} tipa-_textepsilon upgreek-_upvarepsilon
+latex2e-_varphi upgreek-_upvarphi
+latex2e-_varpi upgreek-_upvarpi
+latex2e-_vartheta upgreek-_upvartheta
+latex2e-_xi upgreek-_upxi
+latex2e-_zeta upgreek-_upzeta
+textcomp-_textthreesuperior tipa-_textrevepsilon
+tipa-_textbabygamma tipa-_textgamma tipa-_textramshorns

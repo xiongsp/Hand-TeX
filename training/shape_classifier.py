@@ -586,8 +586,8 @@ if __name__ == "__main__":
     db_path = "database/handtex.db"
 
     # Check if symbol key is provided as a command-line argument
-    # tipa-OT1-_textprimstress
-    symbol_key = "latex2e-OT1-_textasciicircum"
+    # tipa-_textprimstress
+    symbol_key = "latex2e-_textasciicircum"
     # 301
     if len(sys.argv) > 1:
         symbol_key = sys.argv[1]
@@ -596,13 +596,13 @@ if __name__ == "__main__":
 
     symbol_data = sr.SymbolData()
 
-    symbol_key = symbol_data.get_similarity_group("latex2e-OT1-_bigcirc")
+    symbol_key = symbol_data.get_similarity_group("latex2e-_bigcirc")
     shape = "circle"
 
-    # symbol_key = symbol_data.get_similarity_group("amssymb-OT1-_square")
+    # symbol_key = symbol_data.get_similarity_group("amssymb-_square")
     # shape = "square"
 
-    # symbol_key = symbol_data.get_similarity_group("latex2e-OT1-_bigtriangleup")
+    # symbol_key = symbol_data.get_similarity_group("latex2e-_bigtriangleup")
     # shape = "triangle"
 
     check_symbol_instances(db_path, symbol_key, shape)

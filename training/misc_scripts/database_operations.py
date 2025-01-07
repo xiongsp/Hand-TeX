@@ -121,7 +121,7 @@ for key, threshold in sorted(thresholds_min_points.items(), key=lambda x: x[1]):
 #     global total_points_cleaned
 #     total_points += point_count
 #     if (
-#         key != "latex2e-OT1-/"
+#         key != "latex2e-/"
 #         or point_count < thresholds_min_points[symbol_key]
 #         or point_count < 15
 #         or s_id > 339935
@@ -153,12 +153,12 @@ symbol_data = sr.SymbolData()
 
 def operation(s_id, symbol_key, s):
     if symbol_key not in symbol_data.get_similarity_group(
-        #     "latex2e-T1-_guilsinglright"
+        #     "latex2e-_guilsinglright"
         # ) + symbol_data.get_similarity_group(
-        #     "latex2e-T1-_guilsinglleft"
+        #     "latex2e-_guilsinglleft"
         #     ) + symbol_data.get_similarity_group(
-        "latex2e-OT1-_|"
-    ) + symbol_data.get_similarity_group("amssymb-OT1-_intercal"):
+        "latex2e-_|"
+    ) + symbol_data.get_similarity_group("amssymb-_intercal"):
         return s
 
     # # We want to squish the strokes to fit within a width of 400.

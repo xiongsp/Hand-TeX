@@ -64,7 +64,7 @@ def main():
 
     symmetry_path = "../../handtex/data/symbol_metadata/symmetry_self.txt"
     symmetries: list[tuple[str, list[str]]] = []
-    # Example: latex2e-OT1-_lfloor -- mir90 -> latex2e-OT1-_lnot
+    # Example: latex2e-_lfloor -- mir90 -> latex2e-_lnot
     with open(symmetry_path, "r") as file:
         for line in file.readlines():
             if not line.strip():

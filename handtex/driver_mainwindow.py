@@ -819,7 +819,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Check if the symbol filename is missing, and if so, insert the varnothing symbol.
         # This can happen particularly when a new symbol is being trained that doesn't yet exist.
         if not self.current_symbol.filename:
-            symbol_nothing = self.symbol_data["amssymb-OT1-_varnothing"]
+            symbol_nothing = self.symbol_data["amssymb-_varnothing"]
             symbol_obj = symbol_nothing
         else:
             symbol_obj = self.current_symbol

@@ -18,7 +18,7 @@ def main2():
     """
     symbol_data = sr.SymbolData()
 
-    since_key = "stix2-OT1-_fullouterjoin"
+    since_key = "stix2-_fullouterjoin"
     all_keys = symbol_data.all_keys
     start_index = all_keys.index(since_key)
     keys = all_keys[start_index:]
@@ -148,21 +148,21 @@ def evaluate_results():
     # example:
     """
     Collision Type: rot90
-    Symbol: wasysym-OT1-_sun
-    Leader: wasysym-OT1-_sun, Confidence: 0.9998611211776733
-    Symbol: wasysym-OT1-_wasylozenge
-    Leader: wasysym-OT1-_wasylozenge, Confidence: 0.9990512728691101
-    Symbol: marvosym-OT1-_Bat
-    Leader: marvosym-OT1-_Bat, Confidence: 0.9999992847442627
+    Symbol: wasysym-_sun
+    Leader: wasysym-_sun, Confidence: 0.9998611211776733
+    Symbol: wasysym-_wasylozenge
+    Leader: wasysym-_wasylozenge, Confidence: 0.9990512728691101
+    Symbol: marvosym-_Bat
+    Leader: marvosym-_Bat, Confidence: 0.9999992847442627
     Collision Type: rot45
-    Symbol: marvosym-OT1-_Mundus
-    Leader: marvosym-OT1-_Mundus, Confidence: 0.9997351765632629
-    Symbol: marvosym-OT1-_Yinyang
-    Leader: marvosym-OT1-_Yinyang, Confidence: 0.9999496936798096
-    Symbol: marvosym-OT1-_MVAt
-    Leader: marvosym-OT1-_MVAt, Confidence: 0.9999268054962158
-    Symbol: stix2-OT1-_fullouterjoin
-    Leader: stix2-OT1-_fullouterjoin, Confidence: 0.9992081522941589
+    Symbol: marvosym-_Mundus
+    Leader: marvosym-_Mundus, Confidence: 0.9997351765632629
+    Symbol: marvosym-_Yinyang
+    Leader: marvosym-_Yinyang, Confidence: 0.9999496936798096
+    Symbol: marvosym-_MVAt
+    Leader: marvosym-_MVAt, Confidence: 0.9999268054962158
+    Symbol: stix2-_fullouterjoin
+    Leader: stix2-_fullouterjoin, Confidence: 0.9992081522941589
     """
     path = "../misc_scripts/scratch.txt"
     with open(path, "r") as file:

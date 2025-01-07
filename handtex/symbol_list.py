@@ -414,6 +414,7 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         )
         painter.end()
         for key in self.current_symbol_keys:
+            # print(key)
             if key is None:
                 # Add a spacer item to force a new line (like a line break).
                 spacer_item = Qw.QListWidgetItem(separator_pixmap, " ")
@@ -423,7 +424,9 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
                 self.listWidget.addItem(spacer_item)
                 continue
             label = self.symbol_data[key].command
+            start = time.time()
             pixmap = self.get_symbol_pixmap(key)
+            print(f"Loading {label} took {1000*(time.time()-start):.2f}ms")
 
             item = Qw.QListWidgetItem(pixmap, label)
             self.listWidget.addItem(item)
@@ -431,6 +434,7 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self.label_count.setText(
             str(sum(1 for _ in (filter(lambda k: k is not None, self.current_symbol_keys))))
         )
+        print("Done")
 
     def show_symbol_details(self, symbol_key: str | None):
         if not self.loaded:

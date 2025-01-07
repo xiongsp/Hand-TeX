@@ -381,7 +381,7 @@ def load_symbol_svg(symbol: st.Symbol, fill_color: str = "#000000") -> Qc.QByteA
     :return: The raw SVG data.
     """
     try:
-        with resources.path(handtex.data.symbols, f"{symbol.filename}.svg") as svg_file:
+        with resource_path(handtex.data.symbols, f"{symbol.filename}.svg") as svg_file:
             svg_data = svg_file.read_text()
     except FileNotFoundError:
         logger.error(f"Failed to load SVG for symbol {symbol.key}")

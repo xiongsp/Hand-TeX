@@ -31,6 +31,7 @@ db_path = "database/handtex.db"
 # Training Loss: 9.0018, Training Accuracy: 95.92%
 # Validation Loss: 9.2644, Validation Accuracy: 96.31%
 
+# Noise deformation augmentation:
 
 # Simplified model 10 epochs:
 # Validation accuracy: 85.31%
@@ -39,3 +40,7 @@ db_path = "database/handtex.db"
 # Actually pretty nice.
 # Training Loss: 38.9639, Training Accuracy: 84.40%
 # Validation Loss: 45.1656, Validation Accuracy: 83.03%
+
+# Deep model 10 epochs:
+# Training Loss: 7.7815, Training Accuracy: 96.63%
+# Validation Loss: 38.0330, Validation Accuracy: 89.54%

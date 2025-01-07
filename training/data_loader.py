@@ -152,14 +152,14 @@ class StrokeDataset(Dataset):
             return cursor_samples[:split_idx]
 
         # For negations, we need a cycle of the symbol keys to use for the slash.
-        vertical_line_keys = symbol_data.get_similarity_group("latex2e-OT1-|")
+        vertical_line_keys = symbol_data.get_similarity_group("latex2e-|")
         negation_cycle = cycle(load_primary_keys(vertical_line_keys))
 
         # For inside-relations, we need a cycle for circles, squares, and triangles.
         # These need to be filtered for fitness to fit around a symbol.
-        circle_keys = symbol_data.get_similarity_group("latex2e-OT1-_bigcirc")
-        square_keys = symbol_data.get_similarity_group("amssymb-OT1-_square")
-        triangle_keys = symbol_data.get_similarity_group("latex2e-OT1-_bigtriangleup")
+        circle_keys = symbol_data.get_similarity_group("latex2e-_bigcirc")
+        square_keys = symbol_data.get_similarity_group("amssymb-_square")
+        triangle_keys = symbol_data.get_similarity_group("latex2e-_bigtriangleup")
         circle_cycle = cycle(
             filter(
                 lambda s_id: sc.is_good_circle(self.load_stroke_data(s_id))[0],
@@ -650,12 +650,12 @@ def main():
         validation_split=0,
         train=True,
         random_augmentation=True,
-        debug_single_sample_only=True,
+        debug_single_sample_only=False,
         distribution_stats=None,
     )
 
     # Show all the samples for a given symbol.
-    symbol = "logix-OT1-_CircOr"
+    symbol = "stix-_triangleplus"
     leader = symbol_data.to_leader.get(symbol, symbol)
     if symbol != leader:
         print(f"Symbol '{symbol}' is not a leader, using leader '{leader}' instead.")

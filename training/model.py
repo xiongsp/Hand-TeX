@@ -18,12 +18,12 @@ class CNN(nn.Module):
         layer1 = 8
         layer2 = 16
         layer3 = 32
-        layer4 = 48
-        layer5 = 64
-        fc = 3072
+        layer4 = 64
+        layer5 = 128
+        layer6 = 256
 
         self.num_pools = 3
-        self.last_conv = layer5
+        self.last_conv = layer6
 
         # Image size is cut in half with each pooling.
         # This makes the fully connected layer have x * image_size/8 * image_size/8 input features.
@@ -41,13 +41,11 @@ class CNN(nn.Module):
 
         self.conv5 = nn.Conv2d(layer4, layer5, kernel_size=3, padding=1)
         self.bn5 = nn.BatchNorm2d(layer5)
-        # self.conv6 = nn.Conv2d(128, 256, kernel_size=3, padding=1)
-        # self.bn6 = nn.BatchNorm2d(256)
+        self.conv6 = nn.Conv2d(layer5, layer6, kernel_size=3, padding=1)
+        self.bn6 = nn.BatchNorm2d(layer6)
         self.pool3 = nn.MaxPool2d(2, 2)
 
-        self.fc1 = nn.Linear(layer5 * (image_size // 2**self.num_pools) ** 2, fc)
-        self.dropout = nn.Dropout(0.6)
-        self.fc2 = nn.Linear(fc, num_classes)
+        self.fc1 = nn.Linear(self.last_conv, num_classes)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
@@ -63,10 +61,11 @@ class CNN(nn.Module):
         x = F.relu(self.bn4(self.conv4(x)))
         x = self.pool2(x)
         x = F.relu(self.bn5(self.conv5(x)))
-        # x = F.relu(self.bn6(self.conv6(x)))
+        x = F.relu(self.bn6(self.conv6(x)))
         x = self.pool3(x)
-        x = x.view(-1, self.last_conv * (self.image_size // 2**self.num_pools) ** 2)
-        x = F.relu(self.fc1(x))
-        x = self.dropout(x)
-        x = self.fc2(x)
+
+        x = F.adaptive_avg_pool2d(x, (1, 1))
+        # or x = x.mean(dim=[2, 3])
+        x = x.view(-1, self.last_conv)
+        x = self.fc1(x)
         return x

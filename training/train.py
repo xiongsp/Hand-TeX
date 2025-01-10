@@ -50,13 +50,6 @@ def save_encoder(label_encoder: LabelEncoder, leader_keys: list[str]):
         file.write(encoding_str)
 
 
-# Training Loss: 11.7996, Training Accuracy: 93.88%
-# Validation Loss: 13.5945, Validation Accuracy: 93.92%
-
-# Training Loss: 7.1964, Training Accuracy: 96.10%
-# Validation Loss: 8.8431, Validation Accuracy: 95.72%
-
-
 def main(resume_from_checkpoint=False):
     symbol_data = sr.SymbolData()
 
@@ -312,22 +305,6 @@ def main(resume_from_checkpoint=False):
         print(
             f"Actual: {actual}, Predicted: {predicted_label}, Count: {count}, Percentage: {percentage:.2f}%"
         )
-
-    # # Identify and print top ten most misclassified symbols
-    # from collections import Counter
-    #
-    # misclassifications = [
-    #     (target, pred) for target, pred in zip(all_targets, all_preds) if target != pred
-    # ]
-    #
-    # misclass_counter = Counter(misclassifications)
-    # top_misclassified = misclass_counter.most_common(50)
-    #
-    # print("\nTop 50 Most Misclassified Symbols:")
-    # for (actual, predicted), count in top_misclassified:
-    #     actual_label = label_encoder.inverse_transform([actual])[0]
-    #     predicted_label = label_encoder.inverse_transform([predicted])[0]
-    #     print(f"Actual: {actual_label}, Predicted: {predicted_label}, Count: {count}")
 
 
 if __name__ == "__main__":

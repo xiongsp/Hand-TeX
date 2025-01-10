@@ -1,6 +1,6 @@
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 10
+num_epochs = 8
 image_size = 64
 db_path = "database/handtex.db"
 

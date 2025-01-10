@@ -15,29 +15,39 @@ class CNN(nn.Module):
 
         self.image_size = image_size
 
+        layer1 = 8
+        layer2 = 16
+        layer3 = 32
+        layer4 = 48
+        layer5 = 64
+        fc = 3072
+
+        self.num_pools = 3
+        self.last_conv = layer5
+
         # Image size is cut in half with each pooling.
         # This makes the fully connected layer have x * image_size/8 * image_size/8 input features.
-        self.conv1 = nn.Conv2d(1, 8, kernel_size=3, padding=1)
-        self.bn1 = nn.BatchNorm2d(8)
-        self.conv2 = nn.Conv2d(8, 16, kernel_size=3, padding=1)
-        self.bn2 = nn.BatchNorm2d(16)
+        self.conv1 = nn.Conv2d(1, layer1, kernel_size=3, padding=1)
+        self.bn1 = nn.BatchNorm2d(layer1)
+        self.conv2 = nn.Conv2d(layer1, layer2, kernel_size=3, padding=1)
+        self.bn2 = nn.BatchNorm2d(layer2)
         self.pool1 = nn.MaxPool2d(2, 2)
 
-        self.conv3 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
-        self.bn3 = nn.BatchNorm2d(32)
-        self.conv4 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
-        self.bn4 = nn.BatchNorm2d(64)
+        self.conv3 = nn.Conv2d(layer2, layer3, kernel_size=3, padding=1)
+        self.bn3 = nn.BatchNorm2d(layer3)
+        self.conv4 = nn.Conv2d(layer3, layer4, kernel_size=3, padding=1)
+        self.bn4 = nn.BatchNorm2d(layer4)
         self.pool2 = nn.MaxPool2d(2, 2)
 
-        self.conv5 = nn.Conv2d(64, 128, kernel_size=3, padding=1)
-        self.bn5 = nn.BatchNorm2d(128)
-        self.conv6 = nn.Conv2d(128, 256, kernel_size=3, padding=1)
-        self.bn6 = nn.BatchNorm2d(256)
+        self.conv5 = nn.Conv2d(layer4, layer5, kernel_size=3, padding=1)
+        self.bn5 = nn.BatchNorm2d(layer5)
+        # self.conv6 = nn.Conv2d(128, 256, kernel_size=3, padding=1)
+        # self.bn6 = nn.BatchNorm2d(256)
         self.pool3 = nn.MaxPool2d(2, 2)
 
-        self.fc1 = nn.Linear(256 * image_size // 8 * image_size // 8, 4096)
+        self.fc1 = nn.Linear(layer5 * (image_size // 2**self.num_pools) ** 2, fc)
         self.dropout = nn.Dropout(0.6)
-        self.fc2 = nn.Linear(4096, num_classes)
+        self.fc2 = nn.Linear(fc, num_classes)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
@@ -53,9 +63,9 @@ class CNN(nn.Module):
         x = F.relu(self.bn4(self.conv4(x)))
         x = self.pool2(x)
         x = F.relu(self.bn5(self.conv5(x)))
-        x = F.relu(self.bn6(self.conv6(x)))
+        # x = F.relu(self.bn6(self.conv6(x)))
         x = self.pool3(x)
-        x = x.view(-1, 256 * self.image_size // 8 * self.image_size // 8)
+        x = x.view(-1, self.last_conv * (self.image_size // 2**self.num_pools) ** 2)
         x = F.relu(self.fc1(x))
         x = self.dropout(x)
         x = self.fc2(x)

@@ -16,7 +16,7 @@ BLACK_EXCLUDE_PATTERN := "^$(UI_OUTPUT_DIR)/.*"
 # default target
 fresh-install: clean build install
 
-refresh-assets: build-icon-cache compile-ui
+refresh-assets: build-icon-cache compile-ui bundle-symbols
 
 # build target
 build:

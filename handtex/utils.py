@@ -391,7 +391,7 @@ def preload_svg_tar(tar_path: Path | str = ""):
         for member in tar.getmembers():
             if member.isfile() and member.name.endswith(".svg"):
                 svg_cache[member.name] = tar.extractfile(member).read().decode("utf-8")
-    print(f"Loading blob took {1000 * (time.time() - start):.2f}ms")
+    logger.info(f"Loading symbol images took {1000 * (time.time() - start):.2f}ms")
 
 
 def load_symbol_svg(symbol: st.Symbol, fill_color: str = "#000000") -> Qc.QByteArray:

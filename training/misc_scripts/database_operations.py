@@ -237,7 +237,6 @@ def stroke_has_stair_steps(stroke: list[list[list[int]]]) -> bool:
     return False
 
 
-# TODO fix the parallel symbol being slanty
 def operation_fix_stairs(s_id, symbol_key, s):
     if not stroke_has_stair_steps(s):
         return s

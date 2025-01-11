@@ -18,10 +18,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtSvgWidgets import QSvgWidget
 from PySide6.QtWidgets import (QApplication, QCheckBox, QFormLayout, QFrame,
     QGraphicsView, QHBoxLayout, QLabel, QLineEdit,
-    QMainWindow, QPushButton, QScrollArea, QSizePolicy,
-    QSlider, QSpacerItem, QSpinBox, QSplitter,
-    QStackedWidget, QVBoxLayout, QWidget)
+    QMainWindow, QPushButton, QSizePolicy, QSlider,
+    QSpacerItem, QSpinBox, QSplitter, QStackedWidget,
+    QVBoxLayout, QWidget)
 
+from handtex.CustomQ.CScrollArea import CScrollArea
 from handtex.sketchpad import Sketchpad
 
 class Ui_MainWindow(object):
@@ -45,7 +46,7 @@ class Ui_MainWindow(object):
         self.page_sketch.setObjectName(u"page_sketch")
         self.verticalLayout = QVBoxLayout(self.page_sketch)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(-1, -1, 6, -1)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(-1, -1, -1, 1)
@@ -170,12 +171,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_4 = QVBoxLayout(self.page_classify)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.scrollArea_predictions = QScrollArea(self.page_classify)
+        self.scrollArea_predictions = CScrollArea(self.page_classify)
         self.scrollArea_predictions.setObjectName(u"scrollArea_predictions")
+        self.scrollArea_predictions.setMinimumSize(QSize(300, 0))
         self.scrollArea_predictions.setWidgetResizable(True)
         self.widget_predictions = QWidget()
         self.widget_predictions.setObjectName(u"widget_predictions")
-        self.widget_predictions.setGeometry(QRect(0, 0, 517, 632))
+        self.widget_predictions.setGeometry(QRect(0, 0, 541, 628))
         self.verticalLayout_7 = QVBoxLayout(self.widget_predictions)
         self.verticalLayout_7.setSpacing(12)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")

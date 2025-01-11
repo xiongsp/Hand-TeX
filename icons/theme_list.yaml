@@ -6,6 +6,7 @@ Files:
   actions:
     16:
       - application-menu
+      - arrow-up
       - edit-clear
       - edit-undo
       - edit-redo

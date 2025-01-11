@@ -8,7 +8,7 @@ import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtSvgWidgets as Qsw
 import PySide6.QtWidgets as Qw
-from PySide6.QtCore import Signal
+from PySide6.QtCore import Signal, Qt
 from loguru import logger
 from PySide6.QtCore import Slot
 import numpy as np
@@ -28,9 +28,6 @@ import training.inference as inf
 import training.model as mdl
 from handtex import __program__, __version__
 from handtex.ui_generated_files.ui_Mainwindow import Ui_MainWindow
-
-# TODO make curated dataset of symbols used exclusively for validation. Should contain 1 sample per symbol.
-# TODO with the above, start distilling model to shrink size.
 
 
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
@@ -655,57 +652,33 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 frame.setLayout(similarity_stack)
 
             for s in similarity_group:
-                symbol_data = self.symbol_data[s]
-                outer_layout = Qw.QHBoxLayout()
-                outer_layout.setSpacing(6)
-                svg_widget = Qsw.QSvgWidget()
-                svg_widget.load(ut.load_symbol_svg(symbol_data, hex_color))
-                svg_widget.renderer().setAspectRatioMode(Qc.Qt.KeepAspectRatio)
-                svg_widget.setFixedSize(64, 64)
-                outer_layout.addWidget(svg_widget)
-
-                inner_layout = Qw.QVBoxLayout()
-                label_policy = Qw.QSizePolicy(Qw.QSizePolicy.Preferred, Qw.QSizePolicy.Minimum)
-                if not symbol_data.package_is_default():
-                    package_label = Qw.QLabel(f"\\usepackage{{ {symbol_data.package} }}")
-                    package_label.setSizePolicy(label_policy)
-                    package_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
-                    inner_layout.addWidget(package_label)
-                command_label = Qw.QLabel(symbol_data.command)
-                command_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
-                # Make this one 1.5 times bigger.
-                font = command_label.font()
-                font.setPointSize(int(font.pointSize() * 1.5))
-                font.setBold(True)
-                command_label.setSizePolicy(label_policy)
-                command_label.setFont(font)
-                inner_layout.addWidget(command_label)
-                mode_label = Qw.QLabel(f"{symbol_data.mode_str()} (Match: {confidence:.1%})")
-                mode_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
-                font = mode_label.font()
-                font.setPointSize(int(font.pointSize() * 0.9))
-                mode_label.setFont(font)
-                mode_label.setSizePolicy(label_policy)
-                inner_layout.setSpacing(0)
-                inner_layout.setContentsMargins(0, 0, 0, 0)
-                inner_layout.addWidget(mode_label)
-
-                # Squish the inner layout together vertically.
-                # Do this by making them not expand vertically, with a center alignment vertically.
-
-                outer_layout.addLayout(inner_layout)
+                prediction_widget = PredictionWidget(
+                    self, self.symbol_data[s], confidence, hex_color, self.debug
+                )
+                prediction_widget.symbol_for_clipboard.connect(self.copy_symbol_to_clipboard)
 
                 if similarity_stack:
-                    similarity_stack.addLayout(outer_layout)
+                    similarity_stack.addWidget(prediction_widget)
                 else:
                     # Pad the outer layout with a left margin, so
                     # that it lines up with the framed lookalikes.
-                    outer_layout.setContentsMargins(6, 0, 0, 0)
-                    self.widget_predictions.layout().addLayout(outer_layout)
+                    prediction_widget.setContentsMargins(6, 0, 0, 0)
+                    self.widget_predictions.layout().addWidget(prediction_widget)
             if similarity_stack:
                 self.widget_predictions.layout().addWidget(frame)
         # Slap a spacer on the end to push the items to the top.
         self.widget_predictions.layout().addStretch()
+
+    @Slot(str)
+    def copy_symbol_to_clipboard(self, clipboard_text: str) -> None:
+        """
+        Copy the symbol to the clipboard and open a toast at the bottom
+        of the scroll area.
+        """
+        clipboard = Qw.QApplication.clipboard()
+        clipboard.setText(clipboard_text)
+        toast = Toast(self.scrollArea_predictions, f"Copied {clipboard_text} to clipboard.")
+        toast.show()
 
     # ======================================= Loading Images =======================================
 
@@ -868,3 +841,201 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         max_submissions = self.spinBox_max_submissions.value()
         self.label_submission_number.setText(f"{self.submission_count}/{max_submissions}")
+
+
+class PredictionWidget(Qw.QWidget):
+    # Signal to emit the symbol command when double clicked
+    symbol_for_clipboard = Signal(str)
+
+    def __init__(
+        self,
+        parent: Qw.QWidget,
+        symbol_data: st.Symbol,
+        confidence: float,
+        background_color: str,
+        debug: bool = False,
+    ):
+        super().__init__(parent)
+        self.symbol_data = symbol_data
+        self.debug = debug
+
+        outer_layout = Qw.QHBoxLayout()
+        outer_layout.setSpacing(6)
+
+        # SVG widget
+        svg_widget = Qsw.QSvgWidget()
+        svg_widget.load(ut.load_symbol_svg(symbol_data, background_color))
+        svg_widget.renderer().setAspectRatioMode(Qc.Qt.KeepAspectRatio)
+        svg_widget.setFixedSize(64, 64)
+        outer_layout.addWidget(svg_widget)
+
+        # Right side (text) layout
+        inner_layout = Qw.QVBoxLayout()
+        label_policy = Qw.QSizePolicy(Qw.QSizePolicy.Preferred, Qw.QSizePolicy.Minimum)
+
+        # Optional \usepackage label
+        if not symbol_data.package_is_default():
+            package_label = Qw.QLabel(f"\\usepackage{{{symbol_data.package}}}")
+            package_label.setSizePolicy(label_policy)
+            # package_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
+            inner_layout.addWidget(package_label)
+
+        # Command label
+        command_label = Qw.QLabel(symbol_data.command)
+        # command_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
+        font = command_label.font()
+        font.setPointSize(int(font.pointSize() * 1.5))
+        font.setBold(True)
+        command_label.setFont(font)
+        command_label.setSizePolicy(label_policy)
+        inner_layout.addWidget(command_label)
+
+        # Mode + confidence label
+        mode_label = Qw.QLabel(f"{symbol_data.mode_str()} (Match: {confidence:.1%})")
+        # mode_label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
+        font = mode_label.font()
+        font.setPointSize(int(font.pointSize() * 0.9))
+        mode_label.setFont(font)
+        mode_label.setSizePolicy(label_policy)
+        inner_layout.setSpacing(0)
+        inner_layout.setContentsMargins(0, 0, 0, 0)
+        inner_layout.addWidget(mode_label)
+
+        # Combine
+        outer_layout.addLayout(inner_layout)
+        self.setLayout(outer_layout)
+
+    def mouseDoubleClickEvent(self, event: Qg.QMouseEvent) -> None:
+        """
+        Emit the symbol command string when the widget is double clicked
+        (including if the double click happens on a child widget).
+        """
+        self.symbol_for_clipboard.emit(self.symbol_data.command)
+        super().mouseDoubleClickEvent(event)
+
+    def contextMenuEvent(self, event: Qg.QContextMenuEvent) -> None:
+        """
+        Show a context menu on right click offering:
+        - Copy Command
+        - Copy Usepackage Snippet
+        - Copy Key (only if debug=True)
+        """
+        menu = Qw.QMenu(self)
+
+        # Always add "Copy Command"
+        copy_command_action = menu.addAction("Copy Command")
+
+        # Add "Copy UsePackage Snippet" only if a non-default package is used
+        copy_usepackage_action = None
+        if not self.symbol_data.package_is_default():
+            copy_usepackage_action = menu.addAction("Copy UsePackage Snippet")
+
+        # Add "Copy Key" only if debug is True
+        copy_key_action = None
+        if self.debug:
+            copy_key_action = menu.addAction("Copy Key")
+
+        chosen_action = menu.exec_(self.mapToGlobal(event.pos()))
+        if chosen_action == copy_command_action:
+            Qw.QApplication.clipboard().setText(self.symbol_data.command)
+
+        elif chosen_action == copy_usepackage_action:
+            snippet = f"\\usepackage{{{self.symbol_data.package}}}"
+            Qw.QApplication.clipboard().setText(snippet)
+
+        elif chosen_action == copy_key_action:
+            Qw.QApplication.clipboard().setText(self.symbol_data.key)
+
+
+class Toast(Qw.QLabel):
+    """A floating toast message for QScrollArea that auto-closes after 5 seconds."""
+
+    _active_toasts = []
+
+    def __init__(self, parent: Qw.QScrollArea, message: str):
+        super().__init__(parent)
+
+        # Close any other active toasts
+        for toast in list(self._active_toasts):
+            toast.close()
+        self._active_toasts.clear()
+        self._active_toasts.append(self)
+
+        # Increase font size a bit to make the brief message more readable.
+        font = self.font()
+        font.setPointSize(round(font.pointSize() * 1.2))
+        self.setFont(font)
+
+        self.setText(message)
+        self.setWordWrap(True)
+        self.setAlignment(Qc.Qt.AlignCenter)
+        self.setWindowFlag(Qc.Qt.FramelessWindowHint)
+        self.setAttribute(Qc.Qt.WA_TransparentForMouseEvents, True)
+
+        # Derive background color from parent's palette, invert its luminosity.
+        self._apply_inverted_bg_and_text()
+
+        # Close automatically after 5 seconds
+        Qc.QTimer.singleShot(5000, self.close)
+
+    def _apply_inverted_bg_and_text(self) -> None:
+        """Derive the parent's background color, invert it, and pick a good text color."""
+        # Get the scroll area viewport’s palette/color
+        palette = self.parentWidget().viewport().palette()
+        original_color = palette.color(Qg.QPalette.Window)
+
+        # Convert color to HSV and invert V (luminosity)
+        h, s, v, a = original_color.getHsv()
+        # Cut the saturation in half to make the text color more readable.
+        s = s // 2
+
+        # invert the luminosity:
+        v = 255 - v  # if v is in [0..255]
+
+        # Pick text color: if background is dark, text is white, else black
+        if v < 128:
+            text_color = "white"
+        else:
+            text_color = "black"
+
+        # Construct new color with same hue and saturation, inverted luminosity
+        inverted_bg = Qg.QColor()
+        inverted_bg.setHsv(h, s, v, a)
+
+        # Use partial transparency so we see "through" the toast
+        inverted_bg.setAlpha(240)
+
+        # Apply styling
+        self.setStyleSheet(
+            f"""
+            background-color: {inverted_bg.name(Qg.QColor.HexArgb)};
+            color: {text_color};
+            padding: 8px;
+            border-radius: 5px;
+        """
+        )
+
+    def showEvent(self, event):
+        super().showEvent(event)
+
+        # Use ~80% of the scroll area’s width so we don’t end up with a tall/narrow label
+        viewport_rect = self.parentWidget().viewport().rect()
+        max_width = int(viewport_rect.width() * 0.8)
+        self.setFixedWidth(max_width)
+
+        # Now that we have a set width, let the label expand as tall as needed
+        self.adjustSize()
+
+        # Position near bottom center of the scroll area's viewport
+        x = (viewport_rect.width() - self.width()) // 2
+        y = viewport_rect.height() - self.height() - 20
+        self.move(x, y)
+        self.raise_()
+
+    def closeEvent(self, event):
+        # Remove from active toasts if it’s still in the list
+        try:
+            self._active_toasts.remove(self)
+        except ValueError:
+            pass
+        super().closeEvent(event)

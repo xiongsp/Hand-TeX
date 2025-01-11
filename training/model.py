@@ -65,7 +65,6 @@ class CNN(nn.Module):
         x = self.pool3(x)
 
         x = F.adaptive_avg_pool2d(x, (1, 1))
-        # or x = x.mean(dim=[2, 3])
         x = x.view(-1, self.last_conv)
         x = self.fc1(x)
         return x

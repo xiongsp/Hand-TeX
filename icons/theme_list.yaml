@@ -6,7 +6,6 @@ Files:
   actions:
     16:
       - application-menu
-      - arrow-up
       - edit-clear
       - edit-undo
       - edit-redo
@@ -29,6 +28,8 @@ Files:
       - contrast
       - adjustcurves
       - viewimage
+    32:
+      - go-up
   status:
     16:
       - dialog-warning

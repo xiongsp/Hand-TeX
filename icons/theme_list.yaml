@@ -23,11 +23,11 @@ Files:
       - window-close
       - search
       - insert-image
-      - invertimage
-      - image-rotate-right-symbolic
-      - contrast
-      - adjustcurves
-      - viewimage
+#      - invertimage
+#      - image-rotate-right-symbolic
+#      - contrast
+#      - adjustcurves
+#      - viewimage
     32:
       - go-up
   status:

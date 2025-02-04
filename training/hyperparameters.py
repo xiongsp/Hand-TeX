@@ -1,6 +1,6 @@
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 10
+num_epochs = 8
 image_size = 64
 db_path = "database/handtex.db"
 
@@ -44,3 +44,6 @@ db_path = "database/handtex.db"
 # Deep model 10 epochs:
 # Training Loss: 7.7815, Training Accuracy: 96.63%
 # Validation Loss: 38.0330, Validation Accuracy: 89.54%
+
+# Training Loss: 6.7798, Training Accuracy: 97.03%
+# Validation Loss: 27.7906, Validation Accuracy: 90.05%

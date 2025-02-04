@@ -71,9 +71,7 @@ def main(resume_from_checkpoint=False):
         image_size,
         label_encoder,
         random_seed,
-        validation_split=0.2,
-        sample_limit=500,
-        train=True,
+        class_limit=500,
         stroke_cache=stroke_cache,
     )
     validation_dataset = StrokeDataset(
@@ -82,9 +80,7 @@ def main(resume_from_checkpoint=False):
         image_size,
         label_encoder,
         random_seed,
-        validation_split=0.2,
-        sample_limit=100,
-        train=False,
+        class_limit=100,
         stroke_cache=stroke_cache,
     )
 

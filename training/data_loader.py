@@ -2,10 +2,11 @@ import csv
 import json
 import random
 import sqlite3
+from enum import Enum
 from functools import cache
 from itertools import cycle
 from importlib import resources
-from math import ceil
+from math import floor
 
 import cv2
 import numpy as np
@@ -23,6 +24,21 @@ import training.image_gen as ig
 import training.shape_classifier as sc
 import training.hyperparameters as hyp
 import handtex.sketchpad as sp
+
+
+class DataSplit(Enum):
+    TRAIN = 0
+    VALIDATION = 1
+    TEST = 2
+
+
+split_percentages = {
+    DataSplit.TRAIN: 50,
+    DataSplit.VALIDATION: 20,
+    DataSplit.TEST: 30,
+}
+
+assert sum(split_percentages.values()) == 100, "Split points must sum to 100"
 
 
 def build_stroke_cache(db_path: str) -> dict[str, list[list[tuple[int, int]]]]:
@@ -58,6 +74,57 @@ def augmentation_amount(
     return int(factor * real_data_count)
 
 
+def get_data_split(
+    data: list, desired_split: DataSplit, split_percentages: dict[DataSplit, int]
+) -> list:
+    n = len(data)
+
+    if sum(split_percentages.values()) != 100:
+        raise ValueError("Split percentages must sum to 100")
+
+    # Sort the splits in the order defined by the enum.
+    splits = sorted(split_percentages.keys(), key=lambda s: s.value)
+
+    # Compute the ideal (raw) count for each split.
+    # We use floor, but guarantee that each split gets at least one sample.
+    counts = {}
+    fractions = {}
+    for s in splits:
+        raw = n * split_percentages[s] / 100
+        floor_val = floor(raw)
+        # Guarantee at least one sample per split
+        if floor_val < 1:
+            floor_val = 1
+            fraction = 0
+        else:
+            fraction = raw - floor_val
+        counts[s] = floor_val
+        fractions[s] = fraction
+
+    # Compute how many samples are still unassigned.
+    current_sum = sum(counts.values())
+    leftover = n - current_sum
+
+    # Distribute any leftover samples, one-by-one, starting with the split
+    # that had the highest fractional part.
+    for s in sorted(splits, key=lambda s: fractions[s], reverse=True):
+        if leftover <= 0:
+            break
+        counts[s] += 1
+        leftover -= 1
+
+    # Now create contiguous, disjoint segments based on these counts.
+    boundaries = {}
+    start = 0
+    for s in splits:
+        count = counts[s]
+        boundaries[s] = (start, start + count)
+        start += count
+
+    start_idx, end_idx = boundaries[desired_split]
+    return data[start_idx:end_idx]
+
+
 class StrokeDataset(Dataset):
     def __init__(
         self,
@@ -66,9 +133,8 @@ class StrokeDataset(Dataset):
         image_size: int,
         label_encoder: LabelEncoder,
         random_seed: int,
-        validation_split: float = 0.1,
-        train: bool = True,
-        sample_limit: int | None = None,
+        split: DataSplit = DataSplit.TRAIN,
+        class_limit: int | None = None,
         random_augmentation: bool = True,
         stroke_cache: dict[str, list[list[tuple[int, int]]]] = None,
         debug_single_sample_only: bool = False,
@@ -90,8 +156,7 @@ class StrokeDataset(Dataset):
         :param image_size: Size of the generated images (images are square)
         :param label_encoder: LabelEncoder object to encode labels.
         :param random_seed: Seed for the random number generator. Generator for training and validation MUST get the same.
-        :param validation_split: Fraction of the data to use for validation.
-        :param train: If True, load training data, else load validation data.
+        :param split: DataSplit enum to determine which split to use.
         :param random_augmentation: If True, augment the data with random transformations.
         :param stroke_cache: Cache of stroke data for each symbol key, alternative to loading from database.
         :param debug_single_sample_only: If True, only load a single sample for debugging.
@@ -108,10 +173,12 @@ class StrokeDataset(Dataset):
             ]
         ] = []
         self.symbol_keys = []
-        self.train = train
+        self.split = split
         self.stroke_cache = stroke_cache
 
-        random.seed(random_seed)
+        # Store the seed and create an instance-level RNG so that bootstrapping is isolated.
+        self.random_seed = random_seed
+        self.rng = random.Random(random_seed)
 
         # Load primary keys and symbol keys from the database for the provided symbol keys
         conn = sqlite3.connect(self.db_path)
@@ -119,7 +186,9 @@ class StrokeDataset(Dataset):
 
         @cache
         def load_primary_keys(
-            _symbol_keys: str | tuple[str], *, ignore_single_debug_sample_limit: bool = False
+            _symbol_keys: str | tuple[str] | list[str],
+            *,
+            ignore_single_debug_sample_limit: bool = False,
         ) -> list[int]:
             nonlocal cursor, debug_single_sample_only
 
@@ -135,21 +204,20 @@ class StrokeDataset(Dataset):
             # Unwrap the tuples, since squealite returns each row as such, even when selecting a single column.
             cursor_samples = [row[0] for row in cursor.fetchall()]
 
-            # If we only have one sample, just return that, we have no choice.
+            # If there is only one sample, no shuffling is possible.
             if len(cursor_samples) == 1:
                 return cursor_samples
 
-            # Perform the validation split here, to prevent that samples get
-            # reused between training and validation datasets.
-            # Validation gets the first x% of the samples.
-            nonlocal validation_split, train
-            # The split needs to be less than half, to work correctly with rounding up
-            # on small numbers of samples. Nobody uses more than 50% for validation anyway.
-            assert validation_split < 0.5
-            split_idx = ceil(len(cursor_samples) * validation_split)
-            if train:
-                return cursor_samples[split_idx:]
-            return cursor_samples[:split_idx]
+            # Bootstrapping: shuffle deterministically.
+            # Derive a seed from the global random_seed and the _symbol_keys
+            # (this ensures that the same symbol group always shuffles identically)
+            seed_for_shuffle = hash((self.random_seed, tuple(_symbol_keys)))
+            local_rng = random.Random(seed_for_shuffle)
+            local_rng.shuffle(cursor_samples)
+
+            global split_percentages
+            nonlocal split
+            return get_data_split(cursor_samples, split, split_percentages)
 
         # For negations, we need a cycle of the symbol keys to use for the slash.
         vertical_line_keys = symbol_data.get_similarity_group("latex2e-|")
@@ -244,16 +312,17 @@ class StrokeDataset(Dataset):
             if random_augmentation:
                 augmentation_count = augmentation_amount(real_data_count)
                 for _ in range(augmentation_count):
-                    symbol, transformations, composition_tuple, _ = random.choice(samples)
+                    symbol, transformations, composition_tuple, _ = self.rng.choice(samples)
                     # Use 16 bits of randomness, so as not to overflow the perlin noise algorithm.
                     samples.append(
-                        (symbol, transformations, composition_tuple, random.randint(0, 2**16 - 1))
+                        (symbol, transformations, composition_tuple, self.rng.randint(0, 2**16 - 1))
                     )
 
-            if sample_limit is not None:
-                samples = samples[:sample_limit]
+            if class_limit is not None:
+                samples = samples[:class_limit]
 
-            if train:
+            # Only report stats for the training split to cut down on log spam.
+            if split.TRAIN:
                 print(
                     f"Loaded {len(samples)} total samples of {symbol_key}, "
                     f"with {real_data_count} real data, "
@@ -370,17 +439,19 @@ class StrokeDataset(Dataset):
         trans_mats = []
         if random_augmentation_seed is not None:
             # Apply some type of random augmentation, using perlin noise 7/10 times.
-            random.seed(random_augmentation_seed)
-            operation = random.randint(0, 9)
+            local_rng = random.Random(random_augmentation_seed)
+            operation = local_rng.randint(0, 9)
+            numpy_rng = np.random.RandomState(random_augmentation_seed)
+
             if operation == 0:
-                trans_mats.append(ig.rotation_matrix(np.random.uniform(-5, 5)))
+                trans_mats.append(ig.rotation_matrix(numpy_rng.uniform(-5, 5)))
             elif operation == 1:
                 trans_mats.append(
-                    ig.scale_matrix(np.random.uniform(0.9, 1), np.random.uniform(0.9, 1))
+                    ig.scale_matrix(numpy_rng.uniform(0.9, 1), numpy_rng.uniform(0.9, 1))
                 )
             elif operation == 2:
                 trans_mats.append(
-                    ig.skew_matrix(np.random.uniform(-0.1, 0.1), np.random.uniform(-0.1, 0.1))
+                    ig.skew_matrix(numpy_rng.uniform(-0.1, 0.1), numpy_rng.uniform(-0.1, 0.1))
                 )
             else:
                 stroke_data = ig.augment_strokes_with_perlin(
@@ -546,9 +617,6 @@ def main():
             hyp.image_size,
             label_encoder,
             random_seed=0,
-            validation_split=0,
-            train=True,
-            shuffle=False,
             random_augmentation=True,
             debug_single_sample_only=False,
             distribution_stats=stats,
@@ -647,12 +715,37 @@ def main():
         hyp.image_size,
         label_encoder,
         random_seed=0,
-        validation_split=0,
-        train=True,
         random_augmentation=True,
         debug_single_sample_only=False,
         distribution_stats=None,
     )
+
+    test1 = StrokeDataset(
+        db_path,
+        symbol_data,
+        hyp.image_size,
+        label_encoder,
+        random_seed=0,
+        split=DataSplit.TEST,
+        class_limit=100,
+        random_augmentation=True,
+        distribution_stats=None,
+    )
+    test2 = StrokeDataset(
+        db_path,
+        symbol_data,
+        hyp.image_size,
+        label_encoder,
+        random_seed=0,
+        split=DataSplit.TEST,
+        class_limit=100,
+        random_augmentation=True,
+        distribution_stats=None,
+    )
+    assert len(test1) == len(test2), "Test datasets should have the same length"
+    assert (
+        test1.primary_keys == test2.primary_keys
+    ), "Test datasets should have the same primary keys"
 
     # Show all the samples for a given symbol.
     symbol = "stix-_triangleplus"

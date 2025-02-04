@@ -602,3 +602,5 @@ MnSymbol-_rcirclearrowdown mathabx-_uptodownarrow
 latex2e-_not_sqsupseteq stix-_nsqsupseteq
 latex2e-_not_subset stix-_nsubset
 latex2e-_not_sqsubseteq stix-_nsqsubseteq
+fdsymbol-_dotcong stix-_congdot
+fdsymbol-_nwedgeq MnSymbol-_nhateq

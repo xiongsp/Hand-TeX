@@ -45,6 +45,8 @@ def main():
             data = json.load(file)
             for drawing in data:
                 new_key = drawing["key"]
+                new_key = new_key.replace("-OT1", "")
+                new_key = new_key.replace("-T1", "")
                 if new_key not in new_drawings:
                     new_drawings[new_key] = []
                 strokes = drawing["strokes"]

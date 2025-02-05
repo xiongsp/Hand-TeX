@@ -146,138 +146,142 @@ for key, threshold in sorted(thresholds_min_points.items(), key=lambda x: x[1]):
 #
 #     return simple_strokes
 
-import handtex.symbol_relations as sr
-
-symbol_data = sr.SymbolData()
-
-
-def operation(s_id, symbol_key, s):
-    if symbol_key not in symbol_data.get_similarity_group(
-        #     "latex2e-_guilsinglright"
-        # ) + symbol_data.get_similarity_group(
-        #     "latex2e-_guilsinglleft"
-        #     ) + symbol_data.get_similarity_group(
-        "latex2e-_|"
-    ) + symbol_data.get_similarity_group("amssymb-_intercal"):
-        return s
-
-    # # We want to squish the strokes to fit within a width of 400.
-    # min_y = min(min(point[1] for point in stroke) for stroke in s)
-    # max_y = max(max(point[1] for point in stroke) for stroke in s)
-    # We want to squish the strokes to fit within a width of 400.
-    min_x = min(min(point[0] for point in stroke) for stroke in s)
-    max_x = max(max(point[0] for point in stroke) for stroke in s)
-
-    # height = max_y - min_y
-    width = max_x - min_x
-    scaled = False
-    # if height > 400:
-    if width > 600:
-        s_old = s
-        scaled = True
-        scale = 0.65
-        # We need to keep it centered on a 1000x1000 canvas.
-        # offset = (1000 - height * scale) / 2
-        # s_new = [
-        #     [(int(point[0]), int((point[1] - min_y) * scale + offset)) for point in stroke]
-        #     for stroke in s
-        # ]
-        offset = (1000 - width * scale) / 2
-        s_new = [
-            [(int((point[0] - min_x) * scale + offset), int(point[1])) for point in stroke]
-            for stroke in s
-        ]
-        s = [rdp(stroke, epsilon=3) for stroke in s_new]
-        # Plot it to see what it looks like.
-        plot_stroke_pair(s, s_old, f"{symbol_key} (ID: {s_id}) {'(scaled)' if scaled else ''}")
-
-    return s
-
-
-def stroke_has_stair_steps(stroke: list[list[list[int]]]) -> bool:
-    """
-    We want to detect when the stroke has a series of stair steps in it,
-    which resulted from scaling the stroke.
-
-    Stair steps are defined as a series of 3 points that form a perfect right angle.
-
-    :param stroke: a list of strokes, which are a list of (x, y) coordinates.
-    :return: True is the stroke has stair steps, False otherwise.
-    """
-    min_step_count = 3
-    min_step_size = 8
-    max_step_size = 40
-
-    for stroke in stroke:
-        steps = 0
-        for i in range(2, len(stroke)):
-            x0, y0 = stroke[i - 2]
-            x1, y1 = stroke[i - 1]
-            x2, y2 = stroke[i]
-
-            # Check if the points form a right angle.
-            if (x1 - x0) * (x2 - x1) + (y1 - y0) * (y2 - y1) == 0:
-                # Check if the step size is within the threshold.
-                if (
-                    abs(x1 - x0) < max_step_size
-                    and abs(y1 - y0) < max_step_size
-                    and abs(x2 - x1) < max_step_size
-                    and abs(y2 - y1) < max_step_size
-                ):
-                    if (
-                        abs(x1 - x0) > min_step_size
-                        or abs(y1 - y0) > min_step_size
-                        or abs(x2 - x1) > min_step_size
-                        or abs(y2 - y1) > min_step_size
-                    ):
-                        steps += 1
-
-            if steps >= min_step_count:
-                return True
-    return False
-
-
-def operation_fix_stairs(s_id, symbol_key, s):
-    if not stroke_has_stair_steps(s):
-        return s
-
-    # Perform resampling to create more intermediate points.
-    resampled_s = resample_strokes(s, 3)
-    # Perform smoothing to remove the stair steps.
-    smoothed_s = [rdp(stroke, epsilon=7) for stroke in resampled_s]
-
-    # Get difference if point counts.
-    total_points = sum(len(stroke) for stroke in s)
-    total_points_resampled = sum(len(stroke) for stroke in resampled_s)
-    total_points_smoothed = sum(len(stroke) for stroke in smoothed_s)
-
-    # assert total_points_smoothed <= total_points
-
-    # Just show it for now.
-    if total_points_smoothed > total_points:
-        # plot_stroke_pair(
-        #     s,
-        #     smoothed_s,
-        #     f"{symbol_key} (ID: {s_id}) ({total_points} -> {total_points_resampled} -> {total_points_smoothed} [{1- total_points_smoothed/total_points:.2%}])",
-        # )
-        print(
-            f"{symbol_key} (ID: {s_id}) ({total_points} -> {total_points_resampled} -> {total_points_smoothed} [{1- total_points_smoothed/total_points:.2%}])"
-        )
-
-        return s
-    return smoothed_s
+# import handtex.symbol_relations as sr
+#
+# symbol_data = sr.SymbolData()
+#
+#
+# def operation(s_id, symbol_key, s):
+#     if symbol_key not in symbol_data.get_similarity_group(
+#         #     "latex2e-_guilsinglright"
+#         # ) + symbol_data.get_similarity_group(
+#         #     "latex2e-_guilsinglleft"
+#         #     ) + symbol_data.get_similarity_group(
+#         "latex2e-_|"
+#     ) + symbol_data.get_similarity_group("amssymb-_intercal"):
+#         return s
+#
+#     # # We want to squish the strokes to fit within a width of 400.
+#     # min_y = min(min(point[1] for point in stroke) for stroke in s)
+#     # max_y = max(max(point[1] for point in stroke) for stroke in s)
+#     # We want to squish the strokes to fit within a width of 400.
+#     min_x = min(min(point[0] for point in stroke) for stroke in s)
+#     max_x = max(max(point[0] for point in stroke) for stroke in s)
+#
+#     # height = max_y - min_y
+#     width = max_x - min_x
+#     scaled = False
+#     # if height > 400:
+#     if width > 600:
+#         s_old = s
+#         scaled = True
+#         scale = 0.65
+#         # We need to keep it centered on a 1000x1000 canvas.
+#         # offset = (1000 - height * scale) / 2
+#         # s_new = [
+#         #     [(int(point[0]), int((point[1] - min_y) * scale + offset)) for point in stroke]
+#         #     for stroke in s
+#         # ]
+#         offset = (1000 - width * scale) / 2
+#         s_new = [
+#             [(int((point[0] - min_x) * scale + offset), int(point[1])) for point in stroke]
+#             for stroke in s
+#         ]
+#         s = [rdp(stroke, epsilon=3) for stroke in s_new]
+#         # Plot it to see what it looks like.
+#         plot_stroke_pair(s, s_old, f"{symbol_key} (ID: {s_id}) {'(scaled)' if scaled else ''}")
+#
+#     return s
+#
+#
+# def stroke_has_stair_steps(stroke: list[list[list[int]]]) -> bool:
+#     """
+#     We want to detect when the stroke has a series of stair steps in it,
+#     which resulted from scaling the stroke.
+#
+#     Stair steps are defined as a series of 3 points that form a perfect right angle.
+#
+#     :param stroke: a list of strokes, which are a list of (x, y) coordinates.
+#     :return: True is the stroke has stair steps, False otherwise.
+#     """
+#     min_step_count = 3
+#     min_step_size = 8
+#     max_step_size = 40
+#
+#     for stroke in stroke:
+#         steps = 0
+#         for i in range(2, len(stroke)):
+#             x0, y0 = stroke[i - 2]
+#             x1, y1 = stroke[i - 1]
+#             x2, y2 = stroke[i]
+#
+#             # Check if the points form a right angle.
+#             if (x1 - x0) * (x2 - x1) + (y1 - y0) * (y2 - y1) == 0:
+#                 # Check if the step size is within the threshold.
+#                 if (
+#                     abs(x1 - x0) < max_step_size
+#                     and abs(y1 - y0) < max_step_size
+#                     and abs(x2 - x1) < max_step_size
+#                     and abs(y2 - y1) < max_step_size
+#                 ):
+#                     if (
+#                         abs(x1 - x0) > min_step_size
+#                         or abs(y1 - y0) > min_step_size
+#                         or abs(x2 - x1) > min_step_size
+#                         or abs(y2 - y1) > min_step_size
+#                     ):
+#                         steps += 1
+#
+#             if steps >= min_step_count:
+#                 return True
+#     return False
+#
+#
+# def operation_fix_stairs(s_id, symbol_key, s):
+#     if not stroke_has_stair_steps(s):
+#         return s
+#
+#     # Perform resampling to create more intermediate points.
+#     resampled_s = resample_strokes(s, 3)
+#     # Perform smoothing to remove the stair steps.
+#     smoothed_s = [rdp(stroke, epsilon=7) for stroke in resampled_s]
+#
+#     # Get difference if point counts.
+#     total_points = sum(len(stroke) for stroke in s)
+#     total_points_resampled = sum(len(stroke) for stroke in resampled_s)
+#     total_points_smoothed = sum(len(stroke) for stroke in smoothed_s)
+#
+#     # assert total_points_smoothed <= total_points
+#
+#     # Just show it for now.
+#     if total_points_smoothed > total_points:
+#         # plot_stroke_pair(
+#         #     s,
+#         #     smoothed_s,
+#         #     f"{symbol_key} (ID: {s_id}) ({total_points} -> {total_points_resampled} -> {total_points_smoothed} [{1- total_points_smoothed/total_points:.2%}])",
+#         # )
+#         print(
+#             f"{symbol_key} (ID: {s_id}) ({total_points} -> {total_points_resampled} -> {total_points_smoothed} [{1- total_points_smoothed/total_points:.2%}])"
+#         )
+#
+#         return s
+#     return smoothed_s
+#
 
 
 # Process each row, removing consecutive duplicate coordinates
 for row in tqdm(rows):
     sample_id, key, strokes_json = row
-    strokes = json.loads(strokes_json)
-    op_strokes = operation_fix_stairs(sample_id, key, strokes)
-    op_strokes_json = json.dumps(op_strokes)
+    # strokes = json.loads(strokes_json)
+    # op_strokes = operation_fix_old_ids(sample_id, key, strokes)
+    # op_strokes_json = json.dumps(op_strokes)
+    key = key.replace("-OT1", "")
+    key = key.replace("-T1", "")
     # Insert the cleaned data into the new database
     output_cursor.execute(
         "INSERT INTO samples (id, key, strokes) VALUES (?, ?, ?)",
-        (sample_id, key, op_strokes_json),
+        # (sample_id, key, op_strokes_json),
+        (sample_id, key, strokes_json),
     )
 
 print(f"Total points before cleaning: {total_strokes}")

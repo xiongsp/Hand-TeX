@@ -8,6 +8,7 @@ psutil
 numpy
 rdp
 torch
+natsort
 torchvision
 opencv-python
 safetensors

@@ -12,15 +12,13 @@ class Symbol:
     package: Optional[str] = None
     fontenc: Optional[str] = None
     mathmode: bool = False
-    textmode: bool = True
-    pdflatex: bool = True
+    textmode: bool = True  # In the yaml, the mode is assumed to be textmode if not specified.
     key: str = field(init=False)
     filename: str = field(init=False)
 
     def __post_init__(self):
         # Create an ID for the symbol
         package = self.package or "latex2e"
-        fontenc = self.fontenc or "OT1"
         self.key = f"{package}-{self.command.replace('\\', '_')}"
         # Generate initial filename based on hash of the ID
         self.filename = hashlib.md5(self.key.encode()).hexdigest().upper()
@@ -28,13 +26,23 @@ class Symbol:
     def __str__(self):
         return f"{self.command} ({self.package or 'latex2e'}, {self.fontenc or 'OT1'})"
 
-    def to_hash(self):
+    def to_dict(self):
         result = {
-            attr: getattr(self, attr)
-            for attr in self.__annotations__
-            if getattr(self, attr) is not None
+            "command": self.command,
+            "filename": self.filename,
         }
-        result["key"] = self.key
+        # Only include non-default values.
+        if self.package is not None:
+            result["package"] = self.package
+        if self.fontenc is not None:
+            result["fontenc"] = self.fontenc
+        # Assume mathmode is true, and textmode is false.
+        if not self.mathmode and self.textmode:
+            result["mode"] = "text"
+        elif self.mathmode and self.textmode:
+            result["mode"] = "both"
+        # mode = math by default when missing.
+
         return result
 
     @classmethod
@@ -60,7 +68,6 @@ class Symbol:
                                     command=cmd,
                                     package=symbol.get("package"),
                                     fontenc=symbol.get("fontenc"),
-                                    pdflatex=symbol.get("pdflatex", True),
                                     **mode_args,
                                 )
                             )
@@ -75,7 +82,7 @@ class Symbol:
     @staticmethod
     def to_json(symbols, json_file):
         with open(json_file, "w") as f:
-            json.dump([symbol.to_hash() for symbol in symbols], f, indent=2)
+            json.dump([symbol.to_dict() for symbol in symbols], f, indent=2)
 
 
 def main():

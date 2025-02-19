@@ -1453,7 +1453,6 @@
 # COMPREHENSIVE LaTeX SYMBOL LIST by Scott Pakin
 # Table 50: logix Math-mode Versions of Text Symbols
 - package: logix
-  pdflatex: no
   mathmode:
 #    - \AAnd
 #    - \Dagger
@@ -1482,7 +1481,6 @@
 #    - \Semicln
 #Table 51: logix Basic Operators
 - package: logix
-  pdflatex: no
   mathmode:
     - \Asterick
     - \CircMinusPlus
@@ -1994,7 +1992,6 @@
 #    - \shuffle
 # Table 68: logix Logical Operators
 - package: logix
-  pdflatex: no
   mathmode:
     - \CircInvNt
     - \CircXor
@@ -3227,7 +3224,6 @@
     - \wedgeq
 # Table 123: logix Binary Relations
 - package: logix
-  pdflatex: no
   mathmode:
     - \ClsEquv
     - \NotClsEquv

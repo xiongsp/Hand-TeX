@@ -42,25 +42,30 @@ def load_symbols(file_path):
 # 2. Generate LaTeX files
 def generate_latex_file(symbol):
     # Parse package, encoding, and command from symbol id
-    package, command = symbol["key"].split("-", maxsplit=1)
-    package = package.strip()
+    package = symbol.get("package", "latex2e")
     if "fontenc" in symbol:
         encoding = symbol["fontenc"]
     else:
         encoding = "OT1"
 
+    pdflatex = package != "logix"
+    if "mode" not in symbol or symbol["mode"] == "both":
+        mathmode = True
+    else:
+        mathmode = False
+
     # Construct LaTeX document
     tex_content = f"""
     \\documentclass[10pt]{{article}}
-    {'\\usepackage[utf8]{{inputenc}}' if symbol['pdflatex'] else ''}
+    {'\\usepackage[utf8]{{inputenc}}' if pdflatex else ''}
     \\usepackage[{encoding}]{{fontenc}}
     {'\\usepackage{{' + package + '}}' if package != 'latex2e' else ''}
     \\pagestyle{{empty}}
     \\begin{{document}}
-    {'$' + symbol['command'] + '$' if symbol['mathmode'] else symbol['command']}
+    {'$' + symbol['command'] + '$' if mathmode else symbol['command']}
     \\end{{document}}
     """
-    suffix = ".tex" if symbol["pdflatex"] else ".xelatex"
+    suffix = ".tex" if pdflatex else ".xelatex"
     temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
     with open(temp_file.name, "w") as file:
         file.write(tex_content)
@@ -201,6 +206,8 @@ def main():
             missing_symbols.append(symbol["command"])
     if missing_symbols:
         print(f"Failed to render the following symbols: {', '.join(missing_symbols)}")
+    else:
+        print("All symbols rendered successfully.")
 
 
 if __name__ == "__main__":

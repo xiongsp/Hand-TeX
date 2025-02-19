@@ -24,10 +24,24 @@ class Symbol:
     def from_dict(cls, symbol) -> "Symbol":
         if "package" not in symbol:
             symbol["package"] = "latex2e"
+        if symbol["package"] == "logix":
+            symbol["pdflatex"] = False
+        else:
+            symbol["pdflatex"] = True
         if "fontenc" not in symbol:
             symbol["fontenc"] = "OT1"
-        if "pdflatex" not in symbol:
-            symbol["pdflatex"] = True
+        if "key" not in symbol:
+            symbol["key"] = f"{symbol['package']}-{symbol['command'].replace('\\', '_')}"
+        if "mode" not in symbol:
+            symbol["mathmode"] = True
+            symbol["textmode"] = False
+        elif symbol["mode"] == "text":
+            symbol["mathmode"] = False
+            symbol["textmode"] = True
+        elif symbol["mode"] == "both":
+            symbol["mathmode"] = True
+            symbol["textmode"] = True
+        symbol.pop("mode", None)
         return cls(**symbol)
 
     @classmethod

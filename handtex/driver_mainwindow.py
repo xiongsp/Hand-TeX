@@ -59,7 +59,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     data_recorder: dr.DataRecorder | None
     current_symbol: st.Symbol | None
     submission_count: int
-    has_submission = Signal(bool)
+    has_submission: Signal = Signal(bool)
     training_menu_action: Qg.QAction | None
 
     # Symbol list:
@@ -108,7 +108,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.save_default_palette()
         self.load_config_theme()
 
+        symbol_data_start = time.time()
         self.symbol_data = sr.SymbolData()
+        logger.debug(f"Symbol data loaded in {(time.time() - symbol_data_start) * 1000:.2f}ms")
 
         self.state_saver = ss.StateSaver("mainwindow")
         self.init_state_saver()

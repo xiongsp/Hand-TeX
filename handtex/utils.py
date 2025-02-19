@@ -384,11 +384,11 @@ def preload_svg_tar(tar_path: Path | str = ""):
     :param tar_path: Path to the TAR archive.
     """
     if not tar_path:
-        tar_path = resource_path(handtex.data, "symbols.tar.xz")
+        tar_path = resource_path(handtex.data, "symbols.tar")
 
     global svg_cache
     start = time.time()
-    with tarfile.open(tar_path, "r:xz") as tar:
+    with tarfile.open(tar_path, "r") as tar:
         for member in tar.getmembers():
             if member.isfile() and member.name.endswith(".svg"):
                 svg_cache[member.name] = tar.extractfile(member).read().decode("utf-8")

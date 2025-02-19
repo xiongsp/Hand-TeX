@@ -26,8 +26,7 @@ def main():
     symbol_data = sr.SymbolData()
     new_data_dir = Path("../../new_drawings")
     # Load frequency data for the current database.
-    with resource_path(handtex.data.symbol_metadata, "symbol_frequency.csv") as path:
-        frequencies_path = path
+    frequencies_path = resource_path(handtex.data.symbol_metadata, "symbol_frequency.csv")
 
     with open(frequencies_path, "r") as file:
         reader = csv.reader(file)

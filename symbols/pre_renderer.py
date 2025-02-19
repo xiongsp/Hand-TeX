@@ -27,11 +27,9 @@ import symbols
 # Only an issue if multi-threading. But you really should multithread with 1000 symbols...
 # CPUS = os.cpu_count()
 CPUS = 16
-with ut.resource_path(handtex.data) as path:
-    SYMBOLS_FILE = path / "symbol_metadata" / "symbols.json"
+SYMBOLS_FILE = ut.resource_path(handtex.data) / "symbol_metadata" / "symbols.json"
 
-with ut.resource_path(symbols) as path:
-    OUTPUT_DIR = path / "svg"
+OUTPUT_DIR = ut.resource_path(symbols) / "svg"
 
 
 # 1. Load symbols from symbols.json

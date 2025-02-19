@@ -507,14 +507,13 @@ def recalculate_frequencies():
     leader_keys = symbol_data.leaders
 
     # database_path = "database/handtex.db"
-    with ut.resource_path(training.database, "handtex.db") as path:
-        database_path = path
+    database_path = ut.resource_path(training.database, "handtex.db")
 
-    with resources.path(handtex.data.symbol_metadata, "symbol_frequency.csv") as path:
-        frequencies_path = path
+    frequencies_path = ut.resource_path(handtex.data.symbol_metadata, "symbol_frequency.csv")
 
-    with resources.path(handtex.data.symbol_metadata, "augmented_symbol_frequency.csv") as path:
-        augmented_frequencies_path = path
+    augmented_frequencies_path = ut.resource_path(
+        handtex.data.symbol_metadata, "augmented_symbol_frequency.csv"
+    )
 
     # Get the frequencies from the database.
     conn = sqlite3.connect(database_path)

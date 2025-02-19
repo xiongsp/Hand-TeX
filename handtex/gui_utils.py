@@ -12,6 +12,7 @@ from loguru import logger
 import handtex.worker_thread as wt
 from handtex.data import color_themes, custom_icons
 from handtex.error_dialog_driver import ErrorDialog
+from handtex.utils import resource_path
 
 
 # For all show functions, pad the dialog message, so that the dialog is not too narrow for the window title.
@@ -208,8 +209,7 @@ def load_color_palette(theme: str) -> Qg.QPalette:
     """
     palette = Qg.QPalette()
 
-    with resources.files(color_themes) as data_path:
-        file_path = data_path / theme
+    file_path = resource_path(color_themes, theme)
 
     file = Qc.QFile(file_path)
     if file.open(Qc.QFile.ReadOnly | Qc.QFile.Text):
@@ -307,8 +307,7 @@ def custom_icon_path(icon_name: str, theme: Literal["dark", "light"] | str = "")
         if applicable, otherwise leave blank.
     :return: A full path to the file.
     """
-    with resources.files(custom_icons) as data_path:
-        custom_icon_dir: Path = data_path
+    custom_icon_dir: Path = resource_path(custom_icons)
 
     if theme:
         custom_icon_dir = custom_icon_dir / theme

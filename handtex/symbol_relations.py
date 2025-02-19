@@ -420,8 +420,7 @@ def load_symbols() -> dict[str, st.Symbol]:
     :return: A dictionary of key to symbols.
     """
 
-    with resource_path(handtex.data.symbol_metadata, "symbols.json") as symbols_file:
-        symbol_list = st.Symbol.from_json(symbols_file)
+    symbol_list = st.Symbol.from_json(resource_path(handtex.data.symbol_metadata, "symbols.json"))
     return {symbol.key: symbol for symbol in symbol_list}
 
 
@@ -527,9 +526,8 @@ def load_symbol_metadata_self_symmetry() -> dict[str, list[st.Transformation]]:
 
     :return: A dictionary mapping symbol keys to lists of symmetries.
     """
-    with resource_path(handtex.data.symbol_metadata, "symmetry_self.txt") as file_path:
-        with open(file_path, "r") as file:
-            lines = file.readlines()
+    with open(resource_path(handtex.data.symbol_metadata, "symmetry_self.txt"), "r") as file:
+        lines = file.readlines()
 
     symmetries = {}
     for line in lines:
@@ -576,9 +574,8 @@ def load_symbol_metadata_other_symmetry() -> dict[str, list[tuple[str, list[st.T
     """
     symmetries: dict[str, list[tuple[str, list[st.Transformation]]]]
 
-    with resource_path(handtex.data.symbol_metadata, "symmetry_other.txt") as file_path:
-        with open(file_path, "r") as file:
-            lines = file.readlines()
+    with open(resource_path(handtex.data.symbol_metadata, "symmetry_other.txt"), "r") as file:
+        lines = file.readlines()
 
     pattern = re.compile(r"(\S+) -- (.*?) ?--> (\S+)")
     symmetries = defaultdict(list)
@@ -665,9 +662,8 @@ def load_symbol_data_negation() -> dict[str, tuple[str, st.Negation]]:
     """
     negations: dict[str, tuple[str, st.Negation]]
 
-    with resource_path(handtex.data.symbol_metadata, "negations.txt") as file_path:
-        with open(file_path, "r") as file:
-            lines = file.readlines()
+    with open(resource_path(handtex.data.symbol_metadata, "negations.txt"), "r") as file:
+        lines = file.readlines()
 
     pattern = re.compile(r"(\S+) -/ *(.*?) */- (\S+)")
     negations = {}
@@ -720,9 +716,8 @@ def load_symbol_data_inside() -> dict[str, tuple[str, st.Inside]]:
     """
     inside: dict[str, tuple[str, st.Inside]] = {}
 
-    with resource_path(handtex.data.symbol_metadata, "inside.txt") as file_path:
-        with open(file_path, "r") as file:
-            lines = file.readlines()
+    with open(resource_path(handtex.data.symbol_metadata, "inside.txt"), "r") as file:
+        lines = file.readlines()
 
     pattern = re.compile(r"(\S+) is (\S+) in (\S+)")
     for line in lines:

@@ -368,8 +368,10 @@ def load_dict_to_attrs_safely(
     return recoverable_exceptions
 
 
-def resource_path(module, resource=""):
-    return resources.as_file(resources.files(module).joinpath(resource))
+def resource_path(module, resource="") -> Path:
+    with resources.as_file(resources.files(module).joinpath(resource)) as f:
+        path = f
+    return path
 
 
 # Cache to store SVG data
@@ -382,8 +384,7 @@ def preload_svg_tar(tar_path: Path | str = ""):
     :param tar_path: Path to the TAR archive.
     """
     if not tar_path:
-        with resource_path(handtex.data, "symbols.tar.xz") as blob_path:
-            tar_path = blob_path
+        tar_path = resource_path(handtex.data, "symbols.tar.xz")
 
     global svg_cache
     start = time.time()
@@ -413,9 +414,9 @@ def load_symbol_svg(symbol: st.Symbol, fill_color: str = "#000000") -> Qc.QByteA
     except KeyError:
         logger.error(f"Failed to load SVG for symbol {symbol.key}")
         # Instead, load the image-missing icon.
-        with resources.files(handtex.data.custom_icons) as data_path:
-            custom_icon_path: Path = data_path / "image-missing.svg"
-            svg_data = custom_icon_path.read_text()
+
+        custom_icon_path: Path = resource_path(handtex.data.custom_icons, "image-missing.svg")
+        svg_data = custom_icon_path.read_text()
         return Qc.QByteArray(svg_data.encode("utf-8"))
 
     # Recolor the SVG data.

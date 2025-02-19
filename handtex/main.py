@@ -12,6 +12,7 @@ from handtex import __program__, __display_name__, __version__, __description__
 import handtex.gui_utils as gu
 import handtex.data.theme_icons as theme_icons_data
 from handtex.driver_mainwindow import MainWindow
+from handtex.utils import resource_path
 
 
 def main() -> None:
@@ -61,7 +62,7 @@ def main() -> None:
     # Start Qt runtime.
     app = Qw.QApplication(sys.argv)
 
-    theme_icons = str(resources.files(theme_icons_data))
+    theme_icons = str(resource_path(theme_icons_data))
 
     Qg.QIcon.setFallbackSearchPaths([":/icons", theme_icons])
     # We need to set an initial theme on Windows, otherwise the icons will fail to load

@@ -24,8 +24,7 @@ def test_theme_icon_presence():
     """
     # Read the icon list from the yaml file located at Hand-TeX/icons/theme_list.yaml
     yaml_path = Path(__file__).parent.parent / "icons" / "theme_list.yaml"
-    with resources.files(theme_icons_module) as theme_icons_path:
-        theme_icons_root = Path(theme_icons_path)
+    theme_icons_root = resources.files(theme_icons_module)
 
     with yaml_path.open() as file:
         data = yaml.safe_load(file)
@@ -62,8 +61,7 @@ def test_theme_icon_presence():
 
 def test_theme_icon_app_presence():
     # Load the source code and inspect it for xdg icon names.
-    with resources.files(handtex.ui_generated_files) as source_dir:
-        source_dir = Path(source_dir)
+    source_dir = resources.files(handtex.ui_generated_files)
 
     # This only works for the generated code from ui files.
     # General python code would be undecidable.

@@ -18,9 +18,8 @@ def test_duplicates() -> None:
     """
     Test that there are no duplicate lines.
     """
-    with ut.resource_path(symbol_metadata, "symmetry_other.txt") as file:
-        with file.open("r") as f:
-            lines = f.readlines()
+    with open(ut.resource_path(symbol_metadata, "symmetry_other.txt"), "r") as f:
+        lines = f.readlines()
     lines_seen = []
     for index, line in enumerate(lines, 1):
         assert line not in lines_seen, f"Line {index}: {line.strip()} is a duplicate."
@@ -31,9 +30,8 @@ def test_two_way_assignment() -> None:
     Test that there are no two-way assignments.
     Each assignment is implicitly two-way on it's own.
     """
-    with ut.resource_path(symbol_metadata, "symmetry_other.txt") as file:
-        with file.open("r") as f:
-            lines = f.readlines()
+    with open(ut.resource_path(symbol_metadata, "symmetry_other.txt"), "r") as f:
+        lines = f.readlines()
 
     pattern = re.compile(r"(\S+) -- (.*?) ?--> (\S+)")
     pairs_seen = set()

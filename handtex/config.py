@@ -16,6 +16,7 @@ class Config:
     gui_theme: str = ""  # Blank means system theme.
     stroke_width: int = 6
     new_data_dir: str = "new_data"
+    scroll_on_draw: bool = True
 
     def save(self, path: Path = None) -> bool:
         """

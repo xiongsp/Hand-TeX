@@ -329,6 +329,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.theme_is_dark_changed.connect(self.sketchpad.recolor_pen)
         self.theme_is_dark_changed.connect(self.load_training_symbol_data)
 
+        self.hamburger_menu.addSeparator()
+        # Settings section.
+
+        # Setting to scroll up when drawing.
+        action_scroll_on_draw = Qg.QAction("Scroll back up when drawing", self)
+        action_scroll_on_draw.setCheckable(True)
+        action_scroll_on_draw.setChecked(self.config.scroll_on_draw)
+        action_scroll_on_draw.triggered.connect(self.toggle_scroll_on_draw)
+        self.hamburger_menu.addAction(action_scroll_on_draw)
+
         if self.debug:
             # Add an intentional crash button.
             self.hamburger_menu.addSeparator()
@@ -375,6 +385,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         self.sketchpad.set_pen_width(width)
         self.config.stroke_width = width
+        self.config.save()
+
+    def toggle_scroll_on_draw(self) -> None:
+        """
+        Toggle the scroll on draw setting.
+        """
+        self.config.scroll_on_draw = not self.config.scroll_on_draw
         self.config.save()
 
     def reload_stroke_width_icons(self) -> None:
@@ -595,6 +612,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def detection_result(self, result: list[tuple[str, float]]) -> None:
         self.current_predictions = result
         self.show_predictions()
+        if self.config.scroll_on_draw:
+            self.scrollArea_predictions.scroll_to_top()
 
     def detection_error(self, error: wt.WorkerError) -> None:
         gu.show_exception(

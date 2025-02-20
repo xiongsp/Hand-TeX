@@ -23,6 +23,7 @@ Files:
       - window-close
       - search
       - insert-image
+      - package
 #      - invertimage
 #      - image-rotate-right-symbolic
 #      - contrast

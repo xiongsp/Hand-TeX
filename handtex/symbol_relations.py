@@ -45,7 +45,10 @@ class SymbolData:
         inside = load_symbol_data_inside()
         self.to_leader = construct_to_leader_mapping(similarity_groups)
         self.leaders = [key for key in self.symbol_keys if key not in self.to_leader]
-        self.packages = natsorted(list(set(symbol.package for symbol in self.symbol_data.values())))
+        self.packages = natsorted(
+            list(set(symbol.package for symbol in self.symbol_data.values())),
+            key=lambda x: x.lower(),
+        )
         self.encodings = natsorted(
             list(set(symbol.fontenc for symbol in self.symbol_data.values()))
         )

@@ -5,7 +5,7 @@ from typing import Callable, Any
 
 import attrs
 import yaml
-from attrs import define
+from attrs import define, Factory
 from loguru import logger
 
 import handtex.utils as ut
@@ -17,6 +17,7 @@ class Config:
     stroke_width: int = 6
     new_data_dir: str = "new_data"
     scroll_on_draw: bool = True
+    disabled_packages: list[str] = Factory(list)
 
     def save(self, path: Path = None) -> bool:
         """

@@ -40,6 +40,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     hamburger_menu: Qw.QMenu
     theming_menu: Qw.QMenu
+    enabled_packages_menu: Qw.QMenu
     stroke_width_menu: Qw.QMenu
 
     default_palette: Qg.QPalette
@@ -88,6 +89,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.data_recorder = None
 
+        symbol_data_start = time.time()
+        self.symbol_data = sr.SymbolData()
+        logger.debug(f"Symbol data loaded in {(time.time() - symbol_data_start) * 1000:.2f}ms")
+
         self.config = self.load_config()
         # Set the new data directory if one is supplied.
         if new_data_dir:
@@ -107,10 +112,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.save_default_palette()
         self.load_config_theme()
-
-        symbol_data_start = time.time()
-        self.symbol_data = sr.SymbolData()
-        logger.debug(f"Symbol data loaded in {(time.time() - symbol_data_start) * 1000:.2f}ms")
 
         self.state_saver = ss.StateSaver("mainwindow")
         self.init_state_saver()
@@ -339,6 +340,22 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         action_scroll_on_draw.triggered.connect(self.toggle_scroll_on_draw)
         self.hamburger_menu.addAction(action_scroll_on_draw)
 
+        # Menu to select what packages to (not) exclude from predictions.
+        self.enabled_packages_menu = self.hamburger_menu.addMenu(
+            Qg.QIcon.fromTheme("package"), "Show additional matches"
+        )
+        package_list = self.symbol_data.packages
+        package_list.remove("latex2e")  # We don't want to allow disabling the built-in stuff.
+        package_action_group = Qg.QActionGroup(self)
+        package_action_group.setExclusive(False)
+        for package in package_list:
+            action = Qg.QAction(package, self)
+            action.setCheckable(True)
+            action.setChecked(package not in self.config.disabled_packages)
+            package_action_group.addAction(action)
+            action.triggered.connect(partial(self.toggle_package, package))
+            self.enabled_packages_menu.addAction(action)
+
         if self.debug:
             # Add an intentional crash button.
             self.hamburger_menu.addSeparator()
@@ -392,6 +409,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Toggle the scroll on draw setting.
         """
         self.config.scroll_on_draw = not self.config.scroll_on_draw
+        self.config.save()
+
+    def toggle_package(self, package: str) -> None:
+        """
+        Toggle the enabled state of a package.
+        """
+        if package in self.config.disabled_packages:
+            self.config.disabled_packages.remove(package)
+        else:
+            self.config.disabled_packages.append(package)
         self.config.save()
 
     def reload_stroke_width_icons(self) -> None:
@@ -659,7 +686,24 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
             # If this symbol has similar symbols, we want to display
             # them all together in a framed box.
-            similarity_group = self.symbol_data.get_similarity_group(symbol)
+            similarity_group = list(self.symbol_data.get_similarity_group(symbol))
+            # Extract the set of packages represented by the similarity group.
+            packages_represented = {self.symbol_data[s].package for s in similarity_group}
+            # Remove disabled packages as long as doing so leaves at least one package.
+            while len(packages_represented) > 1:
+                for group in list(
+                    packages_represented
+                ):  # iterate over a copy to avoid modifying the set during iteration
+                    if group in self.config.disabled_packages:
+                        packages_represented.remove(group)
+                        break
+                else:
+                    break
+            # Apply filtering to the similarity group.
+            similarity_group = [
+                s for s in similarity_group if self.symbol_data[s].package in packages_represented
+            ]
+
             similarity_stack = None
             frame = None
             if len(similarity_group) > 1:

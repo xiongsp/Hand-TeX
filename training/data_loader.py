@@ -75,22 +75,22 @@ def augmentation_amount(
 
 
 def get_data_split(
-    data: list, desired_split: DataSplit, split_percentages: dict[DataSplit, int]
+    data: list, desired_split: DataSplit, split_at_percentages: dict[DataSplit, int]
 ) -> list:
     n = len(data)
 
-    if sum(split_percentages.values()) != 100:
+    if sum(split_at_percentages.values()) != 100:
         raise ValueError("Split percentages must sum to 100")
 
     # Sort the splits in the order defined by the enum.
-    splits = sorted(split_percentages.keys(), key=lambda s: s.value)
+    splits = sorted(split_at_percentages.keys(), key=lambda s: s.value)
 
     # Compute the ideal (raw) count for each split.
     # We use floor, but guarantee that each split gets at least one sample.
     counts = {}
     fractions = {}
     for s in splits:
-        raw = n * split_percentages[s] / 100
+        raw = n * split_at_percentages[s] / 100
         floor_val = floor(raw)
         # Guarantee at least one sample per split
         if floor_val < 1:

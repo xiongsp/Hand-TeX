@@ -15,35 +15,36 @@ class CNN(nn.Module):
 
         self.image_size = image_size
 
-        layer1 = 8
-        layer2 = 16
-        layer3 = 32
-        layer4 = 64
-        layer5 = 128
-        layer6 = 256
+        # Tuned by Optuna
+        layer1 = 31
+        layer2 = 52
+        layer3 = 92
+        layer4 = 122
+        layer5 = 178
 
-        self.num_pools = 3
-        self.last_conv = layer6
+        self.last_conv = layer5
 
         # Image size is cut in half with each pooling.
         # This makes the fully connected layer have x * image_size/8 * image_size/8 input features.
         self.conv1 = nn.Conv2d(1, layer1, kernel_size=3, padding=1)
         self.bn1 = nn.BatchNorm2d(layer1)
+        self.pool1 = nn.MaxPool2d(2, 2)
+
         self.conv2 = nn.Conv2d(layer1, layer2, kernel_size=3, padding=1)
         self.bn2 = nn.BatchNorm2d(layer2)
-        self.pool1 = nn.MaxPool2d(2, 2)
+        self.pool2 = nn.MaxPool2d(2, 2)
 
         self.conv3 = nn.Conv2d(layer2, layer3, kernel_size=3, padding=1)
         self.bn3 = nn.BatchNorm2d(layer3)
+        self.pool3 = nn.MaxPool2d(2, 2)
+
         self.conv4 = nn.Conv2d(layer3, layer4, kernel_size=3, padding=1)
         self.bn4 = nn.BatchNorm2d(layer4)
-        self.pool2 = nn.MaxPool2d(2, 2)
+        self.pool4 = nn.MaxPool2d(2, 2)
 
         self.conv5 = nn.Conv2d(layer4, layer5, kernel_size=3, padding=1)
         self.bn5 = nn.BatchNorm2d(layer5)
-        self.conv6 = nn.Conv2d(layer5, layer6, kernel_size=3, padding=1)
-        self.bn6 = nn.BatchNorm2d(layer6)
-        self.pool3 = nn.MaxPool2d(2, 2)
+        self.pool5 = nn.MaxPool2d(2, 2)
 
         self.fc1 = nn.Linear(self.last_conv, num_classes)
 
@@ -55,14 +56,15 @@ class CNN(nn.Module):
         :return: The output tensor after passing through the network.
         """
         x = F.relu(self.bn1(self.conv1(x)))
-        x = F.relu(self.bn2(self.conv2(x)))
         x = self.pool1(x)
-        x = F.relu(self.bn3(self.conv3(x)))
-        x = F.relu(self.bn4(self.conv4(x)))
+        x = F.relu(self.bn2(self.conv2(x)))
         x = self.pool2(x)
-        x = F.relu(self.bn5(self.conv5(x)))
-        x = F.relu(self.bn6(self.conv6(x)))
+        x = F.relu(self.bn3(self.conv3(x)))
         x = self.pool3(x)
+        x = F.relu(self.bn4(self.conv4(x)))
+        x = self.pool4(x)
+        x = F.relu(self.bn5(self.conv5(x)))
+        x = self.pool5(x)
 
         x = F.adaptive_avg_pool2d(x, (1, 1))
         x = x.view(-1, self.last_conv)

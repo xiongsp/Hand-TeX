@@ -2,7 +2,19 @@ import sqlite3
 from pathlib import Path
 
 
-from training.data_loader import get_data_split, DataSplit, split_percentages, StrokeDataset
+from training.data_loader import get_data_split, DataSplit, StrokeDataset
+
+split_percentages = {
+    DataSplit.TRAIN: 50,
+    DataSplit.VALIDATION: 20,
+    DataSplit.TEST: 30,
+}
+
+split_percentages_no_test = {
+    DataSplit.TRAIN: 80,
+    DataSplit.VALIDATION: 20,
+    DataSplit.TEST: 0,
+}
 
 
 def test_exact_proportions():
@@ -41,6 +53,27 @@ def test_minimum_one_sample_each():
     assert train == data[0:1]
     assert validation == data[1:2]
     assert test_ == data[2:3]
+
+
+def test_no_test_split():
+    # With 100 samples and no test split, the computed counts should match the percentages exactly.
+    data = list(range(100))
+    train = get_data_split(data, DataSplit.TRAIN, split_percentages_no_test)
+    validation = get_data_split(data, DataSplit.VALIDATION, split_percentages_no_test)
+    test_ = get_data_split(data, DataSplit.TEST, split_percentages_no_test)
+
+    assert len(train) == 80
+    assert len(validation) == 20
+    assert len(test_) == 0
+
+    # Since the segments are contiguous, verify the slices.
+    assert train == data[0:80]
+    assert validation == data[80:100]
+    assert test_ == []
+
+    # Check that the union of splits gives back the original list.
+    combined = train + validation + test_
+    assert combined == data
 
 
 def test_proportional_rounding():
@@ -111,6 +144,12 @@ def test_bootstrapping_determinism(tmp_path):
     dummy_symbol_data = DummySymbolData()
     dummy_label_encoder = DummyLabelEncoder()
 
+    split_percentages = {
+        DataSplit.TRAIN: 80,
+        DataSplit.VALIDATION: 1,
+        DataSplit.TEST: 19,
+    }
+
     # Build two dataloaders with identical random_seed and split.
     ds1 = StrokeDataset(
         db_path=str(db_file),
@@ -119,6 +158,7 @@ def test_bootstrapping_determinism(tmp_path):
         label_encoder=dummy_label_encoder,
         random_seed=42,
         split=DataSplit.TRAIN,
+        split_percentages=split_percentages,
         random_augmentation=False,
     )
     ds2 = StrokeDataset(
@@ -128,6 +168,7 @@ def test_bootstrapping_determinism(tmp_path):
         label_encoder=dummy_label_encoder,
         random_seed=42,
         split=DataSplit.TRAIN,
+        split_percentages=split_percentages,
         random_augmentation=False,
     )
 

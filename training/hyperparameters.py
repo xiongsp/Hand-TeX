@@ -1,4 +1,7 @@
-learning_rate = 0.001
+learning_rate = 0.0005364683338857024
+weight_decay = 1.4868633572534654e-06
+step_size = 3
+gamma = 0.15235718695861067
 batch_size = 64
 num_epochs = 8
 image_size = 64
@@ -47,3 +50,14 @@ db_path = "database/handtex.db"
 
 # Training Loss: 6.7798, Training Accuracy: 97.03%
 # Validation Loss: 27.7906, Validation Accuracy: 90.05%
+
+# Optuna best
+# Training Loss: 8.7202, Training Accuracy: 96.35%
+# Validation Loss: 27.8282, Validation Accuracy: 90.06%
+# Test Loss: 27.7608, Test Accuracy: 90.27%, Test F1 (macro): 0.9016
+# Checkpoint saved at best_model_checkpoint.chkpt
+
+# Optuna best with more training data
+# Training Loss: 5.3208, Training Accuracy: 97.73%
+# Validation Loss: 20.4027, Validation Accuracy: 92.00%
+# Test Loss: 19.1761, Test Accuracy: 92.09%, Test F1 (macro): 0.9196

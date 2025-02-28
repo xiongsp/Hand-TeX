@@ -31,6 +31,8 @@ def load_model_and_decoder(model_path: Path, encodings_path: Path):
     model.load_state_dict(load_file(model_path))
     model.to(device)
     model.eval()  # Set to evaluation mode
+    # num_params = sum(p.numel() for p in model.parameters())
+    # print(f"Model has {num_params} parameters")
 
     return model, label_decoder
 

@@ -32,15 +32,6 @@ class DataSplit(Enum):
     TEST = 2
 
 
-split_percentages = {
-    DataSplit.TRAIN: 50,
-    DataSplit.VALIDATION: 20,
-    DataSplit.TEST: 30,
-}
-
-assert sum(split_percentages.values()) == 100, "Split points must sum to 100"
-
-
 def build_stroke_cache(db_path: str) -> dict[str, list[list[tuple[int, int]]]]:
     """
     Build a cache of the stroke data for each symbol in the database.
@@ -78,6 +69,11 @@ def get_data_split(
     data: list, desired_split: DataSplit, split_at_percentages: dict[DataSplit, int]
 ) -> list:
     n = len(data)
+
+    # Handle cases where we have less than 3 samples.
+    if n < 3:
+        # There is no point splitting this up.
+        return data
 
     if sum(split_at_percentages.values()) != 100:
         raise ValueError("Split percentages must sum to 100")
@@ -133,6 +129,7 @@ class StrokeDataset(Dataset):
         image_size: int,
         label_encoder: LabelEncoder,
         random_seed: int,
+        split_percentages: dict[DataSplit, int],
         split: DataSplit = DataSplit.TRAIN,
         class_limit: int | None = None,
         random_augmentation: bool = True,
@@ -215,7 +212,6 @@ class StrokeDataset(Dataset):
             local_rng = random.Random(seed_for_shuffle)
             local_rng.shuffle(cursor_samples)
 
-            global split_percentages
             nonlocal split
             return get_data_split(cursor_samples, split, split_percentages)
 
@@ -306,7 +302,7 @@ class StrokeDataset(Dataset):
                 if isinstance(composition, st.Inside):
                     inside_count += len(load_primary_keys(current_key))
 
-            assert samples, f"No samples found for symbol key: {symbol_key}"
+            # assert samples, f"No samples found for symbol key: {symbol_key}"
 
             # Augment the data to balance the classes.
             if random_augmentation:

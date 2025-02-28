@@ -16,6 +16,9 @@ from training.hyperparameters import (
     num_epochs,
     image_size,
     learning_rate,
+    weight_decay,
+    step_size,
+    gamma,
 )
 from training.data_loader import (
     StrokeDataset,
@@ -65,6 +68,13 @@ def main(resume_from_checkpoint=False):
 
     random_seed = 0
 
+    split_percentages = {
+        DataSplit.TRAIN: 50,
+        DataSplit.VALIDATION: 20,
+        DataSplit.TEST: 30,
+    }
+    assert sum(split_percentages.values()) == 100, "Split points must sum to 100"
+
     # Create training, validation, and test datasets.
     train_dataset = StrokeDataset(
         db_path,
@@ -73,7 +83,8 @@ def main(resume_from_checkpoint=False):
         label_encoder,
         random_seed,
         split=DataSplit.TRAIN,
-        class_limit=50,
+        split_percentages=split_percentages,
+        class_limit=200,
         stroke_cache=stroke_cache,
     )
     validation_dataset = StrokeDataset(
@@ -83,7 +94,8 @@ def main(resume_from_checkpoint=False):
         label_encoder,
         random_seed,
         split=DataSplit.VALIDATION,
-        class_limit=20,
+        split_percentages=split_percentages,
+        class_limit=80,
         stroke_cache=stroke_cache,
     )
     test_dataset = StrokeDataset(
@@ -93,7 +105,8 @@ def main(resume_from_checkpoint=False):
         label_encoder,
         random_seed,
         split=DataSplit.TEST,
-        class_limit=30,
+        split_percentages=split_percentages,
+        class_limit=120,
         stroke_cache=stroke_cache,
     )
 
@@ -107,8 +120,8 @@ def main(resume_from_checkpoint=False):
     model = CNN(num_classes=num_classes, image_size=image_size).to(device)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-5)
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
+    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=gamma)
 
     # Lists to store per-epoch metrics.
     train_losses, train_accuracies = [], []

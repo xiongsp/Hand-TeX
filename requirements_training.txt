@@ -2,3 +2,5 @@ matplotlib
 scikit-learn
 tqdm
 noise
+pytest
+optuna

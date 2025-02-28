@@ -600,9 +600,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             logger.error("Model is not loaded yet, skipping prediction.")
             return
         # Get the sketch and predict the symbol.
-        start = time.time()
+        # start = time.time()
         strokes, _, _, _ = self.sketchpad.get_clean_strokes()
-        logger.debug(f"Got {len(strokes)} strokes in {(time.time() - start) * 1000:.2f}ms.")
+        # logger.debug(f"Got {len(strokes)} strokes in {(time.time() - start) * 1000:.2f}ms.")
         self.start_detection(strokes)
 
     def start_detection(self, strokes: list[list[tuple[int, int]]], dry_run: bool = False) -> None:

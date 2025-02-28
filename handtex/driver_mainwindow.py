@@ -281,7 +281,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         # Add stroke width selection.
         self.stroke_width_menu = self.hamburger_menu.addMenu(
-            Qg.QIcon.fromTheme("edit-line-width"), "Line Thickness"
+            Qg.QIcon.fromTheme("edit-line-width"), "Line thickness"
         )
         supported_stroke_widths = [2, 4, 6, 8, 12, 16, 20]
         stroke_action_group = Qg.QActionGroup(self)
@@ -305,14 +305,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         # Offer to enter training mode.
         action_training = Qg.QAction(
-            Qg.QIcon.fromTheme("draw-freehand"), "Help Symbol Training", self
+            Qg.QIcon.fromTheme("draw-freehand"), "Help symbol training", self
         )
         action_training.triggered.connect(self.switch_to_training)
         self.hamburger_menu.addAction(action_training)
         self.training_menu_action = action_training
         # Offer way back to classification mode.
         action_classification = Qg.QAction(
-            Qg.QIcon.fromTheme("search"), "Back to Detection Mode", self
+            Qg.QIcon.fromTheme("search"), "Back to detection mode", self
         )
         action_classification.triggered.connect(self.switch_to_classification)
         self.hamburger_menu.addAction(action_classification)

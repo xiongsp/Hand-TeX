@@ -66,6 +66,9 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="toolTip">
+              <string>Clear (Del)</string>
+             </property>
              <property name="text">
               <string>Clear</string>
              </property>
@@ -99,7 +102,7 @@
               <bool>false</bool>
              </property>
              <property name="toolTip">
-              <string>Undo</string>
+              <string>Undo (Ctrl + Z)</string>
              </property>
              <property name="text">
               <string>Undo</string>
@@ -121,7 +124,7 @@
               <bool>false</bool>
              </property>
              <property name="toolTip">
-              <string>Redo</string>
+              <string>Redo (Shift + Ctrl + Z)</string>
              </property>
              <property name="text">
               <string>Redo</string>

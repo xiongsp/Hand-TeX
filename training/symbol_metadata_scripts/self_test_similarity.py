@@ -1,14 +1,15 @@
 import sqlite3
 import json
-from pathlib import Path
 from collections import defaultdict
 
 from tqdm import tqdm
 
 import handtex.utils as ut
-import training.inference as inf
+import detector.inference as inf
 import training.train as trn
-import training.image_gen as ig
+
+# Defunct tool to use the model to find similar symbols automatically.
+# Now replaced by listing the most frequently confused symbols during training.
 
 
 def main():

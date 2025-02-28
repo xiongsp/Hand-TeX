@@ -8,7 +8,7 @@ import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtSvgWidgets as Qsw
 import PySide6.QtWidgets as Qw
-from PySide6.QtCore import Signal, Qt
+from PySide6.QtCore import Signal
 from loguru import logger
 from PySide6.QtCore import Slot
 import numpy as np
@@ -24,8 +24,8 @@ import handtex.symbol_relations as sr
 import handtex.utils as ut
 import handtex.worker_thread as wt
 from training.hyperparameters import image_size
-import training.inference as inf
-import training.model as mdl
+import detector.inference as inf
+import detector.model as mdl
 from handtex import __program__, __version__
 from handtex.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 

@@ -7,8 +7,8 @@ from safetensors.torch import load_file
 import numpy as np
 
 from training.hyperparameters import image_size
-import training.image_gen as ig
-from training.model import CNN
+import detector.image_gen as ig
+from detector.model import CNN
 
 
 def load_decoder(path: Path) -> dict[int, str]:

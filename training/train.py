@@ -26,7 +26,7 @@ from training.data_loader import (
     recalculate_frequencies,
     build_stroke_cache,
 )
-from training.model import CNN
+from detector.model import CNN
 
 
 def save_encoder(label_encoder: LabelEncoder, leader_keys: list[str]):

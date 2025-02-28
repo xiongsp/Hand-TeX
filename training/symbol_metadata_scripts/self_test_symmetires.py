@@ -1,15 +1,17 @@
 import sqlite3
 import json
-from pathlib import Path
 from collections import defaultdict
 
 from tqdm import tqdm
 
 import handtex.utils as ut
-import training.inference as inf
+import detector.inference as inf
 import training.train as trn
-import training.image_gen as ig
+import detector.image_gen as ig
 import handtex.symbol_relations as sr
+
+
+# Defunct tool to use the model to find symmetrical symbols automatically.
 
 
 def main2():

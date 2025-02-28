@@ -10,7 +10,7 @@ from PIL import Image
 
 import handtex.utils as ut
 import handtex.symbol_relations as sr
-import training.image_gen as ig
+import detector.image_gen as ig
 
 
 def main():

@@ -122,6 +122,15 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self.init_state_saver()
         self.state_saver.restore()
 
+        # Focus search bar with Ctrl+F.
+        shortcut = Qg.QShortcut(Qg.QKeySequence("Ctrl+F"), self)
+        shortcut.activated.connect(self.focus_line_edit)
+
+    def focus_line_edit(self):
+        """Sets focus to the QLineEdit"""
+        self.lineEdit_search.setFocus()
+        self.lineEdit_search.selectAll()  # Optional: selects all text
+
     def init_state_saver(self) -> None:
         """
         Load the state from the state saver.

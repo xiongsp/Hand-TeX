@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'SymbolList.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.8.0
+## Created by: Qt User Interface Compiler version 6.8.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -28,7 +28,7 @@ class Ui_SymbolList(object):
     def setupUi(self, SymbolList):
         if not SymbolList.objectName():
             SymbolList.setObjectName(u"SymbolList")
-        SymbolList.resize(1292, 600)
+        SymbolList.resize(1300, 600)
         self.verticalLayout_3 = QVBoxLayout(SymbolList)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, -1, 0, 0)
@@ -184,15 +184,15 @@ class Ui_SymbolList(object):
 
         self.splitter = QSplitter(SymbolList)
         self.splitter.setObjectName(u"splitter")
-        self.splitter.setOrientation(Qt.Horizontal)
+        self.splitter.setOrientation(Qt.Orientation.Horizontal)
         self.listWidget = QListWidget(self.splitter)
         self.listWidget.setObjectName(u"listWidget")
-        self.listWidget.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
-        self.listWidget.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
-        self.listWidget.setMovement(QListView.Static)
-        self.listWidget.setResizeMode(QListView.Adjust)
-        self.listWidget.setLayoutMode(QListView.Batched)
-        self.listWidget.setViewMode(QListView.IconMode)
+        self.listWidget.setVerticalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.listWidget.setHorizontalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.listWidget.setMovement(QListView.Movement.Static)
+        self.listWidget.setResizeMode(QListView.ResizeMode.Adjust)
+        self.listWidget.setLayoutMode(QListView.LayoutMode.Batched)
+        self.listWidget.setViewMode(QListView.ViewMode.IconMode)
         self.listWidget.setUniformItemSizes(True)
         self.splitter.addWidget(self.listWidget)
         self.verticalLayoutWidget = QWidget(self.splitter)
@@ -204,9 +204,9 @@ class Ui_SymbolList(object):
         self.label_command = QLabel(self.verticalLayoutWidget)
         self.label_command.setObjectName(u"label_command")
         self.label_command.setText(u"<command>")
-        self.label_command.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.label_command.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
-        self.verticalLayout.addWidget(self.label_command, 0, Qt.AlignHCenter)
+        self.verticalLayout.addWidget(self.label_command, 0, Qt.AlignmentFlag.AlignHCenter)
 
         self.widget_symbol_view = QSvgWidget(self.verticalLayoutWidget)
         self.widget_symbol_view.setObjectName(u"widget_symbol_view")
@@ -214,7 +214,7 @@ class Ui_SymbolList(object):
         self.verticalLayout_2 = QVBoxLayout(self.widget_symbol_view)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
 
-        self.verticalLayout.addWidget(self.widget_symbol_view, 0, Qt.AlignHCenter)
+        self.verticalLayout.addWidget(self.widget_symbol_view, 0, Qt.AlignmentFlag.AlignHCenter)
 
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
@@ -231,7 +231,7 @@ class Ui_SymbolList(object):
         self.label_package = QLabel(self.verticalLayoutWidget)
         self.label_package.setObjectName(u"label_package")
         self.label_package.setText(u"<package>")
-        self.label_package.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.label_package.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.label_package)
 
@@ -243,7 +243,7 @@ class Ui_SymbolList(object):
         self.label_mode = QLabel(self.verticalLayoutWidget)
         self.label_mode.setObjectName(u"label_mode")
         self.label_mode.setText(u"<mode>")
-        self.label_mode.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.label_mode.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(2, QFormLayout.FieldRole, self.label_mode)
 
@@ -255,7 +255,7 @@ class Ui_SymbolList(object):
         self.label_fontenc = QLabel(self.verticalLayoutWidget)
         self.label_fontenc.setObjectName(u"label_fontenc")
         self.label_fontenc.setText(u"<fontenc>")
-        self.label_fontenc.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.label_fontenc.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(4, QFormLayout.FieldRole, self.label_fontenc)
 
@@ -268,7 +268,7 @@ class Ui_SymbolList(object):
         self.label_similar.setObjectName(u"label_similar")
         self.label_similar.setText(u"<similar>")
         self.label_similar.setWordWrap(True)
-        self.label_similar.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.label_similar.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(5, QFormLayout.FieldRole, self.label_similar)
 
@@ -296,7 +296,7 @@ class Ui_SymbolList(object):
         self.label_id = QLabel(self.verticalLayoutWidget)
         self.label_id.setObjectName(u"label_id")
         self.label_id.setText(u"<symbol id>")
-        self.label_id.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.label_id.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.label_id)
 
@@ -342,6 +342,19 @@ class Ui_SymbolList(object):
         self.verticalLayout_3.addWidget(self.splitter)
 
         self.verticalLayout_3.setStretch(2, 1)
+        QWidget.setTabOrder(self.comboBox_search_field, self.lineEdit_search)
+        QWidget.setTabOrder(self.lineEdit_search, self.pushButton_filter)
+        QWidget.setTabOrder(self.pushButton_filter, self.pushButton_clear_filters)
+        QWidget.setTabOrder(self.pushButton_clear_filters, self.comboBox_sort)
+        QWidget.setTabOrder(self.comboBox_sort, self.comboBox_case)
+        QWidget.setTabOrder(self.comboBox_case, self.comboBox_mode)
+        QWidget.setTabOrder(self.comboBox_mode, self.pushButton_packages)
+        QWidget.setTabOrder(self.pushButton_packages, self.pushButton_encodings)
+        QWidget.setTabOrder(self.pushButton_encodings, self.comboBox_symmetry)
+        QWidget.setTabOrder(self.comboBox_symmetry, self.comboBox_grouping)
+        QWidget.setTabOrder(self.comboBox_grouping, self.spinBox_group_min_size)
+        QWidget.setTabOrder(self.spinBox_group_min_size, self.spinBox_group_max_size)
+        QWidget.setTabOrder(self.spinBox_group_max_size, self.listWidget)
 
         self.retranslateUi(SymbolList)
 

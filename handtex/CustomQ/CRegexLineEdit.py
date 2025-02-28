@@ -75,3 +75,9 @@ class RegexLineEdit(Qw.QWidget):
 
     def setRegexEnabled(self, enabled: bool):
         self.error_icon.setVisible(enabled)
+
+    def setFocus(self, /):
+        self.line_edit.setFocus()
+
+    def selectAll(self):
+        self.line_edit.selectAll()

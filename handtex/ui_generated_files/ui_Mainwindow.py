@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'Mainwindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.8.0
+## Created by: Qt User Interface Compiler version 6.8.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(900, 682)
+        MainWindow.resize(900, 680)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_3 = QVBoxLayout(self.centralwidget)
@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setContentsMargins(0, 6, 0, 0)
         self.splitter = QSplitter(self.centralwidget)
         self.splitter.setObjectName(u"splitter")
-        self.splitter.setOrientation(Qt.Horizontal)
+        self.splitter.setOrientation(Qt.Orientation.Horizontal)
         self.splitter.setHandleWidth(3)
         self.splitter.setChildrenCollapsible(False)
         self.stackedWidget_left = QStackedWidget(self.splitter)
@@ -87,13 +87,13 @@ class Ui_MainWindow(object):
         self.sketchpad = Sketchpad(self.page_sketch)
         self.sketchpad.setObjectName(u"sketchpad")
         self.sketchpad.setMinimumSize(QSize(200, 200))
-        self.sketchpad.setFrameShape(QFrame.NoFrame)
-        self.sketchpad.setFrameShadow(QFrame.Plain)
+        self.sketchpad.setFrameShape(QFrame.Shape.NoFrame)
+        self.sketchpad.setFrameShadow(QFrame.Shadow.Plain)
         self.sketchpad.setLineWidth(0)
-        self.sketchpad.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.sketchpad.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.sketchpad.setRenderHints(QPainter.Antialiasing)
-        self.sketchpad.setTransformationAnchor(QGraphicsView.NoAnchor)
+        self.sketchpad.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.sketchpad.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.sketchpad.setRenderHints(QPainter.RenderHint.Antialiasing)
+        self.sketchpad.setTransformationAnchor(QGraphicsView.ViewportAnchor.NoAnchor)
 
         self.verticalLayout.addWidget(self.sketchpad)
 
@@ -177,7 +177,7 @@ class Ui_MainWindow(object):
         self.scrollArea_predictions.setWidgetResizable(True)
         self.widget_predictions = QWidget()
         self.widget_predictions.setObjectName(u"widget_predictions")
-        self.widget_predictions.setGeometry(QRect(0, 0, 541, 628))
+        self.widget_predictions.setGeometry(QRect(0, 0, 526, 630))
         self.verticalLayout_7 = QVBoxLayout(self.widget_predictions)
         self.verticalLayout_7.setSpacing(12)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
@@ -237,7 +237,7 @@ class Ui_MainWindow(object):
         self.widget_training_symbol.setObjectName(u"widget_training_symbol")
         self.widget_training_symbol.setMinimumSize(QSize(200, 200))
 
-        self.verticalLayout_5.addWidget(self.widget_training_symbol, 0, Qt.AlignHCenter)
+        self.verticalLayout_5.addWidget(self.widget_training_symbol, 0, Qt.AlignmentFlag.AlignHCenter)
 
         self.verticalSpacer_3 = QSpacerItem(20, 12, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding)
 
@@ -278,7 +278,7 @@ class Ui_MainWindow(object):
         self.label_2 = QLabel(self.page_train)
         self.label_2.setObjectName(u"label_2")
 
-        self.verticalLayout_5.addWidget(self.label_2, 0, Qt.AlignHCenter)
+        self.verticalLayout_5.addWidget(self.label_2, 0, Qt.AlignmentFlag.AlignHCenter)
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
@@ -292,8 +292,8 @@ class Ui_MainWindow(object):
         self.horizontalSlider_selection_bias.setObjectName(u"horizontalSlider_selection_bias")
         self.horizontalSlider_selection_bias.setMaximum(100)
         self.horizontalSlider_selection_bias.setValue(25)
-        self.horizontalSlider_selection_bias.setOrientation(Qt.Horizontal)
-        self.horizontalSlider_selection_bias.setTickPosition(QSlider.TicksBelow)
+        self.horizontalSlider_selection_bias.setOrientation(Qt.Orientation.Horizontal)
+        self.horizontalSlider_selection_bias.setTickPosition(QSlider.TickPosition.TicksBelow)
         self.horizontalSlider_selection_bias.setTickInterval(50)
 
         self.horizontalLayout_3.addWidget(self.horizontalSlider_selection_bias)
@@ -393,18 +393,33 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.pushButton_clear.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
+#if QT_CONFIG(shortcut)
+        self.pushButton_clear.setShortcut(QCoreApplication.translate("MainWindow", u"Del", None))
+#endif // QT_CONFIG(shortcut)
 #if QT_CONFIG(tooltip)
         self.pushButton_undo.setToolTip(QCoreApplication.translate("MainWindow", u"Undo", None))
 #endif // QT_CONFIG(tooltip)
         self.pushButton_undo.setText(QCoreApplication.translate("MainWindow", u"Undo", None))
+#if QT_CONFIG(shortcut)
+        self.pushButton_undo.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Z", None))
+#endif // QT_CONFIG(shortcut)
 #if QT_CONFIG(tooltip)
         self.pushButton_redo.setToolTip(QCoreApplication.translate("MainWindow", u"Redo", None))
 #endif // QT_CONFIG(tooltip)
         self.pushButton_redo.setText(QCoreApplication.translate("MainWindow", u"Redo", None))
+#if QT_CONFIG(shortcut)
+        self.pushButton_redo.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Shift+Z", None))
+#endif // QT_CONFIG(shortcut)
         self.pushButton_back_to_drawing.setText(QCoreApplication.translate("MainWindow", u"Back to Sketchpad", None))
         self.pushButton_back_to_drawing_2.setText(QCoreApplication.translate("MainWindow", u"New Image", None))
         self.checkBox.setText(QCoreApplication.translate("MainWindow", u"Invert colors", None))
+#if QT_CONFIG(tooltip)
+        self.pushButton_symbol_list.setToolTip(QCoreApplication.translate("MainWindow", u"Symbol List (Ctrl + S)", None))
+#endif // QT_CONFIG(tooltip)
         self.pushButton_symbol_list.setText(QCoreApplication.translate("MainWindow", u"Symbol List", None))
+#if QT_CONFIG(shortcut)
+        self.pushButton_symbol_list.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+S", None))
+#endif // QT_CONFIG(shortcut)
         self.pushButton_menu.setText("")
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Samples:", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Rarity:", None))

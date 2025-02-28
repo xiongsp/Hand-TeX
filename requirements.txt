@@ -12,3 +12,6 @@ natsort
 torchvision
 opencv-python
 safetensors
+networkx
+noise
+pillow

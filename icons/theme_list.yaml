@@ -19,6 +19,7 @@ Files:
       - edit-line-width
       - edit-copy
       - internet-services
+      - help-about
       - process-stop
       - window-close
       - search

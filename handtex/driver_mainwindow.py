@@ -21,12 +21,13 @@ import handtex.state_saver as ss
 import handtex.structures as st
 import handtex.symbol_list as sl
 import handtex.symbol_relations as sr
+import handtex.about_driver as ad
 import handtex.utils as ut
 import handtex.worker_thread as wt
 from handtex.detector.image_gen import image_size
 import handtex.detector.inference as inf
 import handtex.detector.model as mdl
-from handtex import __program__, __version__
+from handtex import __display_name__, __version__
 from handtex.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 
 
@@ -42,6 +43,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     theming_menu: Qw.QMenu
     enabled_packages_menu: Qw.QMenu
     stroke_width_menu: Qw.QMenu
+
+    about: ad.AboutWidget | None
 
     default_palette: Qg.QPalette
     default_style: str
@@ -75,7 +78,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         start = time.time()
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
-        self.setWindowTitle(f"{__program__} {__version__}")
+        self.setWindowTitle(f"{__display_name__} {__version__}")
         self.setWindowIcon(Qg.QIcon(":/icons/logo.png"))
         self.debug = debug
 
@@ -362,6 +365,24 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             action = Qg.QAction("Simulate crash", self)
             action.triggered.connect(self.simulate_crash)
             self.hamburger_menu.addAction(action)
+
+    @staticmethod
+    def open_online_documentation() -> None:
+        """
+        Open the online documentation in the default browser.
+        """
+        logger.debug("Opening online documentation.")
+        Qg.QDesktopServices.openUrl(Qc.QUrl("https://github.com/VoxelCubes/Hand-TeX"))
+
+    def open_about(self) -> None:
+        """
+        Open the about dialog.
+        """
+        logger.debug("Opening about dialog.")
+        # Bodge in an instance variable to prevent garbage collection from immediately closing the window
+        # due to not opening it modally.
+        self.about = ad.AboutWidget(self)
+        self.about.show()
 
     def switch_to_training(self) -> None:
         """

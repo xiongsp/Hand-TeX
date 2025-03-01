@@ -299,12 +299,55 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 action.setChecked(True)
             self.stroke_width_menu.addAction(action)
 
+        # Setting to scroll up when drawing.
+        action_scroll_on_draw = Qg.QAction("Scroll back up when drawing", self)
+        action_scroll_on_draw.setCheckable(True)
+        action_scroll_on_draw.setChecked(self.config.scroll_on_draw)
+        action_scroll_on_draw.triggered.connect(self.toggle_scroll_on_draw)
+        self.hamburger_menu.addAction(action_scroll_on_draw)
+
+        # Menu to select what packages to (not) exclude from predictions.
+        self.enabled_packages_menu = self.hamburger_menu.addMenu(
+            Qg.QIcon.fromTheme("package"), "Show additional matches"
+        )
+        package_list = self.symbol_data.packages.copy()
+        package_list.remove("latex2e")  # We don't want to allow disabling the built-in stuff.
+        package_action_group = Qg.QActionGroup(self)
+        package_action_group.setExclusive(False)
+        for package in package_list:
+            action = Qg.QAction(package, self)
+            action.setCheckable(True)
+            action.setChecked(package not in self.config.disabled_packages)
+            package_action_group.addAction(action)
+            action.triggered.connect(partial(self.toggle_package, package))
+            self.enabled_packages_menu.addAction(action)
+
+        self.hamburger_menu.addSeparator()
+
+        # About stuff.
+        action_about = Qg.QAction(Qg.QIcon.fromTheme("help-about"), "About Hand TeX", self)
+        action_about.triggered.connect(self.open_about)
+        self.hamburger_menu.addAction(action_about)
+
+        action_online_help = Qg.QAction(
+            Qg.QIcon.fromTheme("internet-services"), "Online Documentation", self
+        )
+        action_online_help.triggered.connect(self.open_online_documentation)
+        self.hamburger_menu.addAction(action_online_help)
+
         # Scan image.
         # This didn't work out, so it's disabled for now. The model just can't
         # handle the complexity of real-world images.
         # action_scan = Qg.QAction(Qg.QIcon.fromTheme("viewimage"), "Open Image", self)
         # action_scan.triggered.connect(self.browse_image)
         # self.hamburger_menu.addAction(action_scan)
+
+        # Offer opening the log viewer.
+        action_open_log = Qg.QAction(
+            Qg.QIcon.fromTheme("tools-report-bug"), "Report an issue...", self
+        )
+        action_open_log.triggered.connect(self.open_log_viewer)
+        self.hamburger_menu.addAction(action_open_log)
 
         # Offer to enter training mode.
         action_training = Qg.QAction(
@@ -321,43 +364,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.hamburger_menu.addAction(action_classification)
         self.detection_menu_action = action_classification
 
-        # Offer opening the log viewer.
-        action_open_log = Qg.QAction(
-            Qg.QIcon.fromTheme("tools-report-bug"), "Report an issue...", self
-        )
-        action_open_log.triggered.connect(self.open_log_viewer)
-        self.hamburger_menu.addAction(action_open_log)
-
         self.reload_stroke_width_icons()
         self.theme_is_dark_changed.connect(self.reload_stroke_width_icons)
         self.theme_is_dark_changed.connect(self.sketchpad.recolor_pen)
         self.theme_is_dark_changed.connect(self.load_training_symbol_data)
-
-        self.hamburger_menu.addSeparator()
-        # Settings section.
-
-        # Setting to scroll up when drawing.
-        action_scroll_on_draw = Qg.QAction("Scroll back up when drawing", self)
-        action_scroll_on_draw.setCheckable(True)
-        action_scroll_on_draw.setChecked(self.config.scroll_on_draw)
-        action_scroll_on_draw.triggered.connect(self.toggle_scroll_on_draw)
-        self.hamburger_menu.addAction(action_scroll_on_draw)
-
-        # Menu to select what packages to (not) exclude from predictions.
-        self.enabled_packages_menu = self.hamburger_menu.addMenu(
-            Qg.QIcon.fromTheme("package"), "Show additional matches"
-        )
-        package_list = self.symbol_data.packages
-        package_list.remove("latex2e")  # We don't want to allow disabling the built-in stuff.
-        package_action_group = Qg.QActionGroup(self)
-        package_action_group.setExclusive(False)
-        for package in package_list:
-            action = Qg.QAction(package, self)
-            action.setCheckable(True)
-            action.setChecked(package not in self.config.disabled_packages)
-            package_action_group.addAction(action)
-            action.triggered.connect(partial(self.toggle_package, package))
-            self.enabled_packages_menu.addAction(action)
 
         if self.debug:
             # Add an intentional crash button.

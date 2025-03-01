@@ -68,10 +68,13 @@ def main(resume_from_checkpoint=False):
 
     random_seed = 0
 
+    # Use 80-1-19 for final training, to increase training data.
+    # The validation set, with a class limit of 1 serves to check each class is represented.
+    # When checking the results of HPO, use the same ratios to see if it overfit to the validation set.
     split_percentages = {
-        DataSplit.TRAIN: 50,
-        DataSplit.VALIDATION: 20,
-        DataSplit.TEST: 30,
+        DataSplit.TRAIN: 80,
+        DataSplit.VALIDATION: 1,
+        DataSplit.TEST: 19,
     }
     assert sum(split_percentages.values()) == 100, "Split points must sum to 100"
 
@@ -95,7 +98,7 @@ def main(resume_from_checkpoint=False):
         random_seed,
         split=DataSplit.VALIDATION,
         split_percentages=split_percentages,
-        class_limit=80,
+        class_limit=1,
         stroke_cache=stroke_cache,
     )
     test_dataset = StrokeDataset(
@@ -106,7 +109,7 @@ def main(resume_from_checkpoint=False):
         random_seed,
         split=DataSplit.TEST,
         split_percentages=split_percentages,
-        class_limit=120,
+        class_limit=50,
         stroke_cache=stroke_cache,
     )
 
@@ -302,29 +305,6 @@ def main(resume_from_checkpoint=False):
             _, predicted = torch.max(outputs.data, 1)
             final_test_preds.extend(predicted.cpu().numpy())
             final_test_targets.extend(targets.cpu().numpy())
-
-    # Compute per-class F1 scores.
-    f1_per_class = f1_score(final_test_targets, final_test_preds, average=None)
-    # Count the number of test samples per class.
-    counts = Counter(final_test_targets)
-    # Get the symbol labels corresponding to each class index.
-    symbols = label_encoder.inverse_transform(list(range(num_classes)))
-    # Create a list of tuples: (symbol, count, F1 score)
-    symbol_f1 = [(symbols[i], counts.get(i, 0), f1_per_class[i]) for i in range(num_classes)]
-    # Sort the symbols in descending order by count.
-    symbol_f1_sorted = sorted(symbol_f1, key=lambda x: x[1], reverse=True)
-
-    # Plot the per-symbol F1 scores.
-    plt.figure(figsize=(12, 6))
-    symbol_names = [x[0] for x in symbol_f1_sorted]
-    symbol_f1_scores = [x[2] for x in symbol_f1_sorted]
-    plt.bar(symbol_names, symbol_f1_scores)
-    plt.xlabel("Symbol")
-    plt.ylabel("F1 Score")
-    plt.title("Per-Symbol F1 Scores (sorted by count)")
-    plt.xticks(rotation=90)
-    plt.tight_layout()
-    plt.show()
 
     # Count the total occurrences of each class (as indices) in the test set.
     total_counts = Counter(final_test_targets)

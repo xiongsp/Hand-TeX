@@ -8,6 +8,7 @@ from tqdm import tqdm
 
 # Import your modules.
 import handtex.symbol_relations as sr
+from hyperparameters import num_epochs
 from training.data_loader import (
     StrokeDataset,
     DataSplit,
@@ -32,6 +33,9 @@ stroke_cache = build_stroke_cache(db_path)
 
 class_limit_factor = 20
 seed = 0
+
+# Use fewer epochs for faster hyperparameter search.
+num_epochs = 6
 
 
 split_percentages = {
@@ -146,7 +150,8 @@ class DynamicCNN(nn.Module):
 ###############################################################################
 def objective(trial: optuna.trial.Trial) -> float:
     # Suggest optimizer hyperparameters.
-    optimizer_name = trial.suggest_categorical("optimizer", ["Adam", "RMSprop", "SGD"])
+    # optimizer_name = trial.suggest_categorical("optimizer", ["Adam", "RMSprop", "SGD"])
+    optimizer_name = "Adam"
     lr = trial.suggest_float("lr", 1e-5, 1e-2, log=True)
     weight_decay = trial.suggest_float("weight_decay", 1e-6, 1e-3, log=True)
 
@@ -199,16 +204,22 @@ def objective(trial: optuna.trial.Trial) -> float:
                 outputs = model(data)
                 loss = criterion(outputs, targets)
                 val_running_loss += loss.item() * data.size(0)
-                _, predicted = torch.max(outputs, 1)
+                _, predicted = torch.max(outputs.data, 1)
                 total += targets.size(0)
                 correct += (predicted == targets).sum().item()
-        val_loss = val_running_loss / len(validation_dataset)
+        val_loss = val_running_loss / len(validation_dataloader)
         val_accuracy = 100 * correct / total
 
         trial.report(val_loss, epoch)
         if trial.should_prune():
+            print(
+                f"Trial {trial.number} pruned at epoch {epoch+1} with loss {val_loss:.4f}, accuracy {val_accuracy:.2f}%"
+            )
             raise optuna.exceptions.TrialPruned()
 
+    print(
+        f"Trial {trial.number} finished with validation loss: {val_loss:.4f}, accuracy: {val_accuracy:.2f}%"
+    )
     return val_loss
 
 
@@ -285,12 +296,15 @@ if __name__ == "__main__":
             outputs = final_model(data)
             loss = criterion(outputs, targets)
             test_running_loss += loss.item() * data.size(0)
-            _, predicted = torch.max(outputs, 1)
+            _, predicted = torch.max(outputs.data, 1)
             total += targets.size(0)
+            correct += (predicted == targets).sum().item()
 
     # Divide the total loss by the number of samples.
-    test_loss = test_running_loss / len(test_dataset)
-    print(f"Final Test Loss: {test_loss:.4f}")
+    test_loss = test_running_loss / len(test_dataloader)
+    test_accuracy = 100 * correct / total
+    print(f"Final Test Loss: {test_loss:.4f}, Test Accuracy: {test_accuracy:.2f}%")
+
 
 #
 # Validation Loss: 0.4935

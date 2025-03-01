@@ -32,38 +32,6 @@ def main():
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # # time the new vs the old apply_transformations function.
-    # # Use a random dataset, and apply the transformations to it.
-    # # Then visualize the results.
-    # import time
-    # import random
-    #
-    # test_strokes = []
-    # for key in symbols.keys():
-    #     cursor.execute("SELECT strokes FROM samples WHERE key = ?", (key,))
-    #     strokes = json.loads(cursor.fetchone()[0])
-    #     test_strokes.append(strokes)
-
-    # key = "latex2e-_lambda"
-    # cursor.execute("SELECT strokes FROM samples WHERE key = ?", (key,))
-    # test_strokes = [json.loads(s[0]) for s in cursor.fetchall()]
-
-    # transformation = [ig.rotation_matrix(-45), ig.skew_matrix(0.5, 0)]
-    # # Test the old apply_transformations function.
-    # start = time.time()
-    # for strokes in test_strokes:
-    #     ig.strokes_to_grayscale_image_cv2(strokes, image_size=48)
-    # old_time = time.time() - start
-
-    # # Test the new apply_transformations function.
-    # start = time.time()
-    # for strokes in test_strokes:
-    #     ig.apply_transformations(strokes, transformation)
-    # new_time = time.time() - start
-
-    # print(f"Old time: {(old_time/len(test_strokes))*1000:.4f} ms")
-    # print(f"New time: {(new_time/len(test_strokes))*1000:.4f} ms")
-
     # Visualize the new drawings for each symbol.
     for index, symbol_key in enumerate(test_set, start=1):
         app = Qw.QApplication.instance() or Qw.QApplication([])
@@ -129,7 +97,7 @@ def main():
             )
 
         for i, drawing in enumerate(drawings_rot):
-            image = ig.strokes_to_grayscale_image_cv2(drawing, 100)
+            image = ig.strokes_to_grayscale_image(drawing, 100)
             image = Image.fromarray(image)
             image = Qg.QImage(
                 image.tobytes(),
@@ -150,7 +118,7 @@ def main():
             drawings_mir.append((i, ig.apply_transformations(strokes, ig.reflection_matrix(i))))
 
         for i, (angle, drawing) in enumerate(drawings_mir):
-            image = ig.strokes_to_grayscale_image_cv2(drawing, 100)
+            image = ig.strokes_to_grayscale_image(drawing, 100)
             image = Image.fromarray(image)
             image = Qg.QImage(
                 image.tobytes(),
@@ -175,7 +143,7 @@ def main():
             drawings_sca.append((i, ig.apply_transformations(strokes, ig.scale_matrix(i, 1, 1000))))
 
         for i, (scale, drawing) in enumerate(drawings_sca):
-            image = ig.strokes_to_grayscale_image_cv2(drawing, 100)
+            image = ig.strokes_to_grayscale_image(drawing, 100)
             image = Image.fromarray(image)
             image = Qg.QImage(
                 image.tobytes(),
@@ -200,7 +168,7 @@ def main():
             drawings_ske.append((i, ig.apply_transformations(strokes, ig.skew_matrix(0, i, 1000))))
 
         for i, (skew, drawing) in enumerate(drawings_ske):
-            image = ig.strokes_to_grayscale_image_cv2(drawing, 100)
+            image = ig.strokes_to_grayscale_image(drawing, 100)
             image = Image.fromarray(image)
             image = Qg.QImage(
                 image.tobytes(),

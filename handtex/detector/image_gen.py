@@ -1,14 +1,15 @@
-import cv2
 import numpy as np
 import torchvision.transforms as transforms
+from PIL import Image, ImageDraw
 from noise import pnoise2
 
-image_size = 64
+IMAGE_SIZE = 64
 
 
-def strokes_to_grayscale_image_cv2(stroke_data: list[list[tuple[int, int]]], image_size: int):
-    # Create a blank white image (grayscale)
-    img = np.ones((image_size, image_size), dtype=np.uint8) * 255  # White background (255)
+def strokes_to_grayscale_image(stroke_data: list[list[tuple[int, int]]], image_size: int):
+    # Create the Pillow version
+    img_pil = Image.new("L", (image_size, image_size), 255)  # 'L' mode for grayscale
+    draw = ImageDraw.Draw(img_pil)
 
     # Scale down the strokes to fit the image size, adding an extra 5% padding.
     padding = 0.10
@@ -34,10 +35,11 @@ def strokes_to_grayscale_image_cv2(stroke_data: list[list[tuple[int, int]]], ima
             point = stroke[0]
             stroke.append((point[0] + 1, point[1] + 1))
 
-        for i in range(len(stroke) - 1):
-            # Line_AA for anti-aliasing doesn't converge during training as well as the hard edge of LINE_4
-            cv2.line(img, stroke[i], stroke[i + 1], color=(0,), thickness=1, lineType=cv2.LINE_4)
-    return img
+        draw.line(stroke, fill=0, width=1)
+
+    img_pil_np = np.array(img_pil)
+
+    return img_pil_np
 
 
 def rotation_matrix(angle: float, image_size: int = 1000) -> np.ndarray:
@@ -252,7 +254,7 @@ def apply_transformations(
 
 
 def tensorize_strokes(stroke_data: list[list[tuple[int, int]]], image_size: int):
-    img = strokes_to_grayscale_image_cv2(stroke_data, image_size)
+    img = strokes_to_grayscale_image(stroke_data, image_size)
     transform = transforms.Compose(
         [
             transforms.ToTensor(),  # Converts the image to a PyTorch tensor (C, H, W) with values in [0, 1]

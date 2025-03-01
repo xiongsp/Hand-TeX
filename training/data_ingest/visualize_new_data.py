@@ -162,7 +162,7 @@ def main():
         print("--------------------")
 
         for i, (path, drawing) in enumerate(drawings):
-            image = ig.strokes_to_grayscale_image_cv2(drawing, 100)
+            image = ig.strokes_to_grayscale_image(drawing, 100)
             image = Image.fromarray(image)
             image = Qg.QImage(
                 image.tobytes(),

@@ -19,7 +19,7 @@ from training.hyperparameters import (
     step_size,
     gamma,
 )
-from handtex.detector.image_gen import image_size
+from handtex.detector.image_gen import IMAGE_SIZE
 from training.data_loader import (
     StrokeDataset,
     DataSplit,
@@ -79,7 +79,7 @@ def main(resume_from_checkpoint=False):
     train_dataset = StrokeDataset(
         db_path,
         symbol_data,
-        image_size,
+        IMAGE_SIZE,
         label_encoder,
         random_seed,
         split=DataSplit.TRAIN,
@@ -90,7 +90,7 @@ def main(resume_from_checkpoint=False):
     validation_dataset = StrokeDataset(
         db_path,
         symbol_data,
-        image_size,
+        IMAGE_SIZE,
         label_encoder,
         random_seed,
         split=DataSplit.VALIDATION,
@@ -101,7 +101,7 @@ def main(resume_from_checkpoint=False):
     test_dataset = StrokeDataset(
         db_path,
         symbol_data,
-        image_size,
+        IMAGE_SIZE,
         label_encoder,
         random_seed,
         split=DataSplit.TEST,
@@ -117,7 +117,7 @@ def main(resume_from_checkpoint=False):
     test_dataloader = DataLoader(test_dataset, batch_size, shuffle=False, num_workers=4)
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = CNN(num_classes=num_classes, image_size=image_size).to(device)
+    model = CNN(num_classes=num_classes, image_size=IMAGE_SIZE).to(device)
 
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=weight_decay)

@@ -7,12 +7,12 @@ from functools import cache
 from itertools import cycle
 from math import floor
 
-import cv2
 import numpy as np
 import torch
 import torchvision.transforms as transforms
 from sklearn.preprocessing import LabelEncoder
 from torch.utils.data import Dataset
+from PIL import Image
 
 import handtex.data.symbol_metadata
 import handtex.structures as st
@@ -21,7 +21,6 @@ import handtex.utils as ut
 import training.database
 import handtex.detector.image_gen as ig
 import training.shape_classifier as sc
-import training.hyperparameters as hyp
 import handtex.sketchpad as sp
 
 
@@ -317,7 +316,7 @@ class StrokeDataset(Dataset):
                 samples = samples[:class_limit]
 
             # Only report stats for the training split to cut down on log spam.
-            if split.TRAIN:
+            if split == DataSplit.TRAIN:
                 print(
                     f"Loaded {len(samples)} total samples of {symbol_key}, "
                     f"with {real_data_count} real data, "
@@ -467,7 +466,7 @@ class StrokeDataset(Dataset):
     def __getitem__(self, idx) -> tuple[torch.Tensor, torch.Tensor]:
         stroke_data, _ = self.load_transformed_strokes(idx)
 
-        img = ig.strokes_to_grayscale_image_cv2(stroke_data, self.image_size)
+        img = ig.strokes_to_grayscale_image(stroke_data, self.image_size)
 
         # Apply the transform to convert the image to a tensor and normalize it
         img_tensor = self.transform(img)
@@ -603,17 +602,24 @@ def main():
     # stats = {}
     stats = None
 
+    split_percentages = {
+        DataSplit.TRAIN: 50,
+        DataSplit.VALIDATION: 20,
+        DataSplit.TEST: 30,
+    }
+
     if stats is not None:
         # Create training and validation datasets and dataloaders
         all_samples = StrokeDataset(
             db_path,
             symbol_data,
-            hyp.image_size,
+            ig.IMAGE_SIZE,
             label_encoder,
             random_seed=0,
             random_augmentation=True,
             debug_single_sample_only=False,
             distribution_stats=stats,
+            split_percentages=split_percentages,
         )
         # Gather stats and visualize them as stacked columns.
         import matplotlib.pyplot as plt
@@ -706,35 +712,38 @@ def main():
     all_samples = StrokeDataset(
         db_path,
         symbol_data,
-        hyp.image_size,
+        ig.IMAGE_SIZE,
         label_encoder,
         random_seed=0,
         random_augmentation=True,
         debug_single_sample_only=False,
         distribution_stats=None,
+        split_percentages=split_percentages,
     )
 
     test1 = StrokeDataset(
         db_path,
         symbol_data,
-        hyp.image_size,
+        ig.IMAGE_SIZE,
         label_encoder,
         random_seed=0,
         split=DataSplit.TEST,
         class_limit=100,
         random_augmentation=True,
         distribution_stats=None,
+        split_percentages=split_percentages,
     )
     test2 = StrokeDataset(
         db_path,
         symbol_data,
-        hyp.image_size,
+        ig.IMAGE_SIZE,
         label_encoder,
         random_seed=0,
         split=DataSplit.TEST,
         class_limit=100,
         random_augmentation=True,
         distribution_stats=None,
+        split_percentages=split_percentages,
     )
     assert len(test1) == len(test2), "Test datasets should have the same length"
     assert (
@@ -763,15 +772,12 @@ def main():
             # This discrepancy causes the de-synchronization between the existing paths
             # and the expected paths, hence producing wrong info here.
             print("THE CLAIMED PATHS MAY NOT BE CORRECT!!")
-        img = ig.strokes_to_grayscale_image_cv2(strokes, hyp.image_size)
+        img = ig.strokes_to_grayscale_image(strokes, ig.IMAGE_SIZE)
         print(
             f"Current symbol: {current_key} with transformations: {transformations} and composition: {composition}"
         )
-        cv2.imshow(f"{symbol} {idx}", img)
-        # wait for a key press
-        cv2.waitKey(0)
-        # close the window
-        cv2.destroyAllWindows()
+        pil_image = Image.fromarray(img)
+        pil_image.show(f"{symbol} {idx}", img)
 
     # If we had more samples than paths, those are augmentations for sure.
     # Just show them now.
@@ -779,13 +785,10 @@ def main():
         for idx, (strokes, symbol) in enumerate(
             symbol_strokes[len(symbol_data.all_paths_to_symbol(symbol)) :]
         ):
-            img = ig.strokes_to_grayscale_image_cv2(strokes, hyp.image_size)
+            img = ig.strokes_to_grayscale_image(strokes, ig.IMAGE_SIZE)
             print(f"Current symbol: {symbol} with some augmentation.")
-            cv2.imshow(f"{symbol} {idx}", img)
-            # wait for a key press
-            cv2.waitKey(0)
-            # close the window
-            cv2.destroyAllWindows()
+            pil_image = Image.fromarray(img)
+            pil_image.show(f"{symbol} {idx}", img)
 
 
 if __name__ == "__main__":

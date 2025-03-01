@@ -2,15 +2,12 @@ attrs
 loguru
 PySide6
 xdg
-setuptools
-PyYAML
 psutil
 numpy
 rdp
 torch
-natsort
 torchvision
-opencv-python
+natsort
 safetensors
 networkx
 noise

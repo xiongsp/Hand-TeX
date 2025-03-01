@@ -6,7 +6,7 @@ import torch.nn.functional as F
 from safetensors.torch import load_file
 import numpy as np
 
-from handtex.detector.image_gen import image_size
+from handtex.detector.image_gen import IMAGE_SIZE
 import handtex.detector.image_gen as ig
 from handtex.detector.model import CNN
 
@@ -27,7 +27,7 @@ def load_model_and_decoder(model_path: Path, encodings_path: Path):
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     # Load model state
-    model = CNN(num_classes=len(label_decoder), image_size=image_size)
+    model = CNN(num_classes=len(label_decoder), image_size=IMAGE_SIZE)
     model.load_state_dict(load_file(model_path))
     model.to(device)
     model.eval()  # Set to evaluation mode
@@ -52,7 +52,7 @@ def predict_strokes(
     :param max_results: The maximum number of results to return.
     :return: A list of tuples containing the predicted label and confidence score
     """
-    tensor = ig.tensorize_strokes(strokes, image_size)
+    tensor = ig.tensorize_strokes(strokes, IMAGE_SIZE)
     return predict(tensor, model, label_decoder, max_results)
 
 
@@ -76,7 +76,7 @@ def predict_image(
     # Turn the array into a tensor
     assert image_data.dtype == np.uint8
     assert image_data.ndim == 2
-    assert image_data.shape == (image_size, image_size)
+    assert image_data.shape == (IMAGE_SIZE, IMAGE_SIZE)
     tensor = torch.from_numpy(image_data).unsqueeze(0).unsqueeze(0).float()
     return predict(tensor, model, label_decoder, max_results)
 

@@ -3,4 +3,6 @@ scikit-learn
 tqdm
 pytest
 optuna
+PyYAML
 build
+setuptools

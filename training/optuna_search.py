@@ -14,8 +14,8 @@ from training.data_loader import (
     recalculate_frequencies,
     build_stroke_cache,
 )
-from training.hyperparameters import db_path, batch_size, num_epochs
-from handtex.detector.image_gen import image_size
+from training.hyperparameters import db_path, batch_size
+from handtex.detector.image_gen import IMAGE_SIZE
 
 # Device configuration.
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -46,7 +46,7 @@ assert sum(split_percentages.values()) == 100, "Split points must sum to 100"
 train_dataset = StrokeDataset(
     db_path,
     symbol_data,
-    image_size,
+    IMAGE_SIZE,
     label_encoder,
     random_seed=seed,
     split=DataSplit.TRAIN,
@@ -57,7 +57,7 @@ train_dataset = StrokeDataset(
 validation_dataset = StrokeDataset(
     db_path,
     symbol_data,
-    image_size,
+    IMAGE_SIZE,
     label_encoder,
     random_seed=seed,
     split=DataSplit.VALIDATION,
@@ -68,7 +68,7 @@ validation_dataset = StrokeDataset(
 test_dataset = StrokeDataset(
     db_path,
     symbol_data,
-    image_size,
+    IMAGE_SIZE,
     label_encoder,
     random_seed=seed,
     split=DataSplit.TEST,
@@ -101,7 +101,7 @@ class DynamicCNN(nn.Module):
         in_channels = 1  # assuming grayscale input
 
         # Determine number of conv layers (between 4 and 6)
-        n_conv_layers = trial.suggest_int("n_conv_layers", 4, 6)
+        n_conv_layers = trial.suggest_int("n_conv_layers", 4, 5)
 
         # For the first conv layer, choose number of output channels.
         out_channels = trial.suggest_int("channels_0", 8, 32)
@@ -151,7 +151,7 @@ def objective(trial: optuna.trial.Trial) -> float:
     weight_decay = trial.suggest_float("weight_decay", 1e-6, 1e-3, log=True)
 
     # Build the model with the current trial's suggested architecture.
-    model = DynamicCNN(num_classes=num_classes, image_size=image_size, trial=trial).to(device)
+    model = DynamicCNN(num_classes=num_classes, image_size=IMAGE_SIZE, trial=trial).to(device)
 
     # Check parameter count; prune if it exceeds 836,456.
     num_params = sum(p.numel() for p in model.parameters())
@@ -263,7 +263,7 @@ if __name__ == "__main__":
             return choices[0]
 
     dummy_trial = DummyTrial(best_trial.params)
-    final_model = DynamicCNN(num_classes=num_classes, image_size=image_size, trial=dummy_trial).to(
+    final_model = DynamicCNN(num_classes=num_classes, image_size=IMAGE_SIZE, trial=dummy_trial).to(
         device
     )
 

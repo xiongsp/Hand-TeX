@@ -24,7 +24,7 @@ import handtex.symbol_relations as sr
 import handtex.about_driver as ad
 import handtex.utils as ut
 import handtex.worker_thread as wt
-from handtex.detector.image_gen import image_size
+from handtex.detector.image_gen import IMAGE_SIZE
 import handtex.detector.inference as inf
 import handtex.detector.model as mdl
 from handtex import __display_name__, __version__
@@ -790,7 +790,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             return
         # Scale the image down to fit the canvas size and then run inference.
         scaled_image = image.scaled(
-            Qc.QSize(image_size, image_size), Qc.Qt.KeepAspectRatio, Qc.Qt.SmoothTransformation
+            Qc.QSize(IMAGE_SIZE, IMAGE_SIZE), Qc.Qt.KeepAspectRatio, Qc.Qt.SmoothTransformation
         )
         # Assuming 'scaled_image' is a QImage object
         if scaled_image.format() != Qg.QImage.Format_Grayscale8:

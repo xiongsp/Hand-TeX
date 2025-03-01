@@ -39,8 +39,7 @@ release: confirm
 	$(PYTHON) -m twine upload $(BUILD_DIR)/*
 
 bundle-symbols:
-	#tar --transform='s:.*/::' --owner=0 --group=0 --mode=644 --mtime='1970-01-01' -cJf handtex/data/symbols.tar.xz symbols/svg/*.svg
-	tar --transform='s:.*/::' --owner=0 --group=0 --mode=644 --mtime='1970-01-01' -cf handtex/data/symbols.tar symbols/svg/*.svg
+	tar --transform='s:.*/::' --owner=0 --group=0 --mode=644 --mtime='1970-01-01' -cJf handtex/data/symbols.tar.xz symbols/svg/*.svg
 
 # compile .ui files
 compile-ui:

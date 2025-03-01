@@ -381,14 +381,17 @@ svg_cache: dict[str, str] = {}
 def preload_svg_tar(tar_path: Path | str = ""):
     """
     Preload all SVG files from the compressed TAR archive into memory.
+    Compression makes the archive 12 times smaller, but takes twice as long to load.
+    This is compensated by the fact that this call happens on a separate thread.
+    
     :param tar_path: Path to the TAR archive.
     """
     if not tar_path:
-        tar_path = resource_path(handtex.data, "symbols.tar")
+        tar_path = resource_path(handtex.data, "symbols.tar.xz")
 
     global svg_cache
     start = time.time()
-    with tarfile.open(tar_path, "r") as tar:
+    with tarfile.open(tar_path, "r:xz") as tar:
         for member in tar.getmembers():
             if member.isfile() and member.name.endswith(".svg"):
                 svg_cache[member.name] = tar.extractfile(member).read().decode("utf-8")

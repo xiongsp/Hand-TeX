@@ -1,10 +1,10 @@
+# Optimized with Optuna.
 learning_rate = 0.0005364683338857024
 weight_decay = 1.4868633572534654e-06
 step_size = 3
 gamma = 0.15235718695861067
 batch_size = 64
 num_epochs = 8
-image_size = 64
 db_path = "database/handtex.db"
 
 # With 1024 nodes for fully connected layer, 10 epochs:

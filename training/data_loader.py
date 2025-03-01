@@ -19,7 +19,7 @@ import handtex.structures as st
 import handtex.symbol_relations as sr
 import handtex.utils as ut
 import training.database
-import detector.image_gen as ig
+import handtex.detector.image_gen as ig
 import training.shape_classifier as sc
 import training.hyperparameters as hyp
 import handtex.sketchpad as sp

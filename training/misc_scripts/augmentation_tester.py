@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from noise import pnoise2
-from detector.image_gen import augment_strokes_with_perlin
+from handtex.detector.image_gen import augment_strokes_with_perlin
 
 
 def visualize_strokes_with_augmentation(

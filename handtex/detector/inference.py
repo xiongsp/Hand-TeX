@@ -6,9 +6,9 @@ import torch.nn.functional as F
 from safetensors.torch import load_file
 import numpy as np
 
-from training.hyperparameters import image_size
-import detector.image_gen as ig
-from detector.model import CNN
+from handtex.detector.image_gen import image_size
+import handtex.detector.image_gen as ig
+from handtex.detector.model import CNN
 
 
 def load_decoder(path: Path) -> dict[int, str]:

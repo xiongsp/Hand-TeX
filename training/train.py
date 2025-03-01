@@ -14,19 +14,19 @@ from training.hyperparameters import (
     db_path,
     batch_size,
     num_epochs,
-    image_size,
     learning_rate,
     weight_decay,
     step_size,
     gamma,
 )
+from handtex.detector.image_gen import image_size
 from training.data_loader import (
     StrokeDataset,
     DataSplit,
     recalculate_frequencies,
     build_stroke_cache,
 )
-from detector.model import CNN
+from handtex.detector.model import CNN
 
 
 def save_encoder(label_encoder: LabelEncoder, leader_keys: list[str]):

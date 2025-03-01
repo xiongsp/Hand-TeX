@@ -14,7 +14,7 @@ from loguru import logger
 import handtex.data.symbol_metadata
 import handtex.symbol_relations as sr
 import handtex.utils as ut
-import detector.image_gen as ig
+import handtex.detector.image_gen as ig
 from handtex.utils import resource_path
 
 

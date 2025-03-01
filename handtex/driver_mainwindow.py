@@ -23,9 +23,9 @@ import handtex.symbol_list as sl
 import handtex.symbol_relations as sr
 import handtex.utils as ut
 import handtex.worker_thread as wt
-from training.hyperparameters import image_size
-import detector.inference as inf
-import detector.model as mdl
+from handtex.detector.image_gen import image_size
+import handtex.detector.inference as inf
+import handtex.detector.model as mdl
 from handtex import __program__, __version__
 from handtex.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 

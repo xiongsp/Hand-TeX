@@ -67,7 +67,7 @@ confirm:
 
 build-elf:
 	$(PYINSTALLER) handtex/main.py \
-		--paths "${PYINSTALLER_VENV}/lib/python3.12/site-packages" \
+		--paths "${PYINSTALLER_VENV}/lib/python3.13/site-packages" \
 		--onedir --noconfirm --clean --workpath=build --distpath=dist-elf --windowed \
 		--name="Hand TeX" \
 		--copy-metadata=numpy \

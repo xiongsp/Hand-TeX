@@ -5,9 +5,9 @@ from collections import defaultdict
 from tqdm import tqdm
 
 import handtex.utils as ut
-import detector.inference as inf
+import handtex.detector.inference as inf
 import training.train as trn
-import detector.image_gen as ig
+import handtex.detector.image_gen as ig
 import handtex.symbol_relations as sr
 
 

@@ -3,6 +3,8 @@ import numpy as np
 import torchvision.transforms as transforms
 from noise import pnoise2
 
+image_size = 64
+
 
 def strokes_to_grayscale_image_cv2(stroke_data: list[list[tuple[int, int]]], image_size: int):
     # Create a blank white image (grayscale)

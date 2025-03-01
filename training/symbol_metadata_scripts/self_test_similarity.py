@@ -5,7 +5,7 @@ from collections import defaultdict
 from tqdm import tqdm
 
 import handtex.utils as ut
-import detector.inference as inf
+import handtex.detector.inference as inf
 import training.train as trn
 
 # Defunct tool to use the model to find similar symbols automatically.

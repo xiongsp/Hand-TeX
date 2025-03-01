@@ -14,7 +14,8 @@ from training.data_loader import (
     recalculate_frequencies,
     build_stroke_cache,
 )
-from training.hyperparameters import db_path, batch_size, num_epochs, image_size
+from training.hyperparameters import db_path, batch_size, num_epochs
+from handtex.detector.image_gen import image_size
 
 # Device configuration.
 device = "cuda" if torch.cuda.is_available() else "cpu"

@@ -22,7 +22,7 @@ class Ui_License(object):
     def setupUi(self, License):
         if not License.objectName():
             License.setObjectName(u"License")
-        License.resize(640, 400)
+        License.resize(500, 400)
         self.verticalLayout = QVBoxLayout(License)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.plainTextEdit = QPlainTextEdit(License)

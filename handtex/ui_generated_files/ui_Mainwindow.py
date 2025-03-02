@@ -291,7 +291,7 @@ class Ui_MainWindow(object):
         self.horizontalSlider_selection_bias = QSlider(self.page_train)
         self.horizontalSlider_selection_bias.setObjectName(u"horizontalSlider_selection_bias")
         self.horizontalSlider_selection_bias.setMaximum(100)
-        self.horizontalSlider_selection_bias.setValue(25)
+        self.horizontalSlider_selection_bias.setValue(100)
         self.horizontalSlider_selection_bias.setOrientation(Qt.Orientation.Horizontal)
         self.horizontalSlider_selection_bias.setTickPosition(QSlider.TickPosition.TicksBelow)
         self.horizontalSlider_selection_bias.setTickInterval(50)

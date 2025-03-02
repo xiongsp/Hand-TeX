@@ -113,11 +113,12 @@ class Sketchpad(Qw.QGraphicsView):
 
             # Finish the stroke.
             if len(self.current_stroke) == 1:
-                # If the stroke has only one point, add a second point right next to it.
+                # If the stroke has a single point, add 3 more to form a little square.
                 pos = Qc.QPoint(*self.current_stroke[0])
-                pos += Qc.QPoint(1, 1)
+                self.current_path.lineTo(pos + Qc.QPoint(1, 0))
+                self.current_path.lineTo(pos + Qc.QPoint(1, 1))
+                self.current_path.lineTo(pos + Qc.QPoint(0, 1))
                 # self.current_stroke.append((pos.x(), pos.y()))
-                self.current_path.lineTo(pos)
                 self.current_path_item.setPath(self.current_path)
 
             self.strokes.append(self.current_stroke)

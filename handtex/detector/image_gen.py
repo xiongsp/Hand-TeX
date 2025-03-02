@@ -1,7 +1,6 @@
 import numpy as np
 import torchvision.transforms as transforms
 from PIL import Image, ImageDraw
-from noise import pnoise2
 
 IMAGE_SIZE = 64
 
@@ -293,6 +292,10 @@ def augment_strokes_with_perlin(
     Returns:
     - List of augmented strokes with distorted coordinates.
     """
+    # This dependency is only needed for training.
+    # This way the file can still be used for inference without the dependency.
+    from noise import pnoise2
+
     distorted_strokes = []
 
     for stroke in strokes:

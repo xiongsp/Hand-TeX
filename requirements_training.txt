@@ -4,5 +4,6 @@ tqdm
 pytest
 optuna
 PyYAML
+noise
 build
 setuptools

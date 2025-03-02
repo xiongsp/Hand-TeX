@@ -10,5 +10,4 @@ torchvision
 natsort
 safetensors
 networkx
-noise
 pillow

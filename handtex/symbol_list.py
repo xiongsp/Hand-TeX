@@ -126,6 +126,11 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         shortcut = Qg.QShortcut(Qg.QKeySequence("Ctrl+F"), self)
         shortcut.activated.connect(self.focus_line_edit)
 
+    def show(self):
+        super().show()
+        # Focus the search bar when the window is shown.
+        self.focus_line_edit()
+
     def focus_line_edit(self):
         """Sets focus to the QLineEdit"""
         self.lineEdit_search.setFocus()

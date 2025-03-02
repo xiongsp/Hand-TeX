@@ -10,6 +10,7 @@
 new_drawings
 
 dist-elf
+dist_exe
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

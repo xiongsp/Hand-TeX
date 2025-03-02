@@ -31,7 +31,7 @@ class Symbol:
         if "fontenc" not in symbol:
             symbol["fontenc"] = "OT1"
         if "key" not in symbol:
-            symbol["key"] = f"{symbol['package']}-{symbol['command'].replace('\\', '_')}"
+            symbol["key"] = symbol["package"] + "-" + symbol["command"].replace("\\", "_")
         if "mode" not in symbol:
             symbol["mathmode"] = True
             symbol["textmode"] = False

@@ -383,7 +383,7 @@ def preload_svg_tar(tar_path: Path | str = ""):
     Preload all SVG files from the compressed TAR archive into memory.
     Compression makes the archive 12 times smaller, but takes twice as long to load.
     This is compensated by the fact that this call happens on a separate thread.
-    
+
     :param tar_path: Path to the TAR archive.
     """
     if not tar_path:

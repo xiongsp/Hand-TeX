@@ -4,7 +4,6 @@ from pathlib import Path
 from typing import Callable, Any
 
 import attrs
-import yaml
 from attrs import define, Factory
 from loguru import logger
 
@@ -76,8 +75,7 @@ class Config:
         Log the config in a safe, easily readable format to debug.
         """
         data = self.dump()
-        # Dump to yaml string.
-        logger.debug("Config:\n" + yaml.safe_dump(data, default_flow_style=False, sort_keys=False))
+        logger.debug("Config:\n" + json.dumps(data, indent=4))
 
 
 def load_config(conf_path: Path, config_factory: Callable[[], Any] = Config) -> tuple[

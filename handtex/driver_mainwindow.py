@@ -118,7 +118,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.state_saver = ss.StateSaver("mainwindow")
         self.init_state_saver()
-        self.state_saver.restore()
 
         self.sketchpad.new_drawing.connect(self.detect_symbol)
         self.theme_is_dark_changed.connect(self.show_predictions)
@@ -198,6 +197,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         sys.excepthook = exception_handler
 
         self.sketchpad.set_pen_width(self.config.stroke_width)
+
+        # Initialize the default split to 80:20.
+        width1, width2 = self.splitter.sizes()
+        logger.debug(f"Splitter sizes: {self.splitter.sizes()}")
+        self.splitter.setSizes([(width1 + width2) * 0.8, (width1 + width2) * 0.2])
+        logger.debug(f"Splitter sizes: {self.splitter.sizes()}")
+
+        self.state_saver.restore()
 
     def closeEvent(self, event: Qg.QCloseEvent) -> None:
         """

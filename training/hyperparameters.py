@@ -61,3 +61,24 @@ db_path = "database/handtex.db"
 # Training Loss: 5.3208, Training Accuracy: 97.73%
 # Validation Loss: 20.4027, Validation Accuracy: 92.00%
 # Test Loss: 19.1761, Test Accuracy: 92.09%, Test F1 (macro): 0.9196
+
+# Optuna best after 1000 trials
+# Training Loss: 8.2494, Training Accuracy: 96.66%
+# Validation Loss: 21.2496, Validation Accuracy: 91.70%
+# Test Loss: 21.4306, Test Accuracy: 91.48%, Test F1 (macro): 0.9128
+
+# With more training data
+# Training Loss: 8.8121, Training Accuracy: 96.41%
+# Validation Loss: 18.3669, Validation Accuracy: 92.94%
+# Test Loss: 20.7496, Test Accuracy: 91.66%, Test F1 (macro): 0.9139
+
+# Returning to previous optuna model, keeping hyperparameters
+# Training Loss: 9.8910, Training Accuracy: 95.92%
+# Validation Loss: 19.2058, Validation Accuracy: 92.73%
+# Test Loss: 19.4933, Test Accuracy: 92.10%, Test F1 (macro): 0.9213
+
+# reverting hyperparameters as well, to match previous best optuna model.
+# Final model:
+# Training Loss: 8.0080, Training Accuracy: 96.40%
+# Validation Loss: 20.6223, Validation Accuracy: 92.12%
+# Test Loss: 19.3567, Test Accuracy: 92.40%, Test F1 (macro): 0.9241

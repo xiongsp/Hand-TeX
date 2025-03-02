@@ -832,7 +832,6 @@ tipa-_textbabygamma: mir90
 tipa-_textcloseepsilon: mir0
 tipa-_textcloseomega: mir90
 tipa-_textcloserevepsilon: mir0
-tipa-_textdoublebaresh: rot180
 tipa-_textdoublebarpipe: rot180 mir0 mir90
 tipa-_textlengthmark: rot180 mir0 mir90
 tipa-_textramshorns: mir90

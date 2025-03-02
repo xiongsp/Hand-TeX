@@ -2597,17 +2597,21 @@ MnSymbol-_nsquigarrowleftright,41
 MnSymbol-_nsquigarrownesw,41
 fdsymbol-_bigcupdot,41
 fdsymbol-_cupdot,41
+fdsymbol-_intBar,41
 logix-_MulMapDual,41
 logix-_NotMulMapDual,41
 stix-_bigcupdot,41
 stix-_cupdot,41
 stix-_dualmap,41
+stix-_intBar,41
+stix-_intBarup,41
 stix-_late,41
 stix-_smte,41
 stix-_subsetcirc,41
 stix-_subsetdot,41
 stix-_supsetcirc,41
 stix-_supsetdot,41
+tipa-_textdoublebaresh,41
 tipa-_textscriptg,41
 txfonts-_multimapboth,41
 txfonts-_multimapbothvert,41
@@ -2987,7 +2991,6 @@ amssymb-_succnsim,24
 amssymb-_varsupsetneqq,24
 fdsymbol-_backcong,24
 fdsymbol-_crossing,24
-fdsymbol-_intBar,24
 fdsymbol-_measuredrightangle,24
 fdsymbol-_pullback,24
 fdsymbol-_pushout,24
@@ -3003,8 +3006,6 @@ stix-_Vee,24
 stix-_Wedge,24
 stix-_backcong,24
 stix-_iinfin,24
-stix-_intBar,24
-stix-_intBarup,24
 stix-_measuredrightangle,24
 stix-_pullback,24
 stix-_pushout,24
@@ -3257,7 +3258,6 @@ stmaryrd-_moo,17
 tipa-_textbarg,17
 tipa-_textcommatailz,17
 tipa-_textcttctclig,17
-tipa-_textdoublebaresh,17
 txfonts-_VvDash,17
 wasysym-_neptune,17
 wasysym-_uranus,17

@@ -358,7 +358,7 @@ fdsymbol-_equal MnSymbol-_equal textcomp-_textdblhyphen textcomp-_textdblhyphenc
 fdsymbol-_frowneq stix-_arceq
 fdsymbol-_frownsmile stix-_closure
 fdsymbol-_hdotdot MnSymbol-_hdotdot
-fdsymbol-_intBar stix-_intBar stix-_intBarup
+fdsymbol-_intBar stix-_intBar stix-_intBarup tipa-_textdoublebaresh
 fdsymbol-_intprod logix-_InvNt stix-_intprod
 fdsymbol-_intprodr stix-_intprodr
 fdsymbol-_landdownint stix-_awint stix-_awintup

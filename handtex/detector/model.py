@@ -46,6 +46,8 @@ class CNN(nn.Module):
         self.bn5 = nn.BatchNorm2d(layer5)
         self.pool5 = nn.MaxPool2d(2, 2)
 
+        self.dropout = nn.Dropout(0.3301385640124735)
+
         self.fc1 = nn.Linear(self.last_conv, num_classes)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -65,6 +67,8 @@ class CNN(nn.Module):
         x = self.pool4(x)
         x = F.relu(self.bn5(self.conv5(x)))
         x = self.pool5(x)
+
+        x = self.dropout(x)
 
         x = F.adaptive_avg_pool2d(x, (1, 1))
         x = x.view(-1, self.last_conv)

@@ -66,16 +66,23 @@ def main(resume_from_checkpoint=False):
     recalculate_frequencies()
     stroke_cache = build_stroke_cache(db_path)
 
-    random_seed = 0
+    random_seed = 11
 
     # Use 80-1-19 for final training, to increase training data.
     # The validation set, with a class limit of 1 serves to check each class is represented.
     # When checking the results of HPO, use the same ratios to see if it overfit to the validation set.
-    split_percentages = {
-        DataSplit.TRAIN: 80,
-        DataSplit.VALIDATION: 1,
-        DataSplit.TEST: 19,
-    }
+    if False:
+        split_percentages = {
+            DataSplit.TRAIN: 50,
+            DataSplit.VALIDATION: 20,
+            DataSplit.TEST: 30,
+        }
+    else:
+        split_percentages = {
+            DataSplit.TRAIN: 80,
+            DataSplit.VALIDATION: 1,
+            DataSplit.TEST: 19,
+        }
     assert sum(split_percentages.values()) == 100, "Split points must sum to 100"
 
     # Create training, validation, and test datasets.
@@ -98,7 +105,7 @@ def main(resume_from_checkpoint=False):
         random_seed,
         split=DataSplit.VALIDATION,
         split_percentages=split_percentages,
-        class_limit=1,
+        class_limit=40,
         stroke_cache=stroke_cache,
     )
     test_dataset = StrokeDataset(

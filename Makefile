@@ -1,6 +1,6 @@
 # define variables
 PYTHON = venv/bin/python
-PYINSTALLER_VENV := venv
+PYINSTALLER_VENV := venv_no_cuda
 PYINSTALLER := $(PYINSTALLER_VENV)/bin/pyinstaller
 CurrentDir := $(shell pwd)
 BUILD_DIR = dist
@@ -17,6 +17,13 @@ BLACK_EXCLUDE_PATTERN := "^$(UI_OUTPUT_DIR)/.*"
 fresh-install: clean build install
 
 refresh-assets: build-icon-cache compile-ui bundle-symbols
+
+run:
+    # PYTHONPATH is needed for the local imports to work.
+	PYTHONPATH=. $(PYTHON) handtex/main.py
+
+run-pyinstaller-venv:
+	PYTHONPATH=. $(PYINSTALLER_VENV)/bin/python handtex/main.py
 
 # build target
 build:
@@ -65,39 +72,39 @@ confirm:
 	fi
 
 build-elf:
-	$(PYINSTALLER) handtex/main.py \
-		--paths "${PYINSTALLER_VENV}/lib/python3.13/site-packages" \
+	# Use torch from: https://download.pytorch.org/whl/cpu/torch-2.6.0%2Bcpu-cp313-cp313-linux_x86_64.whl
+	# Use torchvision from: https://download.pytorch.org/whl/cpu/torchvision-0.21.0%2Bcpu-cp313-cp313-linux_x86_64.whl
+	$(PYINSTALLER_VENV)/bin/python -m PyInstaller handtex/main.py \
 		--onedir --noconfirm --clean --workpath=build --distpath=dist-elf --windowed \
-		--name="Hand TeX" \
+		--name="HandTeX" \
 		--copy-metadata=numpy \
 		--copy-metadata=packaging \
-		--copy-metadata=pyyaml \
 		--copy-metadata=pillow \
-		--collect-data handtex
+		--copy-metadata=torch
 
 	# This stupid thing refuses to collect data, so do it manually:
 	@echo "Copying data files..."
-	mkdir -p dist-elf/Hand\ TeX/_internal/handtex
-	cp -r handtex/data dist-elf/Hand\ TeX/_internal/handtex/
+	mkdir -p dist-elf/HandTeX/_internal/handtex
+	cp -r handtex/data dist-elf/HandTeX/_internal/handtex/
 	@echo "Purging __pycache__ directories..."
-	@find dist-elf/Hand\ TeX/_internal/handtex -type d -name "__pycache__"
-	@find dist-elf/Hand\ TeX/_internal/handtex -type d -name "__pycache__" -exec rm -rf {} \; || true
+	@find dist-elf/HandTeX/_internal/handtex -type d -name "__pycache__"
+	@find dist-elf/HandTeX/_internal/handtex -type d -name "__pycache__" -exec rm -rf {} \; || true
 
-	@echo "Purging CUDA related files from _internal directory..."
-	@find dist-elf/Hand\ TeX/_internal -type f \( \
-		-name 'libtorch_cuda.so' -o \
-		-name 'libc10_cuda.so' -o \
-		-name 'libcusparse.so*' -o \
-		-name 'libcurand.so*' -o \
-		-name 'libcudnn.so*' -o \
-		-name 'libcublasLt.so*' -o \
-		-name 'libcublas.so*' -o \
-		-name 'libcupti.so*' -o \
-		-name 'libcufft.so*' -o \
-		-name 'libcudart.so*' -o \
-		-name 'libnv*' -o \
-		-name 'libnccl.so*' \
-		\) -exec rm -rf {} \;
+#	@echo "Purging CUDA related files from _internal directory..."
+#	@find dist-elf/HandTeX/_internal -type f \( \
+#		-name 'libtorch_cuda.so' -o \
+#		-name 'libc10_cuda.so' -o \
+#		-name 'libcusparse.so*' -o \
+#		-name 'libcurand.so*' -o \
+#		-name 'libcudnn.so*' -o \
+#		-name 'libcublasLt.so*' -o \
+#		-name 'libcublas.so*' -o \
+#		-name 'libcupti.so*' -o \
+#		-name 'libcufft.so*' -o \
+#		-name 'libcudart.so*' -o \
+#		-name 'libnv*' -o \
+#		-name 'libnccl.so*' \
+#		\) -exec rm -rf {} \;
 
 
 

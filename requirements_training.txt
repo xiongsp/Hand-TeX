@@ -6,4 +6,5 @@ optuna
 PyYAML
 noise
 build
+pyinstaller
 setuptools

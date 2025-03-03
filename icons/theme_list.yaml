@@ -30,6 +30,8 @@ Files:
 #      - contrast
 #      - adjustcurves
 #      - viewimage
+    24:
+      - draw-freehand
     32:
       - go-up
   status:

@@ -59,9 +59,10 @@ class CScrollArea(Qw.QScrollArea):
         Listen for palette change events to update the scroll-to-top button's style.
         """
         super().changeEvent(event)
-        if event.type() == Qc.QEvent.ApplicationPaletteChange:
+        if event.type() == Qc.QEvent.PaletteChange:
             # Re-apply styling when the palette changes
-            self.update_scroll_to_top_btn_style()
+            # Do a delay timer to allow the palette to update first.
+            Qc.QTimer.singleShot(1, self.update_scroll_to_top_btn_style)
 
     def update_scroll_to_top_btn_style(self) -> None:
         """

@@ -313,6 +313,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         action_scroll_on_draw.triggered.connect(self.toggle_scroll_on_draw)
         self.hamburger_menu.addAction(action_scroll_on_draw)
 
+        action_single_click_to_copy = Qg.QAction("Single click to copy", self)
+        action_single_click_to_copy.setCheckable(True)
+        action_single_click_to_copy.setChecked(self.config.single_click_to_copy)
+        action_single_click_to_copy.triggered.connect(self.toggle_single_click_to_copy)
+        self.hamburger_menu.addAction(action_single_click_to_copy)
+
         # Menu to select what packages to (not) exclude from predictions.
         self.enabled_packages_menu = self.hamburger_menu.addMenu(
             Qg.QIcon.fromTheme("package"), "Show additional matches"
@@ -447,6 +453,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Toggle the scroll on draw setting.
         """
         self.config.scroll_on_draw = not self.config.scroll_on_draw
+        self.config.save()
+
+    def toggle_single_click_to_copy(self) -> None:
+        """
+        Toggle the single click to copy setting.
+        """
+        self.config.single_click_to_copy = not self.config.single_click_to_copy
         self.config.save()
 
     def toggle_package(self, package: str) -> None:
@@ -772,12 +785,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Slap a spacer on the end to push the items to the top.
         self.widget_predictions.layout().addStretch()
 
-    @Slot(str)
-    def copy_symbol_to_clipboard(self, clipboard_text: str) -> None:
+    @Slot(str, bool)
+    def copy_symbol_to_clipboard(self, clipboard_text: str, is_double_click: bool) -> None:
         """
         Copy the symbol to the clipboard and open a toast at the bottom
         of the scroll area.
         """
+        if is_double_click == self.config.single_click_to_copy:
+            return
         clipboard = Qw.QApplication.clipboard()
         clipboard.setText(clipboard_text)
         toast = Toast(self.scrollArea_predictions, f"Copied {clipboard_text} to clipboard.")
@@ -948,7 +963,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
 class PredictionWidget(Qw.QWidget):
     # Signal to emit the symbol command when double clicked
-    symbol_for_clipboard = Signal(str)
+    symbol_for_clipboard = Signal(str, bool)
 
     def __init__(
         self,
@@ -1013,8 +1028,18 @@ class PredictionWidget(Qw.QWidget):
         Emit the symbol command string when the widget is double clicked
         (including if the double click happens on a child widget).
         """
-        self.symbol_for_clipboard.emit(self.symbol_data.command)
+        if event.button() == Qc.Qt.MouseButton.LeftButton:
+            self.symbol_for_clipboard.emit(self.symbol_data.command, True)
         super().mouseDoubleClickEvent(event)
+
+    def mousePressEvent(self, event: Qg.QMouseEvent) -> None:
+        """
+        Emit the symbol command string when the widget is clicked
+        (including if the click happens on a child widget).
+        """
+        if event.button() == Qc.Qt.MouseButton.LeftButton:
+            self.symbol_for_clipboard.emit(self.symbol_data.command, False)
+        super().mousePressEvent(event)
 
     def contextMenuEvent(self, event: Qg.QContextMenuEvent) -> None:
         """
@@ -1039,15 +1064,21 @@ class PredictionWidget(Qw.QWidget):
             copy_key_action = menu.addAction("Copy Key")
 
         chosen_action = menu.exec_(self.mapToGlobal(event.pos()))
+        text_to_copy = ""
         if chosen_action == copy_command_action:
-            Qw.QApplication.clipboard().setText(self.symbol_data.command)
+            text_to_copy = self.symbol_data.command
 
         elif chosen_action == copy_usepackage_action:
-            snippet = f"\\usepackage{{{self.symbol_data.package}}}"
-            Qw.QApplication.clipboard().setText(snippet)
+            text_to_copy = f"\\usepackage{{{self.symbol_data.package}}}"
 
         elif chosen_action == copy_key_action:
-            Qw.QApplication.clipboard().setText(self.symbol_data.key)
+            text_to_copy = self.symbol_data.key
+
+        if text_to_copy:
+            # Send it with the double click flag set to true and to false, one of them
+            # will work.
+            self.symbol_for_clipboard.emit(text_to_copy, False)
+            self.symbol_for_clipboard.emit(text_to_copy, True)
 
 
 class Toast(Qw.QLabel):

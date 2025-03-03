@@ -16,6 +16,7 @@ class Config:
     stroke_width: int = 6
     new_data_dir: str = "new_data"
     scroll_on_draw: bool = True
+    single_click_to_copy: bool = True
     disabled_packages: list[str] = Factory(list)
 
     def save(self, path: Path = None) -> bool:

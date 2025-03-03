@@ -373,7 +373,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.reload_stroke_width_icons()
         self.theme_is_dark_changed.connect(self.reload_stroke_width_icons)
-        self.theme_is_dark_changed.connect(self.sketchpad.recolor_pen)
+        self.theme_is_dark_changed.connect(self.sketchpad.recolor)
         self.theme_is_dark_changed.connect(self.load_training_symbol_data)
 
         if self.debug:

@@ -29,6 +29,8 @@ class Sketchpad(Qw.QGraphicsView):
 
     pen_width: int
 
+    overlay: Qw.QWidget
+
     def __init__(self, parent=None):
         super().__init__(parent)
         scene = Qw.QGraphicsScene(self)
@@ -39,6 +41,8 @@ class Sketchpad(Qw.QGraphicsView):
         self.current_stroke = None
         self.current_path = None
         self.current_path_item = None
+
+        self.set_up_overlay()
 
         self.pen_width = 10
 
@@ -53,11 +57,46 @@ class Sketchpad(Qw.QGraphicsView):
         self.setMouseTracking(True)  # Enable mouse tracking to get accurate positions
         self.setSceneRect(0, 0, self.width(), self.height())
 
+    def set_up_overlay(self):
+        # Create overlay container
+        self.overlay = Qw.QWidget(self)
+        self.overlay.setAttribute(Qc.Qt.WA_TransparentForMouseEvents, True)  # Click-through
+
+        # Layout for stacking icon and label.
+        layout = Qw.QVBoxLayout()
+        layout.setAlignment(Qc.Qt.AlignCenter)
+
+        text_label = Qw.QLabel("Draw here")
+        font = text_label.font()
+        font.setPointSize(int(3 * font.pointSize()))
+        text_label.setFont(font)
+        text_label.setAlignment(Qc.Qt.AlignCenter)
+
+        icon_label = Qw.QLabel()
+        icon_label.setObjectName("overlay-icon")
+        icon = Qg.QIcon.fromTheme("draw-freehand")
+        pixmap = icon.pixmap(128, 128)  # Set icon size
+        icon_label.setPixmap(pixmap)
+        icon_label.setAlignment(Qc.Qt.AlignCenter)
+
+        layout.addWidget(text_label)
+        layout.addWidget(icon_label)
+        self.overlay.setLayout(layout)
+
+        self.updateOverlayPosition()
+
+    def updateOverlayPosition(self):
+        """
+        Keep overlay centered in the view.
+        """
+        self.overlay.setGeometry(0, 0, self.viewport().width(), self.viewport().height())
+
     def resizeEvent(self, event: Qg.QResizeEvent) -> None:
         """
         Adjust the scene size when the widget is resized.
         """
         self.setSceneRect(0, 0, self.width(), self.height())
+        self.updateOverlayPosition()
         super().resizeEvent(event)
 
     def wheelEvent(self, event: Qg.QWheelEvent) -> None:
@@ -66,17 +105,25 @@ class Sketchpad(Qw.QGraphicsView):
         """
         event.ignore()
 
-    def recolor_pen(self) -> None:
+    def recolor(self) -> None:
         """
         Recolor the pen to match the text color.
+        Change the greeter icon's color.
         """
         pen_color = self.palette().color(Qg.QPalette.Text)
         self.pen.setColor(pen_color)
         for item in self.stroke_items:
             item.setPen(self.pen)
 
+        # Recolor the overlay icon.
+        icon = Qg.QIcon.fromTheme("draw-freehand")
+        pixmap = icon.pixmap(128, 128)
+        icon_label = self.overlay.findChild(Qw.QLabel, "overlay-icon")
+        icon_label.setPixmap(pixmap)
+
     def mousePressEvent(self, event: Qg.QMouseEvent) -> None:
         if event.button() == Qc.Qt.LeftButton:
+            self.overlay.hide()
             # Start a new stroke.
             self.current_stroke = []
             self.current_path = Qg.QPainterPath()

@@ -350,6 +350,9 @@
          <property name="text">
           <string notr="true">&lt;command&gt;</string>
          </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
          <property name="textInteractionFlags">
           <set>Qt::TextInteractionFlag::LinksAccessibleByMouse|Qt::TextInteractionFlag::TextSelectableByKeyboard|Qt::TextInteractionFlag::TextSelectableByMouse</set>
          </property>
@@ -387,6 +390,9 @@
            <property name="text">
             <string notr="true">&lt;package&gt;</string>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
            <property name="textInteractionFlags">
             <set>Qt::TextInteractionFlag::LinksAccessibleByMouse|Qt::TextInteractionFlag::TextSelectableByKeyboard|Qt::TextInteractionFlag::TextSelectableByMouse</set>
            </property>
@@ -404,6 +410,9 @@
            <property name="text">
             <string notr="true">&lt;mode&gt;</string>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
            <property name="textInteractionFlags">
             <set>Qt::TextInteractionFlag::LinksAccessibleByMouse|Qt::TextInteractionFlag::TextSelectableByKeyboard|Qt::TextInteractionFlag::TextSelectableByMouse</set>
            </property>
@@ -420,6 +429,9 @@
           <widget class="QLabel" name="label_fontenc">
            <property name="text">
             <string notr="true">&lt;fontenc&gt;</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
            <property name="textInteractionFlags">
             <set>Qt::TextInteractionFlag::LinksAccessibleByMouse|Qt::TextInteractionFlag::TextSelectableByKeyboard|Qt::TextInteractionFlag::TextSelectableByMouse</set>
@@ -458,6 +470,9 @@
            <property name="text">
             <string>&lt;yes/no&gt;</string>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item row="7" column="0">
@@ -482,6 +497,9 @@
            <property name="text">
             <string notr="true">&lt;symbol id&gt;</string>
            </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
            <property name="textInteractionFlags">
             <set>Qt::TextInteractionFlag::LinksAccessibleByMouse|Qt::TextInteractionFlag::TextSelectableByKeyboard|Qt::TextInteractionFlag::TextSelectableByMouse</set>
            </property>
@@ -498,6 +516,9 @@
           <widget class="QLabel" name="label_xelatex_required">
            <property name="text">
             <string>XeLaTeX or LuaLaTeX required</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -529,6 +550,9 @@
           <widget class="QLabel" name="label_inside_shape">
            <property name="text">
             <string notr="true">&lt;shape&gt;</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>

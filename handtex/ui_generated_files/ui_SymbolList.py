@@ -204,6 +204,7 @@ class Ui_SymbolList(object):
         self.label_command = QLabel(self.verticalLayoutWidget)
         self.label_command.setObjectName(u"label_command")
         self.label_command.setText(u"<command>")
+        self.label_command.setWordWrap(True)
         self.label_command.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.verticalLayout.addWidget(self.label_command, 0, Qt.AlignmentFlag.AlignHCenter)
@@ -231,6 +232,7 @@ class Ui_SymbolList(object):
         self.label_package = QLabel(self.verticalLayoutWidget)
         self.label_package.setObjectName(u"label_package")
         self.label_package.setText(u"<package>")
+        self.label_package.setWordWrap(True)
         self.label_package.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.label_package)
@@ -243,6 +245,7 @@ class Ui_SymbolList(object):
         self.label_mode = QLabel(self.verticalLayoutWidget)
         self.label_mode.setObjectName(u"label_mode")
         self.label_mode.setText(u"<mode>")
+        self.label_mode.setWordWrap(True)
         self.label_mode.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(2, QFormLayout.FieldRole, self.label_mode)
@@ -255,6 +258,7 @@ class Ui_SymbolList(object):
         self.label_fontenc = QLabel(self.verticalLayoutWidget)
         self.label_fontenc.setObjectName(u"label_fontenc")
         self.label_fontenc.setText(u"<fontenc>")
+        self.label_fontenc.setWordWrap(True)
         self.label_fontenc.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(4, QFormLayout.FieldRole, self.label_fontenc)
@@ -279,6 +283,7 @@ class Ui_SymbolList(object):
 
         self.label_self_symmetry = QLabel(self.verticalLayoutWidget)
         self.label_self_symmetry.setObjectName(u"label_self_symmetry")
+        self.label_self_symmetry.setWordWrap(True)
 
         self.formLayout.setWidget(6, QFormLayout.FieldRole, self.label_self_symmetry)
 
@@ -296,6 +301,7 @@ class Ui_SymbolList(object):
         self.label_id = QLabel(self.verticalLayoutWidget)
         self.label_id.setObjectName(u"label_id")
         self.label_id.setText(u"<symbol id>")
+        self.label_id.setWordWrap(True)
         self.label_id.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.label_id)
@@ -307,6 +313,7 @@ class Ui_SymbolList(object):
 
         self.label_xelatex_required = QLabel(self.verticalLayoutWidget)
         self.label_xelatex_required.setObjectName(u"label_xelatex_required")
+        self.label_xelatex_required.setWordWrap(True)
 
         self.formLayout.setWidget(3, QFormLayout.FieldRole, self.label_xelatex_required)
 
@@ -330,6 +337,7 @@ class Ui_SymbolList(object):
         self.label_inside_shape = QLabel(self.verticalLayoutWidget)
         self.label_inside_shape.setObjectName(u"label_inside_shape")
         self.label_inside_shape.setText(u"<shape>")
+        self.label_inside_shape.setWordWrap(True)
 
         self.formLayout.setWidget(9, QFormLayout.FieldRole, self.label_inside_shape)
 

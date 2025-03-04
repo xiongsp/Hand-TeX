@@ -269,6 +269,7 @@ class Ui_MainWindow(object):
         self.spinBox_max_submissions.setObjectName(u"spinBox_max_submissions")
         self.spinBox_max_submissions.setMinimum(1)
         self.spinBox_max_submissions.setMaximum(100)
+        self.spinBox_max_submissions.setValue(3)
 
         self.horizontalLayout_6.addWidget(self.spinBox_max_submissions)
 

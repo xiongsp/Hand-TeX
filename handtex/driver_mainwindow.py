@@ -79,7 +79,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(f"{__display_name__} {__version__}")
-        self.setWindowIcon(Qg.QIcon(":/icons/logo.png"))
+        self.setWindowIcon(gu.load_custom_icon("logo"))
         self.debug = debug
 
         self.current_predictions = []

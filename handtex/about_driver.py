@@ -4,6 +4,8 @@ import PySide6
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Qt
+import PySide6.QtCore as Qc
+import PySide6.QtSvgWidgets as Qsw
 
 import handtex.license_driver as ld
 import handtex.gui_utils as gu
@@ -28,7 +30,7 @@ class AboutWidget(Qw.QWidget, Ui_About):
         Qw.QWidget.__init__(self, parent)
         self.setupUi(self)
         self.setWindowFlag(Qt.Window)
-        self.setWindowIcon(gu.load_custom_icon("logo-tiny"))
+        self.setWindowIcon(gu.load_custom_icon("logo"))
 
         self.label_license.linkActivated.connect(self.open_license)
 
@@ -41,9 +43,7 @@ class AboutWidget(Qw.QWidget, Ui_About):
         self.label_version.setText(__version__)
         self.label_toolkit.setText(f"PySide (Qt) {PySide6.__version__}")
 
-        self.label_logo.setPixmap(
-            Qg.QPixmap(gu.custom_icon_path("logo")).scaledToWidth(200, mode=Qt.SmoothTransformation)
-        )
+        self.label_logo.setPixmap(gu.load_custom_icon("logo").pixmap(200, 200))
 
     def open_license(self) -> None:
         """

@@ -22,7 +22,7 @@ class Ui_About(object):
     def setupUi(self, About):
         if not About.objectName():
             About.setObjectName(u"About")
-        About.resize(620, 265)
+        About.resize(600, 265)
         self.horizontalLayout_2 = QHBoxLayout(About)
         self.horizontalLayout_2.setSpacing(6)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")

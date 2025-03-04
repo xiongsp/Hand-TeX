@@ -84,6 +84,7 @@ class SymbolList(Qw.QWidget, Ui_SymbolList):
         self.last_show_symbol = symbol_data.all_keys[0]
         self.disable_filtering = False
         self.search_pool = symbol_data.all_keys
+        self.setWindowIcon(gu.load_custom_icon("logo"))
 
         self.icon_size = 100
         self.listWidget.setIconSize(Qc.QSize(self.icon_size, self.icon_size))

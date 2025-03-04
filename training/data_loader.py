@@ -527,9 +527,21 @@ def recalculate_frequencies():
             print(symbol)
         frequencies.update({key: 0 for key in missing_symbols})
 
+    # Sort the frequencies by key.
+    frequencies_sorted = sorted(
+        frequencies.items(),
+        key=lambda item: item[0],
+        reverse=False,
+    )
+    frequencies_sorted = sorted(
+        frequencies_sorted,
+        key=lambda item: item[1],
+        reverse=True,
+    )
+
     with open(frequencies_path, "w") as file:
         writer = csv.writer(file, lineterminator="\n")
-        writer.writerows(frequencies.items())
+        writer.writerows(frequencies_sorted)
 
     # Calculate new augmented frequencies.
     # Sum up the frequencies of all symbols that are it's ancestor as well.

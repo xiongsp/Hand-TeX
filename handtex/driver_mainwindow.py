@@ -165,7 +165,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.spinBox_max_submissions.valueChanged.connect(self.update_submission_count)
 
         self.pushButton_submit.clicked.connect(self.submit_training_drawing)
-        self.pushButton_submit.setShortcut("Ctrl+Space")
         self.pushButton_skip.clicked.connect(self.get_next_symbol)
         self.pushButton_undo_submit.clicked.connect(self.previous_symbol)
 

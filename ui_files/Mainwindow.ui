@@ -610,6 +610,9 @@
                 </item>
                 <item>
                  <widget class="QPushButton" name="pushButton_browse_new_data_dir">
+                  <property name="toolTip">
+                   <string>Select directory</string>
+                  </property>
                   <property name="text">
                    <string/>
                   </property>
@@ -624,11 +627,17 @@
             </item>
             <item>
              <widget class="QPushButton" name="pushButton_submit">
+              <property name="toolTip">
+               <string>Submit (Ctrl + Space)</string>
+              </property>
               <property name="text">
                <string>Submit</string>
               </property>
               <property name="icon">
                <iconset theme="dialog-ok"/>
+              </property>
+              <property name="shortcut">
+               <string>Ctrl+Space</string>
               </property>
              </widget>
             </item>
@@ -639,11 +648,17 @@
               </property>
               <item>
                <widget class="QPushButton" name="pushButton_skip">
+                <property name="toolTip">
+                 <string>Skip (Ctrl + N)</string>
+                </property>
                 <property name="text">
                  <string>Skip</string>
                 </property>
                 <property name="icon">
                  <iconset theme="media-skip-forward"/>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+N</string>
                 </property>
                </widget>
               </item>

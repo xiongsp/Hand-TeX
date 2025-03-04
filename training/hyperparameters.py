@@ -5,7 +5,6 @@ step_size = 3
 gamma = 0.15235718695861067
 batch_size = 64
 num_epochs = 8
-db_path = "database/handtex.db"
 
 # With 1024 nodes for fully connected layer, 10 epochs:
 # Training Loss: 13.9550, Training Accuracy: 93.18%

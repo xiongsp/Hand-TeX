@@ -15,7 +15,9 @@ from training.data_loader import (
     recalculate_frequencies,
     build_stroke_cache,
 )
-from training.hyperparameters import db_path, batch_size
+from training.hyperparameters import batch_size
+from training import database
+import handtex.utils as ut
 from handtex.detector.image_gen import IMAGE_SIZE
 
 # Device configuration.
@@ -29,6 +31,7 @@ label_encoder.fit(symbol_data.leaders)
 
 # Preprocess and build stroke cache.
 recalculate_frequencies()
+db_path = ut.resource_path(database, "handtex.db")
 stroke_cache = build_stroke_cache(db_path)
 
 class_limit_factor = 20

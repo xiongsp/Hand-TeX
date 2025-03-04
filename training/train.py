@@ -11,7 +11,6 @@ from collections import Counter
 import handtex.symbol_relations as sr
 import handtex.utils as ut
 from training.hyperparameters import (
-    db_path,
     batch_size,
     num_epochs,
     learning_rate,
@@ -26,6 +25,7 @@ from training.data_loader import (
     recalculate_frequencies,
     build_stroke_cache,
 )
+from training import database
 from handtex.detector.model import CNN
 
 
@@ -64,6 +64,7 @@ def main(resume_from_checkpoint=False):
     label_encoder.fit(symbol_data.leaders)
 
     recalculate_frequencies()
+    db_path = ut.resource_path(database, "handtex.db")
     stroke_cache = build_stroke_cache(db_path)
 
     random_seed = 11

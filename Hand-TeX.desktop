@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=Hand Tex
-Comment= Harness the power of the DeepL API.
-GenericName=Computer Aided Translation
+Comment= Handwritten LaTeX symbol classifier
+GenericName=LaTeX handwriting detector
 Icon=handtex
 Exec=handtex
 Terminal=false

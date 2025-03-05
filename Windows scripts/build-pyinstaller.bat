@@ -7,10 +7,9 @@
     --name="HandTeX" --icon=handtex/data/custom_icons/logo.ico ^
     --copy-metadata numpy ^
     --copy-metadata packaging ^
-    --copy-metadata pyyaml ^
     --collect-datas handtex
 
-@REM Copy "docs\What is _internal.txt" "dist_exe/PanelCleaner\What is _internal.txt"
 xcopy "handtex\data" "dist_exe\HandTeX\_internal\handtex\data" /E /I /Y
 cd "dist_exe\HandTeX\_internal\handtex\data"
 for /d /r . %%d in (__pycache__) do @rmdir /s /q "%%d"
+Copy "docs\What is _internal.txt" "dist_exe\HandTeX\What is _internal.txt"

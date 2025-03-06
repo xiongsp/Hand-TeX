@@ -103,7 +103,7 @@ git clone https://github.com/VoxelCubes/Hand-TeX.git
 cd Hand-TeX
 ```
 
-Optionally, create a virtual environment. If you use your system
+Optionally, create a virtual environment
 ```bash
 python -m venv venv
 source venv/bin/activate

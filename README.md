@@ -91,6 +91,9 @@ as the original Detexify dataset [here](https://github.com/VoxelCubes/Hand-TeX/r
 
 ### Running from source
 
+If you wish to use Hand TeX, you don't need to run from source. Just use `pip install handtex` and run `handtex`.
+But if you wish to develop or train the model, you will need to run from source.
+
 These instructions assume you have Python 3.10 or later installed, as well as a collection of terminal utilities.
 This will work on any Linux system, or other OS with the appropriate tools installed.
 
@@ -100,7 +103,7 @@ git clone https://github.com/VoxelCubes/Hand-TeX.git
 cd Hand-TeX
 ```
 
-Optionally, create a virtual environment
+Optionally, create a virtual environment. If you use your system
 ```bash
 python -m venv venv
 source venv/bin/activate
@@ -110,7 +113,7 @@ Install the dependencies
 ```bash
 pip install -r requirements.txt
 ```
-Optionally, if you wish to train and develop, also install the dev dependencies
+Optionally, if you wish to train and develop the model, not just the interface, also install the dev dependencies
 ```bash
 pip install -r requirements_training.txt
 ```
@@ -120,13 +123,13 @@ You need a model to run the program. You have two options:
 1. Download the model from the releases page
 ```bash
 mkdir -p handtex/data/model
-curl -o handtex/data/model/handtex.safetensors https://github.com/VoxelCubes/Hand-TeX/releases/download/model/handtex.safetensors
-curl -o handtex/data/model/encodings.txt https://github.com/VoxelCubes/Hand-TeX/releases/download/model/encoding.txt
+curl -L -o handtex/data/model/handtex.safetensors https://github.com/VoxelCubes/Hand-TeX/releases/download/model/handtex.safetensors
+curl -L -o handtex/data/model/encodings.txt https://github.com/VoxelCubes/Hand-TeX/releases/download/model/encodings.txt
 ```
-2. Train the model yourself. This requires the dev dependencies and a lot of time.
+2. Train the model yourself. This requires the training dependencies and a lot of time. (Approx. 10 minutes on CUDA, 2 hours on CPU)
 ```bash
 mkdir -p training/database
-curl -o training/database/handtex.db.tar.xz https://github.com/VoxelCubes/Hand-TeX/releases/download/database/handtex.db.tar.xz
+curl -L -o training/database/handtex.db.tar.xz https://github.com/VoxelCubes/Hand-TeX/releases/download/database/handtex.db.tar.xz
 tar -xf training/database/handtex.db.tar.xz -C training/database
 PYTHONPATH=. python training/train.py
 ```
@@ -139,6 +142,7 @@ or
 ```bash
 make run
 ```
+The latter assumes you installed this in a venv, not the system interpreter, conda, or other means.
 
 If you have changed anything with the symbols or Qt ui files, you will need to regenerate the resources
 ```bash

@@ -180,6 +180,16 @@ class Sketchpad(Qw.QGraphicsView):
         self.can_undo.emit(bool(self.strokes))
         self.can_redo.emit(bool(self.redo_strokes))
 
+    def force_release_mouse(self):
+        event = Qg.QMouseEvent(
+            Qc.QEvent.MouseButtonRelease,
+            self.mapToScene(self.mapFromGlobal(self.cursor().pos())),
+            Qc.Qt.LeftButton,
+            Qc.Qt.NoButton,
+            Qc.Qt.NoModifier,
+        )
+        Qc.QCoreApplication.postEvent(self.viewport(), event)  # Post the event to the view
+
     def clear(self) -> None:
         """
         Clear the sketchpad.

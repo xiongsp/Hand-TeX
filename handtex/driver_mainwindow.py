@@ -166,6 +166,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.pushButton_submit.clicked.connect(self.submit_training_drawing)
         self.pushButton_skip.clicked.connect(self.get_next_symbol)
+        self.lineEdit_train_symbol.editingFinished.connect(self.get_next_symbol)
         self.pushButton_undo_submit.clicked.connect(self.previous_symbol)
 
         self.pushButton_symbol_list.clicked.connect(self.open_symbol_list)
@@ -879,6 +880,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Get the next symbol to draw.
         """
+        # Release the mouse capture if it's still held.
+        self.sketchpad.force_release_mouse()
         # Check if the user specified a specific symbol.
         requested_symbol = self.lineEdit_train_symbol.text().strip()
         if requested_symbol:

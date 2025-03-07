@@ -80,21 +80,41 @@ class DataRecorder:
         # All sessions are stored as independant json files.
         new_frequencies = {key: 0 for key in self.symbol_data.all_keys}
         for new_file in data_dir.glob("*.json"):
-            with open(new_file, "r") as file:
-                data = json.load(file)
-                for drawing in data:
-                    new_key = drawing["key"]
-                    # Add 1 to all symbols in it's symmetry group.
-                    # This is the collection of ancestors for it's leader.
-                    if new_key not in self.symbol_data.leaders:
-                        new_key = self.symbol_data.to_leader[new_key]
-                    for key in self.symbol_data.all_symbols_to_symbol(new_key):
-                        new_frequencies[key] += 1
+            try:
+                with open(new_file, "r") as file:
+                    data = json.load(file)
+                    # Check that the file has the expected format.
+                    if not isinstance(data, list):
+                        logger.info(f"Skipping {new_file}, not a handtex training data file.")
+                        continue
+                    if not all(isinstance(drawing, dict) for drawing in data):
+                        logger.info(f"Skipping {new_file}, not a handtex training data file.")
+                        continue
+                    if not all("key" in drawing for drawing in data):
+                        logger.info(f"Skipping {new_file}, not a handtex training data file.")
+                        continue
+                    if not all("strokes" in drawing for drawing in data):
+                        logger.info(f"Skipping {new_file}, not a handtex training data file.")
+                        continue
+
+                    for drawing in data:
+                        new_key = drawing["key"]
+                        # Add 1 to all symbols in it's symmetry group.
+                        # This is the collection of ancestors for it's leader.
+                        if new_key not in self.symbol_data.leaders:
+                            new_key = self.symbol_data.to_leader[new_key]
+                        for key in self.symbol_data.all_symbols_to_symbol(new_key):
+                            new_frequencies[key] += 1
+                    logger.info(f"Loaded {len(data)} drawings from {new_file}.")
+            except Exception as e:
+                logger.warning(f"Failed to load session data from {new_file}: {e}")
 
         logger.info(f"Training {len(self.symbol_data.all_keys)} symbols.")
 
         total_new = sum(new_frequencies.values())
-        logger.info(f"Loaded {total_new} previously recorded drawings for frequency analysis.")
+        logger.info(
+            f"Loaded {total_new} previously recorded drawings for augmented frequency analysis."
+        )
 
         # Combine the old and new frequencies.
         for key, value in new_frequencies.items():

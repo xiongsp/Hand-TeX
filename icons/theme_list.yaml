@@ -10,6 +10,8 @@ Files:
       - edit-undo
       - edit-redo
       - dialog-ok
+      - dialog-ok-apply
+      - dialog-cancel
       - dialog-filters
       - draw-freehand
       - document-open-folder

@@ -118,6 +118,7 @@ def show_info(parent, title: str, msg: str, **kwargs) -> None:
 def show_question(
     parent, title: str, msg: str, buttons=Qw.QMessageBox.Yes | Qw.QMessageBox.Cancel
 ) -> int:
+    # Note: Yes uses dialog-ok-apply, Cancel uses dialog-cancel.
     msg = msg.ljust(MIN_MSG_LENGTH)
     dlg = Qw.QMessageBox(parent)
     dlg.setWindowTitle(title)

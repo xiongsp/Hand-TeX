@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>io.github.voxelcubes.hand-tex</id>
+  <launchable type="desktop-id">io.github.voxelcubes.hand-tex.desktop</launchable>
+  <name>Hand TeX</name>
+  <summary>Draw the symbol, get the LaTeX</summary>
+  <branding>
+  <color type="primary" scheme_preference="light">#ffd294</color>
+  <color type="primary" scheme_preference="dark">#392913</color>
+  </branding>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <developer_name>VoxelCubes</developer_name>
+  <url type="homepage">https://github.com/VoxelCubes/Hand-TeX</url>
+<!--   <url type="translate">https://github.com/VoxelCubes/Hand-TeX/blob/master/translations/TRANSLATING.md</url> -->
+  <url type="bugtracker">https://github.com/VoxelCubes/Hand-TeX/issues</url>
+  <url type="vcs-browser">https://github.com/VoxelCubes/Hand-TeX</url>
+  <description>
+    <p>Hand TeX uses machine learning to find the matching LaTeX symbol and also offers a searchable list of all symbols.</p>
+    <p>It features over 3500 symbols and their variations, of which over 1700 are unique.</p>
+    <p>It operates fully offline, no internet connection at all.</p>
+  </description>
+  <screenshots>
+    <!-- Replace the URL below with a screenshot of your application -->
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/VoxelCubes/Hand-TeX/master/flatpak/classification_light_shadow1.png</image>
+      <caption>Draw your symbol</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/VoxelCubes/Hand-TeX/master/flatpak/symbol_list_shadow.png</image>
+      <caption>Search a list of symbols</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/VoxelCubes/Hand-TeX/master/flatpak/training_shadow.png</image>
+      <caption>Help creating training data</caption>
+    </screenshot>
+  </screenshots>
+  <releases>
+  </releases>
+  <content_rating type="oars-1.1" />
+  <categories>
+    <category>Utility</category>
+    <category>Math</category>
+  </categories>
+  <provides>
+    <binary>handtex</binary>
+  </provides>
+  <keywords>
+    <keyword>LaTeX</keyword>
+    <keyword>Handwriting</keyword>
+    <keyword>Sketch</keyword>
+    <keyword>Draw</keyword>
+    <keyword>Machine Learning</keyword>
+  </keywords>
+</component>

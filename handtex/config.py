@@ -15,6 +15,7 @@ class Config:
     gui_theme: str = ""  # Blank means system theme.
     stroke_width: int = 6
     new_data_dir: str = "new_data"
+    remind_checking_new_data_dir: bool = True
     scroll_on_draw: bool = True
     single_click_to_copy: bool = True
     disabled_packages: list[str] = Factory(list)

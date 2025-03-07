@@ -424,6 +424,35 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.detection_menu_action.setVisible(True)
         self.pushButton_submit.setShortcutEnabled(True)
         self.get_next_symbol()
+        # Unless the user has disabled it, show a reminder to check the new data directory.
+        if self.config.remind_checking_new_data_dir:
+            # Do a delay timer to allow the window to show up first.
+            Qc.QTimer.singleShot(10, self.show_new_data_dir_reminder)
+
+    def show_new_data_dir_reminder(self) -> None:
+        """
+        Show a reminder to check where the new data directory is pointing to.
+        This can be problematic in sandboxed environments.
+        """
+        current_dir = Path(self.config.new_data_dir).resolve()
+
+        # Include an ok button and a "don't show this again" button.
+        message = Qw.QMessageBox(
+            Qw.QMessageBox.Information,
+            "New Data Directory",
+            "Please ensure that the new data directory is accessible and writable. "
+            "This is where your new drawings will be saved as a .json file.\n"
+            f"The new data directory is currently set to:\n\n{current_dir}\n",
+            buttons=Qw.QMessageBox.Ok,
+            parent=self,
+        )
+        message.addButton("Don't show this again", Qw.QMessageBox.NoRole)
+
+        response = message.exec()
+        print(f"{response=}")
+        if response != Qw.QMessageBox.Ok:
+            self.config.remind_checking_new_data_dir = False
+            self.config.save()
 
     def switch_to_classification(self) -> None:
         """

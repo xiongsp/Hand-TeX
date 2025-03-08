@@ -36,6 +36,11 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.0.3" date="2025-03-08">
+      <description>
+        <p>Initial release</p>
+      </description>
+    </release>
   </releases>
   <content_rating type="oars-1.1" />
   <categories>

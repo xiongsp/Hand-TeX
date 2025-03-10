@@ -30,7 +30,7 @@ some of the same training data, now with new symbols and additional training dat
 
 | Platform | Format     | Link                                                                  |
 | --- |------------|-----------------------------------------------------------------------|
-| Linux | Flatpak | Coming soon                                                           |
+| Linux | Flatpak | [Hand TeX on Flathub](https://flathub.org/apps/io.github.voxelcubes.hand-tex)     |
 | | AUR | [handtex](https://aur.archlinux.org/packages/handtex)                 |
 | Windows | Executable | [HandTeX.exe](https://github.com/VoxelCubes/Hand-TeX/releases/latest) |
 | All Platforms | Python package | `pip install handtex`                                                 |
